@@ -10,6 +10,14 @@
 		</layout>
 	</appender>
 	
+		<!-- file appender -->
+	<appender name="filedest" class="org.apache.log4j.FileAppender">
+		<param name="file" value="./logs/file.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.kh.almin">
 		<level value="info" />

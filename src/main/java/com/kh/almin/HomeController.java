@@ -41,12 +41,12 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "template";
 	}
 	
 	@PostMapping("/")
 	public String insertHome() {
-		return "home";
+		return "template";
 	}
 	
 	
