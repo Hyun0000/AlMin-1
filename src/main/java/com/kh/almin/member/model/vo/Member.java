@@ -1,13 +1,13 @@
 package com.kh.almin.member.model.vo;
 
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-//개인회원 테이블
 @Getter
 @Setter
+@ToString
 @Data
 public class Member {
 	
