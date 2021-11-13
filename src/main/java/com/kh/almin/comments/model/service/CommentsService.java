@@ -1,7 +1,8 @@
 package com.kh.almin.comments.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommentsService {
-	public List<String> selectAllCommentAir();
+	public Map<String, List<String>> selectAllComments();
 }

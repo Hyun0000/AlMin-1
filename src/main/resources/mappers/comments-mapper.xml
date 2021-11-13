@@ -2,8 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comments">
 
-  <!-- COMMENTS_AIR(근무 분위기 키워드 select) -->
-  <select id="selectAllCommentAir" resultType="string">
-  	SELECT AIR_NAME FROM COMMENTS_AIR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ================================================= 후기 키워드 가져오기 ================================================= -->
+  <!-- ================================================= 후기 키워드 가져오기 ================================================= -->
+  <!-- ================================================= 후기 키워드 가져오기 ================================================= -->
+  
+  <!-- COMMENTS_AIR -->
+  <select id="selectAllCommentsAir" resultType="string">
+  	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
+  </select>
+  
+    <!-- COMMENTS_CONDITION -->
+  <select id="selectAllCommentsCondition" resultType="string">
+  	SELECT CONDITION_NAME FROM COMMENTS_CONDITION ORDER BY CONDITION_NO
+  </select>
+  
+  <!-- COMMENTS_PAY -->
+  <select id="selectAllCommentsPay" resultType="string">
+  	SELECT PAY_NAME FROM COMMENTS_PAY ORDER BY PAY_NO
+  </select>
+  
+  <!-- COMMENTS_GOOD -->
+  <select id="selectAllCommentsGood" resultType="string">
+  	SELECT GOOD_NAME FROM COMMENTS_GOOD ORDER BY GOOD_NO
+  </select>
+  
+  <!-- COMMENTS_BAD -->
+  <select id="selectAllCommentsBad" resultType="string">
+  	SELECT BAD_NAME FROM COMMENTS_BAD ORDER BY BAD_NO
   </select>
 </mapper>
