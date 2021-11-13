@@ -54,54 +54,34 @@
 </style>
 </head>
 <body>
-<c:forEach var="map" items="${commentsMap}">
-	<c:set var="dropNum" value="${dropNum + 1}"/>
-	<c:set var="dragNum" value="${dragNum + 1}"/>
-	
-	<div id="dropzone_${dropNum}" class="dropzoneClass" ondrop="drop(event)" ondragover="allowDrop(event)">
-		<c:choose>
-			<c:when test="${map.key == 1}">장점</c:when>
-			<c:when test="${map.key == 2}">단점</c:when>
-			<c:when test="${map.key == 3}">조건</c:when>
-			<c:when test="${map.key == 4}">분위기</c:when>
-			<c:when test="${map.key == 5}">급여</c:when>
-		</c:choose>
-	
-	</div>
-	
-	<div id="dragzone_${dragNum}" class="dragzoneClass">
-		<c:forEach var="condition" items="${map.value}">
-			<c:set var="idNum" value="${idNum + 1}"/>
-			<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span>${condition}</span><span class="xMark">&times;</span></div>
-		</c:forEach>
-	</div>
+<!-- <form action="" method="post"> -->
+
+	<c:forEach var="map" items="${commentsMap}">
+		<c:set var="dropNum" value="${dropNum + 1}"/>
+		<c:set var="dragNum" value="${dragNum + 1}"/>
 		
-</c:forEach>
-<%-- <span>key : ${map.key}</span>
-		<span>value : ${map.value}</span> --%>
+		<div id="dropzone_${dropNum}" class="dropzoneClass" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<c:choose>
+				<c:when test="${map.key == 1}">장점</c:when>
+				<c:when test="${map.key == 2}">단점</c:when>
+				<c:when test="${map.key == 3}">조건</c:when>
+				<c:when test="${map.key == 4}">분위기</c:when>
+				<c:when test="${map.key == 5}">급여</c:when>
+			</c:choose>
 		
+		</div>
+		
+		<div id="dragzone_${dragNum}" class="dragzoneClass">
+			<c:forEach var="condition" items="${map.value}">
+				<c:set var="idNum" value="${idNum + 1}"/>
+				<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark">&times;</span></div>
+			</c:forEach>
+		</div>
+	</c:forEach>
 	
-
-
-<%-- 	<div id="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-	
-	<div id="dragzone">
-		<c:forEach var="air" items="${COMMENTS_AIR}">
-			<c:set var="idNum" value="${idNum + 1}"/>
-			<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span>${air}</span><span class="xMark">&times;</span></div>
-		</c:forEach>
-	</div>
-	
-
-<hr>
-${COMMENTS_CONDITION}
-<hr>
-${COMMENTS_PAY}
-<hr>
-${COMMENTS_GOOD}
-<hr>
-${COMMENTS_BAD} --%>
-
+	<button type="button" id="submitBtn">등록</button>
+<!-- </form> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	// item을 놓는 장소인 dropzone : <div id="dropzone">
 	// let dropzoneEle = document.getElementById('dropzone');
@@ -116,6 +96,68 @@ ${COMMENTS_BAD} --%>
 	
 	// x마크
 	let xEle = document.getElementsByClassName('xMark');
+//====================================================================================================
+		// let allConditionObj = new Array();
+		let allConditionObj = {};
+		// 후기 제출
+		document.getElementById('submitBtn').onclick = function () {
+			for (var i = 0; i < dropzoneEle.length; i++) {
+				// 각 dropzone에 있는 아이템의 개수
+				let dropzoneInnerItem_i = dropzoneEle[i].childElementCount;
+				console.log("dropzoneInnerItem_" + i +  " : " + dropzoneInnerItem_i);
+				
+				// 각 dropzone안에 있는 각 아이템이 적혀있는 <span>
+				let spanIndropzone_i = document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
+				
+				// dropzone안에 있는 각 아이템의 키워드를 저장하는 배열 선언
+				let keywordArr_i = new Array();
+				
+	            // 키워드 저장하는 배열에 키워드 넣기
+	            for (let j = 0; j < spanIndropzone_i.length; j++) {
+	            	keywordArr_i[j] = spanIndropzone_i[j].innerText;
+	            }
+	            
+	            allConditionObj['keyword_' + i] = keywordArr_i;
+	            // allConditionObj[i] = keywordArr_i;
+	            
+	            for (let k = 0; k < keywordArr_i.length; k++) {
+	                console.log(keywordArr_i[k]);
+	            }
+			}
+			console.log("=================================================");
+			console.log(allConditionObj);
+			console.log(JSON.stringify(allConditionObj));
+			console.log("=================================================");
+			alert(123);
+			
+	 			$.ajax({
+					type : "POST",
+					url : "commentsinsert",
+					dataType : "json",
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify(allConditionObj)
+						// condition : JSON.stringify(allConditionObj)
+/* 						good : JSON.stringify(keywordArr_0),
+						bad : JSON.stringify(keywordArr_1),
+						condition : JSON.stringify(keywordArr_2),
+						air : JSON.stringify(keywordArr_3),
+						pay : JSON.stringify(keywordArr_4) */
+					,
+					success : function (data) {
+						console.log("success 시작");
+						if (data.result == "ok") {
+							alert("후기 등록 ok");
+						} else {
+							alert("후기 등록 실패");
+						}
+					},
+					error : function(request,status,error) {
+			        	console.log("false")
+			            alert('후기가 없습니다.');
+			            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			        }
+				})
+			}
 //====================================================================================================
 	// dropzone --> dragzone
 	for (let i = 0; i < xEle.length; i++) {
@@ -177,6 +219,9 @@ ${COMMENTS_BAD} --%>
 	function allowDrop(event) {
 	    event.preventDefault();
 	}
+//====================================================================================================
+	
+	
 </script>
 </body>
 </html>
