@@ -13,9 +13,20 @@ public class CommentsServiceImpl implements CommentsService {
 	@Autowired
 	private CommentsDao commentsDao;
 
+// ==============================================================================
+	// 모든 후기 키워드 가져오기
 	@Override
 	public Map<String, List<String>> selectAllComments() {
 		return commentsDao.selectAllComments();
 	}
-
+// ==============================================================================
+	// 후기 작성
+	@Override
+	public int insertComments(List<List<String>> commentsList) {
+		return commentsDao.insertComments(commentsList);
+	}
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
 }
