@@ -1,5 +1,7 @@
 package com.kh.almin.resume.model.vo;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Data
+@Component
 public class MemberResume { //회원 이력서 테이블
 	private int resumeNo;
 	private String memberId;

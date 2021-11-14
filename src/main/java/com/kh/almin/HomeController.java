@@ -20,17 +20,13 @@ import com.kh.almin.member.model.vo.Member;
 @Controller
 public class HomeController {
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	@GetMapping("/")
+	@GetMapping
 	public String home(Locale locale, Model model) {
 		
 		Member member = new Member();
-		
-		
 		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -48,7 +44,4 @@ public class HomeController {
 	public String insertHome() {
 		return "template";
 	}
-	
-	
-	
 }

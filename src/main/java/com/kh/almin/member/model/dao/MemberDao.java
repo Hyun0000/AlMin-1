@@ -21,7 +21,12 @@ public class MemberDao {
 	public List<Member> getMembers() throws Exception{
 		logger.info("Dao 로깅 확인");
 		List<Member> members = new ArrayList();
+		members = sqlSession.selectList("Member.listMember");
 		return members;
+	}
+	public void insertMember(Member member) throws Exception{
+		logger.info("insertDao 진입");
+		sqlSession.insert("Member.insertMember", member);
 	}
 	
 }

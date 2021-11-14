@@ -1,5 +1,7 @@
 package com.kh.almin.member.model.vo;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Data
+@Component
 public class Company {
 	private String companyId;
 	private String companyType;

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Member">
+
+<select id="listMember" resultType="hashmap">
+select MEMBER_ID, MEMBER_TYPE, MEMBER_NAME from MEMBER
+</select>
+
+<insert id="insertMember" parameterType="Member">
+insert into MEMBER (MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
+		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE) values (#{memberId}, #{memberType}, #{memberPw},
+		 #{memberName}, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail}, #{memberGender}, #{memberAge}, sysdate)
+</insert>
 </mapper>

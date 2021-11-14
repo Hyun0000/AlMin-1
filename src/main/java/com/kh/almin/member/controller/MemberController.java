@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,12 +37,12 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	mv.setViewName("member/memberlist");
 	
 		logger.info("전체 회원리스트 조회");
-		
+		logger.info("volist: "+volist.toString());
 		return mv;
 	}
-	
+	//id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@GetMapping("/{userId}")
-	private String selectMember(@PathVariable("userId")String userId) {
+	private String selectMember(@PathVariable("userId")String userId) throws Exception {
 		if(userId == null) {
 			logger.info("전체 회원리스트 조회");
 		} else {
@@ -50,17 +51,22 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return "member/memberlist";
 	}
 	
-	@PostMapping("/")
-	private String insertMember() {
-		return "member/memberlist";
+	@PostMapping
+	private String insertMember(@RequestBody Member member) throws Exception { //회원가입
+		logger.info("insert 진입");
+		logger.info(member.toString());
+		memberService.insertMember(member);
+		return " insert data ";
 	}
 	
-	@PutMapping("/")
-	private String updateMember() {
+	@PutMapping
+	private String updateMember() { //회원정보 수정
+		logger.info("update 진입");
 		return "member/memberlist";
 	}
-	@DeleteMapping("/")
-	private String deleteMember() {
+	@DeleteMapping
+	private String deleteMember() { //회원탈퇴
+		logger.info("delete 진입");
 		return "member/memberlist";
 	}
 	

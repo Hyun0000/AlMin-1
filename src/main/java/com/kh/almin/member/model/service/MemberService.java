@@ -23,4 +23,9 @@ public class MemberService {
 		members = memberDao.getMembers();
 		return members;
 	}
+	
+	public void insertMember(Member member) throws Exception{
+		logger.info("MemberService-insertMember 진입");
+		memberDao.insertMember(member);
+	}
 }
