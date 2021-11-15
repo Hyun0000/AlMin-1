@@ -2,64 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comments">
 <!-- ================================================= 후기 작성 ================================================= -->
-
-
-
-
-
-<!-- 
-INSERT INTO COMMENTS_AIR_MAP VALUES 
-(1, (SELECT AIR_NO FROM COMMENTS_AIR WHERE AIR_NAME ='재밌어요'));
- -->
-
-	<insert id="insertGood" parameterType="java.util.List">
-		INSERT INTO COMMENTS_GOOD_MAP VALUES
-		<foreach collection="list" item="item" separator="," open="(" close=")" index="i">
-		(1, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item[#{i}]}))
-		</foreach>
+<!-- 	<sql id="conditionNum">
+		SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}
+	</sql>
+	<include refid="conditionNum"></include>
+	 -->
+	<insert id="insertComments" parameterType="map" >
+		<choose>
+			<when test="category == 'insertGood'">
+					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+						INTO COMMENTS_GOOD_MAP VALUES
+						(1, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}))
+					</foreach>
+					
+			</when>
+		</choose>
 	</insert>
-	<!-- open="(" close=")"  -->
-	
-<!-- 	<insert id="insertBad">
-		INSERT INTO COMMENTS_BAD_MAP VALUES
-		<foreach collection="list" item="item" open="(1," close=")">
-			#{item}
-		</foreach>
-	</insert>
-	
-	<insert id="insertCon">
-		INSERT INTO COMMENTS_CONDITION_MAP VALUES
-		<foreach collection="list" item="item" open="(1," close=")">
-			#{item}
-		</foreach>
-	</insert>
-	
-	<insert id="insertAir">
-		INSERT INTO COMMENTS_AIR_MAP VALUES
-		<foreach collection="list" item="item" open="(1," close=")">
-			#{item}
-		</foreach>
-	</insert>
-	
-	<insert id="insertPay">
-		INSERT INTO COMMENTS_PAY_MAP VALUES
-		<foreach collection="list" item="item" open="(1," close=")">
-			#{item}
-		</foreach>
-	</insert> -->
+	<!-- (1, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = '보통이에요')) -->
+	<!--  open="(" close=")" -->
+<!-- SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item} -->
 
+<!-- INSERT INTO COMMENTS_AIR_MAP VALUES (1, (SELECT AIR_NO FROM COMMENTS_AIR WHERE AIR_NAME ='사장님 좋아요')
+); -->
 
-
-
-
-
-
-
-
-
-
-
-
+<!-- 		<choose>
+			<when test="category == 'insertGood'">
+				INSERT INTO COMMENTS_GOOD_MAP VALUES
+					<foreach collection="list" item="item" separator=",">
+						(1, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}))
+					</foreach>
+			</when>
+		</choose> -->
 	<!-- ================================================= 후기 키워드 가져오기 ================================================= -->
 	 <!-- COMMENTS_AIR -->
 	 <select id="selectAllCommentsAir" resultType="string">

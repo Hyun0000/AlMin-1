@@ -34,19 +34,33 @@ public class CommentsDao {
 // ==============================================================================================================
 	// 후기 작성
 	public int insertComments(List<List<String>> commentsList) {
-		// Map<String, List<String>> insertMap = new HashMap<String, List<String>>();
-		int result = 0;
-		
+		Map<String, Object> insertMap = new HashMap<String, Object>();
+		// ex) insertMap.put("0", commentsList.get(0));
 		String[] tableName = {"insertGood", "insertBad", "insertCon", "insertAir", "insertPay"};
 		// String[] tableName = {"COMMENTS_GOOD_MAP", "COMMENTS_BAD_MAP", "COMMENTS_PAY_MAP", "COMMENTS_CONDITION_MAP", "COMMENTS_AIR_MAP"};
 		// List<String> find = new ArrayList<String>();
 		// find.add("0");
 
-//		for (int i = 0; i < commentsList.size(); i++) {
-//			result = sqlSession.insert("Comments." + tableName[i], commentsList.get(i));
-//		}
-//		System.out.println("result : " + result);
+		int result = 0;
+		int resultCount = 0;
+		for (int i = 0; i < commentsList.size(); i++) {
+			insertMap.put("category", tableName[i]);
+			insertMap.put("list", commentsList.get(i));
+			System.out.println("commentsList.get(" + i + ") : " + commentsList.get(i));
+			result = sqlSession.insert("Comments.insertComments", insertMap);
+			if (result != 0) {
+				resultCount++;
+			}
+		}
+		// result = sqlSession.insert("Comments.insertComments", insertMap);
+		System.out.println("result : " + result);
+		System.out.println("resultCount : " + resultCount);
 		return result;
+		// insertMap.put(0, commentsList.get(0)); COMMENTS_GOOD_MAP
+		// insertMap.put(1, commentsList.get(1)); COMMENTS_BAD_MAP
+		// insertMap.put(2, commentsList.get(2)); COMMENTS_CONDITION_MAP
+		// insertMap.put(3, commentsList.get(3)); COMMENTS_AIR_MAP
+		// insertMap.put(4, commentsList.get(4)); COMMENTS_PAY_MAP
 	}
 }
 

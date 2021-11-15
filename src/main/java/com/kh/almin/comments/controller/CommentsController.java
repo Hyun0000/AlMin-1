@@ -64,25 +64,25 @@ public class CommentsController {
 	@ResponseBody
 	public String insertUpdate(HttpServletRequest request, HttpServletResponse response, @RequestBody String condition) {
 		response.setContentType("application/json;charset=UTF-8");
-		
+		// Gson을 쓰나 simple-json을 쓰나 해당 부분의 코드는 똑같이 복잡해졌다. 그래서 simple을 선택했다.
 		// 화면에서 넘겨받은 JSON.stringify(allConditionObj)을 담을 변수
 		String fromViewData = "";
 		
 		// 화면에서 넘겨받은 json 형식 data를 Parse할 JSONParser 객체
-		JSONParser jsonParser = new JSONParser();
+		 JSONParser jsonParser = new JSONParser();
 		
 		// Parse한 JSON 객체를 담을 변수
-		JSONObject parsedObj = null;
+		 JSONObject parsedObj = null;
 		
 		// 카테고리별 후기를 담은 후 비즈니스 로직으로 넘길 List
-		List<List<String>> commentsList = new ArrayList<List<String>>();
+		 List<List<String>> commentsList = new ArrayList<List<String>>();
 		
 		try {
+			System.out.println("condition : " + condition);
 			// 한글이 깨진상태로 값이 Controller로 전달되어 이를 막고자 decode 진행			
-			fromViewData = URLDecoder.decode(condition, "UTF-8");
-
+			// fromViewData = URLDecoder.decode(condition, "UTF-8");
 			// JSONParser 객체로 parse후 parsedObj에 담는다.
-			parsedObj = (JSONObject)jsonParser.parse(fromViewData);
+			 parsedObj = (JSONObject)jsonParser.parse(condition);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
