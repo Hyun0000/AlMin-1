@@ -6,10 +6,13 @@
 	</settings>
 	
 	<typeAliases>
+ 	<typeAlias type="com.kh.almin.member.model.vo.Member" alias="Member"/>
+ 	<typeAlias type="com.kh.almin.member.model.vo.Company" alias="Company"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/comments-mapper.xml"/>
+		<mapper resource="mappers/member-mapper.xml"/>
 	</mappers>
 
 </configuration>
