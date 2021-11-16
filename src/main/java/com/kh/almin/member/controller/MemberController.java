@@ -1,6 +1,5 @@
 package com.kh.almin.member.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,16 +29,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	
 	@GetMapping
 	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-	List<Member> volist = new ArrayList<Member>();
-	ModelAndView mv = new ModelAndView();
-	volist= memberService.getMembers();
-	mv.addObject("memberview",volist);
-	mv.setViewName("member/memberlist");
-	
+		List<Member> volist = memberService.getMembers();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberview",volist);
+		mv.setViewName("member/memberlist");
 		logger.info("전체 회원리스트 조회");
 		logger.info("volist: "+volist.toString());
 		return mv;
 	}
+	
 	//id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@GetMapping("/{userId}")
 	private String selectMember(@PathVariable("userId")String userId) throws Exception {

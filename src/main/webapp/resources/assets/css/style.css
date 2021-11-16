@@ -80,7 +80,7 @@ input:focus, textarea:focus {
 .logo {
 	height: 180px;
 	margin-top: -10px;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 }
 
 .jobs-title {
@@ -1191,6 +1191,7 @@ opacity
 }
 
 .footer-area {
+	
 	color: #fff;
 	background: #04091e
 }
