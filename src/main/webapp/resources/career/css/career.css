@@ -1,0 +1,63 @@
+@charset "UTF-8";
+* { margin: 0; padding: 0; }
+
+/* 상단 툴바 */
+#topbar{
+    border: 5px solid blue;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* drop item box & calendar 전체를 담는 <div> */
+#allContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+/* calendar */
+#calendar-container {
+    width: 70%;
+    box-sizing: border-box;
+    /* margin: 0 auto; */
+}
+
+/* drop item box */
+#external-events {
+    border: 1px solid red;
+    width: 25%;
+    box-sizing: border-box;
+    padding: 10px;
+    /* margin-right: 20px; */
+}
+
+/* drop item box 제목 */
+#external-events h3 {
+    text-align: center;
+}
+
+/* drop item box 제목 담는 <p> */
+#external-events P {
+    margin: 30px 0;
+} 
+
+/* drop zone에 있을 때 각 drop item */
+.fc-event {
+    margin: 10px;
+    height: 10px;
+    line-height: 10px;
+    padding: 10px;
+}
+
+/* < > today 버튼 스타일 지정 */
+#calendar-container .fc-button{
+    background-color: royalblue;
+    color: white;
+    border: none;
+    height: 40px;
+}
+
+#calendar .fc-today-button {
+}
