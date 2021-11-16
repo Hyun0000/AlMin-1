@@ -38,8 +38,6 @@ public class CommentsDao {
 		// ex) insertMap.put("0", commentsList.get(0));
 		String[] tableName = {"insertGood", "insertBad", "insertCon", "insertAir", "insertPay"};
 		// String[] tableName = {"COMMENTS_GOOD_MAP", "COMMENTS_BAD_MAP", "COMMENTS_PAY_MAP", "COMMENTS_CONDITION_MAP", "COMMENTS_AIR_MAP"};
-		// List<String> find = new ArrayList<String>();
-		// find.add("0");
 
 		int result = 0;
 		int resultCount = 0;
@@ -52,15 +50,11 @@ public class CommentsDao {
 				resultCount++;
 			}
 		}
-		// result = sqlSession.insert("Comments.insertComments", insertMap);
 		System.out.println("result : " + result);
+		
+		// (resultCount = 5)가 돼야 insert 성공 
 		System.out.println("resultCount : " + resultCount);
 		return result;
-		// insertMap.put(0, commentsList.get(0)); COMMENTS_GOOD_MAP
-		// insertMap.put(1, commentsList.get(1)); COMMENTS_BAD_MAP
-		// insertMap.put(2, commentsList.get(2)); COMMENTS_CONDITION_MAP
-		// insertMap.put(3, commentsList.get(3)); COMMENTS_AIR_MAP
-		// insertMap.put(4, commentsList.get(4)); COMMENTS_PAY_MAP
 	}
 }
 

@@ -147,8 +147,3 @@ public class CommentsController {
 		// https://hianna.tistory.com/629
 	}
 }
-//, @RequestParam(name = "good") String good
-//, @RequestParam(name = "bad") String bad
-//, @RequestParam(name = "condition") String condition
-//, @RequestParam(name = "air") String air
-//, @RequestParam(name = "pay") String pay

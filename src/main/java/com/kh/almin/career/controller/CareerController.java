@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class CareerController {
 	private static final Logger logger = LoggerFactory.getLogger(CareerController.class);
 	
-	@GetMapping
+	@GetMapping("/calender")
 	private String selectCareers() throws Exception {
-		return "career/careers";
+		return "careers/careers";
 	}
 	
 	@ExceptionHandler
