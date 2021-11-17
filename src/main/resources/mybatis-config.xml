@@ -9,6 +9,7 @@
  	<typeAlias type="com.kh.almin.member.model.vo.Member" alias="Member"/>
  	<typeAlias type="com.kh.almin.member.model.vo.Company" alias="Company"/>
  	<typeAlias type="com.kh.almin.recruit.model.vo.Recruit" alias="Recruit"/>
+ 	<!-- <typeAlias type="com.kh.almin.district.model.vo.District" alias="Distrcit"/> -->
 	</typeAliases>
 	
 	<mappers>
@@ -16,6 +17,7 @@
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/recruit-mapper.xml"/>
 		<mapper resource="mappers/career-mapper.xml"/>
+		<!-- <mapper resource="mappers/career-mapper.xml"/> -->
 	</mappers>
 
 </configuration>

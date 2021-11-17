@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+  <mapper namespace="District">
+  
+<resultMap type="District" id="DistrictResultMap">
+	<id property="jobDistrictNo" column="JOB_DISTRICT_NO"/>
+	<result property="jobDistrictName" column="JOB_DISTRICT_NAME"/>
+	</resultMap>
+
+</mapper>

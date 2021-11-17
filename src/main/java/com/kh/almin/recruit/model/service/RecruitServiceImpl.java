@@ -1,5 +1,6 @@
 package com.kh.almin.recruit.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,4 +22,10 @@ public class RecruitServiceImpl implements RecruitService {
 		List<Recruit> recruits = recruitDao.getReport();
 		return recruits;
 	}
+	public List<Recruit> recruitList() throws Exception{
+		List<Recruit> recruit=new ArrayList<Recruit>();
+		recruit=recruitDao.recruitList();
+		return recruit;
+	}
+	
 }

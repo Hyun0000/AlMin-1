@@ -23,5 +23,10 @@ public class RecruitDao {
 		System.out.println(recruits);
 		return recruits;
 	}
-
+	
+public List<Recruit> recruitList() throws Exception {
+		
+		List<Recruit> recruit=sqlSession.selectList("Recruit.jobinfoList");
+		return recruit;
+	}
 }

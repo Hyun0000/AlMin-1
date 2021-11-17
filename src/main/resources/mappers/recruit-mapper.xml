@@ -26,11 +26,24 @@
 	<result property="recruitJobWho" column="RECRUIT_JOB_WHO"/>
 	<result property="recruitJobBranch" column="RECRUIT_JOB_BRANCH"/>
 	<result property="recruitDate" column="RECRUIT_DATE"/>
+	
+	<!-- <association property="districtMap" resultMap="District"></association> -->
 </resultMap>
+
+<!--  <resultMap id="districtMap" type="District">
+	<id property="jobDistrictNo" column="JOB_DISTRICT_NO" />
+	<result property="jobDistrictName" column="JOB_DISTRICT_NAME"/>
+	
+</resultMap> -->
 
 <select id="listReport" resultMap="RecruitResultMap">
 	select RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
 	RECRUIT_EDUCATION,RECRUIT_PERSON,RECRUIT_MONEY,RECRUIT_PERIOD,RECRUIT_DAY,RECRUIT_TIME,RECRUIT_ADDRESS,RECRUIT_CONTENT,RECRUIT_PHOTO,
 	RECRUIT_PUB,RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_JOB_BRANCH,RECRUIT_DATE from COMPANY_RECRUIT WHERE RECRUIT_POLICE>1
+</select>
+<!-- 공고 목록 리스트  -->
+<select id="jobinfoList" resultMap="RecruitResultMap">
+	select b.JOB_DISTRICT_NAME,recruit_title,recruit_money,recruit_date from company_recruit a
+	inner join job_district b on a.recruit_job_district=b.JOB_DISTRICT_NO
 </select>
 </mapper>
