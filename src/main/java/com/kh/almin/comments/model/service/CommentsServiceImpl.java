@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.almin.comments.model.dao.CommentsDao;
+import com.kh.almin.comments.model.vo.CommentsCompany;
 
 @Service("commentsService")
 public class CommentsServiceImpl implements CommentsService {
@@ -16,16 +17,21 @@ public class CommentsServiceImpl implements CommentsService {
 // ==============================================================================
 	// 모든 후기 키워드 가져오기
 	@Override
-	public Map<String, List<String>> selectAllComments() {
-		return commentsDao.selectAllComments();
+	public Map<String, List<String>> selectAllKeyWords() {
+		return commentsDao.selectAllKeyWords();
 	}
 // ==============================================================================
 	// 후기 작성
 	@Override
-	public int insertComments(List<List<String>> commentsList) {
-		return commentsDao.insertComments(commentsList);
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) {
+		return commentsDao.insertComments(commentsList, commentsCompany);
 	}
 // ==============================================================================
+	// 특정 공고의 전체 후기 조회
+	@Override
+	public Map<String, Object> selectAllComments(int recruitNo) {
+		return commentsDao.selectAllComments(recruitNo);
+	}
 // ==============================================================================
 // ==============================================================================
 // ==============================================================================

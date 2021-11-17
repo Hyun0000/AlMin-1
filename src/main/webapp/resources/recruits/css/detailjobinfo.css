@@ -1,0 +1,58 @@
+@charset "UTF-8";
+*{ margin : 0; padding : 0; }
+
+/* 한줄 후기 <input> 스타일 지정 */
+#commentsLine{
+    width: 1000px;
+    height: 50px;
+    line-height: 50px;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* item을 drop하는 div 스타일 지정 */
+.dropzoneClass {
+    padding: 20px;
+    width: 1000px;
+    /* height: 150px; */
+    border: 1px solid red;
+    box-sizing: border-box;
+    
+    margin-top: 50px;
+
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+/* item을 모아놓은 div 스타일 지정 */
+.dragzoneClass {
+    padding: 20px;
+    width: 1000px;
+    /* height: 150px; */
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    margin-top: 50px;
+    
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+/* 각 item 스타일 지정 */
+.dragEle {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 10px;
+}
+
+/* item 이름 옆 x 마크 스타일 지정 */
+.xMark {
+    color: red;
+    margin-left: 5px;
+
+    /* dragzone에 있을때는 x 마크 안 보이게 설정 */
+    display: none;
+}

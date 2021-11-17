@@ -36,7 +36,7 @@ public class CareerController {
 	// 회원의 현재 근무지 정보를 가져오는 method
 	// @PostMapping("/workcalender")
 	
-	@GetMapping(value = "/workcalender", produces="text/plain;charset=UTF-8")
+	@GetMapping(value = "/works", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String selectAllWork() {
 		Gson gson = new GsonBuilder().create();

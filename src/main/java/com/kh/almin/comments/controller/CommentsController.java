@@ -31,6 +31,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kh.almin.HomeController;
 import com.kh.almin.comments.model.service.CommentsService;
+import com.kh.almin.comments.model.vo.CommentsCompany;
 
 @Controller
 @RequestMapping("/recruits")
@@ -40,34 +41,25 @@ public class CommentsController {
 	
 	@Autowired
 	private CommentsService commentsService;
-	
+// ==============================================================================
+	// view용
+	// 현재는 (모든 후기 키워드 가져오기 to insert)
 	@GetMapping("/detailjobinfo")
 	public ModelAndView selectAllCommentAir(ModelAndView mv) {
-		Map<String, List<String>> commentsMap = commentsService.selectAllComments();
-//		List<String> air = commentsMap.get("COMMENTS_AIR");
-//		List<String> condition = commentsMap.get("COMMENTS_CONDITION");
-//		List<String> pay = commentsMap.get("COMMENTS_PAY");
-//		List<String> good = commentsMap.get("COMMENTS_GOOD");
-//		List<String> bad = commentsMap.get("COMMENTS_BAD");
-		
-//		mv.addObject("COMMENTS_AIR", air);
-//		mv.addObject("COMMENTS_CONDITION", condition);
-//		mv.addObject("COMMENTS_PAY", pay);
-//		mv.addObject("COMMENTS_GOOD", good);
-//		mv.addObject("COMMENTS_BAD", bad);
+		Map<String, List<String>> commentsMap = commentsService.selectAllKeyWords();
 		mv.addObject("commentsMap", commentsMap);
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
 	}
 // ==============================================================================
-	@PostMapping(value = "/commentsinsert")
+	// 후기 작성(ajax)
+	// @PostMapping(value = "/commentsinsert")
+	@PostMapping(value = "/reviews")
 	@ResponseBody
 	public String insertUpdate(HttpServletRequest request, HttpServletResponse response, @RequestBody String condition) {
 		response.setContentType("application/json;charset=UTF-8");
-		// Gson을 쓰나 simple-json을 쓰나 해당 부분의 코드는 똑같이 복잡해졌다. 그래서 simple을 선택했다.
-		// 화면에서 넘겨받은 JSON.stringify(allConditionObj)을 담을 변수
-		String fromViewData = "";
 		
+		// Gson을 쓰나 simple-json을 쓰나 해당 부분의 코드는 똑같이 복잡해졌다.
 		// 화면에서 넘겨받은 json 형식 data를 Parse할 JSONParser 객체
 		 JSONParser jsonParser = new JSONParser();
 		
@@ -77,55 +69,38 @@ public class CommentsController {
 		// 카테고리별 후기를 담은 후 비즈니스 로직으로 넘길 List
 		 List<List<String>> commentsList = new ArrayList<List<String>>();
 		
+		System.out.println("condition : " + condition);
+		
 		try {
-			System.out.println("condition : " + condition);
-			// 한글이 깨진상태로 값이 Controller로 전달되어 이를 막고자 decode 진행			
-			// fromViewData = URLDecoder.decode(condition, "UTF-8");
-			// JSONParser 객체로 parse후 parsedObj에 담는다.
-			 parsedObj = (JSONObject)jsonParser.parse(condition);
+			parsedObj = (JSONObject)jsonParser.parse(condition);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		   /*
-			* fromViewData 예시
-			* fromViewData : {
-			* "keyword_0":["칼퇴 가능"],
-			* "keyword_1":["잡일 많아요"],
-			* "keyword_2":["깔끔한 유니폼"],
-			* "keyword_3":["사장님 좋아요"],
-			* "keyword_4":["만족해요"]
-			* }
-			*/
-			/*
-			 * fromViewData : {
-			 * "keyword_0":["근무시간 조절 가능","유익한 경험"],
-			 * "keyword_1":["지저분한 근무 환경","서있는 시간이 많아요"],
-			 * "keyword_2":["청결한 화장실","정해진 일만 해요"],
-			 * "keyword_3":["가족 같은 회사에요","상호 배려","재밌어요"],
-			 * "keyword_4":["많이줘요","급여일 준수"]
-			 * }
-			 */
-			/*
-			 * ["근무시간 조절 가능","유익한 경험"]
-			 * ["지저분한 근무 환경","서있는 시간이 많아요"]
-			 * ["청결한 화장실","정해진 일만 해요"]
-			 * ["가족 같은 회사에요","상호 배려","재밌어요"]
-			 * ["많이줘요","급여일 준수"]
-			 */
-		System.out.println("fromViewData : " + fromViewData);
+		System.out.println("parsedObj : " + parsedObj);
 		System.out.println("obj.size() : " + parsedObj.size());
 		
-		// parsedObj에 있는 각 
-		for (int i = 0; i < parsedObj.size(); i++) {
+		// parsedObj에 있는 각 키워드별 object만 commentsList에 담기
+		// parsedObj의 길이(length, size)가 6이므로 restData js object를 제외한 나머지 data를 key 값을 이용해 꺼내기 --> (parsedObj.size() - 1)
+		for (int i = 0; i < (parsedObj.size() - 1); i++) {
 			// commentsList에 각 카테고리별 data담기, map에서 key을 이용해 접근하는 방식인 get()을 이용해 사용
 			commentsList.add((JSONArray)parsedObj.get("keyword_" + i));
 		}
 		
-		System.out.println("=======================================");
-		System.out.println(commentsList);
-		// [["칼퇴 가능","취업스펙"], ["잡일 많아요","휴식시간 미제공"], ["청결한 화장실","정해진 일만 해요"], ["가족 같은 회사에요","배울점 많아요","상호 배려"], ["많이줘요"]]
-		System.out.println("=======================================");
+		// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담은 object 꺼내기
+		JSONObject parsedObj2 = (JSONObject)parsedObj.get("restData");
 		
+		// CommentsCompany 생성자에 값 담기
+		CommentsCompany commentsCompany = 
+		new CommentsCompany(Integer.parseInt((String)parsedObj2.get("ccRecruitNo")), (String)parsedObj2.get("ccWriter"), (String)parsedObj2.get("ccContent"), (String)parsedObj2.get("ccContract"));
+		
+		System.out.println("================ data 확인용 log ================");
+		System.out.println("commentsList : " + commentsList);
+		System.out.println("parsedObj.get('restData') : " + parsedObj.get("restData"));
+		System.out.println("parsedObj2.get((\"ccRecruitNo\")) : " + parsedObj2.get(("ccRecruitNo")));
+		System.out.println("parsedObj2.get((\"ccWriter\")) : " + parsedObj2.get(("ccWriter")));
+		System.out.println("parsedObj2.get((\"ccContent\")) : " + parsedObj2.get(("ccContent")));
+		System.out.println("parsedObj2.get((\"ccContract\")) : " + parsedObj2.get(("ccContract")));
+		System.out.println("commentsCompany.toString() : " + commentsCompany.toString());
 		// commentsList에 잘 담겼나 log 찍어보기
 		for (int i = 0; i < commentsList.size(); i++) {
 			System.out.println(commentsList.get(i));
@@ -133,17 +108,43 @@ public class CommentsController {
 				System.out.println(list);
 			}
 		}
-		commentsService.insertComments(commentsList);
+		System.out.println("================ data 확인용 log ================");
 		
+		int result = 0;
+		result = commentsService.insertComments(commentsList, commentsCompany);
 // ============================================== ajax로 데이터 보내기 ==============================================
 		Gson gson = new GsonBuilder().create();
 		JsonObject jsonObject = new JsonObject();
 		String jsonStr = "";
-		jsonObject.addProperty("result", "ok");
-		jsonStr = gson.toJson(jsonObject);
-		System.out.println("jsonStr : " + jsonStr);
 		
-		return jsonStr;
+		// (result = 6)가 돼야 후기 insert 성공
+		if (result == 6) {
+			jsonObject.addProperty("result", "ok");
+			jsonStr = gson.toJson(jsonObject);
+			System.out.println("jsonStr : " + jsonStr);
+			return jsonStr;
+		} else {
+			// 에러 페이지를 아직 안 만들었기에 임시로 작성
+			jsonObject.addProperty("result", "fail");
+			jsonStr = gson.toJson(jsonObject);
+			return jsonStr;
+			
+			// TODO
+			// 에러페이지로 이동하는 코드 작성
+		}
 		// https://hianna.tistory.com/629
 	}
+// ==============================================================================
+	// 특정 공고의 전체 후기 조회(ajax)
+	@GetMapping(value = "/reviews")
+	@ResponseBody
+	public String selectAllComments() {
+		String jsonStr = "";
+		
+		
+		Map<String, Object> map = commentsService.selectAllComments(1);
+		
+		return jsonStr;
+	}
+	
 }

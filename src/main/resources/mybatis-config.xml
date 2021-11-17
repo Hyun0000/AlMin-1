@@ -10,6 +10,7 @@
  	<typeAlias type="com.kh.almin.member.model.vo.Company" alias="Company"/>
  	<typeAlias type="com.kh.almin.recruit.model.vo.Recruit" alias="Recruit"/>
  	<!-- <typeAlias type="com.kh.almin.district.model.vo.District" alias="Distrcit"/> -->
+ 	<typeAlias type="com.kh.almin.comments.model.vo.CommentsCompany" alias="CommentsCompany"/>
 	</typeAliases>
 	
 	<mappers>

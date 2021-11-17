@@ -26,7 +26,7 @@ window.onload = function () {
         let userIdParam = params;
 
         // open
-        httpRequest.open("GET", "workcalender");
+        httpRequest.open("GET", "works");
 
         // 타입 지정
         httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

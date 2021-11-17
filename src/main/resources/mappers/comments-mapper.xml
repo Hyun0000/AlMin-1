@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comments">
-<!-- ================================================= 후기 작성 ================================================= -->
-	<insert id="insertComments" parameterType="map" >
+<!-- ================================================= 후기 조회(select) ================================================= -->
+	<resultMap type="CommentsCompany" id="selectCommentVoMap">
+		<id property="ccNo" column="CC_NO"/> <!-- PK -->
+		<result property="ccRecruitNo" column="CC_RECRUIT_NO"/>
+		<result property="ccWriter" column="CC_WRITER"/>
+		<result property="ccWriterType" column="CC_WRITER_TYPE"/>
+		<result property="ccContent" column="CC_CONTENT"/>
+		<result property="ccDate" column="CC_DATE"/>
+		<result property="ccContract" column="CC_CONTRACT"/>
+	</resultMap>
+	
+	<select id="selectCommentVo" resultMap="selectCommentVoMap">
+		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = 1 ORDER BY CC_NO DESC
+	</select>
+	
+	<!-- <select id="selectKeywords" parameterType="map"> -->
+	<select id="selectKeywords" resultType="hashmap">
+		SELECT COMMENTS_AIR_MAP.CAM_CC_WRITER, COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
+		JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
+		WHERE CAM_CC_NO = 1
+	</select>
+	
+<!-- 
+1. COMMENTS_COMPANY에 있는 후기 가져오기
+조건 : 공고번호(CC_RECRUIT_NO)
+SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = 1
+
+2. 위에서 조회한 후기들의 각 키워드 가져오기
+조건 : 공고번호(CC_RECRUIT_NO)
+SELECT COMMENTS_AIR_MAP.CAM_CC_WRITER, COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
+JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
+WHERE CAM_CC_NO = 1
+ -->
+<!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
+	<insert id="insertCommentsKeyword" parameterType="map" >
 		<choose>
+			<!-- 공고글번호 나중에 동적으로 가져와야함 : CPM_CC_NO 같은거 -->
 			<!-- COMMENTS_GOOD_MAP -->
 			<when test="category == 'insertGood'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_GOOD_MAP VALUES
-						(1, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}))
+						(#{recruitNo}, #{writer}, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_BAD_MAP -->
 			<when test="category == 'insertBad'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_BAD_MAP VALUES
-						(1, (SELECT BAD_NO FROM COMMENTS_BAD WHERE BAD_NAME = #{item}))
+						(#{recruitNo}, #{writer}, (SELECT BAD_NO FROM COMMENTS_BAD WHERE BAD_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_CONDITION_MAP -->
 			<when test="category == 'insertCon'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_CONDITION_MAP VALUES
-						(1, (SELECT CONDITION_NO FROM COMMENTS_CONDITION WHERE CONDITION_NAME = #{item}))
+						(#{recruitNo}, #{writer}, (SELECT CONDITION_NO FROM COMMENTS_CONDITION WHERE CONDITION_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_AIR_MAP -->
 			<when test="category == 'insertAir'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_AIR_MAP VALUES
-						(1, (SELECT AIR_NO FROM COMMENTS_AIR WHERE AIR_NAME = #{item}))
+						(#{recruitNo}, #{writer}, (SELECT AIR_NO FROM COMMENTS_AIR WHERE AIR_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_PAY_MAP -->
 			<when test="category == 'insertPay'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_PAY_MAP VALUES
-						(1, (SELECT PAY_NO FROM COMMENTS_PAY WHERE PAY_NAME = #{item}))
+						(#{recruitNo}, #{writer}, (SELECT PAY_NO FROM COMMENTS_PAY WHERE PAY_NAME = #{item}))
 					</foreach>
 			</when>
 		</choose>
 	</insert>
-<!-- ================================================= 후기 키워드 가져오기 ================================================= -->
+<!-- ================================================= 후기 작성(insert)(COMMENTS_COMPANY) ================================================= -->
+	<insert id="insertComments" parameterType="CommentsCompany">
+		INSERT INTO COMMENTS_COMPANY VALUES
+		(COMMENTS_COMPANY_SEQUENCE.NEXTVAL, #{ccRecruitNo}, #{ccWriter}, 1, #{ccContent}, sysdate, #{ccContract})
+	</insert>
+<!-- ================================================= 후기 키워드 가져오기  to 후기 insert ================================================= -->
 	 <!-- COMMENTS_AIR -->
 	 <select id="selectAllCommentsAir" resultType="string">
 	 	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
