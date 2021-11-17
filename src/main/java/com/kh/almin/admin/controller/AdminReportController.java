@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.member.model.service.MemberService;
+import com.kh.almin.member.model.service.MemberServiceImpl;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
-import com.kh.almin.recruit.model.service.RecruitService;
+import com.kh.almin.recruit.model.service.RecruitServiceImpl;
 import com.kh.almin.recruit.model.vo.Recruit;
 
 	@Controller
 	@RequestMapping("/report")
 	public class AdminReportController {//Service, Dao에서 throws Exception 붙이기
 		@Autowired
-		private RecruitService recruitService;
+		private RecruitServiceImpl recruitService;
 		
 		private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 		

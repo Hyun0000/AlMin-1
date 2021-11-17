@@ -16,24 +16,32 @@ public class MemberDao {
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public List<Member> getMembers() throws Exception{
+
+	public List<Member> getMembers() throws Exception {
 		List<Member> members = sqlSession.selectList("Member.listMember");
 		logger.info(members.toString());
 		System.out.println(members);
 		return members;
 	}
-	
-	public List<Company> getCompanies() throws Exception{
+
+	public List<Company> getCompanies() throws Exception {
 		List<Company> companies = sqlSession.selectList("Member.listCompany");
 		logger.info(companies.toString());
 		System.out.println(companies);
 		return companies;
 	}
+
+	public void deleteMember(String memberId) throws Exception{
+		sqlSession.delete("Member.deleteMember",memberId);
+	}
 	
-	public void insertMember(Member member) throws Exception{
+	public void deleteCompany(String companyId) throws Exception{
+		sqlSession.delete("Member.deleteCompany", companyId);
+	}
+
+	public void insertMember(Member member) throws Exception {
 		logger.info("insertDao 진입");
 		sqlSession.insert("Member.insertMember", member);
 	}
-	
+
 }

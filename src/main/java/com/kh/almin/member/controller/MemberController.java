@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.member.model.service.MemberService;
+import com.kh.almin.member.model.service.MemberServiceImpl;
 import com.kh.almin.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/members")
 public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@Autowired
-	private MemberService memberService;
+	private MemberServiceImpl memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	

@@ -25,23 +25,38 @@
 	</resultMap>
 
 	<select id="listMember" resultMap="MemberResultMap">
-		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
-		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
-		WHERE MEMBER_TYPE=1
+		select MEMBER_ID, MEMBER_NAME,
+		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		MEMBER_EMAIL,
+		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		WHERE
+		MEMBER_TYPE=1
 	</select>
 
 	<select id="listCompany" resultMap="CompanyResultMap">
-		select COMPANY_ID, COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
+		select COMPANY_ID,
+		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
 		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
 	</select>
 
+	<delete id="deleteMember" parameterType="String">
+		delete from member where member_id = #{memberId}
+	</delete>
+
+	<delete id="deleteCompany" parameterType="String">
+		 delete from company where company_id = #{companyId}
+	</delete>
 
 	<insert id="insertMember" parameterType="Member">
-		insert into MEMBER (MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
-		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE) values (#{memberId},
+		insert into MEMBER
+		(MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
+		MEMBER_PHONE,
+		MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
+		MEMBER_GENDER, MEMBER_AGE,
+		MEMBER_REGDATE) values (#{memberId},
 		#{memberType}, #{memberPw},
-		#{memberName}, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail},
+		#{memberName}, #{memberPhone}, #{memberAddress}, #{memberBirth},
+		#{memberEmail},
 		#{memberGender}, #{memberAge}, sysdate)
 	</insert>
 </mapper>
