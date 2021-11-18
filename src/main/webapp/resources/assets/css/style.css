@@ -79,8 +79,6 @@ input:focus, textarea:focus {
 
 .logo {
 	height: 180px;
-	margin-top: -10px;
-	margin-bottom: 25px;
 }
 
 .jobs-title {
@@ -106,14 +104,22 @@ input:focus, textarea:focus {
 -webkit-transform
 
 
+
+
 :scale(1)
+
+
 
 
 ;
 opacity
 
 
+
+
 :
+
+
 
 
 0
@@ -129,21 +135,33 @@ keyframes sk-scaleout { 0%{
 -webkit-transform
 
 
+
+
 :scale(1)
+
+
 
 
 ;
 transform
 
 
+
+
 :scale(1)
+
+
 
 
 ;
 opacity
 
 
+
+
 :
+
+
 
 
 0
@@ -175,7 +193,14 @@ opacity
 	float: right
 }
 
+.main-menu {
+	margin-top: 105px;
+}
+
 @media ( min-width : 768px) and (max-width: 991.98px) {
+	.main-menu {
+		margin-top: 30px;
+	}
 	.main-menu ul {
 		display: none;
 		float: left;
@@ -190,6 +215,9 @@ opacity
 }
 
 @media ( min-width : 576px) and (max-width: 767.98px) {
+	.main-menu {
+		margin-top: 30px;
+	}
 	.main-menu ul {
 		display: none;
 		float: left;
@@ -204,6 +232,9 @@ opacity
 }
 
 @media ( max-width : 575.98px) {
+	.main-menu {
+		margin-top: 10px;
+	}
 	.main-menu ul {
 		display: none;
 		float: left;
@@ -215,10 +246,6 @@ opacity
 		width: 100%;
 		padding: 20px 20px 30px
 	}
-}
-
-.main-menu {
-	margin-top: 90px;
 }
 
 .main-menu ul li {
@@ -360,7 +387,7 @@ opacity
 
 .custom-navbar {
 	position: absolute;
-	top: -42px;
+	top: -85px;
 	right: 15px;
 	background: #1FA5FD;
 	padding: 7px 10px;
@@ -508,7 +535,7 @@ opacity
 }
 
 .search-bg {
-	margin-top: -50px;
+	margin-top: -25px;
 	position: relative;
 	z-index: 1
 }
@@ -527,7 +554,7 @@ opacity
 
 @media ( max-width : 575.98px) {
 	.search-bg {
-		margin-top: 100px
+		margin-top: 0;
 	}
 }
 
@@ -1191,7 +1218,6 @@ opacity
 }
 
 .footer-area {
-	
 	color: #fff;
 	background: #04091e
 }
@@ -3656,7 +3682,7 @@ form .template-btn {
 }
 
 .section-padding2 {
-	padding-top: 50px
+	padding-top: 25px
 }
 
 .section-padding3 {

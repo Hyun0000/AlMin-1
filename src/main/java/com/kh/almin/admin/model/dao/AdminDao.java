@@ -8,14 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.almin.member.model.dao.MemberDao;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
 @Repository
 public class AdminDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminDao.class);
 	@Autowired
 	private SqlSession sqlSession;
 

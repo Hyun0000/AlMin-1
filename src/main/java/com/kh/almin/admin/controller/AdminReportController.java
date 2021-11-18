@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.member.model.vo.Company;
-import com.kh.almin.member.model.vo.Member;
 import com.kh.almin.recruit.model.service.RecruitServiceImpl;
 import com.kh.almin.recruit.model.vo.Recruit;
 

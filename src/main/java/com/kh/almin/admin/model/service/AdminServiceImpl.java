@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.almin.admin.model.dao.AdminDao;
-import com.kh.almin.member.model.dao.MemberDao;
+import com.kh.almin.member.model.service.MemberServiceImpl;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired
 	private AdminDao adminDao;
 
@@ -32,6 +32,7 @@ public class AdminServiceImpl implements AdminService {
 
 	public void deleteMember(String memberId) throws Exception {
 		adminDao.deleteMember(memberId);
+
 	}
 
 	public void deleteCompany(String companyId) throws Exception {

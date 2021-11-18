@@ -21,20 +21,39 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
+	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
-	href="resources/assets/css/font-awesome-4.7.0.min.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
-	href="resources/assets/fonts/flat-icon/flaticon.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
 <link rel="stylesheet"
-	href="resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="resources/assets/css/style.css">
+	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/wow.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/owl-carousel.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/main.js"></script>
 
 <style>
 .topleft>ul>li>h4 {
@@ -49,6 +68,16 @@
 .job-text>p {
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+.d-toggle {
+	display: none;
+}
+
+button {
+	border: 0;
+	outline: 0;
+	background-color: transparent
 }
 </style>
 
@@ -66,8 +95,10 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<div class="logo-area">
-						<a href="main"><img src="resources/assets/images/logo.png"
-							class="logo" alt="logo"></a>
+						<a href="<c:url value="/main"/>"> <img
+							src="<c:url value="/resources/assets/images/logo.png"/>"
+							class="logo" alt="logo">
+						</a>
 					</div>
 				</div>
 				<div class="col-lg-10">
@@ -132,10 +163,15 @@
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
 									<c:forEach var="item" items="${memberview}">
-										<div class="mid">${item.memberId}</div>${item.memberName}${item.memberPhone}
-											${item.memberAddress} ${item.memberBirth} ${item.memberEmail}
-											${item.memberGender} ${item.memberAge} ${item.memberRegdate}
-										<button class="genric-btn primary small deletemm">탈퇴</button>
+										<div class="memberItem">
+											<button onclick="myFunction(this)" class="mid">${item.memberId}</button>
+											<div class="d-toggle">
+												${item.memberName}${item.memberPhone} ${item.memberAddress}
+												${item.memberBirth} ${item.memberEmail} ${item.memberGender}
+												${item.memberAge} ${item.memberRegdate}
+												<button class="genric-btn primary small deletemm">탈퇴</button>
+											</div>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -145,14 +181,15 @@
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
 									<c:forEach var="item" items="${companyview}">
-										<button onclick="myFunction('Demo1')"
-											class="w3-button w3-block w3-left-align">${item.companyId}</button>
-										<div id="Demo1" class="w3-container w3-hide">
-											{item.companyTel}${item.companyName}
-												${item.companyBoss} ${item.companyEmail}
-												${item.companyAddress} ${item.companyNum}
+										<div class="companyItem">
+											<button onclick="myFunction(this)" class="cid">${item.companyId}</button>
+											<div class="d-toggle">
+												${item.companyName}${item.companyTel} ${item.companyBoss}
+												${item.companyEmail} ${item.companyAddress}
+												${item.companyNum}
+												<button class="genric-btn primary small deletecm">탈퇴</button>
+											</div>
 										</div>
-										<button class="genric-btn primary small deletecm">탈퇴</button>
 									</c:forEach>
 								</div>
 							</div>
@@ -191,70 +228,65 @@
 
 
 	<!-- Javascript -->
-	<script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-	<script src="resources/assets/js/vendor/wow.min.js"></script>
-	<script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-	<script src="resources/assets/js/vendor/ion.rangeSlider.js"></script>
-	<script src="resources/assets/js/main.js"></script>
 	<script>
-		function myFunction(id) {
-			var x = document.getElementById(id);
-			if (x.className.indexOf("w3-show") == -1) {
-				x.className += " w3-show";
-			} else {
-				x.className = x.className.replace(" w3-show", "");
-			}
+		function myFunction(targetEle) {
+			console.log(targetEle);
+			var $togggleEle = $(targetEle).next();
+			$togggleEle.toggle();
 		}
 	</script>
 	<script>
 		$(".deletemm").click(deletemm);
 		$(".deletecm").click(deletecm);
 
-			function deletemm() {
-		if (confirm('정말 탈퇴처리하시겠습니까?')) {
-				$.ajax({
-					type : "post",
-					url : "/almin/admins/demember",
-					data : {
-						memberId : $("#recent").children("#mid")
-					},
-					success : function(data) {
-						if (data == "OK") {
-							alert('회원이 탈퇴처리되었습니다.');
-							console.log('탈퇴 요청');
-						}
-					},
-					error : function(error) {
-						alert('오류 발생. 오류 코드: ' + error.code);
-					}
-				});
-		} else {
-			return false;
-		}
+		function deletemm() {
+			var mid = $(this).prevAll(".mid").first().text();
+			var $itemEle = $(this).parent(".memberItem");
+			if (confirm('정말 탈퇴처리하시겠습니까?')) {
+				$
+						.ajax({
+							type : "post",
+							url : "${pageContext.request.contextPath }/admins/demember",
+							data : {
+								memberId : mid
+							},
+							success : function(data) {
+								if (data == "OK") {
+									alert('회원이 탈퇴처리되었습니다.');
+									$itemEle.remove();
+								}
+							},
+							error : function(error) {
+								alert('오류 발생. 오류 코드: ' + error.code);
+							}
+						});
+			} else {
+				return false;
 			}
+		}
 
-			function deletecm() {
-		if (confirm('정말 탈퇴처리하시겠습니까?')) {
-				$.ajax({
-					type : "post",
-					url : "/almin/admins/decompany",
-					data : {
-						memberId : "${item.companyId}"
-					},
-					success : function(data) {
-						if (data == "OK") {
-							alert('회원이 탈퇴처리되었습니다.');
-							console.log('탈퇴 요청');
-						}
-					},
-					error : function(error) {
-						alert('오류 발생. 오류 코드: ' + error.code);
-					}
-				});
-
-		} else {
+		function deletecm() {
+			var cid = $(this).prevAll(".cid").first().text();
+			var $itemEle = $(this).parent(".companyItem");
+			if (confirm('정말 탈퇴처리하시겠습니까?')) {
+				$
+						.ajax({
+							type : "post",
+							url : "${pageContext.request.contextPath }/admins/decompany",
+							data : {
+								companyId : cid
+							},
+							success : function(data) {
+								if (data == "OK") {
+									alert('회원이 탈퇴처리되었습니다.');
+									$itemEle.remove();
+								}
+							},
+							error : function(error) {
+								alert('오류 발생. 오류 코드: ' + error.code);
+							}
+						});
+			} else {
 				return false;
 			}
 		}
