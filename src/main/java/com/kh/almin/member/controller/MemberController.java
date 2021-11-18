@@ -3,6 +3,7 @@ package com.kh.almin.member.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,57 +29,65 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@Autowired
 	private MemberService memberService;
 	
-//	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
-//	BCryptPasswordEncoder pwdEncoder;
+	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
+	BCryptPasswordEncoder pwdEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	@GetMapping
-	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-		List<Member> volist = memberService.getMembers();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberview",volist);
-		mv.setViewName("member/memberlist");
-		logger.info("전체 회원리스트 조회");
-		logger.info("volist: "+volist.toString());
-		return mv;
-	}
-	
-	//id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
-	@GetMapping("/{userId}")
-	private String selectMember(@PathVariable("userId")String userId) throws Exception {
-		if(userId == null) {
-			logger.info("전체 회원리스트 조회");
-		} else {
-			logger.info(userId);
-		}
-		return "member/memberlist";
-	}
 	
 	@PostMapping //회원가입
 	private String insertMember(@RequestBody Member member) throws Exception { 
 		logger.info("insert 진입");
 		logger.info(member.toString());
-	/*	int result = memberService.idChk(member);
+		int result = memberService.idChk(member);
+		logger.info(String.valueOf(result));//id값 체크
 		try {
 			if(result == 1) {
-				return "/member/register";
+				return "/member/memberJoin";
 			}else if(result == 0) {
 				String inputPass = member.getMemberPw();
 				String pwd = pwdEncoder.encode(inputPass);
 				member.setMemberPw(pwd);
-				
-				memberService.register(member);
+				memberService.insertMember(member);
 			}
 			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
 			// 존재하지 않는다면 -> register
 		} catch (Exception  e) {
 			throw new RuntimeException();
 		}
-		return "redirect:/";*/
-		
-		memberService.insertMember(member);
-		return "member/memberJoin";
+		return "redirect:/";
+	}
+	@GetMapping
+	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
+		List<Member> volist = memberService.getMembers();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberview",volist);
+//		mv.setViewName("member/memberlist");
+		mv.setViewName("member/memberJoin");
+		logger.info("전체 회원리스트 조회");
+		logger.info("volist: "+volist.toString());
+		return mv;
+	}
+	
+	//id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
+	@PostMapping("/{userId}")
+	private String selectMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
+		logger.info(userId);
+		logger.info(m.toString());
+		Member ms= memberService.selectMember(m);
+		logger.info(ms.toString());
+		if(ms == null) {
+			return "member/memberJoin";
+		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+			boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
+			logger.info(String.valueOf(isPwdMatch));
+			if(isPwdMatch == true) {
+				logger.info("로그인 성공");
+				 session.setAttribute("loginInfo", ms);
+			} else {
+				logger.info("로그인 실패");
+			}
+			return "member/memberlist";
+		}
 	}
 	
 	@PutMapping

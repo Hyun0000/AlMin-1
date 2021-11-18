@@ -36,6 +36,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 </head>
 <body>
+<!-- 공통헤더 템플릿 -->
+<c:import url="/WEB-INF/views/template/header.jsp"/>
 	<!-- Preloader Starts -->
 	<div class="preloader">
 		<div class="spinner"></div>
