@@ -25,17 +25,13 @@
 	</resultMap>
 
 	<select id="listMember" resultMap="MemberResultMap">
-		select MEMBER_ID, MEMBER_NAME,
-		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
-		MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
-		WHERE
-		MEMBER_TYPE=1
+		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		WHERE MEMBER_TYPE=1
 	</select>
 
 	<select id="listCompany" resultMap="CompanyResultMap">
-		select COMPANY_ID,
-		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
+		select COMPANY_ID, COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
 		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
 	</select>
 
@@ -47,16 +43,44 @@
 		 delete from company where company_id = #{companyId}
 	</delete>
 
-	<insert id="insertMember" parameterType="Member">
-		insert into MEMBER
-		(MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
-		MEMBER_PHONE,
-		MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE,
-		MEMBER_REGDATE) values (#{memberId},
-		#{memberType}, #{memberPw},
-		#{memberName}, #{memberPhone}, #{memberAddress}, #{memberBirth},
-		#{memberEmail},
-		#{memberGender}, #{memberAge}, sysdate)
+	<!-- 회원가입 -->
+	<insert id="register" parameterType="Member">
+		insert into MEMBER (MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
+			MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
+			MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE)
+		values (#{memberId},#{memberType}, #{memberPw}, #{memberName}
+			, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail},
+			#{memberGender}, #{memberAge}, sysdate )
 	</insert>
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		  AND MEMBER_PW = #{memberPw}
+	</select>
+	
+		<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+    
+    <!-- 로그인 -->
+    <!-- password는 암호화로 인해 주석처리 -->
+	<select id="login" resultType="Member">
+		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME
+		  FROM MEMBER
+		 WHERE MEMBER_ID = #{memberId}
+		 <!--  AND MEMBER_PW = #{memberPw} -->
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="memberUpdate">
+		UPDATE MEMBER SET 
+		<!-- MEMBER_PW = #{memberPw}, -->
+		MEMBER_NAME = #{memberName}
+		WHERE MEMBER_ID = #{memberId}
+	</update>
+	
+	
 </mapper>

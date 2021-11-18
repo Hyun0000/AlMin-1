@@ -30,16 +30,8 @@ public class MemberDao {
 		System.out.println(companies);
 		return companies;
 	}
-
-	public void deleteMember(String memberId) throws Exception{
-		sqlSession.delete("Member.deleteMember",memberId);
-	}
 	
-	public void deleteCompany(String companyId) throws Exception{
-		sqlSession.delete("Member.deleteCompany", companyId);
-	}
-
-	public void insertMember(Member member) throws Exception {
+	public void insertMember(Member member) throws Exception{
 		logger.info("insertDao 진입");
 		sqlSession.insert("Member.insertMember", member);
 	}

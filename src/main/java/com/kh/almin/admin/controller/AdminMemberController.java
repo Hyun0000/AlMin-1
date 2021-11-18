@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.almin.admin.model.service.AdminService;
 import com.kh.almin.member.model.service.MemberService;
-import com.kh.almin.member.model.service.MemberServiceImpl;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
@@ -31,15 +31,15 @@ import com.kh.almin.member.model.vo.Member;
 @RequestMapping("/member")
 public class AdminMemberController {// Service, Dao에서 throws Exception 붙이기
 	@Autowired
-	private MemberService memberService;
+	private AdminService adminService;
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 
 	@GetMapping
 	private ModelAndView selectMembers() throws Exception { // @ExceptionHandler가 받는다.
-		List<Member> volist = memberService.getMembers();
-		List<Company> cvolist = memberService.getCompanies();
+		List<Member> volist = adminService.getMembers();
+		List<Company> cvolist = adminService.getCompanies();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberview", volist);
 		mv.addObject("companyview", cvolist);
@@ -63,7 +63,7 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 
 	@RequestMapping(value = "/deleteCompany", method = RequestMethod.POST)
 	private void deleteCompany(@RequestParam("companyId") String companyId) throws Exception { // 기업탈퇴
-		memberService.deleteCompany(companyId);
+		adminService.deleteCompany(companyId);
 //		mv.setViewName("redirect:/member");
 //		return mv;		
 	}

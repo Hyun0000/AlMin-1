@@ -2,9 +2,12 @@ package com.kh.almin.member.controller;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,14 +19,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.member.model.service.MemberServiceImpl;
+import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/members")
 public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@Autowired
-	private MemberServiceImpl memberService;
+	private MemberService memberService;
+	
+//	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
+//	BCryptPasswordEncoder pwdEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -49,12 +55,30 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return "member/memberlist";
 	}
 	
-	@PostMapping
-	private String insertMember(@RequestBody Member member) throws Exception { //회원가입
+	@PostMapping //회원가입
+	private String insertMember(@RequestBody Member member) throws Exception { 
 		logger.info("insert 진입");
 		logger.info(member.toString());
+	/*	int result = memberService.idChk(member);
+		try {
+			if(result == 1) {
+				return "/member/register";
+			}else if(result == 0) {
+				String inputPass = member.getMemberPw();
+				String pwd = pwdEncoder.encode(inputPass);
+				member.setMemberPw(pwd);
+				
+				memberService.register(member);
+			}
+			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
+			// 존재하지 않는다면 -> register
+		} catch (Exception  e) {
+			throw new RuntimeException();
+		}
+		return "redirect:/";*/
+		
 		memberService.insertMember(member);
-		return " insert data ";
+		return "member/memberJoin";
 	}
 	
 	@PutMapping
