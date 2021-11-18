@@ -93,7 +93,7 @@
 			<div class="topleft">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item"><h4>
-							<a class="nav-link" id="home-tab" href="member"
+							<a class="nav-link" id="home-tab" href="admins"
 								role="tab" aria-controls="home" aria-selected="false">회원조회</a>
 						</h4></li>
 					<li class="nav-item"><h4>

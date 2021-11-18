@@ -4,21 +4,24 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
-	
+
 	<typeAliases>
- 	<typeAlias type="com.kh.almin.member.model.vo.Member" alias="Member"/>
- 	<typeAlias type="com.kh.almin.member.model.vo.Company" alias="Company"/>
- 	<typeAlias type="com.kh.almin.recruit.model.vo.Recruit" alias="Recruit"/>
- 	<!-- <typeAlias type="com.kh.almin.district.model.vo.District" alias="Distrcit"/> -->
- 	<typeAlias type="com.kh.almin.comments.model.vo.CommentsCompany" alias="CommentsCompany"/>
+		<typeAlias type="com.kh.almin.member.model.vo.Member"
+			alias="Member" />
+		<typeAlias type="com.kh.almin.member.model.vo.Company"
+			alias="Company" />
+		<typeAlias type="com.kh.almin.recruit.model.vo.Recruit"
+			alias="Recruit" />
+		<typeAlias alias="CommentsCompany"
+			type="com.kh.almin.comments.model.vo.CommentsCompany" />
 	</typeAliases>
-	
+
 	<mappers>
-		<mapper resource="mappers/comments-mapper.xml"/>
-		<mapper resource="mappers/member-mapper.xml"/>
-		<mapper resource="mappers/recruit-mapper.xml"/>
-		<mapper resource="mappers/career-mapper.xml"/>
-		<!-- <mapper resource="mappers/career-mapper.xml"/> -->
+		<mapper resource="mappers/comments-mapper.xml" />
+		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/recruit-mapper.xml" />
+		<mapper resource="mappers/adminmember-mapper.xml" />
+		<mapper resource="mappers/career-mapper.xml" />
 	</mappers>
 
 </configuration>

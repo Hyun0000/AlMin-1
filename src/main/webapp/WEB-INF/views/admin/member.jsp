@@ -99,7 +99,7 @@
 			<div class="topleft">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item"><h4>
-							<a class="nav-link active" id="home-tab" href="member" role="tab"
+							<a class="nav-link active" id="home-tab" href="admins" role="tab"
 								aria-controls="home" aria-selected="true">회원조회</a>
 						</h4></li>
 					<li class="nav-item"><h4>
@@ -132,10 +132,10 @@
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
 									<c:forEach var="item" items="${memberview}">
-										<p>${item.memberId}${item.memberName}${item.memberPhone}
+										<div class="mid">${item.memberId}</div>${item.memberName}${item.memberPhone}
 											${item.memberAddress} ${item.memberBirth} ${item.memberEmail}
-											${item.memberGender} ${item.memberAge} ${item.memberRegdate}</p>
-										<button class="genric-btn primary small" id="deletemm">탈퇴</button>
+											${item.memberGender} ${item.memberAge} ${item.memberRegdate}
+										<button class="genric-btn primary small deletemm">탈퇴</button>
 									</c:forEach>
 								</div>
 							</div>
@@ -148,11 +148,11 @@
 										<button onclick="myFunction('Demo1')"
 											class="w3-button w3-block w3-left-align">${item.companyId}</button>
 										<div id="Demo1" class="w3-container w3-hide">
-											<p>{item.companyTel}${item.companyName}
+											{item.companyTel}${item.companyName}
 												${item.companyBoss} ${item.companyEmail}
-												${item.companyAddress} ${item.companyNum}</p>
+												${item.companyAddress} ${item.companyNum}
 										</div>
-										<button class="genric-btn primary small" id="deletecm">탈퇴</button>
+										<button class="genric-btn primary small deletecm">탈퇴</button>
 									</c:forEach>
 								</div>
 							</div>
@@ -209,21 +209,21 @@
 		}
 	</script>
 	<script>
-		$("#deletemm").click(deletemm);
-		$("#deletecm").click(deletecm);
+		$(".deletemm").click(deletemm);
+		$(".deletecm").click(deletecm);
 
 			function deletemm() {
 		if (confirm('정말 탈퇴처리하시겠습니까?')) {
 				$.ajax({
 					type : "post",
-					url : "${contextPath}/member/deleteMember",
+					url : "/almin/admins/demember",
 					data : {
-						memberId : "${memberId}"
+						memberId : $("#recent").children("#mid")
 					},
 					success : function(data) {
 						if (data == "OK") {
-							console.log("삭제 완료: " + "${memberId}");
 							alert('회원이 탈퇴처리되었습니다.');
+							console.log('탈퇴 요청');
 						}
 					},
 					error : function(error) {
@@ -239,14 +239,14 @@
 		if (confirm('정말 탈퇴처리하시겠습니까?')) {
 				$.ajax({
 					type : "post",
-					url : "${contextPath}/member/deleteCompany",
+					url : "/almin/admins/decompany",
 					data : {
-						memberId : "${companyId}"
+						memberId : "${item.companyId}"
 					},
 					success : function(data) {
 						if (data == "OK") {
-							console.log("삭제 완료: " + "${companyId}");
 							alert('회원이 탈퇴처리되었습니다.');
+							console.log('탈퇴 요청');
 						}
 					},
 					error : function(error) {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AdminMember">
+
+	<resultMap type="Member" id="MemberResultMap">
+		<id property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberAddress" column="MEMBER_ADDRESS" />
+		<result property="memberBirth" column="MEMBER_BIRTH" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberGender" column="MEMBER_GENDER" />
+		<result property="memberAge" column="MEMBER_AGE" />
+		<result property="memberRegdate" column="MEMBER_REGDATE" />
+	</resultMap>
+
+	<resultMap type="Company" id="CompanyResultMap">
+		<id property="companyId" column="COMPANY_ID" />
+		<result property="companyTel" column="COMPANY_TEL" />
+		<result property="companyName" column="COMPANY_NAME" />
+		<result property="companyBoss" column="COMPANY_BOSS" />
+		<result property="companyEmail" column="COMPANY_EMAIL" />
+		<result property="companyAddress" column="COMPANY_ADDRESS" />
+		<result property="companyNum" column="COMPANY_NUM" />
+	</resultMap>
+
+	<select id="listMember" resultMap="MemberResultMap">
+		select MEMBER_ID, MEMBER_NAME,
+		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		MEMBER_EMAIL,
+		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		WHERE
+		MEMBER_TYPE=1
+	</select>
+
+	<select id="listCompany" resultMap="CompanyResultMap">
+		select COMPANY_ID,
+		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
+		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+	</select>
+
+	<delete id="deleteMember" parameterType="String">
+		delete from member where member_id = #{memberId}
+	</delete>
+
+	<delete id="deleteCompany" parameterType="String">
+		 delete from company where company_id = #{companyId}
+	</delete>
+
+</mapper>
