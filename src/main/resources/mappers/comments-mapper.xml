@@ -2,6 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comments">
 <!-- ================================================= 후기 조회(select) ================================================= -->
+	<!-- 1. 후기의 키워드 가져오기 -->
+	<select id="selectKeywords" resultType="string" parameterType="map">
+		<choose>
+			<when test="category == 'selectGood'">
+				SELECT COMMENTS_GOOD.GOOD_NAME FROM COMMENTS_GOOD_MAP 
+				JOIN COMMENTS_GOOD ON COMMENTS_GOOD_MAP.CGM_GOOD_NO = COMMENTS_GOOD.GOOD_NO
+				WHERE CGM_CC_NO = #{recruitNo} AND CGM_CC_WRITER = #{writer}
+			</when>
+			<when test="category == 'selectBad'">
+				SELECT COMMENTS_BAD.BAD_NAME FROM COMMENTS_BAD_MAP 
+				JOIN COMMENTS_BAD ON COMMENTS_BAD_MAP.CBM_BAD_NO = COMMENTS_BAD.BAD_NO
+				WHERE CBM_CC_NO = #{recruitNo} AND CBM_CC_WRITER = #{writer}
+			</when>
+			<when test="category == 'selectCon'">
+				SELECT COMMENTS_CONDITION.CONDITION_NAME FROM COMMENTS_CONDITION_MAP 
+				JOIN COMMENTS_CONDITION ON COMMENTS_CONDITION_MAP.CCM_CONDITION_NO = COMMENTS_CONDITION.CONDITION_NO
+				WHERE CCM_CC_NO = #{recruitNo} AND CCM_CC_WRITER = #{writer}
+			</when>
+			<when test="category == 'selectAir'">
+				SELECT COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
+				JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
+				WHERE CAM_CC_NO = #{recruitNo} AND CAM_CC_WRITER = #{writer}
+			</when>
+			<when test="category == 'selectPay'">
+				SELECT COMMENTS_PAY.PAY_NAME FROM COMMENTS_PAY_MAP 
+				JOIN COMMENTS_PAY ON COMMENTS_PAY_MAP.CPM_PAY_NO = COMMENTS_PAY.PAY_NO
+				WHERE CPM_CC_NO = #{recruitNo} AND CPM_CC_WRITER = #{writer}
+			</when>
+		</choose>
+	</select>
+	
 	<resultMap type="CommentsCompany" id="selectCommentVoMap">
 		<id property="ccNo" column="CC_NO"/> <!-- PK -->
 		<result property="ccRecruitNo" column="CC_RECRUIT_NO"/>
@@ -12,28 +43,11 @@
 		<result property="ccContract" column="CC_CONTRACT"/>
 	</resultMap>
 	
-	<select id="selectCommentVo" resultMap="selectCommentVoMap">
-		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = 1 ORDER BY CC_NO DESC
+	<!-- 2. COMMENTS_COMPANY에서 후기 가져오기 -->
+	<select id="selectCommentVo" resultMap="selectCommentVoMap" parameterType="_int">
+		<!-- 지금은 개발중이라 *를 가져오지만 나중에는 필요한 정보만 가져오도록 수정 필요 -->
+		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} ORDER BY CC_NO DESC
 	</select>
-	
-	<!-- <select id="selectKeywords" parameterType="map"> -->
-	<select id="selectKeywords" resultType="hashmap">
-		SELECT COMMENTS_AIR_MAP.CAM_CC_WRITER, COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
-		JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
-		WHERE CAM_CC_NO = 1
-	</select>
-	
-<!-- 
-1. COMMENTS_COMPANY에 있는 후기 가져오기
-조건 : 공고번호(CC_RECRUIT_NO)
-SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = 1
-
-2. 위에서 조회한 후기들의 각 키워드 가져오기
-조건 : 공고번호(CC_RECRUIT_NO)
-SELECT COMMENTS_AIR_MAP.CAM_CC_WRITER, COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
-JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
-WHERE CAM_CC_NO = 1
- -->
 <!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
 	<insert id="insertCommentsKeyword" parameterType="map" >
 		<choose>

@@ -2,8 +2,171 @@
  * 
  */
 window.onload = function() {
-		console.log("${pageContext.request.contextPath}");
-//====================================================================================================
+// ========================================= 후기 조회(select) ===============================================
+	sendRequest("GET", "reviews", null, selectAllComments);
+	
+	// callback function
+	function selectAllComments() {
+		if (httpRequest.readyState === 4) {
+			if (httpRequest.status === 200) {
+				console.log("모듈을 이용한 js-ajax 성공");
+				console.log(httpRequest.responseText);
+				
+				let commentsObj = JSON.parse(httpRequest.responseText);
+/*				console.log("========================commentsObj==========================");
+				console.log(commentsObj);
+				console.log("========================commentsObj.user02==========================");
+				console.log(commentsObj.user02);
+				console.log("========================commentsObj.user02.length==========================");
+				console.log(commentsObj.user02.length);
+				console.log("========================commentsObj.user02[0]==========================");
+				console.log(commentsObj.user02[0]);
+				console.log("========================commentsObj.user02[0][0]==========================");
+				console.log(commentsObj.user02[0][0]);
+				console.log("========================commentsObj.user02[0][1]==========================");
+				console.log(commentsObj.user02[0][1]);
+				console.log("========================commentsObj.user02[0][2]==========================");
+				console.log(commentsObj.user02[0][2]);
+				console.log("========================commentsObj.user02[0][3]==========================");
+				console.log(commentsObj.user02[0][3]);
+				console.log("========================commentsObj.user02[1][0]==========================");
+				console.log(commentsObj.user02[1][0]);
+				console.log("========================commentsObj.commentsVO==========================");
+				console.log(commentsObj.commentsVO);
+				console.log("========================commentsObj[0]==========================");
+				console.log(commentsObj[0]);
+				console.log("========================commentsObj[1]==========================");
+				console.log(commentsObj[1]);
+				
+				console.log("========================foreach==========================");*/
+				
+				// 후기 작성자의 정보를 담는 객체 배열
+				let comments = commentsObj.commentsVO;
+				
+				// 바깥쪽 <li>를 구분하기 위한 변수
+				let num = 0;
+				
+				comments.forEach(function (e) {
+					console.log(e.ccWriter);
+					// let writer = e.ccWriter;
+					// console.log(commentsObj[e.ccWriter]);
+// ===================================================================================================
+// e = {"ccNo":2,"ccRecruitNo":1,"ccWriter":"user02","ccWriterType":"1","ccContent":"알바하러 가는 내 차비가 아깝습니다.","ccDate":"2021-11-18 12:49:52","ccContract":"N"},
+// e = {"ccNo":1,"ccRecruitNo":1,"ccWriter":"user01","ccWriterType":"1","ccContent":"이 가게가 불타버렸으면 좋겠습니다.","ccDate":"2021-11-18 12:49:04","ccContract":"Y"}
+					// ul
+			        let ulEle = document.getElementById('comments_box');
+			        
+			        // 바깥쪽 <li>
+			        let liEle = document.createElement('li');
+			        liEle.setAttribute('class', 'comments_list');
+			        liEle.setAttribute('id', 'comments_list_id_' + num);
+			        num++;
+			        ulEle.appendChild(liEle);
+
+			        // ===================== 상단 ==========================
+			        // top 전체 <div> 만들기
+			        let topDivEle = document.createElement('div');
+			        topDivEle.setAttribute('class', 'comments_top_bar');
+			        liEle.appendChild(topDivEle);
+
+			        // top 좌측 <div> 만들기
+			        let topLeftDivEle = document.createElement('div');
+			        topLeftDivEle.setAttribute('class', 'comments_top_bar_left');
+			        topDivEle.appendChild(topLeftDivEle);
+
+			        // top 좌측 <div>에 속하는 <h2> --> 작성자 아이디   commentsObj[e.ccWriter]?????
+			        let topHtwo = document.createElement('h2');
+			        topHtwo.innerText = e.ccWriter;
+			        topLeftDivEle.appendChild(topHtwo);
+
+			        // top 좌측 <div>에 속하는 <h3> --> 작성일
+			        let topHthree = document.createElement('h3');
+			        topHthree.innerText = e.ccDate;
+			        topLeftDivEle.appendChild(topHthree);
+
+			        // top 우측 <div> 만들기
+			        let topRightDivEle = document.createElement('div');
+			        topRightDivEle.setAttribute('class', 'comments_top_bar_right');
+			        topDivEle.appendChild(topRightDivEle);
+
+			        // 수정 버튼 만들기
+			        let updateBtn = document.createElement('button');
+			        updateBtn.innerText = "수정";
+			        updateBtn.setAttribute('class', 'updateBtn');
+			        topRightDivEle.appendChild(updateBtn);
+
+			        // 삭제 버튼 만들기
+			        let deleteBtn = document.createElement('button');
+			        deleteBtn.innerText = "삭제";
+			        deleteBtn.setAttribute('class', 'deleteBtn');
+			        topRightDivEle.appendChild(deleteBtn);
+			        
+			        // ===================== 한줄 후기 ==========================
+			        // 한줄 후기를 담는 <div> 만들기
+			        let midDivEle = document.createElement('div');
+			        midDivEle.setAttribute('class', 'comments_mid_bar_review');
+			        liEle.appendChild(midDivEle);
+			        
+			        // 한줄 후기를 담는 <div>에 속하는 <h4>
+			        let reviewHfour = document.createElement('h4');
+			        reviewHfour.innerText = e.ccContent;
+			        midDivEle.appendChild(reviewHfour);    
+
+			        // ===================== 하단 ==========================
+			        // bottom 전체 <div> 만들기
+			        let btmDivEle = document.createElement('div');
+			        btmDivEle.setAttribute('class', 'comments_btm_bar');
+			        liEle.appendChild(btmDivEle);
+
+			        let keyword = ["장점", "단점", "근무 조건", "분위기", "급여"];
+			        for (var i = 0; i < keyword.length; i++) {
+			        // bottom 좌측 <div> 만들기
+			        let btmLeftDivEle = document.createElement('div');
+			        btmLeftDivEle.setAttribute('class', 'left_comments_box');
+			        btmDivEle.appendChild(btmLeftDivEle);
+			        
+			        // bottom 우측 <div> 만들기
+			        let btmRightDivEle = document.createElement('div');
+			        btmRightDivEle.setAttribute('class', 'right_comments_box');
+			        btmDivEle.appendChild(btmRightDivEle);
+			        
+			        	// bottom 좌측 <div>에 속하는 <h3>  -->  ["장점", "단점", "근무 조건", "분위기", "급여"]
+			        	let btmHthree = document.createElement('h3');
+			        	btmHthree.innerText = keyword[i];
+			        	btmLeftDivEle.appendChild(btmHthree);
+			        	
+			        	
+			        	// bottom 우측 <div>에 속하는 <ul>
+			        	let btmUl = document.createElement('ul');
+			        	btmUl.setAttribute('class', 'right_comments_box_ul');
+			        	btmRightDivEle.appendChild(btmUl);
+			        	
+			        	for (var j = 0; j < commentsObj[e.ccWriter][i].length; j++) {
+			        		// bottom 우측 <ul>에 속하는 <li>  -->  각 후기별 키워드 넣기
+			        		let btmLiEle = document.createElement('li');
+			        		btmLiEle.innerText = commentsObj[e.ccWriter][i][j];
+			        		btmUl.appendChild(btmLiEle);
+						}
+					}
+				})
+				
+			}
+		}
+	}
+// ========================================= 모달창 띄우기 ===============================================
+		// 모달창 배경 변수 지정
+		let modalBack = document.getElementById('comments_insert_modal_back');
+		
+	    document.getElementById('insert_modal_showBtn').onclick = function () {
+	    	modalBack.style.display = "block";
+	    }
+// ========================================= 모달창 닫기 ===============================================
+	    window.onclick = function() {
+	        if (event.target == modalBack) {
+	            modalBack.style.display = "none";
+	        }
+	    }
+// ========================================= 후기 insert 시작 ===============================================
 		// let allConditionObj = new Array();
 		let allConditionObj = {};
 		// 후기 제출
@@ -77,8 +240,8 @@ window.onload = function() {
 			
 			// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
 			let restData = {
-					ccRecruitNo : '1',
-					ccWriter : 'user02',
+					ccRecruitNo : '2',
+					ccWriter : 'user04',
 					ccContent : commentsLineEle,
 					ccContract : contractRadio
 				}
@@ -116,6 +279,8 @@ window.onload = function() {
 				})
 			}
 //====================================================================================================
+//========================================= 후기 insert 끝 ===============================================
+//========================================= drag&drop evnet ===============================================
 	// dropzone --> dragzone
 	for (let i = 0; i < xEle.length; i++) {
 	    xEle[i].onclick = function () {
@@ -133,7 +298,7 @@ window.onload = function() {
 	    }
 	}
 }
-
+//========================================== window.onload 끝 ==============================================
 
 //====================================================================================================
 // drag한 itme의 id 정보 저장 (in dragzone)
@@ -146,13 +311,10 @@ function drag(event) {
  	// console.log(event.dataTransfer.getData("text"));
     // console.log(event.dataTransfer.getData("text").parentNode);
 }
-
-
 //====================================================================================================
 function allowDrop(event) {
     event.preventDefault();
 }
-
 //====================================================================================================
 // drag한 itme을 dropzone에 놓았을 '때'
 function drop(event) {
@@ -182,3 +344,31 @@ function drop(event) {
 	    }
     }
 }
+//========================================= drag&drop evnet ===============================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

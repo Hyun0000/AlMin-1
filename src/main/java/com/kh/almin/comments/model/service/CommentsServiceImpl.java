@@ -15,20 +15,21 @@ public class CommentsServiceImpl implements CommentsService {
 	private CommentsDao commentsDao;
 
 // ==============================================================================
-	// 모든 후기 키워드 가져오기
+	// 모든 후기 키워드 가져오기(insert)
 	@Override
 	public Map<String, List<String>> selectAllKeyWords() {
 		return commentsDao.selectAllKeyWords();
 	}
 // ==============================================================================
-	// 후기 작성
+	// 후기 작성(insert)
 	@Override
 	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) {
 		return commentsDao.insertComments(commentsList, commentsCompany);
 	}
 // ==============================================================================
-	// 특정 공고의 전체 후기 조회
+	// 특정 공고의 전체 후기 조회(select)
 	@Override
+	// public List<List<String>> selectAllComments(int recruitNo) {
 	public Map<String, Object> selectAllComments(int recruitNo) {
 		return commentsDao.selectAllComments(recruitNo);
 	}

@@ -63,5 +63,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value="/resources/career/js/main.js"/>"></script>
 <script src="<c:url value="/resources/career/js/career.js"/>"></script>
+<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 </body>
 </html>

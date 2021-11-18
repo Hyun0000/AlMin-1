@@ -112,7 +112,7 @@ public class CommentsController {
 		
 		int result = 0;
 		result = commentsService.insertComments(commentsList, commentsCompany);
-// ============================================== ajax로 데이터 보내기 ==============================================
+// ========================== ajax로 데이터 보내기 ==========================
 		Gson gson = new GsonBuilder().create();
 		JsonObject jsonObject = new JsonObject();
 		String jsonStr = "";
@@ -136,15 +136,40 @@ public class CommentsController {
 	}
 // ==============================================================================
 	// 특정 공고의 전체 후기 조회(ajax)
-	@GetMapping(value = "/reviews")
+	@GetMapping(value = "/reviews", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String selectAllComments() {
 		String jsonStr = "";
+		// 지금은 data가 없기에 고정값(1) 적용
+		int recruitNo = 1;
 		
+		// List<List<String>> keyList = commentsService.selectAllComments(recruitNo);
+		Map<String, Object> map = commentsService.selectAllComments(recruitNo);
 		
-		Map<String, Object> map = commentsService.selectAllComments(1);
+		System.out.println("컨트롤러");
+		// System.out.println("keyList : " + keyList);
 		
+		// Map<Integer, List<String>> testMap = new HashMap<Integer, List<String>>();
+		
+//		for (List<String> list : keyList) {
+//			int indecator = 0;
+//			for (int i = 0; i < list.size(); i++) {
+//				
+//			}
+//		}
+		
+		Gson gson = new GsonBuilder().create();
+		jsonStr = gson.toJson(map);
+		System.out.println("jsonStr : " + jsonStr);
+		
+		System.out.println("아직 못가지롱");
 		return jsonStr;
 	}
-	
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
+// ==============================================================================
 }

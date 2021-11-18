@@ -1,25 +1,202 @@
 @charset "UTF-8";
 *{ margin : 0; padding : 0; }
 
+/* 후기 select *//* 후기 select *//* 후기 select *//* 후기 select *//* 후기 select *//* 후기 select *//* 후기 select */
+/* 후기 조회 전체 container */
+#comments_container{
+    width: 1300px;
+    margin: 0 auto;
+}
+
+/* 후기 조회 <ul> */
+#comments_box{
+    /* width: 1300px;
+    margin: 0 auto; */
+    border: 1px solid black;
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 후기 조회 <li> */
+.comments_list {
+    width: 1000px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* 작성자, 날짜, 버튼 등이 들어가는 상단 <div> 전체 */
+.comments_top_bar {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+/* 작성자, 날짜가 들어가는 상단 죄측 <div> */
+.comments_top_bar_left{
+    display: flex;
+    align-items: center;
+}
+
+/* 작성자 <h2> */
+.comments_top_bar_left h2 {
+    padding: 0 10px;
+}
+
+/* 작성일 <h3> */
+.comments_top_bar_left h3 {
+    padding: 0 10px;
+}
+
+/* 수정&삭제 버튼 */
+.comments_top_bar_right button{
+    border: none;
+    background-color: royalblue;
+    color: white;
+    width: 80px; height: 30px;
+    font-weight: bolder;
+    margin: 0 10px;
+}
+
+/* 수정&삭제 버튼 클릭시 */
+.comments_top_bar_right button:active {
+    background-color: red;
+}
+
+/* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 */
+.comments_mid_bar_review {
+    border: 1px solid royalblue;
+    width: 1000px;
+    box-sizing: border-box;
+    padding: 25px;
+    padding-left: 60px;
+}
+
+/* 하단 전체 <div> */
+.comments_btm_bar {
+    border: 1px solid brown;
+    display: flex;
+    padding: 20px;
+}
+
+/* 하단 <div> 중 카테고리명이 들어가는 좌측 <div> */
+.left_comments_box {
+    border: 1px solid green;
+    width: 20%;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* 하단 <div> 중 키워드가 들어가는 우측 <div> */
+.right_comments_box{
+    border: 1px solid violet;
+    width: 80%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* 키워드를 감싸는 <ul> */
+.right_comments_box_ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    /* align-items: center; */
+}
+
+/* 각 키워드 <li> */
+.right_comments_box_ul li {
+    border: 1px solid blue;
+    margin: 10px 10px;
+    padding: 10px;
+}
+/* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert *//* 후기 insert */
+/* 모달창 배경 */
+#comments_insert_modal_back{
+    height: 100%; width: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: rgba(12,12,12,0.3);
+    z-index: 1;
+    /* 스크롤 만들기 */
+    overflow: auto;
+}
+
+/* 후기 입력창 전체를 감싸는 <div> & 모달창 콘텐츠 */
+#comments_insert_box{
+	border: 3px solid red;
+    width: 1300px;
+    /* height: 100%; */
+    margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    background-color: yellow;
+}
+
+/* 한줄 후기 <input>, 근로계약서를 담는 <div> 스타일 지정 */
+.comments_insert_top{
+	/* width: 1300px; */
+    /* margin: 0 auto; */
+    border: 3px solid blue;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 한줄 후기 <input>을 감싸는  fieldset */
+.comments_insert_top fieldset{
+	padding: 40px;
+	width: 900px;
+	margin: 0 auto;
+}
+
 /* 한줄 후기 <input> 스타일 지정 */
 #commentsLine{
     width: 1000px;
-    height: 50px;
-    line-height: 50px;
+    height: 65px;
+    line-height: 65px;
     resize: none;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+/* 근로계약서 radio 버튼을 담는 <div> */
+#contract_box {
+	border: 1px solid pink;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+/* 근로계약서 작성 여부 제목 */
+#contract_box h3 {
+	display: inline-block;
+	margin-right: 30px;
+	border-right: 1px solid yellow;
+	padding-right: 30px;
+}
+
+/* 근로계약서 radio 버튼에 대한 label */
+#contract_box label {
+	color: red;
+	margin: 0 10px;
 }
 
 /* item을 drop하는 div 스타일 지정 */
 .dropzoneClass {
     padding: 20px;
     width: 1000px;
+    margin: 0 auto;
     /* height: 150px; */
     border: 1px solid red;
     box-sizing: border-box;
     
-    margin-top: 50px;
+    margin-top: 30px;
 
     display: flex;
     justify-content: start;
@@ -30,11 +207,12 @@
 .dragzoneClass {
     padding: 20px;
     width: 1000px;
+    margin: 0 auto;
     /* height: 150px; */
     border: 1px solid black;
     box-sizing: border-box;
 
-    margin-top: 50px;
+    margin-top: 30px;
     
     display: flex;
     justify-content: start;
@@ -44,7 +222,7 @@
 /* 각 item 스타일 지정 */
 .dragEle {
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
     margin: 10px 10px;
 }
 
@@ -56,3 +234,38 @@
     /* dragzone에 있을때는 x 마크 안 보이게 설정 */
     display: none;
 }
+
+/* 등록 버튼을 담는 <div> */
+#btnBox {
+	width: 1000px;
+    margin: 50px auto;
+    /* margin-top: 50px; */
+    text-align: center;
+}
+
+/* 등록 버튼 */
+#submitBtn {
+	width: 300px;
+	height: 50px;
+	background-color: royalblue;
+	color: white;
+	font-weight: bolder;
+	border: nonel
+}
+
+/* 등록 버튼 클릭시 */
+#submitBtn:active {
+    background-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
