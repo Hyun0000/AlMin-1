@@ -77,9 +77,11 @@ table, tr, td {
 			</tr>
 			<c:forEach var="item" items="${jobinfolist }">
 				<tr>
+				<!-- item.jobDistrictName -->
 					<td>0</td>
-
-					<td>${item.recruitTitle }</td>
+					<c:set var="recruit_title" value="${recruiTtitle }"></c:set>
+					<c:url value="/recruits/detailjobinfo?recruitTitle='${recruitTitle }'" var="jobinfo"></c:url>
+					<td><a href="${jobinfo }">${item.recruitTitle }</a></td>
 
 					<td>${item.recruitMoney }</td>
 
@@ -89,7 +91,7 @@ table, tr, td {
 				</tr>
 			</c:forEach>
 		</table>
-
+	
 	</section>
 
 	<!-- Footer Area Starts -->

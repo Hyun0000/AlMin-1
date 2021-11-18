@@ -27,5 +27,9 @@ public class RecruitServiceImpl implements RecruitService {
 		recruit=recruitDao.recruitList();
 		return recruit;
 	}
-	
+	public List<Recruit> detailjobinfo() throws Exception{
+		List<Recruit> recruit=new ArrayList<Recruit>();
+		recruit=recruitDao.detailjobinfo();
+		return recruit;
+	}
 }

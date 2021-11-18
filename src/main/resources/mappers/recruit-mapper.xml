@@ -45,4 +45,8 @@
 	select b.JOB_DISTRICT_NAME,recruit_title,recruit_money,recruit_date from company_recruit a
 	inner join job_district b on a.recruit_job_district=b.JOB_DISTRICT_NO
 </select>
+<!-- 공고상세조회 -->
+<select id="detailjobinfo" resultMap="RecruitResultMap">
+	select * from company_recruit where=recruit_title=#{recruit_title}
+</select>
 </mapper>

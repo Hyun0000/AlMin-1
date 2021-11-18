@@ -27,4 +27,11 @@ public class RecruitJobInfoController {
 		mv.setViewName("recruits/jobinfoList");
 		return mv;
 	}
+	@GetMapping(value="/detailjobinfo",produces="text/plain;charset=UTF-8")
+	public ModelAndView detailjobinfo(ModelAndView mv) throws Exception{
+		mv=new ModelAndView();
+		mv.addObject("detailjobinfo",recruitservice.detailjobinfo());
+		mv.setViewName("recruit/detailjobinfo");
+		return mv;
+	}
 }
