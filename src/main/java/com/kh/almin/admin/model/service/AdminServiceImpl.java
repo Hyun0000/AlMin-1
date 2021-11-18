@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.almin.admin.model.dao.AdminDao;
-import com.kh.almin.member.model.service.MemberServiceImpl;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 	@Autowired
 	private AdminDao adminDao;
 
