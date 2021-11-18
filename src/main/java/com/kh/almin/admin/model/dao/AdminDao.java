@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
+import com.kh.almin.recruit.model.vo.Recruit;
 
 @Repository
 public class AdminDao {
@@ -32,6 +33,13 @@ public class AdminDao {
 		return companies;
 	}
 
+	public List<Recruit> getReport() throws Exception{
+		List<Recruit> recruits = sqlSession.selectList("AdminRecruit.listReport");
+		logger.info(recruits.toString());
+		System.out.println(recruits);
+		return recruits;
+	}
+	
 	public void deleteMember(String memberId) throws Exception {
 		sqlSession.delete("AdminMember.deleteMember", memberId);
 	}
@@ -39,4 +47,9 @@ public class AdminDao {
 	public void deleteCompany(String companyId) throws Exception {
 		sqlSession.delete("AdminMember.deleteCompany", companyId);
 	}
+	
+	public void deleteReport(String rtno) throws Exception {
+		sqlSession.delete("AdminRecruit.deleteReport", rtno);
+	}
+	
 }

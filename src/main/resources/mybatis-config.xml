@@ -12,16 +12,17 @@
 			alias="Company" />
 		<typeAlias type="com.kh.almin.recruit.model.vo.Recruit"
 			alias="Recruit" />
-		<typeAlias alias="CommentsCompany"
-			type="com.kh.almin.comments.model.vo.CommentsCompany" />
+		<typeAlias type="com.kh.almin.comments.model.vo.CommentsCompany"
+			alias="CommentsCompany" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mappers/comments-mapper.xml" />
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/recruit-mapper.xml" />
-		<mapper resource="mappers/adminmember-mapper.xml" />
 		<mapper resource="mappers/career-mapper.xml" />
+		<mapper resource="mappers/adminmember-mapper.xml" />
+		<mapper resource="mappers/adminrecruit-mapper.xml" />
 	</mappers>
 
 </configuration>

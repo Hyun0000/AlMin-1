@@ -130,12 +130,12 @@ button {
 			<div class="topleft">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item"><h4>
-							<a class="nav-link active" id="home-tab" href="admins" role="tab"
+							<a class="nav-link active" id="home-tab" href="${pageContext.request.contextPath }/admins" role="tab"
 								aria-controls="home" aria-selected="true">회원조회</a>
 						</h4></li>
 					<li class="nav-item"><h4>
-							<a class="nav-link" id="profile-tab" href="report" role="tab"
-								aria-controls="profile" aria-selected="false">의심공고</a>
+							<a class="nav-link" id="profile-tab" href="${pageContext.request.contextPath }/report"
+								role="tab" aria-controls="profile" aria-selected="false">의심공고</a>
 						</h4></li>
 				</ul>
 			</div>
@@ -197,7 +197,6 @@ button {
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</section>
 	<!-- Body Area End -->
@@ -240,39 +239,38 @@ button {
 		$(".deletecm").click(deletecm);
 
 		function deletemm() {
-			var mid = $(this).prevAll(".mid").first().text();
-			var $itemEle = $(this).parent(".memberItem");
+			var mid = $(this).parent().prev(".mid").text();
+			var $itemEle = $(this).parents(".memberItem");
 			if (confirm('정말 탈퇴처리하시겠습니까?')) {
-				$
-						.ajax({
-							type : "post",
-							url : "${pageContext.request.contextPath }/admins/demember",
-							data : {
-								memberId : mid
-							},
-							success : function(data) {
-								if (data == "OK") {
-									alert('회원이 탈퇴처리되었습니다.');
-									$itemEle.remove();
-								}
-							},
-							error : function(error) {
-								alert('오류 발생. 오류 코드: ' + error.code);
-							}
-						});
+				$.ajax({
+					type : "post",
+					url : "${pageContext.request.contextPath}/admins/demember",
+					data : {
+						memberId : mid
+					},
+					success : function(data) {
+						if (data == "OK") {
+							alert('회원이 탈퇴처리되었습니다.');
+							$itemEle.remove();
+						}
+					},
+					error : function(error) {
+						alert('오류 발생. 오류 코드: ' + error.code);
+					}
+				});
 			} else {
 				return false;
 			}
 		}
 
 		function deletecm() {
-			var cid = $(this).prevAll(".cid").first().text();
-			var $itemEle = $(this).parent(".companyItem");
+			var cid = $(this).parent().prev(".cid").text();
+			var $itemEle = $(this).parents(".companyItem");
 			if (confirm('정말 탈퇴처리하시겠습니까?')) {
 				$
 						.ajax({
 							type : "post",
-							url : "${pageContext.request.contextPath }/admins/decompany",
+							url : "${pageContext.request.contextPath}/admins/decompany",
 							data : {
 								companyId : cid
 							},

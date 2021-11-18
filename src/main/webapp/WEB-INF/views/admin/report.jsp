@@ -21,28 +21,63 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
+	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
-	href="resources/assets/css/font-awesome-4.7.0.min.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
-	href="resources/assets/fonts/flat-icon/flaticon.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
 <link rel="stylesheet"
-	href="resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="resources/assets/css/style.css">
+	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/wow.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/owl-carousel.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/assets/js/main.js"></script>
 
 <style>
 .topleft>ul>li>h4 {
 	padding-right: 20px;
 	padding-bottom: 20px;
 }
+
 .jobs-area {
 	min-height: 60%;
+}
+
+.job-text>p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.d-toggle {
+	display: none;
+}
+
+button {
+	border: 0;
+	outline: 0;
+	background-color: transparent
 }
 </style>
 
@@ -60,8 +95,10 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<div class="logo-area">
-						<a href="main"><img src="resources/assets/images/logo.png"
-							class="logo" alt="logo"></a>
+						<a href="<c:url value="/main"/>"> <img
+							src="<c:url value="/resources/assets/images/logo.png"/>"
+							class="logo" alt="logo">
+						</a>
 					</div>
 				</div>
 				<div class="col-lg-10">
@@ -93,15 +130,18 @@
 			<div class="topleft">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item"><h4>
-							<a class="nav-link" id="home-tab" href="admins"
-								role="tab" aria-controls="home" aria-selected="false">회원조회</a>
+							<a class="nav-link" id="home-tab"
+								href="${pageContext.request.contextPath }/admins" role="tab"
+								aria-controls="home" aria-selected="true">회원조회</a>
 						</h4></li>
 					<li class="nav-item"><h4>
-							<a class="nav-link active" id="home-tab" href="report" role="tab"
-								aria-controls="home" aria-selected="false">의심공고</a>
+							<a class="nav-link active" id="profile-tab"
+								href="${pageContext.request.contextPath }/report" role="tab"
+								aria-controls="profile" aria-selected="false">의심공고</a>
 						</h4></li>
 				</ul>
 			</div>
+
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -111,7 +151,15 @@
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
 									<c:forEach var="item" items="${reportview}">
-										<p>${recruitNo} ${item.recruitCompanyId} ${item.recruitTitle} ${item.recruitDate}</p>
+										<div class="reportItem">
+											<button onclick="myFunction(this)">${item.recruitCompanyId}</button>
+											<div class="d-toggle">
+												<div style="display: none" class="rt">${item.recruitNo}</div>
+												<div>${item.recruitTitle} ${item.recruitDate}</div>
+												<button class="genric-btn primary small" onclick="">공고보기</button>
+												<button class="genric-btn primary small deletert">삭제</button>
+											</div>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -150,12 +198,40 @@
 
 
 	<!-- Javascript -->
-	<script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-	<script src="resources/assets/js/vendor/wow.min.js"></script>
-	<script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-	<script src="resources/assets/js/vendor/ion.rangeSlider.js"></script>
-	<script src="resources/assets/js/main.js"></script>
+	<script>
+		function myFunction(targetEle) {
+			console.log(targetEle);
+			var $togggleEle = $(targetEle).next();
+			$togggleEle.toggle();
+		}
+	</script>
+	<script>
+		$(".deletert").click(deletert);
+
+		function deletert() {
+			var rt = $(this).prevAll(".rt").text();
+			var $itemEle = $(this).parents(".reportItem");
+			if (confirm('정말 삭제하시겠습니까?')) {
+				$.ajax({
+					type : "post",
+					url : "${pageContext.request.contextPath}/report/dereport",
+					data : {
+						rtno : rt
+					},
+					success : function(data) {
+						if (data == "OK") {
+							alert('공고가 삭제되었습니다.');
+							$itemEle.remove();
+						}
+					},
+					error : function(error) {
+						alert('오류 발생. 오류 코드: ' + error.code);
+					}
+				});
+			} else {
+				return false;
+			}
+		}
+	</script>
 </body>
 </html>

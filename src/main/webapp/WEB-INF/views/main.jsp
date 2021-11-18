@@ -21,19 +21,19 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
-	href="resources/assets/css/font-awesome-4.7.0.min.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
 <link rel="stylesheet"
-	href="resources/assets/fonts/flat-icon/flaticon.css">
+	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
 <link rel="stylesheet"
-	href="resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="resources/assets/css/style.css">
+	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 </head>
 <body>
 	<!-- Preloader Starts -->
@@ -48,7 +48,7 @@
 			<div class="row">
 				<div class="col-lg-2">
 					<div class="logo-area">
-						<a href="main"><img src="resources/assets/images/logo.png"
+						<a href="${pageContext.request.contextPath }/main"><img src="${pageContext.request.contextPath }/resources/assets/images/logo.png"
 							class="logo" alt="logo"></a>
 					</div>
 				</div>
@@ -94,8 +94,7 @@
 								<option value="10">디자인</option>
 								<option value="11">배달/운전</option>
 								<option value="12">병원/간호</option>
-							</select> 
-							<select>
+							</select> <select>
 								<option value="0">지역선택</option>
 								<option value="1">서울</option>
 								<option value="2">경기</option>
@@ -134,9 +133,7 @@
 				<div class="col-lg-4">
 					<div class="single-feature mb-4 mb-lg-0">
 						<h4>직종별 알바</h4>
-						<p class="py-3">
-						외식업부터 서비스업까지, 원하는 직종별로 찾아보는 알바의 민족
-						</p>
+						<p class="py-3">외식업부터 서비스업까지, 원하는 직종별로 찾아보는 알바의 민족</p>
 						<a href="#" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
 					</div>
@@ -145,7 +142,7 @@
 					<div class="single-feature mb-4 mb-lg-0">
 						<h4>지역별 알바</h4>
 						<p class="py-3">
-						전국팔도 어디든!<br>지역별로 찾아보는 알바의 민족
+							전국팔도 어디든!<br>지역별로 찾아보는 알바의 민족
 						</p>
 						<a href="#" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
@@ -154,9 +151,7 @@
 				<div class="col-lg-4">
 					<div class="single-feature">
 						<h4>대상별 알바</h4>
-						<p class="py-3">
-						내가 누구든간에~학생,주부,외국인 모두 찾아보는 알바의 민족
-						</p>
+						<p class="py-3">내가 누구든간에~학생,주부,외국인 모두 찾아보는 알바의 민족</p>
 						<a href="#" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
 					</div>
@@ -180,56 +175,56 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="resources/assets/images/cat1.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat1.png" alt="category">
 						<h4>경기/서울</h4>
 						<h5>250 open job</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="resources/assets/images/cat2.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat2.png" alt="category">
 						<h4>강원도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="resources/assets/images/cat3.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat3.png" alt="category">
 						<h4>충청북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="resources/assets/images/cat4.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat4.png" alt="category">
 						<h4>충청남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="resources/assets/images/cat5.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat5.png" alt="category">
 						<h4>경상북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="resources/assets/images/cat6.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat6.png" alt="category">
 						<h4>경상남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-md-0">
-						<img src="resources/assets/images/cat7.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat7.png" alt="category">
 						<h4>전라북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center">
-						<img src="resources/assets/images/cat8.png" alt="category">
+						<img src="${pageContext.request.contextPath }/resources/assets/images/cat8.png" alt="category">
 						<h4>전라남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
@@ -284,7 +279,7 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="resources/assets/images/job1.png" alt="job">
+									<img src="${pageContext.request.contextPath }/resources/assets/images/job1.png" alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn1">지원하기</a>
@@ -309,7 +304,7 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="resources/assets/images/job2.png" alt="job">
+									<img src="${pageContext.request.contextPath }/resources/assets/images/job2.png" alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn2">채용하기</a>
@@ -368,12 +363,12 @@
 
 
 	<!-- Javascript -->
-	<script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-	<script src="resources/assets/js/vendor/wow.min.js"></script>
-	<script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-	<script src="resources/assets/js/vendor/ion.rangeSlider.js"></script>
-	<script src="resources/assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/owl-carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/assets/js/main.js"></script>
 </body>
 </html>

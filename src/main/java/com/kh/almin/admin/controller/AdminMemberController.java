@@ -21,14 +21,14 @@ import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admins")
 public class AdminMemberController {// Service, Dao에서 throws Exception 붙이기
 	@Autowired
 	private AdminService adminService;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 
-	@GetMapping("/admins")
+	@GetMapping
 	private ModelAndView selectMembers() throws Exception { // @ExceptionHandler가 받는다.
 		List<Member> volist = adminService.getMembers();
 		List<Company> cvolist = adminService.getCompanies();
