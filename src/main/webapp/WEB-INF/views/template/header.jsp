@@ -16,7 +16,7 @@
 					</div>
 					<div class="main-menu">
 						<ul>
-							<li class="active"><a href="#">구인공고</a></li>
+							<li class="active"><a href="recruits/jobinfoList">구인공고</a></li>
 							<li><a href="#">인재정보</a></li>
 							<li><a href="#">아이디/비밀번호 찾기</a></li>
 							<li><a href="#">마이페이지</a></li>
