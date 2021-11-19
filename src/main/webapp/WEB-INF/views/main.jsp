@@ -21,19 +21,10 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 </head>
 <body>
 	<!-- Preloader Starts -->
@@ -312,14 +303,5 @@
 
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
-
-	<!-- Javascript -->
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/wow.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/ion.rangeSlider.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>

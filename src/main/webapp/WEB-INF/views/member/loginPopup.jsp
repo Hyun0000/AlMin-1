@@ -13,7 +13,7 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/template/css/almin.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 <style>
 body{
       font-family: 'Noto Sans KR', sans-serif;

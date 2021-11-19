@@ -17,17 +17,7 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/template/css/almin.css"/>">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate-3.7.0.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/font-awesome-4.7.0.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/fonts/flat-icon/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 
 </head>
 <script type="text/javascript">
@@ -36,7 +26,7 @@
 			$("#memberJoin").on("click", function(){
 				location.href = "${pageContext.request.contextPath}/members";
 			});
-		};
+		});
 </script>
 <style>
   body{

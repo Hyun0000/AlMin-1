@@ -1,26 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- jstl은 header가 아닌 메인페이지에 삽입 -->
-<!-- 공통헤더 템플릿입니다. css 작성금지 -->
-<!-- 공통헤더 템플릿입니다. head 영역에 script 작성금지 -->
+<!-- 공통헤더 템플릿입니다. css 작성금지 head 영역에 script 작성금지 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
 	rel="stylesheet">
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/owl-carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/vendor/ion.rangeSlider.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+<!-- Javascript -->
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/owl-carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
 <!-- Header Area Starts -->
 <header class="header-area main-header">
@@ -42,7 +35,7 @@
 						<li><a href="#">아이디/비밀번호 찾기</a></li>
 						<li><a href="#">마이페이지</a></li>
 							<li class="menu-btn"><a href="${pageContext.request.contextPath}/logins" class="login">로그인</a> 
-							<a href="${pageContext.request.contextPath}/logins" class="template-btn">회원가입</a></li>
+							<a href="${pageContext.request.contextPath}/members" class="template-btn">회원가입</a></li>
 						</ul>
 					</div>
 				</div>
