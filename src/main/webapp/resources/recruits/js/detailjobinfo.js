@@ -119,27 +119,38 @@ window.onload = function() {
 			        liEle.appendChild(btmDivEle);
 
 			        let keyword = ["장점", "단점", "근무 조건", "분위기", "급여"];
-			        for (var i = 0; i < keyword.length; i++) {
+			        
 			        // bottom 좌측 <div> 만들기
 			        let btmLeftDivEle = document.createElement('div');
 			        btmLeftDivEle.setAttribute('class', 'left_comments_box');
 			        btmDivEle.appendChild(btmLeftDivEle);
+			        
+			        // bottom 좌측 <div>에 속하는 <ul>
+//			        let btmLeftUlEle = document.createElement('ul');
+//			        btmLeftUlEle.setAttribute('class', 'left_comments_box_ul');
+//			        btmLeftDivEle.appendChild(btmLeftUlEle);
 			        
 			        // bottom 우측 <div> 만들기
 			        let btmRightDivEle = document.createElement('div');
 			        btmRightDivEle.setAttribute('class', 'right_comments_box');
 			        btmDivEle.appendChild(btmRightDivEle);
 			        
-			        	// bottom 좌측 <div>에 속하는 <h3>  -->  ["장점", "단점", "근무 조건", "분위기", "급여"]
-			        	let btmHthree = document.createElement('h3');
-			        	btmHthree.innerText = keyword[i];
-			        	btmLeftDivEle.appendChild(btmHthree);
+			        for (var i = 0; i < keyword.length; i++) { // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+			        // bottom 좌측 <div>에 속하는 <div>
+		        	let btmLeftUlEle = document.createElement('div');
+			        btmLeftUlEle.setAttribute('class', 'left_comments_box_div');
+			        btmLeftUlEle.innerText = keyword[i];
+			        btmLeftDivEle.appendChild(btmLeftUlEle);
+			        
+//			        let btmHthree = document.createElement('li');
+//			        btmHthree.innerText = keyword[i];
+//			        btmLeftUlEle.appendChild(btmHthree);
 			        	
-			        	
-			        	// bottom 우측 <div>에 속하는 <ul>
-			        	let btmUl = document.createElement('ul');
-			        	btmUl.setAttribute('class', 'right_comments_box_ul');
-			        	btmRightDivEle.appendChild(btmUl);
+		        	// bottom 우측 <div>에 속하는 <ul>
+		        	let btmUl = document.createElement('ul');
+		        	btmUl.setAttribute('class', 'right_comments_box_ul');
+		        	btmRightDivEle.appendChild(btmUl);
 			        	
 			        	for (var j = 0; j < commentsObj[e.ccWriter][i].length; j++) {
 			        		// bottom 우측 <ul>에 속하는 <li>  -->  각 후기별 키워드 넣기
