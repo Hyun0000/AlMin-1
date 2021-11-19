@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,12 @@ public class CommentsController {
 	// 현재는 (모든 후기 키워드 가져오기 to insert)
 	@GetMapping("/detailjobinfo")
 	public ModelAndView selectAllCommentAir(ModelAndView mv) {
-		Map<String, List<String>> commentsMap = commentsService.selectAllKeyWords();
+		Map<String, List<String>> commentsMap = null;
+		try {
+			commentsMap = commentsService.selectAllKeyWords();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		mv.addObject("commentsMap", commentsMap);
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
@@ -111,7 +117,11 @@ public class CommentsController {
 		System.out.println("================ data 확인용 log ================");
 		
 		int result = 0;
-		result = commentsService.insertComments(commentsList, commentsCompany);
+		try {
+			result = commentsService.insertComments(commentsList, commentsCompany);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 // ========================== ajax로 데이터 보내기 ==========================
 		Gson gson = new GsonBuilder().create();
 		JsonObject jsonObject = new JsonObject();
@@ -135,29 +145,22 @@ public class CommentsController {
 		// https://hianna.tistory.com/629
 	}
 // ==============================================================================
-	// 특정 공고의 전체 후기 조회(ajax)
+	// ajax
+	// 특정 공고의 전체 후기 조회
 	@GetMapping(value = "/reviews", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String selectAllComments() {
 		String jsonStr = "";
-		// 지금은 data가 없기에 고정값(1) 적용
+		// 지금은 data가 없기에 고정값 적용
 		int recruitNo = 1;
 		
-		// List<List<String>> keyList = commentsService.selectAllComments(recruitNo);
-		Map<String, Object> map = commentsService.selectAllComments(recruitNo);
-		
-		System.out.println("컨트롤러");
-		// System.out.println("keyList : " + keyList);
-		
-		// Map<Integer, List<String>> testMap = new HashMap<Integer, List<String>>();
-		
-//		for (List<String> list : keyList) {
-//			int indecator = 0;
-//			for (int i = 0; i < list.size(); i++) {
-//				
-//			}
-//		}
-		
+		Map<String, Object> map = null;
+		try {
+			map = commentsService.selectAllComments(recruitNo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Gson gson = new GsonBuilder().create();
 		jsonStr = gson.toJson(map);
 		System.out.println("jsonStr : " + jsonStr);
@@ -166,6 +169,34 @@ public class CommentsController {
 		return jsonStr;
 	}
 // ==============================================================================
+	// ajax
+	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
+	@DeleteMapping(value = "/reviews")
+	@ResponseBody
+	public String deleteComment(@RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id) {
+		// ajax로 보낼 data
+		String result = "";
+		
+		// 공고 번호
+		int rNo = 0;
+		if (recruitNo != null && recruitNo != "") {rNo = Integer.parseInt(recruitNo);}
+		else {logger.warn("공고 번호 잘못 전달");}
+		
+		// 작성자 ID
+		String writerId = "";
+		if (id != null && id != "") {writerId = id;}
+		else {logger.warn("작성자 ID 잘못 전달");}
+		
+		// 결과
+		int deleteResult = 0;
+		try {deleteResult = commentsService.deleteComment(rNo, writerId);}
+		catch (Exception e) {e.printStackTrace();}
+		
+		if (deleteResult == 6) {result = "ok";}
+		else {result = "fail";}
+		
+		return result;
+	}
 // ==============================================================================
 // ==============================================================================
 // ==============================================================================

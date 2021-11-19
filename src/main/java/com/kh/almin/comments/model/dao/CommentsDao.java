@@ -18,7 +18,7 @@ public class CommentsDao {
 	private SqlSession sqlSession;
 // ==============================================================================================================
 	// 모든 후기 키워드 가져오기(insert)
-	public Map<String, List<String>> selectAllKeyWords() {
+	public Map<String, List<String>> selectAllKeyWords() throws Exception {
 		Map<String, List<String>> commentsMap = new HashMap<String, List<String>>();
 //		commentsMap.put("COMMENTS_GOOD", sqlSession.selectList("Comments.selectAllCommentsGood"));
 //		commentsMap.put("COMMENTS_BAD", sqlSession.selectList("Comments.selectAllCommentsBad"));
@@ -35,7 +35,7 @@ public class CommentsDao {
 	}
 // ==============================================================================================================
 	// 후기 작성(insert)
-	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) {
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) throws Exception {
 		Map<String, Object> insertMap = new HashMap<String, Object>();
 		// ex) insertMap.put("0", commentsList.get(0));
 		String[] tableName = {"insertGood", "insertBad", "insertCon", "insertAir", "insertPay"};
@@ -83,7 +83,7 @@ public class CommentsDao {
 	}
 // ==============================================================================================================
 	// 특정 공고의 전체 후기 조회(select)
-	public Map<String, Object> selectAllComments(int recruitNo) {
+	public Map<String, Object> selectAllComments(int recruitNo) throws Exception {
 	// public List<List<String>> selectAllComments(int recruitNo) {
 		// 반환용 map
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -179,6 +179,57 @@ public class CommentsDao {
 		
 		// return keyList;
 		return resultMap;
+	}
+// ==============================================================================
+	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
+	public int deleteComment(int recruitNo, String id) throws Exception {
+//		DELETE FROM  WHERE CAM_CC_WRITER = 'user01' AND CAM_CC_NO = 1;
+//		DELETE FROM  WHERE CGM_CC_WRITER = 'user01' AND CGM_CC_NO = 1;
+//		DELETE FROM  WHERE CBM_CC_WRITER = 'user01' AND CBM_CC_NO = 1;
+//		DELETE FROM  WHERE CPM_CC_WRITER = 'user01' AND CPM_CC_NO = 1;
+//		DELETE FROM  WHERE CCM_CC_WRITER = 'user01' AND CCM_CC_NO = 1;
+		
+		
+		
+		
+		// 테이블 이름
+		String[] tableName = 
+		{"COMMENTS_GOOD_MAP", "COMMENTS_BAD_MAP", "COMMENTS_CONDITION_MAP", "COMMENTS_AIR_MAP", "COMMENTS_PAY_MAP"};
+		
+		// 키워드 1
+		String[] keyArrOne = {"GOOD", "BAD", "CONDITION", "AIR", "PAY"};
+		
+		// 키워드 2
+		String[] keyArrtwo = {"CGM", "CBM", "CCM", "CAM", "CPM"};
+		
+		// DB를 갖다올 때마다 conut될 변수
+		int result = 0;
+		
+		// return할 변수
+		int resultCount = 0;
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("recruitNo", recruitNo);
+		paramMap.put("id", id);
+		
+		// 1. 5개의 mapping table에서 조건에 맞는 키워드 모두 지우기
+		for (int i = 0; i < tableName.length; i++) {
+			paramMap.put("category", tableName[i]);
+			paramMap.put("keyArrOne", keyArrOne[i]);
+			paramMap.put("keyArrtwo", keyArrtwo[i]);
+			
+			result = sqlSession.delete("Comments.deleteComment", paramMap);
+			if (result != 0) {resultCount++;}
+		}
+		
+		// 2. COMMENTS_COMPANY에서 후기 지우기
+		paramMap.put("category", "lastDelete");
+		result = sqlSession.delete("Comments.deleteComment", paramMap);
+		if (result != 0) {resultCount++;}
+		
+		// resultCount = 6 이어야 모두 삭제 완료
+		System.out.println("resultCount : " + resultCount);
+		return 0;
 	}
 }
 

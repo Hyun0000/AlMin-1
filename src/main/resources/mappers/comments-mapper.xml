@@ -94,7 +94,7 @@
 		INSERT INTO COMMENTS_COMPANY VALUES
 		(COMMENTS_COMPANY_SEQUENCE.NEXTVAL, #{ccRecruitNo}, #{ccWriter}, 1, #{ccContent}, sysdate, #{ccContract})
 	</insert>
-<!-- ================================================= 후기 키워드 가져오기  to 후기 insert ================================================= -->
+<!-- ================================================= 후기 키워드 가져오기  to (후기 insert) ================================================= -->
 	 <!-- COMMENTS_AIR -->
 	 <select id="selectAllCommentsAir" resultType="string">
 	 	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
@@ -119,4 +119,57 @@
 	 <select id="selectAllCommentsBad" resultType="string">
 	 	SELECT BAD_NAME FROM COMMENTS_BAD ORDER BY BAD_NO
 	 </select>
+ <!-- ================================================= 후기 삭제(delete) ================================================= -->
+ 	<delete id="deleteComment" parameterType="map">
+ 		<if test="category == 'COMMENTS_GOOD_MAP' or 'COMMENTS_BAD_MAP' or 'COMMENTS_CONDITION_MAP' or 'COMMENTS_AIR_MAP' or 'COMMENTS_PAY_MAP'">
+				DELETE FROM COMMENTS_#{keyArrOne}_MAP WHERE #{keyArrtwo}_CC_WRITER = #{id} AND #{keyArrtwo}_CC_NO = #{recruitNo}			
+ 		</if>
+ 		
+		<if test="category == 'lastDelete'">
+				DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = #{id} AND CC_RECRUIT_NO = #{recruitNo}
+ 		</if>
+ 	</delete>
+ 	
+<!--  	
+==================== mapping 후기 삭제 ====================
+DELETE FROM COMMENTS_AIR_MAP WHERE CAM_CC_WRITER = 'user01' AND CAM_CC_NO = 1;
+DELETE FROM COMMENTS_GOOD_MAP WHERE CGM_CC_WRITER = 'user01' AND CGM_CC_NO = 1;
+DELETE FROM COMMENTS_BAD_MAP WHERE CBM_CC_WRITER = 'user01' AND CBM_CC_NO = 1;
+DELETE FROM COMMENTS_PAY_MAP WHERE CPM_CC_WRITER = 'user01' AND CPM_CC_NO = 1;
+DELETE FROM COMMENTS_CONDITION_MAP WHERE CCM_CC_WRITER = 'user01' AND CCM_CC_NO = 1;
+COMMIT;
+ROLLBACK;
+
+==================== 후기 테이블에서 삭제 ====================
+DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = 'user01' AND CC_RECRUIT_NO = 1;
+COMMIT;
+-->
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -249,10 +249,13 @@ window.onload = function() {
 			console.log(JSON.stringify(allConditionObj));
 			console.log("=================================================");
 			
+			let commentsBoxEle = document.getElementById('comments_box');
+			// let commentsListEle = document.getElementsByClassName('comments_list');
+			
 			// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
 			let restData = {
-					ccRecruitNo : '2',
-					ccWriter : 'user04',
+					ccRecruitNo : '1',
+					ccWriter : 'user01',
 					ccContent : commentsLineEle,
 					ccContract : contractRadio
 				}
@@ -277,7 +280,22 @@ window.onload = function() {
 					success : function (data) {
 						console.log("success 시작");
 						if (data.result == "ok") {
+							// 모달창 닫기
+							modalBack.style.display = "none";
+
+							// for (var i = 0; i < commentsListEle.length; i++) {
+							// 	commentsBoxEle.removeChild(commentsListEle[i]);
+							// }
+							
+							// 기존 후기 모두 삭제(let commentsBoxEle의 모든 자식 노드 삭제)
+							while (commentsBoxEle.hasChildNodes()) {
+								commentsBoxEle.removeChild(commentsBoxEle.firstChild);
+							}
+							
 							alert("후기 등록 ok");
+							// 후기 새로 가져오기
+							sendRequest("GET", "reviews", null, selectAllComments);
+							
 						} else {
 							alert("후기 등록 실패");
 						}

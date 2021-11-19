@@ -17,23 +17,28 @@ public class CommentsServiceImpl implements CommentsService {
 // ==============================================================================
 	// 모든 후기 키워드 가져오기(insert)
 	@Override
-	public Map<String, List<String>> selectAllKeyWords() {
+	public Map<String, List<String>> selectAllKeyWords() throws Exception {
 		return commentsDao.selectAllKeyWords();
 	}
 // ==============================================================================
 	// 후기 작성(insert)
 	@Override
-	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) {
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) throws Exception {
 		return commentsDao.insertComments(commentsList, commentsCompany);
 	}
 // ==============================================================================
 	// 특정 공고의 전체 후기 조회(select)
 	@Override
 	// public List<List<String>> selectAllComments(int recruitNo) {
-	public Map<String, Object> selectAllComments(int recruitNo) {
+	public Map<String, Object> selectAllComments(int recruitNo) throws Exception {
 		return commentsDao.selectAllComments(recruitNo);
 	}
 // ==============================================================================
+	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
+	@Override
+	public int deleteComment(int recruitNo, String id) throws Exception {
+		return commentsDao.deleteComment(recruitNo, id);
+	}
 // ==============================================================================
 // ==============================================================================
 }
