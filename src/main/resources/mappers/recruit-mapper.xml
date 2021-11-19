@@ -3,37 +3,39 @@
 <mapper namespace="Recruit">
 
 <resultMap type="Recruit" id="RecruitResultMap">
-	<id property="recruitNo" column="RECRUIT_NO"/>
-	<result property="recruitCompanyId" column="RECRUIT_COMPANY_ID"/>
-	<result property="recruitCompanyType" column="RECRUIT_COMPANY_TYPE"/>
-	<result property="recruitTitle" column="RECRUIT_TITLE"/>
-	<result property="recruitCareer" column="RECRUIT_CAREER"/>
-	<result property="recruitGender" column="RECRUIT_GENDER"/>
-	<result property="recruitAge" column="RECRUIT_AGE"/>
-	<result property="recruitEducation" column="RECRUIT_EDUCATION"/>
-	<result property="recruitPerson" column="RECRUIT_PERSON"/>
-	<result property="recruitMoney" column="RECRUIT_MONEY"/>
-	<result property="recruitPeriod" column="RECRUIT_PERIOD"/>
-	<result property="recruitDay" column="RECRUIT_DAY"/>
-	<result property="recruitTime" column="RECRUIT_TIME"/>
-	<result property="recruitAddress" column="RECRUIT_ADDRESS"/>
-	<result property="recruitContent" column="RECRUIT_CONTENT"/>
-	<result property="recruitPub" column="RECRUIT_PUB"/>
-	<result property="recruitPolice" column="RECRUIT_POLICE"/>
-	<result property="recruitJobType" column="RECRUIT_JOB_TYPE"/>
-	<result property="recruitJobDistrict" column="RECRUIT_JOB_DISTRICT"/>
-	<result property="recruitJobWho" column="RECRUIT_JOB_WHO"/>
-	<result property="recruitJobBranch" column="RECRUIT_JOB_BRANCH"/>
-	<result property="recruitDate" column="RECRUIT_DATE"/>
-	
-	<!-- <association property="districtMap" resultMap="District"></association> -->
+	<id property="recruitNo" column="RECRUIT_NO" />
+	<result property="recruitCompanyId" column="RECRUIT_COMPANY_ID" />
+	<result property="recruitCompanyType"
+		column="RECRUIT_COMPANY_TYPE" />
+	<result property="recruitTitle" column="RECRUIT_TITLE" />
+	<result property="recruitCareer" column="RECRUIT_CAREER" />
+	<result property="recruitGender" column="RECRUIT_GENDER" />
+	<result property="recruitAge" column="RECRUIT_AGE" />
+	<result property="recruitEducation" column="RECRUIT_EDUCATION" />
+	<result property="recruitPerson" column="RECRUIT_PERSON" />
+	<result property="recruitMoney" column="RECRUIT_MONEY" />
+	<result property="recruitPeriod" column="RECRUIT_PERIOD" />
+	<result property="recruitDay" column="RECRUIT_DAY" />
+	<result property="recruitTime" column="RECRUIT_TIME" />
+	<result property="recruitAddress" column="RECRUIT_ADDRESS" />
+	<result property="recruitContent" column="RECRUIT_CONTENT" />
+	<result property="recruitPub" column="RECRUIT_PUB" />
+	<result property="recruitPolice" column="RECRUIT_POLICE" />
+	<result property="recruitJobType" column="RECRUIT_JOB_TYPE" />
+	<result property="recruitJobDistrict"
+		column="RECRUIT_JOB_DISTRICT" />
+	<result property="recruitJobWho" column="RECRUIT_JOB_WHO" />
+	<result property="recruitJobBranch" column="RECRUIT_JOB_BRANCH" />
+	<result property="recruitDate" column="RECRUIT_DATE" />
+
+	<association property="district" resultMap="districtMap">
+	</association>
 </resultMap>
 
-<!--  <resultMap id="districtMap" type="District">
+<resultMap id="districtMap" type="District">
 	<id property="jobDistrictNo" column="JOB_DISTRICT_NO" />
-	<result property="jobDistrictName" column="JOB_DISTRICT_NAME"/>
-	
-</resultMap> -->
+	<result property="jobDistrictName" column="JOB_DISTRICT_NAME" />
+</resultMap>   
 
 <select id="listReport" resultMap="RecruitResultMap">
 	select RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
@@ -42,11 +44,11 @@
 </select>
 <!-- 공고 목록 리스트  -->
 <select id="jobinfoList" resultMap="RecruitResultMap">
-	select b.JOB_DISTRICT_NAME,recruit_title,recruit_money,recruit_date from company_recruit a
+	select b.JOB_DISTRICT_NO, b.JOB_DISTRICT_NAME,recruit_title,recruit_money,recruit_date from company_recruit a
 	inner join job_district b on a.recruit_job_district=b.JOB_DISTRICT_NO
 </select>
 <!-- 공고상세조회 -->
 <select id="detailjobinfo" resultMap="RecruitResultMap">
-	select * from company_recruit where=recruit_title=#{recruit_title}
+	select * from company_recruit where recruit_title=#{recruitTtitle}
 </select>
 </mapper>

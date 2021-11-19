@@ -14,6 +14,8 @@
 			alias="Recruit" />
 		<typeAlias type="com.kh.almin.comments.model.vo.CommentsCompany"
 			alias="CommentsCompany" />
+			<typeAlias type="com.kh.almin.district.model.vo.District"
+			alias="District" />
 	</typeAliases>
 
 	<mappers>

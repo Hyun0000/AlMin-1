@@ -60,10 +60,12 @@ table, tr, td {
 			<c:forEach var="item" items="${jobinfolist }">
 				<tr>
 				<!-- item.jobDistrictName -->
-					<td>0</td>        <%--  ${item.recruitDistrict } --%>
-					<c:set var="recruit_title" value="${recruiTtitle }"></c:set>
+				
+					<td>${item.district.jobDistrictName }</td>        
 					
-					<c:url value="/recruits/detailjobinfo?recruitTitle='${recruit_title }'" var="jobinfo"></c:url>
+					<c:url value="/recruits/detailjobinfo" var="jobinfo">
+					<c:param name="resultTitle" value="${item.recruitTitle }"></c:param>
+					</c:url>
 					<td><a href="${jobinfo }">${item.recruitTitle }</a></td>
 
 					<td>${item.recruitMoney }</td>

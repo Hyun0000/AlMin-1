@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.almin.district.model.vo.District;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,4 +40,6 @@ public class Recruit {
    private Date recruitDate;
    private char recruitPub;
    private char recruitJobBranch;
+   
+   private District district; //쿼리로 join할 Vo
 }
