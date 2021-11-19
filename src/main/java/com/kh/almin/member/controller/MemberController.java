@@ -56,7 +56,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		}
 		return "redirect:/";
 	}
-	@GetMapping //회원리스트 조회(삭제예정)
+	@GetMapping //회원정보 조회
 	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
 		List<Member> volist = memberService.getMembers();
 		ModelAndView mv = new ModelAndView();
@@ -67,28 +67,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		logger.info("전체 회원리스트 조회");
 		logger.info("volist: "+volist.toString());
 		return mv;
-	}
-	
-	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
-	@PostMapping("/{userId}")
-	private String selectMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
-		logger.info(userId);
-		logger.info(m.toString());
-		Member ms= memberService.selectMember(m);
-		logger.info(ms.toString());
-		if(ms == null) {
-			return "member/memberJoin";
-		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
-			boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
-			logger.info(String.valueOf(isPwdMatch));
-			if(isPwdMatch == true) {
-				logger.info("로그인 성공");
-				 session.setAttribute("loginInfo", ms);
-			} else {
-				logger.info("로그인 실패");
-			}
-			return "member/memberlist";
-		}
 	}
 	
 	@PutMapping

@@ -33,10 +33,11 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	@GetMapping //로그인화면
 	private ModelAndView selectMembers() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/register");//회원가입 선택페이지
+		mv.setViewName("member/loginPopup");
 		return mv;
 	}
 	
+	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{userId}")
 	private String loginMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
 		logger.info(userId);
