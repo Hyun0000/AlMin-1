@@ -1,7 +1,5 @@
 package com.kh.almin.member.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +20,8 @@ import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Member;
 
 @Controller
-@RequestMapping("/members") // 개인회원가입, 아이디찾기, 비밀번호찾기
-public class MemberController {//Service, Dao에서 throws Exception 붙이기
+@RequestMapping("/logins")
+public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	@Autowired
 	private MemberService memberService;
 	
@@ -34,44 +30,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@PostMapping //회원가입
-	private String insertMember(@RequestBody Member member) throws Exception { 
-		logger.info("insert 진입");
-		logger.info(member.toString());
-		int result = memberService.idChk(member);
-		logger.info(String.valueOf(result));//id값 체크
-		try {
-			if(result == 1) {
-				return "/member/memberJoin";
-			}else if(result == 0) {
-				String inputPass = member.getMemberPw();
-				String pwd = pwdEncoder.encode(inputPass);
-				member.setMemberPw(pwd);
-				memberService.insertMember(member);
-			}
-			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
-			// 존재하지 않는다면 -> register
-		} catch (Exception  e) {
-			throw new RuntimeException();
-		}
-		return "redirect:/";
-	}
-	@GetMapping //회원리스트 조회(삭제예정)
-	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-		List<Member> volist = memberService.getMembers();
+	@GetMapping //로그인화면
+	private ModelAndView selectMembers() throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberview",volist);
-//		mv.setViewName("member/memberlist");
-//		mv.setViewName("member/memberJoin");
 		mv.setViewName("member/register");//회원가입 선택페이지
-		logger.info("전체 회원리스트 조회");
-		logger.info("volist: "+volist.toString());
 		return mv;
 	}
 	
-	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{userId}")
-	private String selectMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
+	private String loginMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
 		logger.info(userId);
 		logger.info(m.toString());
 		Member ms= memberService.selectMember(m);
@@ -87,14 +54,8 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 			} else {
 				logger.info("로그인 실패");
 			}
-			return "member/memberlist";
+			return "member/loginPopup";
 		}
-	}
-	
-	@PutMapping
-	private String updateMember() { //회원정보 수정
-		logger.info("update 진입");
-		return "member/memberlist";
 	}
 	
 	@ExceptionHandler
@@ -107,5 +68,5 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		mv.setViewName("error/500error");
 		return mv ;
 	}
-
+	
 }

@@ -5,56 +5,107 @@
      margin:0; 
      padding:0;
    }
+ /* 실험용으로 웹폰트 가져왔는데 잘 적용됨*/
+ @font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
   margin: 0;
 }
+.loginArea	{
+    display: flex;
+    }
+/* 테이블 제목 */
+section > h2 {
+          margin: 20px;
+          text-align: center;
+      }
+a {
+	color: #333333;
+	text-decoration: none;
+}
 
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: #BDBDBD;
+	text-decoration: none;
+}
+/* 입력란 */
+input[type=text]{
+  padding: 12px;
+  border: 2px solid #555555;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
+input:hover{
+	opacity:1;
+}
+/* 버튼 한번에 정렬 */
 .btngroup{
           text-align: center;
           margin-bottom: 20px;
       }
-.button{
+   /* submit 버튼 */
+.btn1{
         padding: 5px 25px;
         text-align: center;
         text-decoration: none;
         font-size: 16px;
         margin: 25px 10px;
-        transition-duration: 0.3s;
+        transition-duration: 0.4s;
         cursor: pointer;
-        background-color: white;
-        color: black;
-        border: 2px solid #DFE0DF;
+        background-color: dodgerblue;
+        color: white;
+        border: 2px solid dodgerblue;
         border-radius: 5px;
         }
 
- .button:hover {
-            background-color: #DFE0DF;
+.btn1:hover {/*#2196F3*/
+        border: 2px solid black;
+        background-color: black;
         }
-		/* 검색 버튼 */
-        .btn {
-        padding: 6px 32px;
+	/* 취소 버튼 */
+        .btn2 {
+        cursor: pointer;
+        padding: 5px 22px;
         margin: 4px 2px;
         background-color: white;
         color: black;
         border: 2px solid #555555;
+        border-radius: 5px;
         }
-        .btn:hover {
+        .btn2:hover {
         background-color: #555555;
         color: white;
         }
-        /* 중복확인, 우편번호 찾기 버튼 */
-.btn1 {
- border-color: #2196F3;
- background: white;
-  color: dodgerblue;
-  cursor: pointer;
-}
-
-.btn1:hover{
-background: #2196F3;
-  color: white;
-}
-
+  /* 여백이 적은 노란색 버튼 */
+  .btn3 {
+  	padding: 6px;
+    margin: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 5px;
+  }
+  .btn3:hover {
+   border: 2px solid #FEA500;
+   background-color: #FEA500;
+  }
 
 
 

@@ -14,7 +14,7 @@
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
-	<!-- CSS Files -->
+<!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value="/resources/template/css/almin.css"/>">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate-3.7.0.css">
 <link rel="stylesheet"
@@ -27,13 +27,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/nice-select.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css">
 <style>
-
- @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
   body{
       font-family: 'Noto Sans KR', sans-serif;
   }
@@ -85,8 +78,7 @@
 						
 						if(data==true){
 							if(confirm("회원수정하시겠습니까?")){
-								$("#updateForm").submit();
-							}
+1							}
 							
 						}else{
 							alert("패스워드가 틀렸습니다.");
@@ -102,8 +94,8 @@
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
-<form id="updateForm" action="/member/memberUpdate" method="post">
 	<h2>개인회원가입</h2>
+<form id="updateForm" action="/member/memberUpdate" method="post">
 	<table>
 		<tr>
 		<th><label for="userId">아이디</label></th>
@@ -148,13 +140,13 @@
 		<td>
 		<input type="text" name="phone1" placeholder="010" maxlength="3" size = "3"> -
 		<input type="text" name="phone2" placeholder="0000" maxlength="4" size = "4"> -
-		<input type="text" name="phone3" placeholder="0000" maxlength="4" size = "4"> -
+		<input type="text" name="phone3" placeholder="0000" maxlength="4" size = "4">
 		</td>
 		</tr>
 	</table>
 <div class="btngroup">
-<button type="button" id="submit">회원정보수정</button>
-<button class="cancel btn1" type="button">취소</button>
+<button class="btn1" type="button" id="submit">회원정보수정</button>
+<button class="cancel btn2" type="button">취소</button>
 </div>
 </form>
 </section>
