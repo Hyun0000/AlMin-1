@@ -2,6 +2,11 @@
 <!-- jstl은 header가 아닌 메인페이지에 삽입 -->
 <!-- 공통헤더 템플릿입니다. css 작성금지 -->
 <!-- 공통헤더 템플릿입니다. head 영역에 script 작성금지 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
+	rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
 <script
