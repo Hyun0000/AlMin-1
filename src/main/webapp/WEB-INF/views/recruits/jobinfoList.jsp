@@ -16,57 +16,39 @@
 <title>알바의 민족 구인공고리스트</title>
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="resources/assets/images/logo/favicon.png" type="image/x-icon">
-<!-- CSS Files -->
-<link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
-<link rel="stylesheet"
-	href="resources/assets/css/font-awesome-4.7.0.min.css">
-<link rel="stylesheet"
-	href="resources/assets/fonts/flat-icon/flaticon.css">
-<link rel="stylesheet"
-	href="resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="resources/assets/css/style.css">
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
 
+<!-- CSS Files -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 <style>
+table{
+	width:1000px;
+	 margin-left:auto; 
+    margin-right:auto;
+}
 table, tr, td {
+	
 	border: 1px solid black;
 	border-collapse: collapse;
-}
+	text-align:center;
+	}
 </style>
 </head>
 <body>
-	<!-- Header Area Starts -->
-	<header class="header-area main-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2">
-					<div class="logo-area">
-						<a href="main"><img src="resources/assets/images/logo.png"
-							class="logo" alt="logo"></a>
-					</div>
-				</div>
-				<div class="col-lg-10">
-					<div class="custom-navbar">
-						<span></span> <span></span> <span></span>
-					</div>
-					<div class="main-menu">
-						<ul>
-							<li class="active"><a href="#">구인공고</a></li>
-							<li><a href="#">인재정보</a></li>
-							<li><a href="#">아이디/비밀번호 찾기</a></li>
-							<li><a href="#">마이페이지</a></li>
-
-							<li class="menu-btn"><a href="#" class="login">로그인</a> <a
-								href="#" class="template-btn">회원가입</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+<!-- 공통헤더 템플릿 -->
+<header>
+<c:import url="/WEB-INF/views/template/header.jsp"/>
 	<!-- Header Area End -->
+	</header>
 	<section>
 		<table>
 			<tr>
@@ -78,9 +60,10 @@ table, tr, td {
 			<c:forEach var="item" items="${jobinfolist }">
 				<tr>
 				<!-- item.jobDistrictName -->
-					<td>0</td>
+					<td>0</td>        <%--  ${item.recruitDistrict } --%>
 					<c:set var="recruit_title" value="${recruiTtitle }"></c:set>
-					<c:url value="/recruits/detailjobinfo?recruitTitle='${recruitTitle }'" var="jobinfo"></c:url>
+					
+					<c:url value="/recruits/detailjobinfo?recruitTitle='${recruit_title }'" var="jobinfo"></c:url>
 					<td><a href="${jobinfo }">${item.recruitTitle }</a></td>
 
 					<td>${item.recruitMoney }</td>
@@ -94,26 +77,9 @@ table, tr, td {
 	
 	</section>
 
+	<footer>
 	<!-- Footer Area Starts -->
-	<footer class="footer-area section-padding">
-		<div class="footer-widget">
-			<div class="container"></div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-md-6">
-						<span> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script> All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
+	<c:import url="/WEB-INF/views/template/footer.jsp"/>
 	</footer>
 	<!-- Footer Area End -->
 </body>

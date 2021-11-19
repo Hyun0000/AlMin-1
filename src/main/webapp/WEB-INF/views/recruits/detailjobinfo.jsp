@@ -1,3 +1,10 @@
+<!-- 웹폰트: Noto Sans Korean -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
+	rel="stylesheet">
+	
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,19 +15,29 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/recruits/css/detailjobinfo.css"/>">
-<style>
-.rectable {
-	border: none;
-}
+	<!-- Favicon -->
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
 
-.recdiv {
-	background-color: ivory;
-	width: 50%;
-}
-</style>
+<!-- CSS Files -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
+
 </head>
 <body>
-	<section>
+	<header>
+		<c:import url="/WEB-INF/views/template/header.jsp"/>
+	<!-- Header Area End -->
+	</header>
+	<section id="detailjob">
 		<h1>제목나와라뚜욱닥</h1>
 		<c:forEach var="item" items="${detailjobinfo }">
 			<h1>${item.recruitTitle }</h1>
@@ -289,5 +306,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>
 	<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
+	<footer>
+	<!-- Footer Area Starts -->
+	<c:import url="/WEB-INF/views/template/footer.jsp"/>
+	</footer>
 </body>
 </html>
