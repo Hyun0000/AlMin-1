@@ -261,6 +261,20 @@
     background-color: red;
 }
 
+.rectable {
+	border: none;
+}
+
+.recdiv {
+	background-color: ivory;
+	width: 50%;
+}
+#detailjob{
+	margin-left:150px;
+}
+
+	
+
 
 
 
