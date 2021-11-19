@@ -52,8 +52,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<Member> searchMember(String searchOption, String searchWord) throws Exception {
 		return adminDao.searchMember(searchOption, searchWord);
 	}
-	
+
 	public List<Company> searchCompany(String searchOption, String searchWord) throws Exception {
 		return adminDao.searchCompany(searchOption, searchWord);
 	}
+
 }

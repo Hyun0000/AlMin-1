@@ -25,6 +25,5 @@ public class Member {
 	private String memberGender;
 	private int memberAge;
 	private String memberRegdate;
-	
 
 }

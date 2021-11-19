@@ -22,6 +22,7 @@ import com.kh.almin.admin.model.service.AdminService;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
+
 @Controller
 @RequestMapping("/admins")
 public class AdminMemberController {// Service, Dao에서 throws Exception 붙이기
@@ -76,12 +77,14 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 	public ModelAndView searchMember(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
 		
 		List<Member> volist = adminService.searchMember(searchOption, searchWord);
+		List<Company> cvolist = adminService.getCompanies();
 		ModelAndView mv = new ModelAndView();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("searchWord", searchWord);
 		mv.addObject("memberview", volist);
+		mv.addObject("companyview", cvolist);
 		mv.setViewName("admin/member");
 
 		return mv;
@@ -91,14 +94,17 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 	public ModelAndView searchCompany(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
 		
 		List<Company> volist = adminService.searchCompany(searchOption, searchWord);
+		List<Member> mvolist = adminService.getMembers();
 		ModelAndView mv = new ModelAndView();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("searchWord", searchWord);
 		mv.addObject("companyview", volist);
+		mv.addObject("memberview", mvolist);
 		mv.setViewName("admin/member");
 
 		return mv;
 	}
+
 }

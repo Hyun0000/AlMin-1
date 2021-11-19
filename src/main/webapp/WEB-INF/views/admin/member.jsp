@@ -40,20 +40,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/owl-carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/vendor/ion.rangeSlider.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/assets/js/main.js"></script>
+
 
 <style>
 .topleft>ul>li>h4 {
@@ -105,37 +92,12 @@ button {
 	</div>
 	<!-- Preloader End -->
 
-	<!-- Header Area Starts -->
-	<header class="header-area main-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-2">
-					<div class="logo-area">
-						<a href="<c:url value="/main"/>"> <img
-							src="<c:url value="/resources/assets/images/logo.png"/>"
-							class="logo" alt="logo">
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-10">
-					<div class="custom-navbar">
-						<span></span> <span></span> <span></span>
-					</div>
-					<div class="main-menu">
-						<ul>
-							<li class="active"><a href="#">구인공고</a></li>
-							<li><a href="#">인재정보</a></li>
-							<li><a href="#">아이디/비밀번호 찾기</a></li>
-							<li><a href="#">마이페이지</a></li>
 
-							<li class="menu-btn"><a href="#" class="login">로그인</a> <a
-								href="#" class="template-btn">회원가입</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+	<!-- Header Area Starts -->
+	<!-- 공통헤더 템플릿 -->
+
+	<c:import url="/WEB-INF/views/template/header.jsp" />
+
 	<!-- Header Area End -->
 
 
@@ -192,6 +154,7 @@ button {
 																<option value="member_id">아이디</option>
 																<option value="member_name">이름</option>
 															</select> <input name="searchWord" type="text" required> <input
+																name="type" type="hidden" value="member"> <input
 																type="submit" class="template-btn" value="검색">
 														</form>
 													</div>
@@ -228,8 +191,12 @@ button {
 															<select name="searchOption" required>
 																<option value="company_id">아이디</option>
 																<option value="company_name">상호</option>
-															</select> <input name="searchWord" type="text" required> <input
-																type="submit" class="template-btn" value="검색">
+															</select> <input name="searchWord" type="text"
+																onKeyUp="keywordSearch()" required>
+															<div id="suggest">
+																<div id="suggestList"></div>
+															</div>
+															<input type="submit" class="template-btn" value="검색">
 														</form>
 													</div>
 												</div>
@@ -259,26 +226,7 @@ button {
 
 
 	<!-- Footer Area Starts -->
-	<footer class="footer-area section-padding">
-		<div class="footer-widget">
-			<div class="container"></div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-md-6">
-						<span> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script> All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<c:import url="/WEB-INF/views/template/footer.jsp" />
 	<!-- Footer Area End -->
 
 

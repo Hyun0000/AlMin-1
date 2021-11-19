@@ -1,6 +1,5 @@
 package com.kh.almin.admin.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,7 @@ public class AdminDao {
 		List<Member> members = sqlSession.selectList("AdminMember.searchMember", map);
 		return members;
 	}
-	
+
 	public List<Company> searchCompany(String searchOption, String searchWord) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
@@ -70,4 +69,5 @@ public class AdminDao {
 		List<Company> companies = sqlSession.selectList("AdminMember.searchCompany", map);
 		return companies;
 	}
+
 }

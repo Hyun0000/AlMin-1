@@ -26,24 +26,26 @@
 
 
 
-	<select id="searchMember"
-		resultMap="MemberResultMap" parameterType="String">
+	<select id="searchMember" resultMap="MemberResultMap"
+		parameterType="String">
 		select MEMBER_ID, MEMBER_NAME,
-		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		MEMBER_PHONE,
+		MEMBER_ADDRESS, MEMBER_BIRTH,
 		MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
-		where ${searchOption} like '%'|| #{searchWord} || '%' and MEMBER_TYPE=1
+		MEMBER_GENDER, MEMBER_AGE,
+		MEMBER_REGDATE from MEMBER
+		where ${searchOption} like '%'||
+		#{searchWord} || '%' and MEMBER_TYPE=1
 	</select>
 
-	<select id="searchCompany"
-		resultMap="CompanyResultMap" parameterType="String">
+	<select id="searchCompany" resultMap="CompanyResultMap"
+		parameterType="String">
 		select COMPANY_ID,
-		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
+		COMPANY_TEL, COMPANY_NAME,
+		COMPANY_BOSS, COMPANY_EMAIL,
 		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
 		where ${searchOption} like '%'|| #{searchWord} || '%'
 	</select>
-
-
 
 
 	<select id="listMember" resultMap="MemberResultMap">
