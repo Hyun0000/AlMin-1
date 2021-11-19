@@ -11,12 +11,23 @@
 <head>
 <meta charset="UTF-8">
 <title>알바의 민족 개인회원가입</title>
+<!-- Favicon -->
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
+	<!-- CSS Files -->
+<link rel="stylesheet" href="<c:url value="/resources/template/css/almin.css"/>">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate-3.7.0.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/assets/css/font-awesome-4.7.0.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/assets/fonts/flat-icon/flaticon.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/assets/css/bootstrap-4.1.3.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl-carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/nice-select.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css">
 <style>
- /* reset */
- * {
-       margin: 0;
-       padding: 0;
- }
+
  @font-face {
     font-family: 'GmarketSansMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -26,9 +37,18 @@
   body{
       font-family: 'Noto Sans KR', sans-serif;
   }
-  table {
-  text-align: center;
-  }
+  section {
+         width: 900px;
+         padding: 0 0 30px 0;
+          /* position: relative; */
+         bottom: 170px;
+         left: 600px;
+     }
+      section > h2 {
+          margin: 20px;
+          text-align: center;
+      }
+  
 </style>
 </head>
 <script type="text/javascript">
@@ -41,6 +61,11 @@
 			})
 		
 			$("#submit").on("click", function(){
+				if($("#userId").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#userId").focus();
+					return false;
+				}
 				if($("#userPass").val()==""){
 					alert("비밀번호를 입력해주세요.");
 					$("#userPass").focus();
@@ -74,6 +99,8 @@
 		})
 	</script>
 <body>
+<!-- 공통헤더 템플릿 -->
+<c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
 <form id="updateForm" action="/member/memberUpdate" method="post">
 	<h2>개인회원가입</h2>
@@ -125,9 +152,13 @@
 		</td>
 		</tr>
 	</table>
+<div class="btngroup">
 <button type="button" id="submit">회원정보수정</button>
-<button class="cancel" type="button">취소</button>
+<button class="cancel btn1" type="button">취소</button>
+</div>
 </form>
 </section>
+	<!-- 공통푸터 템플릿 -->
+<c:import url="/WEB-INF/views/template/footer.jsp"/>
 </body>
 </html>

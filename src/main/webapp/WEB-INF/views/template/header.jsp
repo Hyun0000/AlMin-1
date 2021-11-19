@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <!-- jstl은 header가 아닌 메인페이지에 삽입 -->
-    <!-- 공통헤더 템플릿입니다. css 작성금지 -->
+ <!-- 공통헤더 템플릿입니다. css 작성금지
+ 	 jstl은 header가 아닌 메인페이지에 삽입 -->
 	<!-- Header Area Starts -->
 <header class="header-area main-header">
 		<div class="container">

@@ -1,7 +1,59 @@
 @charset "UTF-8";
 /* 공통으로 사용할 css 속성 */
+   /* reset */
+  * {
+     margin:0; 
+     padding:0;
+   }
+body {
+  margin: 0;
+}
 
+.btngroup{
+          text-align: center;
+          margin-bottom: 20px;
+      }
+.button{
+        padding: 5px 25px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 25px 10px;
+        transition-duration: 0.3s;
+        cursor: pointer;
+        background-color: white;
+        color: black;
+        border: 2px solid #DFE0DF;
+        border-radius: 5px;
+        }
 
+ .button:hover {
+            background-color: #DFE0DF;
+        }
+		/* 검색 버튼 */
+        .btn {
+        padding: 6px 32px;
+        margin: 4px 2px;
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+        }
+        .btn:hover {
+        background-color: #555555;
+        color: white;
+        }
+        /* 중복확인, 우편번호 찾기 버튼 */
+.btn1 {
+ border-color: #2196F3;
+ background: white;
+  color: dodgerblue;
+  cursor: pointer;
+}
+
+.btn1:hover{
+background: #2196F3;
+  color: white;
+}
 
 
 

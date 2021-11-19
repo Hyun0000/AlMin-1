@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- 공통푸터 템플릿입니다. css 작성금지
+ 	 jstl은 header가 아닌 메인페이지에 삽입 -->
 <!-- Footer Area Starts -->
 	<footer class="footer-area section-padding">
 		<div class="footer-widget">

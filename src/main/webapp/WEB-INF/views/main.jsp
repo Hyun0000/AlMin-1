@@ -36,11 +36,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 </head>
 <body>
+	<!-- Preloader Starts -->
+	<div class="preloader">
+		<div class="spinner"></div>
+	</div>
+	<!-- Preloader End -->
+	
 <!-- 공통헤더 템플릿 -->
-<header>
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-	</header>
-	<!-- Header Area End -->
 
 	<!-- Search Area Starts -->
 	<div class="search-area">
@@ -307,37 +310,16 @@
 	</section>
 	<!-- Jobs Area End -->
 
-	<!-- Footer Area Starts -->
-	<footer class="footer-area section-padding">
-		<div class="footer-widget">
-			<div class="container"></div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-md-6">
-						<span> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script> All rights reserved | This template is made with <i
-							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer Area End -->
-
+	<!-- 공통푸터 템플릿 -->
+<c:import url="/WEB-INF/views/template/footer.jsp"/>
 
 	<!-- Javascript -->
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/wow.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/owl-carousel.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/vendor/ion.rangeSlider.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/assets/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/owl-carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 </body>
 </html>
