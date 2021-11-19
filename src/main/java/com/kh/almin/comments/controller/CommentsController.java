@@ -158,7 +158,6 @@ public class CommentsController {
 		try {
 			map = commentsService.selectAllComments(recruitNo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Gson gson = new GsonBuilder().create();
@@ -174,6 +173,9 @@ public class CommentsController {
 	@DeleteMapping(value = "/reviews")
 	@ResponseBody
 	public String deleteComment(@RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id) {
+		System.out.println("recruitNo : " + recruitNo);
+		System.out.println("id : " + id);
+		
 		// ajax로 보낼 data
 		String result = "";
 		
@@ -189,8 +191,8 @@ public class CommentsController {
 		
 		// 결과
 		int deleteResult = 0;
-		try {deleteResult = commentsService.deleteComment(rNo, writerId);}
-		catch (Exception e) {e.printStackTrace();}
+//		try {deleteResult = commentsService.deleteComment(rNo, writerId);}
+//		catch (Exception e) {e.printStackTrace();}
 		
 		if (deleteResult == 6) {result = "ok";}
 		else {result = "fail";}

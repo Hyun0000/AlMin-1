@@ -21,8 +21,14 @@
 		// 삼항연산자 : 만약 sendRequest method에 대한 method 인자를 주지않으면 기본 method 방식을 GET으로 지정
 		
 		// server로 보낼 parameter
-		let httpParam = (param == null || param == "") ? null : param;
+		// let httpParam = (param == null || param == "") ? null : param;
+		// httpUrl = httpUrl + "?" + httpParams;
 		// param은 다음과 같은 형식으로 작성 --> 
+		
+		// GET 메소드면 URL 뒤에 파라미터를 붙임
+		if (httpMethod == 'GET' && param != null) {
+			httpUrl = httpUrl + "?" + param;
+		}
 		
 		// server url 지정
 		let httpUrl = url;

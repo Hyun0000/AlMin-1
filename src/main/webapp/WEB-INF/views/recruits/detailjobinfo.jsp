@@ -105,7 +105,6 @@
 			<p>${item.recruitAddress }</p>
 
 			<div id="map" style="width: 700px; height: 350px;"></div>
-
 			<script type="text/javascript"
 				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a26931e0dc5588e1068857f8559fe26e&libraries=services"></script>
 			<script>
@@ -152,74 +151,17 @@
 									}
 								});
 			</script>
+
 		</div>
 		<!-- ======================상세모집요강==================================== -->
 		<h2>상세모집요강</h2>
 		<div id="recruitGuide"></div>
-
-
 	</section>
-
-
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
 	<!-- 후기 조회(select) -->
 	<section id="comments_container">
-		<ul id="comments_box">
-			<!-- 동적 생성 -->
-			<!--
-             <li class="comments_list">
-                <div class="comments_top_bar">
-                    <div class="comments_top_bar_left">
-                        <h2>염라대왕</h2>
-                        <h3>2021.11.18</h3>
-                    </div>
-
-                    <div class="comments_top_bar_right">
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                </div>
-
-                <div class="comments_btm_bar">
-                    <div class="left_comments_box">
-                        <h3>장점</h3>
-                    </div>
-
-                    <div class="right_comments_box">
-                        <ul class="right_comments_box_ul">
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                            <li>박정원</li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
--->
-		</ul>
+		<ul id="comments_box"></ul>
 	</section>
 	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 후기 조회(select) -->
-	<!-- 한줄 후기  & 근로계약서 -->
-	<!-- 한줄 후기  & 근로계약서 -->
-	<!-- 한줄 후기  & 근로계약서 -->
-	<!-- 한줄 후기  & 근로계약서 -->
 	<!-- 한줄 후기  & 근로계약서 -->
 	<button id="insert_modal_showBtn">후기 등록</button>
 	<div id="comments_insert_modal_back" style="display: none;">
@@ -227,8 +169,7 @@
 			<div class="comments_insert_top">
 				<fieldset>
 					<legend>한줄 후기</legend>
-					<input name="ccContent" id="commentsLine"
-						placeholder="100자 이내로 작성해주세요(공백포함)">
+					<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 					<div id="contract_box">
 						<h3>근로계약서 작성 여부</h3>
 						<label for="contract_y">작성</label> <input type="radio" value="Y"
@@ -239,20 +180,12 @@
 				</fieldset>
 			</div>
 			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
-			<!-- 후기 키워드 -->
 			<div class="comments_insert_btm">
 				<c:forEach var="map" items="${commentsMap}">
 					<c:set var="dropNum" value="${dropNum + 1}" />
 					<c:set var="dragNum" value="${dragNum + 1}" />
 
-					<div id="dropzone_${dropNum}" class="dropzoneClass"
-						ondrop="drop(event)" ondragover="allowDrop(event)">
+					<div id="dropzone_${dropNum}" class="dropzoneClass" ondrop="drop(event)" ondragover="allowDrop(event)">
 						<c:choose>
 							<c:when test="${map.key == 1}">장점</c:when>
 							<c:when test="${map.key == 2}">단점</c:when>
@@ -265,10 +198,7 @@
 					<div id="dragzone_${dragNum}" class="dragzoneClass">
 						<c:forEach var="condition" items="${map.value}">
 							<c:set var="idNum" value="${idNum + 1}" />
-							<div id="drag_${idNum}" class="dragEle" draggable="true"
-								ondragstart="drag(event);">
-								<span class="keyword">${condition}</span><span class="xMark">&times;</span>
-							</div>
+							<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark">&times;</span></div>
 						</c:forEach>
 					</div>
 				</c:forEach>
@@ -278,13 +208,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
-	<!-- 후기 키워드 -->
 	<!-- 후기 키워드 -->
 	<script>
 		console.log("${pageContext.request.contextPath}");
@@ -306,9 +229,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>
 	<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
-	<footer>
 	<!-- Footer Area Starts -->
 	<c:import url="/WEB-INF/views/template/footer.jsp"/>
-	</footer>
 </body>
 </html>

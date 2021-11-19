@@ -13,32 +13,8 @@ window.onload = function() {
 				console.log(httpRequest.responseText);
 				
 				let commentsObj = JSON.parse(httpRequest.responseText);
-/*				console.log("========================commentsObj==========================");
-				console.log(commentsObj);
-				console.log("========================commentsObj.user02==========================");
-				console.log(commentsObj.user02);
-				console.log("========================commentsObj.user02.length==========================");
-				console.log(commentsObj.user02.length);
-				console.log("========================commentsObj.user02[0]==========================");
-				console.log(commentsObj.user02[0]);
-				console.log("========================commentsObj.user02[0][0]==========================");
-				console.log(commentsObj.user02[0][0]);
-				console.log("========================commentsObj.user02[0][1]==========================");
-				console.log(commentsObj.user02[0][1]);
-				console.log("========================commentsObj.user02[0][2]==========================");
-				console.log(commentsObj.user02[0][2]);
-				console.log("========================commentsObj.user02[0][3]==========================");
-				console.log(commentsObj.user02[0][3]);
-				console.log("========================commentsObj.user02[1][0]==========================");
-				console.log(commentsObj.user02[1][0]);
-				console.log("========================commentsObj.commentsVO==========================");
-				console.log(commentsObj.commentsVO);
-				console.log("========================commentsObj[0]==========================");
-				console.log(commentsObj[0]);
-				console.log("========================commentsObj[1]==========================");
-				console.log(commentsObj[1]);
 				
-				console.log("========================foreach==========================");*/
+				// 주석 있던 자리
 				
 				// 후기 작성자의 정보를 담는 객체 배열
 				let comments = commentsObj.commentsVO;
@@ -46,21 +22,16 @@ window.onload = function() {
 				// 바깥쪽 <li>를 구분하기 위한 변수
 				let num = 0;
 				
+				// ul
+				let ulEle = document.getElementById('comments_box');
+				
 				comments.forEach(function (e) {
 					console.log(e.ccWriter);
-					// let writer = e.ccWriter;
-					// console.log(commentsObj[e.ccWriter]);
 // ===================================================================================================
-// e = {"ccNo":2,"ccRecruitNo":1,"ccWriter":"user02","ccWriterType":"1","ccContent":"알바하러 가는 내 차비가 아깝습니다.","ccDate":"2021-11-18 12:49:52","ccContract":"N"},
-// e = {"ccNo":1,"ccRecruitNo":1,"ccWriter":"user01","ccWriterType":"1","ccContent":"이 가게가 불타버렸으면 좋겠습니다.","ccDate":"2021-11-18 12:49:04","ccContract":"Y"}
-					// ul
-			        let ulEle = document.getElementById('comments_box');
-			        
 			        // 바깥쪽 <li>
 			        let liEle = document.createElement('li');
 			        liEle.setAttribute('class', 'comments_list');
 			        liEle.setAttribute('id', 'comments_list_id_' + num);
-			        num++;
 			        ulEle.appendChild(liEle);
 
 			        // ===================== 상단 ==========================
@@ -99,8 +70,10 @@ window.onload = function() {
 			        let deleteBtn = document.createElement('button');
 			        deleteBtn.innerText = "삭제";
 			        deleteBtn.setAttribute('class', 'deleteBtn');
+			        deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
+			        deleteBtn.setAttribute('onClick', 'apple(event);');
 			        topRightDivEle.appendChild(deleteBtn);
-			        
+			        num++;
 			        // ===================== 한줄 후기 ==========================
 			        // 한줄 후기를 담는 <div> 만들기
 			        let midDivEle = document.createElement('div');
@@ -125,17 +98,12 @@ window.onload = function() {
 			        btmLeftDivEle.setAttribute('class', 'left_comments_box');
 			        btmDivEle.appendChild(btmLeftDivEle);
 			        
-			        // bottom 좌측 <div>에 속하는 <ul>
-//			        let btmLeftUlEle = document.createElement('ul');
-//			        btmLeftUlEle.setAttribute('class', 'left_comments_box_ul');
-//			        btmLeftDivEle.appendChild(btmLeftUlEle);
-			        
 			        // bottom 우측 <div> 만들기
 			        let btmRightDivEle = document.createElement('div');
 			        btmRightDivEle.setAttribute('class', 'right_comments_box');
 			        btmDivEle.appendChild(btmRightDivEle);
 			        
-			        for (var i = 0; i < keyword.length; i++) { // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			        for (var i = 0; i < keyword.length; i++) {
 
 			        // bottom 좌측 <div>에 속하는 <div>
 		        	let btmLeftUlEle = document.createElement('div');
@@ -143,10 +111,6 @@ window.onload = function() {
 			        btmLeftUlEle.innerText = keyword[i];
 			        btmLeftDivEle.appendChild(btmLeftUlEle);
 			        
-//			        let btmHthree = document.createElement('li');
-//			        btmHthree.innerText = keyword[i];
-//			        btmLeftUlEle.appendChild(btmHthree);
-			        	
 		        	// bottom 우측 <div>에 속하는 <ul>
 		        	let btmUl = document.createElement('ul');
 		        	btmUl.setAttribute('class', 'right_comments_box_ul');
@@ -159,11 +123,36 @@ window.onload = function() {
 			        		btmUl.appendChild(btmLiEle);
 						}
 					}
-				})
-				
-			}
-		}
-	}
+
+				}) // comments.forEach(function (e) 종료
+			} // if (httpRequest.status === 200) 종료
+			console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			let test = document.getElementsByClassName('deleteBtn');
+			console.log(test.length);
+			console.log(document.getElementById('comments_box'));
+			console.log(document.getElementsByClassName('deleteBtn'));
+			console.log(document.getElementById('comments_box').hasChildNodes());
+			
+//			console.log(test.length);
+//			console.log(document.getElementById('comments_box'));
+//			console.log(document.getElementById('comments_box').hasChildNodes());
+//			console.log(document.getElementsByClassName('deleteBtn'));
+		} // if (httpRequest.readyState === 4) 종료
+//		console.log("############################"); 왜 3번?
+//		let test1 = document.getElementsByClassName('deleteBtn');
+//		console.log(test1.length);
+//		console.log(document.getElementById('comments_box'));
+//		console.log(document.getElementsByClassName('deleteBtn'));
+//		console.log(document.getElementById('comments_box').hasChildNodes());
+	} // selectAllComments callback function 종료
+//	console.log("@@@@@@@@@@@@@@@@@@@@@@@@@");
+//	let test1 = document.getElementsByClassName('deleteBtn');
+//	console.log(test1.length);
+//	console.log(document.getElementById('comments_box'));
+//	console.log(document.getElementsByClassName('deleteBtn'));
+//	console.log(document.getElementById('comments_box').hasChildNodes());
+// }
+// window.onload 끝
 // ========================================= 모달창 띄우기 ===============================================
 		// 모달창 배경 변수 지정
 		let modalBack = document.getElementById('comments_insert_modal_back');
@@ -217,9 +206,6 @@ window.onload = function() {
                 alert("근로계약서 작성 여부를 체크해주세요");
                 return false;
             } 
-//            else {
-//                alert("제출 성공" + contractRadio);
-//            }			
 // ============================ 후기 키워드 ========================================
 			for (var i = 0; i < dropzoneEle.length; i++) {
 				// 각 dropzone에 있는 아이템의 개수
@@ -238,7 +224,6 @@ window.onload = function() {
 	            }
 	            
 	            allConditionObj['keyword_' + i] = keywordArr_i;
-	            // allConditionObj[i] = keywordArr_i;
 	            
 	            for (let k = 0; k < keywordArr_i.length; k++) {
 	                console.log(keywordArr_i[k]);
@@ -249,8 +234,8 @@ window.onload = function() {
 			console.log(JSON.stringify(allConditionObj));
 			console.log("=================================================");
 			
+			// comments 전체를 담는 <ul>
 			let commentsBoxEle = document.getElementById('comments_box');
-			// let commentsListEle = document.getElementsByClassName('comments_list');
 			
 			// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
 			let restData = {
@@ -269,24 +254,13 @@ window.onload = function() {
 					/*url : "reviews",*/
 					dataType : "json",
 					contentType : "application/json; charset=utf-8",
-					data : JSON.stringify(allConditionObj)
-						// condition : JSON.stringify(allConditionObj)
-/* 						good : JSON.stringify(keywordArr_0),
-						bad : JSON.stringify(keywordArr_1),
-						condition : JSON.stringify(keywordArr_2),
-						air : JSON.stringify(keywordArr_3),
-						pay : JSON.stringify(keywordArr_4) */
-					,
+					data : JSON.stringify(allConditionObj),
 					success : function (data) {
 						console.log("success 시작");
 						if (data.result == "ok") {
 							// 모달창 닫기
 							modalBack.style.display = "none";
 
-							// for (var i = 0; i < commentsListEle.length; i++) {
-							// 	commentsBoxEle.removeChild(commentsListEle[i]);
-							// }
-							
 							// 기존 후기 모두 삭제(let commentsBoxEle의 모든 자식 노드 삭제)
 							while (commentsBoxEle.hasChildNodes()) {
 								commentsBoxEle.removeChild(commentsBoxEle.firstChild);
@@ -307,7 +281,6 @@ window.onload = function() {
 			        }
 				})
 			}
-//====================================================================================================
 //========================================= 후기 insert 끝 ===============================================
 //========================================= drag&drop evnet ===============================================
 	// dropzone --> dragzone
@@ -326,19 +299,16 @@ window.onload = function() {
 	        }
 	    }
 	}
-}
+//========================================== 후기 delete ==============================================
+//	document.getElementById('comments_list_id_0').onclick = function() {
+//		alert(123);
+//	}
+}// =========여기에 중괄호 다시 넣을수도(window.onload)
 //========================================== window.onload 끝 ==============================================
-
 //====================================================================================================
 // drag한 itme의 id 정보 저장 (in dragzone)
 function drag(event) {
-	// console.log(event.target);
-	// console.log(event.target.id);
-	// console.log(event.target.parentNode);
-	// console.log(event.target.parentNode.previousElementSibling);
     event.dataTransfer.setData("text", event.target.id);
- 	// console.log(event.dataTransfer.getData("text"));
-    // console.log(event.dataTransfer.getData("text").parentNode);
 }
 //====================================================================================================
 function allowDrop(event) {
@@ -354,12 +324,6 @@ function drop(event) {
  		let data = event.dataTransfer.getData("text");
  		let dataInject = document.getElementById(data)
 	    if (dropzoneEle[i] == event.target && dropzoneEle[i] == dataInject.parentNode.previousElementSibling) {
-	    	// console.log(event.dataTransfer.getData("text").parentNode);
-	    	// console.log(event.dataTransfer.getData("text"));
-	    	// console.log("event.target");
-	    	// console.log(event.target);
-	    	// console.log("dropzoneEle[i]");
-	    	// console.log(dropzoneEle[i]);
 	        event.target.appendChild(dataInject);
 	    }
 	}
@@ -368,35 +332,23 @@ function drop(event) {
     for (var i = 0; i < dropzoneEle.length; i++) {
 	    for (let j = 0; j < dragItemEle.length; j++) {
 	        if (dragItemEle[j].parentNode == dropzoneEle[i]) {
+	        	console.log(dragItemEle[j].lastChild);
 	            dragItemEle[j].lastChild.style.display = "inline-block";
 	        }
 	    }
     }
 }
 //========================================= drag&drop evnet ===============================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function apple(event) {
+	alert(123);
+	console.log(event.target);
+	console.log(event.target.parentNode);
+	console.log(event.target.parentNode.previousSibling);
+	console.log(event.target.parentNode.previousSibling.firstChild);
+	console.log(event.target.parentNode.previousSibling.firstChild.innerText);
+	console.log(event);
+	console.log(this);
+}
 
 
 
