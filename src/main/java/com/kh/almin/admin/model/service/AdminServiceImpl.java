@@ -29,13 +29,13 @@ public class AdminServiceImpl implements AdminService {
 		List<Company> companies = adminDao.getCompanies();
 		return companies;
 	}
-	
+
 	public List<Recruit> getReport() throws Exception {
 		logger.info("Service 로깅 확인");
 		List<Recruit> recruits = adminDao.getReport();
 		return recruits;
 	}
-	
+
 	public void deleteMember(String memberId) throws Exception {
 		adminDao.deleteMember(memberId);
 
@@ -44,9 +44,16 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteCompany(String companyId) throws Exception {
 		adminDao.deleteCompany(companyId);
 	}
-	
+
 	public void deleteReport(String rtno) throws Exception {
 		adminDao.deleteReport(rtno);
 	}
 
+	public List<Member> searchMember(String searchOption, String searchWord) throws Exception {
+		return adminDao.searchMember(searchOption, searchWord);
+	}
+	
+	public List<Company> searchCompany(String searchOption, String searchWord) throws Exception {
+		return adminDao.searchCompany(searchOption, searchWord);
+	}
 }

@@ -19,4 +19,8 @@ public interface AdminService {
 	
 	public List<Recruit> getReport() throws Exception;
 
+	public List<Member> searchMember(String searchOption, String searchWord) throws Exception;
+
+	public List<Company> searchCompany(String searchOption, String searchWord) throws Exception;
+
 }

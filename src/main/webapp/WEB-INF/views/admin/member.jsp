@@ -79,6 +79,22 @@ button {
 	outline: 0;
 	background-color: transparent
 }
+
+.search-bg form {
+	background: none;
+	margin-bottom: 0;
+	padding-bottom: 20px;
+	padding-top: 10px;
+}
+
+.search-bg form .template-btn {
+	background: #1FA5FD
+}
+
+.search-bg form input {
+	margin-left: 10px;
+	margin-right: 10px;
+}
 </style>
 
 </head>
@@ -130,12 +146,14 @@ button {
 			<div class="topleft">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item"><h4>
-							<a class="nav-link active" id="home-tab" href="${pageContext.request.contextPath }/admins" role="tab"
+							<a class="nav-link active" id="home-tab"
+								href="${pageContext.request.contextPath }/admins" role="tab"
 								aria-controls="home" aria-selected="true">회원조회</a>
 						</h4></li>
 					<li class="nav-item"><h4>
-							<a class="nav-link" id="profile-tab" href="${pageContext.request.contextPath }/report"
-								role="tab" aria-controls="profile" aria-selected="false">의심공고</a>
+							<a class="nav-link" id="profile-tab"
+								href="${pageContext.request.contextPath }/report" role="tab"
+								aria-controls="profile" aria-selected="false">의심공고</a>
 						</h4></li>
 				</ul>
 			</div>
@@ -145,10 +163,10 @@ button {
 					<div class="jobs-tab tab-item">
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li class="nav-item"><a class="nav-link" id="home-tab"
-								data-toggle="tab" href="#recent" role="tab" aria-controls="home"
+								data-toggle="tab" href="#member" role="tab" aria-controls="home"
 								aria-selected="true">개인회원</a></li>
 							<li class="nav-item"><a class="nav-link" id="profile-tab"
-								data-toggle="tab" href="#full-time" role="tab"
+								data-toggle="tab" href="#company" role="tab"
 								aria-controls="profile" aria-selected="false">기업회원</a></li>
 						</ul>
 					</div>
@@ -158,10 +176,29 @@ button {
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="tab-content" id="myTabContent">
-						<div class="tab-pane fade show active" id="recent" role="tabpanel"
+						<div class="tab-pane fade show active" id="member" role="tabpanel"
 							aria-labelledby="home-tab">
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
+									<div class="search-area">
+										<div class="search-bg">
+											<div class="container">
+												<div class="row">
+													<div class="col-lg-12">
+														<form
+															action="${pageContext.request.contextPath}/admins/searchmem"
+															method="post" class="d-md-flex" name="frmSearch">
+															<select name="searchOption" required>
+																<option value="member_id">아이디</option>
+																<option value="member_name">이름</option>
+															</select> <input name="searchWord" type="text" required> <input
+																type="submit" class="template-btn" value="검색">
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 									<c:forEach var="item" items="${memberview}">
 										<div class="memberItem">
 											<button onclick="myFunction(this)" class="mid">${item.memberId}</button>
@@ -176,10 +213,29 @@ button {
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="full-time" role="tabpanel"
+						<div class="tab-pane fade" id="company" role="tabpanel"
 							aria-labelledby="profile-tab">
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
+									<div class="search-area">
+										<div class="search-bg">
+											<div class="container">
+												<div class="row">
+													<div class="col-lg-12">
+														<form
+															action="${pageContext.request.contextPath}/admins/searchcom"
+															method="post" class="d-md-flex" name="frmSearch">
+															<select name="searchOption" required>
+																<option value="company_id">아이디</option>
+																<option value="company_name">상호</option>
+															</select> <input name="searchWord" type="text" required> <input
+																type="submit" class="template-btn" value="검색">
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 									<c:forEach var="item" items="${companyview}">
 										<div class="companyItem">
 											<button onclick="myFunction(this)" class="cid">${item.companyId}</button>

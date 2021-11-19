@@ -24,6 +24,28 @@
 		<result property="companyNum" column="COMPANY_NUM" />
 	</resultMap>
 
+
+
+	<select id="searchMember"
+		resultMap="MemberResultMap" parameterType="String">
+		select MEMBER_ID, MEMBER_NAME,
+		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		MEMBER_EMAIL,
+		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		where ${searchOption} like '%'|| #{searchWord} || '%' and MEMBER_TYPE=1
+	</select>
+
+	<select id="searchCompany"
+		resultMap="CompanyResultMap" parameterType="String">
+		select COMPANY_ID,
+		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
+		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+		where ${searchOption} like '%'|| #{searchWord} || '%'
+	</select>
+
+
+
+
 	<select id="listMember" resultMap="MemberResultMap">
 		select MEMBER_ID, MEMBER_NAME,
 		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
@@ -40,11 +62,14 @@
 	</select>
 
 	<delete id="deleteMember" parameterType="String">
-		delete from member where member_id = #{memberId}
+		delete from member where
+		member_id = #{memberId}
 	</delete>
 
 	<delete id="deleteCompany" parameterType="String">
-		 delete from company where company_id = #{companyId}
+		delete from company
+		where company_id = #{companyId}
 	</delete>
+
 
 </mapper>

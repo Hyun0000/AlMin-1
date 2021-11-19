@@ -1,6 +1,8 @@
 package com.kh.almin.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +49,7 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 		System.out.println("회원삭제");
 		System.out.println(memberId);
 		adminService.deleteMember(memberId);
-		return "OK";		
+		return "OK";
 	}
 
 	@RequestMapping(value = "/decompany", method = RequestMethod.POST)
@@ -56,7 +58,7 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 		System.out.println("기업삭제");
 		System.out.println(companyId);
 		adminService.deleteCompany(companyId);
-		return "OK";		
+		return "OK";
 	}
 
 	@ExceptionHandler
@@ -70,4 +72,33 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 		return mv;
 	}
 
+	@RequestMapping(value = "/searchmem", method = RequestMethod.POST)
+	public ModelAndView searchMember(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
+		
+		List<Member> volist = adminService.searchMember(searchOption, searchWord);
+		ModelAndView mv = new ModelAndView();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("searchWord", searchWord);
+		mv.addObject("memberview", volist);
+		mv.setViewName("admin/member");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/searchcom", method = RequestMethod.POST)
+	public ModelAndView searchCompany(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
+		
+		List<Company> volist = adminService.searchCompany(searchOption, searchWord);
+		ModelAndView mv = new ModelAndView();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("searchWord", searchWord);
+		mv.addObject("companyview", volist);
+		mv.setViewName("admin/member");
+
+		return mv;
+	}
 }
