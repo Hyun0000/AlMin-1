@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.kh.almin.HomeController;
 import com.kh.almin.comments.model.service.CommentsService;
 import com.kh.almin.comments.model.vo.CommentsCompany;
@@ -160,39 +164,50 @@ public class CommentsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Gson gson = new GsonBuilder().create();
-		jsonStr = gson.toJson(map);
-		System.out.println("jsonStr : " + jsonStr);
 		
-		System.out.println("아직 못가지롱");
+		if (map != null) {
+			Gson gson = new GsonBuilder().create();
+			jsonStr = gson.toJson(map);
+			System.out.println("jsonStr : " + jsonStr);
+		} else {
+			System.out.println("아직 못가지롱");
+			// TODO 오류페이지 이동
+		}
+		
 		return jsonStr;
 	}
 // ==============================================================================
 	// ajax
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
+	// @DeleteMapping(value = "/reviews/{recruitNo}")
 	@DeleteMapping(value = "/reviews")
 	@ResponseBody
-	public String deleteComment(@RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id) {
-		System.out.println("recruitNo : " + recruitNo);
+	public String deleteComment(@RequestBody String test) {
+	// public String deleteComment(@PathVariable(value = "recruitNo") String recruitNo, @PathVariable(value = "id") String id) {
+		// @RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id
+		System.out.println("@DeleteMapping 진입");
+		System.out.println("test : " + test);
+		
+		// Gson gson = new GsonBuilder().create();
+		JsonParser jsonParser = new JsonParser();
+		JsonElement jsonElement = jsonParser.parse(test);
+		System.out.println("jsonElement : " + jsonElement);
+		
+		// 작성자 ID
+		String id = jsonElement.getAsJsonObject().get("id").getAsString();
+		// 공고 번호
+		int rNo = jsonElement.getAsJsonObject().get("recruitNo").getAsInt();
+		
 		System.out.println("id : " + id);
+		System.out.println("rNo : " + rNo);
 		
 		// ajax로 보낼 data
 		String result = "";
 		
-		// 공고 번호
-		int rNo = 0;
-		if (recruitNo != null && recruitNo != "") {rNo = Integer.parseInt(recruitNo);}
-		else {logger.warn("공고 번호 잘못 전달");}
-		
-		// 작성자 ID
-		String writerId = "";
-		if (id != null && id != "") {writerId = id;}
-		else {logger.warn("작성자 ID 잘못 전달");}
-		
 		// 결과
 		int deleteResult = 0;
-//		try {deleteResult = commentsService.deleteComment(rNo, writerId);}
-//		catch (Exception e) {e.printStackTrace();}
+		try {deleteResult = commentsService.deleteComment(rNo, id);}
+		catch (Exception e) {e.printStackTrace();}
 		
 		if (deleteResult == 6) {result = "ok";}
 		else {result = "fail";}

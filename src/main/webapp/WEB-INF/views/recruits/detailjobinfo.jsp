@@ -169,8 +169,8 @@
 			<div class="comments_insert_top">
 				<fieldset>
 					<legend>한줄 후기</legend>
-					<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 					<div id="contract_box">
+						<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 						<h3>근로계약서 작성 여부</h3>
 						<label for="contract_y">작성</label> <input type="radio" value="Y"
 							name="ccContract" id="contract_y"> <label
@@ -225,6 +225,9 @@
 
 		// x마크
 		let xEle = document.getElementsByClassName('xMark');
+		
+		// <ul id="comments_box"></ul> : comments 전체를 담는 <ul>
+		let commentsBoxEle = document.getElementById('comments_box');
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>

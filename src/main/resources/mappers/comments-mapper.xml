@@ -5,27 +5,27 @@
 	<!-- 1. 후기의 키워드 가져오기 -->
 	<select id="selectKeywords" resultType="string" parameterType="map">
 		<choose>
-			<when test="category == 'selectGood'">
+			<when test="category == 'COMMENTS_GOOD_MAP'">
 				SELECT COMMENTS_GOOD.GOOD_NAME FROM COMMENTS_GOOD_MAP 
 				JOIN COMMENTS_GOOD ON COMMENTS_GOOD_MAP.CGM_GOOD_NO = COMMENTS_GOOD.GOOD_NO
 				WHERE CGM_CC_NO = #{recruitNo} AND CGM_CC_WRITER = #{writer}
 			</when>
-			<when test="category == 'selectBad'">
+			<when test="category == 'COMMENTS_BAD_MAP'">
 				SELECT COMMENTS_BAD.BAD_NAME FROM COMMENTS_BAD_MAP 
 				JOIN COMMENTS_BAD ON COMMENTS_BAD_MAP.CBM_BAD_NO = COMMENTS_BAD.BAD_NO
 				WHERE CBM_CC_NO = #{recruitNo} AND CBM_CC_WRITER = #{writer}
 			</when>
-			<when test="category == 'selectCon'">
+			<when test="category == 'COMMENTS_CONDITION_MAP'">
 				SELECT COMMENTS_CONDITION.CONDITION_NAME FROM COMMENTS_CONDITION_MAP 
 				JOIN COMMENTS_CONDITION ON COMMENTS_CONDITION_MAP.CCM_CONDITION_NO = COMMENTS_CONDITION.CONDITION_NO
 				WHERE CCM_CC_NO = #{recruitNo} AND CCM_CC_WRITER = #{writer}
 			</when>
-			<when test="category == 'selectAir'">
+			<when test="category == 'COMMENTS_AIR_MAP'">
 				SELECT COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
 				JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
 				WHERE CAM_CC_NO = #{recruitNo} AND CAM_CC_WRITER = #{writer}
 			</when>
-			<when test="category == 'selectPay'">
+			<when test="category == 'COMMENTS_PAY_MAP'">
 				SELECT COMMENTS_PAY.PAY_NAME FROM COMMENTS_PAY_MAP 
 				JOIN COMMENTS_PAY ON COMMENTS_PAY_MAP.CPM_PAY_NO = COMMENTS_PAY.PAY_NO
 				WHERE CPM_CC_NO = #{recruitNo} AND CPM_CC_WRITER = #{writer}
@@ -53,35 +53,35 @@
 		<choose>
 			<!-- 공고글번호 나중에 동적으로 가져와야함 : CPM_CC_NO 같은거 -->
 			<!-- COMMENTS_GOOD_MAP -->
-			<when test="category == 'insertGood'">
+			<when test="category == 'COMMENTS_GOOD_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_GOOD_MAP VALUES
 						(#{recruitNo}, #{writer}, (SELECT GOOD_NO FROM COMMENTS_GOOD WHERE GOOD_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_BAD_MAP -->
-			<when test="category == 'insertBad'">
+			<when test="category == 'COMMENTS_BAD_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_BAD_MAP VALUES
 						(#{recruitNo}, #{writer}, (SELECT BAD_NO FROM COMMENTS_BAD WHERE BAD_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_CONDITION_MAP -->
-			<when test="category == 'insertCon'">
+			<when test="category == 'COMMENTS_CONDITION_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_CONDITION_MAP VALUES
 						(#{recruitNo}, #{writer}, (SELECT CONDITION_NO FROM COMMENTS_CONDITION WHERE CONDITION_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_AIR_MAP -->
-			<when test="category == 'insertAir'">
+			<when test="category == 'COMMENTS_AIR_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_AIR_MAP VALUES
 						(#{recruitNo}, #{writer}, (SELECT AIR_NO FROM COMMENTS_AIR WHERE AIR_NAME = #{item}))
 					</foreach>
 			</when>
 			<!-- COMMENTS_PAY_MAP -->
-			<when test="category == 'insertPay'">
+			<when test="category == 'COMMENTS_PAY_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
 						INTO COMMENTS_PAY_MAP VALUES
 						(#{recruitNo}, #{writer}, (SELECT PAY_NO FROM COMMENTS_PAY WHERE PAY_NAME = #{item}))
@@ -121,6 +121,29 @@
 	 </select>
  <!-- ================================================= 후기 삭제(delete) ================================================= -->
  	<delete id="deleteComment" parameterType="map">
+ 		<choose>
+ 			<when test="category == 'COMMENTS_GOOD_MAP'">
+ 				DELETE FROM COMMENTS_GOOD_MAP WHERE CGM_CC_WRITER = #{id} AND CGM_CC_NO = #{recruitNo}
+ 			</when>
+ 			<when test="category == 'COMMENTS_BAD_MAP'">
+ 				DELETE FROM COMMENTS_BAD_MAP WHERE CBM_CC_WRITER = #{id} AND CBM_CC_NO = #{recruitNo}
+ 			</when>
+ 			<when test="category == 'COMMENTS_CONDITION_MAP'">
+ 				DELETE FROM COMMENTS_CONDITION_MAP WHERE CCM_CC_WRITER = #{id} AND CCM_CC_NO = #{recruitNo}
+ 			</when>
+ 			<when test="category == 'COMMENTS_AIR_MAP'">
+ 				DELETE FROM COMMENTS_AIR_MAP WHERE CAM_CC_WRITER = #{id} AND CAM_CC_NO = #{recruitNo}
+ 			</when>
+ 			<when test="category == 'COMMENTS_PAY_MAP'">
+ 				DELETE FROM COMMENTS_PAY_MAP WHERE CPM_CC_WRITER = #{id} AND CPM_CC_NO = #{recruitNo}
+ 			</when>
+	 		<when test="category == 'lastDelete'">
+ 				DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = #{id} AND CC_RECRUIT_NO = #{recruitNo}
+ 			</when>
+ 		</choose>
+ 	</delete>
+<!--
+  	<delete id="deleteComment" parameterType="map">
  		<if test="category == 'COMMENTS_GOOD_MAP' or 'COMMENTS_BAD_MAP' or 'COMMENTS_CONDITION_MAP' or 'COMMENTS_AIR_MAP' or 'COMMENTS_PAY_MAP'">
 				DELETE FROM COMMENTS_#{keyArrOne}_MAP WHERE #{keyArrtwo}_CC_WRITER = #{id} AND #{keyArrtwo}_CC_NO = #{recruitNo}			
  		</if>
@@ -129,7 +152,7 @@
 				DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = #{id} AND CC_RECRUIT_NO = #{recruitNo}
  		</if>
  	</delete>
- 	
+-->
 <!--  	
 ==================== mapping 후기 삭제 ====================
 DELETE FROM COMMENTS_AIR_MAP WHERE CAM_CC_WRITER = 'user01' AND CAM_CC_NO = 1;
@@ -145,28 +168,6 @@ DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = 'user01' AND CC_RECRUIT_NO = 1;
 COMMIT;
 -->
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
