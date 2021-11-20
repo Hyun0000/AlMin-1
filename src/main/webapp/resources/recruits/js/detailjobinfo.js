@@ -229,12 +229,15 @@ function selectAllComments() {
 
 		        // 수정 버튼 만들기
 		        let updateBtn = document.createElement('button'); updateBtn.innerText = "수정";
-		        updateBtn.setAttribute('class', 'updateBtn'); topRightDivEle.appendChild(updateBtn);
+		        updateBtn.setAttribute('class', 'updateBtn'); updateBtn.setAttribute('id', 'updateBtn_id_' + num);
+		        updateBtn.setAttribute('onClick', 'updateComment(event);');  topRightDivEle.appendChild(updateBtn);
 
 		        // 삭제 버튼 만들기
 		        let deleteBtn = document.createElement('button'); deleteBtn.innerText = "삭제";
 		        deleteBtn.setAttribute('class', 'deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
 		        deleteBtn.setAttribute('onClick', 'deleteComment(event);'); topRightDivEle.appendChild(deleteBtn);
+		        
+		        // id & class에 붙이는 숫자 변수 (+)
 		        num++;
 		        // ===================== 한줄 후기 ==========================
 		        // 한줄 후기를 담는 <div> 만들기

@@ -33,10 +33,8 @@
 
 </head>
 <body>
-	<header>
-		<c:import url="/WEB-INF/views/template/header.jsp"/>
+	<c:import url="/WEB-INF/views/template/header.jsp"/>
 	<!-- Header Area End -->
-	</header>
 	<section id="detailjob">
 		<h1>제목나와라뚜욱닥</h1>
 		<c:forEach var="item" items="${detailjobinfo }">
@@ -211,7 +209,6 @@
 	<!-- 후기 키워드 -->
 	<script>
 		console.log("${pageContext.request.contextPath}");
-
 		// item을 놓는 장소인 dropzone : <div id="dropzone">
 		// let dropzoneEle = document.getElementById('dropzone');
 		let dropzoneEle = document.getElementsByClassName('dropzoneClass');
