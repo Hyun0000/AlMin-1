@@ -56,6 +56,8 @@ animation-fill-mode:both}
 transition:opacity .4s ease}
 .owl-carousel .owl-item .owl-lazy:not([src]),.owl-carousel .owl-item .owl-lazy[src^=""]{max-height:0}
 .owl-carousel .owl-item img.owl-lazy{transform-style:preserve-3d}
+
+/* video 관련 css */
 .owl-carousel .owl-video-wrapper{position:relative;height:100%;background:#000}
 .owl-carousel .owl-video-play-icon{position:absolute;height:80px;width:80px;
 left:50%;top:50%;margin-left:-40px;margin-top:-40px;

@@ -114,7 +114,7 @@
 				<div class="col-lg-4">
 					<div class="single-feature">
 						<h4>대상별 알바</h4>
-						<p class="py-3">내가 누구든간에~학생,주부,외국인 모두 찾아보는 알바의 민족</p>
+						<p class="py-3">내가 누구든 간에~ 학생, 주부, 외국인도 찾아보는 알바의 민족</p>
 						<a href="#" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
 					</div>
@@ -123,7 +123,58 @@
 		</div>
 	</section>
 	<!-- Feature Area End -->
-
+	
+	<!-- Brand Area Starts-->
+	 <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top text-center">
+                        <h2>브랜드 알바</h2>
+                        <p>각종 프랜차이즈 알바도 찾아보는 알바의 민족</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="employee-slider owl-carousel">
+                        <div class="single-slide d-sm-flex">
+                            <div class="slide-img">
+	<img src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Ediya.png" class="logo" alt="BR">
+                                <div class="hover-state">
+                                    <div class="hover-text text-center">
+                                        <h3>Ediya Coffee</h3>
+                                        <h5>알바 찾아보기</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide-text align-self-center">
+                                <i class="fa fa-quote-left"></i>
+                                <p>이디야커피는 ‘의미 있는 작은 차이가 평범함과 특별함을 가르는 기준이 된다’고 생각합니다. 이디야의 가족이 되어 여러분의 꿈을 키워보세요!</p>
+                            </div>
+                        </div>
+                        <div class="single-slide d-sm-flex">
+                            <div class="slide-img">
+	<img src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Burgerking.png" class="logo" alt="Burgerking">
+                                <div class="hover-state">
+                                    <div class="hover-text text-center">
+                                        <h3>버거킹</h3>
+                                        <h5>알바 찾아보기</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide-text align-self-center">
+                                <i class="fa fa-quote-left"></i>
+                                <p>세계 최대 QSR(Quick Service Restaurant) 브랜드 중 하나인 버거킹은 현재 100개 이상의 국가에서 15,000개 이상의 매장을 운영하고 있습니다. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- Brand Area  End-->
+	
 	<!-- Category Area Starts -->
 	<section class="category-area section-padding">
 		<div class="container">
@@ -138,56 +189,56 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat1.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Seoul_200px.png" alt="경기/서울">
 						<h4>경기/서울</h4>
-						<h5>250 open job</h5>
+						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat2.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Sea_200px.png" alt="강원도">
 						<h4>강원도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat3.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_apt_200px.png" alt="충청북도">
 						<h4>충청북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat4.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Taean_200px.png" alt="충청남도">
 						<h4>충청남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat5.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Andong_200px.png" alt="경상북도">
 						<h4>경상북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat6.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Geoje_200px.png" alt="경상남도">
 						<h4>경상남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-md-0">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat7.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_anywhere_200px.png" alt="전라북도">
 						<h4>전라북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center">
-						<img src="${pageContext.request.contextPath }/resources/assets/images/cat8.png" alt="category">
+						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Bosung_200px.png" alt="전라남도">
 						<h4>전라남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
