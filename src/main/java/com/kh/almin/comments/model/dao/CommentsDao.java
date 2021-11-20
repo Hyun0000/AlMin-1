@@ -73,50 +73,92 @@ public class CommentsDao {
 	}
 // ==============================================================================================================
 	// 특정 공고의 전체 후기 조회(select)
-	public Map<String, Object> selectAllComments(int recruitNo) throws Exception {
+	public Map<String, Object> selectAllComments(int rNo , String userId) throws Exception {
 	// public List<List<String>> selectAllComments(int recruitNo) {
 		// 반환용 map
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		// 1. COMMENTS_COMPANY에서 후기 가져오기
-		List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", recruitNo);
-		// 이건 다 분류하고 난 다음에 하기
-		resultMap.put("commentsVO", commentsVO);
+		// COMMENTS_COMPANY 테이블에서 data를 가져올때 인자로 전달할 map
+		Map<String, Object> firstMap = new HashMap<String, Object>();
+		
+		// mapping table에서 data를 가져올때 인자로 전달할 map
+		Map<String, Object> selectKeywordMap = new HashMap<String, Object>();
+		
+		// userID = ""  -->  전체 후기를 조회할 때
+		if (userId == "") {
+			System.out.println("dao : 전체 후기 조회 in");
+			firstMap.put("recruitNo", rNo);
+			
+			// 1. COMMENTS_COMPANY에서 후기 가져오기
+			List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", firstMap);
+			// 이건 다 분류하고 난 다음에 하기
+			resultMap.put("commentsVO", commentsVO);
 
-		// 2. 각 작성자의 후기별 키워드 가져오기
-		for (CommentsCompany commentsCompany : commentsVO) {
-			List<List<String>> keyList = new ArrayList<List<String>>();
-			for (int i = 0; i < tableName.length; i++) {
-				// select용 map
-				Map<String, Object> selectMap = new HashMap<String, Object>();
-				
-				System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
-				
-				selectMap.put("category", tableName[i]);
-				selectMap.put("recruitNo", recruitNo);
-				selectMap.put("writer", commentsCompany.getCcWriter());
-				
-				// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
-				List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectMap);
-				System.out.println("test" + i + " : " + resultList);
-				
-				keyList.add(resultList);
-				
-				if (i == 4) {
-					resultMap.put(commentsCompany.getCcWriter(), keyList);
+			// 2. 각 작성자의 후기별 키워드 가져오기
+			for (CommentsCompany commentsCompany : commentsVO) {
+				List<List<String>> keyList = new ArrayList<List<String>>();
+				for (int i = 0; i < tableName.length; i++) {
+					
+					System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
+					
+					selectKeywordMap.put("category", tableName[i]);
+					selectKeywordMap.put("recruitNo", rNo);
+					selectKeywordMap.put("writer", commentsCompany.getCcWriter());
+					
+					// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
+					List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap);
+					System.out.println("test" + i + " : " + resultList);
+					
+					keyList.add(resultList);
+					
+					if (i == 4) {
+						resultMap.put(commentsCompany.getCcWriter(), keyList);
+					}
+				}
+			}
+		} else { // 넘어온 iserID가 있다면
+			System.out.println("dao : 특정 후기 조회 in");
+			firstMap.put("recruitNo", rNo);
+			firstMap.put("userId", userId);
+			
+			// 1. COMMENTS_COMPANY에서 후기 가져오기
+			List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", firstMap);
+			// 이건 다 분류하고 난 다음에 하기
+			resultMap.put("commentsVO", commentsVO);
+			
+			// 2. 각 작성자의 후기별 키워드 가져오기
+			for (CommentsCompany commentsCompany : commentsVO) {
+				List<List<String>> keyList = new ArrayList<List<String>>();
+				for (int i = 0; i < tableName.length; i++) {
+					
+					System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
+					
+					selectKeywordMap.put("category", tableName[i]);
+					selectKeywordMap.put("recruitNo", rNo);
+					selectKeywordMap.put("writer", commentsCompany.getCcWriter());
+					
+					// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
+					List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap);
+					System.out.println("test" + i + " : " + resultList);
+					
+					keyList.add(resultList);
+					
+					if (i == 4) {
+						resultMap.put(commentsCompany.getCcWriter(), keyList);
+					}
 				}
 			}
 		}
-		System.out.println("resultMap : " + resultMap);
-		
-		System.out.println("=========================================");
-		System.out.println("resultMap : " + resultMap);
-		System.out.println("=========================================");
-		for (CommentsCompany commentsCompany : commentsVO) {
-			System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
-		}
-		System.out.println("=========================================");
-		System.out.println("commentsVO : " + commentsVO);
+//		System.out.println("resultMap : " + resultMap);
+//		
+//		System.out.println("=========================================");
+//		System.out.println("resultMap : " + resultMap);
+//		System.out.println("=========================================");
+//		for (CommentsCompany commentsCompany : commentsVO) {
+//			System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
+//		}
+//		System.out.println("=========================================");
+//		System.out.println("commentsVO : " + commentsVO);
 		return resultMap;
 	}
 // ==============================================================================
@@ -158,5 +200,72 @@ public class CommentsDao {
 		return resultCount;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+//// 특정 공고의 전체 후기 조회(select)
+//public Map<String, Object> selectAllComments(int recruitNo) throws Exception {
+//// public List<List<String>> selectAllComments(int recruitNo) {
+//	// 반환용 map
+//	Map<String, Object> resultMap = new HashMap<String, Object>();
+//	
+//	// 1. COMMENTS_COMPANY에서 후기 가져오기
+//	List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", recruitNo);
+//	// 이건 다 분류하고 난 다음에 하기
+//	resultMap.put("commentsVO", commentsVO);
+//
+//	// 2. 각 작성자의 후기별 키워드 가져오기
+//	for (CommentsCompany commentsCompany : commentsVO) {
+//		List<List<String>> keyList = new ArrayList<List<String>>();
+//		for (int i = 0; i < tableName.length; i++) {
+//			// select용 map
+//			Map<String, Object> selectMap = new HashMap<String, Object>();
+//			
+//			System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
+//			
+//			selectMap.put("category", tableName[i]);
+//			selectMap.put("recruitNo", recruitNo);
+//			selectMap.put("writer", commentsCompany.getCcWriter());
+//			
+//			// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
+//			List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectMap);
+//			System.out.println("test" + i + " : " + resultList);
+//			
+//			keyList.add(resultList);
+//			
+//			if (i == 4) {
+//				resultMap.put(commentsCompany.getCcWriter(), keyList);
+//			}
+//		}
+//	}
+//	System.out.println("resultMap : " + resultMap);
+//	
+//	System.out.println("=========================================");
+//	System.out.println("resultMap : " + resultMap);
+//	System.out.println("=========================================");
+//	for (CommentsCompany commentsCompany : commentsVO) {
+//		System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
+//	}
+//	System.out.println("=========================================");
+//	System.out.println("commentsVO : " + commentsVO);
+//	return resultMap;
+//}
+
+
+
+
+
+
+
+
+
+
 
 

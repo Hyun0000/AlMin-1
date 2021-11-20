@@ -1,10 +1,11 @@
-/**
- * 
- */
 window.onload = function() {
 // 1.
 // ========================================= page load 후 전체 후기 조회(select) ===============================================
-	sendRequest("GET", "reviews", null, selectAllComments);
+	// TODO
+	// 리뷰번호 param으로 넣어줘야한다.
+	// let param = "recruitNo=1&id=";
+	let param = "recruitNo=1";
+	sendRequest("GET", "reviews", param, selectAllComments);
 	
 // 2. 후기 insert
 // 2-1. modal box
@@ -84,7 +85,7 @@ window.onload = function() {
 	// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
 	let restData = {
 			ccRecruitNo : '1',
-			ccWriter : 'user06',
+			ccWriter : 'user01',
 			ccContent : commentsLineEle,
 			ccContract : contractRadio
 		}
@@ -343,7 +344,43 @@ function deleteComment(event) {
 		}
 	}
 }
+//========================================= 후기 수정 버튼(update) inline function ====================================
+function updateComment(event) {
+	let updateBool = confirm("수정 ㄱ?");
+	let updateUserId = event.target.parentNode.previousSibling.firstChild.innerText;
+	
+	console.log("====================== update ======================");
+	console.log(event.target.parentNode.previousSibling.firstChild.innerText);
+	console.log(updateUserId);
+	
+	
+	// url로 보낼 data
+	let param = "recruitNo=1&id=" + updateUserId;
+	
+	if (updateBool == true) {
+		sendRequest("GET", "reviews", param, afterUpdate);
+	}
+	
+	// data 다 가져온후 modal창 띄우기
+	let modalBack = document.getElementById('comments_insert_modal_back');
+	modalBack.style.display = "block";
+}
 
-
+function afterUpdate() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			console.log(httpRequest.responseText);
+			if (httpRequest.responseText == 'ok') {
+				alert("수정 성공");
+				
+				// 후기 구역 초기화
+				initCommentsBox();
+				
+				// 후기 전체 다시 select
+				sendRequest("GET", "reviews", null, selectAllComments);
+			}
+		}
+	}
+}
 
 

@@ -32,9 +32,12 @@
 		if (httpMethod == 'GET' && param != null) {
 			httpUrl = httpUrl + "?" + param;
 		}
+		console.log(param);
+		console.log(httpUrl);
+		// reviews?recruitNo=1
 		
 		// open
-		httpRequest.open(httpMethod, url, true);
+		httpRequest.open(httpMethod, httpUrl, true);
 		// 예시
 		// httpRequest.open(“GET”, “/test.jsp?id=admin&pw=1234”, true); --> Web&DB 통합구현 교재 참고
 		

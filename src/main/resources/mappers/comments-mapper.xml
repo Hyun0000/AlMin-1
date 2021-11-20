@@ -43,10 +43,19 @@
 		<result property="ccContract" column="CC_CONTRACT"/>
 	</resultMap>
 	
+<!-- 	<select id="selectCommentVo" resultMap="selectCommentVoMap" parameterType="_int">
+		지금은 개발중이라 *를 가져오지만 나중에는 필요한 정보만 가져오도록 수정 필요
+		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{rNo} ORDER BY CC_NO DESC
+	</select> -->
+	
 	<!-- 2. COMMENTS_COMPANY에서 후기 가져오기 -->
-	<select id="selectCommentVo" resultMap="selectCommentVoMap" parameterType="_int">
+	<select id="selectCommentVo" resultMap="selectCommentVoMap" parameterType="map">
 		<!-- 지금은 개발중이라 *를 가져오지만 나중에는 필요한 정보만 가져오도록 수정 필요 -->
-		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} ORDER BY CC_NO DESC
+		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} 
+		<if test="userId != null">
+			AND CC_WRITER = #{userId}
+		</if>
+		ORDER BY CC_NO DESC
 	</select>
 <!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
 	<insert id="insertCommentsKeyword" parameterType="map" >

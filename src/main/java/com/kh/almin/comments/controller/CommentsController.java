@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.weaver.ast.Instanceof;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -151,44 +153,63 @@ public class CommentsController {
 // ==============================================================================
 	// ajax
 	// 특정 공고의 전체 후기 조회
+	//,@RequestParam(value = "id",  defaultValue = "") String id @RequestParam(value = "recruitNo") 
 	@GetMapping(value = "/reviews", produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String selectAllComments() {
-		String jsonStr = "";
-		// 지금은 data가 없기에 고정값 적용
-		int recruitNo = 1;
-		
-		Map<String, Object> map = null;
-		try {
-			map = commentsService.selectAllComments(recruitNo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if (map != null) {
-			Gson gson = new GsonBuilder().create();
-			jsonStr = gson.toJson(map);
-			System.out.println("jsonStr : " + jsonStr);
-		} else {
-			System.out.println("아직 못가지롱");
-			// TODO 오류페이지 이동
-		}
-		
-		return jsonStr;
+	// public String selectAllComments(String recruitNo, String id) {
+	public String selectAllComments(String recruitNo, String id) {
+			System.out.println("@GetMapping(전체 후기 조회) 진입");
+			System.out.println("recruitNo : " + recruitNo);
+
+			// 1. 공고 번호
+			int rNo = 0;
+			if (recruitNo != null && recruitNo != "") {
+				rNo = Integer.parseInt(recruitNo);
+			}
+
+			// 2. userID(id가 있냐 없냐에 특정 공고만 가져오는 전체 공고를 가져오는지가 달라진다.)
+			String userId = "";
+			/*
+			 * (id로 넘어오는 값이 없으면 = 전체 후기를 조회하는 것)이면
+			 * "" 값인 상태로 userId가 넘어간다.
+			 */
+			if (id != null && id != "") {
+				userId = id;
+			}
+			
+			System.out.println("rNo : " + rNo);
+			System.out.println("userId : " + userId);
+			
+			// DB에서 가져온 data를 담을 Map
+			Map<String, Object> map = null;
+			
+			try {
+				 map = commentsService.selectAllComments(rNo, userId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			String jsonStr = "";
+			if (map != null) {
+				Gson gson = new GsonBuilder().create();
+				jsonStr = gson.toJson(map);
+				System.out.println("jsonStr : " + jsonStr);
+			} else {
+				System.out.println("아직 못가지롱");
+				// TODO 오류페이지 이동
+			}
+			
+			return jsonStr;
 	}
 // ==============================================================================
 	// ajax
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
-	// @DeleteMapping(value = "/reviews/{recruitNo}")
 	@DeleteMapping(value = "/reviews")
 	@ResponseBody
 	public String deleteComment(@RequestBody String test) {
-	// public String deleteComment(@PathVariable(value = "recruitNo") String recruitNo, @PathVariable(value = "id") String id) {
-		// @RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id
 		System.out.println("@DeleteMapping 진입");
 		System.out.println("test : " + test);
 		
-		// Gson gson = new GsonBuilder().create();
 		JsonParser jsonParser = new JsonParser();
 		JsonElement jsonElement = jsonParser.parse(test);
 		System.out.println("jsonElement : " + jsonElement);
@@ -217,7 +238,44 @@ public class CommentsController {
 // ==============================================================================
 // ==============================================================================
 // ==============================================================================
-// ==============================================================================
-// ==============================================================================
-// ==============================================================================
 }
+
+
+
+
+// ajax
+// 특정 공고의 전체 후기 조회
+//@GetMapping(value = "/reviews", produces="text/plain;charset=UTF-8")
+//@ResponseBody
+//public String selectAllComments() {
+//// public String selectAllComments(@RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "id") String id) {
+//	System.out.println("@GetMapping(전체 후기 조회) 진입");
+//	
+//	// System.out.println("recruitNo : " + recruitNo);
+//	// System.out.println("id : " + id);
+//	
+//	String jsonStr = "";
+//	// 지금은 data가 없기에 고정값 적용
+//	// 임시주석
+//	int recruitNo = 1;
+//	
+//	Map<String, Object> map = null;
+//	try {
+//		 map = commentsService.selectAllComments(recruitNo);
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	}
+//	
+//	if (map != null) {
+//		Gson gson = new GsonBuilder().create();
+//		jsonStr = gson.toJson(map);
+//		System.out.println("jsonStr : " + jsonStr);
+//	} else {
+//		System.out.println("아직 못가지롱");
+//		// TODO 오류페이지 이동
+//	}
+//	
+//	return jsonStr;
+//}
+
+
