@@ -170,10 +170,8 @@
 					<div id="contract_box">
 						<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 						<h3>근로계약서 작성 여부</h3>
-						<label for="contract_y">작성</label> <input type="radio" value="Y"
-							name="ccContract" id="contract_y"> <label
-							for="contract_n">미작성</label> <input type="radio" value="N"
-							name="ccContract" id="contract_n">
+						<label for="contract_y">작성</label> <input type="radio" value="Y" name="ccContract" id="contract_y">
+						<label for="contract_n">미작성</label> <input type="radio" value="N" name="ccContract" id="contract_n">
 					</div>
 				</fieldset>
 			</div>
@@ -196,7 +194,7 @@
 					<div id="dragzone_${dragNum}" class="dragzoneClass">
 						<c:forEach var="condition" items="${map.value}">
 							<c:set var="idNum" value="${idNum + 1}" />
-							<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark">&times;</span></div>
+							<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark" onClick="deleteX()">&times;</span></div>
 						</c:forEach>
 					</div>
 				</c:forEach>
@@ -221,10 +219,15 @@
 		let dragItemEle = document.getElementsByClassName('dragEle');
 
 		// x마크
-		let xEle = document.getElementsByClassName('xMark');
+		// let xEle = document.getElementsByClassName('xMark');
 		
 		// <ul id="comments_box"></ul> : comments 전체를 담는 <ul>
 		let commentsBoxEle = document.getElementById('comments_box');
+		
+		// userID
+		let userId = "user01";
+		
+		// 공고번호(recruitNo)
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>

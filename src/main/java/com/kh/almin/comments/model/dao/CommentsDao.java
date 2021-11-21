@@ -24,11 +24,21 @@ public class CommentsDao {
 	// 모든 후기 키워드 가져오기(insert)
 	public Map<String, List<String>> selectAllKeyWords() throws Exception {
 		Map<String, List<String>> commentsMap = new HashMap<String, List<String>>();
-		commentsMap.put("1", sqlSession.selectList("Comments.selectAllCommentsGood"));
-		commentsMap.put("2", sqlSession.selectList("Comments.selectAllCommentsBad"));
-		commentsMap.put("3", sqlSession.selectList("Comments.selectAllCommentsCondition"));
-		commentsMap.put("4", sqlSession.selectList("Comments.selectAllCommentsAir"));
-		commentsMap.put("5", sqlSession.selectList("Comments.selectAllCommentsPay"));
+		
+		for (int i = 0; i < tableName.length; i++) {
+			commentsMap.put("" + (i + 1), sqlSession.selectList("Comments." + tableName[i]));
+		}
+//		commentsMap.put("1", sqlSession.selectList("Comments." + tableName[0]));
+//		commentsMap.put("2", sqlSession.selectList("Comments.selectAllCommentsBad"));
+//		commentsMap.put("3", sqlSession.selectList("Comments.selectAllCommentsCondition"));
+//		commentsMap.put("4", sqlSession.selectList("Comments.selectAllCommentsAir"));
+//		commentsMap.put("5", sqlSession.selectList("Comments.selectAllCommentsPay"));
+		
+//		commentsMap.put("1", sqlSession.selectList("Comments.selectAllCommentsGood"));
+//		commentsMap.put("2", sqlSession.selectList("Comments.selectAllCommentsBad"));
+//		commentsMap.put("3", sqlSession.selectList("Comments.selectAllCommentsCondition"));
+//		commentsMap.put("4", sqlSession.selectList("Comments.selectAllCommentsAir"));
+//		commentsMap.put("5", sqlSession.selectList("Comments.selectAllCommentsPay"));
 		return commentsMap;
 	}
 // ==============================================================================================================
@@ -72,7 +82,7 @@ public class CommentsDao {
 		return resultCount;
 	}
 // ==============================================================================================================
-	// 특정 공고의 전체 후기 조회(select)
+	// 특정 공고의 전체 후기 조회(select) & 후기 수정을 위해 특정 유저의 후기 data 가져오기
 	public Map<String, Object> selectAllComments(int rNo , String userId) throws Exception {
 	// public List<List<String>> selectAllComments(int recruitNo) {
 		// 반환용 map
@@ -105,7 +115,6 @@ public class CommentsDao {
 					selectKeywordMap.put("recruitNo", rNo);
 					selectKeywordMap.put("writer", commentsCompany.getCcWriter());
 					
-					// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
 					List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap);
 					System.out.println("test" + i + " : " + resultList);
 					
@@ -140,6 +149,15 @@ public class CommentsDao {
 					// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
 					List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap);
 					System.out.println("test" + i + " : " + resultList);
+					
+//					Map<String, List<String>> commentsMap = new HashMap<String, List<String>>();
+//					
+//					for (int j = 0; j < tableName.length; j++) {
+//						commentsMap.put("" + (j + 1), sqlSession.selectList("Comments." + tableName[j]));
+//					}
+//					for (int j = 0; j < resultList.size(); j++) {
+//						System.out.println("resultList.get(" + j + ") : " + resultList.get(j));
+//					}
 					
 					keyList.add(resultList);
 					

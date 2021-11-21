@@ -104,30 +104,54 @@
 		(COMMENTS_COMPANY_SEQUENCE.NEXTVAL, #{ccRecruitNo}, #{ccWriter}, 1, #{ccContent}, sysdate, #{ccContract})
 	</insert>
 <!-- ================================================= 후기 키워드 가져오기  to (후기 insert) ================================================= -->
-	 <!-- COMMENTS_AIR -->
-	 <select id="selectAllCommentsAir" resultType="string">
-	 	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
-	 </select>
-	 
-	   <!-- COMMENTS_CONDITION -->
-	 <select id="selectAllCommentsCondition" resultType="string">
-	 	SELECT CONDITION_NAME FROM COMMENTS_CONDITION ORDER BY CONDITION_NO
-	 </select>
-	 
-	 <!-- COMMENTS_PAY -->
-	 <select id="selectAllCommentsPay" resultType="string">
-	 	SELECT PAY_NAME FROM COMMENTS_PAY ORDER BY PAY_NO
-	 </select>
-	 
 	 <!-- COMMENTS_GOOD -->
-	 <select id="selectAllCommentsGood" resultType="string">
+	 <select id="COMMENTS_GOOD_MAP" resultType="string">
 	 	SELECT GOOD_NAME FROM COMMENTS_GOOD ORDER BY GOOD_NO
 	 </select>
 	 
 	 <!-- COMMENTS_BAD -->
+	 <select id="COMMENTS_BAD_MAP" resultType="string">
+	 	SELECT BAD_NAME FROM COMMENTS_BAD ORDER BY BAD_NO
+	 </select>
+	 
+ 	  <!-- COMMENTS_CONDITION -->
+	 <select id="COMMENTS_CONDITION_MAP" resultType="string">
+	 	SELECT CONDITION_NAME FROM COMMENTS_CONDITION ORDER BY CONDITION_NO
+	 </select>
+	 
+	 <!-- COMMENTS_AIR -->
+	 <select id="COMMENTS_AIR_MAP" resultType="string">
+	 	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
+	 </select>
+	 
+	 <!-- COMMENTS_PAY -->
+	 <select id="COMMENTS_PAY_MAP" resultType="string">
+	 	SELECT PAY_NAME FROM COMMENTS_PAY ORDER BY PAY_NO
+	 </select>
+	 
+<!--  	 <select id="selectAllCommentsGood" resultType="string">
+	 	SELECT GOOD_NAME FROM COMMENTS_GOOD ORDER BY GOOD_NO
+	 </select>
+	 
+	 COMMENTS_BAD
 	 <select id="selectAllCommentsBad" resultType="string">
 	 	SELECT BAD_NAME FROM COMMENTS_BAD ORDER BY BAD_NO
 	 </select>
+	 
+ 	  COMMENTS_CONDITION
+	 <select id="selectAllCommentsCondition" resultType="string">
+	 	SELECT CONDITION_NAME FROM COMMENTS_CONDITION ORDER BY CONDITION_NO
+	 </select>
+	 
+	 COMMENTS_AIR
+	 <select id="selectAllCommentsAir" resultType="string">
+	 	SELECT AIR_NAME FROM COMMENTS_AIR ORDER BY AIR_NO
+	 </select>
+	 
+	 COMMENTS_PAY
+	 <select id="selectAllCommentsPay" resultType="string">
+	 	SELECT PAY_NAME FROM COMMENTS_PAY ORDER BY PAY_NO
+	 </select> -->
  <!-- ================================================= 후기 삭제(delete) ================================================= -->
  	<delete id="deleteComment" parameterType="map">
  		<choose>

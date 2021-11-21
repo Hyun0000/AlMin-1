@@ -6,7 +6,7 @@ window.onload = function() {
 	// let param = "recruitNo=1&id=";
 	let param = "recruitNo=1";
 	sendRequest("GET", "reviews", param, selectAllComments);
-	
+// ========================================= 후기 insert ===============================================	
 // 2. 후기 insert
 // 2-1. modal box
 	
@@ -110,8 +110,11 @@ window.onload = function() {
 					initCommentsBox();
 					
 					alert("후기 등록 ok");
+					
 					// 후기 새로 가져오기
-					sendRequest("GET", "reviews", null, selectAllComments);
+					// 리뷰번호 param으로 넣어줘야한다.
+					let param = "recruitNo=1";
+					sendRequest("GET", "reviews", param, selectAllComments);
 					
 				} else {
 					alert("후기 등록 실패");
@@ -127,23 +130,52 @@ window.onload = function() {
 //========================================= 후기 insert 끝 ===============================================
 //========================================= drag&drop evnet ===============================================
 	// dropzone --> dragzone
-	for (let i = 0; i < xEle.length; i++) {
-	    xEle[i].onclick = function () {
-	        var movedItem = document.getElementById(event.target.parentNode.id);
-	        console.log("event.target.parentNode.id : " + event.target.parentNode.id);
-	        console.log(movedItem);
-	        // xEle[i].style.display = "none";
-	        this.style.display = "none";
-	        
-	        for (var i = 0; i < dropzoneEle.length; i++) {
-		        if (dropzoneEle[i] == this.parentNode.parentNode) {
-		        	dragzoneEle[i].appendChild(movedItem);
-		        }
-	        }
-	    }
-	}
+//	for (let i = 0; i < xEle.length; i++) {
+//		xEle[i].onclick = function () {
+//			var movedItem = document.getElementById(event.target.parentNode.id);
+//			console.log("event.target.parentNode.id : " + event.target.parentNode.id);
+//			console.log(movedItem);
+//			console.log(123);
+//			// xEle[i].style.display = "none";
+//			this.style.display = "none";
+//			
+//			for (var i = 0; i < dropzoneEle.length; i++) {
+//				if (dropzoneEle[i] == this.parentNode.parentNode) {
+//					dragzoneEle[i].appendChild(movedItem);
+//				}
+//			}
+//		}
+//	}
+	
+	
 }// ========= 여기에 중괄호 다시 넣을수도(window.onload 끝)
 //========================================== window.onload 끝 ==============================================
+function deleteX() {
+	let xEle = document.getElementsByClassName('xMark');
+	console.log("=================== please ===================");
+	console.log(xEle.length);
+	console.log(this);
+	console.log(event.target);
+	for (let i = 0; i < xEle.length; i++) {
+		// xEle[i].onclick = function () {
+	        var movedItem = document.getElementById(event.target.parentNode.id);
+	        // console.log("event.target.parentNode.id : " + event.target.parentNode.id);
+	        // console.log(movedItem);
+	        // console.log(123);
+	        // xEle[i].style.display = "none";
+	        event.target.style.display = "none";
+	        
+	        for (var j = 0; j < dropzoneEle.length; j++) {
+		        if (dropzoneEle[j] == event.target.parentNode.parentNode) {
+		        	dragzoneEle[j].appendChild(movedItem);
+		        }
+	        }
+	    // }
+	}
+}
+
+
+
 //========================================= drag&drop evnet ===============================================
 // drag한 itme의 id 정보 저장 (in dragzone)
 function drag(event) {
@@ -338,7 +370,9 @@ function deleteComment(event) {
 					initCommentsBox();
 					
 					// 후기 전체 다시 select
-					sendRequest("GET", "reviews", null, selectAllComments);
+					// 리뷰번호 param으로 넣어줘야한다.
+					let param = "recruitNo=1";
+					sendRequest("GET", "reviews", param, selectAllComments);
 				}
 			}
 		}
@@ -358,26 +392,171 @@ function updateComment(event) {
 	let param = "recruitNo=1&id=" + updateUserId;
 	
 	if (updateBool == true) {
-		sendRequest("GET", "reviews", param, afterUpdate);
+		sendRequest("GET", "reviews", param, popUpModal);
 	}
-	
-	// data 다 가져온후 modal창 띄우기
-	let modalBack = document.getElementById('comments_insert_modal_back');
-	modalBack.style.display = "block";
 }
 
-function afterUpdate() {
+// 기존에 작성한 후기 data를 가져온 후 실행할 callback function
+function popUpModal() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
-			console.log(httpRequest.responseText);
-			if (httpRequest.responseText == 'ok') {
-				alert("수정 성공");
+			if (httpRequest.responseText != null) {
+				console.log("=================== 후기 수정은 이곳에서 ===================");
+				console.log(httpRequest.responseText);
 				
+				// data 다 가져온후 modal창 띄우기
+				let modalBack = document.getElementById('comments_insert_modal_back');
+				modalBack.style.display = "block";
+				
+				// {"commentsVO":
+				// [{"ccNo":23,"ccRecruitNo":1,"ccWriter":"user01","ccWriterType":"1","ccContent":"만리장성 쌓으러 가실분","ccDate":"2021-11-21 02:00:51","ccContract":"N"}],
+				// "user01":
+				// [
+				// ["편안한 식사시간 보장","유익한 경험"],
+				// ["서있는 시간이 많아요","지저분한 근무 환경"],
+				// ["정해진 일만 해요","청결한 화장실"],
+				// ["동료가 좋아요","사장님 좋아요"],
+				// ["주휴수당 지급","만족해요"]
+				// ]
+				// }
+				console.log("=================== updata :  ===================");
+				let updateObj = JSON.parse(httpRequest.responseText);
+				
+				console.log("=================== httpRequest.responseText.commentsVO :  ===================");
+				console.log(httpRequest.responseText.commentsVO);
+				console.log("=================== updateObj.commentsVO :  ===================");
+				console.log(updateObj.commentsVO);
+				console.log("=================== updateObj.commentsVO.ccContent :  ===================");
+				console.log(updateObj.commentsVO.ccContent);
+				console.log("=================== updateObj.commentsVO[0] :  ===================");
+				console.log(updateObj.commentsVO[0]);
+				console.log("=================== updateObj.commentsVO[0].ccContent :  ===================");
+				console.log(updateObj.commentsVO[0].ccContent);
+				console.log("=================== updateObj.commentsVO[0].ccContract :  ===================");
+				console.log(updateObj.commentsVO[0].ccContract);
+				console.log("=================== userId :  ===================");
+				console.log(userId);
+				console.log("=================== updateObj[userId] :  ===================");
+				console.log(updateObj[userId]);
+				console.log("=================== updateObj[userId].length :  ===================");
+				console.log(updateObj[userId].length);
+				console.log("=================== updateObj.user01[0] :  ===================");
+				console.log(updateObj[userId][0]);
+				console.log("=================== updateObj.user01[0][0] :  ===================");
+				console.log(updateObj[userId][0][0]);
+				
+				// 한줄 후기 입력창
+				let updateoneLine = document.getElementById('commentsLine');
+				updateoneLine.value = updateObj.commentsVO[0].ccContent;
+				
+				
+				let updateDragZone = document.getElementsByClassName('dragzoneClass');
+				let updateDropZone = document.getElementsByClassName('dropzoneClass');
+				
+				for (var i = 0; i < updateObj[userId].length; i++) {
+					console.log("진입1");
+					let keywordSort = document.querySelectorAll("#dragzone_" + (i + 1) + " .keyword");
+					
+					for (var j = 0; j < updateObj[userId][i].length; j++) {
+						console.log("진입2");
+						
+						for (var k = 0; k < keywordSort.length; k++) {
+							console.log("진입3");
+							if (keywordSort[k].innerText == updateObj[userId][i][j]) {
+								console.log("이렇게 하긴 싫다.");
+								keywordSort[k].parentNode.style.display = "none";
+							}
+						}
+					}
+				}
+				
+				
+				
+				
+				
+				// document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
+				// <div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
+//				 			<span class="keyword">${condition}</span>
+//				 			<span class="xMark">&times;</span>
+				// </div>				
+				
+				
+				
+				
+				
+				let num = 1;
+				for (var i = 0; i < updateObj[userId].length; i++) {
+					for (var j = 0; j < updateObj[userId][i].length; j++) {
+						let keywordUpDropZone = document.getElementById('dropzone_' + (i + 1));
+						
+						let upkeywordDiv = document.createElement('div');
+						upkeywordDiv.setAttribute("class", "dragEle");
+						upkeywordDiv.setAttribute("id", "updateDrag_" + num);
+						upkeywordDiv.setAttribute("draggable", "true");
+						upkeywordDiv.setAttribute("ondragstart", "drag();");
+						
+						let upkeywordSpan = document.createElement('span');
+						upkeywordSpan.setAttribute("class", "keyword");
+						upkeywordSpan.innerText = updateObj[userId][i][j];
+						upkeywordDiv.appendChild(upkeywordSpan);
+						
+						let upkeywordX = document.createElement('span');
+						upkeywordX.setAttribute("class", "xMark");
+						upkeywordX.setAttribute("style", "display: inline-block;");
+						upkeywordX.setAttribute('onClick', 'deleteX();');
+						upkeywordX.innerHTML = '&times';
+						upkeywordDiv.appendChild(upkeywordX);
+						
+						keywordUpDropZone.appendChild(upkeywordDiv);
+						
+						num++;
+						// updateDropZonne[i].innerText += updateObj[userId][i][j];
+					}
+				}
+				
+//				for (var i = 0; i < updateDragZone.length; i++) {
+//					let keyText = document.querySelectorAll("#dragzone_" + (i + 1) + " .keyword");
+//					console.log(keyText.length);
+//						for (var j = 0; j < keyText.length; j++) {
+//							console.log(keyText[j]);
+//					}
+//				}
+				
+// document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
+				
+				
+				
+				
+				
+// <div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
+// 			<span class="keyword">${condition}</span>
+// 			<span class="xMark">&times;</span>
+// </div>				
+				
+//				console.log(document.getElementById('contract_y'));
+//				console.log(document.getElementById('contract_n'));
+//				
+//				let test = updateObj.commentsVO[0].ccContract;
+//				let contractRadio_Y = document.getElementById('contract_y');
+//				let contractRadio_N = document.getElementById('contract_n');
+//				
+//				// 근로 계약서 작성 radio 버튼
+//				if (test === 'Y') {
+//					contractRadio_Y.checked;
+//				} else {
+//					contractRadio_N.checked;
+//				}
+				
+				// 장점
+				
+				
+				
+				// TODO 후기 작성 다하고 해야할 것들
 				// 후기 구역 초기화
-				initCommentsBox();
+				// initCommentsBox();
 				
 				// 후기 전체 다시 select
-				sendRequest("GET", "reviews", null, selectAllComments);
+				// sendRequest("GET", "reviews", null, selectAllComments);
 			}
 		}
 	}
