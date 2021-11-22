@@ -225,7 +225,7 @@
 		let commentsBoxEle = document.getElementById('comments_box');
 		
 		// userID
-		let userId = "user01";
+		let userId = "user02";
 		
 		// 공고번호(recruitNo)
 	</script>

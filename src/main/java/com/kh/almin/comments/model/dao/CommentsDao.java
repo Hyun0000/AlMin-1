@@ -28,40 +28,54 @@ public class CommentsDao {
 		for (int i = 0; i < tableName.length; i++) {
 			commentsMap.put("" + (i + 1), sqlSession.selectList("Comments." + tableName[i]));
 		}
-//		commentsMap.put("1", sqlSession.selectList("Comments." + tableName[0]));
-//		commentsMap.put("2", sqlSession.selectList("Comments.selectAllCommentsBad"));
-//		commentsMap.put("3", sqlSession.selectList("Comments.selectAllCommentsCondition"));
-//		commentsMap.put("4", sqlSession.selectList("Comments.selectAllCommentsAir"));
-//		commentsMap.put("5", sqlSession.selectList("Comments.selectAllCommentsPay"));
-		
-//		commentsMap.put("1", sqlSession.selectList("Comments.selectAllCommentsGood"));
-//		commentsMap.put("2", sqlSession.selectList("Comments.selectAllCommentsBad"));
-//		commentsMap.put("3", sqlSession.selectList("Comments.selectAllCommentsCondition"));
-//		commentsMap.put("4", sqlSession.selectList("Comments.selectAllCommentsAir"));
-//		commentsMap.put("5", sqlSession.selectList("Comments.selectAllCommentsPay"));
 		return commentsMap;
 	}
 // ==============================================================================================================
 	// 후기 작성(insert)
-	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) throws Exception {
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany, String insertOrUpdate) throws Exception {
 		Map<String, Object> insertMap = new HashMap<String, Object>();
-		// ex) insertMap.put("0", commentsList.get(0));
 		
-
-		// insert 작업을 시작할 때마다 추가될 변수
+		// DB 작업을 시작할 때마다 추가될 변수
 		int result = 0;
 		
 		// 최종적으로 return할 변수
 		int resultCount = 0;
-		
-		// 1. COMMENTS_COMPANY insert(PK-FK 관게로 인해 해당 작업부터 먼저한다.)
-		result = sqlSession.insert("Comments.insertComments", commentsCompany);
-		if (result != 0) {
-			resultCount++;
-		} else {
-			System.out.println("insert 중 문제가 발생했다.");
+		System.out.println("dao 진입");
+		System.out.println("commentsList : " + commentsList);
+		System.out.println("commentsCompany : " + commentsCompany);
+		System.out.println("insertOrUpdate : " + insertOrUpdate);
+		if (insertOrUpdate.equals("update")) {
+			// 1. 기존 후기의 키워드 지우기
+			System.out.println("수정 작업 진입");
+			
+			Map<String, Object> deleteMap = new HashMap<String, Object>();
+			for (int i = 0; i < tableName.length; i++) {
+				deleteMap.put("category", tableName[i]);
+				deleteMap.put("id", commentsCompany.getCcWriter());
+				deleteMap.put("recruitNo", commentsCompany.getCcRecruitNo());
+				
+				result = sqlSession.delete("Comments.deleteComment", deleteMap);
+				if (result != 0) {System.out.println("키워드 삭제 성공"); resultCount++;}
+			}
+			
+			// 2. 기존 후기 update --> 조건 : 유저ID(CC_WRITER) & 공고번호(CC_RECRUIT_NO)
+			// 수정할 사항 --> 후기 한줄평(CC_CONTENT) & 근로 계약서 작성 여부(CC_CONTRACT)
+			deleteMap.put("writer", commentsCompany.getCcWriter());
+			deleteMap.put("recruitNo", commentsCompany.getCcRecruitNo());
+			deleteMap.put("content", commentsCompany.getCcContent());
+			deleteMap.put("contract", commentsCompany.getCcContract());
+			result = sqlSession.delete("Comments.updateComment", deleteMap);
+			if (result != 0) {System.out.println("후기 수정 성공"); resultCount++;}
+			
+		} else if(insertOrUpdate.equals("insert")) {
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			// 1. COMMENTS_COMPANY insert(PK-FK 관게로 인해 해당 작업부터 먼저한다.)
+			result = sqlSession.insert("Comments.insertComments", commentsCompany);
+			if (result != 0) { resultCount++;}
+			else {System.out.println("insert 중 문제가 발생했다.");}
 		}
 		
+		System.out.println("dao insert keyword");
 		// 2. 5개  mapping table insert
 		for (int i = 0; i < commentsList.size(); i++) {
 				insertMap.put("category", tableName[i]);
@@ -77,7 +91,7 @@ public class CommentsDao {
 		}
 		System.out.println("result : " + result);
 		
-		// (resultCount = 6)가 돼야 후기 insert 성공 
+		// (resultCount = 6(insert) or 11(update))가 돼야 후기 insert 성공 
 		System.out.println("resultCount : " + resultCount);
 		return resultCount;
 	}
@@ -167,21 +181,12 @@ public class CommentsDao {
 				}
 			}
 		}
-//		System.out.println("resultMap : " + resultMap);
-//		
-//		System.out.println("=========================================");
-//		System.out.println("resultMap : " + resultMap);
-//		System.out.println("=========================================");
-//		for (CommentsCompany commentsCompany : commentsVO) {
-//			System.out.println("commentsCompany.getCcWriter() : " + commentsCompany.getCcWriter());
-//		}
-//		System.out.println("=========================================");
-//		System.out.println("commentsVO : " + commentsVO);
 		return resultMap;
 	}
 // ==============================================================================
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
 	public int deleteComment(int recruitNo, String id) throws Exception {
+		System.out.println("dao 후기 삭제 진입");
 		// 키워드 1
 		String[] keyArrOne = {"GOOD", "BAD", "CONDITION", "AIR", "PAY"};
 		
@@ -200,15 +205,15 @@ public class CommentsDao {
 		
 		// 1. 5개의 mapping table에서 조건에 맞는 키워드 모두 지우기(PK-FK 관게로 인해 해당 작업부터 먼저한다.)
 		for (int i = 0; i < tableName.length; i++) {
-			paramMap.put("category", tableName[i]);
-//			paramMap.put("keyArrOne", keyArrOne[i]);
-//			paramMap.put("keyArrtwo", keyArrtwo[i]);
+			System.out.println("dao 키워드 삭제 진입");
 			
+			paramMap.put("category", tableName[i]);
 			result = sqlSession.delete("Comments.deleteComment", paramMap);
 			if (result != 0) {System.out.println("키워드 삭제 성공"); resultCount++;}
 		}
 		
 		// 2. COMMENTS_COMPANY에서 후기 지우기
+		System.out.println("dao 후기 삭제 진입");
 		paramMap.put("category", "lastDelete");
 		result = sqlSession.delete("Comments.deleteComment", paramMap);
 		if (result != 0) {System.out.println("후기 삭제 성공"); resultCount++;}

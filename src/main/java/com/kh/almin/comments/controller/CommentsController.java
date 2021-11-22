@@ -64,7 +64,7 @@ public class CommentsController {
 		return mv;
 	}
 // ==============================================================================
-	// 후기 작성(ajax)
+	// 후기 작성(ajax) & update
 	// @PostMapping(value = "/commentsinsert")
 	@PostMapping(value = "/reviews")
 	@ResponseBody
@@ -105,6 +105,10 @@ public class CommentsController {
 		CommentsCompany commentsCompany = 
 		new CommentsCompany(Integer.parseInt((String)parsedObj2.get("ccRecruitNo")), (String)parsedObj2.get("ccWriter"), (String)parsedObj2.get("ccContent"), (String)parsedObj2.get("ccContract"));
 		
+		// insert 혹은 update를 결정하는 값을 담는 변수
+		String insertOrUpdate = (String)parsedObj2.get("insertOrUpdate");
+		System.out.println("insertOrUpdate : " + insertOrUpdate);
+		
 		System.out.println("================ data 확인용 log ================");
 		System.out.println("commentsList : " + commentsList);
 		System.out.println("parsedObj.get('restData') : " + parsedObj.get("restData"));
@@ -122,9 +126,10 @@ public class CommentsController {
 		}
 		System.out.println("================ data 확인용 log ================");
 		
+		// 비즈니스 로직 GO
 		int result = 0;
 		try {
-			result = commentsService.insertComments(commentsList, commentsCompany);
+			result = commentsService.insertComments(commentsList, commentsCompany, insertOrUpdate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,19 +140,22 @@ public class CommentsController {
 		
 		// (result = 6)가 돼야 후기 insert 성공
 		if (result == 6) {
-			jsonObject.addProperty("result", "ok");
+			jsonObject.addProperty("result", "insertOk");
 			jsonStr = gson.toJson(jsonObject);
 			System.out.println("jsonStr : " + jsonStr);
-			return jsonStr;
+		} else if(result == 11) {
+			jsonObject.addProperty("result", "updateOk");
+			jsonStr = gson.toJson(jsonObject);
+			System.out.println("jsonStr : " + jsonStr);
 		} else {
 			// 에러 페이지를 아직 안 만들었기에 임시로 작성
 			jsonObject.addProperty("result", "fail");
 			jsonStr = gson.toJson(jsonObject);
+		}
 			return jsonStr;
 			
 			// TODO
 			// 에러페이지로 이동하는 코드 작성
-		}
 		// https://hianna.tistory.com/629
 	}
 // ==============================================================================
@@ -157,6 +165,7 @@ public class CommentsController {
 	@GetMapping(value = "/reviews", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	// public String selectAllComments(String recruitNo, String id) {
+	// public String selectAllComments(@RequestParam(value = "id",  defaultValue = "") String id, @RequestParam(value = "recruitNo") String recruitNo) {
 	public String selectAllComments(String recruitNo, String id) {
 			System.out.println("@GetMapping(전체 후기 조회) 진입");
 			System.out.println("recruitNo : " + recruitNo);

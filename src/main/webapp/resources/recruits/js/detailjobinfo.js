@@ -1,3 +1,5 @@
+let modalBack = document.getElementById('comments_insert_modal_back');
+
 window.onload = function() {
 // 1.
 // ========================================= page load 후 전체 후기 조회(select) ===============================================
@@ -8,11 +10,6 @@ window.onload = function() {
 	sendRequest("GET", "reviews", param, selectAllComments);
 // ========================================= 후기 insert ===============================================	
 // 2. 후기 insert
-// 2-1. modal box
-	
-	// 모달창 배경 변수 지정
-	let modalBack = document.getElementById('comments_insert_modal_back');
-
 	// 모달창 띄우기
     document.getElementById('insert_modal_showBtn').onclick = function () {
     	modalBack.style.display = "block";
@@ -22,134 +19,134 @@ window.onload = function() {
     window.onclick = function() {
         if (event.target == modalBack) {modalBack.style.display = "none";}
     }
-    
 // 2-2. insert 시작
-    
-	let allConditionObj = {};
-	
 	// 후기 제출
-	document.getElementById('submitBtn').onclick = function () {
-// 2-2-1. 한줄 후기  & 근로계약서 
-    // 한줄 후기 유효성 검사
-	let commentsLineEle =  document.getElementById('commentsLine').value; console.log(commentsLineEle);
-    
-    if (commentsLineEle.length > 100) {alert("한줄 후기는 100자 이내로 작성해주세요"); return false;}
-    else if(commentsLineEle.length < 1) {alert("한줄 후기는 최소 1자 이상 작성해주세요"); return false;}
-
-    // 근로 계약서 작성 여부 radio value를 담을 변수
-    let contractRadio = null;
-
-    // 근로 계약서 작성(O) element
-    let contractRadio_Y = document.getElementById('contract_y'); console.log(contractRadio_Y.value);
-
-    // 근로 계약서 작성(X) element
-    let contractRadio_N = document.getElementById('contract_n'); console.log(contractRadio_N.value);
-
-    // 선택된 radio 버튼에 따라 contractRadio에 value 담기
-    if (contractRadio_Y.checked) {contractRadio = contractRadio_Y.value;}
-    else if (contractRadio_N.checked) {contractRadio = contractRadio_N.value;} 
-
-    // 근로 계약서 작성 여부 유효성 검사
-    if (contractRadio === null) {alert("근로계약서 작성 여부를 체크해주세요");return false;}
-// 2-2-2. 후기 키워드 넣기
-	for (var i = 0; i < dropzoneEle.length; i++) {
-		// 각 dropzone에 있는 아이템의 개수
-		let dropzoneInnerItem_i = dropzoneEle[i].childElementCount;
-		console.log("dropzoneInnerItem_" + i +  " : " + dropzoneInnerItem_i);
-		
-		// 각 dropzone안에 있는 각 아이템이 적혀있는 <span>
-		let spanIndropzone_i = document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
-		
-		// dropzone안에 있는 각 아이템의 키워드를 저장하는 배열 선언
-		let keywordArr_i = new Array();
-		
-        // 키워드 저장하는 배열에 키워드 넣기
-        for (let j = 0; j < spanIndropzone_i.length; j++) {
-        	keywordArr_i[j] = spanIndropzone_i[j].innerText;
-        }
-        
-        allConditionObj['keyword_' + i] = keywordArr_i;
-        
-        for (let k = 0; k < keywordArr_i.length; k++) {
-            console.log(keywordArr_i[k]);
-        }
-	}
-	console.log("=================================================");
-	console.log(allConditionObj);
-	console.log(JSON.stringify(allConditionObj));
-	console.log("=================================================");
-	
-	// comments 전체를 담는 <ul>
-	// let commentsBoxEle = document.getElementById('comments_box');
-	
-	// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
-	let restData = {
-			ccRecruitNo : '1',
-			ccWriter : 'user01',
-			ccContent : commentsLineEle,
-			ccContract : contractRadio
-		}
-	
-	// 각 후기별 키워드를 담은 js object에 restData 추가
-	allConditionObj.restData = restData;
-	
-		$.ajax({
-			type : "POST",
-			url : "/almin/recruits/reviews",
-			/*url : "reviews",*/
-			dataType : "json",
-			contentType : "application/json; charset=utf-8",
-			data : JSON.stringify(allConditionObj),
-			success : function (data) {
-				console.log("success 시작");
-				if (data.result == "ok") {
-					// 모달창 닫기
-					modalBack.style.display = "none";
-
-					// 기존 후기 모두 삭제(let commentsBoxEle의 모든 자식 노드 삭제)
-					initCommentsBox();
-					
-					alert("후기 등록 ok");
-					
-					// 후기 새로 가져오기
-					// 리뷰번호 param으로 넣어줘야한다.
-					let param = "recruitNo=1";
-					sendRequest("GET", "reviews", param, selectAllComments);
-					
-				} else {
-					alert("후기 등록 실패");
-				}
-			},
-			error : function(request,status,error) {
-	        	console.log("false")
-	            alert('후기가 없습니다.');
-	            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	        }
-		})
+	document.getElementById('submitBtn').onclick = function() {
+		postingComment('insert');
 	}
 //========================================= 후기 insert 끝 ===============================================
-//========================================= drag&drop evnet ===============================================
-	// dropzone --> dragzone
-//	for (let i = 0; i < xEle.length; i++) {
-//		xEle[i].onclick = function () {
-//			var movedItem = document.getElementById(event.target.parentNode.id);
-//			console.log("event.target.parentNode.id : " + event.target.parentNode.id);
-//			console.log(movedItem);
-//			console.log(123);
-//			// xEle[i].style.display = "none";
-//			this.style.display = "none";
-//			
-//			for (var i = 0; i < dropzoneEle.length; i++) {
-//				if (dropzoneEle[i] == this.parentNode.parentNode) {
-//					dragzoneEle[i].appendChild(movedItem);
-//				}
-//			}
-//		}
-//	}
-	
-	
-}// ========= 여기에 중괄호 다시 넣을수도(window.onload 끝)
+}// ========= (window.onload 끝)
 //========================================== window.onload 끝 ==============================================
+// 후기 입력 function
+function postingComment(insertOrUpdate) {
+// 2-1. modal box
+	
+	// 모달창 배경 변수 지정
+//	let modalBack = document.getElementById('comments_insert_modal_back');
+
+	let allConditionObj = {};
+	
+	// 2-2-1. 한줄 후기  & 근로계약서 
+	    // 한줄 후기 유효성 검사
+		let commentsLineEle =  document.getElementById('commentsLine').value; console.log(commentsLineEle);
+	    
+	    if (commentsLineEle.length > 100) {alert("한줄 후기는 100자 이내로 작성해주세요"); return false;}
+	    else if(commentsLineEle.length < 1) {alert("한줄 후기는 최소 1자 이상 작성해주세요"); return false;}
+
+	    // 근로 계약서 작성 여부 radio value를 담을 변수
+	    let contractRadio = null;
+
+	    // 근로 계약서 작성(O) element
+	    let contractRadio_Y = document.getElementById('contract_y'); console.log(contractRadio_Y.value);
+
+	    // 근로 계약서 작성(X) element
+	    let contractRadio_N = document.getElementById('contract_n'); console.log(contractRadio_N.value);
+
+	    // 선택된 radio 버튼에 따라 contractRadio에 value 담기
+	    if (contractRadio_Y.checked) {contractRadio = contractRadio_Y.value;}
+	    else if (contractRadio_N.checked) {contractRadio = contractRadio_N.value;} 
+
+	    // 근로 계약서 작성 여부 유효성 검사
+	    if (contractRadio === null) {alert("근로계약서 작성 여부를 체크해주세요");return false;}
+	// 2-2-2. 후기 키워드 넣기
+		for (var i = 0; i < dropzoneEle.length; i++) {
+			// 각 dropzone에 있는 아이템의 개수
+			let dropzoneInnerItem_i = dropzoneEle[i].childElementCount;
+			console.log("dropzoneInnerItem_" + i +  " : " + dropzoneInnerItem_i);
+			
+			if (dropzoneInnerItem_i == 0) {
+				alert("각 후기별 키워드는 최소 1개 이상 등록해주세요"); return false;
+			}
+			
+			// 각 dropzone안에 있는 각 아이템이 적혀있는 <span>
+			let spanIndropzone_i = document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
+			
+			// dropzone안에 있는 각 아이템의 키워드를 저장하는 배열 선언
+			let keywordArr_i = new Array();
+			
+	        // 키워드 저장하는 배열에 키워드 넣기
+	        for (let j = 0; j < spanIndropzone_i.length; j++) {
+	        	keywordArr_i[j] = spanIndropzone_i[j].innerText;
+	        }
+	        
+	        allConditionObj['keyword_' + i] = keywordArr_i;
+	        
+	        for (let k = 0; k < keywordArr_i.length; k++) {
+	            console.log(keywordArr_i[k]);
+	        }
+		}
+		console.log("=================================================");
+		console.log(allConditionObj);
+		console.log(JSON.stringify(allConditionObj));
+		console.log("=================================================");
+		
+		// comments 전체를 담는 <ul>
+		// let commentsBoxEle = document.getElementById('comments_box');
+		
+		// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
+		let restData = {
+				ccRecruitNo : '1',
+				ccWriter : 'user02',
+				ccContent : commentsLineEle,
+				ccContract : contractRadio,
+				insertOrUpdate : insertOrUpdate
+			}
+		
+		// 각 후기별 키워드를 담은 js object에 restData 추가
+		allConditionObj.restData = restData;
+		
+			$.ajax({
+				type : "POST",
+				url : "/almin/recruits/reviews",
+				/*url : "reviews",*/
+				dataType : "json",
+				contentType : "application/json; charset=utf-8",
+				data : JSON.stringify(allConditionObj),
+				success : function (data) {
+					console.log("success 시작");
+					if (data.result == "insertOk" || data.result == "updateOk") {
+						console.log("=========================");
+						console.log(data.result);
+						
+						// 모달창 닫기
+						modalBack.style.display = "none";
+
+						// 기존 후기 모두 삭제(let commentsBoxEle의 모든 자식 노드 삭제)
+						initCommentsBox();
+						
+						if (data.result == "insertOk") {
+							alert("후기 등록 ok");
+						} else if (data.result == "updateOk") {
+							alert("후기 수정 ok");
+						}
+						
+						// 후기 새로 가져오기
+						// 리뷰번호 param으로 넣어줘야한다.
+						let param = "recruitNo=1";
+						sendRequest("GET", "reviews", param, selectAllComments);
+						
+					} else {
+						alert("후기 등록 or 수정 실패");
+					}
+				},
+				error : function(request,status,error) {
+		        	console.log("false")
+		            alert('후기가 없습니다.');
+		            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        }
+			})
+		}
+// ======================================= 후기 키워드 X mark 클릭시 삭제 =======================================
 function deleteX() {
 	let xEle = document.getElementsByClassName('xMark');
 	console.log("=================== please ===================");
@@ -320,17 +317,7 @@ function selectAllComments() {
 		console.log(document.getElementById('comments_box'));
 		console.log(document.getElementsByClassName('deleteBtn'));
 		console.log(document.getElementById('comments_box').hasChildNodes());
-//		console.log(test.length);
-//		console.log(document.getElementById('comments_box'));
-//		console.log(document.getElementById('comments_box').hasChildNodes());
-//		console.log(document.getElementsByClassName('deleteBtn'));
-	} // if (httpRequest.readyState === 4) 종료
-//	console.log("############################"); 왜 3번?
-//	let test1 = document.getElementsByClassName('deleteBtn');
-//	console.log(test1.length);
-//	console.log(document.getElementById('comments_box'));
-//	console.log(document.getElementsByClassName('deleteBtn'));
-//	console.log(document.getElementById('comments_box').hasChildNodes());
+	}
 } // selectAllComments callback function 종료
 //========================================= 후기 삭제 버튼(delete) inline function ====================================
 function deleteComment(event) {
@@ -404,21 +391,18 @@ function popUpModal() {
 				console.log("=================== 후기 수정은 이곳에서 ===================");
 				console.log(httpRequest.responseText);
 				
+				// 수정 모달창을 띄웠을때 처음 후기를 작성한 후 남아있는 내용(키워드들)을 지우는 반복문
+				let originDropZone = document.getElementsByClassName('dropzoneClass');
+				for (var i = 0; i < originDropZone.length; i++) {
+					while (originDropZone[i].hasChildNodes()) {
+						originDropZone[i].removeChild(originDropZone[i].firstChild);
+					}
+				}
+				
 				// data 다 가져온후 modal창 띄우기
-				let modalBack = document.getElementById('comments_insert_modal_back');
+				// let modalBack = document.getElementById('comments_insert_modal_back');
 				modalBack.style.display = "block";
 				
-				// {"commentsVO":
-				// [{"ccNo":23,"ccRecruitNo":1,"ccWriter":"user01","ccWriterType":"1","ccContent":"만리장성 쌓으러 가실분","ccDate":"2021-11-21 02:00:51","ccContract":"N"}],
-				// "user01":
-				// [
-				// ["편안한 식사시간 보장","유익한 경험"],
-				// ["서있는 시간이 많아요","지저분한 근무 환경"],
-				// ["정해진 일만 해요","청결한 화장실"],
-				// ["동료가 좋아요","사장님 좋아요"],
-				// ["주휴수당 지급","만족해요"]
-				// ]
-				// }
 				console.log("=================== updata :  ===================");
 				let updateObj = JSON.parse(httpRequest.responseText);
 				
@@ -445,11 +429,26 @@ function popUpModal() {
 				console.log("=================== updateObj.user01[0][0] :  ===================");
 				console.log(updateObj[userId][0][0]);
 				
-				// 한줄 후기 입력창
+				// 한줄 후기 입력창에 기존 내용 입력
 				let updateoneLine = document.getElementById('commentsLine');
 				updateoneLine.value = updateObj.commentsVO[0].ccContent;
 				
+				console.log(document.getElementById('contract_y'));
+				console.log(document.getElementById('contract_n'));
 				
+				let test = updateObj.commentsVO[0].ccContract;
+				console.log("test : " + test);
+				let contractRadio_Y = document.getElementById('contract_y');
+				let contractRadio_N = document.getElementById('contract_n');
+				
+				// 근로 계약서 작성 radio 버튼
+				if (test === 'Y') {
+					contractRadio_Y.checked = "checked";
+				} else {
+					contractRadio_N.checked = "checked";
+				}
+				
+				// 작성한 키워드와 그렇지 않은 키워드를 구별
 				let updateDragZone = document.getElementsByClassName('dragzoneClass');
 				let updateDropZone = document.getElementsByClassName('dropzoneClass');
 				
@@ -469,21 +468,8 @@ function popUpModal() {
 						}
 					}
 				}
-				
-				
-				
-				
-				
-				// document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
-				// <div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
-//				 			<span class="keyword">${condition}</span>
-//				 			<span class="xMark">&times;</span>
-				// </div>				
-				
-				
-				
-				
-				
+
+				// 작성한 키워드를 dropZone에 넣기
 				let num = 1;
 				for (var i = 0; i < updateObj[userId].length; i++) {
 					for (var j = 0; j < updateObj[userId][i].length; j++) {
@@ -493,7 +479,7 @@ function popUpModal() {
 						upkeywordDiv.setAttribute("class", "dragEle");
 						upkeywordDiv.setAttribute("id", "updateDrag_" + num);
 						upkeywordDiv.setAttribute("draggable", "true");
-						upkeywordDiv.setAttribute("ondragstart", "drag();");
+						upkeywordDiv.setAttribute("ondragstart", "drag(event);");
 						
 						let upkeywordSpan = document.createElement('span');
 						upkeywordSpan.setAttribute("class", "keyword");
@@ -510,56 +496,14 @@ function popUpModal() {
 						keywordUpDropZone.appendChild(upkeywordDiv);
 						
 						num++;
-						// updateDropZonne[i].innerText += updateObj[userId][i][j];
 					}
 				}
 				
-//				for (var i = 0; i < updateDragZone.length; i++) {
-//					let keyText = document.querySelectorAll("#dragzone_" + (i + 1) + " .keyword");
-//					console.log(keyText.length);
-//						for (var j = 0; j < keyText.length; j++) {
-//							console.log(keyText[j]);
-//					}
-//				}
-				
-// document.querySelectorAll("#dropzone_" + (i + 1) + " .keyword");
-				
-				
-				
-				
-				
-// <div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
-// 			<span class="keyword">${condition}</span>
-// 			<span class="xMark">&times;</span>
-// </div>				
-				
-//				console.log(document.getElementById('contract_y'));
-//				console.log(document.getElementById('contract_n'));
-//				
-//				let test = updateObj.commentsVO[0].ccContract;
-//				let contractRadio_Y = document.getElementById('contract_y');
-//				let contractRadio_N = document.getElementById('contract_n');
-//				
-//				// 근로 계약서 작성 radio 버튼
-//				if (test === 'Y') {
-//					contractRadio_Y.checked;
-//				} else {
-//					contractRadio_N.checked;
-//				}
-				
-				// 장점
-				
-				
-				
-				// TODO 후기 작성 다하고 해야할 것들
-				// 후기 구역 초기화
-				// initCommentsBox();
-				
-				// 후기 전체 다시 select
-				// sendRequest("GET", "reviews", null, selectAllComments);
+				// 수정 작업을 모두 완료한 후 등록 버튼 클릭
+				document.getElementById('submitBtn').onclick = function() {
+					postingComment('update');
+				}
 			}
 		}
 	}
 }
-
-

@@ -23,8 +23,8 @@ public class CommentsServiceImpl implements CommentsService {
 // ==============================================================================
 	// 후기 작성(insert)
 	@Override
-	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) throws Exception {
-		return commentsDao.insertComments(commentsList, commentsCompany);
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany, String insertOrUpdate) throws Exception {
+		return commentsDao.insertComments(commentsList, commentsCompany, insertOrUpdate);
 	}
 // ==============================================================================
 	// 특정 공고의 전체 후기 조회(select)

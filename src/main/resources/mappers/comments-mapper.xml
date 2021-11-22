@@ -200,9 +200,11 @@ ROLLBACK;
 DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = 'user01' AND CC_RECRUIT_NO = 1;
 COMMIT;
 -->
+<!-- 후기 수정(update) -->
+	<update id="updateComment">
+		UPDATE COMMENTS_COMPANY SET CC_CONTENT = #{content}, CC_CONTRACT = #{contract} WHERE CC_WRITER = #{writer} AND CC_RECRUIT_NO = #{recruitNo}
+	</update>
 </mapper>
-
-
 
 
 

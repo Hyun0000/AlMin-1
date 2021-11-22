@@ -11,7 +11,7 @@ public interface CommentsService {
 	public Map<String, List<String>> selectAllKeyWords() throws Exception;
 // ==============================================================================
 	// 후기 작성(insert)
-	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany) throws Exception;
+	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany, String insertOrUpdate) throws Exception;
 // ==============================================================================================================
 	// 특정 공고의 전체 후기 조회(select)
 	// public Map<String, Object> selectAllComments(int recruitNo) throws Exception;
