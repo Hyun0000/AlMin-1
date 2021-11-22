@@ -6,24 +6,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- DBCP 연결(local) -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="almin"/>
-		<property name="password" value="almin2021"/>
-	</bean>
-	
-	<!-- DBCP 연결(학원) local은 git에 올려도 괜찮지만 학원서버는 properties에 넣고 gitignore에 포함
 	<context:property-placeholder location="classpath:config/datasource.properties"/>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driverClass}"/>
 		<property name="url" value="${db.url}"/>
 		<property name="username" value="${db.username}"/>
 		<property name="password" value="${db.password}"/>
-	</bean> -->
+	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>

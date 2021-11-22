@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Applicant">
+
+  	<resultMap type="Applicant" id="ApplicantResultMap">
+		<id property="resumeNo" column="RESUME_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberType" column="MEMBER_TYPE" />
+		<result property="resumeTitle" column="RESUME_TITLE" />
+		<result property="resumeContent" column="RESUME_CONTENT" />
+		<result property="educationNo" column="EDUCATION_NO" />
+	</resultMap>
+
+	<select id="listApplicant" resultMap="ApplicantResultMap">
+		select RESUME_NO,MEMBER_ID,MEMBER_TYPE,RESUME_TITLE,RESUME_CONTENT,EDUCATION_NO
+		from member_resume
+	</select>
+
+<!-- 	<select id="searchApplicant" resultMap="ApplicantResultMap"
+		parameterType="String">
+		select 
+		RESUME_NO,MEMBER_ID,MEMBER_TYPE,RESUME_TITLE,RESUME_CONTENT,EDUCATION_NO
+		from member_resume
+		where ${searchOption} like '%'||
+		#{searchWord} || '%' and 
+	</select> -->
+</mapper>
