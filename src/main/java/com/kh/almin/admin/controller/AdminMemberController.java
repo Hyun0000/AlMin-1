@@ -1,16 +1,13 @@
 package com.kh.almin.admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +19,6 @@ import com.kh.almin.admin.model.service.AdminService;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
-
 @Controller
 @RequestMapping("/admins")
 public class AdminMemberController {// Service, Dao에서 throws Exception 붙이기
@@ -32,18 +28,74 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 
 	@GetMapping
-	private ModelAndView selectMembers() throws Exception { // @ExceptionHandler가 받는다.
-		List<Member> volist = adminService.getMembers();
-		List<Company> cvolist = adminService.getCompanies();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberview", volist);
-		mv.addObject("companyview", cvolist);
+	private ModelAndView selectMembersAll(
+			ModelAndView mv
+			, @RequestParam(required = false) String searchWord
+			, @RequestParam(defaultValue = "id") String searchOption
+			, @RequestParam(defaultValue = "#member") String tabName
+			) throws Exception { // @ExceptionHandler가 받는다.
+		List<Member> mVolist = null;
+		List<Company> cVolist = null;
+		if(searchWord != null && !searchWord.equals("")) {
+			if(tabName.equals("member")) {
+				mVolist = adminService.searchMember(searchOption, searchWord);
+			}else {
+				cVolist = adminService.searchCompany(searchOption, searchWord);
+			}
+		}
+		if(mVolist == null) {
+			mVolist = adminService.getMembers();
+		} 
+		if(cVolist == null) {
+			cVolist = adminService.getCompanies();
+		}
+		mv.addObject("tabName", tabName);
+		mv.addObject("memberview", mVolist);
+		mv.addObject("companyview", cVolist);
 		mv.setViewName("admin/member");
 		logger.info("전체 회원리스트 조회");
-		logger.info("volist: " + volist);
+		logger.info("mvolist: " + mVolist);
+		logger.info("cVolist: " + cVolist);
 		return mv;
 	}
 
+	@PostMapping("/member")
+	@ResponseBody
+	private List<Member> selectMembers(
+			@RequestParam(required = false) String searchWord
+			, @RequestParam(defaultValue = "member_id") String searchOption
+			) throws Exception { // @ExceptionHandler가 받는다.
+		List<Member> mVolist = null;
+		if(searchWord != null && !searchWord.equals("")) {
+			mVolist = adminService.searchMember(searchOption, searchWord);
+		}
+		if(mVolist == null) {
+			mVolist = adminService.getMembers();
+		} 
+		logger.info("Member 리스트 조회: "+ searchWord);
+		logger.info("mVolist: " + mVolist);
+		return mVolist;
+	}
+	
+	@PostMapping("/company")
+	@ResponseBody
+	private List<Company> selectCompanys(
+			@RequestParam(required = false) String searchWord
+			, @RequestParam(defaultValue = "company_id") String searchOption
+			) throws Exception { // @ExceptionHandler가 받는다.
+		List<Company> cVolist = null;
+		if(searchWord != null && !searchWord.equals("")) {
+			cVolist = adminService.searchCompany(searchOption, searchWord);
+		}
+		if(cVolist == null) {
+			cVolist = adminService.getCompanies();
+		}
+		
+		logger.info("Company 리스트 조회: "+ searchWord);
+		logger.info("cVolist: " + cVolist);
+		return cVolist;
+	}
+	
 	@RequestMapping(value = "/demember", method = RequestMethod.POST)
 	@ResponseBody
 	private String deleteMember(@RequestParam("memberId") String memberId) throws Exception { // 회원탈퇴
@@ -72,39 +124,4 @@ public class AdminMemberController {// Service, Dao에서 throws Exception 붙�
 		mv.setViewName("error/500error");
 		return mv;
 	}
-
-	@RequestMapping(value = "/searchmem", method = RequestMethod.POST)
-	public ModelAndView searchMember(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
-		
-		List<Member> volist = adminService.searchMember(searchOption, searchWord);
-		List<Company> cvolist = adminService.getCompanies();
-		ModelAndView mv = new ModelAndView();
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchOption", searchOption);
-		map.put("searchWord", searchWord);
-		mv.addObject("memberview", volist);
-		mv.addObject("companyview", cvolist);
-		mv.setViewName("admin/member");
-
-		return mv;
-	}
-	
-	@RequestMapping(value = "/searchcom", method = RequestMethod.POST)
-	public ModelAndView searchCompany(@RequestParam("searchOption") String searchOption, @RequestParam("searchWord") String searchWord) throws Exception {
-		
-		List<Company> volist = adminService.searchCompany(searchOption, searchWord);
-		List<Member> mvolist = adminService.getMembers();
-		ModelAndView mv = new ModelAndView();
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchOption", searchOption);
-		map.put("searchWord", searchWord);
-		mv.addObject("companyview", volist);
-		mv.addObject("memberview", mvolist);
-		mv.setViewName("admin/member");
-
-		return mv;
-	}
-
 }

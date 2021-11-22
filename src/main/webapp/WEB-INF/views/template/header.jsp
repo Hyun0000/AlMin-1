@@ -34,7 +34,7 @@
 						<li><a href="#">인재정보</a></li>
 						<li><a href="#">아이디/비밀번호 찾기</a></li>
 						<li><a href="#">마이페이지</a></li>
-							<li class="menu-btn"><a href="${pageContext.request.contextPath}/logins" class="login">로그인</a> 
+							<li class="menu-btn"><a href="${pageContext.request.contextPath}/logins" class="login" target="_blank">로그인</a> 
 							<a href="${pageContext.request.contextPath}/members" class="template-btn">회원가입</a></li>
 						</ul>
 					</div>

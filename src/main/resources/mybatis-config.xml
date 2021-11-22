@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.almin.recruit.model.vo.Recruit" alias="Recruit" />
 		<typeAlias type="com.kh.almin.comments.model.vo.CommentsCompany" alias="CommentsCompany" />
 		<typeAlias type="com.kh.almin.district.model.vo.District" alias="District" />
+		<typeAlias type="com.kh.almin.applicant.model.vo.Applicant" alias="Applicant" />
 	</typeAliases>
 
 	<mappers>
@@ -20,6 +21,7 @@
 		<mapper resource="mappers/career-mapper.xml" />
 		<mapper resource="mappers/adminmember-mapper.xml" />
 		<mapper resource="mappers/adminrecruit-mapper.xml" />
+		<mapper resource="mappers/applicant-mapper.xml" />
 	</mappers>
 
 </configuration>

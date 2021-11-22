@@ -21,40 +21,43 @@
 body{
       font-family: 'Noto Sans KR', sans-serif;
   }
+.loginArea { /* flex-direction와 flex-wrap의 단축 속성 */
+   	display: flex;
+	/* row, row-reverse, column, column-reverse 
+	nowrap wrap wrap-reverse */
+	flex-flow: column nowrap;
+	/* flex-start, flex-end, center, space-between, space-around */
+	justify-content: flex-start;
+	align-content: stretch;
+	align-items: center;
+   }
+   .tab button{
+   border: 1px solid #BDBDBD;
+   }
 </style>
 </head>
 <body>
 <div class="loginArea">
-		<div class="tab">
-			<button class="tab-item" data-val="GG">개인회원</button>
-			<button class="tab-item active" data-val="GI">기업회원</button>
+		<div class="tab item">
+			<button type="button" class="tab-item" data-val="GG">개인회원</button>
+			<button type="button" class="tab-item active" data-val="GI">기업회원</button>
 		</div>
-		
-		<form name="form" method="post" action="#">
-		
-	<div class="login-form">
-			<input type="text" name="memberId" id="memberId" maxlength="20" value="" placeholder="아이디">
-			<input type="password" name="memberPw" id="memberPw" maxlength="20" placeholder="비밀번호">
-	</div>
-	<div class="apply">
-			<button type="button" class="btn1" id="loginBtn" onclick='ajaxL1()'>로그인</button>
-		<div class="apply-option">
-			<div class="save-id">
-				<input type="checkbox" name="lb_idSave" id="lb_idSave" value="on" checked><label for="lb_idSave">아이디 저장 </label> 
-			</div>
-		</div>
-	</div>
-		</form>
-		<div class="snsBx" style="display: none;">
+<form name="form" method="post" action="#" class="item">
+		<table class="login-form">
+		<tr><td><input type="text" name="memberId" id="memberId" maxlength="20" value="" placeholder="아이디"></td></tr>
+		<tr><td><input type="password" name="memberPw" id="memberPw" maxlength="20" placeholder="비밀번호"></td></tr>
+		<tr><td class="save-id"><input type="checkbox" name="lb_idSave" id="lb_idSave" value="on" checked><label for="lb_idSave"> 아이디 저장</label></td></tr>
+		<tr><td><button type="button" class="btn1" id="loginBtn" onclick='ajaxL1()'>로그인</button></td></tr>
+		</table>
+</form>
+		<div class="snsBx item" style="display: none;"><!-- 개인회원일 때만 show -->
 			<ul>
 				<li><button type="button" id="btnNvLogin" class="btn_nv"></button></li>
 				<li><button type="button" id="btnKaLogin" class="btn_kt"></button></li>
 				<li><button type="button" id="btnGlLogin" class="btn_gg"></button></li>
 			</ul>
 		</div>
-	</div>
-<div id="login-menu">
-  <ul>
+  <ul class="login-menu item">
       	<li><a href="#" id="findId">아이디 찾기</a></li>
       	<li><a href="#" id="findPwd">비밀번호 찾기</a></li>
    		<li><a href="#" id="join">회원가입</a></li>
