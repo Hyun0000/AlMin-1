@@ -24,9 +24,6 @@ section {
  /* flex: 1 1;  증가너비 감소너비 */
  /* flex: 1 20px;  증가너비 기본너비 (단위를 사용하면 flex-basis가 적용됩니다) */
 }
-.loginArea	{
-    display: flex;
-    }
 .login-menu ul li a{
 	display: inline-flex;
 }

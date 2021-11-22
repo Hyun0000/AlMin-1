@@ -354,5 +354,6 @@
 
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
+
 </body>
 </html>
