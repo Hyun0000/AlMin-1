@@ -24,28 +24,24 @@ public class MemberDao {
 		return members;
 	}
 
-	public List<Company> getCompanies() throws Exception {
-		List<Company> companies = sqlSession.selectList("Member.listCompany");
-		logger.info(companies.toString());
-		System.out.println(companies);
-		return companies;
-	}
-	
 	public void insertMember(Member member) throws Exception{
 		logger.info("insertDao-insertMember 진입");
 		sqlSession.insert("Member.insertMember", member);
 	}
+	
+	// 로그인 - id, pw 동시체크
+	public Member selectMember(Member member) throws Exception{
+		logger.info("insertDao-selectMember 진입");
+		Member result = sqlSession.selectOne("Member.selectMember", member.getMemberId());
+		logger.info("id: "+member.getMemberId()+" result: "+result);
+		return result;
+	}
+	
 	public int idChk(Member member) throws Exception{
 		logger.info("insertDao-idChk 진입");
 		Integer result = sqlSession.selectOne("Member.idChk", member.getMemberId());
 		logger.info("id: "+member.getMemberId()+" result: "+result);
 		// 입력된 아이디가 DB에 존재시 1 없으면 0
-		return result;
-	}
-	public Member selectMember(Member member) throws Exception{
-		logger.info("insertDao-selectMember 진입");
-		Member result = sqlSession.selectOne("Member.selectMember", member.getMemberId());
-		logger.info("id: "+member.getMemberId()+" result: "+result);
 		return result;
 	}
 

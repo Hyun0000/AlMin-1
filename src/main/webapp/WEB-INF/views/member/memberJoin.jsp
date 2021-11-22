@@ -1,7 +1,3 @@
-<!-- 웹폰트: Noto Sans Korean -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,42 +11,16 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/template/css/almin.css"/>">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate-3.7.0.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/font-awesome-4.7.0.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/fonts/flat-icon/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css">
+<link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
 <style>
-  body{
-      font-family: 'Noto Sans KR', sans-serif;
-  }
-  section {
-         width: 900px;
-         padding: 0 0 30px 0;
-          /* position: relative; */
-         bottom: 170px;
-         left: 600px;
-     }
-      section > h2 {
-          margin: 20px;
-          text-align: center;
-      }
-  
 </style>
 </head>
 <script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
 			$(".cancel").on("click", function(){
-				
 				location.href = "/";
-						    
 			})
 		
 			$("#submit").on("click", function(){
@@ -69,24 +39,7 @@
 					$("#userName").focus();
 					return false;
 				}
-				$.ajax({
-					url : "/member/passChk",
-					type : "POST",
-					dateType : "json",
-					data : $("#updateForm").serializeArray(),
-					success: function(data){
-						
-						if(data==true){
-							if(confirm("회원수정하시겠습니까?")){
-1							}
-							
-						}else{
-							alert("패스워드가 틀렸습니다.");
-							return;
-							
-						}
-					}
-				})
+				
 			});
 		})
 	</script>
@@ -102,10 +55,10 @@
 		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" ></td>
 		</tr>
 		<th><label for="userPass">비밀번호</label></th>
-		<td><input type="text" id="userPass"></td>
+		<td><input type="password" id="userPass"></td>
 		</tr>
 		<th>비밀번호 확인</th>
-		<td><input type="text"></td>
+		<td><input type="password"></td>
 		</tr>
 		<tr>
 		<th><label for="userName">이름</label></th>
@@ -118,7 +71,7 @@
 		<th>주민등록번호</th>
 		<td>
 		<input type="text" name="birthNum" placeholder="예:931010" maxlength="6" size = "6"> -
-		<input type="text" name="genderNum" maxlength="1" size = "1">
+		<input type="text" name="genderNum" maxlength="1" size = "1">●●●●●●
 		</td>
 		</tr>
 		<tr>
@@ -145,7 +98,7 @@
 		</tr>
 	</table>
 <div class="btngroup">
-<button class="btn1" type="button" id="submit">회원정보수정</button>
+<button class="btn1" type="button" id="submit">회원가입</button>
 <button class="cancel btn2" type="button">취소</button>
 </div>
 </form>

@@ -23,23 +23,12 @@ public class MemberService {
 		return members;
 	}
 	
-	public List<Company> getCompanies() throws Exception{
-		logger.info("Service 진입");
-		List<Company> companies = memberDao.getCompanies();
-		return companies;
-	}
-	
 	public void insertMember(Member member) throws Exception{
 		logger.info("MemberService-insertMember 진입");
 		memberDao.insertMember(member);
 	}
 	public int idChk(Member member) throws Exception{
 		logger.info("아이디체크 진입");
-		Integer result = memberDao.idChk(member);
-		return result;
-	}
-	public int passChk(Member member) throws Exception{
-		logger.info("비번체크 진입");
 		Integer result = memberDao.idChk(member);
 		return result;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.member.model.service.MemberService;
@@ -31,31 +32,33 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@GetMapping //로그인화면
-	private ModelAndView selectMembers() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/loginPopup");
-		return mv;
+	private String selectMembers() throws Exception {
+		logger.info("로그인 화면 진입");
+		return "member/loginPopup";
 	}
 	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
-	@PostMapping("/{userId}")
-	private String loginMember(HttpSession session,@PathVariable("userId")String userId, @RequestBody Member m) throws Exception {
-		logger.info(userId);
+	@PostMapping("/{memberId}")
+	@ResponseBody
+	private String loginMember(HttpSession session,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
+		String result = "0";
+		logger.info("memberId: "+memberId);
 		logger.info(m.toString());
 		Member ms= memberService.selectMember(m);
 		logger.info(ms.toString());
 		if(ms == null) {
-			return "member/memberJoin";
+			return result;
 		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
 			boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
 			logger.info(String.valueOf(isPwdMatch));
 			if(isPwdMatch == true) {
 				logger.info("로그인 성공");
+				result= "1";
 				 session.setAttribute("loginInfo", ms);
 			} else {
 				logger.info("로그인 실패");
 			}
-			return "member/loginPopup";
+			return result;
 		}
 	}
 	

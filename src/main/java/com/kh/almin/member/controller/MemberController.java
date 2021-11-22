@@ -61,7 +61,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		List<Member> volist = memberService.getMembers();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberview",volist);
-//		mv.setViewName("member/memberlist");
 //		mv.setViewName("member/memberJoin");
 		mv.setViewName("member/register");//회원가입 선택페이지
 		logger.info("전체 회원리스트 조회");
@@ -72,7 +71,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@PutMapping
 	private String updateMember() { //회원정보 수정
 		logger.info("update 진입");
-		return "member/memberlist";
+		return "member/memberInfo";
 	}
 	
 	@ExceptionHandler

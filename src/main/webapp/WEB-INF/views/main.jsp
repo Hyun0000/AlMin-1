@@ -293,7 +293,7 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="${pageContext.request.contextPath }/resources/assets/images/job1.png" alt="job">
+									<img src="${pageContext.request.contextPath}/resources/assets/images/job1.jpg" alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn1">지원하기</a>
@@ -318,7 +318,7 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="${pageContext.request.contextPath }/resources/assets/images/job2.png" alt="job">
+									<img src="${pageContext.request.contextPath}/resources/assets/images/job2.jpg" alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn2">채용하기</a>

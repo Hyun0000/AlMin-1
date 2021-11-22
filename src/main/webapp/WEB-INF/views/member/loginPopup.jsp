@@ -4,6 +4,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +15,8 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
 <style>
 body{
       font-family: 'Noto Sans KR', sans-serif;
@@ -30,11 +33,11 @@ body{
 		<form name="form" method="post" action="#">
 		
 	<div class="login-form">
-			<input type="text" name="M_ID" id="M_ID" maxlength="20" class="emptyId" value="" placeholder="아이디">
-			<input type="password" name="M_PWD" id="M_PWD" maxlength="20" class="emptyPw" placeholder="비밀번호">
+			<input type="text" name="memberId" id="memberId" maxlength="20" value="" placeholder="아이디">
+			<input type="password" name="memberPw" id="memberPw" maxlength="20" placeholder="비밀번호">
 	</div>
 	<div class="apply">
-			<button class="btn1">로그인</button>
+			<button type="button" class="btn1" id="loginBtn" onclick='ajaxL1()'>로그인</button>
 		<div class="apply-option">
 			<div class="save-id">
 				<input type="checkbox" name="lb_idSave" id="lb_idSave" value="on" checked><label for="lb_idSave">아이디 저장 </label> 
@@ -52,10 +55,42 @@ body{
 	</div>
 <div id="login-menu">
   <ul>
-      	<li><a href="findId">아이디 찾기</a></li>
-      	<li><a href="findPwd">비밀번호 찾기</a></li>
-   		<li><a href="join">회원가입</a></li>
+      	<li><a href="#" id="findId">아이디 찾기</a></li>
+      	<li><a href="#" id="findPwd">비밀번호 찾기</a></li>
+   		<li><a href="#" id="join">회원가입</a></li>
   </ul>
 </div>
+<script>
+function ajaxL1(){ //로그인 버튼 onclick
+	var memberId = $("#memberId").val();
+	var memberPw = $("#memberPw").val();
+	var saveIdCheck = $("#lb_idSave:checked").val();
+	var json = {'memberId':  $("#memberId").val(),
+			'memberPw': $("#memberPw").val()};
+	console.log("memberId: "+memberId+", memberPw: "+memberPw);
+	$.ajax({
+		url: "<%=request.getContextPath()%>/logins/"+memberId,
+		type: "post",
+		 // data : 서버(컨트롤러)로 보내는 데이터.
+		 // json데이터를 JSON.stringify를 이용하여 String으로 형변환
+		data: JSON.stringify(json),
+		//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+		contentType : "application/json; charset=utf-8",
+		success: function(result){
+			if(result == 0){
+				alert("아이디와 비밀번호를 다시 확인해주세요.");
+			} else {
+			console.log("로그인 성공하셨습니다.")
+			}
+		location.href ="${pageContext.request.contextPath}/main"
+	},
+	error:function(request,status,error){
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+
+				"\n"+"error:"+error);
+	}
+	});
+	//location.href="<%=request.getContextPath()%>/logins?userId="+userId;
+};
+</script>
 </body>
 </html>
