@@ -1,0 +1,15 @@
+.calendar{
+    background-color: white;
+    border: 1px solid black;
+}
+
+/* 날짜(1일 ~ 31일) style */
+.dayName {
+    color: white;
+    background-color: royalblue;
+}
+
+/* 요일 막대 style */
+.calendar-week-day{
+    margin-bottom: 10px;
+}
