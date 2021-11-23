@@ -8,13 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.member.model.service.MemberService;
@@ -22,12 +25,26 @@ import com.kh.almin.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/logins")
+@SessionAttributes("loginInfo") //model에다가 attribute를 지정
 public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	@Autowired
 	private MemberService memberService;
 	
 	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
 	BCryptPasswordEncoder pwdEncoder;
+	
+	//로그인이 전제되어야 하는 페이지가 필요할때 유용한 @SessionAttributes, @ModelAttribute
+//	@ModelAttribute("loginInfo")
+//	public Member setMemberSession() throws Exception {
+//		Member m = new Member();
+//		m.setMemberId("aaa");
+//		try {
+//			Member ms= memberService.selectMember(m);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return m;
+//	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -39,8 +56,9 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{memberId}")
-	@ResponseBody
+	@ResponseBody // ajax에 쓰이는 어노테이션
 	private String loginMember(HttpSession session,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
+//		private String loginMember(HttpSession session, Model model,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
 		String result = "0";
 		logger.info("memberId: "+memberId);
 		logger.info(m.toString());
@@ -55,6 +73,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 				logger.info("로그인 성공");
 				result= "1";
 				 session.setAttribute("loginInfo", ms);
+				// model.addAttribute("loginInfo",ms); 이런 방식도 있다.
 			} else {
 				logger.info("로그인 실패");
 			}

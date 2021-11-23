@@ -6,6 +6,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+<!-- 카카오 로그인 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +36,10 @@ body{
    .tab button{
    border: 1px solid #BDBDBD;
    }
+.snsBx img:hover {
+	cursor: pointer;
+	opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -50,13 +56,24 @@ body{
 		<tr><td><button type="button" class="btn1" id="loginBtn" onclick='ajaxL1()'>로그인</button></td></tr>
 		</table>
 </form>
-		<div class="snsBx item" style="display: none;"><!-- 개인회원일 때만 show -->
+		<div class="snsBx item"><!-- 개인회원일 때만 show -->
 			<ul>
-				<li><button type="button" id="btnNvLogin" class="btn_nv"></button></li>
-				<li><button type="button" id="btnKaLogin" class="btn_kt"></button></li>
-				<li><button type="button" id="btnGlLogin" class="btn_gg"></button></li>
+				<li><button type="button" id="btnNvLogin" class="btn_nv"><img src="${pageContext.request.contextPath}/resources/assets/images/btnG_완성형.png"></button></li>
+				<li><button type="button" id="btnKaLogin" class="btn_kt" onclick="loginKakao()"><img src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png"></button></li>
+				<li><input type="button" id="btnGlLogin" class="btn_gg">Google</button></li>
 			</ul>
 		</div>
+		<!-- SNS로그인 Modal Box -->
+            <div class="modal" style="display: none;">
+              <div class="modal-content">
+                    <span class="close">&times;</span> <!-- 닫기 -->
+                     <h3>SNS로그인</h3>
+                     <br>
+                     <table class="modal-coupon">
+                        <!-- 쿠폰리스트 -->
+                     </table>
+              </div>
+          </div>
   <ul class="login-menu item">
       	<li><a href="#" id="findId">아이디 찾기</a></li>
       	<li><a href="#" id="findPwd">비밀번호 찾기</a></li>
@@ -94,6 +111,31 @@ function ajaxL1(){ //로그인 버튼 onclick
 	});
 	//location.href="<%=request.getContextPath()%>/logins?userId="+userId;
 };
+
+
+
+Kakao.init('92b42c653e35f2ec80b54619123374f3'); 
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function loginKakao() {
+  Kakao.Auth.login({
+    success: function (response) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (response) {
+        	location.href="main";
+      	  console.log(response)
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+    },
+    fail: function (error) {
+      console.log(error)
+    },
+  })
+}
 </script>
 </body>
 </html>
