@@ -1,4 +1,6 @@
 let modalBack = document.getElementById('comments_insert_modal_back');
+// let param = "recruitNo=" + recruitNo;
+let recruitParam = "recruitNo=" + recruitNo;
 
 window.onload = function() {
 // 1.
@@ -6,8 +8,8 @@ window.onload = function() {
 	// TODO
 	// 리뷰번호 param으로 넣어줘야한다.
 	// let param = "recruitNo=1&id=";
-	let param = "recruitNo=1";
-	sendRequest("GET", "reviews", param, selectAllComments);
+	// let param = "recruitNo=" + recruitNo;
+	sendRequest("GET", "reviews", recruitParam, selectAllComments);
 // ========================================= 후기 insert ===============================================	
 // 2. 후기 insert
 	// 모달창 띄우기
@@ -95,8 +97,8 @@ function postingComment(insertOrUpdate) {
 		
 		// 작성자, 한 줄 후기, 근로계약서 작성 여부 등의 data를 담는 js object
 		let restData = {
-				ccRecruitNo : '1',
-				ccWriter : 'user02',
+				ccRecruitNo : recruitNo,
+				ccWriter : userId,
 				ccContent : commentsLineEle,
 				ccContract : contractRadio,
 				insertOrUpdate : insertOrUpdate
@@ -132,8 +134,8 @@ function postingComment(insertOrUpdate) {
 						
 						// 후기 새로 가져오기
 						// 리뷰번호 param으로 넣어줘야한다.
-						let param = "recruitNo=1";
-						sendRequest("GET", "reviews", param, selectAllComments);
+						// let param = "recruitNo=1";
+						sendRequest("GET", "reviews", recruitParam, selectAllComments);
 						
 					} else {
 						alert("후기 등록 or 수정 실패");
@@ -338,7 +340,7 @@ function deleteComment(event) {
 	let userId = event.target.parentNode.previousSibling.firstChild.innerText
 	
 	let deleteData = {
-			recruitNo : 1,
+			recruitNo : recruitNo,
 			id : event.target.parentNode.previousSibling.firstChild.innerText
 	}
 	
@@ -358,8 +360,8 @@ function deleteComment(event) {
 					
 					// 후기 전체 다시 select
 					// 리뷰번호 param으로 넣어줘야한다.
-					let param = "recruitNo=1";
-					sendRequest("GET", "reviews", param, selectAllComments);
+					// let param = "recruitNo=1";
+					sendRequest("GET", "reviews", recruitParam, selectAllComments);
 				}
 			}
 		}
@@ -376,7 +378,8 @@ function updateComment(event) {
 	
 	
 	// url로 보낼 data
-	let param = "recruitNo=1&id=" + updateUserId;
+	let param = recruitParam + "&id=" + updateUserId;
+	// let param = "recruitNo=1&id=" + updateUserId;
 	
 	if (updateBool == true) {
 		sendRequest("GET", "reviews", param, popUpModal);

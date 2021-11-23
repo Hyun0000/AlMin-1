@@ -227,6 +227,9 @@
 		// userID
 		let userId = "user02";
 		
+		// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
+		let recruitNo = '1';
+		
 		// 공고번호(recruitNo)
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

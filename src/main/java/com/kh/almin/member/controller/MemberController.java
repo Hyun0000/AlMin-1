@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Member;
@@ -36,6 +37,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	
 	@PostMapping //회원가입
 	private String insertMember(@RequestBody Member member) throws Exception { 
+//	private String insertMember(@RequestBody Member member, RedirectAttributes ra) throws Exception { 
 		logger.info("insert 진입");
 		logger.info(member.toString());
 		int result = memberService.idChk(member);
@@ -54,7 +56,9 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		} catch (Exception  e) {
 			throw new RuntimeException();
 		}
-		return "redirect:/";
+		//데이터를 싣고 갈 수 있는 방법(1번째 방식) - 실제로 가장 많이 씀
+//		ra.addAttribute("k1","aaaa"); //root로 가면서 데이터도 들고 감
+		return "redirect:/"; //뒤에 뭐 안적힌걸 보면 root로 가겠다는 뜻
 	}
 	@GetMapping //회원정보 조회
 	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
@@ -63,6 +67,10 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		mv.addObject("memberview",volist);
 //		mv.setViewName("member/memberJoin");
 		mv.setViewName("member/register");//회원가입 선택페이지
+		
+		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
+//		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
+		
 		logger.info("전체 회원리스트 조회");
 		logger.info("volist: "+volist.toString());
 		return mv;
