@@ -13,17 +13,15 @@
 		<result property="educationNo" column="EDUCATION_NO" />
 		<result property="careersNo" column="CAREERS_NO" />
 	</resultMap>
-	
-		<resultMap type="SearchApplicant" id="searchApplicantResultMap">
-		<id property="resumeNo" column="RESUME_NO" />
-		<result property="memberId" column="MEMBER_ID" />
-		<result property="memberType" column="MEMBER_TYPE" />
-		<result property="resumeTitle" column="RESUME_TITLE" />
+
+	<resultMap type="SearchApplicant"
+		id="searchApplicantResultMap">
 		<result property="resumePublicYn" column="RESUME_PUBLIC_YN" />
-		<result property="resumePhone" column="RESUME_PHONE" />
 		<result property="jobDistrictNo" column="JOB_DISTRICT_NO" />
 		<result property="educationNo" column="EDUCATION_NO" />
 		<result property="careersNo" column="CAREERS_NO" />
+		<result property="memberGender" column="MEMBER_GENDER" />
+		<result property="memberAge" column="MEMBER_AGE" />
 	</resultMap>
 
 	<select id="listApplicant" resultMap="ApplicantResultMap">
@@ -35,7 +33,8 @@
 	<select id="searchApplicant" resultMap="ApplicantResultMap"
 		parameterType="searchApplicant">
 		select *
-		from member_resume join member on member_resume.MEMBER_ID = member.MEMBER_ID
+		from member_resume join member on member_resume.MEMBER_ID =
+		member.MEMBER_ID
 		<where>
 			<choose>
 				<when test="searchType == 'JOB_DISTRICT_NO'">
@@ -54,7 +53,7 @@
 					and member_Age like '%' || #{searchWord} || '%'
 				</when>
 			</choose>
-				and resumePublicYn='y'
+			and resumePublicYn='y'
 		</where>
 	</select>
 
