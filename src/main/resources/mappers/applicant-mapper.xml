@@ -2,26 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Applicant">
 
-  	<resultMap type="Applicant" id="ApplicantResultMap">
+	<resultMap type="Applicant" id="ApplicantResultMap">
 		<id property="resumeNo" column="RESUME_NO" />
 		<result property="memberId" column="MEMBER_ID" />
 		<result property="memberType" column="MEMBER_TYPE" />
 		<result property="resumeTitle" column="RESUME_TITLE" />
-		<result property="resumeContent" column="RESUME_CONTENT" />
+		<result property="resumePublicYn" column="RESUME_PUBLIC_YN" />
+		<result property="resumePhone" column="RESUME_PHONE" />
+		<result property="jobDistrictNo" column="JOB_DISTRICT_NO" />
 		<result property="educationNo" column="EDUCATION_NO" />
+		<result property="careersNo" column="CAREERS_NO" />
+	</resultMap>
+	
+		<resultMap type="SearchApplicant" id="searchApplicantResultMap">
+		<id property="resumeNo" column="RESUME_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberType" column="MEMBER_TYPE" />
+		<result property="resumeTitle" column="RESUME_TITLE" />
+		<result property="resumePublicYn" column="RESUME_PUBLIC_YN" />
+		<result property="resumePhone" column="RESUME_PHONE" />
+		<result property="jobDistrictNo" column="JOB_DISTRICT_NO" />
+		<result property="educationNo" column="EDUCATION_NO" />
+		<result property="careersNo" column="CAREERS_NO" />
 	</resultMap>
 
 	<select id="listApplicant" resultMap="ApplicantResultMap">
-		select RESUME_NO,MEMBER_ID,MEMBER_TYPE,RESUME_TITLE,RESUME_CONTENT,EDUCATION_NO
+		select
+		RESUME_NO,MEMBER_ID,MEMBER_TYPE,RESUME_TITLE,RESUME_PUBLIC_YN,RESUME_PHONE,JOB_DISTRICT_NO,EDUCATION_NO,CAREERS_NO
 		from member_resume
 	</select>
 
-<!-- 	<select id="searchApplicant" resultMap="ApplicantResultMap"
-		parameterType="String">
-		select 
-		RESUME_NO,MEMBER_ID,MEMBER_TYPE,RESUME_TITLE,RESUME_CONTENT,EDUCATION_NO
-		from member_resume
-		where ${searchOption} like '%'||
-		#{searchWord} || '%' and 
-	</select> -->
+	<select id="searchApplicant" resultMap="ApplicantResultMap"
+		parameterType="searchApplicant">
+		select *
+		from member_resume join member on member_resume.MEMBER_ID = member.MEMBER_ID
+		<where>
+			<choose>
+				<when test="searchType == 'JOB_DISTRICT_NO'">
+					and JOB_DISTRICT_NO like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'memberGender'">
+					and member_Gender like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'CAREERS_NO'">
+					and CAREERS_NO like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'EDUCATION_NO'">
+					and EDUCATION_NO like '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'memberAge'">
+					and member_Age like '%' || #{searchWord} || '%'
+				</when>
+			</choose>
+				and resumePublicYn='y'
+		</where>
+	</select>
+
 </mapper>

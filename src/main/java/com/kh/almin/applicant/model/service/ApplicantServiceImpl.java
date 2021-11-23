@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.almin.admin.model.service.AdminServiceImpl;
 import com.kh.almin.applicant.model.dao.ApplicantDao;
 import com.kh.almin.applicant.model.vo.Applicant;
+import com.kh.almin.applicant.model.vo.SearchApplicant;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
@@ -22,10 +23,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<Applicant> applicants = applicantDao.getApplicants();
 		return applicants;
 	}
-	/*
-	 * public List<Applicant> searchApplicant(String searchOption, String
-	 * searchWord) throws Exception { return
-	 * applicantDao.searchApplicant(searchOption, searchWord); }
-	 * 
-	 */
+
+	public List<Applicant> searchApplicant(SearchApplicant searchApplicant) throws Exception {
+		return applicantDao.searchApplicant(searchApplicant);
+	}
+
 }
