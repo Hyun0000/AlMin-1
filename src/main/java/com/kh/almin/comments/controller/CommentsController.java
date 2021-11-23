@@ -36,7 +36,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.kh.almin.HomeController;
 import com.kh.almin.comments.model.service.CommentsService;
 import com.kh.almin.comments.model.vo.CommentsCompany;
 
