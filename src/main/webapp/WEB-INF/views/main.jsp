@@ -354,13 +354,5 @@
 
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
-<script>
-function showPopup(){
-    var url = "logins";
-    var name = "popup test";
-    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-    window.open(url, name, option);
-}
-</script>
 </body>
 </html>

@@ -3,7 +3,8 @@
 <mapper namespace="Member">
 
 	<resultMap type="Member" id="MemberResultMap">
-		<id property="memberId" column="MEMBER_ID" />
+		<id property="memberId" column="MEMBER_ID" /><!-- id는 PK -->
+		<id property="memberType" column="MEMBER_TYPE" />
 		<result property="memberName" column="MEMBER_NAME" />
 		<result property="memberPw" column="MEMBER_PW" />
 		<result property="memberPhone" column="MEMBER_PHONE" />
@@ -17,6 +18,7 @@
 
 	<resultMap type="Company" id="CompanyResultMap">
 		<id property="companyId" column="COMPANY_ID" />
+		<id property="companyType" column="COMPANY_TYPE" />
 		<result property="companyTel" column="COMPANY_TEL" />
 		<result property="companyName" column="COMPANY_NAME" />
 		<result property="companyBoss" column="COMPANY_BOSS" />
@@ -43,7 +45,7 @@
 			MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE)
 		values (#{memberId},#{memberType}, #{memberPw}, #{memberName}
 			, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail},
-			#{memberGender}, #{memberAge}, sysdate )
+			#{memberGender}, #{memberAge}, sysdate )<!-- sysdate 생략시 default 들어감 -->
 	</insert>
 	
 	<!-- 아이디 비번 동시 체크 -->

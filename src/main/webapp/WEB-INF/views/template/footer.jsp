@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<!-- 공통 Javascript -->
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/wow.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/owl-carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/vendor/ion.rangeSlider.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+	
 <!-- Footer Area Starts -->
 <footer class="footer-area section-padding">
 	<div class="footer-widget">
