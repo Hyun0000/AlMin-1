@@ -1,6 +1,8 @@
 .calendar{
-    background-color: white;
-    border: 1px solid black;
+    background-color: rgb(128, 233, 30);
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    top: -80%;
 }
 
 /* 날짜(1일 ~ 31일) style */
@@ -13,3 +15,123 @@
 .calendar-week-day{
     margin-bottom: 10px;
 }
+
+/* 일정 추가 모달창 배경 */
+#ModalBg {
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(12,12,12,0.3);
+    /* 임시 주석 */
+    /* display: none; */
+}
+
+/* 일정 추가 모달창 content */
+#exampleModal{
+    width: 500px;
+    /* height: 500px; */
+    position: relative;
+    top: 0;
+    /* left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); */
+    margin: 0 auto;
+    background-color: white;
+}
+
+/* 일정 추가 모달창 content 버튼 전체 <div> */
+#insertBtnBox {
+    text-align: right;
+}
+
+/* 일정 추가 모달창 content 버튼 전체 <div>안의 <label> */
+.modalTypeLabel {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: royalblue;
+    color: white;
+    border: 2px solid royalblue;
+}
+
+/* 일정 추가 모달창 title 전체 <div> */
+#insertTitleBox{
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* 일정 추가 모달창 title 제목 */
+#insertTitleBox_input {
+    font-size: 1.25rem;
+    text-align: left;
+}
+
+/* 일정 추가 모달창 title <input> */
+#recipient-name {
+    width: 450px;
+    border: 1px solid black;
+    padding: 10px;
+    /* text-align: center; */
+}
+
+/* 일정 추가 모달창 title <input> 클릭했을 때 */
+#recipient-name:focus {
+    outline: none;
+}
+
+/* 날짜 입력칸 전체 <div> */
+#insertDayBox {
+    margin-top: 10px;
+}
+
+/* 날짜 입력칸의 <label> */
+#insertDayBox label.col-form-label{
+    font-size: 1.25rem;
+}
+
+/* 시작 & 종료일을 담는 테이블 */
+#insertDateTable{
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+}
+
+/* 시작 & 종료일을 담는 테이블 전체 <td> */
+#insertDayBox #insertDateTable td{
+    border-bottom: 2px solid royalblue;
+    height: 40px;
+    padding: 15px 0;
+}
+
+/* 시작 & 종료일을 담는 테이블의 왼쪽 <td> */
+.insertTableTitle{
+    width: 100px;
+}
+
+/* 시작 & 종료일을 담는 테이블의 오른쪽 <td> */
+.insertTableDate{
+    width: 400px;
+}
+
+/* 시간 설정 체크 박스 */
+#timeCheckbox{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

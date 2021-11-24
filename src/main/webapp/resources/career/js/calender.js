@@ -101,15 +101,30 @@
     });
     calendar.render();
 
-    // 각 날짜를 클릭했을 때
+    // 각 날짜를 클릭했을 때 모달창 팝업 callback function 등록
     let dayDay = document.getElementsByClassName('fc-day');
     for (let i = 0; i < dayDay.length; i++) {
         dayDay[i].onclick = modalUp;
     }
 });  // onload
-function modalUp() {
-    console.log(123);
-    document.getElementById('exampleModal').style.display = 'block';
-    document.getElementById('miniCal').style.display = 'block';
 
-}
+// // 모달창 팝업 callback function
+// function modalUp() {
+//     document.getElementById('ModalBg').style.display = 'block';
+//     // document.getElementById('miniCal').style.display = 'block';
+// }
+
+// // 모달창 팝업 닫기
+// function modalClose() {
+//     document.getElementById('ModalBg').style.display = 'none';
+// }
+
+// function miniCalUp() {
+//     document.getElementById('miniCal').style.display = 'block';
+//     console.log(this);
+//     console.log(event.target);
+//     console.log(event.target.id);
+//     let selectTest = event.target.id;
+//     console.log(selectTest);
+// }
+
