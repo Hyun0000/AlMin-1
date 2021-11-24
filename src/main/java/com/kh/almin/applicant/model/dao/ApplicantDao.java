@@ -25,8 +25,8 @@ public class ApplicantDao {
 	}
 
 	public List<Applicant> searchApplicant(SearchApplicant searchApplicant) throws Exception {
-		List<Applicant> members = sqlSession.selectList("Applicant.searchApplicant", searchApplicant);
-		return members;
+		List<Applicant> applicants = sqlSession.selectList("Applicant.searchApplicant", searchApplicant);
+		return applicants;
 	}
 
 }

@@ -429,6 +429,11 @@ opacity
 	}
 }
 
+button, input{
+	outline:0;
+	border:0;
+}
+
 .custom-navbar span {
 	background: #fff;
 	display: block;

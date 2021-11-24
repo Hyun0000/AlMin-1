@@ -13,10 +13,8 @@ import lombok.ToString;
 @Data
 @Component
 public class SearchApplicant {
-	private char resumePublicYn;
 	private int jobDistrictNo;
 	private int educationNo;
 	private int careersNo;
 	private String memberGender;
-	private int memberAge;
 }

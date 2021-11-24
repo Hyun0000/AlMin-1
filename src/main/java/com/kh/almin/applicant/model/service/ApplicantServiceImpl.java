@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.almin.admin.model.service.AdminServiceImpl;
 import com.kh.almin.applicant.model.dao.ApplicantDao;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;

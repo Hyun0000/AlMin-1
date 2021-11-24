@@ -9,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.admin.controller.AdminMemberController;
 import com.kh.almin.applicant.model.service.ApplicantService;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
@@ -23,27 +21,36 @@ public class ApplicantController {
 	@Autowired
 	private ApplicantService applicantService;
 
-	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ApplicantController.class);
 
 	@GetMapping
-	private ModelAndView selectApplicantsAll() throws Exception {
-		List<Applicant> volist = applicantService.getApplicants();
+	private ModelAndView viewApplicants(SearchApplicant searchApplicant) throws Exception {
+		List<Applicant> volist = null;
+		List<Applicant> svolist = null;
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("applicants", volist);
-		mv.setViewName("applicants/applicants");
-		logger.info("전체 이력서 조회");
-		logger.info("volist: " + volist);
-		return mv;
-	}
+		String msg = "";
+		String showhide = "display:none";
+		System.out.println("searchApplicant : " + searchApplicant);
+		if (searchApplicant.getMemberGender() != null) {
+			svolist = applicantService.searchApplicant(searchApplicant);
+			if (svolist == null || svolist.size() == 0) {
+				msg = "검색 결과가 없습니다.";
+				showhide = "display:block";
+				volist = applicantService.getApplicants();
+				mv.addObject("applicants", volist);
+			}
+			mv.addObject("showhide", showhide);
+			mv.addObject("msg", msg);
+			mv.addObject("applicants", svolist);
+		} else {
+			volist = applicantService.getApplicants();
+			mv.addObject("applicants", volist);
+		}
 
-	@GetMapping("/search")
-	private ModelAndView searchApplicants(SearchApplicant searchApplicant) throws Exception {
-		List<Applicant> volist = applicantService.searchApplicant(searchApplicant);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("applicants", volist);
 		mv.setViewName("applicants/applicants");
-		logger.info("이력서 검색");
+		logger.info("이력서 조회");
 		logger.info("volist: " + volist);
+		logger.info("svolist: " + svolist);
 		return mv;
 	}
 
