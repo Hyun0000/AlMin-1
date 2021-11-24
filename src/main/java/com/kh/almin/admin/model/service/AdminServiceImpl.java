@@ -20,25 +20,21 @@ public class AdminServiceImpl implements AdminService {
 
 	public List<Member> getMembers() throws Exception {
 		logger.info("Service 로깅 확인");
-		List<Member> members = adminDao.getMembers();
-		return members;
+		return adminDao.getMembers();
 	}
 
 	public List<Company> getCompanies() throws Exception {
 		logger.info("Service 로깅 확인");
-		List<Company> companies = adminDao.getCompanies();
-		return companies;
+		return adminDao.getCompanies();
 	}
 
 	public List<Recruit> getReport() throws Exception {
 		logger.info("Service 로깅 확인");
-		List<Recruit> recruits = adminDao.getReport();
-		return recruits;
+		return adminDao.getReport();
 	}
 
 	public void deleteMember(String memberId) throws Exception {
 		adminDao.deleteMember(memberId);
-
 	}
 
 	public void deleteCompany(String companyId) throws Exception {

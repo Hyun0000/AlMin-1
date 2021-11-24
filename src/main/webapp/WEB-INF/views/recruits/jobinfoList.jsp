@@ -1,88 +1,171 @@
-<!-- 웹폰트: Noto Sans Korean -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
-	rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>알바의 민족 구인공고리스트</title>
-<!-- Favicon -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
+	type="image/x-icon">
+<link rel="stylesheet"
+	href="<c:url value="/resources/assets/css/almin.css"/>">
+<title>우리가 어떤 민족입니까?알바의 민족</title>
 
-<!-- CSS Files -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/animate-3.7.0.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/css/font-awesome-4.7.0.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/fonts/flat-icon/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/assets/css/bootstrap-4.1.3.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/owl-carousel.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 <style>
-table{
-	width:1000px;
-	 margin-left:auto; 
-    margin-right:auto;
+.nice-select span.current {
+	line-height: 0;
 }
-table, tr, td {
-	
-	border: 1px solid black;
-	border-collapse: collapse;
-	text-align:center;
-	}
+
+.job-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tab {
+	color: #1FA5FD;
+}
 </style>
 </head>
 <body>
-<!-- 공통헤더 템플릿 -->
-<header>
-<c:import url="/WEB-INF/views/template/header.jsp"/>
-	<!-- Header Area End -->
+	<header>
+		<c:import url="/WEB-INF/views/template/header.jsp" />
 	</header>
-	<section>
-		<table>
-			<tr>
-				<td>지역</td>
-				<td>제목</td>
-				<td>시급</td>
-				<td>등록일</td>
-			</tr>
-			<c:forEach var="item" items="${jobinfolist }">
-				<tr>
-				<!-- item.jobDistrictName -->
-				
-					<td>${item.district.jobDistrictName }</td>        
-					
-					<c:url value="/recruits/detailjobinfo" var="jobinfo">
-					<c:param name="resultTitle" value="${item.recruitTitle }"></c:param>
-					</c:url>
-					<td><a href="${jobinfo }">${item.recruitTitle }</a></td>
 
-					<td>${item.recruitMoney }</td>
+	<!-- Job Single Content Starts -->
+	<section class="job-single-content section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="jobs-tab tab-item">
+						<h4 class="tab">공고목록</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8">
 
-					<td>${item.recruitDate }</td>
+					<c:if test="${empty recruits}">
+						<div class="more-job-btn mt-5 text-center">
+							<input type="button" class="template-btn" onclick="search()"
+								id="btnshow" value="목록으로 돌아가기">
+						</div>
+					</c:if>
 
+					<c:forEach var="item" items="${recruits}">
+						<div class="main-content">
+							<div class="single-content1">
+								<div class="single-job mb-4 d-lg-flex justify-content-between">
+									<div class="job-text">
+										<h4>${item.recruitTitle}</h4>
+										<p>${item.recruitContent}</p>
+										<p>${item.recruitDate}</p>
+										<ul class="mt-4">
+											<li class="mb-3"><h5>
+													<i class="fa fa-map-marker"></i>
+												</h5></li>
+										</ul>
+										<button class="genric-btn primary small"
+											onclick="${pageContext.request.contextPath }//recruits/detailjobinfo">상세보기</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 
-				</tr>
-			</c:forEach>
-		</table>
-	
+				</div>
+				<div class="col-lg-4">
+					<form id="searchRecruit">
+						<div class="sidebar mt-5 mt-lg-0">
+							<div class="single-item mb-4">
+								<h4 class="mb-4">지역</h4>
+								<div class="default-select">
+									<select name="recruitJobDistrict">
+										<option value="17">무관</option>
+										<option value="1">경기</option>
+										<option value="2">인천</option>
+										<option value="3">대전</option>
+										<option value="4">대구</option>
+										<option value="5">부산</option>
+										<option value="6">울산</option>
+										<option value="7">광주</option>
+										<option value="8">강원</option>
+										<option value="9">세종</option>
+										<option value="10">충북</option>
+										<option value="11">충남</option>
+										<option value="12">경북</option>
+										<option value="13">경남</option>
+										<option value="14">전북</option>
+										<option value="15">전남</option>
+										<option value="16">제주</option>
+										<option value="18">서울</option>
+									</select>
+								</div>
+							</div>
+							<div class="single-item mb-4">
+								<h4 class="mb-4">업종</h4>
+								<div class="default-select">
+									<select name="recruitJobType">
+										<option value="0">무관</option>
+										<option value="1">외식/음료</option>
+										<option value="2">유통/판매</option>
+										<option value="3">문화/여가</option>
+										<option value="4">서비스</option>
+										<option value="5">사무/회계</option>
+										<option value="6">고객상담</option>
+										<option value="7">생산/건설/인력</option>
+										<option value="8">IT/미디어</option>
+										<option value="9">교육/강사/학원</option>
+										<option value="10">디자인</option>
+										<option value="11">배달/운전</option>
+										<option value="12">병원/간호</option>
+									</select>
+								</div>
+							</div>
+							<div class="single-item mb-4">
+								<h4 class="mb-4">대상</h4>
+								<div class="default-select">
+									<select name="recruitJobWho">
+										<option value="0">무관</option>
+										<option value="1">청소년</option>
+										<option value="2">대학생</option>
+										<option value="3">중장년</option>
+										<option value="4">장애인</option>
+										<option value="5">주부</option>
+										<option value="6">외국인 가능</option>
+										<option value="7">초보 가능</option>
+										<option value="8">재택 가능</option>
+									</select>
+								</div>
+							</div>
+							<div class="more-job-btn mt-5 text-center">
+								<input type="button" class="template-btn" onclick="search()"
+									id="btnSearch" value="검색" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</section>
+	<!-- Job Single Content End -->
 
 	<footer>
-	<!-- Footer Area Starts -->
-	<c:import url="/WEB-INF/views/template/footer.jsp"/>
+		<c:import url="/WEB-INF/views/template/footer.jsp" />
 	</footer>
-	<!-- Footer Area End -->
+
+	<script>
+	function search(){
+		$("#searchRecruit").attr("action","${pageContext.request.contextPath }/recruits").attr("method","get").submit();
+	}
+	</script>
+	<c:if test="${!empty msg}">
+		<script>
+			alert("${msg}");
+			<c:remove var="msg"/>
+		</script>
+	</c:if>
+
 </body>
 </html>

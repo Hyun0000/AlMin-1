@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.almin.district.model.vo.District" alias="District" />
 		<typeAlias type="com.kh.almin.applicant.model.vo.Applicant" alias="Applicant" />
 		<typeAlias type="com.kh.almin.applicant.model.vo.SearchApplicant" alias="SearchApplicant" />
+		<typeAlias type="com.kh.almin.recruit.model.vo.SearchRecruit" alias="SearchRecruit" />
 	</typeAliases>
 
 	<mappers>

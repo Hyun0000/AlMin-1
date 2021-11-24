@@ -1,4 +1,4 @@
-package com.kh.almin.applicant.controller;
+package com.kh.almin.recruit.controller;
 
 import java.util.List;
 
@@ -6,45 +6,47 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.almin.applicant.model.service.ApplicantService;
-import com.kh.almin.applicant.model.vo.Applicant;
-import com.kh.almin.applicant.model.vo.SearchApplicant;
+import com.kh.almin.recruit.controller.RecruitController;
+import com.kh.almin.recruit.model.vo.Recruit;
+import com.kh.almin.recruit.model.vo.SearchRecruit;
+import com.kh.almin.recruit.model.service.RecruitService;
 
 @Controller
-@RequestMapping("/applicants")
-public class ApplicantController {
+@RequestMapping("/recruits")
+public class RecruitController {
 	@Autowired
-	private ApplicantService applicantService;
-
-	private static final Logger logger = LoggerFactory.getLogger(ApplicantController.class);
-
+	private RecruitService recruitService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(RecruitController.class);
 	@GetMapping
-	private ModelAndView viewApplicants(SearchApplicant searchApplicant) throws Exception {
-		List<Applicant> volist = null;
-		List<Applicant> svolist = null;
+	private ModelAndView viewRecruits(SearchRecruit searchRecruit) throws Exception {
+		List<Recruit> volist = null;
+		List<Recruit> svolist = null;
 		ModelAndView mv = new ModelAndView();
 		String msg = "";
-		if (searchApplicant.getMemberGender() != null) {
-			svolist = applicantService.searchApplicant(searchApplicant);
+		System.out.println("searchRecruit : " + searchRecruit);
+		if (!ObjectUtils.isEmpty(searchRecruit)) {
+			svolist = recruitService.searchRecruit(searchRecruit);
 			if (svolist == null || svolist.size() == 0) {
 				msg = "검색 결과가 없습니다.";
-				volist = applicantService.getApplicants();
-				mv.addObject("applicants", volist);
+				volist = recruitService.recruitList();
+				mv.addObject("recruits", volist);
 			}
 			mv.addObject("msg", msg);
-			mv.addObject("applicants", svolist);
+			mv.addObject("recruits", svolist);
 		} else {
-			volist = applicantService.getApplicants();
-			mv.addObject("applicants", volist);
+			volist = recruitService.recruitList();
+			mv.addObject("recruits", volist);
 		}
 
-		mv.setViewName("applicants/applicants");
-		logger.info("이력서 조회");
+		mv.setViewName("recruits/jobinfoList");
+		logger.info("공고 조회");
 		logger.info("volist: " + volist);
 		logger.info("svolist: " + svolist);
 		return mv;
@@ -60,4 +62,5 @@ public class ApplicantController {
 		mv.setViewName("error/500error");
 		return mv;
 	}
+
 }

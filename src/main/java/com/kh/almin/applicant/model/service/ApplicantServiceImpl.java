@@ -19,8 +19,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	public List<Applicant> getApplicants() throws Exception {
 		logger.info("Service 로깅 확인");
-		List<Applicant> applicants = applicantDao.getApplicants();
-		return applicants;
+		return applicantDao.getApplicants();
 	}
 
 	public List<Applicant> searchApplicant(SearchApplicant searchApplicant) throws Exception {

@@ -1,6 +1,5 @@
 package com.kh.almin.recruit.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.almin.recruit.model.dao.RecruitDao;
 import com.kh.almin.recruit.model.vo.Recruit;
+import com.kh.almin.recruit.model.vo.SearchRecruit;
 
 @Service
 public class RecruitServiceImpl implements RecruitService {
@@ -19,17 +19,21 @@ public class RecruitServiceImpl implements RecruitService {
 
 	public List<Recruit> getReport() throws Exception {
 		logger.info("Service 로깅 확인");
-		List<Recruit> recruits = recruitDao.getReport();
-		return recruits;
+		return recruitDao.getReport();
 	}
+	
 	public List<Recruit> recruitList() throws Exception{
-		List<Recruit> recruit=new ArrayList<Recruit>();
-		recruit=recruitDao.recruitList();
-		return recruit;
+		return recruitDao.recruitList();
 	}
+	
 	public List<Recruit> detailjobinfo() throws Exception{
-		List<Recruit> recruit=new ArrayList<Recruit>();
-		recruit=recruitDao.detailjobinfo();
-		return recruit;
+		return recruitDao.detailjobinfo();
 	}
+	
+	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception{
+		System.out.println("ServiceSearchRecruit : " + searchRecruit);
+
+		return recruitDao.searchRecruit(searchRecruit);
+	}
+
 }

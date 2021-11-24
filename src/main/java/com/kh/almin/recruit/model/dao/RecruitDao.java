@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.almin.recruit.model.vo.Recruit;
+import com.kh.almin.recruit.model.vo.SearchRecruit;
 
 
 @Repository
@@ -25,13 +26,19 @@ public class RecruitDao {
 	}
 	
 	public List<Recruit> recruitList() throws Exception {
-
 		List<Recruit> recruit = sqlSession.selectList("Recruit.jobinfoList");
 		return recruit;
 	}
 
 	public List<Recruit> detailjobinfo() throws Exception {
 		List<Recruit> recruit=sqlSession.selectList("Recruit.detailjobinfo");
+		return recruit;
+	}
+	
+	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception {
+		System.out.println("DaoSearchRecruit : " + searchRecruit);
+
+		List<Recruit> recruit = sqlSession.selectList("Recruit.searchRecruit", searchRecruit);
 		return recruit;
 	}
 }
