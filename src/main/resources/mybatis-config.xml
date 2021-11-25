@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.almin.applicant.model.vo.Applicant" alias="Applicant" />
 		<typeAlias type="com.kh.almin.applicant.model.vo.SearchApplicant" alias="SearchApplicant" />
 		<typeAlias type="com.kh.almin.recruit.model.vo.SearchRecruit" alias="SearchRecruit" />
+		<typeAlias type="com.kh.almin.resume.model.vo.MemberResume" alias="Resume" />
 	</typeAliases>
 
 	<mappers>
@@ -24,6 +25,7 @@
 		<mapper resource="mappers/adminmember-mapper.xml" />
 		<mapper resource="mappers/adminrecruit-mapper.xml" />
 		<mapper resource="mappers/applicant-mapper.xml" />
+		<mapper resource="mappers/resume-mapper.xml" />
 	</mappers>
 
 </configuration>
