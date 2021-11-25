@@ -56,7 +56,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{memberId}")
-	@ResponseBody // ajax에 쓰이는 어노테이션
+	@ResponseBody // ajax에 쓰이는 어노테이션 얘가 없으면 result가 view페이지를 찾음.
 	private String loginMember(HttpSession session,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
 //		private String loginMember(HttpSession session, Model model,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
 		String result = "0";

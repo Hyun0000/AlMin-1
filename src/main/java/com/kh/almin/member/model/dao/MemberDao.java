@@ -15,7 +15,8 @@ import com.kh.almin.member.model.vo.Member;
 public class MemberDao {
 	private static final Logger logger = LoggerFactory.getLogger(MemberDao.class);
 	@Autowired
-	private SqlSession sqlSession;
+//	@Qualifier("sqlSession")
+	private SqlSession sqlSession;//root-context에 정의한 bean 이름과 일치하게 쓰는것을 강력추천.(다르게 쓰면 동작안할 확률 있음)
 
 	public List<Member> getMembers() throws Exception {
 		List<Member> members = sqlSession.selectList("Member.listMember");

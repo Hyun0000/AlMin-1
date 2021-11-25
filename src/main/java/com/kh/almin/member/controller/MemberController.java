@@ -57,6 +57,10 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		//데이터를 싣고 갈 수 있는 방법(1번째 방식) - 실제로 가장 많이 씀
 //		ra.addAttribute("k1","aaaa"); //root로 가면서 데이터도 들고 감
 		return "redirect:/"; //뒤에 뭐 안적힌걸 보면 root로 가겠다는 뜻
+		//forward와 redirect의 차이점
+		//forward: url의 변화가 없을 때 
+		//redirect: url의 변화가 있을 때 
+		
 	}
 	@GetMapping //회원정보 조회
 	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.

@@ -41,12 +41,12 @@
 					<div class="main-menu">
 						<ul>
 							<li class="active"><a href="recruits/jobinfoList">구인공고</a></li>
-						<li><a href="#">인재정보</a></li>
+							<li><a href="#">인재정보</a></li>
 						</ul>
 						<!-- 로그인 전 노출 -->
 						<ul id="logout-state">
 						<li><a href="#">아이디/비밀번호 찾기</a></li>
-							<li class="menu-btn"><button class="login template-btn" onclick="showPopup()">로그인</button>
+							<li class="menu-btn"><button class="login template-btn">로그인</button>
 							<a href="${pageContext.request.contextPath}/members" class="template-btn">회원가입</a></li>
 						</ul>
 						<!-- 로그인 후 노출 -->
@@ -60,20 +60,20 @@
 		</div>
 		
 <!-- 로그인 Modal Box -->
-        <div class="modal" style="display: none;">
-            <div class="modal-content loginArea">
+<div class="modal" style="display: none;">
+   <div class="modal-content loginArea">
                     <span class="close">&times;</span> <!-- 닫기 -->
-                     <div class="tab item">
-			<button type="button" class="tab-item" data-val="GG">개인회원</button>
-			<button type="button" class="tab-item active" data-val="GI">기업회원</button>
+                     <div class="tab item" style="margin-bottom: 10px;">
+			<button type="button" class="tab-item genric-btn" id="memberBtn" autofocus>개인회원</button>
+			<button type="button" class="tab-item active genric-btn" id="companyBtn">기업회원</button>
 					</div>
-				<form name="form" method="post" action="#" class="item">
+	<form name="form" method="post" action="#" class="item">
 		<table class="login-form">
 		<div id="naver_id_login"></div>
 		<tr><td><input type="text" name="memberId" id="memberId" maxlength="20" value="" placeholder="아이디"></td></tr>
 		<tr><td><input type="password" name="memberPw" id="memberPw" maxlength="20" placeholder="비밀번호"></td></tr>
 		<tr><td class="save-id"><input type="checkbox" name="lb_idSave" id="lb_idSave" value="on" checked><label for="lb_idSave"> 아이디 저장</label></td></tr>
-		<tr><td><button type="button" class="btn1" id="loginBtn" onclick='ajaxL1()'>로그인</button></td></tr>
+		<tr><td><button type="button" class="template-btn" id="loginBtn" onclick='ajaxL1()'>로그인</button></td></tr>
 		</table>
 </form>
 <!-- SNS 로그인(개인회원 show) -->
@@ -87,13 +87,15 @@
 			<button type="button" onclick="logoutFB()">Facebook 로그아웃</button>
 			</ul>
 </div>
-	<ul class="login-menu item">
-	      	<li><a href="#" id="findId">아이디 찾기</a></li>
-	      	<li><a href="#" id="findPwd">비밀번호 찾기</a></li>
-	   		<li><a href="#" id="join">회원가입</a></li>
-	  </ul>
-              </div>
-          </div>
+	<table class="login-menu item">
+	<tr>
+	      	<td><a href="#" id="findId">아이디 찾기</a></td>
+	      	<td><a href="#" id="findPwd">비밀번호 찾기</a></td>
+	   		<td><a href="${pageContext.request.contextPath}/members" id="join">회원가입</a></td>
+	</tr>
+	  </table>
+   </div>
+</div>
 <script>
 $(".login").click(function(){
 	$(".modal").show(); 
@@ -101,8 +103,12 @@ $(".login").click(function(){
 $(".close").click(function(){
     $(".modal").hide(); 
  });
-
-
+$("#memberBtn").click(function(){
+    $(".snsBx").show(); 
+ });
+$("#companyBtn").click(function(){
+    $(".snsBx").hide(); 
+ });
 
 function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberId = $("#memberId").val();
@@ -138,6 +144,8 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	});
 	//location.href="<%=request.getContextPath()%>/logins?userId="+userId;
 };
+
+// SNS 로그인(네이버, 카카오, 페이스북)
 
 /*네이버 로그인(JS로 하는 방법) // el태그 인식 못함
 	var naver_id_login = new naver_id_login("LV_HERZOVT4XTBBoYuEl", "http://127.0.0.1:8090/almin/main");

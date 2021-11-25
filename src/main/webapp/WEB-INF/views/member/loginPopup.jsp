@@ -65,7 +65,7 @@ body{
 		<div class="snsBx item"><!-- 개인회원일 때만 show -->
 			<ul>
 <!-- 네이버로그인 jsp로 하는 방법 -->
-			 <%
+<%
     String clientId = "LV_HERZOVT4XTBBoYuEl";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://127.0.0.1:8090/almin/main", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -78,25 +78,14 @@ body{
  %>
   <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 	<!-- <li><button type="button" id="btnNvLogin" class="btn_nv"><img src="${pageContext.request.contextPath}/resources/assets/images/btnG_완성형.png"></button></li> -->
-				<li><button type="button" id="btnKaLogin" class="btn_kt" onclick="loginKakao()"><img src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png"></button></li>
+				<li><button type="button" id="btnKaLogin" class="btn_kt" onclick="loginKakao()">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png"></button></li>
+<fb:login-button scope="public_profile,email"
+  onlogin="checkLoginState();"></fb:login-button>
 			<button type="button" onclick="logoutFB()">Facebook 로그아웃</button>
-<fb:login-button 
-  scope="public_profile,email"
-  onlogin="checkLoginState();">
-</fb:login-button>
 			</ul>
 		</div>
-		<!-- SNS로그인 Modal Box -->
-            <div class="modal" style="display: none;">
-              <div class="modal-content">
-                    <span class="close">&times;</span> <!-- 닫기 -->
-                     <h3>SNS로그인</h3>
-                     <br>
-                     <table class="modal-coupon">
-                        <!-- 쿠폰리스트 -->
-                     </table>
-              </div>
-          </div>
+		
   <ul class="login-menu item">
       	<li><a href="#" id="findId">아이디 찾기</a></li>
       	<li><a href="#" id="findPwd">비밀번호 찾기</a></li>
@@ -105,6 +94,7 @@ body{
 </div>
 <script>
 function ajaxL1(){ //로그인 버튼 onclick
+	//TODO: 모달창 show
 	var memberId = $("#memberId").val();
 	var memberPw = $("#memberPw").val();
 	var saveIdCheck = $("#lb_idSave:checked").val();
@@ -124,6 +114,7 @@ function ajaxL1(){ //로그인 버튼 onclick
 				alert("아이디와 비밀번호를 다시 확인해주세요.");
 			} else {
 			console.log("로그인 성공하셨습니다.")
+			//show()/hide()
 			}
 		location.href ="${pageContext.request.contextPath}/main"
 	},
@@ -226,7 +217,7 @@ FB.getLoginStatus(function(response) {
 	      testAPI();  
 	    } else {                                 // Not logged into your webpage or we are unable to tell.
 	      document.getElementById('status').innerHTML = 'Please log ' +
-	        'into this webp age.';
+	        'into this webpage.';
 	    }
 	  }
  //로그아웃
@@ -239,9 +230,8 @@ FB.getLoginStatus(function(response) {
 	    });
 });
  
- 
  //response.status === 'connected' 로그인상태
- //response.status === 'unknown'
+ //response.status === 'unknown' 로그아웃상태
  }
 </script>
 </body>
