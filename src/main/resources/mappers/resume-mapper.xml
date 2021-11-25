@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Resume">
+	<resultMap type="Resume" id="ResumeResultMap">
+		<id property="resumeNo" column="RESUME_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="resumeTitle" column="RESUME_TITLE"/>
+		<result property="resumePublicYn" column="RESUME_PUBLIC_YN"/>
+		<result property="resumePhone" column="RESUME_PHONE"/>
+		<result property="jobDistrictNo" column="JOB_DISTRICT_NO"/>
+		<result property="educationNo" column="EDUCATION_NO"/>
+		<result property="careersNo" column="CAREERS_NO"/>
+	</resultMap>
+</mapper>
