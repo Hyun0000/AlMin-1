@@ -1,9 +1,35 @@
-.calendar{
-    background-color: rgb(128, 233, 30);
-    /* border: 1px solid black; */
-    margin: 0 auto;
-    top: -80%;
+hr{ margin-top: 0;}
+
+/* 미니 캘린더 모달 배경 */
+#mimiCalbg {
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(12,12,12,0.3);
+    display: none;
 }
+
+/* 미니 캘린더 */
+.calendar{
+    /* z-index: 4; */
+    /* width: 100%; */
+    /* height: 100%; */
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+
+/* .calendar{
+    background-color: rgb(128, 233, 30);
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+} */
 
 /* 날짜(1일 ~ 31일) style */
 .dayName {
@@ -18,25 +44,29 @@
 
 /* 일정 추가 모달창 배경 */
 #ModalBg {
-    width: 100%; height: 100%;
     top: 0; left: 0;
+    width: 100%; height: 100%;
     position: fixed;
     z-index: 2;
     background-color: rgba(12,12,12,0.3);
     /* 임시 주석 */
-    /* display: none; */
+    display: none;
+    /* overflow: scroll; */
+}
+
+.modal-dialog{
+    margin: 0;
 }
 
 /* 일정 추가 모달창 content */
 #exampleModal{
+    /* margin: 30px; */
+    /* overflow: scroll; */
     width: 500px;
-    /* height: 500px; */
     position: relative;
-    top: 0;
-    /* left: 50%;
+    left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%); */
-    margin: 0 auto;
+    transform: translate(-50%, -50%);
     background-color: white;
 }
 
@@ -47,30 +77,40 @@
 
 /* 일정 추가 모달창 content 버튼 전체 <div>안의 <label> */
 .modalTypeLabel {
-    border-radius: 10px;
     padding: 10px;
-    background-color: royalblue;
-    color: white;
+    background-color: white;
+    color: royalblue;
     border: 2px solid royalblue;
+    border-radius: 15px;
 }
 
 /* 일정 추가 모달창 title 전체 <div> */
 #insertTitleBox{
-    margin-top: 10px;
+    /* margin-top: 20px; */
     text-align: center;
+}
+
+/* 일정 추가 모달창 title <input> 담는 <div> */
+#insertTitleDiv {
+    text-align: left;
 }
 
 /* 일정 추가 모달창 title 제목 */
 #insertTitleBox_input {
     font-size: 1.25rem;
-    text-align: left;
+}
+
+/* 일정 입력칸의 <label> */
+#insertTitleBox label.col-form-label{
+    font-size: 1.25rem;
 }
 
 /* 일정 추가 모달창 title <input> */
 #recipient-name {
     width: 450px;
+    height: 30px;
     border: 1px solid black;
-    padding: 10px;
+    padding: 5px;
     /* text-align: center; */
 }
 
@@ -81,7 +121,7 @@
 
 /* 날짜 입력칸 전체 <div> */
 #insertDayBox {
-    margin-top: 10px;
+    /* margin-top: 40px; */
 }
 
 /* 날짜 입력칸의 <label> */
@@ -99,7 +139,7 @@
 
 /* 시작 & 종료일을 담는 테이블 전체 <td> */
 #insertDayBox #insertDateTable td{
-    border-bottom: 2px solid royalblue;
+    /* border-bottom: 2px solid royalblue; */
     height: 40px;
     padding: 15px 0;
 }
@@ -107,19 +147,72 @@
 /* 시작 & 종료일을 담는 테이블의 왼쪽 <td> */
 .insertTableTitle{
     width: 100px;
+    /* border: 1px solid black; */
+    /* border-bottom: 2px solid royalblue; */
 }
+
 
 /* 시작 & 종료일을 담는 테이블의 오른쪽 <td> */
 .insertTableDate{
     width: 400px;
+    border-bottom: 2px solid royalblue;
 }
 
 /* 시간 설정 체크 박스 */
-#timeCheckbox{
-    margin-top: 20px;
+/* #timeCheckbox{
+    margin-top: 0px;
     margin-left: 10px;
+} */
+
+/* 시간 입력칸 전체 <div> */
+#insertTimeBox{
+    /* margin-top: 40px; */
 }
 
+/* 시간 입력칸의 <label> */
+#insertTimeBox label.col-form-label{
+    font-size: 1.25rem;
+}
+
+/* 미니 시계 */
+.mdtp__wrapper {margin: 0 auto;}
+
+/* 시간 입력 전체 table */
+.timeTable{
+    border: none;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 시간 테이블 전체 <td> */
+#insertTimeBox #timeTable td {
+    height: 20px;
+    padding: 15px 0;
+}
+
+/* 시작 & 종료일을 담는 테이블의 왼쪽 <td> */
+.insertTimeTitle{
+    width: 100px;
+    /* border: 1px solid black; */
+    text-align: center;   
+}
+
+/* 시작 & 종료일을 담는 테이블의 오른쪽 <td>의 <input> */
+.insertTime{
+    width: 360px;
+    height: 40px;
+    padding: 15px 0;
+    border: none;
+    text-align: center;
+    border-bottom: 2px solid royalblue;
+}
+
+/* 시작 & 종료일을 담는 테이블의 오른쪽 <td>의 <input> 클릭했을 때 */
+.insertTime:focus {
+    outline: none;
+}
 
 
 

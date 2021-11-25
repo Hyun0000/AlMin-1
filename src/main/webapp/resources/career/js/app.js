@@ -2,18 +2,69 @@
 // 일정 추가 모달창에서 시작일, 종료일 <div>의 id를 담을 변수
 let selectTest;
 
+// 제목칸 <input>
+let titleIn = document.getElementById('recipient-name');
+
 // 시작일 <div>
 let startDaytDiv = document.getElementById('startDay');
 
 // 종료일 <div>
 let endDayDiv = document.getElementById('endDay');
 
+// 시작일 담는 <td>
+let startDayTd = document.getElementById('startDay');
+
+// 종료일 담는 <td>
+let endDayTd = document.getElementById('endDay');
+
+// 시작 시간 <input>
+let startTimeInput = document.getElementById('startTime');
+
+// 종료 시간 <input>
+let EndTimeInput = document.getElementById('endTime');
+
+// 입력 모달창 상단 버튼 4개
 let labelEles = document.getElementsByClassName('modalTypeLabel');
 for (let i = 0; i < labelEles.length; i++) {
     labelEles[i].onclick = changeColor;
 }
 
+// 시작 날짜 + 시간
+let allStart;
+
+// 종료 날짜 + 시간
+let allEnd
+
+// 모달창 일정 등록 버튼
+let calSubmitBtn = document.getElementById('calSubmitBtn');
+calSubmitBtn.onclick = calSubmit;
 // ========================================== 모달창 변수들 ==========================================
+// 모달창 일정 등록 버튼 함수  ex) '2021-11-01T09:00'
+function calSubmit() {
+    console.log(12312312313123);
+    console.log(startDayTd.innerText);
+    console.log(endDayTd.innerText);
+    console.log(startTimeInput.value);
+    console.log(EndTimeInput.value);
+    console.log(12312312313123);
+
+    // 시작 날짜 + 시간
+    allStart = startDayTd.innerText + "T" + startTimeInput.value;
+
+    // 종료 날짜 + 시간
+    allEnd = endDayTd.innerText + "T" + EndTimeInput.value;
+    
+    // 시작일과 종료일이 같은데 종료시간이 시작시간 보다 빠를때
+    if (startDayTd.innerText === endDayTd.innerText && startTimeInput.value > EndTimeInput.value) {
+        alert('시간을 올바르게 입력해주세요');
+        EndTimeInput.value = "";
+    }
+
+    console.log(allStart);
+    console.log(allEnd);
+}
+
+// 모달창 버튼 4개 색깔 바꾸기
 function changeColor() {
     console.log(this);
     if (this.style.backgroundColor == "royalblue" && this.style.color == "white") {
@@ -35,16 +86,31 @@ function changeColor() {
 
 // 모달창 팝업 callback function
 function modalUp() {
+    // 모달창 초기회(by 기존 일정 수정, 새로운 일정 추가)
+    startDayTd.innerText = "";
+    endDayTd.innerText = "";
+    startTimeInput.value = "";
+    EndTimeInput.value = "";
+    titleIn.value = "";
+
     document.getElementById('ModalBg').style.display = 'block';
-    // document.getElementById('miniCal').style.display = 'block';
 }
 
-// 모달창 팝업 닫기
+// 모달창 팝업 닫기(버튼 눌렀을때)
 function modalClose() {
     document.getElementById('ModalBg').style.display = 'none';
 }
 
+// 모달창 팝업 닫기(배경 눌렀을때)
+window.onclick = () => {
+    if (event.target == document.getElementById('ModalBg')) {
+        document.getElementById('ModalBg').style.display = 'none';
+    }
+}
+
 function miniCalUp() {
+    // document.getElementById('miniCal').style.display = 'block';
+    document.getElementById('mimiCalbg').style.display = 'block';
     document.getElementById('miniCal').style.display = 'block';
     // 시작일, 종료일 중 선택한 <div>의 id
     selectTest = event.target.id;
@@ -58,6 +124,7 @@ function miniCalUp() {
 window.onload = minicalLoad;
 
 function minicalLoad() {
+console.log("@@@@@@@@@@@@@");
 
 let calendar = document.querySelector('.calendar')
 
@@ -150,10 +217,12 @@ function dayEleInnerText() {
 
     if (selectTest === 'startDay') {
         startDaytDiv.innerText = saveDate;
-        document.getElementById('miniCal').style.display = 'none';  // 미니 달력 초기화
+        document.getElementById('mimiCalbg').style.display = 'none'; 
+        minicalLoad();
     } else if (selectTest === 'endDay') {
         endDayDiv.innerText = saveDate;
-        document.getElementById('miniCal').style.display = 'none';  // 미니 달력 초기화
+        document.getElementById('mimiCalbg').style.display = 'none';
+        minicalLoad();
     }
 
     // 시작일과 종료일의 날짜 순서가 이상할때
@@ -174,9 +243,13 @@ function dayEleInnerText() {
     // 날짜 선택하면 달력 감추기
     // calendar.style.display = 'none';
 }
+// 지켜야할 형식
 // '2021-11-11T19:00:00'
+// '2021-11-11T09:00:00'
 
-let month_list = calendar.querySelector('.month-list')
+let month_list = calendar.querySelector('.month-list');
+$('#apple').children().remove();
+console.log(123);
 
 month_names.forEach((e, index) => {
     let month = document.createElement('div')
@@ -189,12 +262,14 @@ month_names.forEach((e, index) => {
         console.log(event.target);
         //event.target.parentNode.style.display = 'none';
         // event.target.parentNode.style.backgroundColor = 'red';
+        // month_list.classList.empty();
         month_list.classList.remove('show')
         curr_month.value = index
         // console.log(index);
         // console.log(curr_month.value);
         generateCalendar(index, curr_year.value)
     }
+    // month_list.remove();
     month_list.appendChild(month)
 })
 

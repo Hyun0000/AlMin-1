@@ -622,7 +622,8 @@
 
 	$.fn.mdtimepicker.defaults = {
 		timeFormat: 'hh:mm:ss.000',	// format of the time value (data-time attribute)
-		format: 'h:mm tt',			// format of the input value
+		format: 'hh:mm tt',			// format of the input value
+		// format: 'h:mm tt',			// format of the input value
 		theme: 'blue',				// theme of the timepicker
 		hourPadding: false,			// determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
 		clearBtn: false,            // determines if clear button is visible

@@ -1,5 +1,109 @@
+// ======================== 모달창 변수 ========================
+// 모달 배경
+let modalBack = document.getElementById('ModalBg');
+
+// 상단 버튼 4개도 해야함
+
+// 제목 입력칸
+let titleEle = document.getElementById('recipient-name');
+
+// 시작일 입력칸
+let startDayEle = document.getElementById('startDay');
+
+// 종료일 입력칸
+let endDayEle = document.getElementById('endDay');
+
+// 시작 시간 입력칸
+let startTimeEle = document.getElementById('startTime');
+
+// 시작 시간 입력칸
+let endTimeEle = document.getElementById('endTime');
+
+let evnets = [
+    {
+    title: 'Business Lunch',
+    start: '2021-11-01T09:00',
+    end : '2021-11-01T10:00',
+    constraint: 'availableForMeeting', // 있으면 이벤트 이동을 할수 없다.
+    color: 'red'
+    },
+    {
+    title: 'Meeting1',
+    start: '2021-11-11T11:00',
+    end: '2021-11-11T14:00',
+    constraint: 'availableForMeeting', // defined below
+    color: '#257e4a'
+    },
+    {
+    title: 'Meeting2',
+    start: '2021-11-11T14:00',
+    end: '2021-11-11T15:00',
+    constraint: 'availableForMeeting', // defined below
+    color: '#257e4a'
+    },
+    {
+    title: 'Meeting3',
+    start: '2021-11-11T15:00',
+    end: '2021-11-11T16:00',
+    constraint: 'availableForMeeting', // defined below
+    color: '#257e4a'
+    },
+    {
+    title: 'Meeting4',
+    start: '2021-11-11T16:00',
+    end: '2021-11-11T17:00',
+    constraint: 'availableForMeeting', // defined below
+    color: '#257e4a'
+    },
+    {
+    title: 'Meeting5',
+    start: '2021-11-11T19:00',
+    end: '2021-11-11T20:00',
+    constraint: 'availableForMeeting', // defined below
+    color: '#257e4a'
+    },
+    {
+    title: 'Conference',
+    start: '2021-11-20T20:00',
+    end: '2021-11-21T20:00'
+    },
+    {
+    title: 'Party',
+    start: '2021-11-04T20:00',
+    end: '2021-11-04T21:00'
+    },
+    {
+    groupId: 999,
+    title: 'Repeating Event1',
+    start: '2021-11-16T16:00',
+    end: '2021-11-16T21:00'
+    },
+    {
+    groupId: 999, // 공유하는 이벤트는 groupId자동으로 함께 드래그되고 크기가 조정됩니다.
+    title: 'Repeating Event2',
+    start: '2021-11-23T20:00',
+    end: '2021-11-23T21:00'
+    },
+    // red areas where no events can be dropped
+    {
+    start: '2021-11-28',
+    end: '2021-11-30',
+    overlap: false,
+    display: 'background',
+    color: '#ff9f89'
+    },
+    {
+    title: 'Click for Google',
+    url: 'https://blog.naver.com/rakpink',
+    start: '2021-11-30T20:00',
+    start: '2021-11-30T20:00'
+    }
+]
+// ================================= 이벤트 목록 =================================
     document.addEventListener('DOMContentLoaded', function () { // onload
     var calendarEl = document.getElementById('calendar');
+    // calendarEl.setAttribute('style', 'background : red;');
+    // calendarEl.setAttribute('style', 'border: 1px solid black;');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
@@ -28,103 +132,78 @@
         // 드래그앤드랍 설정
         },
         // events : eventarr
-        events: [
-        {
-        title: 'Business Lunch',
-        start: '2021-11-01T13:00:00',
-        constraint: 'availableForMeeting', // 있으면 이벤트 이동을 할수 없다.
-        color: 'red'
-        },
-        {
-        title: 'Meeting',
-        start: '2021-11-11T11:00:00',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-        },
-        {
-        title: 'Meeting',
-        start: '2021-11-11T14:00:00',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-        },
-        {
-        title: 'Meeting',
-        start: '2021-11-11T15:00:00',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-        },
-        {
-        title: 'Meeting',
-        start: '2021-11-11T16:00:00',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-        },
-        {
-        title: 'Meeting',
-        start: '2021-11-11T19:00:00',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-        },
-        {
-        title: 'Conference',
-        start: '2021-11-20',
-        end: '2021-11-21T20:00:00'
-        },
-        {
-        title: 'Party',
-        start: '2021-11-04T20:00:00'
-        },
-        {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2021-11-16T16:00:00'
-        },
-        {
-        groupId: 999, // 공유하는 이벤트는 groupId자동으로 함께 드래그되고 크기가 조정됩니다.
-        title: 'Repeating Event',
-        start: '2021-11-23T20:00:00'
-        },
-        // red areas where no events can be dropped
-        {
-        start: '2021-11-28',
-        end: '2021-11-30',
-        overlap: false,
-        display: 'background',
-        color: '#ff9f89'
-        },
-        {
-        title: 'Click for Google',
-        url: 'https://blog.naver.com/rakpink',
-        start: '2021-11-30'
-        }
-        ]
+        events: evnets
     });
     calendar.render();
 
     // 각 날짜를 클릭했을 때 모달창 팝업 callback function 등록
-    let dayDay = document.getElementsByClassName('fc-day');
-    for (let i = 0; i < dayDay.length; i++) {
-        dayDay[i].onclick = modalUp;
+    // let dayDay = document.getElementsByClassName('fc-day');
+    let dayDay = document.getElementById('insert_evnet_btn');
+    dayDay.onclick = modalUp;
+    // for (let i = 0; i < dayDay.length; i++) {
+    //     dayDay[i].onclick = modalUp;
+    // }
+
+    //console.log(document.getElementsByClassName('.fc-daygrid-event'));
+    //console.log(document.getElementsByClassName('.fc-daygrid-event')[0]);
+    console.log(document.getElementsByClassName('fc-event-title'));
+    console.log(document.getElementsByClassName('fc-event-title').length);
+    console.log(document.getElementsByClassName('fc-event-title')[0]);
+    console.log(document.getElementsByClassName('fc-event-title')[6]);
+    console.log(document.getElementsByClassName('fc-event-title')[0].innerText);
+    // 등록된 이벤트 관련 내용
+    let eventList = document.getElementsByClassName('fc-daygrid-event-harness');
+    console.log(document.getElementsByClassName('fc-daygrid-event-harness').length);
+    for (let i = 0; i < eventList.length; i++) {
+            eventList[i].onclick = detailEvent;
+            eventList[i].setAttribute("draggable", "true");
+            eventList[i].setAttribute("ondrag", "apple(event);");
+            // document.getElementById('top_title').ondrag = apple;
+            // eventList[i].ondragstart = apple;
+            // eventList[i].addEventListener('drop',  () => {
+            //     console.log(123);
+            //     alert(123);
+            // });
     }
+    // var tableEle = document.querySelector('.fc-scrollgrid-liquid');
+    // tableEle.setAttribute('style', 'border: 1px solid black;');
+
+    // var tableEle2 = document.querySelectorAll('.fc-scrollgrid-liquid td');
+    // tableEle2.setAttribute('style', 'border: 1px solid black;');
+
 });  // onload
+function detailEvent() {
+    // 클릭한 이벤트 제목
+    let title = this.querySelector('.fc-event-title').innerText;
+    console.log("&&&&&&&&&&&&&");
+    console.log(title);
+    for (let i = 0; i < evnets.length; i++) {
+        if (title == evnets[i].title) {
+            console.log("@@@@@@@@@@@@@@###########");
+            console.log(evnets[i].title);
+            console.log(evnets[i].start);
+            console.log(evnets[i].start.split('T'));
+            console.log(evnets[i].start.split('T')[0]);
+            console.log(evnets[i].start.split('T')[1]);
+            console.log(evnets[i].end);
 
-// // 모달창 팝업 callback function
-// function modalUp() {
-//     document.getElementById('ModalBg').style.display = 'block';
-//     // document.getElementById('miniCal').style.display = 'block';
-// }
+            modalBack.style.display = 'block';
+            titleEle.value = evnets[i].title;
+            startDayEle.innerText = evnets[i].start.split('T')[0];
+            endDayEle.innerText = evnets[i].end.split('T')[0];
+            startTimeEle.value = evnets[i].start.split('T')[1];
+            endTimeEle.value = evnets[i].end.split('T')[1];
 
-// // 모달창 팝업 닫기
-// function modalClose() {
-//     document.getElementById('ModalBg').style.display = 'none';
-// }
+        }
+    }
 
-// function miniCalUp() {
-//     document.getElementById('miniCal').style.display = 'block';
-//     console.log(this);
-//     console.log(event.target);
-//     console.log(event.target.id);
-//     let selectTest = event.target.id;
-//     console.log(selectTest);
-// }
+    console.log(event.target);
+    console.log(this);
+    // console.log(this.getElementsByClassName('fc-event-title')[0]);
+    console.log(this.querySelector('.fc-event-title'));
+}
 
+function apple() {
+    alert(123);
+    console.log(123122353565674563456);
+}     
