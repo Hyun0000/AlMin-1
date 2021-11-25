@@ -60,10 +60,9 @@
 									<div class="job-text">
 										<h4>${item.recruitTitle}</h4>
 										<p>${item.recruitContent}</p>
-										<p>${item.recruitDate}</p>
 										<ul class="mt-4">
 											<li class="mb-3"><h5>
-													<i class="fa fa-map-marker"></i>
+													<i class="fa fa-map-marker"> ${item.recruitDate} </i>
 												</h5></li>
 										</ul>
 										<button class="genric-btn primary small"
@@ -82,7 +81,7 @@
 								<h4 class="mb-4">지역</h4>
 								<div class="default-select">
 									<select name="recruitJobDistrict">
-										<option value="17">무관</option>
+										<option value="100">무관</option>
 										<option value="1">경기</option>
 										<option value="2">인천</option>
 										<option value="3">대전</option>
@@ -99,6 +98,7 @@
 										<option value="14">전북</option>
 										<option value="15">전남</option>
 										<option value="16">제주</option>
+										<option value="17">전국</option>
 										<option value="18">서울</option>
 									</select>
 								</div>
@@ -107,7 +107,7 @@
 								<h4 class="mb-4">업종</h4>
 								<div class="default-select">
 									<select name="recruitJobType">
-										<option value="0">무관</option>
+										<option value="100">무관</option>
 										<option value="1">외식/음료</option>
 										<option value="2">유통/판매</option>
 										<option value="3">문화/여가</option>
@@ -127,7 +127,7 @@
 								<h4 class="mb-4">대상</h4>
 								<div class="default-select">
 									<select name="recruitJobWho">
-										<option value="0">무관</option>
+										<option value="100">무관</option>
 										<option value="1">청소년</option>
 										<option value="2">대학생</option>
 										<option value="3">중장년</option>

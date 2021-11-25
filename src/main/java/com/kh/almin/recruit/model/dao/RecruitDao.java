@@ -21,12 +21,15 @@ public class RecruitDao {
 	public List<Recruit> getReport() throws Exception{
 		List<Recruit> recruits = sqlSession.selectList("Recruit.listReport");
 		logger.info(recruits.toString());
-		System.out.println(recruits);
+		System.out.println("여기여기");
+		System.out.println(recruits.size());
 		return recruits;
 	}
 	
 	public List<Recruit> recruitList() throws Exception {
+		System.out.println("aaa");
 		List<Recruit> recruit = sqlSession.selectList("Recruit.jobinfoList");
+		System.out.println("[[ " + recruit);
 		return recruit;
 	}
 
@@ -36,8 +39,6 @@ public class RecruitDao {
 	}
 	
 	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception {
-		System.out.println("DaoSearchRecruit : " + searchRecruit);
-
 		List<Recruit> recruit = sqlSession.selectList("Recruit.searchRecruit", searchRecruit);
 		return recruit;
 	}

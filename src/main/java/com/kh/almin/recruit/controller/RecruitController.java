@@ -22,16 +22,16 @@ import com.kh.almin.recruit.model.service.RecruitService;
 public class RecruitController {
 	@Autowired
 	private RecruitService recruitService;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(RecruitController.class);
+
 	@GetMapping
 	private ModelAndView viewRecruits(SearchRecruit searchRecruit) throws Exception {
 		List<Recruit> volist = null;
 		List<Recruit> svolist = null;
 		ModelAndView mv = new ModelAndView();
 		String msg = "";
-		System.out.println("searchRecruit : " + searchRecruit);
-		if (!ObjectUtils.isEmpty(searchRecruit)) {
+		if (!ObjectUtils.isEmpty(searchRecruit) && searchRecruit.getRecruitJobDistrict() != 0) {
 			svolist = recruitService.searchRecruit(searchRecruit);
 			if (svolist == null || svolist.size() == 0) {
 				msg = "검색 결과가 없습니다.";
@@ -44,7 +44,6 @@ public class RecruitController {
 			volist = recruitService.recruitList();
 			mv.addObject("recruits", volist);
 		}
-
 		mv.setViewName("recruits/jobinfoList");
 		logger.info("공고 조회");
 		logger.info("volist: " + volist);

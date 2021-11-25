@@ -31,8 +31,6 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 	
 	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception{
-		System.out.println("ServiceSearchRecruit : " + searchRecruit);
-
 		return recruitDao.searchRecruit(searchRecruit);
 	}
 
