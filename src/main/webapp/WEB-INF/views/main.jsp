@@ -21,10 +21,19 @@
 
 <!-- Favicon -->
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
+	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png"
+	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/assets/css/almin.css"/>">
+
+<style>
+.search-bg {
+	z-index: 1000;
+}
+</style>
+
 </head>
 <body>
 	<!-- Preloader Starts -->
@@ -32,9 +41,9 @@
 		<div class="spinner"></div>
 	</div>
 	<!-- Preloader End -->
-	
-<!-- 공통헤더 템플릿 -->
-<c:import url="/WEB-INF/views/template/header.jsp"/>
+
+	<!-- 공통헤더 템플릿 -->
+	<c:import url="/WEB-INF/views/template/header.jsp" />
 
 	<!-- Search Area Starts -->
 	<div class="search-area">
@@ -42,9 +51,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<form action="#" class="d-md-flex justify-content-between">
-							<select>
-								<option value="0">업종선택</option>
+						<form id="searchRecruit" class="d-md-flex justify-content-between">
+							<select name="recruitJobType">
+								<option value="100" selected>직종선택</option>
+								<option value="100">무관</option>
 								<option value="1">외식/음료</option>
 								<option value="2">유통/판매</option>
 								<option value="3">문화/여가</option>
@@ -57,30 +67,31 @@
 								<option value="10">디자인</option>
 								<option value="11">배달/운전</option>
 								<option value="12">병원/간호</option>
-							</select> <select>
-								<option value="0">지역선택</option>
-								<option value="1">서울</option>
-								<option value="2">경기</option>
-								<option value="3">인천</option>
-								<option value="4">대전</option>
-								<option value="5">대구</option>
+							</select> <select name="recruitJobDistrict">
+								<option value="100" selected>지역선택</option>
+								<option value="100">무관</option>
+								<option value="18">서울</option>
+								<option value="1">경기</option>
+								<option value="2">인천</option>
+								<option value="3">대전</option>
+								<option value="4">대구</option>
 								<option value="5">부산</option>
-								<option value="5">울산</option>
-								<option value="5">광주</option>
-								<option value="5">강원</option>
-								<option value="5">세종</option>
-								<option value="5">충북</option>
-								<option value="5">충남</option>
-								<option value="5">경북</option>
-								<option value="5">경남</option>
-								<option value="5">전북</option>
-								<option value="5">전남</option>
-								<option value="5">제주</option>
-								<option value="5">전국</option>
-							</select> <input type="text" placeholder="키워드 검색"
-								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = '키워드 검색'" required>
-							<button type="submit" class="template-btn">찾아보기</button>
+								<option value="6">울산</option>
+								<option value="7">광주</option>
+								<option value="8">강원</option>
+								<option value="9">세종</option>
+								<option value="10">충북</option>
+								<option value="11">충남</option>
+								<option value="12">경북</option>
+								<option value="13">경남</option>
+								<option value="14">전북</option>
+								<option value="15">전남</option>
+								<option value="16">제주</option>
+								<option value="17">전국</option>
+							</select> <input type="text" name=recruitJobWho value=100 hidden /> <input
+								type="text" placeholder="키워드 검색" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '키워드 검색'" name="searchKeyword">
+							<button class="template-btn" onclick="search()">찾아보기</button>
 						</form>
 					</div>
 				</div>
@@ -123,58 +134,64 @@
 		</div>
 	</section>
 	<!-- Feature Area End -->
-	
+
 	<!-- Brand Area Starts-->
-	 <section class="section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-top text-center">
-                        <h2>브랜드 알바</h2>
-                        <p>각종 프랜차이즈 알바도 찾아보는 알바의 민족</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="employee-slider owl-carousel">
-                        <div class="single-slide d-sm-flex">
-                            <div class="slide-img">
-	<img src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Ediya.png" class="logo" alt="BR">
-                                <div class="hover-state">
-                                    <div class="hover-text text-center">
-                                        <h3>Ediya Coffee</h3>
-                                        <h5>알바 찾아보기</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="slide-text align-self-center">
-                                <i class="fa fa-quote-left"></i>
-                                <p>이디야커피는 ‘의미 있는 작은 차이가 평범함과 특별함을 가르는 기준이 된다’고 생각합니다. 이디야의 가족이 되어 여러분의 꿈을 키워보세요!</p>
-                            </div>
-                        </div>
-                        <div class="single-slide d-sm-flex">
-                            <div class="slide-img">
-	<img src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Burgerking.png" class="logo" alt="Burgerking">
-                                <div class="hover-state">
-                                    <div class="hover-text text-center">
-                                        <h3>버거킹</h3>
-                                        <h5>알바 찾아보기</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="slide-text align-self-center">
-                                <i class="fa fa-quote-left"></i>
-                                <p>세계 최대 QSR(Quick Service Restaurant) 브랜드 중 하나인 버거킹은 현재 100개 이상의 국가에서 15,000개 이상의 매장을 운영하고 있습니다. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-top text-center">
+						<h2>브랜드 알바</h2>
+						<p>각종 프랜차이즈 알바도 찾아보는 알바의 민족</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="employee-slider owl-carousel">
+						<div class="single-slide d-sm-flex">
+							<div class="slide-img">
+								<img
+									src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Ediya.png"
+									class="logo" alt="BR">
+								<div class="hover-state">
+									<div class="hover-text text-center">
+										<h3>Ediya Coffee</h3>
+										<h5>알바 찾아보기</h5>
+									</div>
+								</div>
+							</div>
+							<div class="slide-text align-self-center">
+								<i class="fa fa-quote-left"></i>
+								<p>이디야커피는 ‘의미 있는 작은 차이가 평범함과 특별함을 가르는 기준이 된다’고 생각합니다. 이디야의
+									가족이 되어 여러분의 꿈을 키워보세요!</p>
+							</div>
+						</div>
+						<div class="single-slide d-sm-flex">
+							<div class="slide-img">
+								<img
+									src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Burgerking.png"
+									class="logo" alt="Burgerking">
+								<div class="hover-state">
+									<div class="hover-text text-center">
+										<h3>버거킹</h3>
+										<h5>알바 찾아보기</h5>
+									</div>
+								</div>
+							</div>
+							<div class="slide-text align-self-center">
+								<i class="fa fa-quote-left"></i>
+								<p>세계 최대 QSR(Quick Service Restaurant) 브랜드 중 하나인 버거킹은 현재
+									100개 이상의 국가에서 15,000개 이상의 매장을 운영하고 있습니다.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<!-- Brand Area  End-->
-	
+
 	<!-- Category Area Starts -->
 	<section class="category-area section-padding">
 		<div class="container">
@@ -189,56 +206,72 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Seoul_200px.png" alt="경기/서울">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Seoul_200px.png"
+							alt="경기/서울">
 						<h4>경기/서울</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Sea_200px.png" alt="강원도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Sea_200px.png"
+							alt="강원도">
 						<h4>강원도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_apt_200px.png" alt="충청북도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_apt_200px.png"
+							alt="충청북도">
 						<h4>충청북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Taean_200px.png" alt="충청남도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Taean_200px.png"
+							alt="충청남도">
 						<h4>충청남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Andong_200px.png" alt="경상북도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Andong_200px.png"
+							alt="경상북도">
 						<h4>경상북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-lg-0">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Geoje_200px.png" alt="경상남도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Geoje_200px.png"
+							alt="경상남도">
 						<h4>경상남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center mb-4 mb-md-0">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_anywhere_200px.png" alt="전라북도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_anywhere_200px.png"
+							alt="전라북도">
 						<h4>전라북도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="single-category text-center">
-						<img src="${pageContext.request.contextPath}/resources/assets/images/place_Bosung_200px.png" alt="전라남도">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/place_Bosung_200px.png"
+							alt="전라남도">
 						<h4>전라남도</h4>
 						<h5>250개 구인공고</h5>
 					</div>
@@ -293,7 +326,9 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="${pageContext.request.contextPath}/resources/assets/images/job1.jpg" alt="job">
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/images/job1.jpg"
+										alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn1">지원하기</a>
@@ -318,7 +353,9 @@
 									</ul>
 								</div>
 								<div class="job-img align-self-center">
-									<img src="${pageContext.request.contextPath}/resources/assets/images/job2.jpg" alt="job">
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/images/job2.jpg"
+										alt="job">
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn2">채용하기</a>
@@ -326,23 +363,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="single-job d-lg-flex justify-content-between">
-                        <div class="job-text">
-                            <h4>Manager/ Asst. Manager (Quality Assurance)</h4>
-                            <ul class="mt-4">
-                                <li class="mb-3"><h5><i class="fa fa-map-marker"></i> new yourk, USA</h5></li>
-                                <li class="mb-3"><h5><i class="fa fa-pie-chart"></i> Applied Chemistry & Chemical Engineering / Chemistry</h5></li>
-                                <li><h5><i class="fa fa-clock-o"></i> Deadline Deadline: Dec 11, 2018</h5></li>
-                            </ul>
-                        </div>
-                        <div class="job-img align-self-center">
-                            <img src="assets/images/job5.png" alt="job">
-                        </div>
-                        <div class="job-btn align-self-center">
-                            <a href="#" class="third-btn job-btn2">full time</a>
-                            <a href="#" class="third-btn">apply</a>
-                        </div>
-                    </div> -->
 				</div>
 			</div>
 			<div class="more-job-btn mt-5 text-center">
@@ -353,6 +373,20 @@
 	<!-- Jobs Area End -->
 
 	<!-- 공통푸터 템플릿 -->
-<c:import url="/WEB-INF/views/template/footer.jsp"/>
+	<c:import url="/WEB-INF/views/template/footer.jsp" />
+	<script>
+		function showPopup() {
+			var url = "logins";
+			var name = "popup test";
+			var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+			window.open(url, name, option);
+		}
+
+		function search() {
+			$("#searchRecruit").attr("action",
+					"${pageContext.request.contextPath }/recruits").attr(
+					"method", "get").submit();
+		}
+	</script>
 </body>
 </html>

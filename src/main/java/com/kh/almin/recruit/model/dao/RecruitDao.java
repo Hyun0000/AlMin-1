@@ -27,9 +27,7 @@ public class RecruitDao {
 	}
 	
 	public List<Recruit> recruitList() throws Exception {
-		System.out.println("aaa");
 		List<Recruit> recruit = sqlSession.selectList("Recruit.jobinfoList");
-		System.out.println("[[ " + recruit);
 		return recruit;
 	}
 

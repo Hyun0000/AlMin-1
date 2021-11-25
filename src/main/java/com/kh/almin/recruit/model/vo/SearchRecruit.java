@@ -17,4 +17,5 @@ public class SearchRecruit {
 	private int recruitJobType;
 	private int recruitJobDistrict;
 	private int recruitJobWho;
+	private String searchKeyword;
 }

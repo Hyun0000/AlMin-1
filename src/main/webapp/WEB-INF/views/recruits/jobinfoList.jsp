@@ -82,6 +82,7 @@
 								<div class="default-select">
 									<select name="recruitJobDistrict">
 										<option value="100">무관</option>
+										<option value="18">서울</option>
 										<option value="1">경기</option>
 										<option value="2">인천</option>
 										<option value="3">대전</option>
@@ -99,7 +100,6 @@
 										<option value="15">전남</option>
 										<option value="16">제주</option>
 										<option value="17">전국</option>
-										<option value="18">서울</option>
 									</select>
 								</div>
 							</div>
@@ -138,6 +138,12 @@
 										<option value="8">재택 가능</option>
 									</select>
 								</div>
+							</div>
+							<div class="single-item mb-4">
+								<h4 class="mb-4">키워드</h4>
+								<input type="text" placeholder="키워드 검색"
+									onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '키워드 검색'" name="searchKeyword">
 							</div>
 							<div class="more-job-btn mt-5 text-center">
 								<input type="button" class="template-btn" onclick="search()"

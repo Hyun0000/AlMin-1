@@ -60,7 +60,10 @@
 			<if test='recruitJobWho != 100 '>
 				and RECRUIT_JOB_WHO = #{recruitJobWho}
 			</if>
-			<![CDATA[and RECRUIT_POLICE < 2]]>
+			<if test='searchKeyword != null '>
+				and RECRUIT_TITLE like '%'|| #{searchKeyword} || '%'
+			</if>
+			<![CDATA[and RECRUIT_POLICE < 1]]>
 		</where>
 		
 	</select>

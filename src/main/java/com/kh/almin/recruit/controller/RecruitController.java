@@ -46,8 +46,6 @@ public class RecruitController {
 		}
 		mv.setViewName("recruits/jobinfoList");
 		logger.info("공고 조회");
-		logger.info("volist: " + volist);
-		logger.info("svolist: " + svolist);
 		return mv;
 	}
 
