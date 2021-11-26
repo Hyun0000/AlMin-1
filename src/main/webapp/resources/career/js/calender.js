@@ -21,9 +21,16 @@ let endTimeEle = document.getElementById('endTime');
 
 let evnets = [
     {
-    title: 'Business Lunch',
+    title: 'Business Lunch1',
     start: '2021-11-01T09:00',
     end : '2021-11-01T10:00',
+    constraint: 'availableForMeeting', // 있으면 이벤트 이동을 할수 없다.
+    color: 'red'
+    },
+    {
+    title: 'Business Lunch2',
+    start: '2021-11-02T09:00',
+    end : '2021-11-02T10:00',
     constraint: 'availableForMeeting', // 있으면 이벤트 이동을 할수 없다.
     color: 'red'
     },
@@ -58,14 +65,21 @@ let evnets = [
     {
     title: 'Meeting5',
     start: '2021-11-11T19:00',
-    end: '2021-11-11T20:00',
+    // end: '2021-11-11T20:00',
     constraint: 'availableForMeeting', // defined below
-    color: '#257e4a'
+    textColor : '#257e4a',
+    backgroundColor : "yellow"
     },
     {
     title: 'Conference',
     start: '2021-11-20T20:00',
     end: '2021-11-21T20:00'
+    },
+    {
+    title: 'Dance',
+    start: '2021-11-20T22:00',
+    end: '2021-11-21T23:00',
+    color : "red",
     },
     {
     title: 'Party',
@@ -96,7 +110,7 @@ let evnets = [
     title: 'Click for Google',
     url: 'https://blog.naver.com/rakpink',
     start: '2021-11-30T20:00',
-    start: '2021-11-30T20:00'
+    end: '2021-11-30T20:00'
     }
 ]
 // ================================= 이벤트 목록 =================================
@@ -123,6 +137,31 @@ let evnets = [
         // 드래그앤드랍 설정
         droppable: true, // this allows things to be dropped onto the calendar
         nowIndicator: true, // 현재 시간을 나타내는 마커를 표시할지 여부(표시기는 사용자가 달력을 보는 동안 자동으로 위치를 변경)
+        eventDisplay : 'block', // 이벤트 디스플레이
+        // 'auto'(기본값) : daygrid에 있을 때 이벤트가 하루 종일 또는 여러 날인 경우 이벤트를 단색 직사각형으로 렌더링, 시간 제한 이벤트인 경우 점으로 렌더링
+        // eventOverlap : true,
+        eventClick : (eventClickInfo) => { // 이벤트 클릭시
+            console.log("^^^^^^^^^^^^^^^^^^^^^^^^");
+            console.log(this);
+            console.log(event.target);
+            console.log(eventClickInfo.event.title); // 이벤트한 타겟의 제목
+            detailEvent(eventClickInfo.event.title);
+            console.log(eventClickInfo);
+            console.log(eventClickInfo.event);
+            console.log(eventClickInfo.title);
+            console.log(eventClickInfo.view);
+            console.log(eventClickInfo.view.getCurrentData);
+            console.log("^^^^^^^^^^^^^^^^^^^^^^^^");
+        }, 
+        dateClick : () => { // 날짜 클릭하면 일정추가 모달창 팝업
+            // alert(123);
+            startDayEle.innerText = "";
+            endDayEle.innerText = "";
+            startTimeEle.value = "";
+            endTimeEle.value = "";
+            titleEle.value = "";
+            modalBack.style.display = 'block';
+        },
         drop: function(arg) {
             // is the "remove after drop" checkbox checked?
             if (document.getElementById('drop-remove').checked) {
@@ -131,7 +170,53 @@ let evnets = [
             }
         // 드래그앤드랍 설정
         },
-        // events : eventarr
+        eventDragStart : (info, event, view, jsEvent) => { // 드래그 시작
+            console.log("############eventDragStart###########");
+            // console.log(info.event.title);
+            // console.log(view);
+            // console.log(jsEvent);
+            // console.log("eventDragStart");
+            // console.log(this);
+            // console.log(event);
+            // console.log("eventDragStart");
+            console.log("############eventDragStart###########");
+        },
+        eventDragStop : (info) => { // 드래그 종료(드래그 당한 이벤트의 정보 - 원래 이벤트 정보)
+            console.log("@@@@@@@@@@eventDragStop@@@@@@@@@");
+            console.log(info);
+            console.log(info.event.title);
+            console.log(info.event.sourceId);
+            console.log(info.event.endTimeEle);
+            console.log(info.event.time);
+            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
+            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
+            // Party
+            // 2021-11-04T11:00:00.000Z
+            // 2021-11-04T12:00:00.000Z
+            console.log("@@@@@@@@@@eventDragStop@@@@@@@@@");
+        },
+        eventDrop : (info) => { // 드래그 이벤트를 받은 객체에 대한 정보(그 날짜 그대로면 해당 이벤트는 실행 X)
+            // TODO
+            // 여기서 ajax 써야할듯
+            console.log("==========eventDrop=========");
+            console.log(info.event.title);
+            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
+            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
+            // Party
+            // 2021-11-03T11:00:00.000Z
+            // 2021-11-03T12:00:00.000Z
+
+            let draggedEventTitle = info.event.title;
+            let draggedEventStartTime = info.event.start.toISOString().split('T')[0];
+            let draggedEventEndTime = info.event.end.toISOString().split('T')[0];
+
+            console.log(draggedEventTitle);
+            console.log(draggedEventStartTime);
+            console.log(draggedEventEndTime);
+
+            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
+            console.log("==========eventDrop=========");
+        },
         events: evnets
     });
     calendar.render();
@@ -156,25 +241,11 @@ let evnets = [
     console.log(document.getElementsByClassName('fc-daygrid-event-harness').length);
     for (let i = 0; i < eventList.length; i++) {
             eventList[i].onclick = detailEvent;
-            eventList[i].setAttribute("draggable", "true");
-            eventList[i].setAttribute("ondrag", "apple(event);");
-            // document.getElementById('top_title').ondrag = apple;
-            // eventList[i].ondragstart = apple;
-            // eventList[i].addEventListener('drop',  () => {
-            //     console.log(123);
-            //     alert(123);
-            // });
     }
-    // var tableEle = document.querySelector('.fc-scrollgrid-liquid');
-    // tableEle.setAttribute('style', 'border: 1px solid black;');
-
-    // var tableEle2 = document.querySelectorAll('.fc-scrollgrid-liquid td');
-    // tableEle2.setAttribute('style', 'border: 1px solid black;');
-
 });  // onload
-function detailEvent() {
+function detailEvent(title) {
     // 클릭한 이벤트 제목
-    let title = this.querySelector('.fc-event-title').innerText;
+    // let title = this.querySelector('.fc-event-title').innerText;
     console.log("&&&&&&&&&&&&&");
     console.log(title);
     for (let i = 0; i < evnets.length; i++) {
@@ -193,17 +264,28 @@ function detailEvent() {
             endDayEle.innerText = evnets[i].end.split('T')[0];
             startTimeEle.value = evnets[i].start.split('T')[1];
             endTimeEle.value = evnets[i].end.split('T')[1];
-
         }
     }
+}
+function movedEvent(title, start, end) {
+    console.log("title : " + title);
+    console.log("start : " + start);
+    console.log("end : " + end);
+    for (let i = 0; i < evnets.length; i++) {
+        if (title == evnets[i].title) {
+            evnets[i].title = title;
 
-    console.log(event.target);
-    console.log(this);
-    // console.log(this.getElementsByClassName('fc-event-title')[0]);
-    console.log(this.querySelector('.fc-event-title'));
+
+
+
+            startDayEle.innerText = evnets[i].start.split('T')[0];
+            endDayEle.innerText = evnets[i].end.split('T')[0];
+            startTimeEle.value = evnets[i].start.split('T')[1];
+            endTimeEle.value = evnets[i].end.split('T')[1];
+        }
+    }
 }
 
-function apple() {
-    alert(123);
-    console.log(123122353565674563456);
-}     
+// title: 'Party',
+// start: '2021-11-04T20:00',
+// end: '2021-11-04T21:00'

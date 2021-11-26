@@ -84,3 +84,11 @@ body {
     color: black;
     text-decoration: none;
 }
+
+.fc-event-time, .fc-event-title {
+    white-space: nowrap;
+}
+
+.fc-title {
+    white-space: normal;
+}
