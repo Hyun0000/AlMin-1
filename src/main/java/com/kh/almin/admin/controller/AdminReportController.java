@@ -25,9 +25,8 @@ public class AdminReportController {// Service, Dao에서 throws Exception 붙�
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
 
 	@GetMapping
-	private ModelAndView getReport() throws Exception { // @ExceptionHandler가 받는다.
+	private ModelAndView getReport(ModelAndView mv) throws Exception { // @ExceptionHandler가 받는다.
 		List<Recruit> volist = adminService.getReport();
-		ModelAndView mv = new ModelAndView();
 		mv.addObject("reportview", volist);
 		mv.setViewName("admin/report");
 		logger.info("의심공고리스트 조회");

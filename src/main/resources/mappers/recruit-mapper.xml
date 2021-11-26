@@ -27,6 +27,7 @@
 		<result property="recruitJobWho" column="RECRUIT_JOB_WHO" />
 		<result property="recruitJobBranch" column="RECRUIT_JOB_BRANCH" />
 		<result property="recruitDate" column="RECRUIT_DATE" />
+		<result property="recruitReport" column="RECRUIT_REPORT" />
 
 		<association property="district" resultMap="districtMap">
 		</association>
@@ -39,16 +40,25 @@
 
 	<select id="listReport" resultMap="RecruitResultMap">
 		<![CDATA[select
-		RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
+		RECRUIT_NO,RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
 		RECRUIT_EDUCATION,RECRUIT_PERSON,RECRUIT_MONEY,RECRUIT_PERIOD,RECRUIT_DAY,RECRUIT_TIME,RECRUIT_ADDRESS,RECRUIT_CONTENT,
 		RECRUIT_PUB,RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_JOB_BRANCH, RECRUIT_DATE
 		from COMPANY_RECRUIT WHERE RECRUIT_POLICE > 0]]>
 	</select>
 
-	<select id="searchRecruit" resultMap="RecruitResultMap" parameterType="searchRecruit">
+	<update id="updatePolice" parameterType="integer">
+		update COMPANY_RECRUIT
+		set RECRUIT_POLICE = RECRUIT_POLICE+1
+		where RECRUIT_NO = #{recruitNo}
+	</update>
+
+
+	<select id="searchRecruit" resultMap="RecruitResultMap"
+		parameterType="searchRecruit">
 		select RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
 		RECRUIT_EDUCATION,RECRUIT_MONEY,RECRUIT_TIME,RECRUIT_CONTENT,
-		RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO , RECRUIT_DATE
+		RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO ,
+		RECRUIT_DATE
 		from COMPANY_RECRUIT
 		<where>
 			<if test='recruitJobDistrict != 100 '>
@@ -65,19 +75,21 @@
 			</if>
 			<![CDATA[and RECRUIT_POLICE < 1]]>
 		</where>
-		
+
 	</select>
 
 	<!-- 공고 목록 리스트 -->
 	<select id="jobinfoList" resultMap="RecruitResultMap">
-		<![CDATA[select RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
+		<![CDATA[select RECRUIT_NO,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
 		RECRUIT_EDUCATION,RECRUIT_MONEY,RECRUIT_TIME,RECRUIT_CONTENT,
 		RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_DATE
 		from COMPANY_RECRUIT where RECRUIT_POLICE < 1]]>
 	</select>
 	<!-- 공고상세조회 -->
-	<select id="detailjobinfo" resultMap="RecruitResultMap">
+	<select id="detailjobinfo" resultMap="RecruitResultMap"
+		parameterType="integer">
 		select * from
-		company_recruit where recruit_title=#{recruitTtitle}
+		company_recruit where
+		RECRUIT_NO=#{recruitNo}
 	</select>
 </mapper>

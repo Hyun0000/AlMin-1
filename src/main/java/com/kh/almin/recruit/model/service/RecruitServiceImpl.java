@@ -26,12 +26,16 @@ public class RecruitServiceImpl implements RecruitService {
 		return recruitDao.recruitList();
 	}
 	
-	public List<Recruit> detailjobinfo() throws Exception{
-		return recruitDao.detailjobinfo();
+	public Recruit detailjobinfo(int recruitNo) throws Exception{
+		return recruitDao.detailjobinfo(recruitNo);
 	}
 	
 	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception{
 		return recruitDao.searchRecruit(searchRecruit);
+	}
+
+	public int reportRecruit(int recruitNo) throws Exception{
+		return recruitDao.reportRecruit(recruitNo);
 	}
 
 }

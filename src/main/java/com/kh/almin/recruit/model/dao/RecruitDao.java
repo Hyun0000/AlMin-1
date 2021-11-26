@@ -31,13 +31,17 @@ public class RecruitDao {
 		return recruit;
 	}
 
-	public List<Recruit> detailjobinfo() throws Exception {
-		List<Recruit> recruit=sqlSession.selectList("Recruit.detailjobinfo");
+	public Recruit detailjobinfo(int recruitNo) throws Exception {
+		Recruit recruit=sqlSession.selectOne("Recruit.detailjobinfo", recruitNo);
 		return recruit;
 	}
 	
 	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception {
 		List<Recruit> recruit = sqlSession.selectList("Recruit.searchRecruit", searchRecruit);
 		return recruit;
+	}
+	
+	public int reportRecruit(int recruitNo) throws Exception{
+		return sqlSession.delete("Recruit.updatePolice", recruitNo);
 	}
 }

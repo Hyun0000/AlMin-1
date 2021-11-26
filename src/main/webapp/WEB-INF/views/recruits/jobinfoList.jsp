@@ -66,7 +66,7 @@
 												</h5></li>
 										</ul>
 										<button class="genric-btn primary small"
-											onclick="${pageContext.request.contextPath }//recruits/detailjobinfo">상세보기</button>
+											onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}'">상세보기</button>
 									</div>
 								</div>
 							</div>
@@ -162,9 +162,11 @@
 	</footer>
 
 	<script>
-	function search(){
-		$("#searchRecruit").attr("action","${pageContext.request.contextPath }/recruits").attr("method","get").submit();
-	}
+		function search() {
+			$("#searchRecruit").attr("action",
+					"${pageContext.request.contextPath }/recruits").attr(
+					"method", "get").submit();
+		}
 	</script>
 	<c:if test="${!empty msg}">
 		<script>

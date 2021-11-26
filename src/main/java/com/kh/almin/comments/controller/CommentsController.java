@@ -50,18 +50,13 @@ public class CommentsController {
 // ==============================================================================
 	// view용
 	// 현재는 (모든 후기 키워드 가져오기 to insert)
-	@GetMapping("/detailjobinfo")
-	public ModelAndView selectAllCommentAir(ModelAndView mv) {
-		Map<String, List<String>> commentsMap = null;
-		try {
-			commentsMap = commentsService.selectAllKeyWords();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mv.addObject("commentsMap", commentsMap);
-		mv.setViewName("recruits/detailjobinfo");
-		return mv;
-	}
+	/*
+	 * @GetMapping("/detailjobinfo") public ModelAndView
+	 * selectAllCommentAir(ModelAndView mv) { Map<String, List<String>> commentsMap
+	 * = null; try { commentsMap = commentsService.selectAllKeyWords(); } catch
+	 * (Exception e) { e.printStackTrace(); } mv.addObject("commentsMap",
+	 * commentsMap); mv.setViewName("recruits/detailjobinfo"); return mv; }
+	 */
 // ==============================================================================
 	// 후기 작성(ajax) & update
 	// @PostMapping(value = "/commentsinsert")

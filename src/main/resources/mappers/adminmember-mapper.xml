@@ -24,8 +24,6 @@
 		<result property="companyNum" column="COMPANY_NUM" />
 	</resultMap>
 
-
-
 	<select id="searchMember" resultMap="MemberResultMap"
 		parameterType="String">
 		select MEMBER_ID, MEMBER_NAME,

@@ -24,10 +24,9 @@ public class ApplicantController {
 	private static final Logger logger = LoggerFactory.getLogger(ApplicantController.class);
 
 	@GetMapping
-	private ModelAndView viewApplicants(SearchApplicant searchApplicant) throws Exception {
+	private ModelAndView viewApplicants(SearchApplicant searchApplicant, ModelAndView mv) throws Exception {
 		List<Applicant> volist = null;
 		List<Applicant> svolist = null;
-		ModelAndView mv = new ModelAndView();
 		String msg = "";
 		if (searchApplicant.getMemberGender() != null) {
 			svolist = applicantService.searchApplicant(searchApplicant);

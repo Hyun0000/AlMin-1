@@ -27,6 +27,7 @@
 		<result property="recruitJobWho" column="RECRUIT_JOB_WHO" />
 		<result property="recruitJobBranch" column="RECRUIT_JOB_BRANCH" />
 		<result property="recruitDate" column="RECRUIT_DATE" />
+		<result property="recruitReport" column="RECRUIT_REPORT" />
 
 		<!-- <association property="districtMap" resultMap="District"></association> -->
 	</resultMap>
@@ -40,7 +41,8 @@
 	</select>
 
 	<delete id="deleteReport" parameterType="String">
-		delete from COMPANY_RECRUIT where
+		delete from
+		COMPANY_RECRUIT where
 		RECRUIT_NO = #{recruitNo}
 	</delete>
 

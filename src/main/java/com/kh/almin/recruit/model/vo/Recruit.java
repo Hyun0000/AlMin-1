@@ -40,6 +40,7 @@ public class Recruit {
    private Date recruitDate;
    private char recruitPub;
    private char recruitJobBranch;
+   private int recruitReport;
    
    private District district; //쿼리로 join할 Vo
 }
