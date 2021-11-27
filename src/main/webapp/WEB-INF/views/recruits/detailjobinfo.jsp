@@ -201,11 +201,7 @@
 					<div id="dragzone_${dragNum}" class="dragzoneClass">
 						<c:forEach var="condition" items="${map.value}">
 							<c:set var="idNum" value="${idNum + 1}" />
-							<div id="drag_${idNum}" class="dragEle" draggable="true"
-								ondragstart="drag(event);">
-								<span class="keyword">${condition}</span><span class="xMark"
-									onClick="deleteX()">&times;</span>
-							</div>
+	<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark" onClick="deleteX()">&times;</span></div>
 						</c:forEach>
 					</div>
 				</c:forEach>
@@ -236,7 +232,7 @@
 		let commentsBoxEle = document.getElementById('comments_box');
 
 		// userID
-		let userId = "user02";
+		let userId = "user01";
 
 		// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
 		let recruitNo = '1';

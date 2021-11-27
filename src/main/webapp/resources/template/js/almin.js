@@ -41,7 +41,9 @@
 		// 예시
 		// httpRequest.open(“GET”, “/test.jsp?id=admin&pw=1234”, true); --> Web&DB 통합구현 교재 참고
 		
-		httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+		// httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		// httpRequest.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+		//  "application/x-www-form-urlencoded"는 웹브라우저가 <form> 태그를 이용해서 입력한 사용자의 데이터를 POST방식으로 전송할때 사용하는 표준 MIME type이며  key=value의 유형으로 인코딩을 합니다.
 		
 		// callback function 지정
 		httpRequest.onreadystatechange = callback;

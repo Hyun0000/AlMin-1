@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Career">
+	<insert id="insertNeed">
+		INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', '명륜갈비', '#003300',
+		TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M')
+	</insert>
+</mapper>
+
+
+
+
+
+<!--
 	<select id="selectAllWork" resultType="hashmap">
-		<!-- 가져오는 data : C.COMPANY_NAME(직장명), T.WORK_MONEY(시급), T.WORK_DAY(근무일), T.MEMBER_ID(회원 아이디) -->
+		가져오는 data : C.COMPANY_NAME(직장명), T.WORK_MONEY(시급), T.WORK_DAY(근무일), T.MEMBER_ID(회원 아이디)
 		SELECT C.COMPANY_NAME, T.WORK_MONEY, T.WORK_DAY, T.MEMBER_ID FROM COMPANY C JOIN (
 		SELECT M.MEMBER_ID, MW.WORK_COMPANY_ID, MW.WORK_DAY, MW.WORK_MONEY FROM MEMBER M JOIN MEMBER_WORK MW ON M.MEMBER_ID = MW.WORK_MEMBER_ID) T
 		ON C.COMPANY_ID = T.WORK_COMPANY_ID
 	</select>
-</mapper>
+-->

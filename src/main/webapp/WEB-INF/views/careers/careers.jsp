@@ -26,82 +26,83 @@
 <div id="ModalBg">
     <div id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 1.5rem; font-weight: bolder;"></h5>
-                    <div id="insertBtnBox">
-                        <label class="modalTypeLabel" for="go">지원</label>
-                        <input type="radio" id="go" name="test" style="display: none;">
-
-                        <label class="modalTypeLabel" for="meet">면접</label>
-                        <input type="radio" id="meet" name="test" style="display: none;">
-
-                        <label class="modalTypeLabel" for="work">근무</label>
-                        <input type="radio" id="work" name="test" style="display: none;">
-
-                        <label class="modalTypeLabel" for="other">기타</label>
-                        <input type="radio" id="other" name="test" style="display: none;">
-                    </div>
-                </div>
-                <div class="modal-body" style="padding: 20px;">
-                    <form>
-                        <!-- 제목 -->
-
-                        <div class="mb-3" id="insertTitleBox">
-                            <div id="insertTitleDiv">
-                            <label for="message-text" class="col-form-label" style="text-align: left;">제목</label>
-                            </div>
-                            <!-- <div id="insertTitleBox_input">제목</div> -->
-                            <hr>
-                            <input type="text" class="form control" id="recipient-name" placeholder="글자수 제한">
-                        </div>
-                        <!-- 날짜 -->
-                        <div class="mb-3" id="insertDayBox">
-                            <label for="message-text" class="col-form-label">날짜</label>
-                            <hr>
-                                <div>
-                                    <table id="insertDateTable">
-                                        <tr>
-                                            <td class="insertTableTitle">시작일</td>
-                                            <td id="startDay" class="insertTableDate" onclick="miniCalUp();"></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="insertTableTitle">종료일</td>
-                                            <td id="endDay" class="insertTableDate" onclick="miniCalUp();"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <!-- <div id="timeCheckbox">
-                                    <input type="checkbox" id="checkbox_id">
-                                    <label for="checkbox_id">시간 설정</label>
-                                </div> -->
-                        </div>
-                        <!-- 시간 -->
-                        <div class="mb-3" id="insertTimeBox">
-                            <label for="message-text" class="col-form-label">시간</label>
-                            <hr>
-                            <table id="timeTable">
-                                <tr>
-                                    <!-- <td><label for="startTime" class="insertTimeTitle">시작 시간</label></td> -->
-                                    <td class="insertTimeTitle">시작 시간</td>
-                                    <td><input type="text" class="timepicker insertTime" id="startTime"/></td>
-                                </tr>
-                                <tr>
-                                    <!-- <td><label for="endTime" class="insertTimeTitle">종료 시간</label></td> -->
-                                    <td class="insertTimeTitle">종료 시간</td>
-                                    <td><input type="text" class="timepicker insertTime" id="endTime"/></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-                    <button type="button" class="btn btn-primary" id="calSubmitBtn">등록</button>
-                    <button type="button" class="btn btn-secondary">삭제</button>
-                    <button type="button" class="btn btn-secondary" id="insertBoxClose" onclick="modalClose();">취소</button>
-                </div>
-            </div>
+        	<!-- <form> -->
+	            <div class="modal-content">
+	            	<!-- 색깔 및 버튼-->
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 1.5rem; font-weight: bolder;"></h5>
+	                    <div id="insertBtnBox">
+	                        <div>
+	                            <input type="color" id="colorPicker">
+	                        </div>
+	                        <div>
+	                            <label class="modalTypeLabel" for="go">지원</label>
+	                            <input value="G" type="radio" id="go" name="test" style="display: none;">
+	
+	                            <label class="modalTypeLabel" for="meet">면접</label>
+	                            <input value="M" type="radio" id="meet" name="test" style="display: none;">
+	
+	                            <label class="modalTypeLabel" for="work">근무</label>
+	                            <input value="W" type="radio" id="work" name="test" style="display: none;">
+	
+	                            <label class="modalTypeLabel" for="other">기타</label>
+	                            <input value="O" type="radio" id="other" name="test" style="display: none;">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="modal-body" style="padding: 20px;">
+	                        <!-- 제목 -->
+	                        <div class="mb-3" id="insertTitleBox">
+	                            <div id="insertTitleDiv">
+	                            <label for="message-text" class="col-form-label" style="text-align: left;">제목</label>
+	                            </div>
+	                            <!-- <div id="insertTitleBox_input">제목</div> -->
+	                            <hr>
+	                            <input type="text" class="form control" id="recipient-name" placeholder="글자수 제한">
+	                        </div>
+	                        <!-- 날짜 -->
+	                        <div class="mb-3" id="insertDayBox">
+	                            <label for="message-text" class="col-form-label">날짜</label>
+	                            <hr>
+	                                <div>
+	                                    <table id="insertDateTable">
+	                                        <tr>
+	                                            <td class="insertTableTitle">시작일</td>
+	                                            <td id="startDay" class="insertTableDate" onclick="miniCalUp();"></td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td class="insertTableTitle">종료일</td>
+	                                            <td id="endDay" class="insertTableDate" onclick="miniCalUp();"></td>
+	                                        </tr>
+	                                    </table>
+	                                </div>
+	                        </div>
+	                        <!-- 시간 -->
+	                        <div class="mb-3" id="insertTimeBox">
+	                            <label for="message-text" class="col-form-label">시간</label>
+	                            <hr>
+	                            <table id="timeTable">
+	                                <tr>
+	                                    <!-- <td><label for="startTime" class="insertTimeTitle">시작 시간</label></td> -->
+	                                    <td class="insertTimeTitle">시작 시간</td>
+	                                    <td><input type="text" class="timepicker insertTime" id="startTime"/></td>
+	                                </tr>
+	                                <tr>
+	                                    <!-- <td><label for="endTime" class="insertTimeTitle">종료 시간</label></td> -->
+	                                    <td class="insertTimeTitle">종료 시간</td>
+	                                    <td><input type="text" class="timepicker insertTime" id="endTime"/></td>
+	                                </tr>
+	                            </table>
+	                        </div>
+	             		</div>
+	                <div class="modal-footer">
+	                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
+	                    <button type="button" class="btn btn-primary" id="calSubmitBtn">등록</button>
+	                    <button type="button" class="btn btn-secondary">삭제</button>
+	                    <button type="button" class="btn btn-secondary" id="insertBoxClose" onclick="modalClose();">취소</button>
+	                </div>
+	            </div>
+            <!-- </form> -->
         </div>
     </div>
 </div>
@@ -151,6 +152,9 @@
         </div>
         <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
     </div>
+<script>
+	let userId = "user01";
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value="/resources/career/js/main.js"/>"></script>
@@ -158,6 +162,7 @@
 <script src="<c:url value="/resources/career/js/calender.js"/>"></script>
 <script src="<c:url value="/resources/career/js/app.js"/>"></script>
 <script src="<c:url value="/resources/career/js/mdtimepicker.js"/>"></script>
+<script src="<c:url value="/resources/career/js/calenderCRUD.js"/>"></script>
 <script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script>$(document).ready(function () {$('.timepicker').mdtimepicker();});</script>
 </body>

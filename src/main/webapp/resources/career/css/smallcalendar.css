@@ -23,14 +23,6 @@ hr{ margin-top: 0;}
     background-color: white;
 }
 
-/* .calendar{
-    background-color: rgb(128, 233, 30);
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0 auto;
-} */
-
 /* 날짜(1일 ~ 31일) style */
 .dayName {
     color: white;
@@ -51,7 +43,6 @@ hr{ margin-top: 0;}
     background-color: rgba(12,12,12,0.3);
     /* 임시 주석 */
     display: none;
-    /* overflow: scroll; */
 }
 
 .modal-dialog{
@@ -70,9 +61,19 @@ hr{ margin-top: 0;}
     background-color: white;
 }
 
+/* 색깔선택 창 */
+#colorPicker {
+    width: 200px;
+    border: none;
+}
+
 /* 일정 추가 모달창 content 버튼 전체 <div> */
 #insertBtnBox {
-    text-align: right;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    /* text-align: right; */
 }
 
 /* 일정 추가 모달창 content 버튼 전체 <div>안의 <label> */

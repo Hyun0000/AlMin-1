@@ -1,4 +1,7 @@
 // ========================================== 모달창 변수들 ==========================================
+// 일정 추가 모달창 검은 바탕
+let modalBgEle = document.getElementById('ModalBg');
+
 // 일정 추가 모달창에서 시작일, 종료일 <div>의 id를 담을 변수
 let selectTest;
 
@@ -36,33 +39,33 @@ let allStart;
 let allEnd
 
 // 모달창 일정 등록 버튼
-let calSubmitBtn = document.getElementById('calSubmitBtn');
-calSubmitBtn.onclick = calSubmit;
+// let calSubmitBtn = document.getElementById('calSubmitBtn');
+// calSubmitBtn.onclick = calSubmit;
 // ========================================== 모달창 변수들 ==========================================
 // 모달창 일정 등록 버튼 함수  ex) '2021-11-01T09:00'
-function calSubmit() {
-    console.log(12312312313123);
-    console.log(startDayTd.innerText);
-    console.log(endDayTd.innerText);
-    console.log(startTimeInput.value);
-    console.log(EndTimeInput.value);
-    console.log(12312312313123);
-
-    // 시작 날짜 + 시간
-    allStart = startDayTd.innerText + "T" + startTimeInput.value;
-
-    // 종료 날짜 + 시간
-    allEnd = endDayTd.innerText + "T" + EndTimeInput.value;
-    
-    // 시작일과 종료일이 같은데 종료시간이 시작시간 보다 빠를때
-    if (startDayTd.innerText === endDayTd.innerText && startTimeInput.value > EndTimeInput.value) {
-        alert('시간을 올바르게 입력해주세요');
-        EndTimeInput.value = "";
-    }
-
-    console.log(allStart);
-    console.log(allEnd);
-}
+//function calSubmit() {
+//    console.log(12312312313123);
+//    console.log(startDayTd.innerText);
+//    console.log(endDayTd.innerText);
+//    console.log(startTimeInput.value);
+//    console.log(EndTimeInput.value);
+//    console.log(12312312313123);
+//
+//    // 시작 날짜 + 시간
+//    allStart = startDayTd.innerText + "T" + startTimeInput.value;
+//
+//    // 종료 날짜 + 시간
+//    allEnd = endDayTd.innerText + "T" + EndTimeInput.value;
+//    
+//    // 시작일과 종료일이 같은데 종료시간이 시작시간 보다 빠를때
+//    if (startDayTd.innerText === endDayTd.innerText && startTimeInput.value > EndTimeInput.value) {
+//        alert('시간을 올바르게 입력해주세요');
+//        EndTimeInput.value = "";
+//    }
+//
+//    console.log(allStart);
+//    console.log(allEnd);
+//}
 
 // 모달창 버튼 4개 색깔 바꾸기
 function changeColor() {
@@ -92,19 +95,28 @@ function modalUp() {
     startTimeInput.value = "";
     EndTimeInput.value = "";
     titleIn.value = "";
+    colorEle.value = "#0d6efd";
 
-    document.getElementById('ModalBg').style.display = 'block';
+    modalBgEle.style.display = 'block';
 }
 
-// 모달창 팝업 닫기(버튼 눌렀을때)
+// 모달창 팝업 닫기(취소 버튼 눌렀을때)
 function modalClose() {
-    document.getElementById('ModalBg').style.display = 'none';
+    modalBgEle.style.display = 'none';
 }
 
 // 모달창 팝업 닫기(배경 눌렀을때)
 window.onclick = () => {
     if (event.target == document.getElementById('ModalBg')) {
-        document.getElementById('ModalBg').style.display = 'none';
+        modalBgEle.style.display = 'none';
+    }
+}
+
+// 모달창 팝업 닫기(Esc 눌렀을때)
+document.onkeydown = (event) => {
+    if (event.keyCode == 27 && modalBgEle.style.display == 'block') {
+        modalBgEle.style.display = 'none';
+        document.getElementById('mimiCalbg').style.display = 'none';
     }
 }
 
