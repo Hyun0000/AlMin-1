@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,12 +42,98 @@ public class CareerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CareerController.class);
 // ===================================================================================================================
+	// calender 첫 page --> 지원일자 조회를 calender 첫 페이지로 결정
+	@GetMapping(value = "/calender/{userId}", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String selectCalList(@PathVariable("userId") String userId) throws Exception {
+		System.out.println("@GetMapping 진입");
+		System.out.println("@PathVariable(\"userId\") : " + userId);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		List<Map<String, String>> calList = null;
+		try {
+			calList = careerService.selectCalList(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String jsonStr = gson.toJson(calList);
+		return jsonStr;
+	}
+// ===================================================================================================================
 	// calender 첫 page를 열어주는 view용 method
 	@GetMapping("/calender")
-	public String selectCareers() throws Exception {
+	public String loadCalender() throws Exception {
 		return "careers/careers";
 	}
 // ===================================================================================================================
+	// 구직 & 면접 일정 입력(insert)
+	@PostMapping(value = "/insertCalneed")
+	@ResponseBody
+	public String insertNeed(@RequestBody String memberNeed) {
+		System.out.println("@PostMapping(\"/insertneed\") 진입");
+		System.out.println("memberNeed1 : " + memberNeed);
+		System.out.println(memberNeed instanceof String);
+		
+		JSONObject jsonObject = new JSONObject();
+		JSONParser jsonParser = new JSONParser();
+		try {
+			jsonObject = (JSONObject) jsonParser.parse(memberNeed);
+			System.out.println("jsonObject : " + jsonObject);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		String startTime = (String)jsonObject.get("needTimeStart");
+		startTime = startTime.replace("T", " ");
+		System.out.println("startTime : " + startTime);
+		
+		String endTime = (String)jsonObject.get("needTimeEnd");
+		endTime = endTime.replace("T", " ");
+		System.out.println("endTime : " + endTime);
+		
+		MemberNeed memberNeedVO = 
+		new MemberNeed((String)jsonObject.get("needMemberId"), (String)jsonObject.get("needTitle"), (String)jsonObject.get("needColor"), startTime, endTime, (String)jsonObject.get("needGoMeet"));
+		
+		int result = 0;
+		try {
+			result = careerService.insertNeed(memberNeedVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 1) {
+			System.out.println("일정추가 성공");
+		} else if(result == 0) {
+			System.out.println("일정추가 실패");
+		}
+		System.out.println();
+		
+
+		// 2021-02-11 23:00:00 --> REPLACE 사용해서 가운데에 T 넣기
+		// title : 명륜진사갈비
+		// start: '2021-11-01T09:00:00'
+		// end : '2021-11-02T23:00:00'
+		// color : red
+
+		return "ok";
+	}
+// ===================================================================================================================
+// ===================================================================================================================
+// ===================================================================================================================
+	// 예외처리
+	@ExceptionHandler
+	private ModelAndView handleMemberException(Exception e) {
+		logger.error(e.getMessage());
+		
+		//나중에 500error.jsp에서 "errorMessage" 표시해주기 + 뒤로가기, 홈으로 이동 버튼
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("errorMessage", e.getMessage());
+		mv.setViewName("error/500error");
+		return mv ;
+	}
+}
+//===================================================================================================================
 //	// 회원의 현재 근무지 정보를 가져오는 method
 //	// @PostMapping("/workcalender")
 //	
@@ -66,99 +153,3 @@ public class CareerController {
 //		
 //		return gsonStr;
 //	}
-// ===================================================================================================================
-// ===================================================================================================================
-// ===================================================================================================================
-	// 구직 & 면접 일정 입력(insert)
-	@PostMapping(value = "/insertCalneed")
-	@ResponseBody
-	public String insertNeed(@RequestBody String memberNeed) {
-		System.out.println("@PostMapping(\"/insertneed\") 진입");
-		System.out.println("memberNeed1 : " + memberNeed);
-		System.out.println(memberNeed instanceof String);
-		
-		JSONObject jsonObject = new JSONObject();
-		JSONParser jsonParser = new JSONParser();
-		try {
-			jsonObject = (JSONObject) jsonParser.parse(memberNeed);
-			System.out.println("jsonObject : " + jsonObject);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(jsonObject.get("needColor"));
-		System.out.println(jsonObject.get("needMemberId"));
-		System.out.println(jsonObject.get("needTimeDay"));
-		System.out.println(jsonObject.get("needTimeDay"));
-		System.out.println(jsonObject.get("needTitle"));
-		System.out.println(jsonObject.get("needGoMeet"));
-		
-		String time = (String)jsonObject.get("needTimeDay");
-		time = time.replace("T", " ");
-		System.out.println("test : " + time);
-		
-		MemberNeed MemberNeedVO = 
-		new MemberNeed((String)jsonObject.get("needMemberId"), (String)jsonObject.get("needTitle"), (String)jsonObject.get("needColor"), time, (String)jsonObject.get("needGoMeet"));
-		
-		
-		//INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', 'apple', '2', '명륜갈비', '#003300', TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M');
-
-		//SELECT TO_CHAR(NEED_TIME_DAY, 'yyyy-mm-dd hh24:mi:ss') FROM MEMBER_NEED;
-
-		//-- 2021-02-11 23:00:00 --> REPLACE 사용해서 가운데에 T 넣기
-		//--start: '2021-11-01T09:00:00'
-		//--end : '2021-11-02T23:00:00'
-		//--이벤트명 / 날짜+T+시간 / 색깔(기본값 필요) - 무조건 #ff0000 형식으로 입력
-
-	     
-		
-//		try {
-//			System.out.println("memberNeed : " + URLDecoder.decode(memberNeed, "UTF-8"));
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-
-		return "";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-// ===================================================================================================================
-	// 예외처리
-	@ExceptionHandler
-	private ModelAndView handleMemberException(Exception e) {
-		logger.error(e.getMessage());
-		
-		//나중에 500error.jsp에서 "errorMessage" 표시해주기 + 뒤로가기, 홈으로 이동 버튼
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("errorMessage", e.getMessage());
-		mv.setViewName("error/500error");
-		return mv ;
-	}
-}

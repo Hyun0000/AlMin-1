@@ -2,13 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Career">
 	<insert id="insertNeed">
-		INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', '명륜갈비', '#003300',
-		TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M')
+		INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, #{needMemberId}, '1', #{needTitle}, #{needColor},
+		TO_DATE(#{needTimeStart},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{needTimeEnd},'yyyy-mm-dd hh24:mi:ss'), #{needGoMeet})
 	</insert>
+	
+	<resultMap type="MemberNeed" id="selectNeedCalMap">
+		<result column="NEED_TITLE" property="needTitle"/>
+		<result column="NEED_COLOR" property="needColor"/>
+		<result column="NEED_TIME_START" property="needTimeStart"/>
+		<result column="NEED_TIME_END" property="needTimeEnd"/>
+	</resultMap>
+	
+	<select id="selectNeedCal" resultType="hashmap" parameterType="string">
+		SELECT NEED_TITLE, NEED_COLOR, TO_CHAR(NEED_TIME_START, 'yyyy-mm-dd hh24:mi:ss') STARTTIME, TO_CHAR(NEED_TIME_END, 'yyyy-mm-dd hh24:mi:ss') ENDTIME
+		FROM MEMBER_NEED WHERE NEED_MEMBER_ID = #{userId}
+	</select>
 </mapper>
 
+<!--
+	title : 명륜진사갈비
+	start: '2021-11-01T09:00:00'
+	end : '2021-11-02T23:00:00'
+	color : red
+-->
 
 
+<!--
+	private int needMemberNo;
+	private String needMemberId;
+	private String needMemberType;
+	private String needTitle;
+	private String needColor;
+	private String needTimeStart;
+	private String needTimeEnd;
+	private String needGoMeet;
+-->
+
+<!--
+	NEED_MEMBER_NO 		NUMBER 			PRIMARY KEY,
+	NEED_MEMBER_ID 		varchar2(50), 	복합 외래키 지정(MEMBER)
+	NEED_MEMBER_TYPE 	char(1) 		DEFAULT 1, 복합 외래키 지정(MEMBER)
+	NEED_TITLE 			varchar2(50) 	NOT NULL,
+	NEED_COLOR 			varchar2(10) 	DEFAULT '#0d6efd',
+	NEED_TIME_START 	TIMESTAMP 		NOT NULL, 면접 혹은 지원 날짜(시작)
+	NEED_TIME_END 		TIMESTAMP 		NOT NULL, 면접 혹은 지원 날짜(종료)
+	NEED_GO_MEET 		char(1) 		CHECK(NEED_GO_MEET IN('G', 'M')), 면접인지 지원인지 구분
+		
+	CONSTRAINT MEMBER_NEED_MEMBER_FK FOREIGN KEY(NEED_MEMBER_ID, NEED_MEMBER_TYPE)REFERENCES MEMBER(MEMBER_ID, MEMBER_TYPE), 복합 외래키 지정(MEMBER)
+	CONSTRAINT MEMBER_NEED_COMPANT_FK FOREIGN KEY(NEED_COMPANY_ID, NEED_COMPANY_TYPE)REFERENCES COMPANY(COMPANY_ID, COMPANY_TYPE) 복합 외래키 지정(COMPANY)
+-->
 
 
 <!--

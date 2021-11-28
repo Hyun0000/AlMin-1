@@ -235,7 +235,7 @@ public class CommentsController {
 		
 		if (deleteResult == 6) {result = "ok";}
 		else {result = "fail";}
-		
+
 		return result;
 	}
 // ==============================================================================

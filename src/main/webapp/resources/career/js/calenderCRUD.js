@@ -7,7 +7,34 @@ let fourbtnEle = document.querySelectorAll('input[type=radio]');
 
 // 클릭된 라디오 버튼의 value
 let fourbtnEleVal;
-// ==================================================================================================
+
+// 달력 최상단 제목 <div>
+let topCalTotle = document.getElementById('top_title');
+
+// 이벤트를 담을 객체 배열
+// let evnets = [];
+//========================================== 일정 조회  ================================================
+//window.onload = function() {
+//	let getPath = "/calender/" + userId;
+//	console.log(getPath);
+//	sendRequest("GET", getPath, afterLoadSelect);
+//}
+
+
+// calender 첫 load 후 callback function
+//function afterLoadSelect() {
+//	console.log(123);
+//	if (httpRequest.readyState === 4) {
+//		console.log(123);
+//		if (httpRequest.status === 200) {
+//			console.log(123);
+//			alert(123);
+//			console.log(httpRequest.responseText);
+//			test();
+//		}
+//	}
+//}
+// ========================================== 일정 추가 ================================================
 function calSubmit() {
 	// 클릭된 라디오 버튼의 value 담기
     for (let k = 0; k < fourbtnEle.length; k++) {
@@ -15,14 +42,6 @@ function calSubmit() {
             fourbtnEleVal = fourbtnEle[k].value;
         }
     }
-    
-	console.log(12312312313123);
-	console.log(startDayTd.innerText);
-	console.log(endDayTd.innerText);
-	console.log(startTimeInput.value);
-	console.log(EndTimeInput.value);
-	console.log(12312312313123);
-	console.log(fourbtnEleVal);
 	
 	let insertBool = true;
 
@@ -44,7 +63,8 @@ function calSubmit() {
 		needMemberId : userId,
 		needTitle : titleEle.value,
 		needColor : colorEle.value,
-		needTimeDay : allStart,
+		needTimeStart : allStart,
+		needTimeEnd : allEnd,
 		needGoMeet : fourbtnEleVal
     }
     
@@ -61,11 +81,15 @@ function calSubmit() {
 function afterCalInsert() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
-			alert("등록 완료");
-			console.log("등록 완료");
+			console.log(httpRequest.responseText);
+			if (httpRequest.responseText === 'ok') {
+				alert("등록 완료");
+				modalBgEle.style.display = 'none';	
+			}
 		}
 	}
 }
+
 
 
 //INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', 'apple', '2', '명륜갈비', '#003300', TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M');
@@ -77,10 +101,13 @@ function afterCalInsert() {
 //--end : '2021-11-02T23:00:00'
 //--이벤트명 / 날짜+T+시간 / 색깔(기본값 필요) - 무조건 #ff0000 형식으로 입력
 
-//private int needMemberNo;
-//private String needMemberId;
-//private String needMemberType;
-//private String needTitle;
-//private String needColor;
-//private String needTimeDay;
-//private String needGoMeet;
+// private int needMemberNo;
+// private String needMemberId;
+// private String needMemberType;
+// private String needTitle;
+// private String needColor;
+// private String needTimeStart;
+// private String needTimeEnd;
+// private String needGoMeet;
+
+
