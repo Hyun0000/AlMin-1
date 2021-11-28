@@ -12,5 +12,10 @@
 		<result property="jobDistrictNo" column="JOB_DISTRICT_NO"/>
 		<result property="educationNo" column="EDUCATION_NO"/>
 		<result property="careersNo" column="CAREERS_NO"/>
+		<result property="jobCareers" column="JOB_CAREERS"/>
 	</resultMap>
+	
+	<insert id="insertResume" parameterType="Resume">
+		insert into MEMBER_RESUME values(MEMBER_RESUME_SEQUENCE.NEXTVAL,#{memberId},#{resumeTitle},#{resumePublicYn},#{resumePhone},#{jobDistrictNo},#{educationNo},#{jobCareers})
+	</insert>
 </mapper>

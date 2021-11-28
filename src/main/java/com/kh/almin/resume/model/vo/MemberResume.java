@@ -15,6 +15,7 @@ import lombok.ToString;
 //JOB_DISTRICT_NO	NUMBER
 //EDUCATION_NO	NUMBER
 //CAREERS_NO	NUMBER
+//JOB_CAREERS VARCHAR2(3000)
 @Getter
 @Setter
 @ToString
@@ -30,4 +31,5 @@ public class MemberResume { //회원 이력서 테이블
 	private int jobDistrictNo;
 	private int educationNo;
 	private int careersNo;
+	private String jobCareers;
 }
