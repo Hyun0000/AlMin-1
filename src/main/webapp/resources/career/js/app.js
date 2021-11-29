@@ -1,43 +1,3 @@
-// ========================================== 모달창 변수들 ==========================================
-// 일정 추가 모달창 검은 바탕
-let modalBgEle = document.getElementById('ModalBg');
-
-// 일정 추가 모달창에서 시작일, 종료일 <div>의 id를 담을 변수
-let selectTest;
-
-// 제목칸 <input>
-let titleIn = document.getElementById('recipient-name');
-
-// 시작일 <div>
-let startDaytDiv = document.getElementById('startDay');
-
-// 종료일 <div>
-let endDayDiv = document.getElementById('endDay');
-
-// 시작일 담는 <td>
-let startDayTd = document.getElementById('startDay');
-
-// 종료일 담는 <td>
-let endDayTd = document.getElementById('endDay');
-
-// 시작 시간 <input>
-let startTimeInput = document.getElementById('startTime');
-
-// 종료 시간 <input>
-let EndTimeInput = document.getElementById('endTime');
-
-// 입력 모달창 상단 버튼 4개
-let labelEles = document.getElementsByClassName('modalTypeLabel');
-for (let i = 0; i < labelEles.length; i++) {
-    labelEles[i].onclick = changeColor;
-}
-
-// 시작 날짜 + 시간
-let allStart;
-
-// 종료 날짜 + 시간
-let allEnd
-
 // 모달창 일정 등록 버튼
 // let calSubmitBtn = document.getElementById('calSubmitBtn');
 // calSubmitBtn.onclick = calSubmit;
@@ -67,62 +27,67 @@ let allEnd
 //    console.log(allEnd);
 //}
 
-// 모달창 버튼 4개 색깔 바꾸기
+// 모달창 radio의 라벨 클릭시
+for (let i = 0; i < labelEles.length; i++) {labelEles[i].onclick = changeColor;}
+
+//모달창 버튼 4개 색깔 바꾸기
 function changeColor() {
     console.log(this);
     if (this.style.backgroundColor == "royalblue" && this.style.color == "white") {
-        console.log(1);
-        this.style.backgroundColor = "white";
-        this.style.color = "royalblue";
-        $(this).siblings('.modalTypeLabel').css("color", "white");
-        $(this).siblings('.modalTypeLabel').css("backgroundColor", "royalblue");
-        console.log($(this).siblings('.modalTypeLabel'));
-    } else {
-        console.log(2);
-        this.style.backgroundColor = "royalblue";
-        this.style.color = "white";
-        $(this).siblings('.modalTypeLabel').css("color", "royalblue");
-        $(this).siblings('.modalTypeLabel').css("backgroundColor", "white");
-        console.log($(this).siblings('.modalTypeLabel'));
+        this.style.backgroundColor = "white"; this.style.color = "royalblue";
+        // console.log(this.nextElementSibling);
+        // this.nextElementSibling.checked = false;
+        $(this).siblings('.modalTypeLabel').css({"background-color":"royalblue","color":"white"});
+    } else if(this.style.backgroundColor == "white" && this.style.color == "royalblue") {
+        this.style.backgroundColor = "royalblue"; this.style.color = "white";
+        $(this).siblings('.modalTypeLabel').css({"background-color":"white","color":"royalblue"});
     }
 }
 
 // 모달창 팝업 callback function
 function modalUp() {
     // 모달창 초기회(by 기존 일정 수정, 새로운 일정 추가)
-    startDayTd.innerText = "";
-    endDayTd.innerText = "";
-    startTimeInput.value = "";
-    EndTimeInput.value = "";
-    titleIn.value = "";
+    startDayEle.innerText = "";
+    endDayEle.innerText = "";
+    startTimeEle.value = "";
+    endTimeEle.value = "";
+    titleEle.value = "";
+    fourbtnEleVal = "";
     colorEle.value = "#0d6efd";
+    document.getElementById('calUpdateBtn').style.display = 'none'; // 수정 버튼 숨기기
+    
+    calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
+    calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
+    
+    $(".modalTypeLabel").css({"background-color":"white","color":"royalblue"}); // 라벨 색깔 원래대로
+    for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
 
-    modalBgEle.style.display = 'block';
+    modalBack.style.display = 'block';
 }
 
 // 모달창 팝업 닫기(취소 버튼 눌렀을때)
 function modalClose() {
-    modalBgEle.style.display = 'none';
+    modalBack.style.display = 'none';
 }
 
 // 모달창 팝업 닫기(배경 눌렀을때)
 window.onclick = () => {
     if (event.target == document.getElementById('ModalBg')) {
-        modalBgEle.style.display = 'none';
+        modalBack.style.display = 'none';
     }
 }
 
 // 모달창 팝업 닫기(Esc 눌렀을때)
 document.onkeydown = (event) => {
-    if (event.keyCode == 27 && modalBgEle.style.display == 'block') {
-        modalBgEle.style.display = 'none';
-        document.getElementById('mimiCalbg').style.display = 'none';
+    if (event.keyCode == 27 && modalBack.style.display == 'block') {
+        modalBack.style.display = 'none';
+        miniCalBack.style.display = 'none';
     }
 }
 
 function miniCalUp() {
     // document.getElementById('miniCal').style.display = 'block';
-    document.getElementById('mimiCalbg').style.display = 'block';
+    miniCalBack.style.display = 'block';
     document.getElementById('miniCal').style.display = 'block';
     // 시작일, 종료일 중 선택한 <div>의 id
     selectTest = event.target.id;
@@ -228,26 +193,26 @@ function dayEleInnerText() {
     console.log(saveDate);
 
     if (selectTest === 'startDay') {
-        startDaytDiv.innerText = saveDate;
-        document.getElementById('mimiCalbg').style.display = 'none'; 
+        startDayEle.innerText = saveDate;
+        miniCalBack.style.display = 'none'; 
         minicalLoad();
     } else if (selectTest === 'endDay') {
-        endDayDiv.innerText = saveDate;
-        document.getElementById('mimiCalbg').style.display = 'none';
+        endDayEle.innerText = saveDate;
+        miniCalBack.style.display = 'none';
         minicalLoad();
     }
 
     // 시작일과 종료일의 날짜 순서가 이상할때
     // 1. 시작일 칸을 선택해서 순서가 이상할때
-    if (selectTest === 'startDay' && startDaytDiv.innerText > endDayDiv.innerText && endDayDiv.innerText != "") {
-        startDaytDiv.innerText = "";
+    if (selectTest === 'startDay' && startDayEle.innerText > endDayEle.innerText && endDayEle.innerText != "") {
+        startDayEle.innerText = "";
         minicalLoad(); // 미니 달력 초기화
         alert("날짜를 올바르게 선택해주세요");
     }
 
     // 1. 종료일 칸을 선택해서 순서가 이상할때
-    if (selectTest === 'endDay' && startDaytDiv.innerText > endDayDiv.innerText && endDayDiv.innerText != "") {
-        endDayDiv.innerText = "";
+    if (selectTest === 'endDay' && startDayEle.innerText > endDayEle.innerText && endDayEle.innerText != "") {
+        endDayEle.innerText = "";
         minicalLoad(); // 미니 달력 초기화
         alert("날짜를 올바르게 선택해주세요");
     }
@@ -312,4 +277,3 @@ document.querySelector('#next-year').onclick = () => {
 let dark_mode_toggle = document.querySelector('.dark-mode-switch');
 }
 // ========================== 미니 달력 load ==========================
-

@@ -36,17 +36,17 @@
 	                            <input type="color" id="colorPicker">
 	                        </div>
 	                        <div>
-	                            <label class="modalTypeLabel" for="go">지원</label>
-	                            <input value="G" type="radio" id="go" name="test" style="display: none;">
-	
+								<label class="modalTypeLabel" for="go">지원</label>
+	                            <input class="typeRadio" value="G" type="radio" id="go" name="test">
+	                            <!--  style="display: none;" -->
 	                            <label class="modalTypeLabel" for="meet">면접</label>
-	                            <input value="M" type="radio" id="meet" name="test" style="display: none;">
+	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test">
 	
 	                            <label class="modalTypeLabel" for="work">근무</label>
-	                            <input value="W" type="radio" id="work" name="test" style="display: none;">
+	                            <input class="typeRadio" value="W" type="radio" id="work" name="test">
 	
 	                            <label class="modalTypeLabel" for="other">기타</label>
-	                            <input value="O" type="radio" id="other" name="test" style="display: none;">
+	                            <input class="typeRadio" value="O" type="radio" id="other" name="test">
 	                        </div>
 	                    </div>
 	                </div>
@@ -97,8 +97,9 @@
 	             		</div>
 	                <div class="modal-footer">
 	                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
+	                    <button type="button" class="btn btn-primary" id="calUpdateBtn">수정</button>
 	                    <button type="button" class="btn btn-primary" id="calSubmitBtn">등록</button>
-	                    <button type="button" class="btn btn-secondary">삭제</button>
+	                    <button type="button" class="btn btn-secondary" id="calDeleteBtn">삭제</button>
 	                    <button type="button" class="btn btn-secondary" id="insertBoxClose" onclick="modalClose();">취소</button>
 	                </div>
 	            </div>
@@ -159,6 +160,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value="/resources/career/js/main.js"/>"></script>
 <script src="<c:url value="/resources/career/js/ko.js"/>"></script>
+<script src="<c:url value="/resources/career/js/calendervar.js"/>"></script>
 <script src="<c:url value="/resources/career/js/calender.js"/>"></script>
 <script src="<c:url value="/resources/career/js/app.js"/>"></script>
 <script src="<c:url value="/resources/career/js/mdtimepicker.js"/>"></script>

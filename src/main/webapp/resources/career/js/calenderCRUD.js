@@ -1,16 +1,3 @@
-// 모달창 일정 '등록' 버튼
-let insertBtn = document.getElementById('calSubmitBtn');
-calSubmitBtn.onclick = calSubmit;
-
-//모달창 4개의 라디오 버튼
-let fourbtnEle = document.querySelectorAll('input[type=radio]');
-
-// 클릭된 라디오 버튼의 value
-let fourbtnEleVal;
-
-// 달력 최상단 제목 <div>
-let topCalTotle = document.getElementById('top_title');
-
 // 이벤트를 담을 객체 배열
 // let evnets = [];
 //========================================== 일정 조회  ================================================
@@ -35,29 +22,50 @@ let topCalTotle = document.getElementById('top_title');
 //	}
 //}
 // ========================================== 일정 추가 ================================================
+calSubmitBtn.onclick = calSubmit;
+
 function calSubmit() {
-	// 클릭된 라디오 버튼의 value 담기
-    for (let k = 0; k < fourbtnEle.length; k++) {
-        if (fourbtnEle[k].checked) {
-            fourbtnEleVal = fourbtnEle[k].value;
-        }
-    }
+	let submitBool = true;
 	
-	let insertBool = true;
+	// 클릭된 라디오 버튼의 value 담기
+    for (let k = 0; k < inputRadioEle.length; k++) {
+        if (inputRadioEle[k].checked) {fourbtnEleVal = inputRadioEle[k].value;}
+    }
 
     // 시작 날짜 + 시간
-    allStart = startDayTd.innerText + "T" + startTimeInput.value;
+    allStart = startDayEle.innerText + "T" + startTimeEle.value;
 
     // 종료 날짜 + 시간
-    allEnd = endDayTd.innerText + "T" + EndTimeInput.value;
+    allEnd = endDayEle.innerText + "T" + endTimeEle.value;
     
     // 시작일과 종료일이 같은데 종료시간이 시작시간 보다 빠를때
-    if (startDayTd.innerText === endDayTd.innerText && startTimeInput.value > EndTimeInput.value) {
+    if (startDayEle.innerText === endDayEle.innerText && startTimeEle.value > endTimeEle.value) {
         alert('시간을 올바르게 입력해주세요');
-        EndTimeInput.value = "";
-        insertBool = false;
-        return false;
+        endTimeEle.value = ""; return false;
     }
+
+    // 라디오 버튼 element 유효성 검사
+    if (fourbtnEleVal === "") {
+        alert("일정의 종류를 선택해주세요");
+        submitBool = false; return false;
+    }
+
+    // 제목 입력 유효성 검사
+    if (titleEle.value.length == 0 || titleEle.value.length > 10) {
+        alert("제목의 글자수를 맞게 입력해주세요");
+        submitBool = false; return false;
+    }
+    
+    // 날짜 시간 등록 유효성 검사
+    if (startDayEle.innerText === "" || endDayEle.innerText === "" || startTimeEle.value === "" || endTimeEle.value === "") {
+        alert("날짜와 시간을 모두 입력해주세요");
+        submitBool = false; return false;
+    }
+    
+    console.log("일정 등록 시작 시간 : " + allStart);
+    console.log("일정 등록 종료 시간 : " + allEnd);
+    console.log("일정 등록 type 버튼 : " + fourbtnEleVal);
+    console.log("색깔 value : " + colorEle.value);
     
     let insertParam = {
 		needMemberId : userId,
@@ -71,7 +79,7 @@ function calSubmit() {
     console.log(insertParam);
     console.log(JSON.stringify(insertParam));
     
-    if (insertBool === true) {
+    if (submitBool === true) {
     	sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
 	}
 
@@ -84,7 +92,9 @@ function afterCalInsert() {
 			console.log(httpRequest.responseText);
 			if (httpRequest.responseText === 'ok') {
 				alert("등록 완료");
-				modalBgEle.style.display = 'none';	
+				modalBack.style.display = 'none';
+				
+				
 			}
 		}
 	}

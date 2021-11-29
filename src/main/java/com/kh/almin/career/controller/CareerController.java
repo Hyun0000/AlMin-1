@@ -59,6 +59,7 @@ public class CareerController {
 		}
 		
 		String jsonStr = gson.toJson(calList);
+		System.out.println("jsonStr : " + jsonStr);
 		return jsonStr;
 	}
 // ===================================================================================================================
