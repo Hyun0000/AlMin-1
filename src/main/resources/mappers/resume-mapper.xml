@@ -30,8 +30,10 @@
 	<insert id="insertResume" parameterType="Resume">
 		<!-- <selectKey keyProperty="resumeSeq" resultType="int" order="BEFORE"> 
 			select MEMBER_RESUME_SEQUENCE.NEXTVAL from MEMBER_RESUME </selectKey> -->
-		insert into
-		MEMBER_RESUME(RESUNE_NO,RESUME_TITLE,RESUME_PHONE,JOB_DISTRICT_NO,EDUCATION_NO,JOB_TYPE_NO,PERIOD_NO,JOB_CAREERS,RESUME_PUBLIC_YN)
-		values(11,#{resumeTitle},#{resumePhone},#{jobDistrictNo},#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers},#{resumePublicYn})
+		insert into 
+		MEMBER_RESUME(RESUME_NO,RESUME_TITLE,RESUME_PHONE,JOB_DISTRICT_NO,EDUCATION_NO,
+		JOB_TYPE_NO,PERIOD_NO,JOB_CAREERS)
+		values(MEMBER_RESUME_SEQUENCE.NEXTVAL,#{resumeTitle},#{resumePhone},#{jobDistrictNo},
+		#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers})
 	</insert>
 </mapper>

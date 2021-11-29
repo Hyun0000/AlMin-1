@@ -48,9 +48,10 @@ public class ResumeController {
 	
 	@PostMapping("addres")
 	public ModelAndView insertResume(MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
-		System.out.println("mr : " +mr);
+		
 		try {
 			if(resumeService.insertResume(mr)>0) {
+				System.out.println("mr : "+mr);
 				redirectAttributes.addAttribute("msg", "이력서 등록이 되었습니다.");
 				mv.setViewName("main");
 			}else {
