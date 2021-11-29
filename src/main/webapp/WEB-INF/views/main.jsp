@@ -30,8 +30,13 @@
 
 <style>
 .search-bg {
-	z-index: 1000;
+	z-index: 100;
 }
+
+#logout-state {
+	z-index: 200;
+}
+
 </style>
 
 </head>
