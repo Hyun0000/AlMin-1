@@ -67,7 +67,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		List<Member> volist = memberService.getMembers();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberview",volist);
-//		mv.setViewName("member/memberJoin");
 		mv.setViewName("member/register");//회원가입 선택페이지
 		
 		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
@@ -78,6 +77,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return mv;
 	}
 	
+	@GetMapping("/member") //개인회원가입창
+	private String joinMember() throws Exception {
+		return "member/memberJoin";
+	}
+	@GetMapping("/company") //기업회원가입창
+	private String joinCompany() throws Exception {
+		return "member/memberJoin";
+	}
+
 	@PutMapping
 	private String updateMember() { //회원정보 수정
 		logger.info("update 진입");

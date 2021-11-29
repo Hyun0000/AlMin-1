@@ -22,7 +22,24 @@
 			$(".cancel").on("click", function(){
 				location.href = "/";
 			})
-		
+			// 정규표현식 선언
+			var regExp = /^[0-9]*$/;   
+			var idPattern = /^[a-zA-Z]{1}[A-Za-z0-9]{6,50}$/;
+			var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,250}$/;
+			var namePattern = /^[a-zA-Z가-힣]*$/;
+			var emailPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*.[a-zA-Z]{1,3}$/i;   
+			var phonePattern = /^01[016789]{1}-?([0-9]{4})-?([0-9]{4})$/;
+			//맨 뒤의 /i는 대소문자 구분하지 않도록 쓸 때 사용
+			
+			var userId = $("#userId").val();
+			
+			function isEmail(asValue){
+			}
+			
+			function idCheck(){ //TODO: id중복체크 onclick
+				
+			}
+			
 			$("#submit").on("click", function(){
 				if($("#userId").val()==""){
 					alert("아이디를 입력해주세요.");
@@ -41,6 +58,7 @@
 				}
 				
 			});
+			 
 		})
 	</script>
 <body>
@@ -53,10 +71,13 @@
 		<tr>
 		<th><label for="userId">아이디</label></th>
 		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" ></td>
+		<td><button type="button" class="btn3" onclick="idCheck()">중복확인</button></td>
 		</tr>
+		<tr>
 		<th><label for="userPass">비밀번호</label></th>
 		<td><input type="password" id="userPass"></td>
 		</tr>
+		<tr>
 		<th>비밀번호 확인</th>
 		<td><input type="password"></td>
 		</tr>

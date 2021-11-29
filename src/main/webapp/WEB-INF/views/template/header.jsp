@@ -14,8 +14,7 @@
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<!-- 네이버로그인 jsp로 하는 방법 -->
-<%
-    String clientId = "LV_HERZOVT4XTBBoYuEl";//애플리케이션 클라이언트 아이디값";
+<%  String clientId = "LV_HERZOVT4XTBBoYuEl";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://127.0.0.1:8090/almin/main", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
@@ -23,15 +22,14 @@
     apiURL += "&client_id=" + clientId;
     apiURL += "&redirect_uri=" + redirectURI;
     apiURL += "&state=" + state;
-    session.setAttribute("state", state);
- %>
+    session.setAttribute("state", state); %>
 <!-- Header Area Starts -->
 <header class="header-area main-header">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-2">
-					<div class="logo-area">
-						<a href="main"><img src="${pageContext.request.contextPath}/resources/assets/images/logo.png" class="logo" alt="logo"></a>
+		 			<div class="logo-area">
+						<a href="${pageContext.request.contextPath}/main"><img src="${pageContext.request.contextPath}/resources/assets/images/logo.png" class="logo" alt="logo"></a>
 					</div>
 				</div>
 				<div class="col-lg-10">
@@ -39,20 +37,20 @@
 						<span></span> <span></span> <span></span>
 					</div>
 					<div class="main-menu">
-						<ul>
-							<li class="active"><a href="recruits/jobinfoList">구인공고</a></li>
-							<li><a href="#">인재정보</a></li>
-						</ul>
 						<!-- 로그인 전 노출 -->
 						<ul id="logout-state">
-						<li><a href="#">아이디/비밀번호 찾기</a></li>
 							<li class="menu-btn"><button class="login template-btn">로그인</button>
 							<a href="${pageContext.request.contextPath}/members" class="template-btn">회원가입</a></li>
 						</ul>
 						<!-- 로그인 후 노출 -->
 						<ul id="login-state" style="display:none;">
-						<li><a href="#">로그아웃</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn" onclick="logout()">로그아웃</a></li>
+			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 						<li><a href="#">마이페이지</a></li>
+						</ul>
+						<ul>
+							<li class="active"><a href="recruits/jobinfoList">구인공고</a></li>
+							<li><a href="#">인재정보</a></li>
 						</ul>
 					</div>
 				</div>
@@ -82,34 +80,36 @@
 			<li><a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a></li>
 			<li><button type="button" id="btnKaLogin" class="btn_kt" onclick="loginKakao()">
 				<img src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png"></button></li>
-<fb:login-button scope="public_profile,email"
-  onlogin="checkLoginState();"></fb:login-button>
-			<button type="button" onclick="logoutFB()">Facebook 로그아웃</button>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 			</ul>
 </div>
 	<table class="login-menu item">
 	<tr>
-	      	<td><a href="#" id="findId">아이디 찾기</a></td>
-	      	<td><a href="#" id="findPwd">비밀번호 찾기</a></td>
-	   		<td><a href="${pageContext.request.contextPath}/members" id="join">회원가입</a></td>
+	    <td><a href="#" id="findId">아이디 찾기</a></td>
+	    <td><a href="#" id="findPwd">비밀번호 찾기</a></td>
+	   	<td><a href="${pageContext.request.contextPath}/members" id="join">회원가입</a></td>
 	</tr>
 	  </table>
    </div>
 </div>
 <script>
-$(".login").click(function(){
-	$(".modal").show(); 
-});
-$(".close").click(function(){
-    $(".modal").hide(); 
- });
-$("#memberBtn").click(function(){
-    $(".snsBx").show(); 
- });
-$("#companyBtn").click(function(){
-    $(".snsBx").hide(); 
- });
-
+window.onload = pageLoadedHandler;
+	function pageLoadedHandler(){
+}
+	
+		$(".login").click(function(){
+			$(".modal").show(); 
+		});
+		$(".close").click(function(){
+		    $(".modal").hide(); 
+		 });
+		$("#memberBtn").click(function(){
+		    $(".snsBx").show(); 
+		 });
+		$("#companyBtn").click(function(){
+		    $(".snsBx").hide(); 
+		 });
+	
 function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberId = $("#memberId").val();
 	var memberPw = $("#memberPw").val();
@@ -129,8 +129,7 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			if(result == 0){
 				alert("아이디와 비밀번호를 다시 확인해주세요.");
 			} else {
-			console.log("로그인 성공하셨습니다.")
-			//show()/hide()
+			console.log("로그인 성공")
     		$(".modal").hide(); 
 			$("#login-state").show();
 			$("#logout-state").hide();
@@ -203,9 +202,7 @@ function fnFbCustomLogin(){
       xfbml      : true,
       version    : 'v12.0'
     });
-      
     FB.AppEvents.logPageView();   
-      
   };
 //1단계
   (function(d, s, id){
@@ -250,7 +247,6 @@ FB.getLoginStatus(function(response) {
 		 statusChangeCallback(response);
 	    });
 });
- 
  //response.status === 'connected' 로그인상태
  //response.status === 'unknown' 로그아웃상태
  }
