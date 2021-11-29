@@ -58,7 +58,7 @@ function modalUp() {
     
     calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
     calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
-    
+    calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
     $(".modalTypeLabel").css({"background-color":"white","color":"royalblue"}); // 라벨 색깔 원래대로
     for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
 
@@ -101,8 +101,6 @@ function miniCalUp() {
 window.onload = minicalLoad;
 
 function minicalLoad() {
-console.log("@@@@@@@@@@@@@");
-
 let calendar = document.querySelector('.calendar')
 
 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -226,27 +224,15 @@ function dayEleInnerText() {
 
 let month_list = calendar.querySelector('.month-list');
 $('#apple').children().remove();
-console.log(123);
 
 month_names.forEach((e, index) => {
     let month = document.createElement('div')
     month.innerHTML = `<div data-month="${index}">${e}</div>`
     month.querySelector('div').onclick = () => {
-        // console.log({index});
-        // console.log({e});
-        // document.getElementsByClassName('month-list').style.display = "none";
-        console.log(this);
-        console.log(event.target);
-        //event.target.parentNode.style.display = 'none';
-        // event.target.parentNode.style.backgroundColor = 'red';
-        // month_list.classList.empty();
         month_list.classList.remove('show')
         curr_month.value = index
-        // console.log(index);
-        // console.log(curr_month.value);
         generateCalendar(index, curr_year.value)
     }
-    // month_list.remove();
     month_list.appendChild(month)
 })
 

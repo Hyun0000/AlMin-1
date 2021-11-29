@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.almin.career.model.service.CareerService;
 import com.kh.almin.career.model.vo.MemberNeed;
@@ -41,6 +44,13 @@ public class CareerController {
 	private CareerService careerService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CareerController.class);
+// ===================================================================================================================
+	// calender 첫 page를 열어주는 view용 method
+	@GetMapping("/calender")
+	public String loadCalender() throws Exception {
+		System.out.println("view용 메소드 진입");
+		return "careers/careers";
+	}
 // ===================================================================================================================
 	// calender 첫 page --> 지원일자 조회를 calender 첫 페이지로 결정
 	@GetMapping(value = "/calender/{userId}", produces="text/plain;charset=UTF-8")
@@ -61,12 +71,6 @@ public class CareerController {
 		String jsonStr = gson.toJson(calList);
 		System.out.println("jsonStr : " + jsonStr);
 		return jsonStr;
-	}
-// ===================================================================================================================
-	// calender 첫 page를 열어주는 view용 method
-	@GetMapping("/calender")
-	public String loadCalender() throws Exception {
-		return "careers/careers";
 	}
 // ===================================================================================================================
 	// 구직 & 면접 일정 입력(insert)
@@ -120,6 +124,35 @@ public class CareerController {
 		return "ok";
 	}
 // ===================================================================================================================
+	// 일정 삭제(조건 : 제목, 시작시간. 종료시간)
+	@DeleteMapping(value = "/calender")
+	@ResponseBody
+	public String deleteCal(@RequestBody String deleteInfo) {
+		System.out.println("@DeleteMapping 진입");
+		System.out.println("deleteInfo : " + deleteInfo);
+		
+		Gson gson = new GsonBuilder().create();
+		MemberNeed memberNeed = gson.fromJson(deleteInfo, MemberNeed.class);
+		System.out.println("memberNeed : " + memberNeed);
+		System.out.println("memberNeed.getNeedTitle() : " + memberNeed.getNeedTitle());
+		System.out.println("memberNeed.getNeedTimeStart() : " + memberNeed.getNeedTimeStart());
+		System.out.println("memberNeed.getNeedTimeEnd() : " + memberNeed.getNeedTimeEnd());
+		
+//		JsonElement jsonElement = new JsonParser().parse(deleteInfo);
+//		JsonParser jsonParser = new JsonParser();
+//		JsonObject jsonObject = (JsonObject)jsonParser.parse(deleteInfo);
+//		System.out.println("jsonObject : " + jsonObject);
+//		System.out.println(jsonObject.getAsString().get);
+		
+		int result = 0;
+		try {result = careerService.deleteCal(memberNeed);}
+		catch (Exception e) {e.printStackTrace();}
+		
+		String resultStr = "";
+		if (result == 1) {resultStr = "ok";}
+		else {resultStr = "false";}
+		return resultStr;
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 	// 예외처리

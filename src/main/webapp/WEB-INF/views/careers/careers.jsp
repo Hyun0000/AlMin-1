@@ -15,9 +15,9 @@
 <body>
     <section id="calender_top">
         <!-- <div> -->
-            <div id="top_title">우리의 민족!!! 칠갑산님의 calendar</div>
+            <div id="top_title"></div>
             <div id="top_btn">
-                <button type="button" class="insert_btn_class">저장</button>
+                <!-- <button type="button" class="insert_btn_class">저장</button> -->
                 <button type="button" class="insert_btn_class" id="insert_evnet_btn">일정추가</button>
             </div>
         <!-- </div> -->
@@ -158,6 +158,7 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script src="<c:url value="/resources/career/js/main.js"/>"></script>
 <script src="<c:url value="/resources/career/js/ko.js"/>"></script>
 <script src="<c:url value="/resources/career/js/calendervar.js"/>"></script>
@@ -165,7 +166,6 @@
 <script src="<c:url value="/resources/career/js/app.js"/>"></script>
 <script src="<c:url value="/resources/career/js/mdtimepicker.js"/>"></script>
 <script src="<c:url value="/resources/career/js/calenderCRUD.js"/>"></script>
-<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script>$(document).ready(function () {$('.timepicker').mdtimepicker();});</script>
 </body>
 </html>

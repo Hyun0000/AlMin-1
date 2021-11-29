@@ -16,7 +16,7 @@ public class CareerServiceImpl implements CareerService{
 // ===================================================================================================================
 	// calender 첫 page --> 지원일자 조회를 calender 첫 페이지로 결정
 	@Override
-	public List<Map<String, String>> selectCalList(String userId) {
+	public List<Map<String, String>> selectCalList(String userId) throws Exception {
 		return careerDao.selectCalList(userId);
 	}
 // ===================================================================================================================
@@ -26,6 +26,11 @@ public class CareerServiceImpl implements CareerService{
 		return careerDao.insertNeed(memberNeed);
 	}
 // ===================================================================================================================
+	// 일정 삭제(조건 : 제목, 시작시간. 종료시간)
+	@Override
+	public int deleteCal(MemberNeed memberNeed) throws Exception {
+		return careerDao.deleteCal(memberNeed);
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================

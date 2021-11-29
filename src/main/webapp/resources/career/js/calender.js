@@ -1,30 +1,38 @@
+//window.onload = function () {
+//	console.log("하 씨발");
+//	let getPath = "/almin/careers/calender/" + userId;
+//	sendRequest("GET", getPath, null, calenderLoad);
+//};
+//document.addEventListener('DOMContentLoaded', function () {
+//	let getPath = "/almin/careers/calender/" + userId;
+//	sendRequest("GET", getPath, null, calenderLoad);
+//	// sendRequest("GET", "calendar", null, afterLoad);
+//});
+
 // 캘린더 등록 이벤트 배열
 let evnets = [];
 
-document.addEventListener('DOMContentLoaded', function () {
-	let getPath = "/almin/careers/calender/" + userId;
-	sendRequest("GET", getPath, null, calenderLoad);
-	// sendRequest("GET", "calendar", null, afterLoad);
-});
+// 처음 캘린더 페이지에 들어왔을 때 실행할 Ajax
+sendRequest("GET", getPath, null, calenderLoad);
 	
 function calenderLoad() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
 	console.log(httpRequest.responseText);
-	console.log(httpRequest.responseText.length);
 	
-	let applekiwi = JSON.parse(httpRequest.responseText);
-	console.log(applekiwi);
-	console.log(applekiwi[0]);
-	console.log(applekiwi[0].NEED_TITLE);
+	let needCalData = JSON.parse(httpRequest.responseText);
+	console.log(needCalData);
 		
-	for (var i = 0; i < applekiwi.length; i++) {
+	for (var i = 0; i < needCalData.length; i++) {
 		let evnetObj = new Object();
-		evnetObj.title = applekiwi[i].NEED_TITLE;
-		evnetObj.start = applekiwi[i].STARTTIME.replace(" ", "T");
-		evnetObj.end = applekiwi[i].ENDTIME.replace(" ", "T");
-		evnetObj.color = applekiwi[i].NEED_COLOR;
+		evnetObj.title = needCalData[i].NEED_TITLE;
+		evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
+		evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
+		evnetObj.color = needCalData[i].NEED_COLOR;
 		evnets[i] = evnetObj;
 	}
 	
+	topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 구직관리 calendar";
 //  title: 'Business Lunch',
 //  start: '2021-11-01T09:00:00',
 //  end : '2021-11-02T23:00:00',
@@ -61,7 +69,12 @@ function calenderLoad() {
             let startTimeArr = info.event.start.toString().split(" ");
             
             // 클릭한 이벤트의 종료 Date 관련 정보 배열
-            let endTimeArr = info.event.end.toString().split(" ");
+            // let endTimeArr = info.event.end.toString().split(" ");
+            
+            // 클릭한 이벤트의 종료 Date 관련 정보 배열
+            let endTimeArr;
+            if (info.event.end == null) {endTimeArr = startTimeArr}
+            else {endTimeArr = info.event.end.toString().split(" ");}
 
             // 조건으로 사용할 title
             let clickEventTitle = info.event.title;
@@ -90,6 +103,7 @@ function calenderLoad() {
             for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
             calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
             calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
+            calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
             modalBack.style.display = 'block';
         },
         drop: function(arg) {
@@ -152,12 +166,13 @@ function calenderLoad() {
 
     // 등록된 이벤트 관련 내용
     let eventList = document.getElementsByClassName('fc-daygrid-event-harness');
-    console.log(document.getElementsByClassName('fc-daygrid-event-harness').length);
     for (let i = 0; i < eventList.length; i++) {
             eventList[i].onclick = detailEvent;
     }
+		}
+	}
 }
-// });  // onload
+// ============================================================================================================
 function detailEvent(title, startTime, endTime) {
     // 클릭한 이벤트 제목
     // let title = this.querySelector('.fc-event-title').innerText;
@@ -193,10 +208,12 @@ function detailEvent(title, startTime, endTime) {
             colorEle.value = evnets[i].color;
             calUpdateBtn.style.display = 'block'; // 수정 버튼 보이기
             calSubmitBtn.style.display = 'none'; // 등록 버튼 숨기기
+            calDeleteBtn.style.display = 'block'; // 삭제 버튼 보이기
             for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
         }
     }
 }
+
 function movedEvent(title, newStartDay, newEndDay) {
     console.log("title : " + title);
     console.log("newStartDay : " + newStartDay);

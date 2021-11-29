@@ -1,26 +1,3 @@
-// 이벤트를 담을 객체 배열
-// let evnets = [];
-//========================================== 일정 조회  ================================================
-//window.onload = function() {
-//	let getPath = "/calender/" + userId;
-//	console.log(getPath);
-//	sendRequest("GET", getPath, afterLoadSelect);
-//}
-
-
-// calender 첫 load 후 callback function
-//function afterLoadSelect() {
-//	console.log(123);
-//	if (httpRequest.readyState === 4) {
-//		console.log(123);
-//		if (httpRequest.status === 200) {
-//			console.log(123);
-//			alert(123);
-//			console.log(httpRequest.responseText);
-//			test();
-//		}
-//	}
-//}
 // ========================================== 일정 추가 ================================================
 calSubmitBtn.onclick = calSubmit;
 
@@ -82,10 +59,9 @@ function calSubmit() {
     if (submitBool === true) {
     	sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
 	}
-
 }
 
-// 일정 추가후 callback function
+// ============================== 일정 추가후 callback function ==============================
 function afterCalInsert() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
@@ -93,14 +69,64 @@ function afterCalInsert() {
 			if (httpRequest.responseText === 'ok') {
 				alert("등록 완료");
 				modalBack.style.display = 'none';
-				
-				
+				sendRequest("GET", getPath, null, calenderLoad); // 일정 등록 후 다시 전체 일정 data 가져오기
 			}
 		}
 	}
 }
+//========================================== 일정 삭제 ================================================
+calDeleteBtn.onclick = calDelete;
 
+// 조건 : 제목, 시작시간. 종료시간
+function calDelete() {
+	let deleteConfirm = confirm("일정을 삭제하시겠습니까?");
+	
+    // 시작 날짜 + 시간
+    allStart = startDayEle.innerText + " " + startTimeEle.value;
 
+    // 종료 날짜 + 시간
+    allEnd = endDayEle.innerText + " " + endTimeEle.value;
+	
+    let deleteParam = {
+    		needTitle : titleEle.value,
+    		needTimeStart : allStart,
+    		needTimeEnd : allEnd
+    }
+    
+    console.log(deleteParam);
+    console.log(JSON.stringify(deleteParam));
+	
+	if(deleteConfirm) {
+		sendRequest("DELETE", "calender", JSON.stringify(deleteParam), afterCalDelete);
+	}
+}
+
+function afterCalDelete() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			if (httpRequest.responseText === 'ok') {
+				alert("삭제 완료");
+				console.log("============================");
+				console.log(getPath);
+				console.log(evnets);
+				console.log(evnets.findIndex(obj => obj.title === titleEle.value));
+				
+				let test = evnets.findIndex(obj => obj.title === titleEle.value);
+				console.log("test : " + test);
+				evnets.splice(test, 1);
+				// arr3.findIndex(i => i.name == "강호동"); 
+				// array.findIndex(obj => obj.name == "희동이");
+				console.log("============================");
+				modalBack.style.display = 'none';
+				sendRequest("GET", getPath, null, calenderLoad); // 일정 삭제 후 다시 전체 일정 data 가져오기
+			} else if(httpRequest.responseText === 'false') {
+				alert("삭제 실패");
+				modalBack.style.display = 'none';
+				sendRequest("GET", getPath, null, calenderLoad);
+			}
+		}
+	}
+}
 
 //INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', 'apple', '2', '명륜갈비', '#003300', TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M');
 

@@ -15,9 +15,9 @@ public class CareerDao {
 	private SqlSession sqlSession;
 // ===================================================================================================================
 	// calender 첫 page --> 지원일자 조회를 calender 첫 페이지로 결정
-	public List<Map<String, String>> selectCalList(String userId) {
+	public List<Map<String, String>> selectCalList(String userId) throws Exception {
 		List<Map<String, String>> test = null;
-		test = sqlSession.selectList("Career.selectNeedCal", userId);
+		test = sqlSession.selectList("Career.selectCal", userId);
 		System.out.println("dao selectCalList : " + test);
 		return test;
 				
@@ -25,12 +25,16 @@ public class CareerDao {
 // ===================================================================================================================
 	// 구직 & 면접 일정 입력(insert)
 	public int insertNeed(MemberNeed memberNeed) throws Exception{
-		return sqlSession.insert("Career.insertNeed", memberNeed);
+		return sqlSession.insert("Career.insertCal", memberNeed);
 	}
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================
+	// 일정 삭제(조건 : 제목, 시작시간. 종료시간)
+	public int deleteCal(MemberNeed memberNeed) throws Exception{
+		return sqlSession.delete("Career.deleteCal", memberNeed);
+	}
 }
 // ===================================================================================================================
 // 회원의 현재 근무지 정보를 가져오는 method
