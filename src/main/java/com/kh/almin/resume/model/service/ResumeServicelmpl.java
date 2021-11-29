@@ -1,5 +1,7 @@
 package com.kh.almin.resume.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +15,11 @@ public class ResumeServicelmpl implements ResumeService {
 	public int insertResume(MemberResume mr) throws Exception {
 		return resumeDao.insertResume(mr);
 	}
+	public List<MemberResume> selectAllResume(MemberResume mr) throws Exception{
+		return resumeDao.selectAllResume(mr);
+	}
+	public List<MemberResume> selectResume() throws Exception{
+		return resumeDao.selectResume();
+	}
+	
 }

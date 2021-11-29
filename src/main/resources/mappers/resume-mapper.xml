@@ -3,19 +3,35 @@
 
 <mapper namespace="Resume">
 	<resultMap type="Resume" id="ResumeResultMap">
-		<id property="resumeNo" column="RESUME_NO"/>
-		<result property="memberId" column="MEMBER_ID"/>
-		<result property="memberType" column="MEMBER_TYPE"/>
-		<result property="resumeTitle" column="RESUME_TITLE"/>
-		<result property="resumePublicYn" column="RESUME_PUBLIC_YN"/>
-		<result property="resumePhone" column="RESUME_PHONE"/>
-		<result property="jobDistrictNo" column="JOB_DISTRICT_NO"/>
-		<result property="educationNo" column="EDUCATION_NO"/>
-		<result property="careersNo" column="CAREERS_NO"/>
-		<result property="jobCareers" column="JOB_CAREERS"/>
+		<id property="resumeNo" column="RESUME_NO" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberType" column="MEMBER_TYPE" />
+		<result property="resumeTitle" column="RESUME_TITLE" />
+		<result property="resumePublicYn" column="RESUME_PUBLIC_YN" />
+		<result property="resumePhone" column="RESUME_PHONE" />
+		<result property="jobDistrictNo" column="JOB_DISTRICT_NO" />
+		<result property="educationNo" column="EDUCATION_NO" />
+		<result property="careersNo" column="CAREERS_NO" />
+		<result property="jobCareers" column="JOB_CAREERS" />
+		<result property="periodNo" column="PERIOD_NO" />
+		<result property="jobTypeNo" column="JOB_TYPE_NO" />
 	</resultMap>
+	<!-- 이력서 전체 조회 -->
+	<select id="selectAllResume" resultMap="ResumeResultMap" resultType="Resume">
+		select RESUME_TITLE from MEMBER_RESUME
+	</select> 
 	
+	<!-- 이력서 조회 -->
+	<select id="selectResume" resultMap="ResumeResultMap" resultType="Resume">
+		select * from MEMBER_RESUME where MEMBER_ID=#{memberId}
+	</select>
+	
+	<!-- 이력서 등록 -->
 	<insert id="insertResume" parameterType="Resume">
-		insert into MEMBER_RESUME values(MEMBER_RESUME_SEQUENCE.NEXTVAL,#{memberId},#{resumeTitle},#{resumePublicYn},#{resumePhone},#{jobDistrictNo},#{educationNo},#{jobCareers})
+		<!-- <selectKey keyProperty="resumeSeq" resultType="int" order="BEFORE"> 
+			select MEMBER_RESUME_SEQUENCE.NEXTVAL from MEMBER_RESUME </selectKey> -->
+		insert into
+		MEMBER_RESUME(RESUNE_NO,RESUME_TITLE,RESUME_PHONE,JOB_DISTRICT_NO,EDUCATION_NO,JOB_TYPE_NO,PERIOD_NO,JOB_CAREERS,RESUME_PUBLIC_YN)
+		values(11,#{resumeTitle},#{resumePhone},#{jobDistrictNo},#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers},#{resumePublicYn})
 	</insert>
 </mapper>

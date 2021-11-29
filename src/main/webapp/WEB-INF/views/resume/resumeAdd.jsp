@@ -81,7 +81,7 @@
                 <option value="11">배달/운전</option>
                 <option value="12">병원/간호</option>
             </select>
-            <select name="jobPeriodNo">
+            <select name="PeriodNo">
                 <option value="1">1주일</option>
                 <option value="2">1주일~1개월</option>
                 <option value="3">1개월~3개월</option>
@@ -95,7 +95,7 @@
             <input type="checkbox" name="resumePublicYn" value="Y">공개
             <input type="checkbox" name="resumePublicYn" value="N">비공개
         </div>
-        <button type="submit">등록</button>
+        <button>등록</button>
         </form>
     </div>
 </body>
