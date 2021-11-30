@@ -23,7 +23,8 @@ public class Recruit {
    private String recruitTitle;
    private String recruitCareer;
    private String recruitGender;
-   private int recruitAge;
+   private int recruitStartAge;
+   private int recruitEndAge;
    private int recruitEducation;
    private int recruitPerson;
    private int recruitMoney;
