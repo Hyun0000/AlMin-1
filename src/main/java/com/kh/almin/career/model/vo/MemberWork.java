@@ -9,24 +9,27 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-@Component
+@ToString
 public class MemberWork { // 회원 근무 테이블
-	// WORK_MEMBER_ID 		varchar2(50), 		-- 복합 외래키 지정(MEMBER)
-	// WORK_MEMBER_TYPE 	char(1) 			DEFAULT 1, -- 복합 외래키 지정(MEMBER)
-	// WORK_COMPANY_ID 		varchar2(50), 		-- 복합 외래키 지정(COMPANY)
-	// WORK_COMPANY_TYPE 	char(1) 			DEFAULT 2, 	-- 복합 외래키 지정(COMPANY)
-	// WORK_TYPE 			NUMBER 				REFERENCES JOB_TYPE (JOB_TYPE_NO),
-	// WORK_DAY 			NUMBER				DEFAULT 0,
-	// WORK_MONEY 			NUMBER 				NOT NULL,
-	// FOREIGN KEY(WORK_MEMBER_ID, WORK_MEMBER_TYPE)REFERENCES MEMBER(MEMBER_ID, MEMBER_TYPE), -- 복합 외래키 지정(MEMBER)
-	// FOREIGN KEY(WORK_COMPANY_ID, WORK_COMPANY_TYPE)REFERENCES COMPANY(COMPANY_ID, COMPANY_TYPE) -- 복합 외래키 지정(COMPANY)
-		private String workMemberId; 
-		private String workMemberType;
-		private String workCompanyId;
-		private String workCompanyType;
-		private int workType;
-		private int workDay;
-		private int workMoney;
+// WORK_MEMBER_NO 		NUMBER 			PRIMARY KEY,
+// WORK_MEMBER_ID 		varchar2(50), 	복합 외래키 지정(MEMBER)
+// WORK_MEMBER_TYPE 	char(1) 		DEFAULT 1, 복합 외래키 지정(MEMBER)
+// WORK_TITLE 			varchar2(50) 	NOT NULL,
+// WORK_COLOR 			varchar2(10) 	DEFAULT '#0d6efd',
+// WORK_TIME_START 		TIMESTAMP 		NOT NULL,
+// WORK_TIME_END 		TIMESTAMP 		NOT NULL,
+// WORK_MONEY 			NUMBER 			NOT NULL, -- 시급
+// WORK_TYPE 			CHAR(1) 		CHECK(WORK_TYPE IN('W')), -- 면접인지 지원인지 구분
+
+// CONSTRAINT MEMBER_WORK_MEMBER_FK FOREIGN KEY(WORK_MEMBER_ID, WORK_MEMBER_TYPE)REFERENCES MEMBER(MEMBER_ID, MEMBER_TYPE) -- 복합 외래키 지정(MEMBER)
+	private int workMemberNo;
+	private String workMemberId; 
+	private String workMemberType;
+	private String workTitle;
+	private String workColor;
+	private String workTimeStart;
+	private String workTimeEnd;
+	private int workMoney;
+	private String workType;
 }

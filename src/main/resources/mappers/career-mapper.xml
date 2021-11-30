@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Career">
+	<!-- 일정 조회 -->
+	<select id="selectCal" resultType="hashmap" parameterType="string">
+		SELECT NEED_MEMBER_NO, NEED_TITLE, NEED_COLOR, TO_CHAR(NEED_TIME_START, 'yyyy-mm-dd hh24:mi:ss') STARTTIME, TO_CHAR(NEED_TIME_END, 'yyyy-mm-dd hh24:mi:ss') ENDTIME, NEED_GO_MEET
+		FROM MEMBER_NEED WHERE NEED_MEMBER_ID = #{userId}
+		<!-- 나중에  WHERE문 조건 추가해야한다.(지원, 면접 구분 위해) -->
+	</select>
+
+	<!-- 일정 추가 -->	
 	<insert id="insertCal">
 		INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, #{needMemberId}, '1', #{needTitle}, #{needColor},
 		TO_DATE(#{needTimeStart},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{needTimeEnd},'yyyy-mm-dd hh24:mi:ss'), #{needGoMeet})
 	</insert>
 	
+	<!-- 일정 삭제 -->
+	<delete id="deleteCal" parameterType="MemberNeed">
+		DELETE FROM MEMBER_NEED WHERE NEED_TITLE = #{needTitle} AND NEED_TIME_START = #{needTimeStart} AND NEED_TIME_END = #{needTimeEnd}
+		<!-- 나중에  WHERE문 조건 추가해야한다.(지원, 면접 구분 위해) -->
+	</delete>
+	
+	<!-- 일정 수정 -->
+	<update id="updateCal" parameterType="MemberNeed">
+		UPDATE MEMBER_NEED SET NEED_TITLE = #{needTitle}, NEED_COLOR = #{needColor}, NEED_TIME_START = TO_DATE(#{needTimeStart},'yyyy-mm-dd hh24:mi:ss'),
+		NEED_TIME_END = TO_DATE(#{needTimeEnd},'yyyy-mm-dd hh24:mi:ss'), NEED_GO_MEET = #{needGoMeet}
+		WHERE NEED_MEMBER_NO = #{needMemberNo} AND NEED_MEMBER_ID = #{needMemberId}
+		<!-- 나중에  WHERE문 조건 추가해야한다.(지원, 면접 구분 위해) -->
+	</update>
+</mapper>
+<!-- 	
 	<resultMap type="MemberNeed" id="selectNeedCalMap">
 		<result column="NEED_TITLE" property="needTitle"/>
 		<result column="NEED_COLOR" property="needColor"/>
 		<result column="NEED_TIME_START" property="needTimeStart"/>
 		<result column="NEED_TIME_END" property="needTimeEnd"/>
 	</resultMap>
-	
-	<select id="selectCal" resultType="hashmap" parameterType="string">
-		SELECT NEED_TITLE, NEED_COLOR, TO_CHAR(NEED_TIME_START, 'yyyy-mm-dd hh24:mi:ss') STARTTIME, TO_CHAR(NEED_TIME_END, 'yyyy-mm-dd hh24:mi:ss') ENDTIME
-		FROM MEMBER_NEED WHERE NEED_MEMBER_ID = #{userId}
-	</select>
-	
-	<delete id="deleteCal" parameterType="MemberNeed">
-		DELETE FROM MEMBER_NEED WHERE NEED_TITLE = #{needTitle} AND NEED_TIME_START = #{needTimeStart} AND NEED_TIME_END = #{needTimeEnd}
-	</delete>
-</mapper>
+-->
 
 <!--
 	title : 명륜진사갈비
@@ -29,7 +43,6 @@
 	end : '2021-11-02T23:00:00'
 	color : red
 -->
-
 
 <!--
 	private int needMemberNo;
@@ -55,7 +68,6 @@
 	CONSTRAINT MEMBER_NEED_MEMBER_FK FOREIGN KEY(NEED_MEMBER_ID, NEED_MEMBER_TYPE)REFERENCES MEMBER(MEMBER_ID, MEMBER_TYPE), 복합 외래키 지정(MEMBER)
 	CONSTRAINT MEMBER_NEED_COMPANT_FK FOREIGN KEY(NEED_COMPANY_ID, NEED_COMPANY_TYPE)REFERENCES COMPANY(COMPANY_ID, COMPANY_TYPE) 복합 외래키 지정(COMPANY)
 -->
-
 
 <!--
 	<select id="selectAllWork" resultType="hashmap">

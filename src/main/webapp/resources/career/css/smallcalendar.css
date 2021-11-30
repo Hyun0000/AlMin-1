@@ -76,6 +76,11 @@ hr{ margin-top: 0;}
     /* text-align: right; */
 }
 
+/* 일정 추가 모달창 content 버튼의 <label>을 담은 <div> */
+#insertBtnBox #labelBox{
+	display: flex;
+}
+
 /* 일정 추가 모달창 content 버튼 전체 <div>안의 <label> */
 .modalTypeLabel {
     padding: 10px;
@@ -91,9 +96,28 @@ hr{ margin-top: 0;}
     text-align: center;
 }
 
-/* 일정 추가 모달창 title <input> 담는 <div> */
+/* 일정 추가 모달창 title <input> & 시급 입력창 담는 <div> */
 #insertTitleDiv {
     text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 시급 입력창 <label> */
+#work_money_label{
+	/* margin-right: 10px; */
+}
+
+/* 시급 입력창 <input> */
+#work_money_label #work_money {
+	margin-left: 10px;
+	border: 1px solid black;
+}
+
+/* 시급 입력창 <input> 클릭했을 때 */
+#work_money_label #work_money:focus {
+	outline: none;
 }
 
 /* 일정 추가 모달창 title 제목 */

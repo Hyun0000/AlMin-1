@@ -12,6 +12,20 @@
 // 캘린더 등록 이벤트 배열
 let evnets = [];
 
+//(지원 / 면접일자) 버튼 선택
+needCalButn.onclick = () => {
+	selectCal = "NG";
+	alert(123);
+	alert(selectCal);
+	sendRequest("GET", getPath, null, calenderLoad);
+}
+
+workCalButn.onclick = () => {
+	selectCal = "W";
+	alert(123);
+	alert(selectCal);
+}
+
 // 처음 캘린더 페이지에 들어왔을 때 실행할 Ajax
 sendRequest("GET", getPath, null, calenderLoad);
 	
@@ -22,17 +36,21 @@ function calenderLoad() {
 	
 	let needCalData = JSON.parse(httpRequest.responseText);
 	console.log(needCalData);
-		
-	for (var i = 0; i < needCalData.length; i++) {
-		let evnetObj = new Object();
-		evnetObj.title = needCalData[i].NEED_TITLE;
-		evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
-		evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
-		evnetObj.color = needCalData[i].NEED_COLOR;
-		evnets[i] = evnetObj;
+	
+	if(selectCal === "NG" || selectCal === "") {
+		for (var i = 0; i < needCalData.length; i++) {
+			let evnetObj = new Object();
+			evnetObj.title = needCalData[i].NEED_TITLE;
+			evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
+			evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
+			evnetObj.color = needCalData[i].NEED_COLOR;
+			evnetObj.id = needCalData[i].NEED_MEMBER_NO;
+			evnetObj.type = needCalData[i].NEED_GO_MEET;
+			evnets[i] = evnetObj;
+			topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 구직관리 calendar";
+		}
 	}
 	
-	topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 구직관리 calendar";
 //  title: 'Business Lunch',
 //  start: '2021-11-01T09:00:00',
 //  end : '2021-11-02T23:00:00',
@@ -44,7 +62,8 @@ function calenderLoad() {
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
-            right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth'
+            right: 'dayGridMonth,dayGridWeek,listMonth'
+            // dayGridDay,
         },
         initialView: 'dayGridMonth',
         locale: 'ko',
@@ -104,6 +123,12 @@ function calenderLoad() {
             calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
             calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
             calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
+            
+            // 입력 모달창 타입 <label> 관련 코드
+        	goLabelEle.style.display = 'block';
+        	meetLabelEle.style.display = 'block';
+        	workLabelEle.style.display = 'block';
+            
             modalBack.style.display = 'block';
         },
         drop: function(arg) {
@@ -173,11 +198,34 @@ function calenderLoad() {
 	}
 }
 // ============================================================================================================
+//모달창 팝업 callback function
+function modalUp() {
+    // 모달창 초기회(by 기존 일정 수정, 새로운 일정 추가)
+    startDayEle.innerText = "";
+    endDayEle.innerText = "";
+    startTimeEle.value = "";
+    endTimeEle.value = "";
+    titleEle.value = "";
+    fourbtnEleVal = "";
+    colorEle.value = "#0d6efd";
+    document.getElementById('calUpdateBtn').style.display = 'none'; // 수정 버튼 숨기기
+    
+    calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
+    calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
+    calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
+    $(".modalTypeLabel").css({"background-color":"white","color":"royalblue"}); // 라벨 색깔 원래대로
+    for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
+    
+    // 입력 모달창 타입 <label> 관련 코드
+	goLabelEle.style.display = 'block';
+	meetLabelEle.style.display = 'block';
+	workLabelEle.style.display = 'block';
+
+    modalBack.style.display = 'block';
+}
+
 function detailEvent(title, startTime, endTime) {
-    // 클릭한 이벤트 제목
-    // let title = this.querySelector('.fc-event-title').innerText;
-    console.log("&&&&&&&&&&&&&");
-    console.log(title);
+    console.log(title); // 클릭한 이벤트 제목
     console.log(evnets);
     for (let i = 0; i < evnets.length; i++) {
         if (title == evnets[i].title && startTime == evnets[i].start.split('T')[1] && endTime == evnets[i].end.split('T')[1]) {
@@ -191,6 +239,7 @@ function detailEvent(title, startTime, endTime) {
             console.log(evnets[i].start.split('T')[1].split(":"));
             console.log(evnets[i].end);
             console.log(evnets[i].start.split('T')[1].split(":")[0] + ":" + evnets[i].start.split('T')[1].split(":")[1]);
+            console.log("evnets[i].groupId : " + evnets[i].groupId);
 
             // 시작 시간
             let startVal = evnets[i].start.split('T')[1].split(":")[0] + ":" + evnets[i].start.split('T')[1].split(":")[1];
@@ -206,6 +255,20 @@ function detailEvent(title, startTime, endTime) {
             startTimeEle.value = startVal;
             endTimeEle.value = endVal;
             colorEle.value = evnets[i].color;
+            eventGroupId = evnets[i].id;
+            
+            // 입력 모달창 타입 <label> 관련 코드
+            if(evnets[i].type === "G" || evnets[i].type === "M") {
+            	goLabelEle.style.display = 'block';
+            	meetLabelEle.style.display = 'block';
+            	workLabelEle.style.display = 'none';
+            } else if(evnets[i].type === "W") {
+            	goLabelEle.style.display = 'none';
+            	meetLabelEle.style.display = 'none';
+            	workLabelEle.style.display = 'block';            	
+            }
+            
+            
             calUpdateBtn.style.display = 'block'; // 수정 버튼 보이기
             calSubmitBtn.style.display = 'none'; // 등록 버튼 숨기기
             calDeleteBtn.style.display = 'block'; // 삭제 버튼 보이기

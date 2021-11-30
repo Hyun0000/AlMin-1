@@ -35,18 +35,19 @@
 	                        <div>
 	                            <input type="color" id="colorPicker">
 	                        </div>
-	                        <div>
-								<label class="modalTypeLabel" for="go">지원</label>
-	                            <input class="typeRadio" value="G" type="radio" id="go" name="test">
+	                        <div id="labelBox">
 	                            <!--  style="display: none;" -->
-	                            <label class="modalTypeLabel" for="meet">면접</label>
-	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test">
+								<label id="goLabel" class="modalTypeLabel" for="go">지원</label>
+	                            <input class="typeRadio" value="G" type="radio" id="go" name="test" style="display: none;">
+	                            
+	                            <label id="meetLabel" class="modalTypeLabel" for="meet">면접</label>
+	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test" style="display: none;">
 	
-	                            <label class="modalTypeLabel" for="work">근무</label>
-	                            <input class="typeRadio" value="W" type="radio" id="work" name="test">
+	                            <label id="workLabel" class="modalTypeLabel" for="work">근무</label>
+	                            <input class="typeRadio" value="W" type="radio" id="work" name="test" style="display: none;">
 	
-	                            <label class="modalTypeLabel" for="other">기타</label>
-	                            <input class="typeRadio" value="O" type="radio" id="other" name="test">
+	                            <label id="otherLabel" class="modalTypeLabel" for="other">기타</label>
+	                            <input class="typeRadio" value="O" type="radio" id="other" name="test" style="display: none;">
 	                        </div>
 	                    </div>
 	                </div>
@@ -55,6 +56,8 @@
 	                        <div class="mb-3" id="insertTitleBox">
 	                            <div id="insertTitleDiv">
 	                            <label for="message-text" class="col-form-label" style="text-align: left;">제목</label>
+	                            <label for="work_money" id="work_money_label" style="display: none;">시급<input type="text" id="work_money" placeholder="숫자만 입력"></label>
+	                            <!-- style="display: none;" -->
 	                            </div>
 	                            <!-- <div id="insertTitleBox_input">제목</div> -->
 	                            <hr>
@@ -142,10 +145,10 @@
     <div id='calendar-wrap'>
         <div id="side_calendar">
             <div id="btn_box">
-                <button class="calendarBtn" style="width: 100%;">지원일자</button>
-                <button class="calendarBtn" style="width: 100%;">면접일자</button>
-                <button class="calendarBtn" style="width: 100%;">근무관리</button>
-                <button class="calendarBtn" style="width: 100%;">경력관리</button>
+                <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
+                <!-- <button class="calendarBtn" style="width: 100%;">면접일자</button> -->
+                <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
+                <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
             </div>
             <div>지원횟수 면접횟수 --> chart.js</div>
             <div>근무관련 데이터 --> chart.js</div>

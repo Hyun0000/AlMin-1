@@ -44,26 +44,31 @@ function changeColor() {
     }
 }
 
-// 모달창 팝업 callback function
-function modalUp() {
-    // 모달창 초기회(by 기존 일정 수정, 새로운 일정 추가)
-    startDayEle.innerText = "";
-    endDayEle.innerText = "";
-    startTimeEle.value = "";
-    endTimeEle.value = "";
-    titleEle.value = "";
-    fourbtnEleVal = "";
-    colorEle.value = "#0d6efd";
-    document.getElementById('calUpdateBtn').style.display = 'none'; // 수정 버튼 숨기기
-    
-    calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
-    calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
-    calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
-    $(".modalTypeLabel").css({"background-color":"white","color":"royalblue"}); // 라벨 색깔 원래대로
-    for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
-
-    modalBack.style.display = 'block';
-}
+//// 모달창 팝업 callback function
+//function modalUp() {
+//    // 모달창 초기회(by 기존 일정 수정, 새로운 일정 추가)
+//    startDayEle.innerText = "";
+//    endDayEle.innerText = "";
+//    startTimeEle.value = "";
+//    endTimeEle.value = "";
+//    titleEle.value = "";
+//    fourbtnEleVal = "";
+//    colorEle.value = "#0d6efd";
+//    document.getElementById('calUpdateBtn').style.display = 'none'; // 수정 버튼 숨기기
+//    
+//    calUpdateBtn.style.display = 'none'; // 수정 버튼 숨기기
+//    calSubmitBtn.style.display = 'block'; // 등록 버튼 보이기
+//    calDeleteBtn.style.display = 'none'; // 삭제 버튼 숨기기
+//    $(".modalTypeLabel").css({"background-color":"white","color":"royalblue"}); // 라벨 색깔 원래대로
+//    for (let i = 0; i < inputRadioEle.length; i++) {inputRadioEle[i].checked = false;} // 라디오 버튼 체크 해제
+//    
+//    // 입력 모달창 타입 <label> 관련 코드
+//	goLabelEle.style.display = 'block';
+//	meetLabelEle.style.display = 'block';
+//	workLabelEle.style.display = 'block';
+//
+//    modalBack.style.display = 'block';
+//}
 
 // 모달창 팝업 닫기(취소 버튼 눌렀을때)
 function modalClose() {

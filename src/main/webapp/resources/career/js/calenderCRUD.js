@@ -1,5 +1,8 @@
 // ========================================== 일정 추가 ================================================
 calSubmitBtn.onclick = calSubmit;
+//workLabelEle.onclick = () => {
+//	moneyLabelEle.style.display = 'block';
+//}
 
 function calSubmit() {
 	let submitBool = true;
@@ -7,6 +10,11 @@ function calSubmit() {
 	// 클릭된 라디오 버튼의 value 담기
     for (let k = 0; k < inputRadioEle.length; k++) {
         if (inputRadioEle[k].checked) {fourbtnEleVal = inputRadioEle[k].value;}
+//        if (fourbtnEleVal === 'W') {
+//        	moneyLabelEle.style.display = 'block';
+//		} else {
+//			moneyLabelEle.style.display = 'none';
+//		}
     }
 
     // 시작 날짜 + 시간
@@ -61,7 +69,7 @@ function calSubmit() {
 	}
 }
 
-// ============================== 일정 추가후 callback function ==============================
+// ============================== 일정 추가 후 callback function ==============================
 function afterCalInsert() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
@@ -101,22 +109,28 @@ function calDelete() {
 	}
 }
 
+//============================== 일정 삭제 후 callback function ==============================
 function afterCalDelete() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
 			if (httpRequest.responseText === 'ok') {
 				alert("삭제 완료");
-				console.log("============================");
-				console.log(getPath);
-				console.log(evnets);
-				console.log(evnets.findIndex(obj => obj.title === titleEle.value));
 				
-				let test = evnets.findIndex(obj => obj.title === titleEle.value);
-				console.log("test : " + test);
-				evnets.splice(test, 1);
-				// arr3.findIndex(i => i.name == "강호동"); 
-				// array.findIndex(obj => obj.name == "희동이");
-				console.log("============================");
+			    console.log("############# 1 ###############");
+			    console.log(evnets);
+			    console.log("############# 1 ###############");
+				
+				// 삭제된 일정을 events 배열에서 삭제
+				let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
+				evnets.splice(deleteEventObj, 1);
+				
+			    console.log("############# 2 ###############");
+			    console.log(evnets);
+			    console.log("############# 2 ###############");
+				// ex)
+				// arr3.findIndex(i => i.name == "스펀지밥"); 
+				// array.findIndex(obj => obj.name == "뚱이");
+				
 				modalBack.style.display = 'none';
 				sendRequest("GET", getPath, null, calenderLoad); // 일정 삭제 후 다시 전체 일정 data 가져오기
 			} else if(httpRequest.responseText === 'false') {
@@ -127,23 +141,75 @@ function afterCalDelete() {
 		}
 	}
 }
+//========================================== 일정 수정 ================================================
+calUpdateBtn.onclick = calUpdate;
+
+// 일정 수정(조건 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 면접 or 구직 구분값)
+function calUpdate() {
+    // 시작 날짜 + 시간
+    allStart = startDayEle.innerText + " " + startTimeEle.value;
+
+    // 종료 날짜 + 시간
+    allEnd = endDayEle.innerText + " " + endTimeEle.value;
+    
+    let updateParam = {
+    		needMemberNo : eventGroupId,
+    		needMemberId : userId,
+    		needTitle : titleEle.value,
+    		needColor : colorEle.value,
+    		needTimeStart : allStart,
+    		needTimeEnd : allEnd,
+    		needGoMeet : fourbtnEleVal
+    }
+    
+    console.log("#################################");
+    console.log(updateParam);
+    console.log(JSON.stringify(updateParam));
+    console.log("#################################");
+    
+    let updateConfirm = confirm("수정하시겠습니까?");
+    
+	if(updateConfirm) {
+		sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
+	}
+}
+//============================== 일정 수정 후 callback function ==============================
+function afterCalUpdate() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			if (httpRequest.responseText === 'ok') {
+				alert("수정 완료");
+				modalBack.style.display = 'none';
+				sendRequest("GET", getPath, null, calenderLoad); // 일정 수정 후 다시 전체 일정 data 가져오기
+			} else {
+				alert("수정 미완료");
+			}
+		}
+	}
+}
+//private int needMemberNo;
+//private String needMemberId;
+//private String needMemberType;
+//private String needTitle;
+//private String needColor;
+//private String needTimeStart;
+//private String needTimeEnd;
+//private String needGoMeet;
 
 //INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, 'user01', '1', 'apple', '2', '명륜갈비', '#003300', TO_DATE('2021-11-02 23:00:00','yyyy-dd-mm hh24:mi:ss'), 'M');
-
 //SELECT TO_CHAR(NEED_TIME_DAY, 'yyyy-mm-dd hh24:mi:ss') FROM MEMBER_NEED;
-
 //-- 2021-02-11 23:00:00 --> REPLACE 사용해서 가운데에 T 넣기
 //--start: '2021-11-01T09:00:00'
 //--end : '2021-11-02T23:00:00'
 //--이벤트명 / 날짜+T+시간 / 색깔(기본값 필요) - 무조건 #ff0000 형식으로 입력
 
-// private int needMemberNo;
-// private String needMemberId;
-// private String needMemberType;
-// private String needTitle;
-// private String needColor;
-// private String needTimeStart;
-// private String needTimeEnd;
-// private String needGoMeet;
+//NEED_MEMBER_NO 		NUMBER 			PRIMARY KEY,
+//NEED_MEMBER_ID 		varchar2(50), 	-- 복합 외래키 지정(MEMBER)
+//NEED_MEMBER_TYPE 	char(1) 		DEFAULT 1, -- 복합 외래키 지정(MEMBER)
+//NEED_TITLE 			varchar2(50) 	NOT NULL,
+//NEED_COLOR 			varchar2(10) 	DEFAULT '#0d6efd',
+//NEED_TIME_START 		TIMESTAMP 		NOT NULL, -- 면접 혹은 지원 날짜(시작)
+//NEED_TIME_END 		TIMESTAMP 		NOT NULL, -- 면접 혹은 지원 날짜(종료)
+//NEED_GO_MEET 		char(1) 		CHECK(NEED_GO_MEET IN('G', 'M')), -- 면접인지 지원인지 구분
 
 
