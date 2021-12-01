@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,7 @@ public class ResumeController {
 	@Autowired
 	private ResumeService resumeService;
 	
-	@GetMapping("resumeAdd") //이력서 등록
+	@GetMapping("resumeAdd") //이력서 등록 페이지
 	public String goResumeAddPage(@RequestParam(value="msg", required=false ) String msg,Model model) throws Exception {
 		System.out.println("msg : " + msg);
 		model.addAttribute("msg", msg);
@@ -46,21 +45,22 @@ public class ResumeController {
 		return mv;
 	}
 	
-	@PostMapping("addres")
+	@PostMapping("addres")//이력서등록
 	public ModelAndView insertResume(MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
-		
+		System.out.println("mr : "+mr);
+		int result=-1;
 		try {
-			if(resumeService.insertResume(mr)>0) {
-				System.out.println("mr : "+mr);
-				redirectAttributes.addAttribute("msg", "이력서 등록이 되었습니다.");
-				mv.setViewName("main");
-			}else {
-				redirectAttributes.addAttribute("msg", "이력서 등록이 실패하였습니다. 다시 시도해주세요.");
-				String referer = request.getHeader("Referer"); //이전페이지 이동
-			    mv.setViewName("redirect:"+ referer); 
-			}
+			result=resumeService.insertResume(mr);
 		}catch(Exception e) {
 			e.printStackTrace();
+		}
+		if(result==1) {
+			redirectAttributes.addAttribute("msg", "이력서 등록이 되었습니다.");
+			mv.setViewName("main");
+		}else {
+			redirectAttributes.addAttribute("msg", "이력서 등록이 실패하였습니다. 다시 시도해주세요.");
+			String referer = request.getHeader("Referer"); //이전페이지로 이동
+		    mv.setViewName("redirect:"+ referer); 
 		}
 		return mv;
 	}

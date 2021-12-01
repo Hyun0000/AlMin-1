@@ -23,7 +23,7 @@
 	
 	<!-- 이력서 조회 -->
 	<select id="selectResume" resultMap="ResumeResultMap" resultType="Resume">
-		select * from MEMBER_RESUME where MEMBER_ID=#{memberId}
+		select * from MEMBER_RESUME where RESUME_TITLE=#{resumeTitle}
 	</select>
 	
 	<!-- 이력서 등록 -->
@@ -32,8 +32,8 @@
 			select MEMBER_RESUME_SEQUENCE.NEXTVAL from MEMBER_RESUME </selectKey> -->
 		insert into 
 		MEMBER_RESUME(RESUME_NO,RESUME_TITLE,RESUME_PHONE,JOB_DISTRICT_NO,EDUCATION_NO,
-		JOB_TYPE_NO,PERIOD_NO,JOB_CAREERS)
+		JOB_TYPE_NO,PERIOD_NO,JOB_CAREERS,RESUME_PUBLIC_YN)
 		values(MEMBER_RESUME_SEQUENCE.NEXTVAL,#{resumeTitle},#{resumePhone},#{jobDistrictNo},
-		#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers})
+		#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers},#{resumePublicYn})
 	</insert>
 </mapper>

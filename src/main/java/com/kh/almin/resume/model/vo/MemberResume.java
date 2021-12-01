@@ -28,7 +28,7 @@ public class MemberResume { //회원 이력서 테이블
 	private char memberType;
 	private String resumeTitle;
 	private char resumePublicYn;
-	private char resumePhone;
+	private String resumePhone;
 	private int jobDistrictNo;
 	private int educationNo;
 	private int careersNo;
