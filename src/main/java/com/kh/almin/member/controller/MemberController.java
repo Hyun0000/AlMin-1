@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,7 +52,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 				memberService.insertMember(member);
 			}
 			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
-			// 존재하지 않는다면 -> register
+			// 존재하지 않는다면 -> 가입완료
 		} catch (Exception  e) {
 			throw new RuntimeException();
 		}
@@ -62,6 +64,29 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		//redirect: url의 변화가 있을 때 
 		
 	}
+	@PostMapping("/idCheck")//회원가입 - id 중복체크
+	@ResponseBody
+	private int idCheck(Member member) throws Exception {
+//	public String idCheck(@RequestParam("id") String id) {
+		String resultStr = "";
+//		int result = 0;
+//		try {
+//			result = memberservice.idCheck(id);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			resultStr = "ajax 통신 실패";
+//		}
+//		if (result == 1) {
+//			resultStr = "false";
+//		} else {
+//			resultStr = "true";
+//		}
+//		return resultStr;
+		int result = memberService.idChk(member);
+		/* 만약, DB에 ID가 존재하면 1을, 존재하지 않으면 0을 return 할 것임 */
+		return result;
+	}
+	
 	@GetMapping //회원정보 조회
 	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
 		List<Member> volist = memberService.getMembers();

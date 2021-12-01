@@ -53,18 +53,22 @@
 		SELECT MEMBER_ID , MEMBER_PW FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>
+	<select id="selectCompany" resultMap="CompanyResultMap" parameterType="String">
+		SELECT COMPANY_ID , COMPANY_PW FROM COMPANY
+		WHERE COMPANY_ID = #{companyId}
+	</select>
 	
 		<!-- 아이디 중복 체크 -->
 	<select id="idChk" resultType="Integer" parameterType="String">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE TRIM(MEMBER_ID) = #{memberId}
 	</select>
-	<!-- 패스워드 체크 -->
+	<!-- 패스워드 체크
 	<select id="passChk" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 		  AND MEMBER_PW = #{memberPw}
-	</select>
+	</select> -->
     
     <!-- 로그인 -->
     <!-- password는 암호화로 인해 주석처리 -->

@@ -1,7 +1,6 @@
 package com.kh.almin.member.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,11 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.member.model.service.MemberService;
+import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 
 @Controller
@@ -58,7 +55,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{memberId}")
-	@ResponseBody // ajax에 쓰이는 어노테이션 얘가 없으면 result가 view페이지를 찾음.
+	@ResponseBody // ajax에 쓰이는 어노테이션. 얘가 없으면 result가 view페이지를 찾음.
 	private String loginMember(HttpSession session,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
 //		private String loginMember(HttpSession session, Model model,@PathVariable("memberId")String memberId, @RequestBody Member m) throws Exception {
 		String result = "0";
@@ -83,6 +80,13 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 		}
 	}
 	
+	@PostMapping("/{companyId}")
+	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {
+		String result = "0";
+		logger.info("companyId: "+companyId);
+		logger.info(c.toString());
+		return result;
+	}
 	
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {

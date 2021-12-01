@@ -49,21 +49,21 @@ session.setAttribute("state", state);
 					<span></span> <span></span> <span></span>
 				</div>
 				<div class="main-menu">
-					<ul>
-						<li class="active"><a href="recruits/jobinfoList">구인공고</a></li>
-						<li><a href="#">인재정보</a></li>
-					</ul>
 					<!-- 로그인 전 노출 -->
 					<ul id="logout-state">
-						<li><a href="#">아이디/비밀번호 찾기</a></li>
 						<li class="menu-btn"><button class="login template-btn">로그인</button>
 							<a href="${pageContext.request.contextPath}/members"
 							class="template-btn">회원가입</a></li>
 					</ul>
 					<!-- 로그인 후 노출 -->
 					<ul id="login-state" style="display: none;">
-						<li><a href="#">로그아웃</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn" onclick="logout()">로그아웃</a></li>
+			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 						<li><a href="#">마이페이지</a></li>
+					</ul>
+					<ul>
+						<li class="active"><a href="recruits">구인공고</a></li>
+						<li><a href="#">인재정보</a></li>
 					</ul>
 				</div>
 			</div>
@@ -94,12 +94,10 @@ session.setAttribute("state", state);
 					</tr>
 					<tr>
 						<td class="save-id"><input type="checkbox" name="lb_idSave"
-							id="lb_idSave" value="on" checked><label for="lb_idSave">
-								아이디 저장</label></td>
+							id="lb_idSave" value="on" checked><label for="lb_idSave">아이디 저장</label></td>
 					</tr>
 					<tr>
-						<td><button type="button" class="template-btn" id="loginBtn"
-								onclick='ajaxL1()'>로그인</button></td>
+						<td><button type="button" class="template-btn" id="loginBtn" onclick='ajaxL1()'>로그인</button></td>
 					</tr>
 				</table>
 			</form>
@@ -113,17 +111,14 @@ session.setAttribute("state", state);
 							<img
 								src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png">
 						</button></li>
-					<fb:login-button scope="public_profile,email"
-						onlogin="checkLoginState();"></fb:login-button>
-					<button type="button" onclick="logoutFB()">Facebook 로그아웃</button>
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 				</ul>
 			</div>
 			<table class="login-menu item">
 				<tr>
 					<td><a href="#" id="findId">아이디 찾기</a></td>
 					<td><a href="#" id="findPwd">비밀번호 찾기</a></td>
-					<td><a href="${pageContext.request.contextPath}/members"
-						id="join">회원가입</a></td>
+					<td><a href="${pageContext.request.contextPath}/members" id="join"><button>회원가입</button></a></td>
 				</tr>
 			</table>
 		</div>
@@ -161,8 +156,7 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			if(result == 0){
 				alert("아이디와 비밀번호를 다시 확인해주세요.");
 			} else {
-			console.log("로그인 성공하셨습니다.")
-			//show()/hide()
+				console.log("로그인 성공")
     		$(".modal").hide(); 
 			$("#login-state").show();
 			$("#logout-state").hide();
@@ -174,8 +168,7 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 				"\n"+"error:"+error);
 	}
 	});
-	//location.href="<%=request.getContextPath()%>
-		/logins?userId="+userId;
+	//location.href="<%=request.getContextPath()%>/logins?userId="+userId;
 		};
 
 		// SNS 로그인(네이버, 카카오, 페이스북)
