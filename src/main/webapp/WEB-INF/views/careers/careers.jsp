@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/career/css/app.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/smallcalendar.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/mdtimepicker.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/career/css/chart.css"/>">
 </head>
 <body>
     <section id="calender_top">
@@ -156,6 +157,16 @@
         </div>
         <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
     </div>
+<!-- ================================================== chart.js ================================================== -->
+    <div id="firstDiv">
+        <canvas id="myChart"></canvas>
+    </div>
+    <div id="secondDiv">
+        <canvas id="myChart2"></canvas>
+    </div>
+    <div id="thirdDiv">
+        <canvas id="myChart3"></canvas>
+    </div>
 <script>
 	let userId = "user01";
 </script>
@@ -169,6 +180,8 @@
 <script src="<c:url value="/resources/career/js/app.js"/>"></script>
 <script src="<c:url value="/resources/career/js/mdtimepicker.js"/>"></script>
 <script src="<c:url value="/resources/career/js/calenderCRUD.js"/>"></script>
+<script src="<c:url value="/resources/career/js/chart.js"/>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>$(document).ready(function () {$('.timepicker').mdtimepicker();});</script>
 </body>
 </html>

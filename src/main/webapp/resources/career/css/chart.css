@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#firstDiv{
+    border: 1px solid black;
+    width: 500px;
+    height: 500px;
+    display: inline-block;
+}
+
+#secondDiv{
+    border: 1px solid black;
+    width: 700px;
+    height: 500px;
+    display: inline-block;
+}
+
+#thirdDiv{
+    border: 1px solid black;
+    width: 500px;
+    height: 500px;
+    display: inline-block;
+}
