@@ -1,8 +1,5 @@
 // ========================================== 일정 추가 ================================================
 calSubmitBtn.onclick = calSubmit;
-//workLabelEle.onclick = () => {
-//	moneyLabelEle.style.display = 'block';
-//}
 
 function calSubmit() {
 	let submitBool = true;
@@ -10,11 +7,6 @@ function calSubmit() {
 	// 클릭된 라디오 버튼의 value 담기
     for (let k = 0; k < inputRadioEle.length; k++) {
         if (inputRadioEle[k].checked) {fourbtnEleVal = inputRadioEle[k].value;}
-//        if (fourbtnEleVal === 'W') {
-//        	moneyLabelEle.style.display = 'block';
-//		} else {
-//			moneyLabelEle.style.display = 'none';
-//		}
     }
 
     // 시작 날짜 + 시간
@@ -52,32 +44,81 @@ function calSubmit() {
     console.log("일정 등록 type 버튼 : " + fourbtnEleVal);
     console.log("색깔 value : " + colorEle.value);
     
-    let insertParam = {
-		needMemberId : userId,
-		needTitle : titleEle.value,
-		needColor : colorEle.value,
-		needTimeStart : allStart,
-		needTimeEnd : allEnd,
-		needGoMeet : fourbtnEleVal
-    }
-    
-    console.log(insertParam);
-    console.log(JSON.stringify(insertParam));
-    
     if (submitBool === true) {
-    	sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
+		if(fourbtnEleVal === 'G' || fourbtnEleVal === 'M') {
+			let insertParam = {
+					needMemberId : userId,
+					needTitle : titleEle.value,
+					needColor : colorEle.value,
+					needTimeStart : allStart,
+					needTimeEnd : allEnd,
+					needGoMeet : fourbtnEleVal
+			}
+		    console.log(insertParam);
+		    console.log(JSON.stringify(insertParam));
+		    console.log("fourbtnEleVal : " + fourbtnEleVal);
+			sendRequest("POST", "calender", JSON.stringify(insertParam), afterCalInsert);
+			// sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
+		} else if(fourbtnEleVal === 'M') {
+			let insertWorkParam = {
+					workMemberId : userId,
+					workTitle : titleEle.value,
+					workColor : colorEle.value,
+					workTimeStart : allStart,
+					workTimeEnd : allEnd,
+					workMoney : "9500", // 우선 이걸로 고정값
+					workType : fourbtnEleVal
+			}
+		    console.log(workMemberId);
+		    console.log(JSON.stringify(workMemberId));
+		    console.log("fourbtnEleVal : " + fourbtnEleVal);
+		    sendRequest("POST", "works", JSON.stringify(workMemberId), afterCalInsert);
+		}
 	}
+    
+//	private int workMemberNo;
+//	private String workMemberId; 
+//	private String workMemberType;
+//	private String workTitle;
+//	private String workColor;
+//	private String workTimeStart;
+//	private String workTimeEnd;
+//	private int workMoney;
+//	private String workType;
+//	INSERT INTO MEMBER_WORK VALUES (MEMBER_WORK_SEQUENCE.NEXTVAL, 'user01', '1', '롯데월드', '#003300',
+//	TO_DATE('2021-11-02 23:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2021-11-03 11:00:00','yyyy-mm-dd hh24:mi:ss'), 9500, 'W');  
+// &&&&&&&&&&
+//    let insertParam = {
+//    		needMemberId : userId,
+//    		needTitle : titleEle.value,
+//    		needColor : colorEle.value,
+//    		needTimeStart : allStart,
+//    		needTimeEnd : allEnd,
+//    		needGoMeet : fourbtnEleVal
+//    }
+//    
+//    console.log(insertParam);
+//    console.log(JSON.stringify(insertParam));
+//    console.log("fourbtnEleVal : " + fourbtnEleVal); // fourbtnEleVal : W
+//    
+//    if (submitBool === true) {
+//    	sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
+//    }
 }
 
-// ============================== 일정 추가 후 callback function ==============================
+// ============================== 일정 추가 후 callback function(근무 & 구직 관리) ==============================
 function afterCalInsert() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
 			console.log(httpRequest.responseText);
 			if (httpRequest.responseText === 'ok') {
-				alert("등록 완료");
+				alert("일정 추가 성공");
+				console.log("fourbtnEleVal callback function : " + fourbtnEleVal);
 				modalBack.style.display = 'none';
 				sendRequest("GET", getPath, null, calenderLoad); // 일정 등록 후 다시 전체 일정 data 가져오기
+			} else {
+				alert("일정 추가 실패");
+				modalBack.style.display = 'none';
 			}
 		}
 	}

@@ -15,15 +15,15 @@ let evnets = [];
 //(지원 / 면접일자) 버튼 선택
 needCalButn.onclick = () => {
 	selectCal = "NG";
-	alert(123);
 	alert(selectCal);
 	sendRequest("GET", getPath, null, calenderLoad);
 }
 
 workCalButn.onclick = () => {
 	selectCal = "W";
-	alert(123);
 	alert(selectCal);
+	let getWorkPath = "/almin/careers/works/" + userId;
+	sendRequest("GET", getWorkPath, null, calenderLoad);
 }
 
 // 처음 캘린더 페이지에 들어왔을 때 실행할 Ajax
@@ -38,6 +38,7 @@ function calenderLoad() {
 	console.log(needCalData);
 	
 	if(selectCal === "NG" || selectCal === "") {
+		evnets = []; // 배열 초기화
 		for (var i = 0; i < needCalData.length; i++) {
 			let evnetObj = new Object();
 			evnetObj.title = needCalData[i].NEED_TITLE;
@@ -48,6 +49,21 @@ function calenderLoad() {
 			evnetObj.type = needCalData[i].NEED_GO_MEET;
 			evnets[i] = evnetObj;
 			topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 구직관리 calendar";
+		}
+	}
+	
+	if(selectCal === "W") {
+		evnets = []; // 배열 초기화
+		for (var i = 0; i < needCalData.length; i++) {
+			let evnetObj = new Object();
+			evnetObj.title = needCalData[i].WORK_TITLE;
+			evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
+			evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
+			evnetObj.color = needCalData[i].WORK_COLOR;
+			evnetObj.id = needCalData[i].WORK_MEMBER_NO;
+			evnetObj.type = needCalData[i].WORK_TYPE;
+			evnets[i] = evnetObj;
+			topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 근무관리 calendar";
 		}
 	}
 	

@@ -16,13 +16,15 @@
 		<typeAlias type="com.kh.almin.recruit.model.vo.SearchRecruit" alias="SearchRecruit" />
 		<typeAlias type="com.kh.almin.resume.model.vo.MemberResume" alias="Resume" />
 		<typeAlias type="com.kh.almin.career.model.vo.MemberNeed" alias="MemberNeed" />
+		<typeAlias type="com.kh.almin.career.model.vo.MemberWork" alias="MemberWork" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mappers/comments-mapper.xml" />
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/recruit-mapper.xml" />
-		<mapper resource="mappers/career-mapper.xml" />
+		<mapper resource="mappers/careerneed-mapper.xml" />
+		<mapper resource="mappers/careerwork-mapper.xml" />
 		<mapper resource="mappers/adminmember-mapper.xml" />
 		<mapper resource="mappers/adminrecruit-mapper.xml" />
 		<mapper resource="mappers/applicant-mapper.xml" />

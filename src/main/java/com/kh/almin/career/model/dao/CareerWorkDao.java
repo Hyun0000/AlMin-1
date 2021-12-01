@@ -7,35 +7,28 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.almin.career.model.vo.MemberNeed;
+import com.kh.almin.career.model.vo.MemberWork;
 
-@Repository("careerNeedDao")
-public class CareerNeedDao {
+@Repository("careerWorkDao")
+public class CareerWorkDao {
 	@Autowired
 	private SqlSession sqlSession;
 // ===================================================================================================================
-	// calender 첫 page --> 지원일자 조회를 calender 첫 페이지로 결정
-	public List<Map<String, String>> selectCalList(String userId) throws Exception {
+	// 근무 일정 전체 조회(select)
+	public List<Map<String, String>> selectWorkCalList(String userId) {
 		List<Map<String, String>> test = null;
-		test = sqlSession.selectList("CareerNeed.selectCal", userId);
-		System.out.println("dao selectCalList : " + test);
+		test = sqlSession.selectList("CareerWork.selectWorkCal", userId);
+		System.out.println("dao workList : " + test);
 		return test;
 	}
 // ===================================================================================================================
-	// 구직 & 면접 일정 입력(insert)
-	public int insertNeed(MemberNeed memberNeed) throws Exception{
-		return sqlSession.insert("CareerNeed.insertCal", memberNeed);
+	// 근무 일정 입력(insert)
+	public int insertWork(MemberWork insertMemberWork) {
+		return 0;
 	}
 // ===================================================================================================================
-	// 일정 삭제(조건 : 제목, 시작시간. 종료시간)
-	public int deleteCal(MemberNeed deleteMemberNeed) throws Exception{
-		return sqlSession.delete("CareerNeed.deleteCal", deleteMemberNeed);
-	}
 // ===================================================================================================================
-	// 일정 수정(조건 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 면접 or 구직 구분값)
-	public int updateCal(MemberNeed updateMemberNeed) {
-		return sqlSession.update("CareerNeed.updateCal", updateMemberNeed);
-	}
+// ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================
 }

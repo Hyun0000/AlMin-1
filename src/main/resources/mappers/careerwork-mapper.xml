@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CareerWork">
+	<!-- 근무 일정 조회 -->
+	<select id="selectWorkCal" resultType="hashmap" parameterType="string">
+		SELECT WORK_MEMBER_NO, WORK_TITLE, WORK_COLOR, TO_CHAR(WORK_TIME_START, 'yyyy-mm-dd hh24:mi:ss') STARTTIME, TO_CHAR(WORK_TIME_END, 'yyyy-mm-dd hh24:mi:ss') ENDTIME, WORK_MONEY, WORK_TYPE
+		FROM MEMBER_WORK WHERE WORK_MEMBER_ID = #{userId}
+		<!-- 나중에  WHERE문 조건 추가해야한다.(지원, 면접 구분 위해) -->
+	</select>
+</mapper>
