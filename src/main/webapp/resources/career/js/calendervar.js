@@ -82,5 +82,8 @@ let calDeleteBtn = document.getElementById('calDeleteBtn');
 //달력 최상단 제목 <div>
 let topCalTitle = document.getElementById('top_title');
 
-// Ajax를 통해 @PathVariable로 보낼 경로
-let getPath = "/almin/careers/calender/" + userId;
+// Ajax를 통해 @PathVariable로 보낼 경로(근무 / 구직 관리)
+const getPath = "/almin/careers/calender/" + userId;
+
+//Ajax를 통해 @PathVariable로 보낼 경로(근무 관리)
+const getWorkPath = "/almin/careers/works/" + userId;

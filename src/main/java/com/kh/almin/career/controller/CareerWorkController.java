@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +56,7 @@ public class CareerWorkController {
 	@PostMapping("/works")
 	@ResponseBody
 	public String insertWork(@RequestBody String insertInfo) {
-		System.out.println("@PostMapping(\"/insertneed\") 진입");
+		System.out.println("works @PostMapping(\"/insertneed\") 진입");
 		System.out.println("insertInfo : " + insertInfo);
 		
 		Gson gson = new GsonBuilder().create();
@@ -69,7 +71,60 @@ public class CareerWorkController {
 		return resultStr;
 	}
 // ===================================================================================================================
+	// 근무 일정 삭제(조건 : 유저 아이디, 일정 번호)
+	@DeleteMapping(value = "/works")
+	@ResponseBody
+	public String deleteWork(@RequestBody String deleteInfo) {
+		System.out.println("works @DeleteMapping(\"/insertneed\") 진입");
+		System.out.println("deleteInfo : " + deleteInfo);
+		
+		Gson gson = new GsonBuilder().create();
+		MemberWork deleteMemberWork = gson.fromJson(deleteInfo, MemberWork.class);
+		System.out.println("insertMemberWork : " + deleteMemberWork);
+		
+		int result = 0;
+		try {result = careerWorkService.deleteWork(deleteMemberWork);} catch (Exception e) {e.printStackTrace();}
+		
+		String resultStr = "";
+		if (result == 1) {resultStr = "ok";} else {resultStr = "false";}
+		return resultStr;
+	}
 // ===================================================================================================================
+	// 근무 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 시급)
+	@PatchMapping("/works")
+	@ResponseBody
+	public String updateWork(@RequestBody String updateInfo) {
+		System.out.println("works @PatchMapping(\"/insertneed\") 진입");
+		System.out.println("updateInfo : " + updateInfo);
+		
+		Gson gson = new GsonBuilder().create();
+		MemberWork updateMemberWork = gson.fromJson(updateInfo, MemberWork.class);
+		System.out.println("updateMemberWork : " + updateMemberWork);
+		
+		int result = 0;
+		try {result = careerWorkService.updateWork(updateMemberWork);} catch (Exception e) {e.printStackTrace();}
+		
+		String resultStr = "";
+		if (result == 1) {resultStr = "ok";} else {resultStr = "false";}
+		return resultStr;
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

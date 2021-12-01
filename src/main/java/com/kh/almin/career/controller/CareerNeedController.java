@@ -88,17 +88,10 @@ public class CareerNeedController {
 		try {
 			jsonObject = (JSONObject) jsonParser.parse(memberNeed);
 			System.out.println("jsonObject : " + jsonObject);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		} catch (ParseException e) {e.printStackTrace();}
 		
 		String startTime = (String)jsonObject.get("needTimeStart");
-		startTime = startTime.replace("T", " ");
-		System.out.println("startTime : " + startTime);
-		
 		String endTime = (String)jsonObject.get("needTimeEnd");
-		endTime = endTime.replace("T", " ");
-		System.out.println("endTime : " + endTime);
 		
 		MemberNeed memberNeedVO = 
 		new MemberNeed((String)jsonObject.get("needMemberId"), (String)jsonObject.get("needTitle"), (String)jsonObject.get("needColor"), startTime, endTime, (String)jsonObject.get("needGoMeet"));
@@ -106,21 +99,14 @@ public class CareerNeedController {
 		int result = 0;
 		try {
 			result = careerNeedService.insertNeed(memberNeedVO);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {e.printStackTrace();}
 		String resultStr = "";
 		if (result == 1) {System.out.println("일정추가 성공"); resultStr = "ok";}
 		else if(result == 0) {System.out.println("일정추가 실패"); resultStr = "false";}
-		// 2021-02-11 23:00:00 --> REPLACE 사용해서 가운데에 T 넣기
-		// title : 명륜진사갈비
-		// start: '2021-11-01T09:00:00'
-		// end : '2021-11-02T23:00:00'
-		// color : red
 		return resultStr;
 	}
 // ===================================================================================================================
-	// 구직 & 면접 일정 삭제(조건 : 제목, 시작시간. 종료시간)
+	// 구직 & 면접 일정 삭제(조건 : 유저 아이디, 일정 번호)
 	@DeleteMapping(value = "/calender")
 	@ResponseBody
 	public String deleteCal(@RequestBody String deleteInfo) {

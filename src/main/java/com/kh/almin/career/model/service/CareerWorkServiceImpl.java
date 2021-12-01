@@ -27,7 +27,17 @@ public class CareerWorkServiceImpl implements CareerWorkService {
 		return careerWorkDao.insertWork(insertMemberWork);
 	}
 // ===================================================================================================================	
+	// 근무 일정 삭제(조건 : 유저 아이디, 일정 번호)
+	@Override
+	public int deleteWork(MemberWork deleteMemberWork) throws Exception {
+		return careerWorkDao.deleteWork(deleteMemberWork);
+	}
 // ===================================================================================================================	
+	// 근무 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 시급)
+	@Override
+	public int updateWork(MemberWork updateMemberWork) throws Exception {
+		return careerWorkDao.updateWork(updateMemberWork);
+	}
 // ===================================================================================================================	
 // ===================================================================================================================
 }

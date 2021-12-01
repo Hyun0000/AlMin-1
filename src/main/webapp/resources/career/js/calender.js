@@ -15,14 +15,13 @@ let evnets = [];
 //(지원 / 면접일자) 버튼 선택
 needCalButn.onclick = () => {
 	selectCal = "NG";
-	alert(selectCal);
+	// alert(selectCal);
 	sendRequest("GET", getPath, null, calenderLoad);
 }
 
 workCalButn.onclick = () => {
 	selectCal = "W";
-	alert(selectCal);
-	let getWorkPath = "/almin/careers/works/" + userId;
+	// alert(selectCal);
 	sendRequest("GET", getWorkPath, null, calenderLoad);
 }
 

@@ -10,10 +10,12 @@ function calSubmit() {
     }
 
     // 시작 날짜 + 시간
-    allStart = startDayEle.innerText + "T" + startTimeEle.value;
+    // allStart = startDayEle.innerText + "T" + startTimeEle.value;
+    allStart = startDayEle.innerText + " " + startTimeEle.value;
 
     // 종료 날짜 + 시간
-    allEnd = endDayEle.innerText + "T" + endTimeEle.value;
+    // allEnd = endDayEle.innerText + "T" + endTimeEle.value;
+    allEnd = endDayEle.innerText + " " + endTimeEle.value;
     
     // 시작일과 종료일이 같은데 종료시간이 시작시간 보다 빠를때
     if (startDayEle.innerText === endDayEle.innerText && startTimeEle.value > endTimeEle.value) {
@@ -59,7 +61,7 @@ function calSubmit() {
 		    console.log("fourbtnEleVal : " + fourbtnEleVal);
 			sendRequest("POST", "calender", JSON.stringify(insertParam), afterCalInsert);
 			// sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
-		} else if(fourbtnEleVal === 'M') {
+		} else if(fourbtnEleVal === 'W') {
 			let insertWorkParam = {
 					workMemberId : userId,
 					workTitle : titleEle.value,
@@ -69,10 +71,10 @@ function calSubmit() {
 					workMoney : "9500", // 우선 이걸로 고정값
 					workType : fourbtnEleVal
 			}
-		    console.log(workMemberId);
-		    console.log(JSON.stringify(workMemberId));
+		    console.log(userId);
+		    console.log(JSON.stringify(insertWorkParam));
 		    console.log("fourbtnEleVal : " + fourbtnEleVal);
-		    sendRequest("POST", "works", JSON.stringify(workMemberId), afterCalInsert);
+		    sendRequest("POST", "works", JSON.stringify(insertWorkParam), afterCalInsert);
 		}
 	}
     
@@ -105,8 +107,7 @@ function calSubmit() {
 //    	sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
 //    }
 }
-
-// ============================== 일정 추가 후 callback function(근무 & 구직 관리) ==============================
+// ============================== 일정 추가 후 callback function ==============================
 function afterCalInsert() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
@@ -115,7 +116,12 @@ function afterCalInsert() {
 				alert("일정 추가 성공");
 				console.log("fourbtnEleVal callback function : " + fourbtnEleVal);
 				modalBack.style.display = 'none';
-				sendRequest("GET", getPath, null, calenderLoad); // 일정 등록 후 다시 전체 일정 data 가져오기
+				
+				if(fourbtnEleVal === "G" || fourbtnEleVal === "M") {
+					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 등록 후 다시 전체 일정 data 가져오기
+				} else if(fourbtnEleVal === "W") {
+					sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 등록 후 다시 전체 일정 data 가져오기
+				}
 			} else {
 				alert("일정 추가 실패");
 				modalBack.style.display = 'none';
@@ -136,18 +142,49 @@ function calDelete() {
     // 종료 날짜 + 시간
     allEnd = endDayEle.innerText + " " + endTimeEle.value;
 	
-    let deleteParam = {
-    		needTitle : titleEle.value,
-    		needTimeStart : allStart,
-    		needTimeEnd : allEnd
+//    let deleteParam = {
+//    		needTitle : titleEle.value,
+//    		needTimeStart : allStart,
+//    		needTimeEnd : allEnd
+//    }
+    
+    if(deleteConfirm) {
+    	if(selectCal === "NG" || selectCal === "") {
+    		let deleteParam = {
+    				needMemberNo : eventGroupId,
+    				needMemberId : userId
+    		}
+    		console.log(deleteParam);
+    	    console.log(JSON.stringify(deleteParam));
+    		sendRequest("DELETE", "calender", JSON.stringify(deleteParam), afterCalDelete);
+    	} else if(selectCal === "W") {
+    		let deleteWorkParam = {
+    				workMemberNo : eventGroupId,
+    				workMemberId : userId
+    		}
+    		console.log(deleteWorkParam);
+    	    console.log(JSON.stringify(deleteWorkParam));
+    		sendRequest("DELETE", "works", JSON.stringify(deleteWorkParam), afterCalDelete);
+    	}
     }
     
-    console.log(deleteParam);
-    console.log(JSON.stringify(deleteParam));
-	
-	if(deleteConfirm) {
-		sendRequest("DELETE", "calender", JSON.stringify(deleteParam), afterCalDelete);
-	}
+    
+//	private int needMemberNo;
+//	private String needMemberId;
+//	private String needMemberType;
+//	private String needTitle;
+//	private String needColor;
+//	private String needTimeStart;
+//	private String needTimeEnd;
+//	private String needGoMeet;
+    
+    
+//    console.log(deleteParam);
+//    console.log(JSON.stringify(deleteParam));
+//	
+//	if(deleteConfirm) {
+//		sendRequest("DELETE", "calender", JSON.stringify(deleteParam), afterCalDelete);
+//	}
 }
 
 //============================== 일정 삭제 후 callback function ==============================
@@ -156,28 +193,41 @@ function afterCalDelete() {
 		if (httpRequest.status === 200) {
 			if (httpRequest.responseText === 'ok') {
 				alert("삭제 완료");
+				modalBack.style.display = 'none';
 				
-			    console.log("############# 1 ###############");
-			    console.log(evnets);
-			    console.log("############# 1 ###############");
+				if(selectCal === "NG" || selectCal === "") {
+					// 삭제된 일정을 events 배열에서 삭제
+					let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
+					evnets.splice(deleteEventObj, 1);
+					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 등록 후 다시 전체 일정 data 가져오기
+				} else if(selectCal === "W") {
+					// 삭제된 일정을 events 배열에서 삭제
+					let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
+					evnets.splice(deleteEventObj, 1);
+					sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 등록 후 다시 전체 일정 data 가져오기
+				}
 				
-				// 삭제된 일정을 events 배열에서 삭제
-				let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
-				evnets.splice(deleteEventObj, 1);
-				
-			    console.log("############# 2 ###############");
-			    console.log(evnets);
-			    console.log("############# 2 ###############");
+//			    console.log("############# 1 ###############");
+//			    console.log(evnets);
+//			    console.log("############# 1 ###############");
+//				
+//				// 삭제된 일정을 events 배열에서 삭제
+//				let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
+//				evnets.splice(deleteEventObj, 1);
+//				
+//			    console.log("############# 2 ###############");
+//			    console.log(evnets);
+//			    console.log("############# 2 ###############");
 				// ex)
 				// arr3.findIndex(i => i.name == "스펀지밥"); 
 				// array.findIndex(obj => obj.name == "뚱이");
 				
-				modalBack.style.display = 'none';
-				sendRequest("GET", getPath, null, calenderLoad); // 일정 삭제 후 다시 전체 일정 data 가져오기
+				
+				// sendRequest("GET", getPath, null, calenderLoad); // 일정 삭제 후 다시 전체 일정 data 가져오기
 			} else if(httpRequest.responseText === 'false') {
 				alert("삭제 실패");
 				modalBack.style.display = 'none';
-				sendRequest("GET", getPath, null, calenderLoad);
+				// sendRequest("GET", getPath, null, calenderLoad);
 			}
 		}
 	}
@@ -185,34 +235,65 @@ function afterCalDelete() {
 //========================================== 일정 수정 ================================================
 calUpdateBtn.onclick = calUpdate;
 
-// 일정 수정(조건 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 면접 or 구직 구분값)
 function calUpdate() {
+	let updateConfirm = confirm("수정하시겠습니까?");
+	
     // 시작 날짜 + 시간
     allStart = startDayEle.innerText + " " + startTimeEle.value;
 
     // 종료 날짜 + 시간
     allEnd = endDayEle.innerText + " " + endTimeEle.value;
     
-    let updateParam = {
-    		needMemberNo : eventGroupId,
-    		needMemberId : userId,
-    		needTitle : titleEle.value,
-    		needColor : colorEle.value,
-    		needTimeStart : allStart,
-    		needTimeEnd : allEnd,
-    		needGoMeet : fourbtnEleVal
+    if(updateConfirm) {
+    	if(selectCal === "NG" || selectCal === "") {
+    		// 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 면접 or 구직 구분값)
+    		let updateParam = {
+    				needMemberNo : eventGroupId,
+    				needMemberId : userId,
+    				needTitle : titleEle.value,
+    				needColor : colorEle.value,
+    				needTimeStart : allStart,
+    				needTimeEnd : allEnd,
+    				needGoMeet : fourbtnEleVal
+    		}
+    	    console.log(updateParam);
+    	    console.log(JSON.stringify(updateParam));
+    	    sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
+    	} else if(selectCal === "W") {
+    		// 근무 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 시급)
+    		let updateWorkParam = {
+    				workMemberNo : eventGroupId,
+    				workMemberId : userId,
+    				workTitle : titleEle.value,
+    				workColor : colorEle.value,
+    				workTimeStart : allStart,
+    				workTimeEnd : allEnd,
+    				workMoney : "10000" // 임시 값
+    		}
+    	    console.log(updateWorkParam);
+    	    console.log(JSON.stringify(updateWorkParam));
+    	    sendRequest("PATCH", "works", JSON.stringify(updateWorkParam), afterCalUpdate);
+    	}
     }
+// 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 면접 or 구직 구분값)
+//	let updateParam = {
+//			needMemberNo : eventGroupId,
+//			needMemberId : userId,
+//			needTitle : titleEle.value,
+//			needColor : colorEle.value,
+//			needTimeStart : allStart,
+//			needTimeEnd : allEnd,
+//			needGoMeet : fourbtnEleVal
+//	}
     
-    console.log("#################################");
-    console.log(updateParam);
-    console.log(JSON.stringify(updateParam));
-    console.log("#################################");
+//    console.log("#################################");
+//    console.log(updateParam);
+//    console.log(JSON.stringify(updateParam));
+//    console.log("#################################");
     
-    let updateConfirm = confirm("수정하시겠습니까?");
-    
-	if(updateConfirm) {
-		sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
-	}
+//	if(updateConfirm) {
+//		sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
+//	}
 }
 //============================== 일정 수정 후 callback function ==============================
 function afterCalUpdate() {
@@ -221,9 +302,16 @@ function afterCalUpdate() {
 			if (httpRequest.responseText === 'ok') {
 				alert("수정 완료");
 				modalBack.style.display = 'none';
-				sendRequest("GET", getPath, null, calenderLoad); // 일정 수정 후 다시 전체 일정 data 가져오기
+				// sendRequest("GET", getPath, null, calenderLoad); // 일정 수정 후 다시 전체 일정 data 가져오기
+				
+				if(selectCal === "NG" || selectCal === "") {
+					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 수정 후 다시 전체 구직 일정 data 가져오기
+				} else if(selectCal === "W") {
+					sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 수정 후 다시 전체 근무 일정 data 가져오기
+				}
 			} else {
 				alert("수정 미완료");
+				modalBack.style.display = 'none';
 			}
 		}
 	}

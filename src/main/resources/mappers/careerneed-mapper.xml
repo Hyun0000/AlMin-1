@@ -9,15 +9,16 @@
 	</select>
 
 	<!-- 일정 추가 -->	
-	<insert id="insertCal">
+	<insert id="insertCal" parameterType="MemberNeed">
 		INSERT INTO MEMBER_NEED VALUES (MEMBER_NEED_SEQUENCE.NEXTVAL, #{needMemberId}, '1', #{needTitle}, #{needColor},
 		TO_DATE(#{needTimeStart},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{needTimeEnd},'yyyy-mm-dd hh24:mi:ss'), #{needGoMeet})
 	</insert>
 	
 	<!-- 일정 삭제 -->
 	<delete id="deleteCal" parameterType="MemberNeed">
-		DELETE FROM MEMBER_NEED WHERE NEED_TITLE = #{needTitle} AND NEED_TIME_START = #{needTimeStart} AND NEED_TIME_END = #{needTimeEnd}
+		<!-- DELETE FROM MEMBER_NEED WHERE NEED_TITLE = #{needTitle} AND NEED_TIME_START = #{needTimeStart} AND NEED_TIME_END = #{needTimeEnd} -->
 		<!-- 나중에  WHERE문 조건 추가해야한다.(지원, 면접 구분 위해) -->
+		DELETE FROM MEMBER_NEED WHERE NEED_MEMBER_ID = #{needMemberId} AND NEED_MEMBER_NO = #{needMemberNo}
 	</delete>
 	
 	<!-- 일정 수정 -->
