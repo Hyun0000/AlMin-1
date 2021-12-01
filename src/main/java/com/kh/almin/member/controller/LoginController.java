@@ -32,6 +32,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
 	BCryptPasswordEncoder pwdEncoder;
 	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	//로그인이 전제되어야 하는 페이지가 필요할때 유용한 @SessionAttributes, @ModelAttribute
 //	@ModelAttribute("loginInfo")
 //	public Member setMemberSession() throws Exception {
@@ -45,13 +46,11 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 //		return m;
 //	}
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
-	@GetMapping //로그인화면
-	private String selectMembers() throws Exception {
-		logger.info("로그인 화면 진입");
-		return "member/loginPopup";
-	}
+//	@GetMapping //로그인화면
+//	private String selectMembers() throws Exception {
+//		logger.info("로그인 화면 진입");
+//		return "member/loginPopup";//모달창으로 변경(삭제예정)
+//	}
 	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/{memberId}")
@@ -80,13 +79,13 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 		}
 	}
 	
-	@PostMapping("/{companyId}")
-	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {
-		String result = "0";
-		logger.info("companyId: "+companyId);
-		logger.info(c.toString());
-		return result;
-	}
+//	@PostMapping("/{companyId}")
+//	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {
+//		String result = "0";
+//		logger.info("companyId: "+companyId);
+//		logger.info(c.toString());
+//		return result;
+//	}
 	
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {

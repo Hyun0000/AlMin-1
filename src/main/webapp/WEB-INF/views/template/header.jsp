@@ -62,7 +62,7 @@ session.setAttribute("state", state);
 						<li><a href="#">마이페이지</a></li>
 					</ul>
 					<ul>
-						<li class="active"><a href="recruits">구인공고</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
 						<li><a href="#">인재정보</a></li>
 					</ul>
 				</div>
