@@ -10,14 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.almin.comments.model.service.CommentsService;
 import com.kh.almin.recruit.controller.RecruitController;
+import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Recruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
 import com.kh.almin.recruit.model.service.RecruitService;
@@ -55,22 +57,81 @@ public class RecruitController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/report", method = RequestMethod.GET)
-	private ModelAndView reportRecruit(@RequestParam("recruitNo") int recruitNo, ModelAndView mv, RedirectAttributes ra) throws Exception {
+	@GetMapping(value = "/report")
+	private ModelAndView reportRecruit(@RequestParam("recruitNo") int recruitNo, ModelAndView mv, RedirectAttributes ra)
+			throws Exception {
 		String msg = "";
-		msg = "공고가 신고되었습니다.";
 		int result = recruitService.reportRecruit(recruitNo);
+		if (result > 0) {
+			msg = "공고가 신고되었습니다.";
+		} else {
+			msg = "공고 신고 중 문제가 발생했습니다.";
+		}
 		ra.addFlashAttribute("msg", msg);
 		ra.addAttribute("recruitNo", recruitNo);
 		mv.setViewName("redirect:/recruits/detailjobinfo");
 		return mv;
 	}
 
+	@GetMapping(value = "/testmember")
+	private ModelAndView listLikes(ModelAndView mv) throws Exception {
+		List<Recruit> volist = null;
+		LikeRecruit likeRecruit = new LikeRecruit();
+		likeRecruit.setMemberId("sy111k2");
+		volist = recruitService.listLike(likeRecruit.getMemberId());
+		mv.addObject("recruits", volist);
+		mv.setViewName("member/memberPage");
+		logger.info("마이페이지-관심공고");
+		return mv;
+	}
+
+	@GetMapping(value = "/dislike")
+	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {
+		likeRecruit.setMemberId("sy111k2");
+		recruitService.dislikeRecruit(likeRecruit);
+		return "redirect:/recruits/testmember";
+	}
+
+//	@GetMapping(value = "/like")
+//	private ModelAndView likeRecruit(LikeRecruit likeRecruit, ModelAndView mv, RedirectAttributes ra) throws Exception {
+//		int like = 0;
+//		likeRecruit.setMemberId("sy111k2");
+//		like = recruitService.dislikeRecruit(likeRecruit);
+//		if (like == 1) {
+//			System.out.println("찜 해제");
+//		} else if (like == 0) {
+//			recruitService.likeRecruit(likeRecruit);
+//			System.out.println("찜 등록");
+//			ra.addFlashAttribute("like", like);
+//		}
+//		mv.setViewName("redirect:/recruits/detailjobinfo?recruitNo=" + likeRecruit.getRecruitNo());
+//		return mv;
+//	}
+	@PostMapping(value = "/like")
+	@ResponseBody
+	private String likeRecruit(LikeRecruit likeRecruit) throws Exception {
+		String result = "";
+		int like = 0;
+		likeRecruit.setMemberId("sy111k2");
+		like = recruitService.dislikeRecruit(likeRecruit);
+		if (like == 1) {
+			System.out.println("찜 해제");
+		} else if (like == 0) {
+			recruitService.likeRecruit(likeRecruit);
+			System.out.println("찜 등록");
+		}
+		result = String.valueOf(like);   // 0: 찜 등록완료, 1. 찜 해제완료
+		return result;
+	}
+
 	@GetMapping(value = "/detailjobinfo")
-	public ModelAndView detailjobinfo(@RequestParam("recruitNo") int recruitNo, ModelAndView mv
-			, @RequestParam(name="msg", required = false) String msg
-			) throws Exception {
+	public ModelAndView detailjobinfo(@RequestParam("recruitNo") int recruitNo, ModelAndView mv,
+			@RequestParam(name = "msg", required = false) String msg) throws Exception {
+		LikeRecruit likeRecruit = new LikeRecruit();
 		Map<String, List<String>> commentsMap = null;
+		likeRecruit.setMemberId("sy111k2");
+		likeRecruit.setRecruitNo(recruitNo);
+		int like = recruitService.checkLike(likeRecruit);
 		try {
 			commentsMap = commentsService.selectAllKeyWords();
 		} catch (Exception e) {
@@ -78,6 +139,11 @@ public class RecruitController {
 		}
 		mv.addObject("commentsMap", commentsMap);
 		mv.addObject("detailjobinfo", recruitService.detailjobinfo(recruitNo));
+		if (like > 0) {
+			mv.addObject("like", like);
+		} else {
+			mv.addObject("like", null);
+		}
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
 	}

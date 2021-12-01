@@ -55,11 +55,11 @@
 
 					<c:forEach var="item" items="${recruits}">
 						<div class="main-content">
+					
 							<div class="single-content1">
 								<div class="single-job mb-4 d-lg-flex justify-content-between">
 									<div class="job-text">
 										<h4>${item.recruitTitle}</h4>
-										<p>${item.recruitContent}</p>
 										<ul class="mt-4">
 											<li class="mb-3"><h5>
 													<i class="fa fa-map-marker"> ${item.recruitDate} </i>

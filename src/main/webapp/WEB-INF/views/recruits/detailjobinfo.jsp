@@ -55,11 +55,6 @@
 					<td>성별</td>
 					<td>${detailjobinfo.recruitGender }</td>
 				</tr>
-
-				<tr>
-					<td>연령</td>
-					<td>${detailjobinfo.recruitAge }</td>
-				</tr>
 				<tr>
 					<td>인원</td>
 					<td>${detailjobinfo.recruitPerson }명</td>
@@ -69,9 +64,18 @@
 
 		</div>
 		<aside>
-			<button type="button">지원하기</button>
-			<button type="button">찜하기</button>
-			<button type="button"
+			<button type="button" class="template-btn">지원하기</button>
+			<button class="template-btn like-btn" onclick="doLike(this);">
+				<c:choose>
+					<c:when test="${like == null}">
+					찜하기
+				</c:when>
+					<c:otherwise>
+					찜해제
+				</c:otherwise>
+				</c:choose>
+			</button>
+			<button class="template-btn"
 				onclick="location.href='${pageContext.request.contextPath}/recruits/report?recruitNo=${detailjobinfo.recruitNo}'">신고하기</button>
 		</aside>
 
@@ -201,7 +205,11 @@
 					<div id="dragzone_${dragNum}" class="dragzoneClass">
 						<c:forEach var="condition" items="${map.value}">
 							<c:set var="idNum" value="${idNum + 1}" />
-	<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);"><span class="keyword">${condition}</span><span class="xMark" onClick="deleteX()">&times;</span></div>
+							<div id="drag_${idNum}" class="dragEle" draggable="true"
+								ondragstart="drag(event);">
+								<span class="keyword">${condition}</span><span class="xMark"
+									onClick="deleteX()">&times;</span>
+							</div>
 						</c:forEach>
 					</div>
 				</c:forEach>
@@ -251,14 +259,28 @@
 		</script>
 	</c:if>
 	<script>
-		$('#report')
-				.on(
-						"click",
-						function(e) {
-							let popUrl = "${pageContext.request.contextPath}/recruits/reportPop";
-							let popOption = "width = 600px, height=700px, top=300px, left=300px, scrollbars=no";
-							window.open(popUrl, "작가 찾기", popOption);
-						});
+		function doLike(e) {
+			//location.href='${pageContext.request.contextPath}/recruits/like?recruitNo=${detailjobinfo.recruitNo}';
+			$.ajax({
+				url : '${pageContext.request.contextPath}/recruits/like',
+				type : 'post',
+				data : {
+					recruitNo : '${detailjobinfo.recruitNo}'
+				},
+				success : function(data) {
+					console.log(data);
+					if (data == "1") {
+						$(".template-btn.like-btn").text("찜하기");
+					} else {
+						// 0: 찜 등록완료, 1. 찜 해제완료
+						$(".template-btn.like-btn").text("찜해제");
+					}
+				},
+				error : function() {
+
+				}
+			});
+		}
 	</script>
 </body>
 </html>

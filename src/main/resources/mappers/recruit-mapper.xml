@@ -34,32 +34,32 @@
 		</association>
 	</resultMap>
 
+
 	<resultMap id="districtMap" type="District">
 		<id property="jobDistrictNo" column="JOB_DISTRICT_NO" />
 		<result property="jobDistrictName" column="JOB_DISTRICT_NAME" />
 	</resultMap>
 
+	<!-- 신고공고조회 -->
 	<select id="listReport" resultMap="RecruitResultMap">
 		<![CDATA[select
-		RECRUIT_NO,RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_START_AGE,RECRUIT_END_AGE,
+		RECRUIT_NO,RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,
 		RECRUIT_EDUCATION,RECRUIT_PERSON,RECRUIT_MONEY,RECRUIT_PERIOD,RECRUIT_DAY,RECRUIT_TIME,RECRUIT_ADDRESS,RECRUIT_CONTENT,
 		RECRUIT_PUB,RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_JOB_BRANCH, RECRUIT_DATE
 		from COMPANY_RECRUIT WHERE RECRUIT_POLICE > 0]]>
 	</select>
 
+	<!-- 공고신고 -->
 	<update id="updatePolice" parameterType="integer">
 		update COMPANY_RECRUIT
 		set RECRUIT_POLICE = RECRUIT_POLICE+1
 		where RECRUIT_NO = #{recruitNo}
 	</update>
 
-
+	<!-- 공고검색 -->
 	<select id="searchRecruit" resultMap="RecruitResultMap"
 		parameterType="searchRecruit">
-		select RECRUIT_NO,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_START_AGE,RECRUIT_END_AGE,
-		RECRUIT_EDUCATION,RECRUIT_MONEY,RECRUIT_TIME,RECRUIT_CONTENT,
-		RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO ,
-		RECRUIT_DATE
+		select *
 		from COMPANY_RECRUIT
 		<where>
 			<if test='recruitJobDistrict != 100 '>
@@ -76,16 +76,43 @@
 			</if>
 			<![CDATA[and RECRUIT_POLICE < 3]]>
 		</where>
+	</select>
 
+	<!-- 관심공고 리스트 -->
+	<select id="listLike" resultMap="RecruitResultMap"
+		parameterType="String">
+		<![CDATA[select * from COMPANY_RECRUIT c JOIN MEMBER_LIKE m USING(RECRUIT_NO) where MEMBER_ID = #{memberId} AND RECRUIT_POLICE < 3]]>
+	</select>
+
+	<!-- 좋아요 -->
+	<insert id="doLike" parameterType="likeRecruit">
+		insert into member_like
+		(LIKE_NO,MEMBER_ID,MEMBER_TYPE,RECRUIT_NO)
+		values
+		(MEMBER_LIKE_SEQUENCE.NEXTVAL,#{memberId},#{memberType},#{recruitNo})
+	</insert>
+
+	<!-- 좋아요 취소 -->
+	<delete id="disLike" parameterType="likeRecruit">
+		delete from member_like
+		where
+		RECRUIT_NO = #{recruitNo}
+		and member_id = #{memberId}
+	</delete>
+
+	<!-- 좋아요 체크 -->
+	<select id="checkLike" resultType="integer"
+		parameterType="likeRecruit">
+		select count(*) from member_like where
+		member_id = #{memberId} and recruit_no = #{recruitNo}
 	</select>
 
 	<!-- 공고 목록 리스트 -->
 	<select id="jobinfoList" resultMap="RecruitResultMap">
-		<![CDATA[select RECRUIT_NO,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_START_AGE,RECRUIT_END_AGE,
-		RECRUIT_EDUCATION,RECRUIT_MONEY,RECRUIT_TIME,RECRUIT_CONTENT,
-		RECRUIT_POLICE,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_DATE
-		from COMPANY_RECRUIT where RECRUIT_POLICE < 3]]>
+		<![CDATA[select *
+		from COMPANY_RECRUIT where RECRUIT_POLICE < 3 order by recruit_date desc]]>
 	</select>
+	
 	<!-- 공고상세조회 -->
 	<select id="detailjobinfo" resultMap="RecruitResultMap"
 		parameterType="integer">
