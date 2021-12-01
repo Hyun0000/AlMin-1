@@ -75,8 +75,7 @@
 				</c:otherwise>
 				</c:choose>
 			</button>
-			<button class="template-btn"
-				onclick="location.href='${pageContext.request.contextPath}/recruits/report?recruitNo=${detailjobinfo.recruitNo}'">신고하기</button>
+			<button class="template-btn" onclick="report(this);">신고하기</button>
 		</aside>
 
 		<!-- =================================근무조건============================ -->
@@ -277,7 +276,24 @@
 					}
 				},
 				error : function() {
+					alert('오류 발생. 오류 코드: ' + error.code);
+				}
+			});
+		}
 
+		function report(e) {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/recruits/report',
+				type : 'post',
+				data : {
+					recruitNo : '${detailjobinfo.recruitNo}'
+				},
+				success : function(data) {
+					console.log(data);
+					alert('신고가 완료되었습니다.');
+				},
+				error : function() {
+					alert('오류 발생. 오류 코드: ' + error.code);
 				}
 			});
 		}

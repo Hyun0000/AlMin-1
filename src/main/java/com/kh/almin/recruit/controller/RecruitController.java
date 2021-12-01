@@ -57,56 +57,30 @@ public class RecruitController {
 		return mv;
 	}
 
-	@GetMapping(value = "/report")
-	private ModelAndView reportRecruit(@RequestParam("recruitNo") int recruitNo, ModelAndView mv, RedirectAttributes ra)
-			throws Exception {
-		String msg = "";
-		int result = recruitService.reportRecruit(recruitNo);
-		if (result > 0) {
-			msg = "공고가 신고되었습니다.";
-		} else {
-			msg = "공고 신고 중 문제가 발생했습니다.";
-		}
-		ra.addFlashAttribute("msg", msg);
-		ra.addAttribute("recruitNo", recruitNo);
-		mv.setViewName("redirect:/recruits/detailjobinfo");
-		return mv;
-	}
-
 	@GetMapping(value = "/testmember")
 	private ModelAndView listLikes(ModelAndView mv) throws Exception {
 		List<Recruit> volist = null;
-		LikeRecruit likeRecruit = new LikeRecruit();
-		likeRecruit.setMemberId("sy111k2");
-		volist = recruitService.listLike(likeRecruit.getMemberId());
+		volist = recruitService.listLike("sy111k2");
 		mv.addObject("recruits", volist);
 		mv.setViewName("member/memberPage");
 		logger.info("마이페이지-관심공고");
 		return mv;
 	}
 
-	@GetMapping(value = "/dislike")
+	@PostMapping(value = "/dislike")
+	@ResponseBody
 	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {
+		String result = "";
+		int like = 0;
 		likeRecruit.setMemberId("sy111k2");
-		recruitService.dislikeRecruit(likeRecruit);
-		return "redirect:/recruits/testmember";
+		like = recruitService.dislikeRecruit(likeRecruit);
+		if (like == 1) {
+			System.out.println("찜 해제");
+		}
+		result = String.valueOf(like); // 1. 찜 해제완료
+		return result;
 	}
 
-//	@GetMapping(value = "/like")
-//	private ModelAndView likeRecruit(LikeRecruit likeRecruit, ModelAndView mv, RedirectAttributes ra) throws Exception {
-//		int like = 0;
-//		likeRecruit.setMemberId("sy111k2");
-//		like = recruitService.dislikeRecruit(likeRecruit);
-//		if (like == 1) {
-//			System.out.println("찜 해제");
-//		} else if (like == 0) {
-//			recruitService.likeRecruit(likeRecruit);
-//			System.out.println("찜 등록");
-//			ra.addFlashAttribute("like", like);
-//		}
-//		mv.setViewName("redirect:/recruits/detailjobinfo?recruitNo=" + likeRecruit.getRecruitNo());
-//		return mv;
-//	}
 	@PostMapping(value = "/like")
 	@ResponseBody
 	private String likeRecruit(LikeRecruit likeRecruit) throws Exception {
@@ -120,7 +94,20 @@ public class RecruitController {
 			recruitService.likeRecruit(likeRecruit);
 			System.out.println("찜 등록");
 		}
-		result = String.valueOf(like);   // 0: 찜 등록완료, 1. 찜 해제완료
+		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		return result;
+	}
+
+	@PostMapping(value = "/report")
+	@ResponseBody
+	private String reportRecruit(@RequestParam("recruitNo") int recruitNo) throws Exception {
+		String result = "";
+		int report = 0;
+		report = recruitService.reportRecruit(recruitNo);
+		if (report == 1) {
+			System.out.println("공고 신고");
+		}
+		result = String.valueOf(report); // 1. 신고완료
 		return result;
 	}
 

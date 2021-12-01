@@ -42,7 +42,7 @@ public class RecruitDao {
 	}
 
 	public int reportRecruit(int recruitNo) throws Exception {
-		return sqlSession.delete("Recruit.updatePolice", recruitNo);
+		return sqlSession.update("Recruit.updatePolice", recruitNo);
 	}
 
 	public int likeRecruit(LikeRecruit likeRecruit) throws Exception {

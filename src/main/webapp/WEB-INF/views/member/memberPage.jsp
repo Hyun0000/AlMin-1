@@ -58,11 +58,9 @@
 															<a href="#">${item.recruitTitle}</a>
 														</h5>
 														<p class="date">${item.recruitDate}</p>
-														<p class="comment">${item.recruitContent}</p>
 														<div class="reply-btn">
-															<button class="genric-btn primary small"
-																onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">
-																찜 해제</button>
+															<button type="button" class="template-btn">지원하기</button>
+															<button class="template-btn" onclick="doLike(this);">찜해제</button>
 														</div>
 													</div>
 												</div>
@@ -97,6 +95,24 @@
 	</section>
 	<!-- End blog-posts Area -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />
-
+	<script>
+		function doLike(e) {
+			var $itemEle = $(this).parents(".desc");
+			$.ajax({
+				url : "${pageContext.request.contextPath}/recruits/dislike",
+				type : "post",
+				data : {
+					recruitNo : recruitNo
+				},
+				success : function(data) {
+					console.log(data);
+					$itemEle.remove();
+				},
+				error : function() {
+					alert('오류 발생. 오류 코드: ' + error.code);
+				}
+			});
+		}
+	</script>
 </body>
 </html>

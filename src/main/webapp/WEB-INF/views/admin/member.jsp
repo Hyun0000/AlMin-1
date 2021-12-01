@@ -381,8 +381,7 @@ button {
 			var cid = $(this).parent().prev(".cid").text();
 			var $itemEle = $(this).parents(".companyItem");
 			if (confirm('정말 탈퇴처리하시겠습니까?')) {
-				$
-						.ajax({
+				$.ajax({
 							type : "post",
 							url : "${pageContext.request.contextPath}/admins/decompany",
 							data : {
