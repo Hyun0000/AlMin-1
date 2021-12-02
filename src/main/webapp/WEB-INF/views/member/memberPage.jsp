@@ -33,8 +33,6 @@
 <body>
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 
-
-
 	<!-- Start blog-posts Area -->
 	<section class="blog-posts-area section-padding">
 		<div class="container">
@@ -57,10 +55,13 @@
 														<h5>
 															<a href="#">${item.recruitTitle}</a>
 														</h5>
+														<p class="rno" style="display: none">${item.recruitNo}</p>
 														<p class="date">${item.recruitDate}</p>
 														<div class="reply-btn">
 															<button type="button" class="template-btn">지원하기</button>
-															<button class="template-btn" onclick="doLike(this);">찜해제</button>
+															<button class="template-btn"
+																onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">
+																찜 해제</button>
 														</div>
 													</div>
 												</div>
@@ -95,24 +96,5 @@
 	</section>
 	<!-- End blog-posts Area -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />
-	<script>
-		function doLike(e) {
-			var $itemEle = $(this).parents(".desc");
-			$.ajax({
-				url : "${pageContext.request.contextPath}/recruits/dislike",
-				type : "post",
-				data : {
-					recruitNo : recruitNo
-				},
-				success : function(data) {
-					console.log(data);
-					$itemEle.remove();
-				},
-				error : function() {
-					alert('오류 발생. 오류 코드: ' + error.code);
-				}
-			});
-		}
-	</script>
 </body>
 </html>

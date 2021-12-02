@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- jstl은 header가 아닌 메인페이지에 삽입 -->
 <!-- 공통헤더 템플릿입니다. css 작성금지 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap"
-	rel="stylesheet">
+
 <!-- 네이버 로그인 -->
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
@@ -16,11 +12,7 @@
 	charset="utf-8"></script>
 <!-- 카카오 로그인 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<style>
-#logout-state {
-	z-index: 200;
-}
-</style>
+
 <!-- 네이버로그인 jsp로 하는 방법 -->
 <%
 	String clientId = "LV_HERZOVT4XTBBoYuEl";//애플리케이션 클라이언트 아이디값";

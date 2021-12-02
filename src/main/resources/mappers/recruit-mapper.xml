@@ -49,12 +49,20 @@
 		from COMPANY_RECRUIT WHERE RECRUIT_POLICE > 0]]>
 	</select>
 
-	<!-- 공고신고 -->
+	<!-- 공고신고횟수 -->
 	<update id="updatePolice" parameterType="integer">
 		update COMPANY_RECRUIT
 		set RECRUIT_POLICE = RECRUIT_POLICE+1
 		where RECRUIT_NO = #{recruitNo}
 	</update>
+
+	<!-- 공고신고 -->
+	<insert id="doReport" parameterType="ReportRecruit">
+		insert into REPORT_RECRUIT
+		(REPORT_NO,MEMBER_ID,MEMBER_TYPE,RECRUIT_NO,REASON_NO)
+		values
+		(RECRUIT_REPORT_SEQUENCE.NEXTVAL,#{memberId},#{memberType},#{recruitNo},#{reasonNo})
+	</insert>
 
 	<!-- 공고검색 -->
 	<select id="searchRecruit" resultMap="RecruitResultMap"
@@ -104,7 +112,8 @@
 	<select id="checkLike" resultType="integer"
 		parameterType="likeRecruit">
 		select count(*) from member_like where
-		member_id = #{memberId} and recruit_no = #{recruitNo}
+		member_id =
+		#{memberId} and recruit_no = #{recruitNo}
 	</select>
 
 	<!-- 공고 목록 리스트 -->
@@ -112,7 +121,7 @@
 		<![CDATA[select *
 		from COMPANY_RECRUIT where RECRUIT_POLICE < 3 order by recruit_date desc]]>
 	</select>
-	
+
 	<!-- 공고상세조회 -->
 	<select id="detailjobinfo" resultMap="RecruitResultMap"
 		parameterType="integer">

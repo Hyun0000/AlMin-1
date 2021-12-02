@@ -21,6 +21,7 @@ import com.kh.almin.comments.model.service.CommentsService;
 import com.kh.almin.recruit.controller.RecruitController;
 import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Recruit;
+import com.kh.almin.recruit.model.vo.ReportRecruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
 import com.kh.almin.recruit.model.service.RecruitService;
 
@@ -57,7 +58,7 @@ public class RecruitController {
 		return mv;
 	}
 
-	@GetMapping(value = "/testmember")
+	@GetMapping(value = "/myrecruits")
 	private ModelAndView listLikes(ModelAndView mv) throws Exception {
 		List<Recruit> volist = null;
 		volist = recruitService.listLike("sy111k2");
@@ -67,18 +68,11 @@ public class RecruitController {
 		return mv;
 	}
 
-	@PostMapping(value = "/dislike")
-	@ResponseBody
+	@GetMapping(value = "/dislike")
 	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {
-		String result = "";
-		int like = 0;
 		likeRecruit.setMemberId("sy111k2");
-		like = recruitService.dislikeRecruit(likeRecruit);
-		if (like == 1) {
-			System.out.println("찜 해제");
-		}
-		result = String.valueOf(like); // 1. 찜 해제완료
-		return result;
+		recruitService.dislikeRecruit(likeRecruit);
+		return "redirect:/recruits/testmember";
 	}
 
 	@PostMapping(value = "/like")
@@ -100,10 +94,13 @@ public class RecruitController {
 
 	@PostMapping(value = "/report")
 	@ResponseBody
-	private String reportRecruit(@RequestParam("recruitNo") int recruitNo) throws Exception {
+	private String reportRecruit(ReportRecruit reportRecruit) throws Exception {
 		String result = "";
 		int report = 0;
-		report = recruitService.reportRecruit(recruitNo);
+		reportRecruit.setMemberId("sy111k2");
+		report = recruitService.doReport(reportRecruit);
+		System.out.println("신고 들어옴!!! : "+reportRecruit);
+		recruitService.reportRecruit(reportRecruit.getRecruitNo());
 		if (report == 1) {
 			System.out.println("공고 신고");
 		}

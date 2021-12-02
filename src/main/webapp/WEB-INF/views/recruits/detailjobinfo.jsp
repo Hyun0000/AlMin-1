@@ -36,6 +36,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
 
+
+<style>
+.d-toggle {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/template/header.jsp" />
@@ -75,7 +81,37 @@
 				</c:otherwise>
 				</c:choose>
 			</button>
-			<button class="template-btn" onclick="report(this);">신고하기</button>
+			<button class="template-btn" onclick="myFunction(this)">신고하기</button>
+			<div class="d-toggle">
+				<div class="col-lg-4">
+					<div class="sidebar mt-5 mt-lg-0">
+						<div class="single-item mb-4">
+							<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
+							<p style="display: none">${detailjobinfo.recruitNo}</p>
+							<button class="sidebar-btn d-flex justify-content-between mb-3"
+								onclick="report(this);" id="rno_1">
+								<span>통장,신분증,비밀번호를 요구하는 경우</span>
+							</button>
+							<button class="sidebar-btn d-flex justify-content-between mb-3"
+								onclick="report(this);" id="rno_2">
+								<span>유흥업소 및 불건전 업소</span>
+							</button>
+							<button class="sidebar-btn d-flex justify-content-between mb-3"
+								onclick="report(this);" id="rno_3">
+								<span>허위 사기성 내용</span>
+							</button>
+							<button class="sidebar-btn d-flex justify-content-between mb-3"
+								onclick="report(this);" id="rno_4">
+								<span>다단계 및 피라미드성 통신상품 판매 업체</span>
+							</button>
+							<button class="sidebar-btn d-flex justify-content-between"
+								onclick="report(this);" id="rno_5">
+								<span>최저임금 미만의 급여</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</aside>
 
 		<!-- =================================근무조건============================ -->
@@ -258,6 +294,13 @@
 		</script>
 	</c:if>
 	<script>
+		function myFunction(targetEle) {
+			console.log(targetEle);
+			var $togggleEle = $(targetEle).next();
+			$togggleEle.toggle();
+		}
+	</script>
+	<script>
 		function doLike(e) {
 			//location.href='${pageContext.request.contextPath}/recruits/like?recruitNo=${detailjobinfo.recruitNo}';
 			$.ajax({
@@ -280,13 +323,16 @@
 				}
 			});
 		}
-
+	</script>
+	<script>
 		function report(e) {
+			var selectedVal = $(e).attr("id").split("_");
 			$.ajax({
 				url : '${pageContext.request.contextPath}/recruits/report',
 				type : 'post',
 				data : {
-					recruitNo : '${detailjobinfo.recruitNo}'
+					recruitNo : '${detailjobinfo.recruitNo}',
+					reasonNo : selectedVal[1]
 				},
 				success : function(data) {
 					console.log(data);
