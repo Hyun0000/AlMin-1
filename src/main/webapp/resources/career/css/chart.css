@@ -1,21 +1,115 @@
-@charset "UTF-8";
-#firstDiv{
+/* chart 전체를 담는 <div> */
+#chartBox{
+	border: 1px solid red;
+	width: 70%;
+	padding: 30px;
+}
+
+/* chart 제목 */
+#chartTitle {
+	margin-bottom: 20px;
+}
+
+input[type=number] {
+    width: 80px;
+    margin-right: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    /* text-align: center; */
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+#date_input_btn{
+    background-color: white;
+    color: royalblue;
+    border: 5px solid royalblue;
+    width: 100px;
+    height: 35px;
+}
+
+#date_input_btn:active {
+    background-color: royalblue;
+    color: white;
+}
+
+.dateTypeSpan{
+    margin-right: 20px;
+}
+
+#top_box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#top_box_right {
+    text-align: right;
+}
+
+#top_box_right_innerBox {
+    /* border: 5px solid royalblue; */
+    border-bottom: 5px solid royalblue;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 50px;
+}
+
+#firstChartBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 40px;
+}
+
+#needChartDiv{
     border: 1px solid black;
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
     display: inline-block;
 }
 
-#secondDiv{
+#workChartDiv{
     border: 1px solid black;
-    width: 700px;
-    height: 500px;
-    display: inline-block;
+    width: 400px;
+    height: 400px;
 }
 
-#thirdDiv{
+#careerChartDiv{
     border: 1px solid black;
     width: 500px;
-    height: 500px;
+    /* height: 300px; */
+    padding: 20px;
     display: inline-block;
+    box-sizing: border-box;
+}
+
+#secondChartBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+}
+
+#secondChartBox table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    /* width: 500px;
+    height: 500px; */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#secondChartBox table td {
+    border: 1px solid black;
+    padding: 20px;
+    /* height: 100px;
+    width: 50px; */
+}
+
+.tableColName {
+    background-color: royalblue;
 }

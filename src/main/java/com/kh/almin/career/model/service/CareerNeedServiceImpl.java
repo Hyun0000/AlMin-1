@@ -38,6 +38,11 @@ public class CareerNeedServiceImpl implements CareerNeedService{
 		return careerNeedDao.updateCal(updateMemberNeed);
 	}
 // ===================================================================================================================
+	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
+	@Override
+	public List<Map<String, String>> chartNeed(String year, String month) throws Exception {
+		return careerNeedDao.chartNeed(year, month);
+	}
 // ===================================================================================================================
 }
 //===================================================================================================================

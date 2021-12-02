@@ -16,14 +16,24 @@ let evnets = [];
 needCalButn.onclick = () => {
 	selectCal = "NG";
 	// alert(selectCal);
+	calDiv.style.display = 'block';
+	chartDiv.style.display = 'none';
 	sendRequest("GET", getPath, null, calenderLoad);
 }
 
 workCalButn.onclick = () => {
 	selectCal = "W";
 	// alert(selectCal);
+	calDiv.style.display = 'block';
+	chartDiv.style.display = 'none';
 	sendRequest("GET", getWorkPath, null, calenderLoad);
 }
+
+//careerCalButn.onclick = () => {
+//	calDiv.style.display = 'none';
+//	chartDiv.style.display = 'block';
+//	topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 MyChart";
+//}
 
 // 처음 캘린더 페이지에 들어왔을 때 실행할 Ajax
 sendRequest("GET", getPath, null, calenderLoad);

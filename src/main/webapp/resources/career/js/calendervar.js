@@ -1,3 +1,9 @@
+// 켈린더 전체 영역
+let calDiv = document.getElementById('calendar');
+
+// chart 전체 영역
+let chartDiv = document.getElementById('chartBox');
+
 // (지원 / 면접일자), (근무 관리) calender를 구분하기 위한 변수
 let selectCal = "";
 

@@ -1,5 +1,6 @@
 package com.kh.almin.career.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +38,16 @@ public class CareerNeedDao {
 		return sqlSession.update("CareerNeed.updateCal", updateMemberNeed);
 	}
 // ===================================================================================================================
+	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
+	public List<Map<String, String>> chartNeed(String year, String month) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("year", year);
+		paramMap.put("month", month);
+		List<Map<String, String>> result = null;
+		result = sqlSession.selectList("CareerNeed.chartNeed", paramMap);
+		System.out.println("result dao : " + result);
+		
+		return result;
+	}
 // ===================================================================================================================
 }

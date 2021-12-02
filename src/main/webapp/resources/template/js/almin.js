@@ -26,9 +26,9 @@ function sendRequest(method, url, param, callback) { // 들고올 paramter가 �
 	let httpUrl = url;
 	
 	// GET 메소드면 URL 뒤에 파라미터를 붙임
-	if (httpMethod == 'GET' && param != null) {
-		httpUrl = httpUrl + "?" + param;
-	}
+//	if (httpMethod == 'GET' && param != null) {
+//		httpUrl = httpUrl + "?" + param;
+//	}
 	// console.log(param);
 	// console.log(httpUrl);
 	// reviews?recruitNo=1

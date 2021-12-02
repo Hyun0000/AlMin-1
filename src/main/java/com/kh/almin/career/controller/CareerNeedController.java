@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -156,6 +157,28 @@ public class CareerNeedController {
 		if (result == 1) {resultStr = "ok";}
 		else {resultStr = "false";}
 		return resultStr;
+	}
+// ===================================================================================================================
+	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
+	@GetMapping(value = "/needchart", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String chartNeed(@RequestParam(name = "year") String year, @RequestParam(name = "month") String month) {
+		System.out.println("chartNeed 진입");
+		System.out.println("year : " + year + ", month : " + month);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		List<Map<String, String>> needMapChart = null;
+		try {
+			needMapChart = careerNeedService.chartNeed(year, month);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String jsonStr = "";
+		jsonStr = gson.toJson(needMapChart);
+		System.out.println("jsonStr : " + jsonStr);
+		
+		return jsonStr;
 	}
 // ===================================================================================================================
 	// 예외처리
