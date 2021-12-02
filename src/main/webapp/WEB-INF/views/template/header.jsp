@@ -41,18 +41,22 @@ session.setAttribute("state", state);
 					<span></span> <span></span> <span></span>
 				</div>
 				<div class="main-menu">
+				<c:if test="${empty sessionScope.loginInfo.memberId}">
 					<!-- 로그인 전 노출 -->
 					<ul id="logout-state">
 						<li class="menu-btn"><button class="login template-btn">로그인</button>
-							<a href="${pageContext.request.contextPath}/members"
+							<a href="${pageContext.request.contextPath}/members/register"
 							class="template-btn">회원가입</a></li>
 					</ul>
+				</c:if>
+				<c:otherwise>
 					<!-- 로그인 후 노출 -->
 					<ul id="login-state" style="display: none;">
-						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn" onclick="logout()">로그아웃</a></li>
-			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 						<li><a href="#">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn" onclick="logout()"><button class="template-btn">로그아웃</button></a></li>
+			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 					</ul>
+   				</c:otherwise>
 					<ul>
 						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
 						<li><a href="#">인재정보</a></li>
@@ -110,7 +114,7 @@ session.setAttribute("state", state);
 				<tr>
 					<td><a href="#" id="findId">아이디 찾기</a></td>
 					<td><a href="#" id="findPwd">비밀번호 찾기</a></td>
-					<td><a href="${pageContext.request.contextPath}/members" id="join"><button>회원가입</button></a></td>
+					<td><a href="${pageContext.request.contextPath}/members/register" id="join"><button>회원가입</button></a></td>
 				</tr>
 			</table>
 		</div>
@@ -150,8 +154,8 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			} else {
 				console.log("로그인 성공")
     		$(".modal").hide(); 
-			$("#login-state").show();
-			$("#logout-state").hide();
+			//$("#login-state").show();//로그아웃, 마이페이지
+			//$("#logout-state").hide();//로그인, 회원가입
 			}
 		location.href ="${pageContext.request.contextPath}/main"
 	},

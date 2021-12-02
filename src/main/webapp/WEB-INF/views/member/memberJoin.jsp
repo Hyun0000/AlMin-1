@@ -14,10 +14,59 @@
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
 <style>
+.agree_terms{/* 가입약관 */
+  height: 300px;/* scroll하기 위해 추가 */
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: scroll;
+  transition: max-height 0.3s ease-out;
+ }
 </style>
 </head>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(){ 
+		function checkSelectAll()  {
+			  // 전체 체크박스
+			  const checkboxes 
+			    = document.querySelectorAll('input[name="agree"]');
+			  // 선택된 체크박스
+			  const checked 
+			    = document.querySelectorAll('input[name="agree"]:checked');
+			  // select all 체크박스
+			  const selectAll 
+			    = document.querySelector('input[name="selectall"]');
+			  
+			  if(checkboxes.length === checked.length)  {
+			    selectAll.checked = true;
+			  }else {
+			    selectAll.checked = false;
+			  }
+			}
+		function selectAll(selectAll)  {//전체선택 체크 시
+			  const checkboxes 
+			       = document.getElementsByName('agree');
+			  
+			  checkboxes.forEach((checkbox) => {
+			    checkbox.checked = selectAll.checked;
+			  })
+			} 
+		
+		//내용보기 클릭 시 가입약관 Accordion
+		var acc = document.getElementsByClassName("toggle_terms");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    var agree_terms = this.nextElementSibling;
+		    if (agree_terms.style.maxHeight) {
+		    	agree_terms.style.maxHeight = null;
+		      } else {
+		    	  agree_terms.style.maxHeight = agree_terms.scrollHeight + "px";
+		      } 
+		  });
+		}
 			$(".cancel").on("click", function(){// 취소버튼 클릭 시
 				location.href = "${pageContext.request.contextPath}/main";
 			})
@@ -33,30 +82,27 @@
 			/*	function isEmail(asValue){
 			} */
 			
-			var userId = $("#userId").val();
 			$("#idCheck").on("click", function(){
+			var userId = $("#userId").val();
 				console.log(userId);
 					if(userId == ""){
 						alert("아이디를 입력해주세요.");
 						$("#userId").focus();
 						return false;
-					} else {
+					} else if(!idPattern.test(userId)){
+						alert("아이디를 조건에 맞게 입력해주세요(6~50자 영문, 숫자)");
+		                return false;
+					}	else {
+					}
 						$.ajax({
 							type : 'post',
-							url : '${pageContext.request.contextPath}/idCheck',
+							url : '${pageContext.request.contextPath}/members/idCheck',
 							data : {
 								userId : userId
 							},
 							dataType : 'text',
 							success : function(result) {
 								console.log(result);
-							/*
-								if (result == "true") {
-									$("#userId").text("사용 가능한 아이디 입니다.");
-								} else {
-									$("#userId").text("사용할 수 없는 아이디 입니다.");
-								} 
-							*/
 								if (result == 1) {
 									alert("중복된 ID입니다.");
 								} else {
@@ -67,10 +113,9 @@
 								$("#checkId").text("ajax 통신 실패");
 							}
 						});
-					};
-				}); 
-				
-		$("#submit").on("click", function(){
+					});
+
+			$("#submit").on("click", function(){
 			console.log
 			if($("#userId").val()==""){
 				alert("아이디를 입력해주세요.");
@@ -96,21 +141,21 @@
 <section>
 	<h2>개인회원가입</h2>
 	<div class="inner">
-    <div class="user_join_agree">
-        <input type="checkbox" name="user_all_agree" id="agreeChkAll" value=""><label for="agreeChkAll">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</label>
+    <div class="user_join_agree">									<!-- 여기서 this는 이벤트가 발생한 element, 즉, '일괄동의' 체크박스 -->
+        <input type="checkbox" name="selectall" id="agreeChkAll" value="selectall" onclick='selectAll(this)'><label for="agreeChkAll"><b style="color:dodgerblue">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</b></label>
     </div>
-    <div class="join_dot"></div>
+    <hr>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="Agree5" id="agreeChk_5" value="on" data-required="1"><label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
+        <input type="checkbox" name="agree" id="agreeChk_5" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
     </div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="Agree1" id="agreeChk_0" value="on" data-required="1"><label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_0" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
-        <div class="agree_terms" style="height: 0px; display: none;">
+        <div class="agree_terms">
             <p>개정일자 : 2020년 9월 3일</p>
             <dl>
                 <dt>제1조 (목적)</dt>
-                <dd>본 약관은 잡코리아 유한책임회사 (이하 "회사")가 운영하는 "서비스"를 이용함에 있어 "회사"와 회원간의 이용 조건 및 제반 절차, 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 한다.</dd>
+                <dd>본 약관은 알바의 민족 유한책임회사 (이하 "회사")가 운영하는 "서비스"를 이용함에 있어 "회사"와 회원간의 이용 조건 및 제반 절차, 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 한다.</dd>
                 <dt>제2조 (용어의 정의)</dt>
                 <dd>
                     이 약관에서 사용하는 용어의 정의는 아래와 같다.
@@ -118,12 +163,8 @@
                         <li>
                             ① "사이트"라 함은 회사가 서비스를 "회원"에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 설정한 가상의 영업장 또는 회사가 운영하는 웹사이트, 모바일웹, 앱 등의 서비스를 제공하는 모든 매체를 통칭하며, 통합된 하나의 회원 계정(아이디 및 비밀번호)을 이용하여 서비스를 제공받을 수 있는 아래의 사이트를 말한다.
                             <ul>
-                                <li>- www.jobkorea.co.kr </li>
                                 <li>- www.albamon.com</li>
-                                <li>- www.campusmon.com</li>
-                                <li>- m.jobkorea.co.kr</li>
                                 <li>- m.albamon.com</li>
-                                <li>- learning.jobkorea.co.kr</li>
                             </ul>
                         </li>
                         <li>② "서비스"라 함은 회사가 운영하는 사이트를 통해 개인이 구직, 교육 등의 목적으로 등록하는 자료를 DB화하여 각각의 목적에 맞게 분류 가공, 집계하여 정보를 제공하는 서비스와 사이트에서 제공하는 모든 부대 서비스를 말한다.</li>
@@ -397,10 +438,10 @@
         </div>
     </div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="Agree2" id="agreeChk_1" value="on" data-required="1"><label for="agreeChk_1"><span>[필수]</span> 개인정보 수집 및 이용 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_1" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_1"><span>[필수]</span> 개인정보 수집 및 이용 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
-        <div class="agree_terms" style="height: 0px; display: none;">
-            잡코리아 및 알바몬 서비스 이용을 위해 아래와 같이 개인정보를 수집 및 이용합니다. <br>동의를 거부할 권리가 있으며, 동의 거부 시 잡코리아 및 알바몬 회원서비스 이용이 불가합니다.
+        <div class="agree_terms">
+            알바의 민족 서비스 이용을 위해 아래와 같이 개인정보를 수집 및 이용합니다. <br>동의를 거부할 권리가 있으며, 동의 거부 시 알바의 민족 회원서비스 이용이 불가합니다.
             <table class="agree-table">
                 <colgroup>
                     <col width="33%">
@@ -435,10 +476,9 @@
     </div>
     <div class="join_dot"></div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="Agree4" id="agreeChk_3" value="on"><label for="agreeChk_3"><span class="select">[선택]</span> 개인정보 수집 및 이용 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_3" value="on" onclick='checkSelectAll()'><label for="agreeChk_3"><span class="select">[선택]</span> 개인정보 수집 및 이용 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
-        <div class="agree_terms" style="height: 0px;  display: none;">
-            <!-- 내용보기 클릭시 t_on 클래스 추가  -->
+        <div class="agree_terms">
             <dl>
                 <dt>1. 수집하는 개인정보 항목 및 이용 목적</dt>
                 <dd>
@@ -458,12 +498,12 @@
         </div>
     </div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="Agree3" id="agreeChk_2" value="on"><label for="agreeChk_2"><span class="select">[선택]</span> 광고성 정보 이메일/SMS 수신 동의 <br><span class="promotion_type">(알바 뉴스레터, 소식 및 광고메일, 휴대폰 알림)</span></label>
+        <input type="checkbox" name="agree" id="agreeChk_2" value="on"><label for="agreeChk_2"><span class="select">[선택]</span> 광고성 정보 이메일/SMS 수신 동의 <br><span class="promotion_type">(알바 뉴스레터, 소식 및 광고메일, 휴대폰 알림)</span></label>
+    <hr>
         <div class="toggle_terms">
             <a href="#">내용보기<span class=""></span></a>
         </div>
-        <div class="agree_terms" style="height: 0px; display: none;">
-            <!-- 내용보기 클릭시 t_on 클래스 추가  -->
+        <div class="agree_terms">
             <dl>
                 <dt>1. 수집 및 이용 목적</dt>
                 <dd>회원이 수집 및 이용에 동의한 개인정보를 활용하여, 전자적 전송매체(이메일/SMS 등 다양한 전송매체)를 통해 서비스에 대한 개인 맞춤형 광고 정보(뉴스레터, 소식 및 광고메일, 휴대폰 알림)를 전송할 수 있습니다.</dd>
@@ -490,12 +530,12 @@
 	<table>
 		<tr>
 		<th><label for="userId">아이디</label></th>
-		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" >
+		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" required>
 		<button type="button" class="btn3" id="idCheck">중복확인</button></td>
 		</tr>
 		<tr>
-		<th><label for="userPass">비밀번호</label></th>
-		<td><input type="password" id="userPass"></td>
+		<th><label for="userPass" placeholder="8~16자 영문, 숫자, 특수문자">비밀번호</label></th>
+		<td><input type="password" id="userPass" required></td>
 		</tr>
 		<tr>
 		<th>비밀번호 확인</th>
@@ -505,21 +545,21 @@
 		<th><label for="userName">이름</label></th>
 		<td>
 		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
-		<input type="text" id="userName" name="userName" maxlength="50" size = "10">
+		<input type="text" id="userName" name="userName" maxlength="50" size = "10" required>
 		</td>
 		</tr>
 		<tr>
 		<th>주민등록번호</th>
 		<td>
-		<input type="text" name="birthNum" placeholder="예:931010" maxlength="6" size = "6"> -
-		<input type="text" name="genderNum" maxlength="1" size = "1">●●●●●●
+		<input type="text" name="birthNum" placeholder="예:931010" maxlength="6" size="6" required> -
+		<input type="text" name="genderNum" maxlength="1" size = "1" required>●●●●●●
 		</td>
 		</tr>
 		<tr>
 		<th>이메일</th>
 		<td>
-		<input type="text" id = "email_1" name="email_1" maxlength="30">@
-		<input type="text" id = "email_2" name="email_2" maxlength="30">
+		<input type="text" id = "email_1" name="email_1" maxlength="30" required>@
+		<input type="text" id = "email_2" name="email_2" maxlength="30" required>
 		</td>
 		<td>
 		<select id = "email_3" name="email_3">
@@ -534,11 +574,78 @@
 		<tr>
 		<th>휴대폰번호</th>
 		<td>
-		<input type="text" name="phone1" placeholder="010" maxlength="3" size = "3"> -
-		<input type="text" name="phone2" placeholder="0000" maxlength="4" size = "4"> -
-		<input type="text" name="phone3" placeholder="0000" maxlength="4" size = "4">
-		</td>
+		<input type="text" name="phone1" placeholder="010" maxlength="3" size = "3" required> -
+		<input type="text" name="phone2" placeholder="0000" maxlength="4" size = "4" required> -
+		<input type="text" name="phone3" placeholder="0000" maxlength="4" size = "4" required>
+		<div id="check"><a href="javascript:;" id="msg"></a></div></td>
+<script>
+		Kakao.Link.createDefaultButton({
+			  container: '#msg',
+			  objectType: 'feed',
+			  content: {
+			    title: '오늘의 디저트',
+			    description: '아메리카노, 빵, 케익',
+			    imageUrl:
+			      'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+			    link: {
+			      mobileWebUrl: 'https://developers.kakao.com',
+			      androidExecutionParams: 'test',
+			    },
+			  },
+			  itemContent: {
+			    profileText: 'Kakao',
+			    profileImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+			    titleImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+			    titleImageText: 'Cheese cake',
+			    titleImageCategory: 'Cake',
+			    items: [
+			      {
+			        item: 'Cake1',
+			        itemOp: '1000원',
+			      },
+			      {
+			        item: 'Cake2',
+			        itemOp: '2000원',
+			      },
+			      {
+			        item: 'Cake3',
+			        itemOp: '3000원',
+			      },
+			      {
+			        item: 'Cake4',
+			        itemOp: '4000원',
+			      },
+			      {
+			        item: 'Cake5',
+			        itemOp: '5000원',
+			      },
+			    ],
+			    sum: 'Total',
+			    sumOp: '15000원',
+			  },
+			  social: {
+			    likeCount: 10,
+			    commentCount: 20,
+			    sharedCount: 30,
+			  },
+			  buttons: [
+			    {
+			      title: '웹으로 이동',
+			      link: {
+			        mobileWebUrl: 'https://developers.kakao.com',
+			      },
+			    },
+			    {
+			      title: '앱으로 이동',
+			      link: {
+			        mobileWebUrl: 'https://developers.kakao.com',
+			      },
+			    },
+			  ]
+			});	
+</script>
 		</tr>
+		<tr><td></td><td><input type="text"><button type="button" class="btn2">확인</button></td></tr>
 	</table>
 <div class="btngroup">
 <button class="btn1" type="button" id="submit">회원가입</button>

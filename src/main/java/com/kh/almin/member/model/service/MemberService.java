@@ -27,6 +27,10 @@ public class MemberService {
 		logger.info("MemberService-insertMember 진입");
 		memberDao.insertMember(member);
 	}
+	public void insertCompany(Company company) throws Exception{
+		logger.info("MemberService-insertCompany 진입");
+		memberDao.insertCompany(company);
+	}
 	public int idChk(Member member) throws Exception{
 		logger.info("아이디체크 진입");
 		Integer result = memberDao.idChk(member);
@@ -37,4 +41,5 @@ public class MemberService {
 		Member result = memberDao.selectMember(member);
 		return result;
 	}
+	
 }

@@ -87,30 +87,29 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 	}
 	
-	@GetMapping //회원정보 조회
-	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-		List<Member> volist = memberService.getMembers();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberview",volist);
-		mv.setViewName("member/register");//회원가입 선택페이지
-		
-		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
-//		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
-		
-		logger.info("전체 회원리스트 조회");
-		logger.info("volist: "+volist.toString());
-		return mv;
+	@GetMapping("/register") //개인, 기업 회원가입 선택 페이지
+	private String registMember() throws Exception {
+		return "member/register";
 	}
-	
-	@GetMapping("/member") //개인회원가입창
+	@GetMapping //개인회원가입창
 	private String joinMember() throws Exception {
 		return "member/memberJoin";
 	}
-	@GetMapping("/company") //기업회원가입창
-	private String joinCompany() throws Exception {
-		return "member/memberJoin";
-	}
-
+//	@GetMapping //회원정보 조회
+//	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
+//		List<Member> volist = memberService.getMembers();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("memberview",volist);
+//		mv.setViewName("member/register");//jsp화면
+//		
+//		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
+////		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
+//		
+////		logger.info("전체 회원리스트 조회");
+////		logger.info("volist: "+volist.toString());
+//		return mv;
+//	}
+	
 	@PutMapping
 	private String updateMember() { //회원정보 수정
 		logger.info("update 진입");
@@ -127,5 +126,4 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		mv.setViewName("error/500error");
 		return mv ;
 	}
-
 }

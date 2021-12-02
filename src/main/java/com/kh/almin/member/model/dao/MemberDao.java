@@ -26,8 +26,13 @@ public class MemberDao {
 	}
 
 	public void insertMember(Member member) throws Exception{
-		logger.info("insertDao-insertMember 진입");
+		logger.info("Dao-insertMember 진입");
 		sqlSession.insert("Member.insertMember", member);
+	}
+	
+	public void insertCompany(Company company) throws Exception{
+		logger.info("Dao-insertCompany 진입");
+		sqlSession.insert("Member.insertCompany", company);
 	}
 	
 	// 로그인 - id, pw 동시체크
@@ -45,5 +50,7 @@ public class MemberDao {
 		// 입력된 아이디가 DB에 존재시 1 없으면 0
 		return result;
 	}
+	
+	
 
 }

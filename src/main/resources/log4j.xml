@@ -61,7 +61,7 @@
 	<!-- Root Logger -->
 	<root>
 		<priority value="debug" />
-		<appender-ref ref="console" />
+		<appender-ref ref="filedest" />
 	</root>
 	
 </log4j:configuration>

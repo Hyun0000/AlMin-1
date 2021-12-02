@@ -47,6 +47,14 @@
 			, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail},
 			#{memberGender}, #{memberAge}, sysdate )<!-- sysdate 생략시 default 들어감 -->
 	</insert>
+	<!-- 기업회원가입 -->
+	<insert id="insertCompany" parameterType="Company">
+		insert into COMPANY (COMPANY_ID,COMPANY_TYPE,COMPANY_PW,COMPANY_TEL,COMPANY_NAME,
+			COMPANY_BOSS,COMPANY_EMAIL,COMPANY_ADDRESS,COMPANY_NUM)
+		values (#{companyId},#{companyType}, #{companyPwd}, #{companyTel}
+			, #{companyName}, #{companyBoss}, #{companyEmail}, #{companyAddress},
+			#{companyNum} )
+	</insert>
 	
 	<!-- 아이디 비번 동시 체크 -->
 	<select id="selectMember" resultMap="MemberResultMap" parameterType="String">

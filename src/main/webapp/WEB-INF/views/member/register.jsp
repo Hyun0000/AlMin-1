@@ -37,11 +37,11 @@
 		$(document).ready(function(){
 			// 개인회원가입 페이지로 이동
 			$("#memberJoin").on("click", function(){
-				location.href = "${pageContext.request.contextPath}/members/member";
+				location.href = "${pageContext.request.contextPath}/members";
 			});
 			// 기업회원가입 페이지로 이동
 			$("#companyJoin").on("click", function(){
-				location.href = "${pageContext.request.contextPath}/members/company";
+				location.href = "${pageContext.request.contextPath}/companies";
 			});
 		});
 </script>
