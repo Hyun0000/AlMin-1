@@ -1,5 +1,6 @@
 package com.kh.almin.resume.controller;
 
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.util.Base64Utils;
 
 import com.kh.almin.resume.model.service.ResumeService;
 import com.kh.almin.resume.model.vo.MemberResume;
@@ -46,10 +48,22 @@ public class ResumeController {
 	}
 	
 	@PostMapping("addres")//이력서등록
-	public ModelAndView insertResume(MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
+	public ModelAndView insertResume(@RequestParam(value = "resumePhoto",required = false) byte[] resumePhoto,MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
 		System.out.println("mr : "+mr);
 		int result=-1;
+		byte imageArray[] = null;
+		final String BASE_64_PREFIX = "data:image/jpg;base64,";
 		try {
+			 String base64Url = String.valueOf(mr);
+			
+//			 String base64Url = String.valueOf(param.get("image"));
+	            if (base64Url.startsWith(BASE_64_PREFIX)){
+	                imageArray =  Base64.getDecoder().decode(base64Url.substring(BASE_64_PREFIX.length()));
+	                
+	                System.out.println("[imageArray] : " + new String(imageArray));
+	                
+	            }
+			
 			result=resumeService.insertResume(mr);
 		}catch(Exception e) {
 			e.printStackTrace();

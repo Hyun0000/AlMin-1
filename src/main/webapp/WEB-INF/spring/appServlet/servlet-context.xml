@@ -42,4 +42,10 @@
 		</interceptor>
 	</interceptors>
 <!-- spring 3.2버전 부터는 exclude-mapping이라 해서 해당 interceptor로부터 제외시키는 기능을 제공해준다. -->
+	<!-- 파일 업로드 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 </beans:beans>
+
+
+
+

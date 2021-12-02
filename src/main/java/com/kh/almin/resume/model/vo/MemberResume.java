@@ -35,4 +35,5 @@ public class MemberResume { //회원 이력서 테이블
 	private String jobCareers;
 	private int periodNo;
 	private int jobTypeNo;
+	private byte[] resumePhoto;
 }
