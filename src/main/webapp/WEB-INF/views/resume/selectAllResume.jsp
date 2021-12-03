@@ -45,7 +45,7 @@
                             	</c:if>
                                 <div class="reportItem">
                                     <div class="d-toggle">
-                                        <div class="rt"><a href="">${item.resumeTitle}</a></div>
+                                        <div class="rt"><a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a></div>
                                     </div>
                                 </div>
                             </c:forEach>

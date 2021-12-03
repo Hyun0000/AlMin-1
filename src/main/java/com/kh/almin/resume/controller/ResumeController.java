@@ -33,6 +33,20 @@ public class ResumeController {
 		model.addAttribute("msg", msg);
 		return "resume/resumeAdd";
 	}
+	@GetMapping("resume") //이력서 상세 조회
+	public ModelAndView selectResume(@RequestParam("resumeNo") int resumeNo,ModelAndView mv) {
+		MemberResume resum=new MemberResume();
+		resum.setResumeNo(resumeNo);
+		try {
+			mv.addObject("resum", resumeService.selectResume(resumeNo));
+			System.out.println("resum: "+resum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("resume/selectResume");
+		return mv;
+	}
+	
 	@GetMapping("allres") //로그인된 회원 전체 이력서 조회
 	public ModelAndView goAllResumePage(MemberResume mr,ModelAndView mv) {
 		List<MemberResume> volist=null;
@@ -63,7 +77,6 @@ public class ResumeController {
 	                System.out.println("[imageArray] : " + new String(imageArray));
 	                
 	            }
-			
 			result=resumeService.insertResume(mr);
 		}catch(Exception e) {
 			e.printStackTrace();

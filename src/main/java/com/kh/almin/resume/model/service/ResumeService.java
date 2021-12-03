@@ -11,5 +11,5 @@ public interface ResumeService{
 	
 	public List<MemberResume> selectAllResume(MemberResume mr) throws Exception;
 		
-	public List<MemberResume> selectResume() throws Exception;
+	public MemberResume selectResume(int resumeNo) throws Exception;
 }

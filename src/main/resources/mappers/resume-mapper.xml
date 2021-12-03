@@ -16,15 +16,16 @@
 		<result property="periodNo" column="PERIOD_NO" />
 		<result property="jobTypeNo" column="JOB_TYPE_NO" />
 		<result property="resumePhoto" column="RESUME_PHOTO" />
+		
 	</resultMap>
 	<!-- 이력서 전체 조회 -->
 	<select id="selectAllResume" resultMap="ResumeResultMap" resultType="Resume">
-		select RESUME_TITLE from MEMBER_RESUME
+		select RESUME_NO,RESUME_TITLE from MEMBER_RESUME
 	</select> 
 	
-	<!-- 이력서 조회 -->
-	<select id="selectResume" resultMap="ResumeResultMap" resultType="Resume">
-		select * from MEMBER_RESUME where RESUME_TITLE=#{resumeTitle}
+	<!-- 이력서 상세  조회 -->
+	<select id="selectResume" resultMap="ResumeResultMap" parameterType="integer">
+		select * from MEMBER_RESUME where RESUME_NO=#{resumeNo}
 	</select>
 	
 	<!-- 이력서 등록 -->

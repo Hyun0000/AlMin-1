@@ -1,11 +1,5 @@
 package com.kh.almin.resume.model.dao;
 
-
-
-
-
-
-
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,9 +18,9 @@ public class ResumeDao {
 		return resume;
 	}
 	
-	public List<MemberResume> selectResume() throws Exception{
-		List<MemberResume> resume=sqlSession.selectOne("Resume.selectResume");
-		return resume;
+	public MemberResume selectResume(int resumeNo) throws Exception{
+		MemberResume resum= sqlSession.selectOne("Resume.selectResume",resumeNo);
+		return resum;
 	}
 	
 	public int insertResume(MemberResume mr) throws Exception {

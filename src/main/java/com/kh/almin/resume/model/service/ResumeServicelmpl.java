@@ -18,8 +18,8 @@ public class ResumeServicelmpl implements ResumeService {
 	public List<MemberResume> selectAllResume(MemberResume mr) throws Exception{
 		return resumeDao.selectAllResume(mr);
 	}
-	public List<MemberResume> selectResume() throws Exception{
-		return resumeDao.selectResume();
+	public MemberResume selectResume(int resumeNo) throws Exception{
+		return resumeDao.selectResume(resumeNo);
 	}
 	
 }
