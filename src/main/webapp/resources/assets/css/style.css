@@ -18,6 +18,54 @@ a#MOVE_TOP_BTN {
 	bottom: 50px;
 	z-index: 999;
 }
+#logout-state {
+	z-index: 200;
+}
+input#memberId,#memberPw {
+  padding: 12px;
+  border: 2px solid #555555;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+input:hover{
+	opacity:1;
+}
+/* 버튼 한번에 정렬 */
+.btngroup{
+          text-align: center;
+          margin-bottom: 20px;
+}
+.btn0{
+	cursor: pointer;
+}
+
+/* 개인회원 / 기업회원 탭 */
+   .tab-item {
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 28px;
+    border: none;
+    background-color: #ddd;
+    color: black;
+	font-size: 1rem;
+    transition: 0.3s;
+   }
+   .tab-item:hover {
+    background-color: #F9F871;
+   }
+   .tab-item:active{
+   background-color: #FEA500;
+   }
+
+table.login-form {
+	margin-bottom: 20px;
+}
  /* Modal Box */
 .close{
   float: right;
@@ -35,13 +83,13 @@ a#MOVE_TOP_BTN {
  }
 .modal-content {
         width: 320px;
-        height: 430px;
+        height: 450px;
        /* overflow:scroll; */
         top: 50px;
-        left: 450px;
+        left: 460px;
         position: relative;
         border-radius: 20px;
-        background-color: #FFC0B7;
+        background-color: #FFEECB;
         color: white;
         padding: 30px;
  }

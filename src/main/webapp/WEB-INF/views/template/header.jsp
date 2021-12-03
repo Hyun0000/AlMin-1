@@ -44,7 +44,7 @@ session.setAttribute("state", state);
 				<c:if test="${empty sessionScope.loginInfo.memberId}">
 					<!-- 로그인 전 노출 -->
 					<ul id="logout-state">
-						<li class="menu-btn"><button class="login template-btn">로그인</button>
+						<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
 							<a href="${pageContext.request.contextPath}/members/register"
 							class="template-btn">회원가입</a></li>
 					</ul>
@@ -59,7 +59,7 @@ session.setAttribute("state", state);
    				</c:otherwise>
 					<ul>
 						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
-						<li><a href="#">인재정보</a></li>
+						<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
 					</ul>
 				</div>
 			</div>
@@ -71,10 +71,10 @@ session.setAttribute("state", state);
 		<div class="modal-content loginArea">
 			<span class="close">&times;</span>
 			<!-- 닫기 -->
-			<div class="tab item" style="margin-bottom: 10px;">
-				<button type="button" class="tab-item genric-btn" id="memberBtn"
+			<div class="tab item btngroup" style="margin-bottom: 10px;">
+				<button type="button" class="tab-item" id="memberBtn"
 					autofocus>개인회원</button>
-				<button type="button" class="tab-item active genric-btn"
+				<button type="button" class="tab-item active"
 					id="companyBtn">기업회원</button>
 			</div>
 			<form name="form" method="post" action="#" class="item">
@@ -93,28 +93,25 @@ session.setAttribute("state", state);
 							id="lb_idSave" value="on" checked><label for="lb_idSave">아이디 저장</label></td>
 					</tr>
 					<tr>
-						<td><button type="button" class="template-btn" id="loginBtn" onclick='ajaxL1()'>로그인</button></td>
+						<td class="btngroup"><button type="button" class="template-btn btn0" id="loginBtn" onclick='ajaxL1()'>로그인</button></td>
 					</tr>
 				</table>
 			</form>
 			<!-- SNS 로그인(개인회원 show) -->
-			<div class="snsBx item">
-				<ul>
-					<li><a href="<%=apiURL%>"><img height="50"
-							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a></li>
-					<li><button type="button" id="btnKaLogin" class="btn_kt"
-							onclick="loginKakao()">
-							<img
-								src="${pageContext.request.contextPath}/resources/assets/images/kakao_login_medium_narrow.png">
-						</button></li>
-					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-				</ul>
-			</div>
+			<table class="snsBx login-form item">
+				<tr>
+					<td><a href="<%=apiURL%>"><img height="50"
+							src="${pageContext.request.contextPath}/resources/assets/images/naver.png" /></a></td>
+					<td><button type="button" id="btnKaLogin" class="btn0" onclick="loginKakao()">
+							<img src="${pageContext.request.contextPath}/resources/assets/images/kakao.png"></button></td>
+							<td><fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button></td>
+				</tr>
+			</table>
 			<table class="login-menu item">
 				<tr>
 					<td><a href="#" id="findId">아이디 찾기</a></td>
 					<td><a href="#" id="findPwd">비밀번호 찾기</a></td>
-					<td><a href="${pageContext.request.contextPath}/members/register" id="join"><button>회원가입</button></a></td>
+					<td><a href="${pageContext.request.contextPath}/members/register" id="join">회원가입</a></td>
 				</tr>
 			</table>
 		</div>
@@ -132,6 +129,7 @@ $("#memberBtn").click(function(){
 $("#companyBtn").click(function(){
     $(".snsBx").hide(); 
  });
+
 
 function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberId = $("#memberId").val();
@@ -154,10 +152,10 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			} else {
 				console.log("로그인 성공")
     		$(".modal").hide(); 
-			//$("#login-state").show();//로그아웃, 마이페이지
-			//$("#logout-state").hide();//로그인, 회원가입
+			$("#login-state").show();//로그아웃, 마이페이지
+			$("#logout-state").hide();//로그인, 회원가입
 			}
-		location.href ="${pageContext.request.contextPath}/main"
+		//location.href ="${pageContext.request.contextPath}/main"
 	},
 	error:function(request,status,error){
 		alert("code:"+request.status+"\n"+"message:"+request.responseText+

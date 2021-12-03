@@ -114,9 +114,27 @@
 							}
 						});
 					});
-
+	
+			$("#userPass").on("focus", function(){
+				console.log("비밀번호 입력~");
+				var html = "";
+				var userPass = $("#userPass").val();
+				if(!pwPattern.test(userPass)){
+					 html+="영문, 숫자, 특수문자 포함 6자 이상 입력";
+				} else{
+					html+="비밀번호 양식에 부합합니다.";
+				}  $("#pwComment").html(html);
+			})
+			
+			$("#pwChk").on("focus", function(){
+				var html = "";
+				if($("#userPass").val()==""){
+					 html+="먼저 비밀번호를 입력해주세요.";
+					$("#userPass").focus();
+				}  $("#pwChkComment").html(html);
+			})
 			$("#submit").on("click", function(){
-			console.log
+			
 			if($("#userId").val()==""){
 				alert("아이디를 입력해주세요.");
 				$("#userId").focus();
@@ -535,11 +553,11 @@
 		</tr>
 		<tr>
 		<th><label for="userPass" placeholder="8~16자 영문, 숫자, 특수문자">비밀번호</label></th>
-		<td><input type="password" id="userPass" required></td>
+		<td><input type="password" id="userPass" required><span id="pwComment"></span></td>
 		</tr>
 		<tr>
 		<th>비밀번호 확인</th>
-		<td><input type="password"></td>
+		<td><input type="password" id="pwChk"><span id="pwChkComment"></span></td>
 		</tr>
 		<tr>
 		<th><label for="userName">이름</label></th>

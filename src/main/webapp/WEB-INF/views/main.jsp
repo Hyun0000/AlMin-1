@@ -25,18 +25,12 @@
 	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet"
-	href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 
 <style>
 .search-bg {
 	z-index: 100;
 }
-
-#logout-state {
-	z-index: 200;
-}
-
 </style>
 
 </head>
@@ -380,13 +374,6 @@
 	<!-- 공통푸터 템플릿 -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />
 	<script>
-		function showPopup() {
-			var url = "logins";
-			var name = "popup test";
-			var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-			window.open(url, name, option);
-		}
-
 		function search() {
 			$("#searchRecruit").attr("action",
 					"${pageContext.request.contextPath }/recruits").attr(

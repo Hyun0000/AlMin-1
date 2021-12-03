@@ -27,7 +27,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {//Interceptor�
         }
         return true;
     } 
-	
+	/* prehandle -> 로그인 여부 체크할 때 많이 씀.
+	posthandle -> 어떤 유저가 어떤 컨트롤러 타는지 검사할때 많이 씀.
+	after (쓸일별로없다.) */
 	@Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
