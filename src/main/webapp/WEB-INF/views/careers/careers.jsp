@@ -143,83 +143,66 @@
     </div>
 </div>
 <!-- ================================================== 모달창 ================================================== -->
-   <div id='calendar-wrap'>
-       <div id="side_calendar">
-           <div id="btn_box">
-               <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
-               <!-- <button class="calendarBtn" style="width: 100%;">면접일자</button> -->
-               <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
-               <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
-           </div>
-           <div>지원횟수 면접횟수 --> chart.js</div>
-           <div>근무관련 데이터 --> chart.js</div>
-           <div>경력관련 데이터 --> chart.js</div>
-       </div>
-       
-       <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
-       
-	<div id="chartBox" style="display: none;">
-		<div id="top_box">
-	        	<h3 id="chartTitle"></h3>
-	            <div id="top_box_right_innerBox">
-	                <input id="yearInput" type="number" min="0000" max="9999"><span class="dateTypeSpan">년</span>
-	                <input id="monthInput" type="number" min="1" max="12"><span class="dateTypeSpan">월</span>
-	                <button type="button" id="date_input_btn">조회</button>
-	            </div>
-		</div>
-	    <div id="firstChartBox">
-	        <div id="needChartDiv"><canvas id="needChart"></canvas></div>
-	        <div id="workChartDiv"><canvas id="workChart"></canvas></div>
-	    </div>
-
-			<div id="secondChartBox">
-				<div id="careerChartDiv"><canvas id="careerChart"></canvas></div>
-				<div>
-					<table>
-						<tr>
-							<td class="firstTd tableColName">매장(시급)</td>
-							<td class="secondTd tableColName">급여(월)</td>
-						</tr>
-						<tr>
-							<td class="firstTd">피자스쿨<br>(9000원)</td>
-							<td class="secondTd">450000원</td>
-						</tr>
-						<tr>
-							<td class="firstTd">명륜진사갈비<br>(10000원)</td>
-							<td class="secondTd">600000원</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- ================================================== chart.js ================================================== -->
-<%-- <div id="chartBox">
-    <div id="firstChartBox">
-        <div id="needChartDiv"><canvas id="needChart"></canvas></div>
-        <div id="workChartDiv"><canvas id="workChart"></canvas></div>
+<div id='calendar-wrap'>
+    <div id="side_calendar">
+        <div id="btn_box">
+            <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
+            <!-- <button class="calendarBtn" style="width: 100%;">면접일자</button> -->
+            <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
+            <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
+        </div>
+        <div>지원횟수 면접횟수 --> chart.js</div>
+        <div>근무관련 데이터 --> chart.js</div>
+        <div>경력관련 데이터 --> chart.js</div>
     </div>
-
-    <div id="secondChartBox">
-        <div id="careerChartDiv"><canvas id="careerChart"></canvas></div>
-        <div>
-            <table>
-                <tr>
-                    <td class="firstTd tableColName">매장(시급)</td>
-                    <td class="secondTd tableColName">급여(월)</td>
-                </tr>
-                <tr>
-                    <td class="firstTd">피자스쿨<br>(9000원)</td>
-                    <td class="secondTd">450000원</td>
-                </tr>
-                <tr>
-                    <td class="firstTd">명륜진사갈비<br>(10000원)</td>
-                    <td class="secondTd">600000원</td>
-                </tr>
-            </table>
+       
+    <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
+<!-- ================================================== chart.js ================================================== -->
+<div id="chartBox" style="display: none">
+    <div id="top_box">
+       	<!-- <h1>우리의 민족!!! 칠갑산님의 Chart</h1> -->
+       	<h1></h1>
+        <div id="top_box_right_innerBox">
+            <input id="yearInput" type="number" min="0000" max="9999"><span class="dateTypeSpan">년</span>
+            <input id="monthInput" type="number" min="1" max="12"><span class="dateTypeSpan">월</span>
+            <button type="button" id="date_input_btn">조회</button>
         </div>
     </div>
-</div> --%>
+    <div id="allChartBox">
+        <div id="firstChartBox">
+            <div id="needChartDiv"><canvas id="needChart"></canvas></div>
+            <div id="careerChartDiv"><canvas id="careerChart"></canvas></div>
+        </div>
+
+        <div id="secondChartBox">
+            <div id="workChartDiv"><canvas id="workChart"></canvas></div>
+            <div id="moneyTabel">
+                <table id="moneyTabelReal">
+                    <tr>
+                        <td class="firstTd tableColName">매장(시급)</td>
+                        <td class="secondTd tableColName">급여(월)</td>
+                    </tr>
+<!--                     <tr>
+                        <td class="firstTd">피자스쿨<br>(9000원)</td>
+                        <td class="secondTd">450000원</td>
+                    </tr>
+                    <tr>
+                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
+                        <td class="secondTd">600000원</td>
+                    </tr>
+                    <tr>
+                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
+                        <td class="secondTd">600000원</td>
+                    </tr>
+                    <tr>
+                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
+                        <td class="secondTd">600000원</td>
+                    </tr> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
 	let userId = "user01";
 </script>

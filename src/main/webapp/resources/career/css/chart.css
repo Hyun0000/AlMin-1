@@ -10,6 +10,14 @@
 	margin-bottom: 20px;
 }
 
+/* 제목 & 버튼 등이 있는 <div> 박스 전체 */
+#top_box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 년 & 월을 입력하는 <input> */
 input[type=number] {
     width: 80px;
     margin-right: 5px;
@@ -20,6 +28,7 @@ input[type=number] {
     border-radius: 10px;
 }
 
+/* 년 & 월을 입력하는 <button> */
 #date_input_btn{
     background-color: white;
     color: royalblue;
@@ -28,25 +37,13 @@ input[type=number] {
     height: 35px;
 }
 
+/* 년 & 월을 입력하는 <button> 눌렀을 때 */
 #date_input_btn:active {
     background-color: royalblue;
     color: white;
 }
 
-.dateTypeSpan{
-    margin-right: 20px;
-}
-
-#top_box{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#top_box_right {
-    text-align: right;
-}
-
+/* 날짜 입력칸 & 버튼 전체를 담는 <div> */
 #top_box_right_innerBox {
     /* border: 5px solid royalblue; */
     border-bottom: 5px solid royalblue;
@@ -56,13 +53,42 @@ input[type=number] {
     padding-left: 50px;
 }
 
-#firstChartBox {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 40px;
+/* 년 & 월 <input> 옆의 텍스트 */
+#top_box_right_innerBox .dateTypeSpan{
+    margin-right: 20px;
 }
 
+/* 날짜 입력 <div> 박스 전체 */
+#top_box_right {
+    text-align: right;
+}
+
+/* Chart 전체 담는 <div> 박스 */
+#allChartBox {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    margin-top: 50px;
+}
+
+/* 왼쪽 라인 박스 */
+#firstChartBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* margin-top: 50px; */
+}
+
+/* 오른쪽 라인 박스 */
+#secondChartBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* 구직&면접 차트 */
 #needChartDiv{
     border: 1px solid black;
     width: 400px;
@@ -70,37 +96,41 @@ input[type=number] {
     display: inline-block;
 }
 
+/* 근무 차트 */
 #workChartDiv{
     border: 1px solid black;
     width: 400px;
     height: 400px;
 }
 
+/* 경력 차트 */
 #careerChartDiv{
     border: 1px solid black;
-    width: 500px;
+    width: 400px;
     /* height: 300px; */
-    padding: 20px;
+    height: 400px;
     display: inline-block;
     box-sizing: border-box;
-}
-
-#secondChartBox {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     margin-top: 50px;
-    /* justify-content: space-between; */
-    /* justify-content: space-around; */
 }
 
-#secondChartBox table {
+#secondChartBox #moneyTabel {
     border: 1px solid black;
     border-collapse: collapse;
+    width: 100%;
     /* width: 500px;
     height: 500px; */
     text-align: center;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
+    margin-top: 50px;
+}
+
+#secondChartBox #moneyTabel .firstTd {
+    width: 30%;
+}
+
+#secondChartBox #moneyTabel .secondTd {
+    width: 70%;
 }
 
 #secondChartBox table td {

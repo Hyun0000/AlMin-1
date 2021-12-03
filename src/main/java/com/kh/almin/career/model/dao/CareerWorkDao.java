@@ -1,5 +1,6 @@
 package com.kh.almin.career.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,18 @@ public class CareerWorkDao {
 		return sqlSession.insert("CareerWork.updateWorkCal", updateMemberWork);
 	}
 // ===================================================================================================================
+	// 차트에서 근무 data 조회(년&월 기준)
+	public List<Map<String, String>> chartWork(String userId, String year, String month) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", userId);
+		paramMap.put("year", year);
+		paramMap.put("month", month);
+		List<Map<String, String>> result = null;
+		result = sqlSession.selectList("CareerWork.chartWork", paramMap);
+		System.out.println("result dao : " + result);
+		
+		return result;
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 }

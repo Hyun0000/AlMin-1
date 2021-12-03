@@ -32,7 +32,7 @@
 	<!-- 차트에서 구직 & 면접 횟수 조회(년&월 기준) -->
 	<select id="chartNeed" resultType="hashmap" parameterType="map">
 		SELECT NEED_GO_MEET, COUNT(NEED_GO_MEET) COUNT_TYPE FROM MEMBER_NEED
-		WHERE NEED_MEMBER_ID = 'user01' AND EXTRACT(MONTH FROM NEED_TIME_START) = #{month} AND EXTRACT(YEAR FROM NEED_TIME_START) = #{year}
+		WHERE NEED_MEMBER_ID = #{userId} AND EXTRACT(MONTH FROM NEED_TIME_START) = #{month} AND EXTRACT(YEAR FROM NEED_TIME_START) = #{year}
 		GROUP BY NEED_GO_MEET
 	</select>
 </mapper>

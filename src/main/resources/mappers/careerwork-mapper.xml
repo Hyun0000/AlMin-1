@@ -10,7 +10,7 @@
 	
 	<!-- 근무 일정 추가 -->
 	<insert id="insertWorkCal" parameterType="MemberWork">
-		INSERT INTO MEMBER_WORK VALUES (MEMBER_WORK_SEQUENCE.NEXTVAL, #{workMemberId}, '1', #{workTitle}, #{workColor},
+		INSERT INTO MEMBER_WORK VALUES (MEMBER_WORK_SEQUENCE.NEXTVAL, #{workMemberId}, '1', #{workTitle}, #{workTime}, #{workColor},
 		TO_DATE(#{workTimeStart},'yyyy-mm-dd hh24:mi:ss'), TO_DATE(#{workTimeEnd},'yyyy-mm-dd hh24:mi:ss'), #{workMoney}, #{workType})
 	</insert>
 	
@@ -25,6 +25,13 @@
 		WORK_TIME_END = TO_DATE(#{workTimeEnd},'yyyy-mm-dd hh24:mi:ss'), WORK_MONEY = #{workMoney}
 		WHERE WORK_MEMBER_NO = #{workMemberNo} AND WORK_MEMBER_ID = #{workMemberId}
 	</update>
+	
+	<!-- 차트에서 구직 & 면접 횟수 조회(년&월 기준) -->
+	<select id="chartWork" resultType="hashmap" parameterType="map">
+		SELECT WORK_TITLE, WORK_TIME, WORK_MONEY, WORK_MEMBER_ID, (EXTRACT(DAY FROM WORK_TIME_END) - EXTRACT(DAY FROM WORK_TIME_START)) WORKDAY
+		FROM MEMBER_WORK
+		WHERE EXTRACT(YEAR FROM WORK_TIME_START) = #{year} AND EXTRACT(MONTH FROM WORK_TIME_START) = #{month} AND WORK_MEMBER_ID = #{userId}
+	</select>
 </mapper>
 <!--
 	private int workMemberNo;

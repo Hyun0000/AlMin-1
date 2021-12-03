@@ -65,6 +65,7 @@ function calSubmit() {
 			let insertWorkParam = {
 					workMemberId : userId,
 					workTitle : titleEle.value,
+					workTime : "8", // 우선 이걸로 고정값
 					workColor : colorEle.value,
 					workTimeStart : allStart,
 					workTimeEnd : allEnd,

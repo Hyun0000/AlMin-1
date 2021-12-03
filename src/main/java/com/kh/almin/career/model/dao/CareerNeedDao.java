@@ -39,8 +39,9 @@ public class CareerNeedDao {
 	}
 // ===================================================================================================================
 	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
-	public List<Map<String, String>> chartNeed(String year, String month) {
+	public List<Map<String, String>> chartNeed(String userId, String year, String month) {
 		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", userId);
 		paramMap.put("year", year);
 		paramMap.put("month", month);
 		List<Map<String, String>> result = null;

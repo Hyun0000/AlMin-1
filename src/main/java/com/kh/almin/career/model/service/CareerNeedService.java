@@ -20,7 +20,7 @@ public interface CareerNeedService {
 	public int updateCal(MemberNeed updateMemberNeed) throws Exception;
 // ===================================================================================================================
 	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
-	public List<Map<String, String>> chartNeed(String year, String month) throws Exception;
+	public List<Map<String, String>> chartNeed(String userId, String year, String month) throws Exception;
 // ===================================================================================================================
 }
 // ===================================================================================================================

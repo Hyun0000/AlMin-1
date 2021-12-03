@@ -160,16 +160,16 @@ public class CareerNeedController {
 	}
 // ===================================================================================================================
 	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
-	@GetMapping(value = "/needchart", produces="text/plain;charset=UTF-8")
+	@GetMapping(value = "/needchart/{userId}", produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String chartNeed(@RequestParam(name = "year") String year, @RequestParam(name = "month") String month) {
+	public String chartNeed(@PathVariable("userId") String userId, @RequestParam(name = "year") String year, @RequestParam(name = "month") String month) {
 		System.out.println("chartNeed 진입");
-		System.out.println("year : " + year + ", month : " + month);
+		System.out.println("userId : " + userId + ", year : " + year + ", month : " + month);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		List<Map<String, String>> needMapChart = null;
 		try {
-			needMapChart = careerNeedService.chartNeed(year, month);
+			needMapChart = careerNeedService.chartNeed(userId, year, month);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
