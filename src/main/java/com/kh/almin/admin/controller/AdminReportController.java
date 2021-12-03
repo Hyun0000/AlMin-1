@@ -1,5 +1,6 @@
 package com.kh.almin.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,14 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.admin.model.service.AdminService;
 import com.kh.almin.recruit.model.service.RecruitService;
+import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
 
 @Controller
@@ -37,14 +39,22 @@ public class AdminReportController {// Service, Dao에서 throws Exception 붙�
 		return mv;
 	}
 
-	@RequestMapping(value = "/listreason", method = RequestMethod.POST)
+	@PostMapping("/listreason")
 	@ResponseBody
-	private List<String> listReason(@RequestParam("recruitNo") int recruitNo) throws Exception {
-		List<String> result = recruitService.listReason(recruitNo);
-		return result;
+	private List<String> listReason(Reason reason) throws Exception {
+		System.out.println("listReason:" + reason);
+		List<String> reasonlist = new ArrayList<String>();
+		int result = 0;
+		for (int i = 1; i < 6; i++) {
+			reason.setReasonNo(i);
+			result = recruitService.listReason(reason);
+			reasonlist.add(String.valueOf(result));
+		}
+		System.out.println("reasonlist는~~~~ : " + reasonlist);
+		return reasonlist;
 	}
 
-	@RequestMapping(value = "/dereport", method = RequestMethod.POST)
+	@PostMapping("/dereport")
 	@ResponseBody
 	private String deleteReport(@RequestParam(value = "rtno", required = false) String rtno) throws Exception { // 회원탈퇴
 		System.out.println("공고삭제");

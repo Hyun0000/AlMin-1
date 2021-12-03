@@ -3,6 +3,7 @@ package com.kh.almin.recruit.model.service;
 import java.util.List;
 
 import com.kh.almin.recruit.model.vo.LikeRecruit;
+import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
 import com.kh.almin.recruit.model.vo.ReportRecruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
@@ -25,8 +26,8 @@ public interface RecruitService {
 	public List<Recruit> listLike(String memberId) throws Exception;
 
 	public int checkLike(LikeRecruit likeRecruit) throws Exception;
-	
+
 	public int doReport(ReportRecruit reportRecruit) throws Exception;
 
-	public List<String> listReason(int recruitNo) throws Exception;
+	public int listReason(Reason reason) throws Exception;
 }

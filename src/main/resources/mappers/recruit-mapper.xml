@@ -49,11 +49,12 @@
 	</select>
 
 	<!--공고 신고 사유 목록 -->
-	<select id="listReason" resultType="String"
-		parameterType="integer">
-		select RS.REASON_CONTENT from REPORT_RECRUIT RC JOIN
-		REPORT_REASON RS USING(REASON_NO)
-		WHERE RECRUIT_NO = #{recruitNo}
+	<select id="listReason" resultType="integer"
+		parameterType="Reason">
+		SELECT COUNT(REASON_NO) count FROM
+		REPORT_RECRUIT WHERE
+		RECRUIT_NO = #{recruitNo} AND REASON_NO =
+		#{reasonNo}
 	</select>
 
 	<!-- 공고신고횟수 -->

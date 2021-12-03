@@ -97,7 +97,21 @@ button {
 												<button class="genric-btn primary small reason"
 													onclick="reason(this)">신고사유</button>
 												<div class="d-toggle rlist">
-													<div class="here"></div>
+													<div>
+														통장,신분증,비밀번호를 요구하는 경우<span id="here_1"></span>
+													</div>
+													<div>
+														유흥업소 및 불건전 업소<span id="here_2"></span>
+													</div>
+													<div>
+														허위 사기성 내용<span id="here_3"></span>
+													</div>
+													<div>
+														다단계 및 피라미드성 통신상품 판매 업체<span id="here_4"></span>
+													</div>
+													<div>
+														최저임금 미만의 급여<span id="here_5"></span>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -133,10 +147,10 @@ button {
 		function reason(targetEle) {
 			var reasonlist = "";
 			var rno = $(targetEle).parents().children(".rt").text();
+			//var selectedVal = $(targetEle).next().children("id").split("_");
 			$.ajax({
 				type : "post",
 				url : "${pageContext.request.contextPath}/report/listreason",
-				async : false,
 				data : {
 					recruitNo : rno
 				},
@@ -152,9 +166,10 @@ button {
 			myFunction(targetEle);
 		}
 		function displayDiv_rlist(reasonlist, targetEle) {
-			for(var i = 0; i < reasonlist.length; i++){
-			var html = "<p>" + reasonlist[i] + "</p>";
-			$(targetEle).next().children(".here").append(html);
+			//$(targetEle).next().children("id").split("_");
+			for (var i = 1; i < reasonlist.length + 1; i++) {
+				$(targetEle).next().find("#here_" + i).html("");
+				$(targetEle).next().find("#here_" + i).html(reasonlist[i-1]);
 			}
 		}
 	</script>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.almin.recruit.model.vo.LikeRecruit;
+import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
 import com.kh.almin.recruit.model.vo.ReportRecruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
@@ -22,8 +23,6 @@ public class RecruitDao {
 	public List<Recruit> getReport() throws Exception {
 		List<Recruit> recruits = sqlSession.selectList("Recruit.listReport");
 		logger.info(recruits.toString());
-		System.out.println("여기여기");
-		System.out.println(recruits.size());
 		return recruits;
 	}
 
@@ -66,7 +65,7 @@ public class RecruitDao {
 		return sqlSession.insert("Recruit.doReport", reportRecruit);
 	}
 
-	public List<String> listReason(int recruitNo) throws Exception {
-		return sqlSession.selectList("Recruit.listReason", recruitNo);
+	public int listReason(Reason reason) throws Exception {
+		return sqlSession.selectOne("Recruit.listReason", reason);
 	}
 }

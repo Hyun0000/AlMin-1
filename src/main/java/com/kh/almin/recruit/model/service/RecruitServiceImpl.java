@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.almin.recruit.model.dao.RecruitDao;
 import com.kh.almin.recruit.model.vo.LikeRecruit;
+import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
 import com.kh.almin.recruit.model.vo.ReportRecruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
@@ -55,12 +56,12 @@ public class RecruitServiceImpl implements RecruitService {
 	public int checkLike(LikeRecruit likeRecruit) throws Exception {
 		return recruitDao.checkLike(likeRecruit);
 	}
-	
-	public int doReport(ReportRecruit reportRecruit) throws Exception{
+
+	public int doReport(ReportRecruit reportRecruit) throws Exception {
 		return recruitDao.doReport(reportRecruit);
 	}
 
-	public List<String> listReason(int recruitNo) throws Exception{
-		return recruitDao.listReason(recruitNo);
+	public int listReason(Reason reason) throws Exception {
+		return recruitDao.listReason(reason);
 	}
 }
