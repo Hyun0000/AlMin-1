@@ -72,9 +72,9 @@ session.setAttribute("state", state);
 			<span class="close">&times;</span>
 			<!-- 닫기 -->
 			<div class="tab item btngroup" style="margin-bottom: 10px;">
-				<button type="button" class="tab-item" id="memberBtn"
+				<button type="button" class="tab-item tab1" id="memberBtn"
 					autofocus>개인회원</button>
-				<button type="button" class="tab-item active"
+				<button type="button" class="tab-item tab1 active"
 					id="companyBtn">기업회원</button>
 			</div>
 			<form name="form" method="post" action="#" class="item">

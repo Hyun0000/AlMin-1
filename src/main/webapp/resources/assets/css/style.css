@@ -46,21 +46,24 @@ input:hover{
 }
 
 /* 개인회원 / 기업회원 탭 */
-   .tab-item {
+   .tab1 {
     text-align: center;
     cursor: pointer;
     padding: 8px 28px;
-    border: none;
-    background-color: #ddd;
+    border: 3px solid #FAE100;
+    border-radius: 5px;
+    background-color: WHITE;
     color: black;
 	font-size: 1rem;
     transition: 0.3s;
    }
-   .tab-item:hover {
-    background-color: #F9F871;
+   .tab1:hover {
+    background-color: #FAE100;
    }
-   .tab-item:active{
-   background-color: #FEA500;
+   .tab1:active{
+ 	background-color: #f8b600;
+	border: 3px solid #f8b600;
+ 	COLOR: WHITE;
    }
 
 table.login-form {
