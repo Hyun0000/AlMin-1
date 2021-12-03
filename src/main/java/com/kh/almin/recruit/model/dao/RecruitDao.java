@@ -61,8 +61,12 @@ public class RecruitDao {
 	public int checkLike(LikeRecruit likeRecruit) throws Exception {
 		return sqlSession.selectOne("Recruit.checkLike", likeRecruit);
 	}
-	
+
 	public int doReport(ReportRecruit reportRecruit) throws Exception {
 		return sqlSession.insert("Recruit.doReport", reportRecruit);
+	}
+
+	public List<String> listReason(int recruitNo) throws Exception {
+		return sqlSession.selectList("Recruit.listReason", recruitNo);
 	}
 }

@@ -28,4 +28,5 @@ public interface RecruitService {
 	
 	public int doReport(ReportRecruit reportRecruit) throws Exception;
 
+	public List<String> listReason(int recruitNo) throws Exception;
 }

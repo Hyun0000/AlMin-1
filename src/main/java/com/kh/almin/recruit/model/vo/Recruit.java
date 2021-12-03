@@ -13,7 +13,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @Data
 @Component
 public class Recruit {
@@ -44,4 +43,25 @@ public class Recruit {
    private int recruitReport;
    
    private District district; //쿼리로 join할 Vo
+
+@Override
+public String toString() {
+	String result = "Recruit [recruitNo=" + recruitNo + ", recruitCompanyId=" + recruitCompanyId + ", recruitCompanyType="
+			+ recruitCompanyType + ", recruitTitle=" + recruitTitle + ", recruitCareer=" + recruitCareer
+			+ ", recruitGender=" + recruitGender + ", recruitStartAge=" + recruitStartAge + ", recruitEndAge="
+			+ recruitEndAge + ", recruitEducation=" + recruitEducation + ", recruitPerson=" + recruitPerson
+			+ ", recruitMoney=" + recruitMoney + ", recruitPeriod=" + recruitPeriod + ", recruitDay=" + recruitDay
+			+ ", recruitTime=" + recruitTime + ", recruitAddress=" + recruitAddress + ", recruitPhoto=" + recruitPhoto + ", recruitPolice=" + recruitPolice
+			+ ", recruitJobType=" + recruitJobType + ", recruitJobDistrict=" + recruitJobDistrict + ", recruitJobWho="
+			+ recruitJobWho + ", recruitDate=" + recruitDate + ", recruitPub=" + recruitPub + ", recruitJobBranch="
+			+ recruitJobBranch + ", recruitReport=" + recruitReport + ", district=" + district;
+	String content = recruitContent;
+	if(recruitContent != null && recruitContent.length() > 20) {
+		content = recruitContent.substring(0, 19);
+	}
+	result += ", recruitContent=" + content  + "]";
+	return result;
+}
+   
+   
 }

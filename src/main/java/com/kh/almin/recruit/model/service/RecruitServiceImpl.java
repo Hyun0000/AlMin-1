@@ -60,4 +60,7 @@ public class RecruitServiceImpl implements RecruitService {
 		return recruitDao.doReport(reportRecruit);
 	}
 
+	public List<String> listReason(int recruitNo) throws Exception{
+		return recruitDao.listReason(recruitNo);
+	}
 }

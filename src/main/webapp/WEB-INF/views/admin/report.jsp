@@ -89,10 +89,16 @@ button {
 										<div class="reportItem">
 											<button onclick="myFunction(this)">${item.recruitCompanyId}</button>
 											<div class="d-toggle">
+												<div class="title">${item.recruitTitle}${item.recruitDate}</div>
 												<div style="display: none" class="rt">${item.recruitNo}</div>
-												<div>${item.recruitTitle}${item.recruitDate}</div>
-												<button class="genric-btn primary small" onclick="">공고보기</button>
+												<button class="genric-btn primary small"
+													onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}'">공고보기</button>
 												<button class="genric-btn primary small deletert">삭제</button>
+												<button class="genric-btn primary small reason"
+													onclick="reason(this)">신고사유</button>
+												<div class="d-toggle rlist">
+													<div class="here"></div>
+												</div>
 											</div>
 										</div>
 									</c:forEach>
@@ -121,6 +127,35 @@ button {
 			console.log(targetEle);
 			var $togggleEle = $(targetEle).next();
 			$togggleEle.toggle();
+		}
+	</script>
+	<script>
+		function reason(targetEle) {
+			var reasonlist = "";
+			var rno = $(targetEle).parents().children(".rt").text();
+			$.ajax({
+				type : "post",
+				url : "${pageContext.request.contextPath}/report/listreason",
+				async : false,
+				data : {
+					recruitNo : rno
+				},
+				success : function(result) {
+					console.log("신고 사유 목록");
+					console.log(result);
+					displayDiv_rlist(result, targetEle);
+				},
+				error : function(error) {
+					alert('오류 발생. 오류 코드: ' + error.code);
+				}
+			});
+			myFunction(targetEle);
+		}
+		function displayDiv_rlist(reasonlist, targetEle) {
+			for(var i = 0; i < reasonlist.length; i++){
+			var html = "<p>" + reasonlist[i] + "</p>";
+			$(targetEle).next().children(".here").append(html);
+			}
 		}
 	</script>
 	<script>

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.almin.comments.model.service.CommentsService;
 import com.kh.almin.recruit.controller.RecruitController;
@@ -99,7 +98,6 @@ public class RecruitController {
 		int report = 0;
 		reportRecruit.setMemberId("sy111k2");
 		report = recruitService.doReport(reportRecruit);
-		System.out.println("신고 들어옴!!! : "+reportRecruit);
 		recruitService.reportRecruit(reportRecruit.getRecruitNo());
 		if (report == 1) {
 			System.out.println("공고 신고");
