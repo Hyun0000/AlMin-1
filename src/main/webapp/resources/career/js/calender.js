@@ -15,7 +15,9 @@ let evnets = [];
 //(지원 / 면접일자) 버튼 선택
 needCalButn.onclick = () => {
 	selectCal = "NG";
-	// alert(selectCal);
+	// 차트 load 오류 문제를 막기 위한 변수 초기화
+//	chartLoadVarNum = 0;
+	
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
 	sendRequest("GET", getPath, null, calenderLoad);
@@ -23,7 +25,10 @@ needCalButn.onclick = () => {
 
 workCalButn.onclick = () => {
 	selectCal = "W";
-	// alert(selectCal);
+	
+	// 차트 load 오류 문제를 막기 위한 변수 초기화
+//	chartLoadVarNum = 0;
+	
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
 	sendRequest("GET", getWorkPath, null, calenderLoad);

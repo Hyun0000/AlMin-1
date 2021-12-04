@@ -178,10 +178,10 @@
             <div id="workChartDiv"><canvas id="workChart"></canvas></div>
             <div id="moneyTabel">
                 <table id="moneyTabelReal">
-                    <tr>
+<!--                     <tr id="applekiwi">
                         <td class="firstTd tableColName">매장(시급)</td>
                         <td class="secondTd tableColName">급여(월)</td>
-                    </tr>
+                    </tr> -->
 <!--                     <tr>
                         <td class="firstTd">피자스쿨<br>(9000원)</td>
                         <td class="secondTd">450000원</td>

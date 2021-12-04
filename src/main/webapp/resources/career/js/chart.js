@@ -34,12 +34,17 @@ console.log("getWorkChartPath : " + getWorkChartPath);
 
 // 좌측 사이드 버튼을 클릭하면 chart 화면으로 전환
 careerCalButn.onclick = () => {
+	
+	console.log(777);
 	calDiv.style.display = 'none';
 	chartDiv.style.display = 'block';
 	// topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 MyChart";
 	
 	// 구직 data 가져오기
-	sendRequest("GET", getNeedChartPath, null, afterNeedChart);
+//	if(chartLoadVarNum == 0) {
+		// chartLoadVarNum++;
+		sendRequest("GET", getNeedChartPath, null, afterNeedChart);
+//	}
 	
 	// 근무 data 가져오기
 	// sendRequest("GET", getWorkChartPath, null, afterWorkChart);
@@ -54,6 +59,7 @@ function afterNeedChart() {
 		if (httpRequest.status === 200) {
 			let needCalChartData = JSON.parse(httpRequest.responseText);
 			console.log(needCalChartData);
+			
 			for (var i = 0; i < needCalChartData.length; i++) {
 				needchartArr[i] = needCalChartData[i].COUNT_TYPE;
 			}
@@ -65,14 +71,14 @@ function afterNeedChart() {
 // 근무 data 중 근무일수를 담을 배열
 let workChartDay = [];
 
-//근무 data 중 매장명을 담을 배열
+// 근무 data 중 매장명을 담을 배열
 let workChartTitle = [];
 
 // 그래프 배경색
-let backgroundColorArr = []
+let backgroundColorArr = [];
 
-//그래프 border 색
-let borderColorArr = []
+// 그래프 border 색
+let borderColorArr = [];
 
 // 근무 data ajax callback function
 function afterWorkChart() {
@@ -83,6 +89,7 @@ function afterWorkChart() {
 			
 			// 근무 chart에 data 및 색깔널기
 			for (var i = 0; i < workCalChartData.length; i++) {
+				
 				workChartDay[i] = workCalChartData[i].WORKDAY;
 				workChartTitle[i] = workCalChartData[i].WORK_TITLE;
 				
@@ -92,15 +99,36 @@ function afterWorkChart() {
 				// 그래프 border
 				borderColorArr[i] = colorTemp.replace(",0.2)", ")");
 			}
+			console.log(workChartDay);
 			
-			let tabelEle = document.getElementById('moneyTabelReal');
+			// let tabelEle = document.getElementById('moneyTabelReal');
+			
+			while (moneyTable.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+				moneyTable.removeChild(moneyTable.firstChild);
+			}
+
 			
 			if(workCalChartData.length != 0) { // 근무 데이터가 있을때만 테이블 동적 생성
+				let trHEle = document.createElement('tr');
+				moneyTable.appendChild(trHEle);
+				
+				let firstHTdEle = document.createElement('td');
+				firstHTdEle.setAttribute('class', 'firstTd tableColName');
+				firstHTdEle.innerText = "매장 시급";
+				trHEle.appendChild(firstHTdEle);
+				
+				let secondHTdEle = document.createElement('td');
+				secondHTdEle.setAttribute('class', 'secondTd tableColName');
+				secondHTdEle.innerText = "급여(월)";
+				trHEle.appendChild(secondHTdEle);
+				
+				
 				// 월급 테이블 계산
 				for (var i = 0; i < workCalChartData.length; i++) {
+					
 					// <tr>
 					let trEle = document.createElement('tr');
-					tabelEle.appendChild(trEle);
+					moneyTable.appendChild(trEle);
 	
 					// 매장명이 담기는 <td>
 					let firstTdEle = document.createElement('td');
@@ -116,6 +144,10 @@ function afterWorkChart() {
 				}
 			}
 			
+			console.log(document.querySelector("#applekiwi~tr"));
+			console.log(document.querySelector("#applekiwi"));
+			console.log(document.querySelectorAll("#applekiwi~tr"));
+			console.log(document.querySelectorAll("#applekiwi~tr").length);
 			
 			// TODO 마지막 ajax callback function에서 해야함
 			loadChart();
@@ -123,6 +155,23 @@ function afterWorkChart() {
 	}	
 }
 //======================================================================================================
+//근무 변수
+const workCt = document.getElementById('workChart');
+
+// 구직 변수
+const needCt = document.getElementById('needChart');
+
+// 경력 변수
+const careerCt = document.getElementById('careerChart');
+
+// 구직 차트 객체를 담을 변수
+let needChart;
+
+// 근무 차트 객체를 담을 변수
+let workChart;
+
+// 경력 차트 객체를 담을 변수
+let careerChart;
 
 // window.onload = function () { onload 시작
 function loadChart() {
@@ -133,40 +182,25 @@ function loadChart() {
 ////년&월 입력칸에 현재 날짜 값 넣기(년)
 //monthInput.value = date.getMonth() + 1;
 
-//근무 변수
-const workCt = document.getElementById('workChart');
-
-// 구직 변수
-const needCt = document.getElementById('needChart');
-
-// 경력 변수
-const careerCt = document.getElementById('careerChart');
 //============================================================================================================
 	// 구직 chart
-	const needChart = new Chart(needCt, {
+	// chart가 최초 한 번 load된 후 재 load시 destroy 진행 
+	if(chartLoad == "loded") {
+		needChart.destroy();
+		workChart.destroy();
+		careerChart.destroy();
+	}
+	
+	// const needChart = new Chart(needCt, {
+	needChart = new Chart(needCt, {
 	type: 'pie',
 	data: {
 	    labels: ['면접 횟수', '지원 횟수'],
 	    datasets: [{
-	        // data: [12, 19, 3, 5, 2, 3],
 	        data: needchartArr,
-	        backgroundColor: [
-	            'rgba(255, 99, 132, 0.2)',
-	            'rgba(54, 162, 235, 0.2)'
-	            // 'rgba(255, 206, 86, 0.2)'
-	            // 'rgba(75, 192, 192, 0.2)',
-	            // 'rgba(153, 102, 255, 0.2)',
-	            // 'rgba(255, 159, 64, 0.2)'
-	        ],
-	        borderColor: [
-	            'rgba(255, 99, 132, 1)',
-	            'rgba(54, 162, 235, 1)'
-	            // 'rgba(255, 206, 86, 1)'
-	            // 'rgba(75, 192, 192, 1)',
-	            // 'rgba(153, 102, 255, 1)',
-	            // 'rgba(255, 159, 64, 1)'
-	        ],
-	        // , borderWidth: 1 // 그래프 바깥선
+	        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+	        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+	        borderWidth: 3, // 그래프 바깥선
 	    	hoverOffset: 10
 	    }]
 	},
@@ -193,15 +227,14 @@ const careerCt = document.getElementById('careerChart');
 	});
 //============================================================================================================
 	// 근무 chart
-	const workChart = new Chart(workCt, {
+	// const workChart = new Chart(workCt, {
+	workChart = new Chart(workCt, {
 	type: 'doughnut',
 	data: {
 	    // labels: ['Red', 'Blue', 'Yellow', 'Green'],
 	    labels: workChartTitle,
 	    datasets: [{
 	        data: workChartDay, // 알바별 월 근무 일수
-	        // data: [32, 19, 3, 5], // 알바별 월 알바비 총량
-	        // data: [32, 19, 3, 5, 2, 3],
 	        backgroundColor: backgroundColorArr,
 	        borderColor: borderColorArr,
 	        borderWidth: 3, // 그래프 바깥 경계
@@ -230,7 +263,8 @@ const careerCt = document.getElementById('careerChart');
 	});
 // ============================================================================================================
 	// 경력 chart
-	const careerChart = new Chart(careerCt, {
+	// const careerChart = new Chart(careerCt, {
+	careerChart = new Chart(careerCt, {
 	type: 'pie',
 	data: {
 	    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -259,14 +293,6 @@ const careerCt = document.getElementById('careerChart');
 	},
 	options: {
 	    scales: {
-	        // yAxes : [{ // y축 그래프 범위
-	        //     ticks : {
-	        //         min : -10,
-	        //         max : 100,
-	        //         stepSize : 5,
-	        //         position: 'none'
-	        //     }
-	        // }],
 	        y: {
 	            beginAtZero: true,
 	            position: 'none'
@@ -284,6 +310,9 @@ const careerCt = document.getElementById('careerChart');
 	    }
 	}
 	});
+	
+	// chart가 최초 한 번 load된 후 재 load시 destroy를 위한 변수 값 할당
+	chartLoad = "loded";
 }
 // } onload 끝
 // 색깔 랜덤 생성(그래프 배경 & border)

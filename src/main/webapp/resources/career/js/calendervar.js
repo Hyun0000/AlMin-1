@@ -1,3 +1,9 @@
+// 급여 & 매장명을 담는 <table>
+let moneyTable = document.getElementById('moneyTabelReal');
+
+// 차트 load 오류 문제를 막기 위한 변수
+let chartLoad;
+
 // 켈린더 전체 영역
 let calDiv = document.getElementById('calendar');
 
