@@ -117,6 +117,41 @@ session.setAttribute("state", state);
 		</div>
 	</div>
 	<script>
+		var chk = "member";
+	$(document).ready(function(){
+		$("#memberBtn").css({
+			"background-color":"#f8b600",
+			"color":"white",
+			"border":"3px solid #f8b600"
+		});
+		$("#memberBtn").click(function(){
+			chk="member";
+			$("#memberBtn").css({
+				"background-color":"#f8b600",
+				"color":"white",
+				"border":"3px solid #f8b600"
+			});
+			$("#companyBtn").css({
+				"background-color":"white",
+				"color":"black",
+				"border":"3px solid #FAE100"
+			});
+			})
+		$("#companyBtn").click(function(){
+			chk="company";
+			$("#companyBtn").css({
+				"background-color":"#f8b600",
+				"color":"white",
+				"border":"3px solid #f8b600"
+			});
+			$("#memberBtn").css({
+				"background-color":"white",
+				"color":"black",
+				"border":"3px solid #FAE100"
+			});
+			})
+
+	})
 $(".login").click(function(){
 	$(".modal").show(); 
 });
@@ -130,16 +165,24 @@ $("#companyBtn").click(function(){
     $(".snsBx").hide(); 
  });
 
-
 function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberId = $("#memberId").val();
 	var memberPw = $("#memberPw").val();
+	
 	var saveIdCheck = $("#lb_idSave:checked").val();//TODO
 	var json = {'memberId':  $("#memberId").val(),
 			'memberPw': $("#memberPw").val()};
-	console.log("memberId: "+memberId+", memberPw: "+memberPw);
+	var url="<%=request.getContextPath()%>/logins";
+	console.log("memberId: "+memberId+", memberPw: "+memberPw+" chk: "+chk);
+	
+	if(chk=="company"){
+		url+="/companies/"+memberId;
+	}else if(chk=="member"){
+		url+="/members/"+memberId;
+	}
+	
 	$.ajax({
-		url: "<%=request.getContextPath()%>/logins/"+memberId,
+		url: url,
 		type: "post",
 		 // data : 서버(컨트롤러)로 보내는 데이터.
 		 // json데이터를 JSON.stringify를 이용하여 String으로 형변환

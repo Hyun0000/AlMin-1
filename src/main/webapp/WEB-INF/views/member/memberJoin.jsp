@@ -26,31 +26,16 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){ 
-		function checkSelectAll()  {
-			  // 전체 체크박스
-			  const checkboxes 
-			    = document.querySelectorAll('input[name="agree"]');
-			  // 선택된 체크박스
-			  const checked 
-			    = document.querySelectorAll('input[name="agree"]:checked');
-			  // select all 체크박스
-			  const selectAll 
-			    = document.querySelector('input[name="selectall"]');
-			  
-			  if(checkboxes.length === checked.length)  {
-			    selectAll.checked = true;
-			  }else {
-			    selectAll.checked = false;
-			  }
-			}
-		function selectAll(selectAll)  {//전체선택 체크 시
-			  const checkboxes 
-			       = document.getElementsByName('agree');
-			  
-			  checkboxes.forEach((checkbox) => {
-			    checkbox.checked = selectAll.checked;
-			  })
-			} 
+		$("#agreeChkAll").change(function selectAll(selectAll) {
+			console.log("전체선택 체크");
+		    if(this.checked){
+			console.log($("input[name=agree]"));
+			$(':checkbox').each(function() {
+	            this.checked = true;                        
+	        });
+		    }
+			else $("input[name=agree]").prop("checked", false);
+			}); 
 		
 		//내용보기 클릭 시 가입약관 Accordion
 		var acc = document.getElementsByClassName("toggle_terms");
@@ -73,7 +58,9 @@
 			// 정규표현식 선언
 			var regExp = /^[0-9]*$/;   
 			var idPattern = /^[a-zA-Z]{1}[A-Za-z0-9]{6,50}$/;
-			var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,250}$/;
+//			var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,250}$/;
+//			var pwPattern =/^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,16}$/;
+			var pwPattern =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
 			var namePattern = /^[a-zA-Z가-힣]*$/;
 			var emailPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*.[a-zA-Z]{1,3}$/i;   
 			var phonePattern = /^01[016789]{1}-?([0-9]{4})-?([0-9]{4})$/;
@@ -116,10 +103,11 @@
 					});
 	
 			$("#userPass").on("focus", function(){
-				console.log("비밀번호 입력~");
 				var html = "";
 				var userPass = $("#userPass").val();
+				console.log(userPass);
 				if(!pwPattern.test(userPass)){
+					console.log("일치안함");
 					 html+="영문, 숫자, 특수문자 포함 6자 이상 입력";
 				} else{
 					html+="비밀번호 양식에 부합합니다.";
@@ -160,14 +148,14 @@
 	<h2>개인회원가입</h2>
 	<div class="inner">
     <div class="user_join_agree">									<!-- 여기서 this는 이벤트가 발생한 element, 즉, '일괄동의' 체크박스 -->
-        <input type="checkbox" name="selectall" id="agreeChkAll" value="selectall" onclick='selectAll(this)'><label for="agreeChkAll"><b style="color:dodgerblue">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</b></label>
+        <input type="checkbox" name="selectall" id="agreeChkAll" value="selectall"><label for="agreeChkAll"><b style="color:dodgerblue">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</b></label>
     </div>
     <hr>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="agree" id="agreeChk_5" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
+        <input type="checkbox" name="agree" id="agreeChk_5" value="on" data-required="1"><label for="agreeChk_5"><span>[필수]</span> 만 15세 이상입니다</label>
     </div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="agree" id="agreeChk_0" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_0" value="on" data-required="1"><label for="agreeChk_0"><span>[필수]</span> 서비스 이용약관 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
         <div class="agree_terms">
             <p>개정일자 : 2020년 9월 3일</p>
@@ -456,7 +444,7 @@
         </div>
     </div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="agree" id="agreeChk_1" value="on" data-required="1" onclick='checkSelectAll()'><label for="agreeChk_1"><span>[필수]</span> 개인정보 수집 및 이용 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_1" value="on" data-required="1"><label for="agreeChk_1"><span>[필수]</span> 개인정보 수집 및 이용 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
         <div class="agree_terms">
             알바의 민족 서비스 이용을 위해 아래와 같이 개인정보를 수집 및 이용합니다. <br>동의를 거부할 권리가 있으며, 동의 거부 시 알바의 민족 회원서비스 이용이 불가합니다.
@@ -492,9 +480,8 @@
             </table>
         </div>
     </div>
-    <div class="join_dot"></div>
     <div class="user_join_agree agrSelect">
-        <input type="checkbox" name="agree" id="agreeChk_3" value="on" onclick='checkSelectAll()'><label for="agreeChk_3"><span class="select">[선택]</span> 개인정보 수집 및 이용 동의</label>
+        <input type="checkbox" name="agree" id="agreeChk_3" value="on"><label for="agreeChk_3"><span class="select">[선택]</span> 개인정보 수집 및 이용 동의</label>
         <div class="toggle_terms"><a href="#">내용보기<span class=""></span></a></div>
         <div class="agree_terms">
             <dl>

@@ -67,21 +67,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@PostMapping("/idCheck")//회원가입 - id 중복체크
 	@ResponseBody
 	private int idCheck(Member member) throws Exception {
-//	public String idCheck(@RequestParam("id") String id) {
-		String resultStr = "";
-//		int result = 0;
-//		try {
-//			result = memberservice.idCheck(id);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			resultStr = "ajax 통신 실패";
-//		}
-//		if (result == 1) {
-//			resultStr = "false";
-//		} else {
-//			resultStr = "true";
-//		}
-//		return resultStr;
 		int result = memberService.idChk(member);
 		/* 만약, DB에 ID가 존재하면 1을, 존재하지 않으면 0을 return 할 것임 */
 		return result;
