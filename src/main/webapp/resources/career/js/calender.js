@@ -6,6 +6,7 @@ needCalButn.onclick = () => {
 	selectCal = "NG";
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
+	careerInputTable.style.display = "none";
 	sendRequest("GET", getPath, null, calenderLoad);
 }
 
@@ -13,6 +14,7 @@ workCalButn.onclick = () => {
 	selectCal = "W";
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
+	careerInputTable.style.display = "none";
 	sendRequest("GET", getWorkPath, null, calenderLoad);
 }
 

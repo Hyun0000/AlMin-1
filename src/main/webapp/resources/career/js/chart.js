@@ -34,6 +34,10 @@ console.log("getNeedChartPath : " + getNeedChartPath);
 let getWorkChartPath = "/almin/careers/workchart/" + userId + "?year=" + date.getFullYear() + "&month=" + (date.getMonth() + 1);
 console.log("getWorkChartPath : " + getWorkChartPath);
 
+// 경력
+let getCareerChartPath = "/almin/careers/careerchart/" + userId;
+console.log("getWorkChartPath : " + getCareerChartPath);
+
 // 년도 & 월에 맞는 data 가져오는 event
 dateInputBtn.onclick = () => {
     console.log(yearInput.value + " : " + monthInput.value);
@@ -49,8 +53,11 @@ dateInputBtn.onclick = () => {
 
 // 좌측 사이드 버튼을 클릭하면 chart 화면으로 전환
 careerCalButn.onclick = () => {
+	selectCal = "C";
+//	document.getElementById('slide_first_img').style.display = "none";
+//	document.getElementById('slide_second_img').style.display = "none";
+	careerInputTable.style.display = "block";
 	
-	console.log(777);
 	calDiv.style.display = 'none';
 	chartDiv.style.display = 'block';
 	topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 MyChart";
@@ -164,18 +171,52 @@ function afterWorkChart() {
 					trEle.appendChild(secondTdEle);
 				}
 			}
-			
-			console.log(document.querySelector("#applekiwi~tr"));
-			console.log(document.querySelector("#applekiwi"));
-			console.log(document.querySelectorAll("#applekiwi~tr"));
-			console.log(document.querySelectorAll("#applekiwi~tr").length);
-			
+			sendRequest("GET", getCareerChartPath, null, afterCareerChart);
 			// TODO 마지막 ajax callback function에서 해야함
-			loadChart();
 		}
 	}	
 }
 //======================================================================================================
+// 개인 경력을 횟수 담을 배열
+let careerchartArr = [];
+
+//개인 경력을 제목 담을 배열
+let careerchartTitleArr = [];
+
+// 그래프 배경색
+let careerBackgroundColorArr = [];
+
+// 그래프 border 색
+let careerBorderColorArr = [];
+
+
+// 경력 조회  data ajax callback function
+function afterCareerChart() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			let careerCalChartData = JSON.parse(httpRequest.responseText);
+			console.log(careerCalChartData);
+			
+			careerchartArr = [];
+			
+			for (var i = 0; i < careerCalChartData.length; i++) {
+				careerchartArr[i] = careerCalChartData[i].COUNT;
+				careerchartTitleArr[i] = careerCalChartData[i].JOB_TYPE_NAME;
+				
+				let careerColorTemp = changeRGBA();
+				
+				// 그래프 배경 색
+				careerBackgroundColorArr[i] = careerColorTemp;
+				
+				// 그래프 border
+				careerBorderColorArr[i] = careerColorTemp.replace(",0.2)", ")");
+			}
+			
+			loadChart();
+		}
+	}
+}
+
 //근무 변수
 const workCt = document.getElementById('workChart');
 
@@ -317,26 +358,14 @@ function loadChart() {
 	careerChart = new Chart(careerCt, {
 	type: 'pie',
 	data: {
-	    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	    labels: careerchartTitleArr,
+	    // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 	    datasets: [{
-	        label: '# of Votes',
-	        data: [32, 19, 3, 5, 2, 3],
-	        backgroundColor: [
-	            'rgba(255, 99, 132, 0.2)',
-	            'rgba(54, 162, 235, 0.2)',
-	            'rgba(255, 206, 86, 0.2)',
-	            'rgba(75, 192, 192, 0.2)',
-	            'rgba(153, 102, 255, 0.2)',
-	            'rgba(255, 159, 64, 0.2)'
-	        ],
-	        borderColor: [
-	            'rgba(255, 99, 132, 1)',
-	            'rgba(54, 162, 235, 1)',
-	            'rgba(255, 206, 86, 1)',
-	            'rgba(75, 192, 192, 1)',
-	            'rgba(153, 102, 255, 1)',
-	            'rgba(255, 159, 64, 1)'
-	        ],
+//	        label: '# of Votes',
+	        // data: [32, 19, 3, 5, 2, 3],
+	        data: careerchartArr,
+	        backgroundColor: careerBackgroundColorArr,
+	        borderColor: careerBorderColorArr,
 	        borderWidth: 1,
 	        hoverOffset: 10
 	    }]
@@ -367,6 +396,14 @@ function loadChart() {
 	    }
 	}
 	});
+	
+	if(careerchartArr.length === 0) {
+		document.getElementById('careerChart').style.display = "none";
+		document.getElementById('careerChart_alterImage').style.display = "block";
+	} else {
+		document.getElementById('careerChart').style.display = "block";
+		document.getElementById('careerChart_alterImage').style.display = "none";
+	}
 	
 	// chart가 최초 한 번 load된 후 재 load시 destroy를 위한 변수 값 할당
 	chartLoad = "loded";

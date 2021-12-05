@@ -38,10 +38,10 @@
 	                        <div id="labelBox">
 	                            <!--  style="display: none;" -->
 								<label id="goLabel" class="modalTypeLabel" for="go">지원</label>
-	                            <input class="typeRadio" value="G" type="radio" id="go" name="test">
+	                            <input class="typeRadio" value="G" type="radio" id="go" name="test" style="display: none;">
 	                            
 	                            <label id="meetLabel" class="modalTypeLabel" for="meet">면접</label>
-	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test">
+	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test" style="display: none;">
 	
 <!-- 	                            <label id="workLabel" class="modalTypeLabel" for="work">근무</label>
 	                            <input class="typeRadio" value="W" type="radio" id="work" name="test"> -->
@@ -146,23 +146,123 @@
     </div>
 </div>
 <!-- ================================================== 모달창 ================================================== -->
-<div id='calendar-wrap'>
-    <div id="side_calendar">
-        <div id="btn_box">
-            <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
-            <!-- <button class="calendarBtn" style="width: 100%;">면접일자</button> -->
-            <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
-            <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
-        </div>
-        <div id="side_calendar_img_box">
-			<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png">
-			<img src="${pageContext.request.contextPath}/resources/assets/images/calender_logo.png">
-        </div>
-    </div>
-       
-    <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
+<section>
+	<div id='calendar-wrap'>
+	    <div id="side_calendar">
+	        <div id="btn_box">
+	            <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
+	            <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
+	            <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
+	        </div>
+	        <div id="side_calendar_img_box">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png" id="slide_first_img">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_logo.png" id="slide_second_img">
+				<!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 -->
+	 			<div id="careerInputTable_box">
+				    <table id="careerInputTable" style="display: none;">
+				        <tr>
+				            <td class="careerInputFirstTd">
+				                <label for="job_type">업무직종</label>
+				            </td>
+				
+				            <td class="careerInputSecondTd">
+				                <select name="job_type" id="job_type">
+				                    <option value="job_type_no">-------업무 직종-------</option>
+				                    <option value="1">외식 / 음료</option>
+				                    <option value="2">유통 / 판매</option>
+				                    <option value="3">문화 / 여가</option>
+				                    <option value="4">서비스</option>
+				                    <option value="5">사무 / 회계</option>
+				                    <option value="6">고객상담</option>
+				                    <option value="7">생산 / 건설 / 인력</option>
+				                    <option value="8">IT / 미디어</option>
+				                    <option value="9">교육 / 강사 / 학원</option>
+				                    <option value="10">디자인</option>
+				                    <option value="11">배달 / 운전</option>
+				                    <option value="12">병원 / 간호</option>
+				                </select>
+				            </td>
+				        </tr>
+				
+				        <tr>
+				            <td class="careerInputFirstTd">
+				                <label for="job_period">기간</label>
+				            </td>
+				
+				            <td class="careerInputSecondTd">
+				                <select name="job_period" id="job_period">
+				                    <option value="job_period_no">-------기간-------</option>
+				                    <option value="1">1주일</option>
+				                    <option value="2">1주일 ~ 1개월</option>
+				                    <option value="3">1개월 ~ 3개월</option>
+				                    <option value="4">3개월 ~ 6개월</option>
+				                    <option value="5">6개월 ~ 1년</option>
+				                    <option value="6">1년 이상</option>
+				                </select>
+				            </td>
+				        </tr>
+				
+				        <tr>
+				            <td class="careerInputFirstTd">
+				                <label for="careerTitle">담당업무</label>
+				            </td>
+				
+				            <td class="careerInputSecondTd">
+				                <input type="text" id="careerTitle">
+				            </td>
+				        </tr>
+				        
+			        	<tr>
+			        		<td colspan="2" id="insertBtnTd">
+			        			<button id="career_in_modal_up">경력추가</button>
+			        		</td>
+			        	</tr>
+				    </table>
+				</div>
+				<!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 -->
+	        </div>
+	    </div>
+	<!-- ================================================== calender ================================================== -->
+	    <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
+	<!-- ================================================== chart.js ================================================== -->
+	    <div id="chartBox" style="display: none">
+		    <div id="top_box">
+		       	<!-- <h1>우리의 민족!!! 칠갑산님의 Chart</h1> -->
+		       	<h1></h1>
+		        <div id="top_box_right_innerBox">
+		            <input id="yearInput" type="number" min="0000" max="9999"><span class="dateTypeSpan">년</span>
+		            <input id="monthInput" type="number" min="1" max="12"><span class="dateTypeSpan">월</span>
+		            <button type="button" id="date_input_btn">조회</button>
+		        </div>
+		    </div>
+		    <div id="allChartBox">
+		        <div id="firstChartBox">
+		            <div id="needChartDiv">
+		           		<canvas id="needChart"></canvas>
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="needChart_alterImage" style="width: 400px">
+		           	</div>
+		            <div id="careerChartDiv">
+		            	<canvas id="careerChart"></canvas>
+		            	<!-- <button id="career_in_modal_up">경력추가</button> -->
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="careerChart_alterImage" style="width: 400px">
+		           	</div>
+		        </div>
+		
+		        <div id="secondChartBox">
+		            <div id="workChartDiv">
+		            	<canvas id="workChart"></canvas>
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="workChart_alterImage" style="width: 400px">
+		           	</div>
+		            <div id="moneyTabel">
+		                <table id="moneyTabelReal"></table>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</section> 
 <!-- ================================================== chart.js ================================================== -->
-<div id="chartBox" style="display: none">
+<%-- <div id="chartBox" style="display: none">
     <div id="top_box">
        	<!-- <h1>우리의 민족!!! 칠갑산님의 Chart</h1> -->
        	<h1></h1>
@@ -178,7 +278,11 @@
            		<canvas id="needChart"></canvas>
             	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="needChart_alterImage" style="width: 400px">
            	</div>
-            <div id="careerChartDiv"><canvas id="careerChart"></canvas></div>
+            <div id="careerChartDiv">
+            	<canvas id="careerChart"></canvas>
+            	<!-- <button id="career_in_modal_up">경력추가</button> -->
+            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="careerChart_alterImage" style="width: 400px">
+           	</div>
         </div>
 
         <div id="secondChartBox">
@@ -212,7 +316,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --%>
 <script>
 	let userId = "test01";
 </script>

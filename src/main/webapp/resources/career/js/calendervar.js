@@ -1,3 +1,7 @@
+// 개인 경력 입력 <table>
+let careerInputTable = document.getElementById('careerInputTable');
+
+
 // 급여 & 매장명을 담는 <table>
 let moneyTable = document.getElementById('moneyTabelReal');
 

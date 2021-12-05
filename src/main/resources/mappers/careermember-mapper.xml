@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="careerMember">
+	<!-- 차트에서 개인 경력 조회 -->
+	<select id="chartMember_select" resultType="hashmap" parameterType="string">
+		SELECT JOB_TYPE.JOB_TYPE_NAME, COUNT(MEMBER_CAREERS.CAREERS_TYPE) COUNT FROM MEMBER_CAREERS JOIN JOB_TYPE ON MEMBER_CAREERS.CAREERS_TYPE = JOB_TYPE.JOB_TYPE_NO
+		WHERE CAREERS_MEMBER_ID = #{userId}
+		GROUP BY JOB_TYPE.JOB_TYPE_NAME, MEMBER_CAREERS.CAREERS_TYPE
+	</select>
+</mapper>

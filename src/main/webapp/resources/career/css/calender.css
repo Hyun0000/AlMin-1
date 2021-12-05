@@ -99,6 +99,10 @@ body {
     color: black;
 }
 
+#chartBox {
+	width: 70%;
+}
+
 /* 메인 캘린더의 요일, 날짜 <a> 태그 */
 #calendar a {
     color: black;
@@ -111,4 +115,86 @@ body {
 
 .fc-title {
     white-space: normal;
+}
+
+/* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 */
+/* 경력추가 테이블 전체 */
+#careerInputTable {
+    /* border: 5px solid royalblue; */
+	width: 300px;
+    /* height: 250px; */
+    border-collapse: collapse;
+    box-sizing: border-box;
+    margin-top: 50px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* 경력추가 테이블 전체 <td> */
+#careerInputTable td {
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid royalblue;
+}
+
+/* 경력추가 테이블 중 왼쪽 열 */
+.careerInputFirstTd {
+    border-right: 2px solid royalblue;
+    text-align: center;
+    padding: 20px 10px;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+/* 경력추가 테이블 중 오른쪽 열 */
+.careerInputSecondTd {
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* 근무 직종 선택 <select> */
+#job_type {
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid royalblue;
+}
+
+/* 근무 기간 선택 <select> */
+#job_period{
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 2px solid royalblue;
+}
+
+/* 근무 내용 <input> */
+#careerTitle {
+    width: 100%;
+    height: 25px;
+    box-sizing: border-box;
+    border: 2px solid royalblue;
+}
+
+/* 근무 내용 <input> */
+#careerTitle:focus {
+    outline: none;
+}
+
+/* 경력 버튼 담는 <td> */
+#insertBtnTd {
+	border-top: 5px solid royalblue;
+	padding: 10px 10px;
+}
+
+/* 경력 추가 버튼 */
+#career_in_modal_up{
+	background-color: white;
+	border: 5px solid royalblue;
+	padding: 5px 10px;
+	border-radius: 20px;
 }

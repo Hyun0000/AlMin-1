@@ -31,7 +31,7 @@ public class CareerWorkController {
 	@Autowired
 	private CareerWorkService careerWorkService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(CareerNeedController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CareerWorkController.class);
 // ===================================================================================================================
 	// 근무 일정 전체 조회(select)
 	@GetMapping(value = "/works/{userId}", produces="text/plain;charset=UTF-8")
