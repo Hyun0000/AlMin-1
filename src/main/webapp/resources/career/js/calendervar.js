@@ -10,7 +10,7 @@ let calDiv = document.getElementById('calendar');
 // chart 전체 영역
 let chartDiv = document.getElementById('chartBox');
 
-// (지원 / 면접일자), (근무 관리) calender를 구분하기 위한 변수
+// (지원 / 면접일자), (근무 관리) calender를 구분하기 위한 변수()
 let selectCal = "";
 
 // (지원 / 면접일자) 달력 선택 버튼
@@ -71,7 +71,7 @@ let goLabelEle = document.getElementById('goLabel');
 let meetLabelEle = document.getElementById('meetLabel');
 
 // 근무 <label>
-let workLabelEle = document.getElementById('workLabel');
+// let workLabelEle = document.getElementById('workLabel');
 
 // 기타 <label>
 let otherLabelEle = document.getElementById('"otherLabel"');
@@ -81,6 +81,25 @@ let inputRadioEle = document.querySelectorAll(".typeRadio");
 
 // 클릭된 라디오 버튼의 value
 let fourbtnEleVal;
+
+// 근무 & 시급 입력 정규식
+let workTimeMoneyReg = /^[0-9]/;
+// let workTimeMoneyReg = /^[0-9]{1,10}$/;
+
+// 시급 입력 <input>
+let workMoneyInputEle = document.getElementById("money_input");
+
+// 근무 시간 입력 <input>
+let workTimeInputEle = document.getElementById("time_input");
+
+// 근무 & 시급 입력 <div> 박스
+let workTimeBox = document.getElementById("work_time_money_box");
+
+// 시급  <label>
+let moneyLabel = document.getElementById("money_label_id");
+
+// 근무시간  <label>
+let workLabel = document.getElementById("time_label_id");
 
 // 모달창 일정 등록 버튼
 let calSubmitBtn = document.getElementById('calSubmitBtn');

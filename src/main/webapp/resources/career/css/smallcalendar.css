@@ -104,20 +104,34 @@ hr{ margin-top: 0;}
     align-items: center;
 }
 
-/* 시급 입력창 <label> */
-#work_money_label{
-	/* margin-right: 10px; */
+/* 시급 & 하루 근무시간 전체 담는 <div> */
+#work_time_money_box {
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+	/* border: 3px solid red; */
 }
 
-/* 시급 입력창 <input> */
-#work_money_label #work_money {
+/* 시급 & 하루 근무시간 <input> */
+.work_time_money_input {
+	width: 100px;
+	border: 3px solid royalblue;
+	border-radius: 20px;
+	padding: 0 10px;
 	margin-left: 10px;
-	border: 1px solid black;
 }
 
-/* 시급 입력창 <input> 클릭했을 때 */
-#work_money_label #work_money:focus {
+/* 시급 & 하루 근무시간 <input> 클릭시 */
+.work_time_money_input:focus {
 	outline: none;
+}
+
+/* 시급 & 하루 근무시간 <label> */
+.work_time_money_label {
+	/* border: 1px solid red; */
+	margin-left: 20px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 /* 일정 추가 모달창 title 제목 */

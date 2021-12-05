@@ -18,8 +18,7 @@
         <!-- <div> -->
             <div id="top_title"></div>
             <div id="top_btn">
-                <!-- <button type="button" class="insert_btn_class">저장</button> -->
-                <button type="button" class="insert_btn_class" id="insert_evnet_btn">일정추가</button>
+                <!-- <button type="button" class="insert_btn_class" id="insert_evnet_btn">일정추가</button> -->
             </div>
         <!-- </div> -->
     </section>
@@ -39,16 +38,13 @@
 	                        <div id="labelBox">
 	                            <!--  style="display: none;" -->
 								<label id="goLabel" class="modalTypeLabel" for="go">지원</label>
-	                            <input class="typeRadio" value="G" type="radio" id="go" name="test" style="display: none;">
+	                            <input class="typeRadio" value="G" type="radio" id="go" name="test">
 	                            
 	                            <label id="meetLabel" class="modalTypeLabel" for="meet">면접</label>
-	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test" style="display: none;">
+	                            <input class="typeRadio" value="M" type="radio" id="meet" name="test">
 	
-	                            <label id="workLabel" class="modalTypeLabel" for="work">근무</label>
-	                            <input class="typeRadio" value="W" type="radio" id="work" name="test" style="display: none;">
-	
-	                            <label id="otherLabel" class="modalTypeLabel" for="other">기타</label>
-	                            <input class="typeRadio" value="O" type="radio" id="other" name="test" style="display: none;">
+<!-- 	                            <label id="workLabel" class="modalTypeLabel" for="work">근무</label>
+	                            <input class="typeRadio" value="W" type="radio" id="work" name="test"> -->
 	                        </div>
 	                    </div>
 	                </div>
@@ -56,9 +52,16 @@
 	                        <!-- 제목 -->
 	                        <div class="mb-3" id="insertTitleBox">
 	                            <div id="insertTitleDiv">
-	                            <label for="message-text" class="col-form-label" style="text-align: left;">제목</label>
-	                            <label for="work_money" id="work_money_label" style="display: none;">시급<input type="text" id="work_money" placeholder="숫자만 입력"></label>
-	                            <!-- style="display: none;" -->
+	                            	<div><label for="message-text" class="col-form-label" style="text-align: left;">제목</label></div>
+	                            	<div id="work_time_money_box">
+	                            		<label class="work_time_money_label" for="money_input" id="money_label_id">시급
+	                            			<input id="money_input" class="work_time_money_input" type="text" placeholder="숫자만입력">
+	                            		</label>
+	                            		
+	                            		<label class="work_time_money_label" for="time_input" id="time_label_id">일 근무시간
+	                            			<input id="time_input" class="work_time_money_input" type="text" placeholder="숫자만입력">
+	                            		</label>
+	                            	</div>
 	                            </div>
 	                            <!-- <div id="insertTitleBox_input">제목</div> -->
 	                            <hr>
@@ -151,9 +154,10 @@
             <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
             <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
         </div>
-        <div>지원횟수 면접횟수 --> chart.js</div>
-        <div>근무관련 데이터 --> chart.js</div>
-        <div>경력관련 데이터 --> chart.js</div>
+        <div id="side_calendar_img_box">
+			<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png">
+			<img src="${pageContext.request.contextPath}/resources/assets/images/calender_logo.png">
+        </div>
     </div>
        
     <div id='calendar'></div><!-- 얘는 고정값으로 가야한다. -->
@@ -170,12 +174,18 @@
     </div>
     <div id="allChartBox">
         <div id="firstChartBox">
-            <div id="needChartDiv"><canvas id="needChart"></canvas></div>
+            <div id="needChartDiv">
+           		<canvas id="needChart"></canvas>
+            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="needChart_alterImage" style="width: 400px">
+           	</div>
             <div id="careerChartDiv"><canvas id="careerChart"></canvas></div>
         </div>
 
         <div id="secondChartBox">
-            <div id="workChartDiv"><canvas id="workChart"></canvas></div>
+            <div id="workChartDiv">
+            	<canvas id="workChart"></canvas>
+            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="workChart_alterImage" style="width: 400px">
+           	</div>
             <div id="moneyTabel">
                 <table id="moneyTabelReal">
 <!--                     <tr id="applekiwi">
@@ -204,7 +214,7 @@
     </div>
 </div>
 <script>
-	let userId = "user01";
+	let userId = "test01";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

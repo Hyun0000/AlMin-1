@@ -1,6 +1,7 @@
 /* chart 전체를 담는 <div> */
 #chartBox{
-	border: 1px solid red;
+	border: 5px solid #ADC4FB;
+	border-radius : 30px;
 	width: 70%;
 	padding: 30px;
 }
@@ -49,8 +50,10 @@ input[type=number] {
     border-bottom: 5px solid royalblue;
     box-sizing: border-box;
     padding-bottom: 10px;
-    padding-right: 10px;
+    padding-right: 30px;
     padding-left: 50px;
+    margin-top: 20px;
+    margin-right: 20px;
 }
 
 /* 년 & 월 <input> 옆의 텍스트 */
@@ -90,7 +93,7 @@ input[type=number] {
 
 /* 구직&면접 차트 */
 #needChartDiv{
-    border: 1px solid black;
+    border: 1px solid #687DE8;
     width: 400px;
     height: 400px;
     display: inline-block;
@@ -98,14 +101,14 @@ input[type=number] {
 
 /* 근무 차트 */
 #workChartDiv{
-    border: 1px solid black;
+    border: 1px solid #687DE8;
     width: 400px;
     height: 400px;
 }
 
 /* 경력 차트 */
 #careerChartDiv{
-    border: 1px solid black;
+    border: 1px solid #687DE8;
     width: 400px;
     /* height: 300px; */
     height: 400px;
@@ -114,8 +117,9 @@ input[type=number] {
     margin-top: 50px;
 }
 
+/* 월 급여 <table>을 담는 <div>  */
 #secondChartBox #moneyTabel {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-collapse: collapse;
     width: 100%;
     /* width: 500px;
@@ -123,6 +127,11 @@ input[type=number] {
     text-align: center;
     /* box-sizing: border-box; */
     margin-top: 50px;
+}
+
+/* 월 급여 <table> */
+#moneyTabelReal {
+	width: 100%;
 }
 
 #secondChartBox #moneyTabel .firstTd {
@@ -135,11 +144,15 @@ input[type=number] {
 
 #secondChartBox table td {
     border: 1px solid black;
-    padding: 20px;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
     /* height: 100px;
     width: 50px; */
 }
 
 .tableColName {
     background-color: royalblue;
+    color : white;
+    font-weight: bolder;
 }

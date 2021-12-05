@@ -25,8 +25,24 @@ function calSubmit() {
 
     // 라디오 버튼 element 유효성 검사
     if (fourbtnEleVal === "") {
-        alert("일정의 종류를 선택해주세요");
-        submitBool = false; return false;
+    	if(fourbtnEleVal === 'G' || fourbtnEleVal === 'M' || selectCal === "NG" || selectCal === "") {
+	        alert("일정의 종류를 선택해주세요");
+	        submitBool = false; return false;
+    	}
+    }
+    
+    // 시급 정규식 검사
+    if(!workTimeMoneyReg.test(workMoneyInputEle.value)) {
+    	console.log(workTimeMoneyReg.test(workMoneyInputEle));
+    	alert("시급을 정확히 입력해주세요");
+    	submitBool = false; return false;
+    }
+    
+    // 근무시간 정규식 검사
+    if(!workTimeMoneyReg.test(workTimeInputEle.value)) {
+    	console.log(workTimeMoneyReg.test(workTimeInputEle));
+    	alert("시간을 정확히 입력해주세요");
+    	submitBool = false; return false;
     }
 
     // 제목 입력 유효성 검사
@@ -61,16 +77,17 @@ function calSubmit() {
 		    console.log("fourbtnEleVal : " + fourbtnEleVal);
 			sendRequest("POST", "calender", JSON.stringify(insertParam), afterCalInsert);
 			// sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
-		} else if(fourbtnEleVal === 'W') {
+		} else {
 			let insertWorkParam = {
 					workMemberId : userId,
 					workTitle : titleEle.value,
-					workTime : "8", // 우선 이걸로 고정값
+					workTime : workTimeInputEle.value,
 					workColor : colorEle.value,
 					workTimeStart : allStart,
 					workTimeEnd : allEnd,
-					workMoney : "9500", // 우선 이걸로 고정값
-					workType : fourbtnEleVal
+					workMoney : workMoneyInputEle.value,
+					workType : "W"
+					/*workType : fourbtnEleVal*/
 			}
 		    console.log(userId);
 		    console.log(JSON.stringify(insertWorkParam));
@@ -120,7 +137,7 @@ function afterCalInsert() {
 				
 				if(fourbtnEleVal === "G" || fourbtnEleVal === "M") {
 					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 등록 후 다시 전체 일정 data 가져오기
-				} else if(fourbtnEleVal === "W") {
+				} else {
 					sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 등록 후 다시 전체 일정 data 가져오기
 				}
 			} else {
@@ -158,7 +175,7 @@ function calDelete() {
     		console.log(deleteParam);
     	    console.log(JSON.stringify(deleteParam));
     		sendRequest("DELETE", "calender", JSON.stringify(deleteParam), afterCalDelete);
-    	} else if(selectCal === "W") {
+    	} else {
     		let deleteWorkParam = {
     				workMemberNo : eventGroupId,
     				workMemberId : userId
@@ -201,7 +218,7 @@ function afterCalDelete() {
 					let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
 					evnets.splice(deleteEventObj, 1);
 					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 등록 후 다시 전체 일정 data 가져오기
-				} else if(selectCal === "W") {
+				} else {
 					// 삭제된 일정을 events 배열에서 삭제
 					let deleteEventObj = evnets.findIndex(obj => obj.title === titleEle.value);
 					evnets.splice(deleteEventObj, 1);
@@ -260,8 +277,22 @@ function calUpdate() {
     	    console.log(updateParam);
     	    console.log(JSON.stringify(updateParam));
     	    sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
-    	} else if(selectCal === "W") {
-    		// 근무 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 시급)
+    	} else {
+    	    // 시급 정규식 검사
+    	    if(!workTimeMoneyReg.test(workMoneyInputEle.value)) {
+    	    	console.log(workTimeMoneyReg.test(workMoneyInputEle));
+    	    	alert("시급을 정확히 입력해주세요");
+    	    	submitBool = false; return false;
+    	    }
+    	    
+    	    // 근무시간 정규식 검사
+    	    if(!workTimeMoneyReg.test(workTimeInputEle.value)) {
+    	    	console.log(workTimeMoneyReg.test(workTimeInputEle));
+    	    	alert("시간을 정확히 입력해주세요");
+    	    	submitBool = false; return false;
+    	    }
+    	    
+    		// 근무 일정 수정(받는 값 : 일정 번호(ID), 유저 아이디, 일정 제목, 일정 색상, 시작일(시간), 종료일(시간), 시급, 일 근무시간)
     		let updateWorkParam = {
     				workMemberNo : eventGroupId,
     				workMemberId : userId,
@@ -269,7 +300,8 @@ function calUpdate() {
     				workColor : colorEle.value,
     				workTimeStart : allStart,
     				workTimeEnd : allEnd,
-    				workMoney : "10000" // 임시 값
+    				workTime : workTimeInputEle.value,
+    				workMoney : workMoneyInputEle.value
     		}
     	    console.log(updateWorkParam);
     	    console.log(JSON.stringify(updateWorkParam));
@@ -307,7 +339,7 @@ function afterCalUpdate() {
 				
 				if(selectCal === "NG" || selectCal === "") {
 					sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 수정 후 다시 전체 구직 일정 data 가져오기
-				} else if(selectCal === "W") {
+				} else {
 					sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 수정 후 다시 전체 근무 일정 data 가져오기
 				}
 			} else {

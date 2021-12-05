@@ -1,3 +1,12 @@
+// 구직 chart 담는 <div>
+let needChartBox = document.getElementById('needChartDiv');
+
+// 근무 chart 담는 <div>
+let workChartBox = document.getElementById('workChartDiv');
+
+// 경력 chart 담는 <div>
+let careerChartBox = document.getElementById('careerChartDiv');
+
 // 날짜 조회 버튼
 let dateInputBtn = document.getElementById('date_input_btn');
 
@@ -16,12 +25,6 @@ yearInput.value = date.getFullYear();
 //년&월 입력칸에 현재 날짜 값 넣기(년)
 monthInput.value = date.getMonth() + 1;
 
-// 년도 & 월에 맞는 data 가져오는 event
-dateInputBtn.onclick = () => {
-    console.log(yearInput.value + " : " + monthInput.value);
-    // ajax 코드 필요
-}
-
 //ajax를 통해 GET method로 보낼 path
 // 구직 & 면접
 let getNeedChartPath = "/almin/careers/needchart/" + userId + "?year=" + date.getFullYear() + "&month=" + (date.getMonth() + 1);
@@ -31,6 +34,18 @@ console.log("getNeedChartPath : " + getNeedChartPath);
 let getWorkChartPath = "/almin/careers/workchart/" + userId + "?year=" + date.getFullYear() + "&month=" + (date.getMonth() + 1);
 console.log("getWorkChartPath : " + getWorkChartPath);
 
+// 년도 & 월에 맞는 data 가져오는 event
+dateInputBtn.onclick = () => {
+    console.log(yearInput.value + " : " + monthInput.value);
+    // ajax 코드 필요
+    getNeedChartPath = "/almin/careers/needchart/" + userId + "?year=" + yearInput.value + "&month=" + (monthInput.value);
+    console.log("경력 조회 : getNeedChartPath" + " : " + getNeedChartPath);
+    
+    getWorkChartPath = "/almin/careers/workchart/" + userId + "?year=" + yearInput.value + "&month=" + (monthInput.value);
+    console.log("근무 조회 : getNeedChartPath" + " : " + getNeedChartPath);
+    
+    sendRequest("GET", getNeedChartPath, null, afterNeedChart);
+}
 
 // 좌측 사이드 버튼을 클릭하면 chart 화면으로 전환
 careerCalButn.onclick = () => {
@@ -38,7 +53,7 @@ careerCalButn.onclick = () => {
 	console.log(777);
 	calDiv.style.display = 'none';
 	chartDiv.style.display = 'block';
-	// topCalTitle.innerText = "우리의 민족!!! 칠갑산님의 MyChart";
+	topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 MyChart";
 	
 	// 구직 data 가져오기
 //	if(chartLoadVarNum == 0) {
@@ -59,6 +74,8 @@ function afterNeedChart() {
 		if (httpRequest.status === 200) {
 			let needCalChartData = JSON.parse(httpRequest.responseText);
 			console.log(needCalChartData);
+			
+			 needchartArr = [];
 			
 			for (var i = 0; i < needCalChartData.length; i++) {
 				needchartArr[i] = needCalChartData[i].COUNT_TYPE;
@@ -87,6 +104,9 @@ function afterWorkChart() {
 			let workCalChartData = JSON.parse(httpRequest.responseText);
 			console.log(workCalChartData);
 			
+			workChartDay = [];
+			workChartTitle = [];
+			
 			// 근무 chart에 data 및 색깔널기
 			for (var i = 0; i < workCalChartData.length; i++) {
 				
@@ -103,7 +123,8 @@ function afterWorkChart() {
 			
 			// let tabelEle = document.getElementById('moneyTabelReal');
 			
-			while (moneyTable.hasChildNodes()) {	// 부모노드가 자식이 있는지 여부를 알아낸다
+			// <table> 초기화
+			while (moneyTable.hasChildNodes()) {
 				moneyTable.removeChild(moneyTable.firstChild);
 			}
 
@@ -139,7 +160,7 @@ function afterWorkChart() {
 					// 월급이 담기는 <td>
 					let secondTdEle = document.createElement('td');
 					secondTdEle.setAttribute('class', 'secondTd');
-					secondTdEle.innerText = workCalChartData[i].WORK_TIME * workCalChartData[i].WORKDAY * workCalChartData[i].WORK_MONEY;
+					secondTdEle.innerText = workCalChartData[i].WORK_TIME * workCalChartData[i].WORKDAY * workCalChartData[i].WORK_MONEY + "원";
 					trEle.appendChild(secondTdEle);
 				}
 			}
@@ -207,24 +228,37 @@ function loadChart() {
 	options: {
 	    plugins: {
 	        legend: {
-	            position: 'top',
+	            position: 'bottom'
 	        },
 	        title: {
 	            display: true,
-	            text: '지원 & 면접 횟수'
+	            text: '지원 & 면접 횟수',
+            	color : "black",
+        		padding: 20,
+            	font : {
+            		weight: 'bolder',
+            		size : 20
+    			},
 	        }
 	    },
 	    scales: {
 	        y: {
 	            beginAtZero: true,
-	            position: 'none'
-	        }
+	            position: 'none',
+	            grid:{ display:false} // 격자 지우기
+	        },
 	    }
-	    // , events : () => {
-	    //     alert(123);
-	    // } ajax 사용
 	}
 	});
+	
+	// 차트에 해당하는 data 유무에 따라 보여줄 객체 선택
+	if(needchartArr.length === 0) {
+		document.getElementById('needChart').style.display = "none";
+		document.getElementById('needChart_alterImage').style.display = "block";
+	} else {
+		document.getElementById('needChart').style.display = "block";
+		document.getElementById('needChart_alterImage').style.display = "none";
+	}
 //============================================================================================================
 	// 근무 chart
 	// const workChart = new Chart(workCt, {
@@ -244,23 +278,39 @@ function loadChart() {
 	options: {
 	    plugins: {
 	        legend: {
-	            position: 'top',
+	            position: 'bottom'
 	        },
 	        title: {
 	            display: true,
-	            text: '근무 일수'
+	            text: '근무 일수',
+            	color : "black",
+        		padding: 20,
+            	font : {
+            		weight: 'bolder',
+            		size : 20
+    			},
 	        }
 	    },
 	    scales: {
 	        y: {
 	            beginAtZero: true,
-	            position: 'none'
+	            position: 'none',
+	            grid:{ display:false} // 격자 지우기
 	        }
 	    },
 	    cutout: "60%", // 도넛 원형 크기 설정
 	    borderRadius: 5 // 그래프 끝 radius 설정
 	}
 	});
+	
+	// 차트에 해당하는 data 유무에 따라 보여줄 객체 선택
+	if(workChartDay.length === 0) {
+		document.getElementById('workChart').style.display = "none";
+		document.getElementById('workChart_alterImage').style.display = "block";
+	} else {
+		document.getElementById('workChart').style.display = "block";
+		document.getElementById('workChart_alterImage').style.display = "none";
+	}
 // ============================================================================================================
 	// 경력 chart
 	// const careerChart = new Chart(careerCt, {
@@ -295,17 +345,24 @@ function loadChart() {
 	    scales: {
 	        y: {
 	            beginAtZero: true,
-	            position: 'none'
+	            position: 'none',
+	            grid:{ display:false} // 격자 지우기
 	        }
 	    },
 	    plugins: {
 	        legend: {
-	            position: 'top'
+	            position: 'bottom'
 	            // display: false // (label: '# of Votes') 지우기
 	        },
 	        title: {
 	            display: true,
-	            text: '경력'
+	            text: '경력',
+            	color : "black",
+        		padding: 20,
+            	font : {
+            		weight: 'bolder',
+            		size : 20
+    			},
 	        }
 	    }
 	}

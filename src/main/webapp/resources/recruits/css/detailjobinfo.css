@@ -128,35 +128,56 @@
     z-index: 1;
     /* 스크롤 만들기 */
     overflow: auto;
+    
+    /* 임시 주석 */
+    /* display: none; */
 }
 
 /* 후기 입력창 전체를 감싸는 <div> & 모달창 콘텐츠 */
 #comments_insert_box{
-	border: 3px solid red;
-    width: 1300px;
+	border: 3px solid royalblue;
+	border-radius: 30px;
+    width: 1100px;
     /* height: 100%; */
-    margin: 0 auto;
+    padding: 20px 0;
+    margin: 50px auto;
     box-sizing: border-box;
     position: relative;
     z-index: 2;
-    background-color: white;
+    /* background-color: white; */
+    
+    
+    color : white;
+    background-color: rgba(12,12,12,0.8);
 }
 
 /* 한줄 후기 <input>, 근로계약서를 담는 <div> 스타일 지정 */
 .comments_insert_top{
 	/* width: 1300px; */
     /* margin: 0 auto; */
-    border: 3px solid blue;
+    /* border: 3px solid blue; */
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* 한줄 후기 <input>을 감싸는  fieldset */
+/* 한줄 후기 <input>을 감싸는  <fieldset> */
 .comments_insert_top fieldset{
-	padding: 40px;
+	padding: 30px;
 	width: 1000px;
 	margin: 0 auto;
-	border: 1px solid red;
+	border: 3px solid royalblue;
+	border-radius: 30px;
+	
+	color : white;
+}
+
+/* 한줄 후기 <input>을 감싸는  <legend> */
+#comments_insert_legend {
+	border: 3px solid royalblue;
+	padding : 10px;
+	padding-left: 30px;
+	
+	color : white;
 }
 
 /* 한줄 후기 <input> 스타일 지정 */
@@ -166,15 +187,18 @@
     line-height: 65px;
     resize: none;
     padding: 20px;
+    border: 1px solid black;
     box-sizing: border-box;
     font-size: 1.2rem;
 }
 
 /* 근로계약서 radio 버튼을 담는 <div> */
 #contract_box {
-	border: 1px solid pink;
+	border: 5px solid pink;
 	padding: 20px;
 	box-sizing: border-box;
+	
+	color : white;
 }
 
 /* 근로계약서 작성 여부 제목 */
@@ -183,12 +207,31 @@
 	margin-right: 30px;
 	border-right: 1px solid yellow;
 	padding-right: 30px;
+	
+	color : white;
+}
+
+#radio_box {
+	margin-top: 25px;
+	display: flex;
+	align-items: center;
 }
 
 /* 근로계약서 radio 버튼에 대한 label */
 #contract_box label {
-	color: red;
+	color: black;
 	margin: 0 10px;
+	color : white;
+}
+
+.keyName {
+	border: 3px solid yellow;
+	border-radius: 30px;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
 }
 
 /* item을 drop하는 div 스타일 지정 */
@@ -197,7 +240,11 @@
     width: 1000px;
     margin: 0 auto;
     /* height: 150px; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    
+   	border: 3px solid royalblue;
+	border-radius: 30px;
+    
     box-sizing: border-box;
     
     margin-top: 30px;
@@ -213,7 +260,11 @@
     width: 1000px;
     margin: 0 auto;
     /* height: 150px; */
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    
+  	border: 3px solid skyblue;
+	border-radius: 30px;
+	
     box-sizing: border-box;
 
     margin-top: 30px;
@@ -225,7 +276,7 @@
 
 /* 각 item 스타일 지정 */
 .dragEle {
-    border: 1px solid black;
+    border: 1px solid white;
     padding: 5px;
     margin: 10px 10px;
 }
@@ -242,7 +293,8 @@
 /* 등록 버튼을 담는 <div> */
 #btnBox {
 	width: 1000px;
-    margin: 50px auto;
+    /* margin: 50px auto; */
+    margin: 30px auto;
     /* margin-top: 50px; */
     text-align: center;
 }

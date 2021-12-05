@@ -35,7 +35,7 @@
 	href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 .d-toggle {
@@ -204,19 +204,21 @@
 	<!-- 후기 조회(select) -->
 	<!-- 한줄 후기  & 근로계약서 -->
 	<button id="insert_modal_showBtn">후기 등록</button>
-	<div id="comments_insert_modal_back" style="display: none;">
+	<div id="comments_insert_modal_back">
 		<div id="comments_insert_box">
 			<div class="comments_insert_top">
 				<fieldset>
-					<legend>한줄 후기</legend>
+					<legend style="color: white;" id="comments_insert_legend">한줄 후기</legend>
 					<div id="contract_box">
 						<input name="ccContent" id="commentsLine"
 							placeholder="100자 이내로 작성해주세요(공백포함)">
-						<h3>근로계약서 작성 여부</h3>
-						<label for="contract_y">작성</label> <input type="radio" value="Y"
-							name="ccContract" id="contract_y"> <label
-							for="contract_n">미작성</label> <input type="radio" value="N"
-							name="ccContract" id="contract_n">
+						<div id="radio_box">
+							<h3>근로계약서 작성 여부</h3>
+							<label for="contract_y">작성</label>
+							<input type="radio" value="Y" name="ccContract" id="contract_y">
+							<label for="contract_n">미작성</label>
+							<input type="radio" value="N" name="ccContract" id="contract_n">
+						</div>
 					</div>
 				</fieldset>
 			</div>
@@ -226,24 +228,22 @@
 					<c:set var="dropNum" value="${dropNum + 1}" />
 					<c:set var="dragNum" value="${dragNum + 1}" />
 
-					<div id="dropzone_${dropNum}" class="dropzoneClass"
-						ondrop="drop(event)" ondragover="allowDrop(event)">
-						<c:choose>
-							<c:when test="${map.key == 1}">장점</c:when>
-							<c:when test="${map.key == 2}">단점</c:when>
-							<c:when test="${map.key == 3}">조건</c:when>
-							<c:when test="${map.key == 4}">분위기</c:when>
-							<c:when test="${map.key == 5}">급여</c:when>
-						</c:choose>
+					<c:choose>
+						<c:when test="${map.key == 1}"><div class="keyName">장점</div></c:when>
+						<c:when test="${map.key == 2}"><div class="keyName">단점</div></c:when>
+						<c:when test="${map.key == 3}"><div class="keyName">조건</div></c:when>
+						<c:when test="${map.key == 4}"><div class="keyName">분위기</div></c:when>
+						<c:when test="${map.key == 5}"><div class="keyName">급여</div></c:when>
+					</c:choose>
+					
+					<div id="dropzone_${dropNum}" class="dropzoneClass" ondrop="drop(event)" ondragover="allowDrop(event)">
 					</div>
 
 					<div id="dragzone_${dragNum}" class="dragzoneClass">
 						<c:forEach var="condition" items="${map.value}">
 							<c:set var="idNum" value="${idNum + 1}" />
-							<div id="drag_${idNum}" class="dragEle" draggable="true"
-								ondragstart="drag(event);">
-								<span class="keyword">${condition}</span><span class="xMark"
-									onClick="deleteX()">&times;</span>
+							<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
+								<span class="keyword">${condition}</span><span class="xMark" onClick="deleteX()">&times;</span>
 							</div>
 						</c:forEach>
 					</div>

@@ -22,7 +22,7 @@
 	<!-- 근무 일정 수정 -->
 	<update id="updateWorkCal" parameterType="MemberWork">
 		UPDATE MEMBER_WORK SET WORK_TITLE = #{workTitle}, WORK_COLOR = #{workColor}, WORK_TIME_START = TO_DATE(#{workTimeStart},'yyyy-mm-dd hh24:mi:ss'),
-		WORK_TIME_END = TO_DATE(#{workTimeEnd},'yyyy-mm-dd hh24:mi:ss'), WORK_MONEY = #{workMoney}
+		WORK_TIME_END = TO_DATE(#{workTimeEnd},'yyyy-mm-dd hh24:mi:ss'), WORK_MONEY = #{workMoney}, WORK_TIME = #{workTime}
 		WHERE WORK_MEMBER_NO = #{workMemberNo} AND WORK_MEMBER_ID = #{workMemberId}
 	</update>
 	
