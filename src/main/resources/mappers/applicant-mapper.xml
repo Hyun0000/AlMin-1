@@ -9,12 +9,13 @@
 		<result property="jobDistrictNo" column="JOB_DISTRICT_NO" />
 		<result property="educationNo" column="EDUCATION_NO" />
 		<result property="careersNo" column="CAREERS_NO" />
+		<result property="resumeDate" column="RESUME_DATE" />
 	</resultMap>
 
 	<select id="listApplicant" resultMap="ApplicantResultMap">
 		select
 		r.RESUME_NO,m.MEMBER_ID,r.RESUME_TITLE,r.JOB_DISTRICT_NO,r.EDUCATION_NO,r.CAREERS_NO
-		from member_resume r join member m on r.member_id=m.member_id and r.RESUME_PUBLIC_YN='Y'
+		from member_resume r join member m on r.member_id=m.member_id and r.RESUME_PUBLIC_YN='Y' ORDER BY RESUME_DATE DESC
 	</select>
 
 	<select id="searchApplicant" resultMap="ApplicantResultMap"

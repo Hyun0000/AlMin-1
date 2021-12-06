@@ -25,7 +25,8 @@
 	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/assets/css/almin.css"/>">
 
 <style>
 .search-bg {
@@ -105,27 +106,31 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="single-feature mb-4 mb-lg-0">
-						<h4>직종별 알바</h4>
-						<p class="py-3">외식업부터 서비스업까지, 원하는 직종별로 찾아보는 알바의 민족</p>
-						<a href="#" class="secondary-btn">둘러보기<span
-							class="flaticon-next"></span></a>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="single-feature mb-4 mb-lg-0">
-						<h4>지역별 알바</h4>
+						<h4>알바 캘린더</h4>
 						<p class="py-3">
-							전국팔도 어디든!<br>지역별로 찾아보는 알바의 민족
+							간편 알바 일정 확인도 알바의 민족!<br>한눈에 보는 나의 알바 달력~
 						</p>
 						<a href="#" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
 					</div>
 				</div>
 				<div class="col-lg-4">
+					<div class="single-feature mb-4 mb-lg-0">
+						<h4>이력서 등록</h4>
+						<p class="py-3">
+							일거리를 찾는 알바의 민족이라면?<br>이력서 등록하고 간편 지원하자!
+						</p>
+						<a href="#" class="secondary-btn">등록하기<span
+							class="flaticon-next"></span></a>
+					</div>
+				</div>
+				<div class="col-lg-4">
 					<div class="single-feature">
-						<h4>대상별 알바</h4>
-						<p class="py-3">내가 누구든 간에~ 학생, 주부, 외국인도 찾아보는 알바의 민족</p>
-						<a href="#" class="secondary-btn">둘러보기<span
+						<h4>공고 등록</h4>
+						<p class="py-3">
+							가족을 찾는 구인의 민족이라면?<br>공고 등록하고 쉽게 구인하자!
+						</p>
+						<a href="#" class="secondary-btn">등록하기<span
 							class="flaticon-next"></span></a>
 					</div>
 				</div>
@@ -133,6 +138,103 @@
 		</div>
 	</section>
 	<!-- Feature Area End -->
+
+	<!-- Category Area Starts -->
+	<section class="category-area section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-top text-center">
+						<h2>직종별로 보는 알바</h2>
+						<p>어떤 일을 해볼까요?하나씩 구경해보세요!</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=8&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat1.png"
+							alt="IT/미디어">
+						<h4>IT/미디어</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=11&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat2.png"
+							alt="배달/운전">
+						<h4>배달/운전</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=6&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat3.png"
+							alt="고객상담">
+						<h4>고객상담</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=7&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat4.png"
+							alt="생산/건설/인력">
+						<h4>생산/건설/인력</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=4&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4 mb-lg-0">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat5.png"
+							alt="서비스">
+						<h4>서비스</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=9&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4 mb-lg-0">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat6.png"
+							alt="교육/강사/학원">
+						<h4>교육/강사/학원</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=10&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center mb-4 mb-md-0">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat7.png"
+							alt="디자인">
+						<h4>디자인</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-6"
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=12&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					<div class="single-category text-center">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/images/cat8.png"
+							alt="병원/간호">
+						<h4>병원/간호</h4>
+						<h5>250개 구인공고</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category Area End -->
 
 	<!-- Brand Area Starts-->
 	<section class="section-padding">
@@ -191,94 +293,6 @@
 	</section>
 	<!-- Brand Area  End-->
 
-	<!-- Category Area Starts -->
-	<section class="category-area section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-top text-center">
-						<h2>지역별로 보는 알바</h2>
-						<p>우리 집 주변에는 어떤 알바들이 있지?</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Seoul_200px.png"
-							alt="경기/서울">
-						<h4>경기/서울</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Sea_200px.png"
-							alt="강원도">
-						<h4>강원도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_apt_200px.png"
-							alt="충청북도">
-						<h4>충청북도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Taean_200px.png"
-							alt="충청남도">
-						<h4>충청남도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4 mb-lg-0">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Andong_200px.png"
-							alt="경상북도">
-						<h4>경상북도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4 mb-lg-0">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Geoje_200px.png"
-							alt="경상남도">
-						<h4>경상남도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center mb-4 mb-md-0">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_anywhere_200px.png"
-							alt="전라북도">
-						<h4>전라북도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="single-category text-center">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/images/place_Bosung_200px.png"
-							alt="전라남도">
-						<h4>전라남도</h4>
-						<h5>250개 구인공고</h5>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Category Area End -->
 
 	<!-- Jobs Area Starts -->
 	<section class="jobs-area section-padding3">
@@ -311,23 +325,19 @@
 							aria-labelledby="home-tab">
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
-									<h4>저희 집 바퀴벌레 잡아주실 분</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> 서울 광진구
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> 경력자 우대/각종 약 제공/인센티브
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> 2021-11-15
-											</h5></li>
-									</ul>
+									<c:forEach var="item" begin="0" end="0" items="${recruits}">
+										<h4>${item.recruitTitle}</h4>
+										<ul class="mt-4">
+											<li><h5>
+													<i class="fa fa-clock-o"></i>${item.recruitDate}
+												</h5></li>
+										</ul>
+									</c:forEach>
 								</div>
 								<div class="job-img align-self-center">
-									<img
+									<%-- 									<img
 										src="${pageContext.request.contextPath}/resources/assets/images/job1.jpg"
-										alt="job">
+										alt="job"> --%>
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn1">지원하기</a>
@@ -338,23 +348,19 @@
 							aria-labelledby="profile-tab">
 							<div class="single-job mb-4 d-lg-flex justify-content-between">
 								<div class="job-text">
-									<h4>밝고 눈치빠른 인재입니다.</h4>
-									<ul class="mt-4">
-										<li class="mb-3"><h5>
-												<i class="fa fa-map-marker"></i> 서울 동작구
-											</h5></li>
-										<li class="mb-3"><h5>
-												<i class="fa fa-pie-chart"></i> 알바 경력 다수/하버드대학교 재학중/25
-											</h5></li>
-										<li><h5>
-												<i class="fa fa-clock-o"></i> 2021-11-14
-											</h5></li>
-									</ul>
+									<c:forEach var="item" begin="0" end="0" items="${applicants}">
+										<h4>${item.resumeTitle}</h4>
+										<ul class="mt-4">
+											<li><h5>
+													<i class="fa fa-clock-o"></i>${item.memberId}
+												</h5></li>
+										</ul>
+									</c:forEach>
 								</div>
 								<div class="job-img align-self-center">
-									<img
+									<%-- 									<img
 										src="${pageContext.request.contextPath}/resources/assets/images/job2.jpg"
-										alt="job">
+										alt="job"> --%>
 								</div>
 								<div class="job-btn align-self-center">
 									<a href="#" class="third-btn job-btn2">채용하기</a>

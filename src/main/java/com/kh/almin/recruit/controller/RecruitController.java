@@ -71,7 +71,7 @@ public class RecruitController {
 	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {
 		likeRecruit.setMemberId("sy111k2");
 		recruitService.dislikeRecruit(likeRecruit);
-		return "redirect:/recruits/testmember";
+		return "redirect:/recruits/myrecruits";
 	}
 
 	@PostMapping(value = "/like")

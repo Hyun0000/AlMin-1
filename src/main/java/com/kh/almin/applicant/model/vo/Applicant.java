@@ -1,5 +1,7 @@
 package com.kh.almin.applicant.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -22,4 +24,5 @@ public class Applicant {
 	private int jobDistrictNo;
 	private int educationNo;
 	private int careersNo;
+	private Date resumeDate;
 }
