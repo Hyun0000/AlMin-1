@@ -8,7 +8,6 @@
 		<result property="memberName" column="MEMBER_NAME" />
 		<result property="memberPw" column="MEMBER_PW" />
 		<result property="memberPhone" column="MEMBER_PHONE" />
-		<result property="memberAddress" column="MEMBER_ADDRESS" />
 		<result property="memberBirth" column="MEMBER_BIRTH" />
 		<result property="memberEmail" column="MEMBER_EMAIL" />
 		<result property="memberGender" column="MEMBER_GENDER" />
@@ -28,7 +27,7 @@
 	</resultMap>
 
 	<select id="listMember" resultMap="MemberResultMap">
-		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
+		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_BIRTH,
 		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
 		WHERE MEMBER_TYPE=1
 	</select>
@@ -71,12 +70,6 @@
 		SELECT COUNT(*) FROM MEMBER
 		WHERE TRIM(MEMBER_ID) = #{memberId}
 	</select>
-	<!-- 패스워드 체크
-	<select id="passChk" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
-		WHERE MEMBER_ID = #{memberId}
-		  AND MEMBER_PW = #{memberPw}
-	</select> -->
     
     <!-- 로그인 -->
     <!-- password는 암호화로 인해 주석처리 -->
