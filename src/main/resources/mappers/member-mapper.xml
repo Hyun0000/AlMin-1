@@ -41,17 +41,17 @@
 	<!-- 개인회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER (MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
-			MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH, MEMBER_EMAIL,
+			MEMBER_PHONE, MEMBER_BIRTH, MEMBER_EMAIL,
 			MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE)
-		values (#{memberId},#{memberType}, #{memberPw}, #{memberName}
-			, #{memberPhone}, #{memberAddress}, #{memberBirth}, #{memberEmail},
+		values (#{memberId},'1', #{memberPw}, #{memberName}
+			, #{memberPhone}, #{memberBirth}, #{memberEmail},
 			#{memberGender}, #{memberAge}, sysdate )<!-- sysdate 생략시 default 들어감 -->
 	</insert>
 	<!-- 기업회원가입 -->
 	<insert id="insertCompany" parameterType="Company">
 		insert into COMPANY (COMPANY_ID,COMPANY_TYPE,COMPANY_PW,COMPANY_TEL,COMPANY_NAME,
 			COMPANY_BOSS,COMPANY_EMAIL,COMPANY_ADDRESS,COMPANY_NUM)
-		values (#{companyId},#{companyType}, #{companyPwd}, #{companyTel}
+		values (#{companyId},'2', #{companyPwd}, #{companyTel}
 			, #{companyName}, #{companyBoss}, #{companyEmail}, #{companyAddress},
 			#{companyNum} )
 	</insert>

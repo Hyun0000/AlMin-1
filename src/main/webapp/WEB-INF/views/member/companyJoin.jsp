@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>알바의 민족 개인회원가입</title>
+<title>알바의 민족 기업회원가입</title>
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
 <link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<!-- 다음 주소찾기 -->
+			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 .agree_terms{/* 가입약관 */
   height: 300px;/* scroll하기 위해 추가 */
@@ -138,12 +140,12 @@
 				$("#pwChkCmt").html(html);
 			})
 			
-			$("#userName").on("keyup", function(){
-				var userName = $("#userName").val();
+			$("#bossName").on("keyup", function(){
+				var bossName = $("#bossName").val();
 				var html = "";
-				if(!namePattern.test(userName)){
+				if(!namePattern.test(bossName)){
 					 html+="영문 또는 한글만 입력해주세요.";
-				} $("#nmCmt").html(html);
+				} $("#bsCmt").html(html);
 			})
 			
 			$("#email_3").change(function(){
@@ -157,7 +159,60 @@
 							}
 					});
 			});
+			$("#companyNum").on("click",function(){
+				console.log("확인 클릭")
+				var json = {
+						  "businesses": [
+							    {
+							      "b_no": $("#firstNum").val()+$("#midNum").val()+$("#endNum").val(),
+							      "start_dt": "20000101",//TODO:YYYYMMDD 형태로 개업일 input칸 만들기
+							      "p_nm": $("#companyBoss").val(),
+							      "b_nm": $("#companyName").val()
+							    }
+							  ]
+							}
+				
+				
+				$.ajax({
+					url: "http://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=vUM20otkgSpGnI%2BSs%2BVr3%2FnILMSGkBIYZ2Nang%2FeMSgOAjaxLk5CJRXBRQSQm7atRnNOjJwT4yc2GMZRa16%2Bqg%3D%3D",
+					type: "post",
+					 // data : 서버(컨트롤러)로 보내는 데이터.
+					 // json데이터를 JSON.stringify를 이용하여 String으로 형변환
+					data: JSON.stringify(json),
+					//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+					contentType : "application/json; charset=utf-8",
+					success: function(data){
+						console.log(data.data[0]);
+						if(data.data[0].valid=="02"){
+							alert(data.data[0].valid_msg);
+						}else{
+							alert(data.data[0].valid_msg);
+							
+						}
+					//location.href ="${pageContext.request.contextPath}/main"
+				},
+				error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+
+							"\n"+"error:"+error);
+				}
+			});
+				});
 			
+			$("#findAddress").on("click",function(){
+			    new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+			            console.log(data);
+			           
+			            
+			           $("#zonecode").val(data.zonecode);
+			           $("#basicAddress").val(data.address);
+			            
+			            
+			        }
+			    }).open();
+			});
 			
 			$("#submit").on("click", function(){
 			
@@ -175,21 +230,27 @@
 				$("#userPass").focus();
 				return false;
 			}
-			if($("#userName").val()==""){
-				alert("성명을 입력해주세요.");
-				$("#userName").focus();
+			if($("#companyName").val()==""){
+				alert("회사/점포명을 입력해주세요.");
+				$("#companyName").focus();
 				return false;
 			}
-			var json = {'memberId':  $("#userId").val(),
-					'memberPw': $("#userPass").val(),
-					'memberName':$("#userName").val(),
-					'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
-					'memberBirth':$("#birthNum").val(),
-					'memberGender':$("#genderNum").val(),
-					'memberEmail':$("#email_1").val()+"@"+$("#email_2").val()
+			if($("#bossName").val()==""){
+				alert("대표자명을 입력해주세요.");
+				$("#bossName").focus();
+				return false;
+			}
+			var json = {'companyId':  $("#userId").val(),//TODO
+					'companyPwd': $("#userPass").val(),
+					'companyTel':$("#tel1").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val(),
+					'companyName':$("#companyName").val(),
+					'companyBoss':$("#bossName").val(),
+					'companyNum':$("#firstNum").val()+"-"+$("#midNum").val()+"-"+$("#endNum").val(),
+					'companyAddress':$("#basicAddress").val()+""+$("#detailAddress").val(),
+					'companyEmail':$("#email_1").val()+"@"+$("#email_2").val()
 					};
 			$.ajax({
-				url: "<%=request.getContextPath()%>/members",
+				url: "<%=request.getContextPath()%>/companies",
 				type: "post",
 				 // data : 서버(컨트롤러)로 보내는 데이터.
 				 // json데이터를 JSON.stringify를 이용하여 String으로 형변환
@@ -205,7 +266,7 @@
 					$("#login-state").show();//로그아웃, 마이페이지
 					$("#logout-state").hide();//로그인, 회원가입
 					}
-				location.href ="<%=request.getContextPath()%>/members/emails?Memberemail="+$("#email_1").val()+"@"+$("#email_2").val()
+				//location.href ="${pageContext.request.contextPath}/main"
 			},
 			error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+
@@ -219,7 +280,7 @@
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
-	<h2>개인회원가입</h2>
+	<h2>기업회원가입</h2>
 	<div class="inner">
     <div class="user_join_agree">									<!-- 여기서 this는 이벤트가 발생한 element, 즉, '일괄동의' 체크박스 -->
         <input type="checkbox" name="selectall" id="agreeChkAll" value="selectall"><label for="agreeChkAll"><b style="color:dodgerblue">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</b></label>
@@ -622,20 +683,13 @@
 		<td><input type="password" id="pwChk"><span id="pwChkCmt" class="cmt"></span></td>
 		</tr>
 		<tr>
-		<th><label for="userName">이름</label></th>
+		<th>전화번호</th>
 		<td>
-		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
-		<input type="text" id="userName" name="userName" maxlength="50" size = "10" required>
-		<span id="nmCmt" class="cmt"></span>
-		</td>
+		<input type="text" name="tel1" id="tel1" placeholder="010" maxlength="3" size = "3" required> -
+		<input type="text" name="tel2" id="tel2"  placeholder="0000" maxlength="4" size = "4" required> -
+		<input type="text" name="tel3" id="tel3"  placeholder="0000" maxlength="4" size = "4" required>
 		</tr>
-		<tr>
-		<th>주민등록번호</th>
-		<td>
-		<input type="text" id="birthNum" placeholder="예:931010" maxlength="6" size="6" required> -
-		<input type="text" id="genderNum" maxlength="1" size = "1" required>●●●●●●
-		</td>
-		</tr>
+		
 		<tr>
 		<th>이메일</th>
 		<td>
@@ -657,80 +711,48 @@
 		</td>
 		</tr>
 		<tr>
-		<th>휴대폰번호</th>
+		<th>사업자등록번호</th>
 		<td>
-		<input type="text" name="phone1" id="phone1" placeholder="010" maxlength="3" size = "3" required> -
-		<input type="text" name="phone2" id="phone2"  placeholder="0000" maxlength="4" size = "4" required> -
-		<input type="text" name="phone3" id="phone3"  placeholder="0000" maxlength="4" size = "4" required>
-		<div id="check"><a href="javascript:;" id="msg">인증번호 받기</a></div></td>
-<script>
-		Kakao.Link.createDefaultButton({
-			  container: '#msg',
-			  objectType: 'feed',
-			  content: {
-			    title: '오늘의 디저트',
-			    description: '아메리카노, 빵, 케익',
-			    imageUrl:
-			      'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
-			    link: {
-			      mobileWebUrl: 'https://developers.kakao.com',
-			      androidExecutionParams: 'test',
-			    },
-			  },
-			  itemContent: {
-			    profileText: 'Kakao',
-			    profileImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-			    titleImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-			    titleImageText: 'Cheese cake',
-			    titleImageCategory: 'Cake',
-			    items: [
-			      {
-			        item: 'Cake1',
-			        itemOp: '1000원',
-			      },
-			      {
-			        item: 'Cake2',
-			        itemOp: '2000원',
-			      },
-			      {
-			        item: 'Cake3',
-			        itemOp: '3000원',
-			      },
-			      {
-			        item: 'Cake4',
-			        itemOp: '4000원',
-			      },
-			      {
-			        item: 'Cake5',
-			        itemOp: '5000원',
-			      },
-			    ],
-			    sum: 'Total',
-			    sumOp: '15000원',
-			  },
-			  social: {
-			    likeCount: 10,
-			    commentCount: 20,
-			    sharedCount: 30,
-			  },
-			  buttons: [
-			    {
-			      title: '웹으로 이동',
-			      link: {
-			        mobileWebUrl: 'https://developers.kakao.com',
-			      },
-			    },
-			    {
-			      title: '앱으로 이동',
-			      link: {
-			        mobileWebUrl: 'https://developers.kakao.com',
-			      },
-			    },
-			  ]
-			});	
-</script>
+		<input type="text" id="firstNum" maxlength="3" size="3" required> -
+		<input type="text" id="midNum" maxlength="2" size = "2" required> -
+		<input type="text" id="endNum" maxlength="5" size = "5" required>
+		<button type="button" class="btn2" id="companyNum">확인</button>
+		</td>
 		</tr>
-		<tr><td></td><td><input type="text"><button type="button" class="btn2">확인</button></td></tr>
+		<tr>
+		<td></td>
+		<td><pre>※ 사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.
+※ 지점·지사의 경우, 해당 지점·지사의 사업자등록번호를 입력해 주세요.
+※ 인증이 되지 않을 경우 고객센터(T.1588-9351)로 문의해 주세요.</pre></td>
+		</tr>
+		<tr>
+		<th><label for="companyName">회사/점포명</label></th>
+		<td>
+		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
+		<input type="text" id="companyName" name="companyName" maxlength="50" size = "10" required>
+		<span id="nmCmt" class="cmt"></span>
+		</td>
+		</tr>
+		<tr>
+		<th><label for="bossName">대표자명</label></th>
+		<td>
+		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
+		<input type="text" id="bossName" name="bossName" maxlength="50" size = "10" required>
+		<span id="bsCmt" class="cmt"></span>
+		</td>
+		</tr>
+		<tr>
+		<th><label for="detailAddress">회사/점포주소</label></th>
+		<td>
+		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
+		<input type="text" id="zonecode" name="zonecode" maxlength="50" size = "10" required readonly>
+		<input type="text" id="basicAddress" name="basicAddress" maxlength="50" size = "10" required readonly>
+		<input type="text" id="detailAddress" name="detailAddress" maxlength="50" size = "10" required>
+		<button type="button" class="btn2" id="findAddress">주소 검색</button>
+		<span id="adCmt" class="cmt"></span>
+		</td>
+		</tr>
+		
 	</table>
 <div class="btngroup">
 <button class="btn1" type="button" id="submit">회원가입</button>

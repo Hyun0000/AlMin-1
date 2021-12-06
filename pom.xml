@@ -214,6 +214,19 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.0.0.RELEASE</version>
 		</dependency>
+		<!-- mail 인증 -->
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+				<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.0.2.RELEASE</version>
+		</dependency>
 
 
 		<!-- Test -->

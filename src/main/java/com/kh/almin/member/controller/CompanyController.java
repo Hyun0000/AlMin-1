@@ -30,7 +30,7 @@ public class CompanyController {
 
 	@GetMapping //기업회원가입창
 	private String joinCompany() throws Exception {
-		return "member/memberJoin";//TODO: 기업회원가입 화면 만들기
+		return "member/companyJoin";//TODO: 기업회원가입 화면 만들기
 	}
 	
 	@PostMapping //회원가입
