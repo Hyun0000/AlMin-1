@@ -222,9 +222,19 @@ public class CommentsDao {
 		System.out.println("resultCount : " + resultCount);
 		return resultCount;
 	}
+//==============================================================================
+	// 현재 접속자의 해당 공고 후기 작성 유무 확인
+	public int findComments(String rNo, String userId) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("recruitNo", rNo);
+		paramMap.put("id", userId);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = sqlSession.selectOne("Comments.findComments", paramMap);
+		System.out.println("resultMap : " + resultMap);
+		return 0;
+	}
 }
-
-
 
 
 

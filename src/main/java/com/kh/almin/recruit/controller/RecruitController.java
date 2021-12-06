@@ -121,6 +121,9 @@ public class RecruitController {
 		}
 		mv.addObject("commentsMap", commentsMap);
 		mv.addObject("detailjobinfo", recruitService.detailjobinfo(recruitNo));
+		
+		// 후기 입력에 필요한 recruitNo도 추가로 넘기겠습니다. - Hyun
+		mv.addObject("recruitNo", recruitNo);
 		if (like > 0) {
 			mv.addObject("like", like);
 		} else {

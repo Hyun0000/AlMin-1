@@ -13,8 +13,6 @@
 <head>
 <meta charset="UTF-8">
 <title>${recruitTitle}</title>
-<link rel="stylesheet"
-	href="<c:url value="/resources/recruits/css/detailjobinfo.css"/>">
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
@@ -35,6 +33,7 @@
 	href="${pageContext.request.contextPath }/resources/assets/css/nice-select.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/assets/css/style.css">
+<link rel="stylesheet" href="<c:url value="/resources/recruits/css/detailjobinfo.css"/>">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
@@ -197,94 +196,18 @@
 		<h2>상세모집요강</h2>
 		<div id="recruitGuide"></div>
 	</section>
-	<!-- 후기 조회(select) -->
+	<!-- 후기 영역 -->
+<!-- ================================================================== 후기 조회(select) ================================================================== -->
+	<div id="comments_start_line_div">
+		<h2 style="color: white; margin-bottom: 0">매장 후기</h2>
+		<button id="insert_modal_showBtn">후기 등록</button>
+	</div>
 	<section id="comments_container">
 		<ul id="comments_box"></ul>
 	</section>
 	<!-- 후기 조회(select) -->
 	<!-- 한줄 후기  & 근로계약서 -->
-	<button id="insert_modal_showBtn">후기 등록</button>
-	<div id="comments_insert_modal_back">
-		<div id="comments_insert_box">
-			<div class="comments_insert_top">
-				<fieldset>
-					<legend style="color: white;" id="comments_insert_legend">한줄 후기</legend>
-					<div id="contract_box">
-						<input name="ccContent" id="commentsLine"
-							placeholder="100자 이내로 작성해주세요(공백포함)">
-						<div id="radio_box">
-							<h3>근로계약서 작성 여부</h3>
-							<label for="contract_y">작성</label>
-							<input type="radio" value="Y" name="ccContract" id="contract_y">
-							<label for="contract_n">미작성</label>
-							<input type="radio" value="N" name="ccContract" id="contract_n">
-						</div>
-					</div>
-				</fieldset>
-			</div>
-			<!-- 후기 키워드 -->
-			<div class="comments_insert_btm">
-				<c:forEach var="map" items="${commentsMap}">
-					<c:set var="dropNum" value="${dropNum + 1}" />
-					<c:set var="dragNum" value="${dragNum + 1}" />
-
-					<c:choose>
-						<c:when test="${map.key == 1}"><div class="keyName">장점</div></c:when>
-						<c:when test="${map.key == 2}"><div class="keyName">단점</div></c:when>
-						<c:when test="${map.key == 3}"><div class="keyName">조건</div></c:when>
-						<c:when test="${map.key == 4}"><div class="keyName">분위기</div></c:when>
-						<c:when test="${map.key == 5}"><div class="keyName">급여</div></c:when>
-					</c:choose>
-					
-					<div id="dropzone_${dropNum}" class="dropzoneClass" ondrop="drop(event)" ondragover="allowDrop(event)">
-					</div>
-
-					<div id="dragzone_${dragNum}" class="dragzoneClass">
-						<c:forEach var="condition" items="${map.value}">
-							<c:set var="idNum" value="${idNum + 1}" />
-							<div id="drag_${idNum}" class="dragEle" draggable="true" ondragstart="drag(event);">
-								<span class="keyword">${condition}</span><span class="xMark" onClick="deleteX()">&times;</span>
-							</div>
-						</c:forEach>
-					</div>
-				</c:forEach>
-			</div>
-			<div id="btnBox">
-				<button type="button" id="submitBtn">등록</button>
-			</div>
-		</div>
-	</div>
-	<!-- 후기 키워드 -->
-	<script>
-		console.log("${pageContext.request.contextPath}");
-		// item을 놓는 장소인 dropzone : <div id="dropzone">
-		// let dropzoneEle = document.getElementById('dropzone');
-		let dropzoneEle = document.getElementsByClassName('dropzoneClass');
-
-		// 기존 item을 저장하는 장소인 dragzone : <div id="dragzone">
-		// let dragzoneEle = document.getElementById('dragzone');dragzoneClass
-		let dragzoneEle = document.getElementsByClassName('dragzoneClass');
-
-		// drag할 각 item
-		let dragItemEle = document.getElementsByClassName('dragEle');
-
-		// x마크
-		// let xEle = document.getElementsByClassName('xMark');
-
-		// <ul id="comments_box"></ul> : comments 전체를 담는 <ul>
-		let commentsBoxEle = document.getElementById('comments_box');
-
-		// userID
-		let userId = "user01";
-
-		// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
-		let recruitNo = '1';
-
-		// 공고번호(recruitNo)
-	</script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>
-	<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
+<!-- ================================================================== 후기 조회(select) ================================================================== -->	
 	<!-- Footer Area Starts -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />
 	<c:if test="${!empty msg}">
@@ -344,5 +267,38 @@
 			});
 		}
 	</script>
+<script>
+	console.log("${pageContext.request.contextPath}");
+	// item을 놓는 장소인 dropzone : <div id="dropzone">
+	// let dropzoneEle = document.getElementById('dropzone');
+	let dropzoneEle = document.getElementsByClassName('dropzoneClass');
+
+	// 기존 item을 저장하는 장소인 dragzone : <div id="dragzone">
+	// let dragzoneEle = document.getElementById('dragzone');dragzoneClass
+	let dragzoneEle = document.getElementsByClassName('dragzoneClass');
+
+	// drag할 각 item
+	let dragItemEle = document.getElementsByClassName('dragEle');
+
+	// x마크
+	// let xEle = document.getElementsByClassName('xMark');
+
+	// <ul id="comments_box"></ul> : comments 전체를 담는 <ul>
+	let commentsBoxEle = document.getElementById('comments_box');
+
+	// userID
+	// let userId = "test01";
+	// let userId = "minzi91";
+	let userId = "jinpark";
+
+	// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
+	let recruitNo = "${recruitNo}";
+	console.log("recruitNo : " + recruitNo);
+	// 공고번호(recruitNo)
+</script>
+<c:import url="/WEB-INF/views/recruits/detailjobinfo_comments.jsp" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
+<script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>
 </body>
 </html>

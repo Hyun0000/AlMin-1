@@ -8,27 +8,32 @@
 			<when test="category == 'COMMENTS_GOOD_MAP'">
 				SELECT COMMENTS_GOOD.GOOD_NAME FROM COMMENTS_GOOD_MAP 
 				JOIN COMMENTS_GOOD ON COMMENTS_GOOD_MAP.CGM_GOOD_NO = COMMENTS_GOOD.GOOD_NO
+				<!-- WHERE CGM_CC_NO = #{recruitNo} -->
 				WHERE CGM_CC_NO = #{recruitNo} AND CGM_CC_WRITER = #{writer}
 			</when>
 			<when test="category == 'COMMENTS_BAD_MAP'">
 				SELECT COMMENTS_BAD.BAD_NAME FROM COMMENTS_BAD_MAP 
 				JOIN COMMENTS_BAD ON COMMENTS_BAD_MAP.CBM_BAD_NO = COMMENTS_BAD.BAD_NO
+				<!-- WHERE CBM_CC_NO = #{recruitNo} -->
 				WHERE CBM_CC_NO = #{recruitNo} AND CBM_CC_WRITER = #{writer}
 			</when>
 			<when test="category == 'COMMENTS_CONDITION_MAP'">
 				SELECT COMMENTS_CONDITION.CONDITION_NAME FROM COMMENTS_CONDITION_MAP 
 				JOIN COMMENTS_CONDITION ON COMMENTS_CONDITION_MAP.CCM_CONDITION_NO = COMMENTS_CONDITION.CONDITION_NO
+				<!-- WHERE CCM_CC_NO = #{recruitNo} -->
 				WHERE CCM_CC_NO = #{recruitNo} AND CCM_CC_WRITER = #{writer}
 			</when>
 			<when test="category == 'COMMENTS_AIR_MAP'">
 				SELECT COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR_MAP 
 				JOIN COMMENTS_AIR ON COMMENTS_AIR_MAP.CAM_AIR_NO = COMMENTS_AIR.AIR_NO
+				<!-- WHERE CAM_CC_NO = #{recruitNo} -->
 				WHERE CAM_CC_NO = #{recruitNo} AND CAM_CC_WRITER = #{writer}
 			</when>
 			<when test="category == 'COMMENTS_PAY_MAP'">
 				SELECT COMMENTS_PAY.PAY_NAME FROM COMMENTS_PAY_MAP 
 				JOIN COMMENTS_PAY ON COMMENTS_PAY_MAP.CPM_PAY_NO = COMMENTS_PAY.PAY_NO
 				WHERE CPM_CC_NO = #{recruitNo} AND CPM_CC_WRITER = #{writer}
+				<!-- WHERE CPM_CC_NO = #{recruitNo} -->
 			</when>
 		</choose>
 	</select>
@@ -52,9 +57,9 @@
 	<select id="selectCommentVo" resultMap="selectCommentVoMap" parameterType="map">
 		<!-- 지금은 개발중이라 *를 가져오지만 나중에는 필요한 정보만 가져오도록 수정 필요 -->
 		SELECT * FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} 
-		<if test="userId != null">
+<!-- 		<if test="userId != null">
 			AND CC_WRITER = #{userId}
-		</if>
+		</if> -->
 		ORDER BY CC_NO DESC
 	</select>
 <!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
@@ -175,35 +180,14 @@
  			</when>
  		</choose>
  	</delete>
-<!--
-  	<delete id="deleteComment" parameterType="map">
- 		<if test="category == 'COMMENTS_GOOD_MAP' or 'COMMENTS_BAD_MAP' or 'COMMENTS_CONDITION_MAP' or 'COMMENTS_AIR_MAP' or 'COMMENTS_PAY_MAP'">
-				DELETE FROM COMMENTS_#{keyArrOne}_MAP WHERE #{keyArrtwo}_CC_WRITER = #{id} AND #{keyArrtwo}_CC_NO = #{recruitNo}			
- 		</if>
- 		
-		<if test="category == 'lastDelete'">
-				DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = #{id} AND CC_RECRUIT_NO = #{recruitNo}
- 		</if>
- 	</delete>
--->
-<!--  	
-==================== mapping 후기 삭제 ====================
-DELETE FROM COMMENTS_AIR_MAP WHERE CAM_CC_WRITER = 'user01' AND CAM_CC_NO = 1;
-DELETE FROM COMMENTS_GOOD_MAP WHERE CGM_CC_WRITER = 'user01' AND CGM_CC_NO = 1;
-DELETE FROM COMMENTS_BAD_MAP WHERE CBM_CC_WRITER = 'user01' AND CBM_CC_NO = 1;
-DELETE FROM COMMENTS_PAY_MAP WHERE CPM_CC_WRITER = 'user01' AND CPM_CC_NO = 1;
-DELETE FROM COMMENTS_CONDITION_MAP WHERE CCM_CC_WRITER = 'user01' AND CCM_CC_NO = 1;
-COMMIT;
-ROLLBACK;
-
-==================== 후기 테이블에서 삭제 ====================
-DELETE FROM COMMENTS_COMPANY WHERE CC_WRITER = 'user01' AND CC_RECRUIT_NO = 1;
-COMMIT;
--->
 <!-- 후기 수정(update) -->
 	<update id="updateComment">
 		UPDATE COMMENTS_COMPANY SET CC_CONTENT = #{content}, CC_CONTRACT = #{contract} WHERE CC_WRITER = #{writer} AND CC_RECRUIT_NO = #{recruitNo}
 	</update>
+<!-- ================================================= 후기 작성 유무 확인 ================================================= -->
+	<select id="findComments" parameterType="map" resultType="hashmap">
+		SELECT COUNT(CC_NO) FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} AND CC_WRITER = #{id}
+	</select>
 </mapper>
 
 

@@ -160,7 +160,7 @@ public class CommentsController {
 	@ResponseBody
 	// public String selectAllComments(String recruitNo, String id) {
 	// public String selectAllComments(@RequestParam(value = "id",  defaultValue = "") String id, @RequestParam(value = "recruitNo") String recruitNo) {
-	public String selectAllComments(String recruitNo, String id) {
+	public String selectAllComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String recruitNo) {
 			System.out.println("@GetMapping(전체 후기 조회) 진입");
 			System.out.println("recruitNo : " + recruitNo);
 
@@ -239,6 +239,29 @@ public class CommentsController {
 		return result;
 	}
 // ==============================================================================
+	// ajax
+	// 현재 접속자의 해당 공고 후기 작성 유무 확인
+	@GetMapping("findComments")
+	@ResponseBody
+	public String findComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String recruitNo) {
+		System.out.println("@GetMapping(후기 작성 여부) 진입");
+		System.out.println("id : " + id);
+		System.out.println("recruitNo : " + recruitNo);
+		
+		int result = 0;
+		try {
+			result = commentsService.findComments(id, recruitNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("result : " + result);
+		
+		String resultStr = "";
+		if (result == 1) {resultStr = "true";}
+		else if(result == 0) {resultStr = "false";}
+		
+		return resultStr;
+	}
 // ==============================================================================
 // ==============================================================================
 }

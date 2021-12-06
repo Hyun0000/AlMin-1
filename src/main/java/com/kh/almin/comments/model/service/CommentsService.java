@@ -21,6 +21,8 @@ public interface CommentsService {
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
 	public int deleteComment(int rNo , String userId) throws Exception;
 // ==============================================================================
+	// 현재 접속자의 해당 공고 후기 작성 유무 확인
+	public int findComments(String rNo , String userId) throws Exception;
 // ==============================================================================
 // ==============================================================================
 }

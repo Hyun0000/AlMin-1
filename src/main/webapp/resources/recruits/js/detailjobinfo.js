@@ -1,6 +1,7 @@
 let modalBack = document.getElementById('comments_insert_modal_back');
 // let param = "recruitNo=" + recruitNo;
-let recruitParam = "recruitNo=" + recruitNo;
+// let recruitParam = "recruitNo=" + recruitNo;
+let recruitCommentParam = "reviews?recruitNo=" + recruitNo + "&id=" + userId;
 
 window.onload = function() {
 // 1.
@@ -9,7 +10,8 @@ window.onload = function() {
 	// 리뷰번호 param으로 넣어줘야한다.
 	// let param = "recruitNo=1&id=";
 	// let param = "recruitNo=" + recruitNo;
-	sendRequest("GET", "reviews", recruitParam, selectAllComments);
+	sendRequest("GET", recruitCommentParam, null, selectAllComments);
+	// sendRequest("GET", "reviews", recruitParam, selectAllComments);
 // ========================================= 후기 insert ===============================================	
 // 2. 후기 insert
 	// 모달창 띄우기
@@ -135,7 +137,8 @@ function postingComment(insertOrUpdate) {
 						// 후기 새로 가져오기
 						// 리뷰번호 param으로 넣어줘야한다.
 						// let param = "recruitNo=1";
-						sendRequest("GET", "reviews", recruitParam, selectAllComments);
+						sendRequest("GET", recruitCommentParam, null, selectAllComments);
+						// sendRequest("GET", "reviews", recruitParam, selectAllComments);
 						
 					} else {
 						alert("후기 등록 or 수정 실패");
@@ -172,9 +175,6 @@ function deleteX() {
 	    // }
 	}
 }
-
-
-
 //========================================= drag&drop evnet ===============================================
 // drag한 itme의 id 정보 저장 (in dragzone)
 function drag(event) {
@@ -226,6 +226,9 @@ function selectAllComments() {
 			// 후기 작성자의 정보를 담는 객체 배열
 			let comments = commentsObj.commentsVO;
 			
+			// 후기 작성자 전체를 담을 변수
+			// let commentsWriterArr = [];
+			
 			// 바깥쪽 <li>를 구분하기 위한 변수
 			let num = 0;
 			
@@ -250,24 +253,40 @@ function selectAllComments() {
 		        // top 좌측 <div>에 속하는 <h2> --> 작성자 아이디   commentsObj[e.ccWriter]?????
 		        let topHtwo = document.createElement('h2'); topHtwo.innerText = e.ccWriter;
 		        topLeftDivEle.appendChild(topHtwo);
+		        
+		        // 작성자 담기
+		        // commentsWriterArr[num] = e.ccWriter;
 
 		        // top 좌측 <div>에 속하는 <h3> --> 작성일
-		        let topHthree = document.createElement('h3'); topHthree.innerText = e.ccDate;
+		        let topHthree = document.createElement('h4'); topHthree.innerText = e.ccDate;
+		        topHthree.setAttribute('style', 'margin : 0;');
 		        topLeftDivEle.appendChild(topHthree);
 
 		        // top 우측 <div> 만들기
 		        let topRightDivEle = document.createElement('div'); topRightDivEle.setAttribute('class', 'comments_top_bar_right');
 		        topDivEle.appendChild(topRightDivEle);
 
-		        // 수정 버튼 만들기
-		        let updateBtn = document.createElement('button'); updateBtn.innerText = "수정";
-		        updateBtn.setAttribute('class', 'updateBtn'); updateBtn.setAttribute('id', 'updateBtn_id_' + num);
-		        updateBtn.setAttribute('onClick', 'updateComment(event);');  topRightDivEle.appendChild(updateBtn);
-
-		        // 삭제 버튼 만들기
-		        let deleteBtn = document.createElement('button'); deleteBtn.innerText = "삭제";
-		        deleteBtn.setAttribute('class', 'deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
-		        deleteBtn.setAttribute('onClick', 'deleteComment(event);'); topRightDivEle.appendChild(deleteBtn);
+		        // 해당 후기 작성자(현재 접속한 회원)에게만 후기 수정 & 삭제 버튼이 보이게 하는 기능 구현
+		        console.log("작성자 : " + e.ccWriter);
+		        if(userId === e.ccWriter) {
+			        // 수정 버튼 만들기
+			        let updateBtn = document.createElement('button'); updateBtn.innerText = "수정";
+			        updateBtn.setAttribute('class', 'updateBtn'); updateBtn.setAttribute('id', 'updateBtn_id_' + num);
+			        updateBtn.setAttribute('onClick', 'updateComment(event);');  topRightDivEle.appendChild(updateBtn);
+	
+			        // 삭제 버튼 만들기
+			        let deleteBtn = document.createElement('button'); deleteBtn.innerText = "삭제";
+			        deleteBtn.setAttribute('class', 'deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
+			        deleteBtn.setAttribute('onClick', 'deleteComment(event);'); topRightDivEle.appendChild(deleteBtn);
+		        }
+		        
+//		        if(userId === e.ccWriter) {
+//		        	// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+//		        	document.getElementById('insert_modal_showBtn').style.display = "none";
+//		        } else {
+//		        	// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+//		        	document.getElementById('insert_modal_showBtn').style.display = "block";
+//		        }
 		        
 		        // id & class에 붙이는 숫자 변수 (+)
 		        num++;
@@ -277,7 +296,8 @@ function selectAllComments() {
 		        liEle.appendChild(midDivEle);
 		        
 		        // 한줄 후기를 담는 <div>에 속하는 <h4>
-		        let reviewHfour = document.createElement('h4'); reviewHfour.innerText = e.ccContent;
+		        let reviewHfour = document.createElement('h3'); reviewHfour.innerText = e.ccContent;
+		        reviewHfour.setAttribute('style', 'margin : 0;');
 		        midDivEle.appendChild(reviewHfour);    
 
 		        // ===================== 하단 ==========================
@@ -306,13 +326,30 @@ function selectAllComments() {
 	        	btmRightDivEle.appendChild(btmUl);
 		        	
 		        	for (var j = 0; j < commentsObj[e.ccWriter][i].length; j++) {
+		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		        		console.log(commentsObj[e.ccWriter][i]);
+		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		        		// bottom 우측 <ul>에 속하는 <li>  -->  각 후기별 키워드 넣기
 		        		let btmLiEle = document.createElement('li'); btmLiEle.innerText = commentsObj[e.ccWriter][i][j];
 		        		btmUl.appendChild(btmLiEle);
 					}
 				}
 			}) // comments.forEach(function (e) 종료
+			
+//			console.log("작성자 배열 : " + commentsWriterArr);
+//			for (var i = 0; i < commentsWriterArr.length; i++) {
+//				if(commentsWriterArr[i] === userId) {
+//					// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+//		        	document.getElementById('insert_modal_showBtn').style.display = "none";
+//				} else {
+//					// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+//		        	document.getElementById('insert_modal_showBtn').style.display = "block";					
+//				}
+//			}
 		} // if (httpRequest.status === 200) 종료
+		let findCommentsPath = "findComments?recruitNo=" + recruitNo + "&id=" + userId;
+		sendRequest("GET", findCommentsPath, null, findComments);
+		
 		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		let test = document.getElementsByClassName('deleteBtn');
 		console.log(test.length);
@@ -323,7 +360,7 @@ function selectAllComments() {
 } // selectAllComments callback function 종료
 //========================================= 후기 삭제 버튼(delete) inline function ====================================
 function deleteComment(event) {
-	let deleteBool = confirm("삭제 ㄱ?");
+	let deleteBool = confirm("삭제 하시겠습니까?");
 	console.log("====================== 1 ======================");
 	console.log(event.target);
 	console.log("====================== 2 ======================");
@@ -361,7 +398,8 @@ function deleteComment(event) {
 					// 후기 전체 다시 select
 					// 리뷰번호 param으로 넣어줘야한다.
 					// let param = "recruitNo=1";
-					sendRequest("GET", "reviews", recruitParam, selectAllComments);
+					// sendRequest("GET", "reviews", recruitParam, selectAllComments);
+					sendRequest("GET", recruitCommentParam, null, selectAllComments);
 				}
 			}
 		}
@@ -369,7 +407,7 @@ function deleteComment(event) {
 }
 //========================================= 후기 수정 버튼(update) inline function ====================================
 function updateComment(event) {
-	let updateBool = confirm("수정 ㄱ?");
+	let updateBool = confirm("수정 하시겠습니까?");
 	let updateUserId = event.target.parentNode.previousSibling.firstChild.innerText;
 	
 	console.log("====================== update ======================");
@@ -378,11 +416,12 @@ function updateComment(event) {
 	
 	
 	// url로 보낼 data
-	let param = recruitParam + "&id=" + updateUserId;
+	// 	let param = recruitParam + "&id=" + updateUserId;
 	// let param = "recruitNo=1&id=" + updateUserId;
 	
 	if (updateBool == true) {
-		sendRequest("GET", "reviews", param, popUpModal);
+		sendRequest("GET", recruitCommentParam, null, popUpModal);
+		// sendRequest("GET", "reviews", param, popUpModal);
 	}
 }
 
@@ -507,6 +546,24 @@ function popUpModal() {
 					postingComment('update');
 				}
 			}
+		}
+	}
+}
+
+function findComments() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			console.log(httpRequest.responseText);
+			let test = httpRequest.responseText;
+			
+			if(test === "true") {
+				// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+	        	document.getElementById('insert_modal_showBtn').style.display = "none";
+			} else if(test === "false") {
+				// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
+	        	document.getElementById('insert_modal_showBtn').style.display = "false";				
+			}
+			
 		}
 	}
 }
