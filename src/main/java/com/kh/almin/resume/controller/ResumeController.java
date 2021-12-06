@@ -61,6 +61,21 @@ public class ResumeController {
 		return mv;
 	}
 	
+	@GetMapping("deleteResume")
+	public String deleteResume(@RequestParam(value="msg", required=false)String msg,int resumeNo,RedirectAttributes rs,Model m) throws Exception{
+		
+		int result=resumeService.deleteResume(resumeNo);
+		if(result==1) {
+			rs.addAttribute("msg","삭제되었습니다.");
+			m.addAttribute("msg","삭제되었습니다");
+		}else {
+			rs.addAttribute("msg","다시 시도해주세요.");
+			m.addAttribute("msg","다시 시도해주세요.");
+		}
+		
+		return "redirect:allres";
+	}
+	
 	@PostMapping("addres")//이력서등록
 	public ModelAndView insertResume(@RequestParam(value = "resumePhoto",required = false) byte[] resumePhoto,MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
 		System.out.println("mr : "+mr);
@@ -83,9 +98,11 @@ public class ResumeController {
 		}
 		if(result==1) {
 			redirectAttributes.addAttribute("msg", "이력서 등록이 되었습니다.");
-			mv.setViewName("main");
+			mv.addObject("msg", "이력서 등록이 되었습니다.");
+			mv.setViewName("redirect:allres");
 		}else {
 			redirectAttributes.addAttribute("msg", "이력서 등록이 실패하였습니다. 다시 시도해주세요.");
+			mv.addObject("msg", "이력서 등록이 실패하였습니다. 다시 시도해주세요.");
 			String referer = request.getHeader("Referer"); //이전페이지로 이동
 		    mv.setViewName("redirect:"+ referer); 
 		}

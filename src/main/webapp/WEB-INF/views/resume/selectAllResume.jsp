@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>우리가 어떤 민족입니까?알바의 민족 이력서 조회</title>
 <!-- Favicon -->
 <link rel="shortcut icon"
@@ -31,6 +31,12 @@
 <c:import url="/WEB-INF/views/template/header.jsp" />
 </header>
 <section>
+	<c:if test="${!empty msg}">
+		<script>
+			alert("${msg}");
+			<c:remove var="msg"/>
+		</script>
+		</c:if>
 	<h1>My이력서</h1>
     <div class="row">
         <div class="col-lg-12">
@@ -45,7 +51,9 @@
                             	</c:if>
                                 <div class="reportItem">
                                     <div class="d-toggle">
-                                        <div class="rt"><a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a></div>
+                                        <div class="rt"><a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a>
+                                        	
+                                        </div>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -76,5 +84,9 @@
 			</div>
 		</div>
 	</footer>
+	
+	<script>
+	
+	</script>
 </body>
 </html>

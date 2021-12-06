@@ -12,6 +12,7 @@ import com.kh.almin.resume.model.vo.MemberResume;
 public class ResumeServicelmpl implements ResumeService {
 	@Autowired
 	private ResumeDao resumeDao;
+	
 	public int insertResume(MemberResume mr) throws Exception {
 		return resumeDao.insertResume(mr);
 	}
@@ -21,5 +22,7 @@ public class ResumeServicelmpl implements ResumeService {
 	public MemberResume selectResume(int resumeNo) throws Exception{
 		return resumeDao.selectResume(resumeNo);
 	}
-	
+	public int deleteResume(int resumeNo) throws Exception{
+		return resumeDao.deleteResume(resumeNo);
+	}
 }

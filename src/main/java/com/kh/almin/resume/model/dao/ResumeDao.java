@@ -27,4 +27,8 @@ public class ResumeDao {
 		return sqlSession.insert("Resume.insertResume", mr);
 		
 	}
+	
+	public int deleteResume(int resumeNo) throws Exception{
+		return sqlSession.delete("Resume.deleteResume", resumeNo);
+	}
 }

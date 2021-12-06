@@ -70,4 +70,8 @@
 		values(MEMBER_RESUME_SEQUENCE.NEXTVAL,#{resumeTitle},#{resumePhone},#{jobDistrictNo},
 		#{educationNo},#{jobTypeNo},#{periodNo},#{jobCareers},#{resumePublicYn},#{resumePhoto})
 	</insert>
+	
+	<delete id="deleteResume" parameterType="Resume">
+		delete from MEMBER_RESUME where RESUME_NO=#{resumeNo}
+	</delete>
 </mapper>

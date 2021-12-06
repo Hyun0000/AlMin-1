@@ -10,10 +10,13 @@
 	type="image/x-icon">
 <link rel="stylesheet"
 	href="<c:url value="/resources/assets/css/almin.css"/>">
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 <title>상세 이력서 조회</title>
 <style type="text/css">
-	button{
-	margin-left:50%;
+	#updateResume{
+	margin-left:300px;
+	}
+	.resumbtn{
 	width:100px;
 	color:gray;
 	}
@@ -28,6 +31,13 @@
 	</header>
 
 	<section>
+		<c:if test="${!empty msg}">
+		<script>
+			alert("${msg}");
+			<c:remove var="msg"/>
+		</script>
+		</c:if>
+		
 		<h2>개인기본정보</h2>
 		<div>
 		<strong>사진</strong><br>
@@ -53,7 +63,11 @@
 		${resum.jobType.jobTypeName } ${resum.period.periodType } ${resum.jobCareers }
 		</div>
 		<br>
-		<button onclick="history.back();">확인</button>
+		<div>
+		<button id="updateResume" class="resumbtn">수정</button>
+		<button id="deleteResume" class="resumbtn" onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+		<button class="resumbtn" onclick="history.back();">확인</button>
+		</div>
 	</section>
 
 	<footer>
