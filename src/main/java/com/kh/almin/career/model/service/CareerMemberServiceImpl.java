@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.almin.career.model.dao.CareerMemberDao;
 import com.kh.almin.career.model.dao.CareerWorkDao;
+import com.kh.almin.career.model.vo.MembersCareer;
 
 @Service("careerMemberService")
 public class CareerMemberServiceImpl implements CareerMemberService{
@@ -20,6 +21,11 @@ public class CareerMemberServiceImpl implements CareerMemberService{
 		return careerMemberDao.selectCareerChart(userId);
 	}
 // ===================================================================================================================
+	// 개인 경력 insert
+	@Override
+	public int insertCareer(MembersCareer insertCareerMember) throws Exception {
+		return careerMemberDao.insertCareer(insertCareerMember);
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================

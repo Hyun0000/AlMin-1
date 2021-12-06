@@ -155,8 +155,9 @@
 	            <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
 	        </div>
 	        <div id="side_calendar_img_box">
-				<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png" id="slide_first_img">
-				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_logo.png" id="slide_second_img">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side1.png" id="slide_first_img">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side2.png" id="slide_second_img" style="display: none;">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side3.png" id="slide_third_img" style="display: none;">
 				<!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 -->
 	 			<div id="careerInputTable_box">
 				    <table id="careerInputTable" style="display: none;">
@@ -208,13 +209,13 @@
 				            </td>
 				
 				            <td class="careerInputSecondTd">
-				                <input type="text" id="careerTitle">
+				                <input type="text" id="careerTitle" placeholder="15자 이내 입력">
 				            </td>
 				        </tr>
 				        
 			        	<tr>
 			        		<td colspan="2" id="insertBtnTd">
-			        			<button id="career_in_modal_up">경력추가</button>
+			        			<button id="career_insert_btn">경력추가</button>
 			        		</td>
 			        	</tr>
 				    </table>
@@ -239,19 +240,20 @@
 		        <div id="firstChartBox">
 		            <div id="needChartDiv">
 		           		<canvas id="needChart"></canvas>
-		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="needChart_alterImage" style="width: 400px">
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/no_need_data.png" id="needChart_alterImage">
+		            	<!--  style="width: 400px" -->
 		           	</div>
 		            <div id="careerChartDiv">
 		            	<canvas id="careerChart"></canvas>
 		            	<!-- <button id="career_in_modal_up">경력추가</button> -->
-		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="careerChart_alterImage" style="width: 400px">
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/no_career_data.png" id="careerChart_alterImage">
 		           	</div>
 		        </div>
 		
 		        <div id="secondChartBox">
 		            <div id="workChartDiv">
 		            	<canvas id="workChart"></canvas>
-		            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="workChart_alterImage" style="width: 400px">
+		            	<img src="${pageContext.request.contextPath}/resources/assets/images/no_work_data.png" id="workChart_alterImage">
 		           	</div>
 		            <div id="moneyTabel">
 		                <table id="moneyTabelReal"></table>
@@ -262,63 +264,9 @@
 	</div>
 </section> 
 <!-- ================================================== chart.js ================================================== -->
-<%-- <div id="chartBox" style="display: none">
-    <div id="top_box">
-       	<!-- <h1>우리의 민족!!! 칠갑산님의 Chart</h1> -->
-       	<h1></h1>
-        <div id="top_box_right_innerBox">
-            <input id="yearInput" type="number" min="0000" max="9999"><span class="dateTypeSpan">년</span>
-            <input id="monthInput" type="number" min="1" max="12"><span class="dateTypeSpan">월</span>
-            <button type="button" id="date_input_btn">조회</button>
-        </div>
-    </div>
-    <div id="allChartBox">
-        <div id="firstChartBox">
-            <div id="needChartDiv">
-           		<canvas id="needChart"></canvas>
-            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="needChart_alterImage" style="width: 400px">
-           	</div>
-            <div id="careerChartDiv">
-            	<canvas id="careerChart"></canvas>
-            	<!-- <button id="career_in_modal_up">경력추가</button> -->
-            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="careerChart_alterImage" style="width: 400px">
-           	</div>
-        </div>
-
-        <div id="secondChartBox">
-            <div id="workChartDiv">
-            	<canvas id="workChart"></canvas>
-            	<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" id="workChart_alterImage" style="width: 400px">
-           	</div>
-            <div id="moneyTabel">
-                <table id="moneyTabelReal">
-<!--                     <tr id="applekiwi">
-                        <td class="firstTd tableColName">매장(시급)</td>
-                        <td class="secondTd tableColName">급여(월)</td>
-                    </tr> -->
-<!--                     <tr>
-                        <td class="firstTd">피자스쿨<br>(9000원)</td>
-                        <td class="secondTd">450000원</td>
-                    </tr>
-                    <tr>
-                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
-                        <td class="secondTd">600000원</td>
-                    </tr>
-                    <tr>
-                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
-                        <td class="secondTd">600000원</td>
-                    </tr>
-                    <tr>
-                        <td class="firstTd">명륜진사갈비<br>(10000원)</td>
-                        <td class="secondTd">600000원</td>
-                    </tr> -->
-                </table>
-            </div>
-        </div>
-    </div>
-</div> --%>
 <script>
 	let userId = "test01";
+	// let userId = "syfkbsjf";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -1,6 +1,17 @@
+// 경력 insert 버튼
+let careerIsertBtn = document.getElementById('career_insert_btn');
+
+// 업무 직종 <select>
+let jobTypeSelect = document.getElementById('job_type');
+
+// 근무 직종 <select>
+let jobPeriodSelect = document.getElementById('job_period');
+
+// 근무 내용 <input>
+let careerInputEle = document.getElementById('careerTitle');
+
 // 개인 경력 입력 <table>
 let careerInputTable = document.getElementById('careerInputTable');
-
 
 // 급여 & 매장명을 담는 <table>
 let moneyTable = document.getElementById('moneyTabelReal');

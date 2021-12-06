@@ -3,11 +3,15 @@ package com.kh.almin.career.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.almin.career.model.vo.MembersCareer;
+
 public interface CareerMemberService {
 // ===================================================================================================================
 	// 차트에서 개인 경력 조회(조건 : 회원 아이디)
 	public List<Map<String, String>> selectCareerChart(String userId) throws Exception;
 // ===================================================================================================================
+	// 개인 경력 insert
+	public int insertCareer(MembersCareer insertCareerMember) throws Exception;
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================

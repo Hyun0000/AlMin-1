@@ -31,18 +31,21 @@ function calSubmit() {
     	}
     }
     
-    // 시급 정규식 검사
-    if(!workTimeMoneyReg.test(workMoneyInputEle.value)) {
-    	console.log(workTimeMoneyReg.test(workMoneyInputEle));
-    	alert("시급을 정확히 입력해주세요");
-    	submitBool = false; return false;
-    }
-    
-    // 근무시간 정규식 검사
-    if(!workTimeMoneyReg.test(workTimeInputEle.value)) {
-    	console.log(workTimeMoneyReg.test(workTimeInputEle));
-    	alert("시간을 정확히 입력해주세요");
-    	submitBool = false; return false;
+    // 근무 & 시간 정규식 검사
+    if(selectCal === "W") {
+	    // 시급 정규식 검사
+	    if(!workTimeMoneyReg.test(workMoneyInputEle.value)) {
+	    	console.log(workTimeMoneyReg.test(workMoneyInputEle));
+	    	alert("시급을 정확히 입력해주세요");
+	    	submitBool = false; return false;
+	    }
+	    
+	    // 근무시간 정규식 검사
+	    if(!workTimeMoneyReg.test(workTimeInputEle.value)) {
+	    	console.log(workTimeMoneyReg.test(workTimeInputEle));
+	    	alert("시간을 정확히 입력해주세요");
+	    	submitBool = false; return false;
+	    }
     }
 
     // 제목 입력 유효성 검사

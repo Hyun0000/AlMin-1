@@ -93,7 +93,7 @@ input[type=number] {
 
 /* 구직&면접 차트 */
 #needChartDiv{
-    border: 1px solid #687DE8;
+    /* border: 1px solid #687DE8; */
     width: 400px;
     height: 400px;
     display: inline-block;
@@ -101,14 +101,14 @@ input[type=number] {
 
 /* 근무 차트 */
 #workChartDiv{
-    border: 1px solid #687DE8;
+    /* border: 1px solid #687DE8; */
     width: 400px;
     height: 400px;
 }
 
 /* 경력 차트 */
 #careerChartDiv{
-    border: 1px solid #687DE8;
+    /* border: 1px solid #687DE8; */
     width: 400px;
     /* height: 300px; */
     height: 400px;
@@ -156,3 +156,25 @@ input[type=number] {
     color : white;
     font-weight: bolder;
 }
+
+/* 이미지 설정 */
+#careerChart_alterImage {
+	width: 400px;
+	height: 400px;
+}
+
+#needChart_alterImage {
+	width: 400px;
+	height: 400px;
+}
+
+#workChart_alterImage {
+	width: 400px;
+	height: 400px;
+}
+
+
+
+
+
+

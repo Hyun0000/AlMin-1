@@ -6,7 +6,14 @@ needCalButn.onclick = () => {
 	selectCal = "NG";
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
+	
+	// 좌측 사이드 이미지
+	document.getElementById('slide_first_img').style.display = "block";
+	document.getElementById('slide_second_img').style.display = "none";
+	document.getElementById('slide_third_img').style.display = "none";
+	
 	careerInputTable.style.display = "none";
+	// topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
 	sendRequest("GET", getPath, null, calenderLoad);
 }
 
@@ -14,8 +21,15 @@ workCalButn.onclick = () => {
 	selectCal = "W";
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
+	
+	// 좌측 사이드 이미지
+	document.getElementById('slide_first_img').style.display = "none";
+	document.getElementById('slide_second_img').style.display = "block";
+	document.getElementById('slide_third_img').style.display = "none";
+	
 	careerInputTable.style.display = "none";
 	sendRequest("GET", getWorkPath, null, calenderLoad);
+	// topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 근무관리 calendar";
 }
 
 // 처음 캘린더 페이지에 들어왔을 때 실행할 Ajax
@@ -29,7 +43,9 @@ function calenderLoad() {
 	let needCalData = JSON.parse(httpRequest.responseText);
 	console.log(needCalData);
 	
+	
 	if(selectCal === "NG" || selectCal === "") {
+		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
 		evnets = []; // 배열 초기화
 		for (var i = 0; i < needCalData.length; i++) {
 			let evnetObj = new Object();
@@ -40,11 +56,11 @@ function calenderLoad() {
 			evnetObj.id = needCalData[i].NEED_MEMBER_NO;
 			evnetObj.type = needCalData[i].NEED_GO_MEET;
 			evnets[i] = evnetObj;
-			topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
 		}
 	}
 	
 	if(selectCal === "W") {
+		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 근무관리 calendar";
 		evnets = []; // 배열 초기화
 		for (var i = 0; i < needCalData.length; i++) {
 			let evnetObj = new Object();
@@ -55,7 +71,6 @@ function calenderLoad() {
 			evnetObj.id = needCalData[i].WORK_MEMBER_NO;
 			evnetObj.type = needCalData[i].WORK_TYPE;
 			evnets[i] = evnetObj;
-			topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 근무관리 calendar";
 		}
 	}
 	

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.almin.career.model.service.CareerMemberService;
 import com.kh.almin.career.model.service.CareerNeedService;
+import com.kh.almin.career.model.vo.MembersCareer;
 
 @Controller
 @RequestMapping("/careers")
@@ -50,6 +53,29 @@ public class CareerMemberController {
 		return jsonStr;
 	}
 // ===================================================================================================================
+	// 개인 경력 insert
+	@PostMapping(value = "/careerchart", produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String insertCareer(@RequestBody String insertCareer) {
+		System.out.println("@PostMapping(\"/careerchart\") 진입");
+		System.out.println("insertCareer : " + insertCareer);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		MembersCareer insertCareerMember = gson.fromJson(insertCareer, MembersCareer.class);
+		System.out.println("insertCareerMember : " + insertCareerMember);
+		
+		int result = 0;
+		try {
+			result = careerMemberService.insertCareer(insertCareerMember);
+		} catch (Exception e) {e.printStackTrace();}
+		
+		String resultStr = "";
+		if(result == 1) {resultStr = "ok";}
+		else if(result == 0) {resultStr = "false";}
+		
+		
+		return resultStr;
+	}
 // ===================================================================================================================
 // ===================================================================================================================
 // ===================================================================================================================

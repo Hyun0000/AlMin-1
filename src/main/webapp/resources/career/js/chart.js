@@ -54,8 +54,12 @@ dateInputBtn.onclick = () => {
 // 좌측 사이드 버튼을 클릭하면 chart 화면으로 전환
 careerCalButn.onclick = () => {
 	selectCal = "C";
-//	document.getElementById('slide_first_img').style.display = "none";
-//	document.getElementById('slide_second_img').style.display = "none";
+	
+	// 좌측 사이드 이미지
+	document.getElementById('slide_first_img').style.display = "none";
+	document.getElementById('slide_second_img').style.display = "none";
+	document.getElementById('slide_third_img').style.display = "block";
+	
 	careerInputTable.style.display = "block";
 	
 	calDiv.style.display = 'none';
@@ -409,6 +413,7 @@ function loadChart() {
 	chartLoad = "loded";
 }
 // } onload 끝
+
 // 색깔 랜덤 생성(그래프 배경 & border)
 function changeRGBA() {
 	// 0~255값을 랜덤으로 뽑아내서 각각의 변수 r,g,b 에 들어간다.
@@ -421,3 +426,107 @@ function changeRGBA() {
 	 
 	return random_color;
 }
+//============================================================================================================
+// 경력 추가
+careerIsertBtn.onclick = () => {
+	console.log("직종 : " + jobTypeSelect.value + " 기간 : " + jobPeriodSelect.value + " 내용 : " + careerInputEle.value);
+	
+	let careerInputBool = true;
+	
+	let careerInputObject = {
+		careersMemberId : userId,
+		careersType : jobTypeSelect.value,
+		careersTime : jobPeriodSelect.value,
+		careerPart : careerInputEle.value
+	};
+	
+	// 직무 타입 입력 유효성 검사
+	if(jobTypeSelect.value === "job_type_no") {
+		alert("근무 직종을 선택해 주세요");
+		careerInputBool = false; return false;
+	}
+	
+	// 근무 기간 입력 유효성 검사
+	if(jobPeriodSelect.value === "job_period_no") {
+		alert("근무 기간을 선택해 주세요");
+		careerInputBool = false; return false;
+	}
+	
+	// 근무 내용 입룍 유효성 검사(1~15자 입력)
+	if(careerInputEle.value.length === 0 || careerInputEle.value.length > 15) {
+		alert("근무 내용을 1자 ~ 15 이내로 입력해주세요");
+		careerInputBool = false; return false;
+	}
+	
+	if(careerInputBool === true) {
+		console.log(careerInputObject);
+	    console.log(JSON.stringify(careerInputObject));
+	    
+	    sendRequest("POST", "careerchart", JSON.stringify(careerInputObject), afterCareerInput);
+	}
+}
+
+// 경력 추가 callback function
+function afterCareerInput() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			if (httpRequest.responseText === 'ok') {
+				alert("경력 추가 성공");
+				
+				jobTypeSelect.value = "";
+				jobPeriodSelect.value = "";
+				careerInputEle.value = "";
+				
+				// 경력 입력 후 chart 전체 새로 load
+				sendRequest("GET", getNeedChartPath, null, afterNeedChart);
+			} else if(httpRequest.responseText === 'false') {
+				alert("경력 추가 실패");
+			}
+		}
+	}
+}
+
+// CAREERS_NO 				NUMBER 			PRIMARY KEY,
+// CAREERS_MEMBER_ID 		varchar2(50), 	-- 복합 외래키 지정
+// CAREERS_MEMBER_TYPE 	char(1) 		DEFAULT 1, -- 복합 외래키 지정
+// CAREERS_TYPE 			NUMBER 			REFERENCES JOB_TYPE (JOB_TYPE_NO),
+// CAREERS_TIME 			NUMBER 			REFERENCES PERIOD(PERIOD_NO),
+// CAREERS_PART 			varchar2(100) 	NOT NULL,
+
+// CONSTRAINT MEMBER_CAREER_FK FOREIGN KEY(CAREERS_MEMBER_ID, CAREERS_MEMBER_TYPE)REFERENCES MEMBER(MEMBER_ID, MEMBER_TYPE) -- 복합 외래키 지정
+
+// private int careersNo;
+// private String careersMemberId;
+// private String careersMemberType;
+// private int careersType; // 업종번호
+// private int careersTime; // 근무기간번호
+// private String careerPart; // 담당 업무(짧게)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
