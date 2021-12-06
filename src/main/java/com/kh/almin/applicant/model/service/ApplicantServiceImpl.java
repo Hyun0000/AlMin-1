@@ -28,12 +28,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return applicantDao.searchApplicant(searchApplicant);
 	}
 
-	public int likeRecruit(LikeApplicant likeApplicant) throws Exception {
-		return applicantDao.likeRecruit(likeApplicant);
+	public int likeApplicant(LikeApplicant likeApplicant) throws Exception {
+		return applicantDao.likeApplicant(likeApplicant);
 	}
 
-	public int dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
-		return applicantDao.dislikeRecruit(likeApplicant);
+	public int dislikeApplicant(LikeApplicant likeApplicant) throws Exception {
+		return applicantDao.dislikeApplicant(likeApplicant);
 	}
 
 	public List<Applicant> listLike(String companyId) throws Exception {

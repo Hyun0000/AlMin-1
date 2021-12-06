@@ -44,8 +44,6 @@
 	<!-- 관심인재 리스트 -->
 	<select id="listLike" resultMap="ApplicantResultMap"
 		parameterType="String">
-		select * from member_resume r JOIN focus_member f
-		USING(RESUME_NO) where f.COMPANY_ID = 'testcompany05';
 		SELECT * FROM
 		MEMBER_RESUME R JOIN FOCUS_MEMBER F USING(RESUME_NO) WHERE
 		F.COMPANY_ID = #{companyId}

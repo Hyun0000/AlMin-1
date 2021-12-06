@@ -17,8 +17,6 @@ import com.kh.almin.applicant.model.service.ApplicantService;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
-import com.kh.almin.recruit.model.vo.LikeRecruit;
-import com.kh.almin.recruit.model.vo.Recruit;
 
 @Controller
 @RequestMapping("/applicants")
@@ -67,7 +65,7 @@ public class ApplicantController {
 	@GetMapping(value = "/dislike")
 	private String dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
 		likeApplicant.setCompanyId("testcompany01");
-		applicantService.dislikeRecruit(likeApplicant);
+		applicantService.dislikeApplicant(likeApplicant);
 		return "redirect:/applicants/myapplicants";
 	}
 
@@ -77,14 +75,15 @@ public class ApplicantController {
 		String result = "";
 		int like = 0;
 		likeApplicant.setCompanyId("testcompany01");
-		like = applicantService.dislikeRecruit(likeApplicant);
+		like = applicantService.dislikeApplicant(likeApplicant);
 		if (like == 1) {
 			System.out.println("찜 해제");
 		} else if (like == 0) {
-			applicantService.likeRecruit(likeApplicant);
+			applicantService.likeApplicant(likeApplicant);
 			System.out.println("찜 등록");
 		}
 		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		System.out.println("like!!!!!!!!! : "+like);
 		return result;
 	}
 

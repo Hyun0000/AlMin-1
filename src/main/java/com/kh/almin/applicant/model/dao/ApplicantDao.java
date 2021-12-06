@@ -26,19 +26,19 @@ public class ApplicantDao {
 		return sqlSession.selectList("Applicant.searchApplicant", searchApplicant);
 	}
 
-	public int likeRecruit(LikeApplicant likeApplicant) throws Exception {
-		return sqlSession.insert("Recruit.doLike", likeApplicant);
+	public int likeApplicant(LikeApplicant likeApplicant) throws Exception {
+		return sqlSession.insert("Applicant.doLike", likeApplicant);
 	}
 
-	public int dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
-		return sqlSession.delete("Recruit.disLike", likeApplicant);
+	public int dislikeApplicant(LikeApplicant likeApplicant) throws Exception {
+		return sqlSession.delete("Applicant.disLike", likeApplicant);
 	}
 
 	public List<Applicant> listLike(String companyId) throws Exception {
-		return sqlSession.selectList("Recruit.listLike", companyId);
+		return sqlSession.selectList("Applicant.listLike", companyId);
 	}
 
 	public int checkLike(LikeApplicant likeApplicant) throws Exception {
-		return sqlSession.selectOne("Recruit.checkLike", likeApplicant);
+		return sqlSession.selectOne("Applicant.checkLike", likeApplicant);
 	}
 }

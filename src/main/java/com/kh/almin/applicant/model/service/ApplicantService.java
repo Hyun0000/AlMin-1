@@ -11,9 +11,9 @@ public interface ApplicantService {
 
 	public List<Applicant> searchApplicant(SearchApplicant searchApplicant) throws Exception;
 
-	public int likeRecruit(LikeApplicant likeApplicant) throws Exception;
+	public int likeApplicant(LikeApplicant likeApplicant) throws Exception;
 
-	public int dislikeRecruit(LikeApplicant likeApplicant) throws Exception;
+	public int dislikeApplicant(LikeApplicant likeApplicant) throws Exception;
 
 	public List<Applicant> listLike(String companyId) throws Exception;
 
