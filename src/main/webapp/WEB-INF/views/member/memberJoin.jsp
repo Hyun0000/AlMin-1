@@ -662,75 +662,8 @@
 		<input type="text" name="phone1" id="phone1" placeholder="010" maxlength="3" size = "3" required> -
 		<input type="text" name="phone2" id="phone2"  placeholder="0000" maxlength="4" size = "4" required> -
 		<input type="text" name="phone3" id="phone3"  placeholder="0000" maxlength="4" size = "4" required>
-		<div id="check"><a href="javascript:;" id="msg">인증번호 받기</a></div></td>
-<script>
-		Kakao.Link.createDefaultButton({
-			  container: '#msg',
-			  objectType: 'feed',
-			  content: {
-			    title: '오늘의 디저트',
-			    description: '아메리카노, 빵, 케익',
-			    imageUrl:
-			      'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
-			    link: {
-			      mobileWebUrl: 'https://developers.kakao.com',
-			      androidExecutionParams: 'test',
-			    },
-			  },
-			  itemContent: {
-			    profileText: 'Kakao',
-			    profileImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-			    titleImageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
-			    titleImageText: 'Cheese cake',
-			    titleImageCategory: 'Cake',
-			    items: [
-			      {
-			        item: 'Cake1',
-			        itemOp: '1000원',
-			      },
-			      {
-			        item: 'Cake2',
-			        itemOp: '2000원',
-			      },
-			      {
-			        item: 'Cake3',
-			        itemOp: '3000원',
-			      },
-			      {
-			        item: 'Cake4',
-			        itemOp: '4000원',
-			      },
-			      {
-			        item: 'Cake5',
-			        itemOp: '5000원',
-			      },
-			    ],
-			    sum: 'Total',
-			    sumOp: '15000원',
-			  },
-			  social: {
-			    likeCount: 10,
-			    commentCount: 20,
-			    sharedCount: 30,
-			  },
-			  buttons: [
-			    {
-			      title: '웹으로 이동',
-			      link: {
-			        mobileWebUrl: 'https://developers.kakao.com',
-			      },
-			    },
-			    {
-			      title: '앱으로 이동',
-			      link: {
-			        mobileWebUrl: 'https://developers.kakao.com',
-			      },
-			    },
-			  ]
-			});	
-</script>
+		</td>
 		</tr>
-		<tr><td></td><td><input type="text"><button type="button" class="btn2">확인</button></td></tr>
 	</table>
 <div class="btngroup">
 <button class="btn1" type="button" id="submit">회원가입</button>

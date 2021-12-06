@@ -68,6 +68,42 @@ $(document).ready(function(){
 		    $("#dev_certForm1").hide(); 
 		    $("#dev_certForm2").hide(); 
 		})
+		
+		$("#nextBtn").click(function(){ //다음 클릭 시
+		console.log("다음버튼 클릭");
+		//choose="member"- Member테이블 / "company" - Company테이블
+		var url="<%=request.getContextPath()%>/logins";
+		var json = {'memberId':  $("#userId").val(),
+				'memberPw': $("#userPass").val(),
+				'memberName':$("#userName").val(),
+				'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
+				'memberBirth':$("#birthNum").val(),
+				'memberGender':$("#genderNum").val(),
+				'memberEmail':$("#email_1").val()+"@"+$("#email_2").val()
+				};
+		$.ajax({
+			url: url,
+			type: "post",
+			 // data : 서버(컨트롤러)로 보내는 데이터.
+			 // json데이터를 JSON.stringify를 이용하여 String으로 형변환
+			data: JSON.stringify(json),
+			//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+			contentType : "application/json; charset=utf-8",
+			success: function(result){
+				if(result == 0){
+					alert("일치하는 아이디가 없습니다.");
+				} else {
+					console.log("로그인 성공")
+				}
+			//location.href ="${pageContext.request.contextPath}/main"
+		},
+		error:function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+
+					"\n"+"error:"+error);
+		}
+		});
+		
+		})
 });
 </script>
 </head>
