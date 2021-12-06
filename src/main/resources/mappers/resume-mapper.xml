@@ -17,7 +17,31 @@
 		<result property="jobTypeNo" column="JOB_TYPE_NO" />
 		<result property="resumePhoto" column="RESUME_PHOTO" />
 		
+		<association property="district" resultMap="districtMap"></association>
+		<association property="jobType" resultMap="jobTypeMap"></association>
+		<association property="education" resultMap="educationMap"></association>
+		<association property="period" resultMap="periodMap"></association>
+		
 	</resultMap>
+	
+	<resultMap id="districtMap" type="District">
+		<id property="jobDistrictNo" column="JOB_DISTRICT_NO" />
+		<result property="jobDistrictName" column="JOB_DISTRICT_NAME" />
+	</resultMap>
+	<resultMap id="jobTypeMap" type="com.kh.almin.model.jobtype.vo.JobType">
+		<id property="jobTypeNo" column="JOB_TYPE_NO"/>
+		<result property="jobTypeName" column="JOB_TYPE_NAME"/>
+	</resultMap>
+	<resultMap type="com.kh.almin.model.education.vo.Education" id="educationMap">
+		<id property="educationNo" column="EDUCATION_NO"/>
+		<result property="educationType" column="EDUCATION_TYPE"/>
+	</resultMap>
+	<resultMap type="com.kh.almin.model.period.vo.Period" id="periodMap">
+		<id property="periodNo" column="PERIOD_NO"/>
+		<result property="periodType" column="PERIOD_TYPE"/>
+	</resultMap>
+	
+	
 	<!-- 이력서 전체 조회 -->
 	<select id="selectAllResume" resultMap="ResumeResultMap" resultType="Resume">
 		select RESUME_NO,RESUME_TITLE from MEMBER_RESUME
@@ -25,7 +49,15 @@
 	
 	<!-- 이력서 상세  조회 -->
 	<select id="selectResume" resultMap="ResumeResultMap" parameterType="integer">
-		select * from MEMBER_RESUME where RESUME_NO=#{resumeNo}
+		select a.*,b.JOB_DISTRICT_NAME,c.EDUCATION_TYPE,d.JOB_TYPE_NAME,e.PERIOD_TYPE from member_resume a left outer join job_district b
+		on a.JOB_DISTRICT_NO=b.JOB_DISTRICT_NO
+		left outer join education c
+		on a.EDUCATION_NO=c.EDUCATION_NO
+		left outer join JOB_TYPE d
+		on a.JOB_TYPE_NO=d.JOB_TYPE_NO
+		left outer join PERIOD e
+		on a.PERIOD_NO=e.PERIOD_NO
+ 		where a.RESUME_NO=#{resumeNo}
 	</select>
 	
 	<!-- 이력서 등록 -->

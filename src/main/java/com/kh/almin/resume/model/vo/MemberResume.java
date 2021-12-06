@@ -2,6 +2,11 @@ package com.kh.almin.resume.model.vo;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.almin.district.model.vo.District;
+import com.kh.almin.model.education.vo.Education;
+import com.kh.almin.model.jobtype.vo.JobType;
+import com.kh.almin.model.period.vo.Period;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,4 +41,10 @@ public class MemberResume { //회원 이력서 테이블
 	private int periodNo;
 	private int jobTypeNo;
 	private byte[] resumePhoto;
+	
+	//join
+	private District district;
+	private JobType jobType;
+	private Education education;
+	private Period period;
 }

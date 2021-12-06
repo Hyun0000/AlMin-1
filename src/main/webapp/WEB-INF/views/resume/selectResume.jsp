@@ -11,6 +11,16 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/assets/css/almin.css"/>">
 <title>상세 이력서 조회</title>
+<style type="text/css">
+	button{
+	margin-left:50%;
+	width:100px;
+	color:gray;
+	}
+	section{
+		margin-left:300px;
+	}
+</style>
 </head>
 <body>
 	<header>
@@ -35,13 +45,14 @@
 		<hr>
 		<h2>지역</h2>
 		<div>
-		${resum.jobDistrictNo }
+		<%-- ${resum.district.districtName }--%>
 		</div>
 		<hr>
 		<h2>경력</h2>
 		<div>
-		${resum.jobTypeNo } ${resum.periodNo } ${resum.jobCareers }
+		${resum.jobType.jobTypeName } ${resum.period.periodType } ${resum.jobCareers }
 		</div>
+		<br>
 		<button onclick="history.back();">확인</button>
 	</section>
 
