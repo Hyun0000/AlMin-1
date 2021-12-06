@@ -69,8 +69,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		 
 	 }
 	 
-	 
-	 
 	@PostMapping //회원가입
 	private String insertMember(@RequestBody Member member) throws Exception { 
 //	private String insertMember(@RequestBody Member member, RedirectAttributes ra) throws Exception { 

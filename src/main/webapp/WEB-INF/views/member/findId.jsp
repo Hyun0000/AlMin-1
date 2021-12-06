@@ -71,14 +71,12 @@ $(document).ready(function(){
 		
 		$("#nextBtn").click(function(){ //다음 클릭 시
 		console.log("다음버튼 클릭");
-		//choose="member"- Member테이블 / "company" - Company테이블
+		//TODO: choose="member"- Member테이블 / "company" - Company테이블
 		var url="<%=request.getContextPath()%>/logins";
-		var json = {'memberId':  $("#userId").val(),
-				'memberPw': $("#userPass").val(),
+		var json = {
 				'memberName':$("#userName").val(),
-				'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val(),
-				'memberBirth':$("#birthNum").val(),
-				'memberGender':$("#genderNum").val(),
+				'memberPhone':$("#phone1").val()+"-"+$("#tel2").val(),//TODO:국번 선택에 따라 phone1혹은 tel1.val()
+				'companyNum':$("#companyNum").val(),
 				'memberEmail':$("#email_1").val()+"@"+$("#email_2").val()
 				};
 		$.ajax({
@@ -152,22 +150,21 @@ $(document).ready(function(){
                     <table class="find-form">
                         <tr class="form-item">
                             <th class="form-table form-title">이름</th>
-                            <div class="form-table form-data">
+                            <td class="form-table form-data">
                                 <input type="text" name="certPhoneName" id="dev_certPhoneName" title="가입자명" placeholder="가입자명" maxlength="12">
-                                <p class="mon-warn hide"></p>
-                            </div>
+                            </td>
                         </tr>
                         <div class="form-item">
-                            <div class="form-table form-title">연락처</div>
+                            <th class="form-table form-title">연락처</th>
                             <div class="form-table form-data user-contact">
-                                <span class="contact-type">
+                                <td class="contact-type">
                                     <select name="certPhoneType" id="dev_certPhoneType" title="연락처 타입">
                                         <option value="1">휴대폰</option>
                                         <option value="2">유선전화</option>
                                     </select>
-                                </span>
-                                <span class="front-number">
-                                    <select name="tabPhone" id="dev_tabPhone1" title="휴대폰국번">
+                                </td>
+                                <td class="front-number">
+                                    <select name="phone1" id="phone1" title="휴대폰국번">
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="016">016</option>
@@ -176,7 +173,7 @@ $(document).ready(function(){
                                         <option value="019">019</option>
                                     </select>
 
-                                    <select name="tabPhone" id="dev_tabPhone2" title="유선국번" style="display: none;">
+                                    <select name="tel1" id="tel1" title="유선국번" style="display: none;">
                                         <option value="02">02</option>
                                         <option value="031">031</option>
                                         <option value="032">032</option>
@@ -197,11 +194,10 @@ $(document).ready(function(){
                                         <option value="070">070</option>
                                         <option value="0">직접입력</option>
                                     </select>
-                                </span>
-                                <span class="last-number">
-                                    <input type="tel" name="certPhoneNum" id="dev_certPhoneNum" title="전화번호" maxlength="8">
-                                </span>
-                                <p class="mon-warn hide"></p>
+                                </td>
+                                <td class="last-number">
+                                    <input type="tel" name=tel2 id="dev_certPhoneNum" title="전화번호" maxlength="8">
+                                </td>
                             </div>
                         </div>
                     </table>
@@ -219,7 +215,7 @@ $(document).ready(function(){
                         <div class="form-item">
                             <div class="form-table form-title">이름</div>
                             <div class="form-table form-data">
-                                <input type="text" name="certEmailName" id="dev_certEmailName" title="가입자명" placeholder="가입자명" maxlength="12">
+                                <input type="text" name="userName" id="userName" title="가입자명" placeholder="가입자명" maxlength="12">
                                 <p class="mon-warn hide"></p>
                             </div>
                         </div>
@@ -251,7 +247,7 @@ $(document).ready(function(){
                         <div class="form-item">
                             <div class="form-table form-title">사업자등록번호</div>
                             <div class="form-table form-data">
-                                <input type="text" name="certIdent" id="dev_certIdent" title="사업자등록번호" placeholder="사업자등록번호 ( - 포함)" maxlength="10">
+                                <input type="text" name="companyNum" id="companyNum" title="사업자등록번호" placeholder="사업자등록번호 ( - 포함)" maxlength="10">
                                 <p class="mon-warn hide"></p>
                             </div>
                         </div>
