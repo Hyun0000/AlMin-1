@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.almin.applicant.model.vo.Applicant;
+import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
 
 @Repository
@@ -18,15 +19,26 @@ public class ApplicantDao {
 	private SqlSession sqlSession;
 
 	public List<Applicant> getApplicants() throws Exception {
-		List<Applicant> applicants = sqlSession.selectList("Applicant.listApplicant");
-		System.out.println(applicants);
-		logger.info(applicants.toString());
-		return applicants;
+		return sqlSession.selectList("Applicant.listApplicant");
 	}
 
 	public List<Applicant> searchApplicant(SearchApplicant searchApplicant) throws Exception {
-		List<Applicant> applicants = sqlSession.selectList("Applicant.searchApplicant", searchApplicant);
-		return applicants;
+		return sqlSession.selectList("Applicant.searchApplicant", searchApplicant);
 	}
 
+	public int likeRecruit(LikeApplicant likeApplicant) throws Exception {
+		return sqlSession.insert("Recruit.doLike", likeApplicant);
+	}
+
+	public int dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
+		return sqlSession.delete("Recruit.disLike", likeApplicant);
+	}
+
+	public List<Applicant> listLike(String companyId) throws Exception {
+		return sqlSession.selectList("Recruit.listLike", companyId);
+	}
+
+	public int checkLike(LikeApplicant likeApplicant) throws Exception {
+		return sqlSession.selectOne("Recruit.checkLike", likeApplicant);
+	}
 }

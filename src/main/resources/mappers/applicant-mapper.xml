@@ -15,16 +15,18 @@
 	<select id="listApplicant" resultMap="ApplicantResultMap">
 		select
 		r.RESUME_NO,m.MEMBER_ID,r.RESUME_TITLE,r.JOB_DISTRICT_NO,r.EDUCATION_NO,r.CAREERS_NO
-		from member_resume r join member m on r.member_id=m.member_id and r.RESUME_PUBLIC_YN='Y' ORDER BY RESUME_DATE DESC
+		from member_resume r join member m on r.member_id=m.member_id and
+		r.RESUME_PUBLIC_YN='Y' ORDER BY RESUME_DATE DESC
 	</select>
 
 	<select id="searchApplicant" resultMap="ApplicantResultMap"
 		parameterType="searchApplicant">
-		select RESUME_NO,MEMBER_ID,RESUME_TITLE,JOB_DISTRICT_NO,EDUCATION_NO,CAREERS_NO
+		select
+		RESUME_NO,MEMBER_ID,RESUME_TITLE,JOB_DISTRICT_NO,EDUCATION_NO,CAREERS_NO
 		from searchApplicant
 		<where>
 			<if test='jobDistrictNo != 17 '>
-				and JOB_DISTRICT_NO =  #{jobDistrictNo} 
+				and JOB_DISTRICT_NO = #{jobDistrictNo}
 			</if>
 			<if test='educationNo != 0 '>
 				and EDUCATION_NO = #{educationNo}
@@ -35,8 +37,42 @@
 			<if test='memberGender != "0" '>
 				and MEMBER_GENDER like '%' || #{memberGender} || '%'
 			</if>
-				and RESUME_PUBLIC_YN='Y'
+			and RESUME_PUBLIC_YN='Y'
 		</where>
+	</select>
+
+	<!-- 관심인재 리스트 -->
+	<select id="listLike" resultMap="ApplicantResultMap"
+		parameterType="String">
+		select * from member_resume r JOIN focus_member f
+		USING(RESUME_NO) where f.COMPANY_ID = 'testcompany05';
+		SELECT * FROM
+		MEMBER_RESUME R JOIN FOCUS_MEMBER F USING(RESUME_NO) WHERE
+		F.COMPANY_ID = #{companyId}
+	</select>
+
+	<!-- 좋아요 -->
+	<insert id="doLike" parameterType="likeApplicant">
+		insert into FOCUS_MEMBER
+		(LIKE_NO,RESUME_NO,COMPANY_ID,COMPANY_TYPE)
+		values
+		(FOCUS_MEMBER_SEQUENCE.NEXTVAL,#{resumeNo},#{companyId},#{companyType})
+	</insert>
+
+	<!-- 좋아요 취소 -->
+	<delete id="disLike" parameterType="likeApplicant">
+		delete from FOCUS_MEMBER
+		where
+		RESUME_NO = #{resumeNo}
+		and COMPANY_ID = #{companyId}
+	</delete>
+
+	<!-- 좋아요 체크 -->
+	<select id="checkLike" resultType="integer"
+		parameterType="likeApplicant">
+		select count(*) from FOCUS_MEMBER where
+		membCOMPANY_IDer_id =
+		#{companyId} and RESUME_NO = #{resumeNo}
 	</select>
 
 </mapper>

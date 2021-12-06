@@ -153,7 +153,7 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=8&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=8&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat1.png"
@@ -163,7 +163,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=11&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=11&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat2.png"
@@ -173,7 +173,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=6&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=6&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat3.png"
@@ -183,7 +183,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=7&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=7&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat4.png"
@@ -193,7 +193,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=4&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=4&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4 mb-lg-0">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat5.png"
@@ -203,7 +203,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=9&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=9&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4 mb-lg-0">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat6.png"
@@ -213,7 +213,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=10&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=10&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center mb-4 mb-md-0">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat7.png"
@@ -223,7 +223,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
-					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=12&recruitJobDistrict=100&recruitJobWho=100&searchKeyword='">
+					onclick="location.href='${pageContext.request.contextPath}/recruits?recruitJobType=12&recruitJobDistrict=100&recruitJobWho=100&recruitJobBranch=X&searchKeyword='">
 					<div class="single-category text-center">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/images/cat8.png"

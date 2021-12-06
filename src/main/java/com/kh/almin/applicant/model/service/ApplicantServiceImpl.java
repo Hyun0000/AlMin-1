@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.kh.almin.applicant.model.dao.ApplicantDao;
 import com.kh.almin.applicant.model.vo.Applicant;
+import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
+import com.kh.almin.recruit.model.vo.Recruit;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
@@ -26,4 +28,20 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return applicantDao.searchApplicant(searchApplicant);
 	}
 
+	public int likeRecruit(LikeApplicant likeApplicant) throws Exception {
+		return applicantDao.likeRecruit(likeApplicant);
+	}
+
+	public int dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
+		return applicantDao.dislikeRecruit(likeApplicant);
+	}
+
+	public List<Applicant> listLike(String companyId) throws Exception {
+		return applicantDao.listLike(companyId);
+	}
+
+	public int checkLike(LikeApplicant likeApplicant) throws Exception {
+		return applicantDao.checkLike(likeApplicant);
+
+	}
 }

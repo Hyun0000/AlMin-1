@@ -8,12 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.applicant.model.service.ApplicantService;
 import com.kh.almin.applicant.model.vo.Applicant;
+import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
+import com.kh.almin.recruit.model.vo.LikeRecruit;
+import com.kh.almin.recruit.model.vo.Recruit;
 
 @Controller
 @RequestMapping("/applicants")
@@ -47,6 +52,40 @@ public class ApplicantController {
 		logger.info("volist: " + volist);
 		logger.info("svolist: " + svolist);
 		return mv;
+	}
+
+	@GetMapping(value = "/myapplicants")
+	private ModelAndView listLikes(ModelAndView mv) throws Exception {
+		List<Applicant> volist = null;
+		volist = applicantService.listLike("testcompany01");
+		mv.addObject("applicants", volist);
+		mv.setViewName("applicants/myapplicants");
+		logger.info("마이페이지-관심공고");
+		return mv;
+	}
+
+	@GetMapping(value = "/dislike")
+	private String dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
+		likeApplicant.setCompanyId("testcompany01");
+		applicantService.dislikeRecruit(likeApplicant);
+		return "redirect:/applicants/myapplicants";
+	}
+
+	@PostMapping(value = "/like")
+	@ResponseBody
+	private String likeRecruit(LikeApplicant likeApplicant) throws Exception {
+		String result = "";
+		int like = 0;
+		likeApplicant.setCompanyId("testcompany01");
+		like = applicantService.dislikeRecruit(likeApplicant);
+		if (like == 1) {
+			System.out.println("찜 해제");
+		} else if (like == 0) {
+			applicantService.likeRecruit(likeApplicant);
+			System.out.println("찜 등록");
+		}
+		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		return result;
 	}
 
 	@ExceptionHandler
