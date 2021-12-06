@@ -88,8 +88,9 @@
 								<option value="15">전남</option>
 								<option value="16">제주</option>
 								<option value="17">전국</option>
-							</select> <input type="text" name=recruitJobWho value=100 hidden /> <input
-								type="text" placeholder="키워드 검색" onfocus="this.placeholder = ''"
+							</select> <input type="text" name=recruitJobWho value=100 style="display:none" />
+							<input type="text" name=recruitJobBranch value="X" style="display:none" />
+							<input type="text" placeholder="키워드 검색" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '키워드 검색'" name="searchKeyword">
 							<button class="template-btn" onclick="search()">찾아보기</button>
 						</form>
