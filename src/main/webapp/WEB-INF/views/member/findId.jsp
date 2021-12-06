@@ -113,14 +113,14 @@ $(document).ready(function(){
                     <p class="message-content strong">회원정보에 등록된 연락처로 아이디를 찾을 수 있습니다.</p>
                 </div>
                 <div class="find-to-result">
-                    <div class="find-form">
-                        <div class="form-item">
-                            <div class="form-table form-title">이름</div>
+                    <table class="find-form">
+                        <tr class="form-item">
+                            <th class="form-table form-title">이름</th>
                             <div class="form-table form-data">
                                 <input type="text" name="certPhoneName" id="dev_certPhoneName" title="가입자명" placeholder="가입자명" maxlength="12">
                                 <p class="mon-warn hide"></p>
                             </div>
-                        </div>
+                        </tr>
                         <div class="form-item">
                             <div class="form-table form-title">연락처</div>
                             <div class="form-table form-data user-contact">
@@ -168,7 +168,7 @@ $(document).ready(function(){
                                 <p class="mon-warn hide"></p>
                             </div>
                         </div>
-                    </div>
+                    </table>
                 </div>
             </div>
 

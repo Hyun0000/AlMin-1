@@ -20,7 +20,6 @@ public class MailSendService {
         this.size = size;
         return getAuthCode();
     }
-
     //인증코드 난수 발생
     private String getAuthCode() {
         Random random = new Random();
@@ -31,10 +30,8 @@ public class MailSendService {
             num = random.nextInt(10);
             buffer.append(num);
         }
-
         return buffer.toString();
     }
-
     //인증메일 보내기
     public String sendAuthMail(String email) {
         //6자리 난수 인증번호 생성
