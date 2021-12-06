@@ -17,7 +17,7 @@ button {
 	width: 100px;
 	color: gray;
 }
-
+  
 section {
 	margin-left: 300px;
 }

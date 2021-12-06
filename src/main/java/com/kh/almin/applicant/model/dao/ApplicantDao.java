@@ -14,7 +14,7 @@ import com.kh.almin.applicant.model.vo.SearchApplicant;
 
 @Repository
 public class ApplicantDao {
-	private static final Logger logger = LoggerFactory.getLogger(ApplicantDao.class);
+//	private static final Logger logger = LoggerFactory.getLogger(ApplicantDao.class);
 	@Autowired
 	private SqlSession sqlSession;
 

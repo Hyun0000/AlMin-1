@@ -11,7 +11,6 @@ import com.kh.almin.applicant.model.dao.ApplicantDao;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
-import com.kh.almin.recruit.model.vo.Recruit;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
@@ -20,7 +19,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 	private ApplicantDao applicantDao;
 
 	public List<Applicant> getApplicants() throws Exception {
-		logger.info("Service 로깅 확인");
 		return applicantDao.getApplicants();
 	}
 
@@ -28,7 +26,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return applicantDao.searchApplicant(searchApplicant);
 	}
 
-	public int likeApplicant(LikeApplicant likeApplicant) throws Exception {
+	public int likeApplicant(LikeApplicant likeApplicant) throws Exception { 
 		return applicantDao.likeApplicant(likeApplicant);
 	}
 
