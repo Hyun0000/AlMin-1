@@ -1,6 +1,5 @@
 package com.kh.almin.recruit.model.vo;
 
-
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
@@ -18,4 +17,5 @@ public class SearchRecruit {
 	private int recruitJobDistrict;
 	private int recruitJobWho;
 	private String searchKeyword;
+	private String recruitJobBranch;
 }

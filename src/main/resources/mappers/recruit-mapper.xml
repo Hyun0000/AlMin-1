@@ -87,6 +87,9 @@
 			<if test='recruitJobWho != 100 '>
 				and RECRUIT_JOB_WHO = #{recruitJobWho}
 			</if>
+			<if test='recruitJobBranch != "X" '>
+				and RECRUIT_JOB_BRANCH = #{recruitJobBranch}
+			</if>
 			<if test='searchKeyword != null '>
 				and RECRUIT_TITLE like '%'|| #{searchKeyword} || '%'
 			</if>

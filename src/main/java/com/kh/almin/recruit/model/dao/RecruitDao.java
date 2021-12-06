@@ -21,24 +21,19 @@ public class RecruitDao {
 	private SqlSession sqlSession;
 
 	public List<Recruit> getReport() throws Exception {
-		List<Recruit> recruits = sqlSession.selectList("Recruit.listReport");
-		logger.info(recruits.toString());
-		return recruits;
+		return sqlSession.selectList("Recruit.listReport");
 	}
 
 	public List<Recruit> recruitList() throws Exception {
-		List<Recruit> recruit = sqlSession.selectList("Recruit.jobinfoList");
-		return recruit;
+		return sqlSession.selectList("Recruit.jobinfoList");
 	}
 
 	public Recruit detailjobinfo(int recruitNo) throws Exception {
-		Recruit recruit = sqlSession.selectOne("Recruit.detailjobinfo", recruitNo);
-		return recruit;
+		return sqlSession.selectOne("Recruit.detailjobinfo", recruitNo);
 	}
 
 	public List<Recruit> searchRecruit(SearchRecruit searchRecruit) throws Exception {
-		List<Recruit> recruit = sqlSession.selectList("Recruit.searchRecruit", searchRecruit);
-		return recruit;
+		return sqlSession.selectList("Recruit.searchRecruit", searchRecruit);
 	}
 
 	public int reportRecruit(int recruitNo) throws Exception {

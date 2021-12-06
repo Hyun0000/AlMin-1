@@ -55,7 +55,7 @@
 
 					<c:forEach var="item" items="${recruits}">
 						<div class="main-content">
-					
+
 							<div class="single-content1">
 								<div class="single-job mb-4 d-lg-flex justify-content-between">
 									<div class="job-text">
@@ -136,6 +136,16 @@
 										<option value="6">외국인 가능</option>
 										<option value="7">초보 가능</option>
 										<option value="8">재택 가능</option>
+									</select>
+								</div>
+							</div>
+							<div class="single-item mb-4">
+								<h4 class="mb-4">브랜드</h4>
+								<div class="default-select">
+									<select name="recruitJobBranch">
+										<option value="X">무관</option>
+										<option value="Y">브랜드알바 보기</option>
+										<option value="N">브랜드알바 제외</option>
 									</select>
 								</div>
 							</div>
