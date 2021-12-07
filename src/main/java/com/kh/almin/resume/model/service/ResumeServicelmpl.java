@@ -25,4 +25,7 @@ public class ResumeServicelmpl implements ResumeService {
 	public int deleteResume(int resumeNo) throws Exception{
 		return resumeDao.deleteResume(resumeNo);
 	}
+	public int updateResume(int resumeNo) throws Exception{
+		return resumeDao.updateResume(resumeNo);
+	}
 }

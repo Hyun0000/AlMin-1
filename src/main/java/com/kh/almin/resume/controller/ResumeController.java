@@ -75,6 +75,12 @@ public class ResumeController {
 		
 		return "redirect:allres";
 	}
+	@PostMapping("updateResume")
+	public String updateResume(int resumeNo) {
+		
+		
+		return "";
+	}
 	
 	@PostMapping("addres")//이력서등록
 	public ModelAndView insertResume(@RequestParam(value = "resumePhoto",required = false) byte[] resumePhoto,MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{

@@ -74,4 +74,9 @@
 	<delete id="deleteResume" parameterType="Resume">
 		delete from MEMBER_RESUME where RESUME_NO=#{resumeNo}
 	</delete>
+	
+	<update id="updateResume" parameterType="Resume">
+		update MEMBER_RESUME set RESUME_TITLE=#{resumeTitle},RESUME_PHONE=#{resumePhone},JOB_DISTRICT_NO=#{jobDistrictNo},
+		JOB_TYPE_NO=#{jobTypeNo},EDUCATION_NO=#{educationNo},JOB_CAREERS=#{jobCareers} where RESUME_NO=#{resumeNo}
+	</update>
 </mapper>

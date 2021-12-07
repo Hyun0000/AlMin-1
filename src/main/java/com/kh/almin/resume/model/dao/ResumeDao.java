@@ -31,4 +31,8 @@ public class ResumeDao {
 	public int deleteResume(int resumeNo) throws Exception{
 		return sqlSession.delete("Resume.deleteResume", resumeNo);
 	}
+	
+	public int updateResume(int resumeNo) throws Exception{
+		return sqlSession.update("Resume.updateResume", resumeNo);
+	}
 }
