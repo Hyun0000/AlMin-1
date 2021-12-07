@@ -53,7 +53,10 @@ section {
 		<div>${resum.jobType.jobTypeName }${resum.period.periodType }
 			${resum.jobCareers }</div>
 		<br>
-		<button onclick="history.back();">확인</button>
+		<button class="template-btn like-btn" onclick="history.back();">확인</button>
+		<button class="template-btn like-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+		<button class="template-btn like-btn">수정</button>
+		
 		<button class="template-btn like-btn" onclick="doLike(this);">
 			<c:choose>
 				<c:when test="${like == null}">
