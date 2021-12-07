@@ -21,5 +21,6 @@ public class Company {
 	private String companyBoss;
 	private String companyEmail;
 	private String companyAddress;
+	private String mailCheckYn;
 	private String companyNum;
 }

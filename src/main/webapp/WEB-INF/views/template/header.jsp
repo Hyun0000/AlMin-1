@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- jstl은 header가 아닌 메인페이지에 삽입 -->
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 공통헤더 템플릿입니다. css 작성금지 -->
 
 <!-- 네이버 로그인 -->
@@ -34,7 +35,7 @@ session.setAttribute("state", state);
 		<div class="row">
 			<div class="col-lg-2">
 				<div class="logo-area">
-					<a href="${pageContext.request.contextPath}/main"><img
+				<a href="${pageContext.request.contextPath}/main"><img
 						src="${pageContext.request.contextPath}/resources/assets/images/logo.png"
 						class="logo" alt="logo"></a>
 				</div>
@@ -44,22 +45,25 @@ session.setAttribute("state", state);
 					<span></span> <span></span> <span></span>
 				</div>
 				<div class="main-menu">
-				<c:if test="${empty sessionScope.loginInfo.memberId}">
-					<!-- 로그인 전 노출 -->
-					<ul id="logout-state">
-						<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
-							<a href="${pageContext.request.contextPath}/members/register"
-							class="template-btn">회원가입</a></li>
-					</ul>
-				</c:if>
-				<c:otherwise>
-					<!-- 로그인 후 노출 -->
-					<ul id="login-state" style="display: none;">
-						<li><a href="${pageContext.request.contextPath}/recruits/myrecruits">마이페이지</a></li>
-						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn""><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
-					</ul>
-   				</c:otherwise>
+				<c:choose>
+					<c:when test="${empty sessionScope.loginInfo.memberId}">
+						<!-- 로그인 전 노출 -->
+						<ul id="logout-state">
+							<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
+								<a href="${pageContext.request.contextPath}/members/register"
+								class="template-btn">회원가입</a></li>
+						</ul>
+				
+					</c:when>
+					<c:otherwise>
+						<!-- 로그인 후 노출 -->
+						<ul id="login-state" style="display: none;">
+							<li><a href="${pageContext.request.contextPath}/recruits/myrecruits">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
+				<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
+						</ul>
+					</c:otherwise>
+   				</c:choose>
 					<ul>
 						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
 						<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
@@ -250,11 +254,10 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 				alert("아이디와 비밀번호를 다시 확인해주세요.");
 			} else {
 				console.log("로그인 성공")
+				
     		$(".modal").hide(); 
-			$("#login-state").show();//로그아웃, 마이페이지
-			$("#logout-state").hide();//로그인, 회원가입
 			}
-		//location.href ="${pageContext.request.contextPath}/main"
+		location.href ="${pageContext.request.contextPath}/main"
 	},
 	error:function(request,status,error){
 		alert("code:"+request.status+"\n"+"message:"+request.responseText+

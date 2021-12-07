@@ -62,7 +62,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 		logger.info(m.toString());
 		Member ms= memberService.selectMember(m);
 		logger.info(ms.toString());
-		if(ms == null) {
+		if(ms.getMemberId() == null) {
 			return result;
 		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
 			boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
@@ -71,6 +71,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 				logger.info("로그인 성공");
 				result= "1";
 				 session.setAttribute("loginInfo", ms);
+				 logger.info((String) session.getAttribute("loginInfo"));
 				// model.addAttribute("loginInfo",ms); 이런 방식도 있다.
 			} else {
 				logger.info("로그인 실패");

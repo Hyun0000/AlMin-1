@@ -23,6 +23,7 @@ public class Member {
 	private String memberEmail;
 	private String memberGender;
 	private int memberAge;
+	private String mailCheckYn;
 	private String memberRegdate;
 	private String authKey;
 }

@@ -13,6 +13,7 @@
 		<result property="memberGender" column="MEMBER_GENDER" />
 		<result property="memberAge" column="MEMBER_AGE" />
 		<result property="memberRegdate" column="MEMBER_REGDATE" />
+		<result property="mailCheckYn" column="MAILCHEK_YN" />
 	</resultMap>
 
 	<resultMap type="Company" id="CompanyResultMap">
@@ -24,35 +25,36 @@
 		<result property="companyEmail" column="COMPANY_EMAIL" />
 		<result property="companyAddress" column="COMPANY_ADDRESS" />
 		<result property="companyNum" column="COMPANY_NUM" />
+		<result property="mailCheckYn" column="MAILCHEK_YN" />
 	</resultMap>
 
 	<select id="listMember" resultMap="MemberResultMap">
 		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_BIRTH,
-		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE,MAILCHEK_YN from MEMBER
 		WHERE MEMBER_TYPE=1
 	</select>
 
 	<select id="listCompany" resultMap="CompanyResultMap">
 		select COMPANY_ID, COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
-		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+		COMPANY_ADDRESS, COMPANY_NUM,MAILCHEK_YN from COMPANY
 	</select>
 
 	<!-- 개인회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		insert into MEMBER (MEMBER_ID, MEMBER_TYPE, MEMBER_PW, MEMBER_NAME,
 			MEMBER_PHONE, MEMBER_BIRTH, MEMBER_EMAIL,
-			MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE)
+			MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE,MAILCHEK_YN)
 		values (#{memberId},'1', #{memberPw}, #{memberName}
 			, #{memberPhone}, #{memberBirth}, #{memberEmail},
-			#{memberGender}, #{memberAge}, sysdate )<!-- sysdate 생략시 default 들어감 -->
+			#{memberGender}, #{memberAge}, sysdate, 'N')<!-- sysdate 생략시 default 들어감 -->
 	</insert>
 	<!-- 기업회원가입 -->
 	<insert id="insertCompany" parameterType="Company">
 		insert into COMPANY (COMPANY_ID,COMPANY_TYPE,COMPANY_PW,COMPANY_TEL,COMPANY_NAME,
-			COMPANY_BOSS,COMPANY_EMAIL,COMPANY_ADDRESS,COMPANY_NUM)
+			COMPANY_BOSS,COMPANY_EMAIL,COMPANY_ADDRESS,COMPANY_NUM,MAILCHEK_YN)
 		values (#{companyId},'2', #{companyPwd}, #{companyTel}
 			, #{companyName}, #{companyBoss}, #{companyEmail}, #{companyAddress},
-			#{companyNum} )
+			#{companyNum},'N' )
 	</insert>
 	
 	<!-- 아이디 비번 동시 체크 -->
