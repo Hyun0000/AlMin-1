@@ -296,7 +296,9 @@
 	console.log("recruitNo : " + recruitNo);
 	// 공고번호(recruitNo)
 </script>
+<!-- 후기 입력 모달창 import -->
 <c:import url="/WEB-INF/views/recruits/detailjobinfo_comments.jsp" />
+<!-- 후기 입력 모달창 import -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script src="<c:url value="/resources/recruits/js/detailjobinfo.js"/>"></script>

@@ -347,15 +347,11 @@ function selectAllComments() {
 //				}
 //			}
 		} // if (httpRequest.status === 200) 종료
+		console.log("삭제 버튼 유무");
 		let findCommentsPath = "findComments?recruitNo=" + recruitNo + "&id=" + userId;
 		sendRequest("GET", findCommentsPath, null, findComments);
 		
-		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 		let test = document.getElementsByClassName('deleteBtn');
-		console.log(test.length);
-		console.log(document.getElementById('comments_box'));
-		console.log(document.getElementsByClassName('deleteBtn'));
-		console.log(document.getElementById('comments_box').hasChildNodes());
 	}
 } // selectAllComments callback function 종료
 //========================================= 후기 삭제 버튼(delete) inline function ====================================
@@ -554,6 +550,7 @@ function findComments() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
 			console.log(httpRequest.responseText);
+			console.log("삭제 버튼 function");
 			let test = httpRequest.responseText;
 			
 			if(test === "true") {
@@ -561,7 +558,7 @@ function findComments() {
 	        	document.getElementById('insert_modal_showBtn').style.display = "none";
 			} else if(test === "false") {
 				// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
-	        	document.getElementById('insert_modal_showBtn').style.display = "false";				
+	        	document.getElementById('insert_modal_showBtn').style.display = "block";				
 			}
 			
 		}

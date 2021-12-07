@@ -22,7 +22,7 @@ public interface CommentsService {
 	public int deleteComment(int rNo , String userId) throws Exception;
 // ==============================================================================
 	// 현재 접속자의 해당 공고 후기 작성 유무 확인
-	public int findComments(String rNo , String userId) throws Exception;
+	public int findComments(String userId, int recruitNo) throws Exception;
 // ==============================================================================
 // ==============================================================================
 }

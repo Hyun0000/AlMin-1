@@ -243,10 +243,12 @@ public class CommentsController {
 	// 현재 접속자의 해당 공고 후기 작성 유무 확인
 	@GetMapping("findComments")
 	@ResponseBody
-	public String findComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String recruitNo) {
+	public String findComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String rNo) {
 		System.out.println("@GetMapping(후기 작성 여부) 진입");
 		System.out.println("id : " + id);
-		System.out.println("recruitNo : " + recruitNo);
+		System.out.println("rNo : " + rNo);
+		int recruitNo = Integer.parseInt(rNo);
+		if(rNo == "" || rNo == null) {recruitNo = 0;}
 		
 		int result = 0;
 		try {
@@ -254,7 +256,7 @@ public class CommentsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("result : " + result);
+		System.out.println("result controller : " + result);
 		
 		String resultStr = "";
 		if (result == 1) {resultStr = "true";}

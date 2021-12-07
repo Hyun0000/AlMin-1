@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="MyRecruit">
+	<resultMap type="MyRecruit" id="selectRecruitMemberMap">
+		<result column="RWM_MEMBER_ID" property="rwmMemberId"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="MEMBER_BIRTH" property="memberBirth"/>
+		<result column="MEMBER_GENDER" property="memberGender"/>
+		<result column="MEMBER_PHONE" property="memberPhone"/>
+		<result column="MEMBER_EMAIL" property="memberEmail"/>
+	</resultMap>
+	
+	<select id="selectRecruitMember" parameterType="_int" resultType="hashmap">
+		SELECT RWM.RWM_MEMBER_ID, MEMBER.MEMBER_NAME, MEMBER.MEMBER_BIRTH, MEMBER.MEMBER_GENDER, MEMBER.MEMBER_PHONE, MEMBER.MEMBER_EMAIL
+		FROM RECRUIT_WANT_MEMBER RWM JOIN MEMBER ON RWM.RWM_MEMBER_ID = MEMBER.MEMBER_ID WHERE RWM_RECRUIT_NO = #{recruitNo}
+	</select>
+</mapper>
+
+
+<!--
+private int rwmRecruitNo;
+private String rwmMemberId;
+private String rwmMemberType;
+
+private String memberId;
+private String memberType;
+private String memberPw;
+private String memberName;
+private String memberPhone;
+private String memberBirth;
+private String memberEmail;
+private String memberGender;
+private int memberAge;
+private String memberRegdate;
+private String authKey;
+-->

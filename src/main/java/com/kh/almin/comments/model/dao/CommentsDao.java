@@ -224,15 +224,15 @@ public class CommentsDao {
 	}
 //==============================================================================
 	// 현재 접속자의 해당 공고 후기 작성 유무 확인
-	public int findComments(String rNo, String userId) {
+	public int findComments(String userId, int recruitNo) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("recruitNo", rNo);
 		paramMap.put("id", userId);
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap = sqlSession.selectOne("Comments.findComments", paramMap);
-		System.out.println("resultMap : " + resultMap);
-		return 0;
+		paramMap.put("recruitNo", recruitNo);
+		System.out.println("dao rNo : " + recruitNo + " id : " + userId);
+		int result = 0;
+		result = sqlSession.selectOne("Comments.findComments", paramMap);
+		System.out.println("result dao : " + result);
+		return result;
 	}
 }
 

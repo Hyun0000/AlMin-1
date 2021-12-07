@@ -45,8 +45,8 @@ public class CommentsServiceImpl implements CommentsService {
 // ==============================================================================
 	// 현재 접속자의 해당 공고 후기 작성 유무 확인
 	@Override
-	public int findComments(String rNo, String userId) throws Exception {
-		return commentsDao.findComments(rNo, userId);
+	public int findComments(String userId, int recruitNo) throws Exception {
+		return commentsDao.findComments(userId, recruitNo);
 	}
 // ==============================================================================
 }

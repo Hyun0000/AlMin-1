@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+/* 지원자 전체를 담는 <section> */
+#candidate_container {
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* 각 지원자의 정보를 담는 <div> */
+.candidate_box {
+    border: 5px solid royalblue;
+    border-radius: 30px;
+    display: inline-block;
+    width: 400px;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+/* 각 지원자의 정보를 모두 담는 <ul> */
+.candidate_list {
+    list-style-type: none;
+    padding: 30px;
+    margin: 0;
+}
+
+/* 각 지원자의 이름, 생년월일을 담는 <li> */
+.candidate_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 각 지원자의 생년월일 & 성별 담는 <div> */
+.candidate_birth {
+    text-align: right;
+}
+
+/* 각 지원자에 걸려있는 <a> link */
+.detailInfo_Link {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
