@@ -33,7 +33,7 @@ public class MailSendService {
         return buffer.toString();
     }
     //인증메일 보내기
-    public String sendAuthMail(String email) {
+    public String sendAuthMail(String email) { //parameter로 받는사람 메일(email)
         //6자리 난수 인증번호 생성
         String authKey = getKey(6);
 
@@ -44,7 +44,7 @@ public class MailSendService {
             sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
             .append(authKey)
             .toString());
-            sendMail.setFrom("chsh9410@gmail.com", "관리자");//보내는 메일
+            sendMail.setFrom("chsh9410@gmail.com", "관리자");//보내는사람 메일
             sendMail.setTo(email);
             sendMail.send();
         } catch (MessagingException e) {

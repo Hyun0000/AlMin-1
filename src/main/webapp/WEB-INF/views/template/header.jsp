@@ -16,7 +16,7 @@
 <!-- 네이버로그인 jsp로 하는 방법 -->
 <%
 	String clientId = "LV_HERZOVT4XTBBoYuEl";//애플리케이션 클라이언트 아이디값";
-String redirectURI = URLEncoder.encode("http://127.0.0.1:8090/almin/main", "UTF-8");
+String redirectURI = URLEncoder.encode("http://localhost:8090/almin/main", "UTF-8");
 SecureRandom random = new SecureRandom();
 String state = new BigInteger(130, random).toString();
 String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -24,7 +24,10 @@ apiURL += "&client_id=" + clientId;
 apiURL += "&redirect_uri=" + redirectURI;
 apiURL += "&state=" + state;
 session.setAttribute("state", state);
+
 %>
+
+
 <!-- Header Area Starts -->
 <header class="header-area main-header">
 	<div class="container">
@@ -52,8 +55,8 @@ session.setAttribute("state", state);
 				<c:otherwise>
 					<!-- 로그인 후 노출 -->
 					<ul id="login-state" style="display: none;">
-						<li><a href="#">마이페이지</a></li>
-						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn" onclick="logout()"><button class="template-btn">로그아웃</button></a></li>
+						<li><a href="${pageContext.request.contextPath}/recruits/myrecruits">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn""><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
 			<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 					</ul>
    				</c:otherwise>
@@ -120,6 +123,7 @@ session.setAttribute("state", state);
 	<script>
 		var chk = "member";
 	$(document).ready(function(){
+		console.log(Kakao.Auth.getAccessToken());//토큰확인
 		$("#memberBtn").css({
 			"background-color":"#f8b600",
 			"color":"white",
@@ -263,10 +267,10 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 		// SNS 로그인(네이버, 카카오, 페이스북)
 
 		/*네이버 로그인(JS로 하는 방법) // el태그 인식 못함
-		 var naver_id_login = new naver_id_login("LV_HERZOVT4XTBBoYuEl", "http://127.0.0.1:8090/almin/main");
+		 var naver_id_login = new naver_id_login("LV_HERZOVT4XTBBoYuEl", "http://localhost:8090/almin/main");
 		 var state = naver_id_login.getUniqState();
 		 naver_id_login.setButton("white", 2,40);
-		 naver_id_login.setDomain("http://127.0.0.1:8090/");
+		 naver_id_login.setDomain("http://localhost:8090/");
 		 naver_id_login.setState(state);
 		 naver_id_login.setPopup();
 		 naver_id_login.init_naver_id_login();
@@ -359,11 +363,12 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			if (response.status === 'connected') { // Logged into your webpage and Facebook.
 				testAPI();
 			} else { // Not logged into your webpage or we are unable to tell.
-				document.getElementById('status').innerHTML = 'Please log '
-						+ 'into this webpage.';
+				//document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
 			}
 		}
-		//로그아웃
+		
+		
+	//logout
 		function logoutFB() {
 			FB.logout(function(response) {
 				// Person is now logged out
@@ -372,10 +377,38 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 					statusChangeCallback(response);
 				});
 			});
+		};
+ 	function logout(){
+ 		logoutFB();
+		Kakao.Auth.logout();
+		//연결끊기
+		Kakao.API.request({
+			  url: '/v1/user/unlink',
+			  success: function(response) {
+			    console.log(response);
+			  },
+			  fail: function(error) {
+			    console.log(error);
+			  },
+			});
+		
+		
+		//로그아웃()
+		if (!Kakao.Auth.getAccessToken()) {
+			
+			  console.log('Not logged in.');
+			  return;
+			}
+			Kakao.Auth.logout(function() {
+			  console.log(Kakao.Auth.getAccessToken());
+			});
+			location.href="${pageContext.request.contextPath}/logout"
+ 	}
+		
 
 			//response.status === 'connected' 로그인상태
 			//response.status === 'unknown' 로그아웃상태
-		}
+		
 	</script>
 </header>
 <!-- Header Area End -->

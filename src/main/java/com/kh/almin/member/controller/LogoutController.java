@@ -24,9 +24,12 @@ public class LogoutController {
             HttpServletRequest request,
             Model model) throws Exception{
 		//invalidate: 모든 세션 무효화 / removeAttribute: 특정 세션만 종료
-            request.getSession().removeAttribute("loginInfo");
+           request.getSession().removeAttribute("loginInfo");
+           request.getSession().removeAttribute("state");//네이버 로그아웃
+            //sns로그아웃 -> 토큰값 지우기 -> 네이버 쪽에 api 날리기
+            //DB에 있는 것도 지우고, 세션도 지우고
             logger.info("로그아웃");
-            return "redirect:/main";
+            return "member/logoutAction";
     }
 	
 	@ExceptionHandler

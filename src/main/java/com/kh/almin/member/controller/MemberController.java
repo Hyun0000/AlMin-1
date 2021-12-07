@@ -113,20 +113,20 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	private String findPwdMember() throws Exception {
 		return "member/findPwd";
 	}
-//	@GetMapping //회원정보 조회
-//	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-//		List<Member> volist = memberService.getMembers();
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("memberview",volist);
-//		mv.setViewName("member/register");//jsp화면
-//		
-//		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
-////		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
-//		
-////		logger.info("전체 회원리스트 조회");
-////		logger.info("volist: "+volist.toString());
-//		return mv;
-//	}
+	@GetMapping("/mypage") //회원정보 조회
+	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
+		List<Member> volist = memberService.getMembers();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberview",volist);
+		mv.setViewName("member/memberInfo");//jsp화면
+		
+		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
+//		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
+		
+//		logger.info("전체 회원리스트 조회");
+//		logger.info("volist: "+volist.toString());
+		return mv;
+	}
 	
 	@PutMapping
 	private String updateMember() { //회원정보 수정

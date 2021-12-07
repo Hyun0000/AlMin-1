@@ -63,8 +63,12 @@
 //			var pwPattern =/^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,16}$/;
 			var pwPattern =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$^!%*#?&])[A-Za-z\d$@$!^%*#?&]{6,}$/;
 			var namePattern = /^[a-zA-Z가-힣]*$/;
+			var birthPattern = /^\d{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1]){6}$/;
+			var genderPattern = /^[1-4]{1}$/;
 			var emailPattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*.[a-zA-Z]{1,3}$/i;   
-			var phonePattern = /^01[016789]{1}-?([0-9]{4})-?([0-9]{4})$/;
+//			var phonePattern = /^01[016789]{1}-?([0-9]{4})-?([0-9]{4})$/;
+			var phone2Pattern = /^[0-9]{3,4}$/;
+			var phone3Pattern = /^[0-9]{4}$/;
 			//맨 뒤의 /i는 대소문자 구분하지 않도록 쓸 때 사용
 			var idChkYN = "N";
 			$("#idCheck").on("click", function(){
@@ -146,6 +150,22 @@
 				} $("#nmCmt").html(html);
 			})
 			
+			$("#birthNum").on("keyup", function(){
+				var birthNum = $("#birthNum").val();
+				var html = "";
+				if(!birthPattern.test(birthNum)){
+					 html+="생년월일 형태로 입력해주세요.";
+				} $("#gdCmt").html(html);
+			})
+			
+			$("#genderNum").on("keyup", function(){
+				var genderNum = $("#genderNum").val();
+				var html = "";
+				if(!genderPattern.test(genderNum)){
+					 html+="1~4 숫자만 입력해주세요.";
+				} $("#gdCmt").html(html);
+			})
+			
 			$("#email_3").change(function(){
 				$("#email_3 option:selected").each(function () { 
 					if($(this).val()== '1'){ //직접입력일 경우
@@ -158,9 +178,23 @@
 					});
 			});
 			
+			$("#phone2").on("keyup", function(){
+				var phone2 = $("#phone2").val();
+				var html = "";
+				if(!phone2Pattern.test(phone2)){
+					 html+="최소3자리, 최대4자리 숫자만 입력해주세요.";
+				} $("#pn2Cmt").html(html);
+			})
+			$("#phone3").on("keyup", function(){
+				var phone3 = $("#phone3").val();
+				var html = "";
+				if(!phone3Pattern.test(phone3)){
+					 html+="4자리 숫자만 입력해주세요.";
+				} $("#pn3Cmt").html(html);
+			})
 			
 			$("#submit").on("click", function(){
-			
+			//TODO: agreeChk_5, 0, 1 체크안되면 "필수항목에 동의해주세요."
 			if($("#userId").val()==""){
 				alert("아이디를 입력해주세요.");
 				$("#userId").focus();
@@ -634,6 +668,7 @@
 		<td>
 		<input type="text" id="birthNum" placeholder="예:931010" maxlength="6" size="6" required> -
 		<input type="text" id="genderNum" maxlength="1" size = "1" required>●●●●●●
+		<span id="gdCmt" class="cmt"></span>
 		</td>
 		</tr>
 		<tr>
@@ -659,9 +694,18 @@
 		<tr>
 		<th>휴대폰번호</th>
 		<td>
-		<input type="text" name="phone1" id="phone1" placeholder="010" maxlength="3" size = "3" required> -
-		<input type="text" name="phone2" id="phone2"  placeholder="0000" maxlength="4" size = "4" required> -
+		<select id = "phone1" name="phone1" style="width:150px;">
+			<option value="010" selected>010</option> 
+			<option value="011">011</option> 
+			<option value="016">016</option> 
+			<option value="017">017</option> 
+			<option value="018">018</option> 
+			<option value="019">019</option> 
+		</select>
+		- <input type="text" name="phone2" id="phone2"  placeholder="0000" maxlength="4" size = "4" required> -
 		<input type="text" name="phone3" id="phone3"  placeholder="0000" maxlength="4" size = "4" required>
+		<span id="pn2Cmt" class="cmt"></span>
+		<span id="pn3Cmt" class="cmt"></span>
 		</td>
 		</tr>
 	</table>
