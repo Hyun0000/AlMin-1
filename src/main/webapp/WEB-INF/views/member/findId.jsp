@@ -91,6 +91,7 @@ $(document).ready(function(){
 				if(result == 0){
 					alert("일치하는 아이디가 없습니다.");
 				} else {
+					//TODO: 일치하는 n개의 아이디를 찾았습니다(화면 생성)
 					console.log("로그인 성공")
 				}
 			//location.href ="${pageContext.request.contextPath}/main"

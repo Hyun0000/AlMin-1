@@ -37,11 +37,12 @@
 	<context:component-scan base-package="com.kh.almin.**.service"></context:component-scan>
 	<context:component-scan base-package="com.kh.almin.**.dao"></context:component-scan>
 <!-- email 인증 관련   -->
+<context:property-placeholder location="classpath:config/datasource.properties"/>
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
-        <property name="username" value="chsh9410@gmail.com"/>
-        <property name="password" value="ysg01180^^" />
+        <property name="username" value="${gmail.id}"/>
+        <property name="password" value="${gmail.pwd}" />
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
