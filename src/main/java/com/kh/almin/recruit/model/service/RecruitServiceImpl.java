@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.almin.recruit.model.dao.RecruitDao;
+import com.kh.almin.recruit.model.vo.CountCat;
 import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
@@ -64,4 +65,47 @@ public class RecruitServiceImpl implements RecruitService {
 	public int listReason(Reason reason) throws Exception {
 		return recruitDao.listReason(reason);
 	}
+
+	public CountCat countCat() throws Exception {
+		int count = 0;
+		CountCat countCat = new CountCat();
+		for (int recruitJobType = 0; recruitJobType < 13; recruitJobType++) {
+			switch (recruitJobType) {
+			case 8:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCEight(count);
+				break;
+			case 11:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCEleven(count);
+				break;
+			case 6:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCSix(count);
+				break;
+			case 7:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCSeven(count);
+				break;
+			case 4:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCFour(count);
+				break;
+			case 9:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCNine(count);
+				break;
+			case 10:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCTen(count);
+				break;
+			case 12:
+				count = recruitDao.countCat(recruitJobType);
+				countCat.setCTwelve(count);
+				break;
+			}
+		}
+		return countCat;
+	}
+
 }

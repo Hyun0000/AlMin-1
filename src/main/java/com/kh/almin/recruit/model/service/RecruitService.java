@@ -2,6 +2,7 @@ package com.kh.almin.recruit.model.service;
 
 import java.util.List;
 
+import com.kh.almin.recruit.model.vo.CountCat;
 import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Reason;
 import com.kh.almin.recruit.model.vo.Recruit;
@@ -30,4 +31,6 @@ public interface RecruitService {
 	public int doReport(ReportRecruit reportRecruit) throws Exception;
 
 	public int listReason(Reason reason) throws Exception;
+
+	public CountCat countCat() throws Exception;
 }

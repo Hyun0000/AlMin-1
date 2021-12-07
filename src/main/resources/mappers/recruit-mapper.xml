@@ -39,7 +39,13 @@
 		<result property="jobDistrictName" column="JOB_DISTRICT_NAME" />
 	</resultMap>
 
+	<!-- 카테고리별 공고 수 조회 -->
+	<select id="countCat" resultType="int" parameterType="int">
+		select count(recruit_no) from company_recruit where recruit_job_type = #{recruitJobType}
+	</select>
+
 	<!-- 신고공고조회 -->
+
 	<select id="listReport" resultMap="RecruitResultMap">
 		<![CDATA[select
 		RECRUIT_NO,RECRUIT_COMPANY_ID,RECRUIT_COMPANY_TYPE,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,RECRUIT_AGE,

@@ -6,7 +6,6 @@
 		<id property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
 		<result property="memberPhone" column="MEMBER_PHONE" />
-		<result property="memberAddress" column="MEMBER_ADDRESS" />
 		<result property="memberBirth" column="MEMBER_BIRTH" />
 		<result property="memberEmail" column="MEMBER_EMAIL" />
 		<result property="memberGender" column="MEMBER_GENDER" />
@@ -26,39 +25,26 @@
 
 	<select id="searchMember" resultMap="MemberResultMap"
 		parameterType="String">
-		select MEMBER_ID, MEMBER_NAME,
-		MEMBER_PHONE,
-		MEMBER_ADDRESS, MEMBER_BIRTH,
-		MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE,
-		MEMBER_REGDATE from MEMBER
+		select * from MEMBER
 		where ${searchOption} like '%'||
 		#{searchWord} || '%' and MEMBER_TYPE=1
 	</select>
 
 	<select id="searchCompany" resultMap="CompanyResultMap"
 		parameterType="String">
-		select COMPANY_ID,
-		COMPANY_TEL, COMPANY_NAME,
-		COMPANY_BOSS, COMPANY_EMAIL,
-		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+		select * from COMPANY
 		where ${searchOption} like '%'|| #{searchWord} || '%'
 	</select>
 
 
 	<select id="listMember" resultMap="MemberResultMap">
-		select MEMBER_ID, MEMBER_NAME,
-		MEMBER_PHONE, MEMBER_ADDRESS, MEMBER_BIRTH,
-		MEMBER_EMAIL,
-		MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		select * from MEMBER
 		WHERE
-		MEMBER_TYPE=1
+		MEMBER_TYPE=1 ORDER BY MEMBER_REGDATE DESC
 	</select>
 
 	<select id="listCompany" resultMap="CompanyResultMap">
-		select COMPANY_ID,
-		COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
-		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+		select * from COMPANY
 	</select>
 
 	<delete id="deleteMember" parameterType="String">

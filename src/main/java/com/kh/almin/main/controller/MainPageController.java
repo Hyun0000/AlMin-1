@@ -9,12 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.applicant.model.service.ApplicantService;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.recruit.controller.RecruitController;
 import com.kh.almin.recruit.model.service.RecruitService;
+import com.kh.almin.recruit.model.vo.CountCat;
 import com.kh.almin.recruit.model.vo.Recruit;
 
 @Controller
@@ -29,12 +31,12 @@ public class MainPageController {
 
 	@GetMapping("main")
 	public ModelAndView main(ModelAndView mv) throws Exception {
-		List<Recruit> volist = null;
-		List<Applicant> avolist = null;
-		volist = recruitService.recruitList();
-		avolist = applicantService.getApplicants();
+		List<Recruit> volist = recruitService.recruitList();
+		List<Applicant> avolist = applicantService.getApplicants();
+		CountCat countCat = recruitService.countCat();
 		mv.addObject("applicants", avolist);
 		mv.addObject("recruits", volist);
+		mv.addObject("countCat", countCat);
 		mv.setViewName("main");
 
 		logger.info("메인페이지");

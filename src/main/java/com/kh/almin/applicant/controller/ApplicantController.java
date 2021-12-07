@@ -51,7 +51,7 @@ public class ApplicantController {
 		logger.info("svolist: " + svolist);
 		return mv;
 	}
- 
+
 	@GetMapping(value = "/myapplicants")
 	private ModelAndView listLikes(ModelAndView mv) throws Exception {
 		List<Applicant> volist = null;
@@ -61,7 +61,7 @@ public class ApplicantController {
 		logger.info("마이페이지-관심공고");
 		return mv;
 	}
- 
+
 	@GetMapping(value = "/dislike")
 	private String dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
 		likeApplicant.setCompanyId("testcompany01");
@@ -83,7 +83,6 @@ public class ApplicantController {
 			System.out.println("찜 등록");
 		}
 		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
-		System.out.println("like!!!!!!!! : "+like);
 		return result;
 	}
 

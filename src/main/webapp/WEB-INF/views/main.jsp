@@ -88,9 +88,10 @@
 								<option value="15">전남</option>
 								<option value="16">제주</option>
 								<option value="17">전국</option>
-							</select> <input type="text" name=recruitJobWho value=100 style="display:none" />
-							<input type="text" name=recruitJobBranch value="X" style="display:none" />
-							<input type="text" placeholder="키워드 검색" onfocus="this.placeholder = ''"
+							</select> <input type="text" name=recruitJobWho value=100
+								style="display: none" /> <input type="text"
+								name=recruitJobBranch value="X" style="display: none" /> <input
+								type="text" placeholder="키워드 검색" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = '키워드 검색'" name="searchKeyword">
 							<button class="template-btn" onclick="search()">찾아보기</button>
 						</form>
@@ -159,7 +160,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat1.png"
 							alt="IT/미디어">
 						<h4>IT/미디어</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CEight}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -169,7 +170,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat2.png"
 							alt="배달/운전">
 						<h4>배달/운전</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CEleven}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -179,7 +180,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat3.png"
 							alt="고객상담">
 						<h4>고객상담</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CSix}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -189,7 +190,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat4.png"
 							alt="생산/건설/인력">
 						<h4>생산/건설/인력</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CSeven}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -199,7 +200,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat5.png"
 							alt="서비스">
 						<h4>서비스</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CFour}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -209,7 +210,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat6.png"
 							alt="교육/강사/학원">
 						<h4>교육/강사/학원</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CNine}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -219,7 +220,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat7.png"
 							alt="디자인">
 						<h4>디자인</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CTen}개 구인공고</h5>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6"
@@ -229,7 +230,7 @@
 							src="${pageContext.request.contextPath}/resources/assets/images/cat8.png"
 							alt="병원/간호">
 						<h4>병원/간호</h4>
-						<h5>250개 구인공고</h5>
+						<h5>${countCat.CTwelve}개 구인공고</h5>
 					</div>
 				</div>
 			</div>
@@ -341,7 +342,10 @@
 										alt="job"> --%>
 								</div>
 								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn1">지원하기</a>
+									<c:forEach var="item" begin="0" end="0" items="${recruits}">
+										<a href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}"
+											class="third-btn job-btn1">상세보기</a>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -364,7 +368,10 @@
 										alt="job"> --%>
 								</div>
 								<div class="job-btn align-self-center">
-									<a href="#" class="third-btn job-btn2">채용하기</a>
+									<c:forEach var="item" begin="0" end="0" items="${applicants}">
+										<a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo}"
+											class="third-btn job-btn2">상세보기</a>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -372,7 +379,8 @@
 				</div>
 			</div>
 			<div class="more-job-btn mt-5 text-center">
-				<a href="#" class="template-btn">더 알아보기</a>
+				<a href="${pageContext.request.contextPath}/recruits"
+					class="template-btn">더 알아보기</a>
 			</div>
 		</div>
 	</section>

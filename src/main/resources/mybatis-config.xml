@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.almin.recruit.model.vo.SearchRecruit" alias="SearchRecruit" />
 		<typeAlias type="com.kh.almin.recruit.model.vo.ReportRecruit" alias="ReportRecruit" />
 		<typeAlias type="com.kh.almin.recruit.model.vo.Reason" alias="Reason" />
+		<typeAlias type="com.kh.almin.recruit.model.vo.CountCat" alias="CountCat" />
 		<typeAlias type="com.kh.almin.resume.model.vo.MemberResume" alias="Resume" />
 		<typeAlias type="com.kh.almin.career.model.vo.MemberNeed" alias="MemberNeed" />
 		<typeAlias type="com.kh.almin.career.model.vo.MemberWork" alias="MemberWork" />
