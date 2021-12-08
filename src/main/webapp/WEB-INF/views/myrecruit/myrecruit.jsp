@@ -8,45 +8,60 @@
 <title>공고 지원한 용사들</title>
 </head>
 <body>
+<!-- =========================================== 모달창 =========================================== -->
+<div id="modal_back" style="display: none;">
+    <div id="candidate_box_id">
+        <ul id="candidate_info_ul">
+            <li id="candidate_info_id">
+                <div id="candidate_name_box">
+                    <h3 style="margin: 0;" id="candidate_name_id"></h3>
+                </div>
+                <div>
+                    <h4 style="margin: 0;" id="candidate_birth_id"></h4>
+                    <h4 style="margin-top: 10px;" id="candidate_gender_id"></h4>
+                </div>
+            </li>
+            <li style="font-weight: bolder; margin-top: 10px;" id="candidate_phone_id"></li>
+            <li style="font-weight: bolder; margin-top: 10px;" id="candidate_email_id"></li>
+        </ul>
+
+        <div id="careerChartDiv">
+            <canvas id="careerChart"></canvas>
+        </div>
+    </div>
+</div>
+<!-- =========================================== 모달창 =========================================== -->
 <section id="candidate_container">
-<!-- foreach -->
+	<c:forEach var="selectRecruitMember" items="${resultMap}">
+	<c:set var="k" value="${1+k}"></c:set>
+	
 	<div class="candidate_box">
-	    <a href="#1" class="detailInfo_Link">
 	        <ul class="candidate_list">
 	            <li class="candidate_info">
 	                <div>
-	                    <h2 style="margin: 0;">박정원</h2>
+	                    <h2 class="candidate_name_class" style="margin: 0;">${selectRecruitMember.MEMBER_NAME}</h2>
 	               </div>
 	               <div class="candidate_birth">
-	                   <h4 style="margin: 0;">19951017</h4>
-	                   <h4 style="margin-top: 10px;">남자</h4>
+	                   <h4 class="candidate_birth_class" style="margin: 0;">${selectRecruitMember.MEMBER_BIRTH}</h4>
+	                   <c:choose>
+	                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'F'}">
+	                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">여자</h4>
+	                   </c:when>
+	                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'M'}">
+	                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">남자</h4>
+	                   </c:when>
+	                   </c:choose>
 	               </div>
 	           </li>
-	           <li style="font-weight: bolder; margin-top: 10px;">010-0000-0000</li>
-	           <li style="font-weight: bolder; margin-top: 10px;">apple@apple.com</li>
+	           <li class="candidate_phone_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_PHONE}</li>
+	           <li class="candidate_email_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_EMAIL}</li>
 	        </ul>
-	    </a>
 	</div>
-	
-    <div class="candidate_box">
-        <a href="#2" class="detailInfo_Link">
-            <ul class="candidate_list">
-                <li class="candidate_info">
-                    <div>
-                        <h2 style="margin: 0;">박정원</h2>
-                    </div>
-                    <div class="candidate_birth">
-                        <h4 style="margin: 0;">19951017</h4>
-                        <h4 style="margin-top: 10px;">남자</h4>
-                    </div>
-                </li>
-                <li style="font-weight: bolder; margin-top: 10px;">010-0000-0000</li>
-                <li style="font-weight: bolder; margin-top: 10px;">apple@apple.com</li>
-            </ul>
-        </a>
-    </div>
-<!-- foreach -->
+	</c:forEach>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="<c:url value="/resources/template/js/almin.js"/>"></script>
+<script src="<c:url value="/resources/myrecruit/js/myrecruit.js"/>"></script>
 </body>
 </html>
 <!--
