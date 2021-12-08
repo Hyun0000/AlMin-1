@@ -87,9 +87,9 @@ button {
 								<div class="job-text">
 									<c:forEach var="item" items="${reportview}">
 										<div class="reportItem">
-											<button onclick="myFunction(this)">${item.recruitCompanyId}</button>
+											<button onclick="myFunction(this)">${item.recruitTitle}</button>
 											<div class="d-toggle">
-												<div class="title">${item.recruitTitle}${item.recruitDate}</div>
+												<div class="title">${item.recruitCompanyId}${item.recruitDate}</div>
 												<div style="display: none" class="rt">${item.recruitNo}</div>
 												<button class="genric-btn primary small"
 													onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}'">공고보기</button>
