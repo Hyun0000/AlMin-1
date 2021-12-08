@@ -81,11 +81,29 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	}
 	
 	@PostMapping("/companies/{companyId}")
+	@ResponseBody 
 	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {
 		String result = "0";
 		logger.info("companyId: "+companyId);
 		logger.info(c.toString());
-		return result;
+		Company ms= memberService.loginCompany(c);
+		logger.info(ms.toString());
+		if(ms.getCompanyId() == null) {
+			return result;
+		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+			boolean isPwdMatch = pwdEncoder.matches(c.getCompanyPwd(), ms.getCompanyPwd());
+			logger.info(String.valueOf(isPwdMatch));
+			if(isPwdMatch == true) {
+				logger.info("로그인 성공");
+				result= "1";
+				 session.setAttribute("loginInfo", ms);
+				 logger.info((String) session.getAttribute("loginInfo"));
+				// model.addAttribute("loginInfo",ms); 이런 방식도 있다.
+			} else {
+				logger.info("로그인 실패");
+			}
+			return result;
+		}
 	}
 	
 	@ExceptionHandler

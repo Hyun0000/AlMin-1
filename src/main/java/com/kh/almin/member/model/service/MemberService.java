@@ -25,6 +25,7 @@ public class MemberService {
 		return members;
 	}
 	
+	//개인회원가입
 	public void insertMember(Member member) throws Exception{
 		logger.info("MemberService-insertMember 진입");
 		//만나이 적용안함 
@@ -56,8 +57,6 @@ public class MemberService {
 			member.setMemberGender("F");//TODO: GenderException으로 커스터마이징 할수있다.
 		}
 		
-
-		
 			//0n으로 시작하면 2000년대
 		//1900년대 / 2000년대 출생 구분
 		memberDao.insertMember(member);
@@ -67,13 +66,18 @@ public class MemberService {
 		memberDao.insertCompany(company);
 	}
 	public int idChk(Member member) throws Exception{
-		logger.info("아이디체크 진입");
+		logger.info("개인회원 아이디체크 진입");
 		Integer result = memberDao.idChk(member);
 		return result;
 	}
 	public Member selectMember(Member member) throws Exception{
-		logger.info("아디비번 동시체크 진입");
+		logger.info("개인회원 로그인-아디비번 동시체크 진입");
 		Member result = memberDao.selectMember(member);
+		return result;
+	}
+	public Company loginCompany(Company company) throws Exception{
+		logger.info("개인회원 로그인-아디비번 동시체크 진입");
+		Company result = memberDao.loginCompany(company);
 		return result;
 	}
 	

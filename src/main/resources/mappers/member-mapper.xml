@@ -57,30 +57,35 @@
 			#{companyNum},'N' )
 	</insert>
 	
-	<!-- 아이디 비번 동시 체크 -->
-	<select id="selectMember" resultMap="MemberResultMap" parameterType="String">
+	<!-- 로그인(아이디 비번 동시 체크) -->
+    <!-- password는 암호화로 인해 주석처리 -->
+	<select id="loginMember" resultMap="MemberResultMap" parameterType="String">
 		SELECT MEMBER_ID , MEMBER_PW FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
+		 <!--  AND MEMBER_PW = #{memberPw} -->
 	</select>
-	<select id="selectCompany" resultMap="CompanyResultMap" parameterType="String">
+	<select id="loginCompany" resultMap="CompanyResultMap" parameterType="String">
 		SELECT COMPANY_ID , COMPANY_PW FROM COMPANY
 		WHERE COMPANY_ID = #{companyId}
+		 <!--  AND MEMBER_PW = #{memberPw} -->
 	</select>
 	
+	<!-- 아이디 찾기(연락처) -->
+	<select id="findMIdphone" resultMap="MemberResultMap" parameterType="Member">
+	SELECT MEMBER_ID FROM MEMBER 
+	WHERE MEMBER_NAME = #{memberName} AND MEMBER_PHONE = #{memberPhone}
+	</select>
+	<!-- 아이디 찾기(이메일) -->
+	<select id="findMIdmail" resultMap="MemberResultMap" parameterType="Member">
+	SELECT MEMBER_ID FROM MEMBER 
+	WHERE MEMBER_NAME = #{memberName} AND MEMBER_EMAIL = #{memberEmail}
+	</select>
 		<!-- 아이디 중복 체크 -->
 	<select id="idChk" resultType="Integer" parameterType="String">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE TRIM(MEMBER_ID) = #{memberId}
 	</select>
     
-    <!-- 로그인 -->
-    <!-- password는 암호화로 인해 주석처리 -->
-	<select id="login" resultType="Member">
-		SELECT MEMBER_ID, MEMBER_PW, MEMBER_NAME
-		  FROM MEMBER
-		 WHERE MEMBER_ID = #{memberId}
-		 <!--  AND MEMBER_PW = #{memberPw} -->
-	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate">
