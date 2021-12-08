@@ -6,8 +6,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +17,8 @@
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png"
 	type="image/x-icon">
-
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- CSS Files -->
 <link rel="stylesheet"
@@ -53,7 +52,7 @@
 													<div class="thumb"></div>
 													<div class="desc">
 														<h5>
-															<a href="#">${item.resumeTitle}</a>
+															<a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo}">${item.resumeTitle}</a>
 														</h5>
 														<p class="rno" style="display: none">${item.resumeNo}</p>
 														<p class="date">${item.resumeDate}</p>

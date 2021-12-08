@@ -108,4 +108,8 @@ public class RecruitServiceImpl implements RecruitService {
 		return countCat;
 	}
 
+	public List<Recruit> appForYou(String memberId) throws Exception {
+		return recruitDao.appForYou(memberId);
+	}
+
 }

@@ -30,6 +30,7 @@
 
 .jobs-area {
 	min-height: 60%;
+	padding-bottom : 200px;
 }
 
 .job-text>p {

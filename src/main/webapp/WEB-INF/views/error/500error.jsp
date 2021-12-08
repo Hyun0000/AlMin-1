@@ -11,7 +11,8 @@
 	type="image/x-icon">
 <link rel="stylesheet"
 	href="<c:url value="/resources/assets/css/almin.css"/>">
-
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 .error {
 	text-align: center;

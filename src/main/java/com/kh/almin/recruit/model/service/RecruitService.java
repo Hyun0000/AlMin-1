@@ -33,4 +33,7 @@ public interface RecruitService {
 	public int listReason(Reason reason) throws Exception;
 
 	public CountCat countCat() throws Exception;
+
+	public List<Recruit> appForYou(String memberId) throws Exception;
+
 }

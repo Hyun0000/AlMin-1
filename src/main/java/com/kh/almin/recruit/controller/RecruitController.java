@@ -66,6 +66,16 @@ public class RecruitController {
 		logger.info("마이페이지-관심공고");
 		return mv;
 	}
+	
+	@GetMapping(value = "/appforyou")
+	private ModelAndView appForYou(ModelAndView mv) throws Exception {
+		List<Recruit> volist = null;
+		volist = recruitService.appForYou("minzi91");
+		mv.addObject("recruits", volist);
+		mv.setViewName("member/appForYou");
+		logger.info("마이페이지-맞춤공고");
+		return mv;
+	}
 
 	@GetMapping(value = "/dislike")
 	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {

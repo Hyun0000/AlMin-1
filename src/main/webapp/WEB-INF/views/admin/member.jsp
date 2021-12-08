@@ -11,7 +11,7 @@
 
 <!-- Page Title -->
 <title>우리가 어떤 민족입니까?알바의 민족</title>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"

@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/assets/css/almin.css"/>">
 <title>우리가 어떤 민족입니까?알바의 민족</title>
-
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 .nice-select span.current {
 	line-height: 0;

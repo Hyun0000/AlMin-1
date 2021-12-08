@@ -67,4 +67,8 @@ public class RecruitDao {
 	public int countCat(int recruitJobType) throws Exception{
 		return sqlSession.selectOne("Recruit.countCat", recruitJobType);
 	}
+	
+	public List<Recruit> appForYou(String memberId) throws Exception {
+		return sqlSession.selectList("Recruit.appForYou", memberId);
+	}
 }

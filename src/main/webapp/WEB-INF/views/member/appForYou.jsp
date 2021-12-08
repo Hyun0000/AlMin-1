@@ -53,15 +53,13 @@
 													<div class="thumb"></div>
 													<div class="desc">
 														<h5>
-															<a href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle}</a>
+															<a
+																href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle}</a>
 														</h5>
 														<p class="rno" style="display: none">${item.recruitNo}</p>
 														<p class="date">${item.recruitDate}</p>
 														<div class="reply-btn">
 															<button type="button" class="template-btn">지원하기</button>
-															<button class="template-btn"
-																onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">
-																찜 해제</button>
 														</div>
 													</div>
 												</div>
@@ -83,10 +81,10 @@
 								class="justify-content-between align-items-center d-flex"><h6>회원정보
 									</h6></a></li>
 							<li><a href="#"
-								class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6> </a></li>
-							<li><a href="#"
 								class="justify-content-between align-items-center d-flex "><h6
-										class="active">관심공고</h6> </a></li>
+										class="active">맞춤공고</h6> </a></li>
+							<li><a href="#"
+								class="justify-content-between align-items-center d-flex "><h6>관심공고</h6> </a></li>
 							<li><a href="#"
 								class="justify-content-between align-items-center d-flex"><h6>이력서
 										관리</h6> </a></li>
