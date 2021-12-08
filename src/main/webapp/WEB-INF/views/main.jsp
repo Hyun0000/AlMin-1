@@ -112,7 +112,7 @@
 						<p class="py-3">
 							간편 알바 일정 확인도 알바의 민족!<br>한눈에 보는 나의 알바 달력~
 						</p>
-						<a href="#" class="secondary-btn">둘러보기<span
+						<a href="${pageContext.request.contextPath}/careers/calender" class="secondary-btn">둘러보기<span
 							class="flaticon-next"></span></a>
 					</div>
 				</div>

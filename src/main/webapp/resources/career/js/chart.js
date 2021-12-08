@@ -184,7 +184,7 @@ function afterWorkChart() {
 // 개인 경력을 횟수 담을 배열
 let careerchartArr = [];
 
-//개인 경력을 제목 담을 배열
+// 개인 경력을 제목 담을 배열
 let careerchartTitleArr = [];
 
 // 그래프 배경색
@@ -192,7 +192,6 @@ let careerBackgroundColorArr = [];
 
 // 그래프 border 색
 let careerBorderColorArr = [];
-
 
 // 경력 조회  data ajax callback function
 function afterCareerChart() {
@@ -290,7 +289,7 @@ function loadChart() {
 	        y: {
 	            beginAtZero: true,
 	            position: 'none',
-	            grid:{ display:false} // 격자 지우기
+	            grid:{display:false} // 격자 지우기
 	        },
 	    }
 	}
@@ -422,7 +421,6 @@ function changeRGBA() {
 	let b = Math.round(Math.random() * 255);
 	 
 	let random_color = "rgba(" + r + "," + g + "," + b + "," + 0.2 + ")";
-	// let random_color = "rgb(" + r + "," + g + "," + b + ")";
 	 
 	return random_color;
 }

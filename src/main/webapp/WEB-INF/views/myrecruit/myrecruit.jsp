@@ -1,13 +1,38 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap">
+<link rel="stylesheet" href="<c:url value="/resources/myrecruit/css/myrecruit.css"/>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="<c:url value="/resources/myrecruit/css/myrecruit.css"/>">
-<title>공고 지원한 용사들</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>공고 지원 용사들</title>
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
+
+<!-- CSS Files -->
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+
+<style>
+.search-bg {z-index: 100;}
+</style>
 </head>
 <body>
+<!-- Preloader Starts -->
+<div class="preloader">
+	<div class="spinner"></div>
+</div>
+<!-- Preloader End -->
+
+<!-- 공통헤더 템플릿 -->
+<c:import url="/WEB-INF/views/template/header.jsp" />
+
 <!-- =========================================== 모달창 =========================================== -->
 <div id="modal_back" style="display: none;">
     <div id="candidate_box_id">
@@ -27,6 +52,9 @@
 
         <div id="careerChartDiv">
             <canvas id="careerChart"></canvas>
+            <div id="alterImage_div">
+            	<img src="${pageContext.request.contextPath}/resources/assets/images/recruitMemberCareerNo.png" id="alterImage">
+            </div>
         </div>
     </div>
 </div>
@@ -40,6 +68,8 @@
 	            <li class="candidate_info">
 	                <div>
 	                    <h2 class="candidate_name_class" style="margin: 0;">${selectRecruitMember.MEMBER_NAME}</h2>
+	                    <!-- 경력 차트 조회용 아이디 -->
+	                    <span style="display: none" class="candidate_memberId_class">${selectRecruitMember.RWM_MEMBER_ID}</span>
 	               </div>
 	               <div class="candidate_birth">
 	                   <h4 class="candidate_birth_class" style="margin: 0;">${selectRecruitMember.MEMBER_BIRTH}</h4>
@@ -59,6 +89,15 @@
 	</div>
 	</c:forEach>
 </section>
+<!-- 공통푸터 템플릿 -->
+<c:import url="/WEB-INF/views/template/footer.jsp" />
+<script>
+	function search() {
+		$("#searchRecruit").attr("action",
+				"${pageContext.request.contextPath }/recruits").attr(
+				"method", "get").submit();
+	}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script src="<c:url value="/resources/myrecruit/js/myrecruit.js"/>"></script>

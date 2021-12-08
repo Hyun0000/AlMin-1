@@ -1,7 +1,7 @@
 /* 지원자 전체를 담는 <section> */
 #candidate_container {
     width: 900px;
-    margin: 0 auto;
+    margin: 50px auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -63,7 +63,7 @@
 
 /* 모달찰 content box */
 #candidate_box_id{
-    width: 800px;
+    /* width: 800px; */
     padding: 50px;
     /* height: 600px; */
     margin: 0 auto;
@@ -83,13 +83,19 @@
 /* 지원자 상세 정보를 담는 <ul> */
 #candidate_info_ul{
     list-style-type: none;
-    border: 1px solid black;
-    width: 250px;
+    border: 5px solid rgb(129, 151, 216);
+    border-radius: 50px;
+    width: 300px;
     /* height: 300px; */
     height: 400px;
-    padding: 35px;
+    padding: 30px;
     text-align: center;
     box-sizing: border-box;
+    margin-right: 50px;
+    
+    /* display: flex; */
+    /* justify-content: space-between;
+    align-items: center; */
 }
 
 /* 지원자 상세 정보를 담는 <li> 전체 설정 */
@@ -110,10 +116,25 @@
     height: 400px;
     /* display: inline-block; */
     box-sizing: border-box;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* 지원자 차트 없을시 대체 이미지 */
+#alterImage_div{
+	margin: 0 auto;
+    width: 300px; height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-
+#alterImage{
+	width: 350px; height: 350px;
+	margin: 0 auto;
+}
 
 
 

@@ -15,7 +15,7 @@
 
 /* 후기 등록창 modal up 버튼 */
 #insert_modal_showBtn {
-	border: 5px solid black;
+	border: 5px solid white;
 	border-radius: 30px;
 	background: white;
 	padding: 5px 10px;
