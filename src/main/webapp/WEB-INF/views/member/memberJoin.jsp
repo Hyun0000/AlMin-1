@@ -59,8 +59,6 @@
 			// 정규표현식 선언
 			var regExp = /^[0-9]*$/;   
 			var idPattern = /^[a-zA-Z]{1}[A-Za-z0-9]{6,50}$/;
-//			var pwPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,250}$/;
-//			var pwPattern =/^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{6,16}$/;
 			var pwPattern =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$^!%*#?&])[A-Za-z\d$@$!^%*#?&]{6,}$/;
 			var namePattern = /^[a-zA-Z가-힣]*$/;
 			var birthPattern = /^\d{2}([0]\d|[1][0-2])([0][1-9]|[1-2]\d|[3][0-1]){6}$/;
@@ -212,6 +210,13 @@
 			if($("#userName").val()==""){
 				alert("성명을 입력해주세요.");
 				$("#userName").focus();
+				return false;
+			}
+			if($("#phone2").val()==""){
+				alert("휴대폰 가운데 번호를 입력해주세요.")
+				return false;
+			} else if($("#phone3").val()==""){
+				alert("휴대폰 뒷자리를 입력해주세요.")
 				return false;
 			}
 			var json = {'memberId':  $("#userId").val(),

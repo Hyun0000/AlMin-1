@@ -105,9 +105,35 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	private String joinMember() throws Exception {
 		return "member/memberJoin";
 	}
-	@GetMapping("/id") //개인 아이디찾기
+	@GetMapping("/id") //개인 아이디찾기창
 	private String findIdMember() throws Exception {
 		return "member/findId";
+	}
+	@PostMapping("/id/phone") //개인 아이디찾기(연락처)
+	private String findMIdphone(@RequestBody Member m) throws Exception {
+		String result="";
+		logger.info(m.toString());
+		Member ms= memberService.findMIdphone(m);
+		if(ms.getMemberId() == null) {
+			return result;
+		}else {
+			logger.info("아이디찾기 성공");
+			result=ms.getMemberId();
+		}
+		return result;
+	}
+	@PostMapping("/id/mail") //개인 아이디찾기(이메일)
+	private String findMIdmail(@RequestBody Member m) throws Exception {
+		String result="";
+		logger.info(m.toString());
+		Member ms= memberService.findMIdmail(m);
+		if(ms.getMemberId() == null) {
+			return result;
+		}else {
+			logger.info("아이디찾기 성공");
+			result=ms.getMemberId();
+		}
+		return result;
 	}
 	@GetMapping("/pwd") //개인 비밀번호찾기
 	private String findPwdMember() throws Exception {
@@ -127,11 +153,21 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 //		logger.info("volist: "+volist.toString());
 		return mv;
 	}
+	@GetMapping("/mypage/memberinfo")
+	private String Memberinfo() { //회원정보 수정 전 비번 재입력
+		logger.info("회원정보 수정 전 단계 진입");
+		return "member/editCheck";
+	}
 	
 	@PutMapping
 	private String updateMember() { //회원정보 수정
 		logger.info("update 진입");
-		return "member/memberInfo";
+		return "member/memberInfoEdit";
+	}
+	@GetMapping("/mypage/edit")
+	private String editMemberinfo() { //회원정보 수정
+		logger.info("update 진입");
+		return "member/memberInfoEdit";
 	}
 	
 	@ExceptionHandler

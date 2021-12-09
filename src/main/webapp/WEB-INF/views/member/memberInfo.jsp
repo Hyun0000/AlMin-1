@@ -38,7 +38,7 @@
     position: relative;
     float: left;
     width: 390px;
-    height: 200px;
+    height: 350px;
     margin: 0 15px 15px 0;
     padding: 30px;
     border: 1px solid #ddd;
@@ -47,7 +47,7 @@
     position: relative;
     float: left;
     width: 390px;
-    height: 200px;
+    height: 350px;
     padding: 30px;
     border: 1px solid #ddd;
 }
@@ -56,7 +56,13 @@
     border: 1px solid #ddd;
     float: left;
     width: 390px;
-    height: 200px;
+    height: 350px;
+}
+.mName{
+	font-size: 1.5em;
+}
+.id{
+font-color: dodgerblue
 }
 </style>
 <script type="text/javascript">
@@ -89,17 +95,18 @@ $.ajax({
 <c:import url="/WEB-INF/views/template/header.jsp" />
 <section>
 <div id="container">
-		<p class="mName"><em class="id">chsh9410</em>님의 알바의 민족 <em>통합 회원정보</em></p>
-		<p class="mTip">알바몬을 더 이상 이용하지 않는다면 <a href="http://www.albamon.com/customer/mon_leave_info.asp">회원탈퇴</a></p>
+		<p class="mName"><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b style="color:dodgerblue">통합 회원정보</b></p>
+		<!--  <p class="mTip">알바몬을 더 이상 이용하지 않는다면 <a href="#">회원탈퇴</a></p> -->
 		<div class="mInfoWrap">
 
 			<!--// 회원정보 -->
 			<div class="mInfo">
-				<h2><img src="/monimg/list/mlist/gg_tit_1.gif" alt="회원정보"></h2>
+				<h2>회원정보</h2>
+				<button class="template-btn">수정</button>
 				<p class="txt">안전한 정보보호를 위해 연락처 일부만 확인가능하며,<br> 수정화면에서 정확한 연락처 확인이 가능합니다.</p>
 				<dl>
-					<dt>최근수정일</dt>
-					<dd>2020-05-22</dd>
+					<!--<dt>최근수정일</dt>
+					<dd>2020-05-22</dd>-->
 					<dt>연락처</dt>
 					<dd>010-8***-***0</dd>
 					<dt>e-메일</dt>
@@ -107,54 +114,52 @@ $.ajax({
 					<dt>주소</dt>
 					<dd>서울 성동구  ******</dd>
 				</dl>
-				<p class="btn"><a href="/Account/mem/edit-check">수정</a></p>
 			</div>
-
 
 			<!--// 비밀번호-->
 			<div class="mPw">
-				<h2><img src="/monimg/list/mlist/gg_tit_2.gif" alt="비밀번호"></h2>
+				<h2>비밀번호</h2>
 
 				<div class="snsMem">
 				
+					<button class="template-btn">변경</button>
 					<p class="txt">비밀번호를 주기적으로 변경하여<br> 소중한 개인정보를 안전하게 보호하세요(6개월마다 알림)</p>
 					<dl>
-						<dt>최근변경일</dt>
+						<!--<dt>최근변경일</dt>
 						<dd>2009년 10월 25일
-						(<em>21일</em> 후 변경 알림 예정)</dd>
-						
+						(<em>21일</em> 후 변경 알림 예정)</dd>-->
 					</dl>
-					<p class="btn"><a href="/Account/mem/ChangePWD">변경</a></p>
-				
 				</div>
 			</div>
 
 			<!--// 간편 로그인 관리 -->
 			<div class="mSns">
-				<h2><img src="/monimg/list/mlist/gg_tit_4.gif" alt="간편 로그인 관리"></h2>
+				<h2>간편 로그인 관리</h2>
 				<p class="txt">소셜서비스 계정과 연결하면, 소셜 로그인으로 간편하게 로그인 할 수 있습니다.</p>
 				<div class="social-list">
 					
 					<div class="social-icon sns-naver">
+						<span><img src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></span>
 						<span class="social-name">네이버</span>
 						<button id="btn_nv" onclick="connection()">연결</button>
 					</div>
 					
 					<div class="social-icon sns-kakao">
+						<span><img src="${pageContext.request.contextPath}/resources/assets/images/kakao.png""></span>
 						<span class="social-name">카카오</span>
 						<button id="btn_ka">연결</button>
 					</div>
 					
 					<div class="social-icon sns-facebook">
+						<span><img src=""></span>
 						<span class="social-name">페이스북</span>
 						<button id="btn_fb">연결</button>
 					</div>
 					
 				</div>
 			</div>
-			
 		</div>
-
+		
 	</div>
 	<script>
 	function connection(){

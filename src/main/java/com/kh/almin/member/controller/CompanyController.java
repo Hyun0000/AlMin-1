@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Company;
+import com.kh.almin.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/companies")//기업회원가입, 아이디찾기, 비밀번호찾기
@@ -42,6 +43,47 @@ public class CompanyController {
 		company.setCompanyPwd(pwd);
 		memberService.insertCompany(company);
 		return "redirect:";
+	}
+	
+	@PostMapping("/id/tel") //기업 아이디찾기(연락처)
+	private String findCIdphone(@RequestBody Company c) throws Exception {
+		String result="";
+		logger.info(c.toString());
+		Company ms= memberService.findCIdphone(c);
+		if(ms.getCompanyId() == null) {
+			return result;
+		}else {
+			logger.info("아이디찾기 성공");
+			result=ms.getCompanyId();
+		}
+		return result;
+	}
+	@PostMapping("/id/mail") //기업 아이디찾기(이메일)
+	private String findCIdmail(@RequestBody Company c) throws Exception {
+		String result="";
+		logger.info(c.toString());
+		Company ms= memberService.findCIdmail(c);
+		if(ms.getCompanyId() == null) {
+			return result;
+		}else {
+			logger.info("아이디찾기 성공");
+			result=ms.getCompanyId();
+		}
+		return result;
+	}
+	
+	@PostMapping("/id/num") //기업 아이디찾기(사업자번호)
+	private String findCIdnum(@RequestBody Company c) throws Exception {
+		String result="";
+		logger.info(c.toString());
+		Company ms= memberService.findCIdnum(c);
+		if(ms.getCompanyId() == null) {
+			return result;
+		}else {
+			logger.info("아이디찾기 성공");
+			result=ms.getCompanyId();
+		}
+		return result;
 	}
 	
 	@ExceptionHandler

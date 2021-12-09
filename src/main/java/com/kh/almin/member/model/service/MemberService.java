@@ -66,7 +66,7 @@ public class MemberService {
 		memberDao.insertCompany(company);
 	}
 	public int idChk(Member member) throws Exception{
-		logger.info("개인회원 아이디체크 진입");
+		logger.info("개인회원 아이디 중복체크 진입");
 		Integer result = memberDao.idChk(member);
 		return result;
 	}
@@ -80,5 +80,29 @@ public class MemberService {
 		Company result = memberDao.loginCompany(company);
 		return result;
 	}
-	
+	public Member findMIdphone(Member member) throws Exception{
+		logger.info("개인회원-아이디찾기(연락처) 진입");
+		Member result = memberDao.findMIdphone(member);
+		return result;
+	}
+	public Member findMIdmail(Member member) throws Exception{
+		logger.info("개인회원-아이디찾기(이메일) 진입");
+		Member result = memberDao.findMIdmail(member);
+		return result;
+	}
+	public Company findCIdphone(Company company) throws Exception{
+		logger.info("기업회원-아이디찾기(연락처) 진입");
+		Company result = memberDao.findCIdphone(company);
+		return result;
+	}
+	public Company findCIdmail(Company company) throws Exception{
+		logger.info("기업회원-아이디찾기(이메일) 진입");
+		Company result = memberDao.findCIdmail(company);
+		return result;
+	}
+	public Company findCIdnum(Company company) throws Exception{
+		logger.info("기업회원-아이디찾기(사업자번호) 진입");
+		Company result = memberDao.findCIdnum(company);
+		return result;
+	}
 }

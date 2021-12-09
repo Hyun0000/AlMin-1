@@ -59,6 +59,41 @@ public class MemberDao {
 		return result;
 	}
 	
+	// 개인회원 아이디 찾기(연락처)
+	public Member findMIdphone(Member member) throws Exception{
+		logger.info("Dao-findMIdphone 진입");
+		Member result = sqlSession.selectOne("Member.findMIdphone", member);
+		logger.info("id: "+result.getMemberId()+" result: "+result);
+		return result;
+	}
+	// 개인회원 아이디 찾기(이메일)
+	public Member findMIdmail(Member member) throws Exception{
+		logger.info("Dao-findMIdmail 진입");
+		Member result = sqlSession.selectOne("Member.findMIdmail", member.getMemberId());
+		logger.info("id: "+member.getMemberId()+" result: "+result);
+		return result;
+	}
 	
+	// 기업회원 아이디 찾기(연락처)
+		public Company findCIdphone(Company company) throws Exception{
+			logger.info("Dao-findCIdphone 진입");
+			Company result = sqlSession.selectOne("Company.findCIdphone", company);
+			logger.info("id: "+result.getCompanyId()+" result: "+result);
+			return result;
+		}
+	// 기업회원 아이디 찾기(이메일)
+		public Company findCIdmail(Company company) throws Exception{
+			logger.info("Dao-findCIdmail 진입");
+			Company result = sqlSession.selectOne("Company.findCIdmail", company);
+			logger.info("id: "+result.getCompanyId()+" result: "+result);
+			return result;
+		}
+	// 기업회원 아이디 찾기(사업자번호)
+		public Company findCIdnum(Company company) throws Exception{
+			logger.info("Dao-findCIdnum 진입");
+			Company result = sqlSession.selectOne("Company.findCIdnum", company);
+			logger.info("id: "+result.getCompanyId()+" result: "+result);
+			return result;
+		}
 
 }
