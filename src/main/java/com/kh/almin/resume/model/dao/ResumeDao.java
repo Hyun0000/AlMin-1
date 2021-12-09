@@ -32,7 +32,7 @@ public class ResumeDao {
 		return sqlSession.delete("Resume.deleteResume", resumeNo);
 	}
 	
-	public int updateResume(int resumeNo) throws Exception{
-		return sqlSession.update("Resume.updateResume", resumeNo);
+	public int updateResume(MemberResume mr) throws Exception{
+		return sqlSession.update("Resume.updateResume", mr);
 	}
 }

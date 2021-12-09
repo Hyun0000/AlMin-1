@@ -15,5 +15,5 @@ public interface ResumeService{
 	
 	public int deleteResume(int resumeNo) throws Exception;
 	
-	public int updateResume(int resumeNo) throws Exception;
+	public int updateResume(MemberResume mr) throws Exception;
 }

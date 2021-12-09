@@ -51,7 +51,8 @@
     <br>
     <hr>
     <div>
-    <form action="updateResume" method="post">
+    <form action="updateResume?resumeNo=${resum.resumeNo }" method="post">
+    
    <!-- 	<div id="resumePhoto">
    	<strong>이력서 사진</strong><br>
    	 <input type="file" name="resumePhoto"><br>
@@ -62,22 +63,24 @@
    	 </div>
    		<img id="preview" name="resumePhoto" alt="[미리보기 표시]"/> -->
    		<div id="dropbox">
-   			<input type="file" name="resumePhoto" onchange="setThumbnail(event);"/>
+   			<input type="file" name="resumePhoto" value="${resum.resumePhoto }" onchange="setThumbnail(event);"/>
    			<div class="fileEmpty" id="preView"></div>
 
    		</div>
    	 <br>
+
         <div id="resumeTitle">
             <strong>이력서 제목</strong><br>
-            <input type="text" name="resumeTitle" value='<c:out value="${selectResume.resumeTitle} }"/>'><br>
+            <input type="text" name="resumeTitle" value="${resum.resumeTitle}"><br>
         </div>
         <div id="resumePhone">
             <strong>전화번호</strong><br>
-            <input type="text" name="resumePhone" placeholder="연락받으실 연락처 입력해주세요.">
+            <input type="text" name="resumePhone" value="${resum.resumePhone }" >
         </div>
         <strong>지역</strong><br>
         <div id="jobDistrictNo" class="default-select">
             <select name="jobDistrictNo">
+            	<option value="${resum.jobDistrictNo }">${resum.district.jobDistrictName }</option>
                 <option value="1">경기도</option>
                 <option value="2">인천</option>
                 <option value="3">대전</option>
@@ -102,6 +105,7 @@
         <div id="educationNo" class="default-select">
             
             <select name="educationNo">
+            	<option value="${resum.educationNo }">${resum.education.educationType }</option>
                 <option value="1">초등학교</option>
                 <option value="2">중학교</option>
                 <option value="3">고등학교</option>
@@ -114,7 +118,8 @@
         <strong>경력</strong><br>
         <div id="careers" class="default-select">
             
-            <select name="jobTypeNo">
+            <select name="jobTypeNo" >
+            	<option value="${resum.jobTypeNo }">${resum.jobType.jobTypeName }</option> <!-- select db값 가져오기 -->
                 <option value="1">외식/음료</option>
                 <option value="2">유통/판매</option>
                 <option value="3">문화/여가</option>
@@ -140,15 +145,16 @@
         </div>
         <br>
         	<br>
-            <input type="text" name=jobCareers placeholder="담당했던 업무 입력해주세요.">
+            <input type="text" name=jobCareers value="${resum.jobCareers }" >
             <br>
         <div id="resumePublicYn">
             <input type="checkbox" name="resumePublicYn" value="Y">공개
             <input type="checkbox" name="resumePublicYn" value="N">비공개
         </div>
         <br>
-        <button>등록</button>
+        <button class="template-btn">수정</button>
         </form>
+        
     </div>
     </section>
     </div>

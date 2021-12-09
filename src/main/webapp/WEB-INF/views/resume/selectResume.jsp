@@ -29,6 +29,7 @@ section {
 	</header>
 
 	<section>
+		
 		<h2>개인기본정보</h2>
 		<div>
 			<strong>사진</strong><br>
@@ -46,16 +47,16 @@ section {
 		<hr>
 		<h2>지역</h2>
 		<div>
-			<%-- ${resum.district.districtName }--%>
+			 ${resum.district.jobDistrictName }
 		</div>
 		<hr>
 		<h2>경력</h2>
 		<div>${resum.jobType.jobTypeName }${resum.period.periodType }
 			${resum.jobCareers }</div>
 		<br>
-		<button class="template-btn like-btn" onclick="history.back();">확인</button>
-		<button class="template-btn like-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
-		<button class="template-btn like-btn">수정</button>
+		<button class="template-btn" onclick="history.back();">확인</button>
+		<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+		<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
 		
 		<button class="template-btn like-btn" onclick="doLike(this);">
 			<c:choose>

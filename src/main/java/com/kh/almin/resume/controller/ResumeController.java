@@ -61,7 +61,7 @@ public class ResumeController {
 		return mv;
 	}
 	
-	@GetMapping("deleteResume")
+	@GetMapping("deleteResume")//이력서 삭제
 	public String deleteResume(@RequestParam(value="msg", required=false)String msg,int resumeNo,RedirectAttributes rs,Model m) throws Exception{
 		
 		int result=resumeService.deleteResume(resumeNo);
@@ -75,11 +75,25 @@ public class ResumeController {
 		
 		return "redirect:allres";
 	}
-	@PostMapping("updateResume")
-	public String updateResume(int resumeNo) {
-		
-		
-		return "";
+	@GetMapping("update")
+	public ModelAndView goUpdateResume(@RequestParam("resumeNo") int resumeNo,ModelAndView mv) {
+		try {
+			mv.addObject("resum", resumeService.selectResume(resumeNo));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("resume/updateResume");
+		return mv;
+	}
+	@PostMapping("updateResume")//이력서 수정
+	public String updateResume(@RequestParam(value="msg", required=false)String msg,MemberResume mr,Model m ) throws Exception {
+		int result=resumeService.updateResume(mr);
+		if(result>0) {
+			m.addAttribute("msg","수정되었습니다.");
+		}else {
+			m.addAttribute("msg","다시 시도해주세요.");
+		}
+		return "redirect:allres";
 	}
 	
 	@PostMapping("addres")//이력서등록

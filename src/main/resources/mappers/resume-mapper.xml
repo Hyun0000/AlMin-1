@@ -48,7 +48,7 @@
 	</select> 
 	
 	<!-- 이력서 상세  조회 -->
-	<select id="selectResume" resultMap="ResumeResultMap" parameterType="integer">
+	<select id="selectResume" resultMap="ResumeResultMap" parameterType="Resume">
 		select a.*,b.JOB_DISTRICT_NAME,c.EDUCATION_TYPE,d.JOB_TYPE_NAME,e.PERIOD_TYPE from member_resume a left outer join job_district b
 		on a.JOB_DISTRICT_NO=b.JOB_DISTRICT_NO
 		left outer join education c
@@ -76,7 +76,9 @@
 	</delete>
 	
 	<update id="updateResume" parameterType="Resume">
-		update MEMBER_RESUME set RESUME_TITLE=#{resumeTitle},RESUME_PHONE=#{resumePhone},JOB_DISTRICT_NO=#{jobDistrictNo},
-		JOB_TYPE_NO=#{jobTypeNo},EDUCATION_NO=#{educationNo},JOB_CAREERS=#{jobCareers} where RESUME_NO=#{resumeNo}
+		update MEMBER_RESUME
+		set RESUME_TITLE=#{resumeTitle}, RESUME_PHONE=#{resumePhone},JOB_DISTRICT_NO=#{jobDistrictNo},EDUCATION_NO=#{educationNo},
+		JOB_TYPE_NO=#{jobTypeNo},PERIOD_NO=#{periodNo},JOB_CAREERS=#{jobCareers},RESUME_PUBLIC_YN=#{resumePublicYn}
+		,RESUME_PHOTO=#{resumePhoto} where RESUME_NO=#{resumeNo}
 	</update>
 </mapper>
