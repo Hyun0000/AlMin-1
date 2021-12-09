@@ -164,7 +164,7 @@
 				// 주소로 좌표를 검색합니다
 				geocoder
 						.addressSearch(
-								'서울특별시 중구 남대문로 120 대일빌딩',
+								'${detailjobinfo.recruitAddress}',
 								function(result, status) {
 
 									// 정상적으로 검색이 완료됐으면 
@@ -182,7 +182,7 @@
 										// 인포윈도우로 장소에 대한 설명을 표시합니다
 										var infowindow = new kakao.maps.InfoWindow(
 												{
-													content : '<div style="width:150px;text-align:center;padding:6px 0;">kh정보교육원</div>'
+													content : '<div style="width:150px;text-align:center;padding:6px 0;">${detailjobinfo.recruitAddress}</div>'
 												});
 										infowindow.open(map, marker);
 
