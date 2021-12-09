@@ -47,6 +47,7 @@
 	<!-- Header Area End -->
 	<section id="detailjob">
 		<h2>${detailjobinfo.recruitTitle}</h2>
+		<button type="button" class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
 		<!-- ===========================모집조건====================================== -->
 		<h2>모집요건</h2>
 		<div id="recruitCondition" class="recdiv">
@@ -200,7 +201,8 @@
 <!-- ================================================================== 후기 조회(select) ================================================================== -->
 	<div id="comments_start_line_div">
 		<h2 style="color: white; margin-bottom: 0">매장 후기</h2>
-		<button id="insert_modal_showBtn">후기 등록</button>
+		<button type="button" id="insert_modal_showBtn">후기 등록</button>
+		<%-- <button type="button" id="insert_modal_showBtn" onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo'">후기 등록</button> --%>
 	</div>
 	<section id="comments_container">
 		<ul id="comments_box"></ul>

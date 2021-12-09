@@ -7,6 +7,31 @@
     flex-wrap: wrap;
 }
 
+/* 지원자가 없을시 보여주는 대체 이미지를 담는 <section> */
+#alter_container {
+    width: 900px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid royalblue;
+    border-radius: 50px;
+    padding: 50px;
+}
+
+/* 지원자가 없을시 보여주는 대체 이미지를 담는 <section>안의 <div> */
+#alter_container_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;	
+}
+
+/* 지원자가 없을시 보여주는 대체 이미지 */
+#alter_container_img{
+	width: 600px;
+	height: 800px;
+}
+
 
 /* 각 지원자의 정보를 담는 <div> */
 .candidate_box {

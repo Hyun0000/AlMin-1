@@ -59,36 +59,47 @@
     </div>
 </div>
 <!-- =========================================== 모달창 =========================================== -->
-<section id="candidate_container">
-	<c:forEach var="selectRecruitMember" items="${resultMap}">
-	<c:set var="k" value="${1+k}"></c:set>
-	
-	<div class="candidate_box">
-	        <ul class="candidate_list">
-	            <li class="candidate_info">
-	                <div>
-	                    <h2 class="candidate_name_class" style="margin: 0;">${selectRecruitMember.MEMBER_NAME}</h2>
-	                    <!-- 경력 차트 조회용 아이디 -->
-	                    <span style="display: none" class="candidate_memberId_class">${selectRecruitMember.RWM_MEMBER_ID}</span>
-	               </div>
-	               <div class="candidate_birth">
-	                   <h4 class="candidate_birth_class" style="margin: 0;">${selectRecruitMember.MEMBER_BIRTH}</h4>
-	                   <c:choose>
-	                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'F'}">
-	                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">여자</h4>
-	                   </c:when>
-	                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'M'}">
-	                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">남자</h4>
-	                   </c:when>
-	                   </c:choose>
-	               </div>
-	           </li>
-	           <li class="candidate_phone_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_PHONE}</li>
-	           <li class="candidate_email_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_EMAIL}</li>
-	        </ul>
-	</div>
-	</c:forEach>
-</section>
+<c:choose>
+	<c:when test="${resultMsg eq 'yes'}">
+		<section id="candidate_container">
+			<c:forEach var="selectRecruitMember" items="${resultMap}">
+			<c:set var="k" value="${1+k}"></c:set>
+			
+			<div class="candidate_box">
+			        <ul class="candidate_list">
+			            <li class="candidate_info">
+			                <div>
+			                    <h2 class="candidate_name_class" style="margin: 0;">${selectRecruitMember.MEMBER_NAME}</h2>
+			                    <!-- 경력 차트 조회용 아이디 -->
+			                    <span style="display: none" class="candidate_memberId_class">${selectRecruitMember.RWM_MEMBER_ID}</span>
+			               </div>
+			               <div class="candidate_birth">
+			                   <h4 class="candidate_birth_class" style="margin: 0;">${selectRecruitMember.MEMBER_BIRTH}</h4>
+			                   <c:choose>
+			                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'F'}">
+			                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">여자</h4>
+			                   </c:when>
+			                   <c:when test="${selectRecruitMember.MEMBER_GENDER == 'M'}">
+			                   		<h4 class="candidate_gneder_class" style="margin-top: 10px;">남자</h4>
+			                   </c:when>
+			                   </c:choose>
+			               </div>
+			           </li>
+			           <li class="candidate_phone_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_PHONE}</li>
+			           <li class="candidate_email_class" style="font-weight: bolder; margin-top: 10px;">${selectRecruitMember.MEMBER_EMAIL}</li>
+			        </ul>
+			</div>
+			</c:forEach>
+		</section>
+	</c:when>
+	<c:when test="${resultMsg eq 'no'}">
+		<section id="alter_container">
+			<div id="alter_container_div">
+				<img id="alter_container_img" src="${pageContext.request.contextPath}/resources/assets/images/no_recruiter.png" id="no_recruiter_alterImage">
+			</div>
+		</section>
+	</c:when>
+</c:choose>
 <!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp" />
 <script>

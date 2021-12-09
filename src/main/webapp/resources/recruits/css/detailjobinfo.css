@@ -18,7 +18,7 @@
 	border: 5px solid white;
 	border-radius: 30px;
 	background: white;
-	padding: 5px 10px;
+	padding: 0px 10px;
 }
 
 #insert_modal_showBtn:focus {

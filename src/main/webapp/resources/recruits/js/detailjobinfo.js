@@ -17,6 +17,50 @@ window.onload = function() {
 	// 모달창 띄우기
     document.getElementById('insert_modal_showBtn').onclick = function () {
     	modalBack.style.display = "block";
+    	
+    	// =========== 모달창 초기화 ===========
+    	// 한 줄 후기 입력창 초기화
+    	document.getElementById('commentsLine').value = "";
+    	
+    	// 근로계약서 radio 초기화
+    	document.getElementById('contract_n').checked = false;
+		document.getElementById('contract_y').checked = false;
+		
+		// 키워드 입력창 초기화
+		while (document.getElementById('dropzone_1').hasChildNodes()) {
+//				console.log(document.getElementById('dropzone_1').firstChild);
+				let tempData = document.getElementById('dropzone_1').firstChild;
+				console.log(tempData);
+				console.log(tempData.lastChild);
+				// console.log(tempData.querySelector(".xMark"));
+				// tempData.lastChild.style.display = "none";
+				document.getElementById('dropzone_1').removeChild(tempData);
+				document.getElementById('dragzone_1').appendChild(tempData);
+				console.log(document.getElementById('dragzone_1').appendChild(tempData));
+				// tempData.lastChild.style.display = "none";
+//				let data = tempData.dataTransfer.getData("text");
+//				let dataInject = document.getElementById(data);
+//				document.getElementById('dragzone_1').appendChild(dataInject);
+//			document.getElementById('dropzone_1').removeChild(document.getElementById('dropzone_1').firstChild);
+		}
+		
+		while (document.getElementById('dropzone_2').hasChildNodes()) {
+			document.getElementById('dropzone_2').removeChild(document.getElementById('dropzone_2').firstChild);
+		}
+		
+		while (document.getElementById('dropzone_3').hasChildNodes()) {
+			document.getElementById('dropzone_3').removeChild(document.getElementById('dropzone_3').firstChild);
+		}
+		
+		while (document.getElementById('dropzone_4').hasChildNodes()) {
+			document.getElementById('dropzone_4').removeChild(document.getElementById('dropzone_4').firstChild);
+		}
+		
+		while (document.getElementById('dropzone_5').hasChildNodes()) {
+			document.getElementById('dropzone_5').removeChild(document.getElementById('dropzone_5').firstChild);
+		}
+		// =========== 모달창 초기화 ===========
+    	
     }
     
 	// 모달창 닫기

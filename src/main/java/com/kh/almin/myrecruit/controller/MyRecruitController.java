@@ -34,8 +34,19 @@ public class MyRecruitController {
 		try {resultMap = myRecruitService.selectRecruitMember(recruitNo);}
 		catch (Exception e) {e.printStackTrace();}
 		
-		if (resultMap != null) {model.addAttribute("resultMap", resultMap);}
-		else {model.addAttribute("msg", "공고 지원자가 없습니다.");}
+		System.out.println("resultMap.size() : " + resultMap.size());
+		
+		if (resultMap.size() != 0) {
+			model.addAttribute("resultMap", resultMap);
+			model.addAttribute("resultMsg", "yes");
+			System.out.println("controller 공고 지원자 있음");
+		}
+		else if(resultMap.size() == 0)
+		{
+			model.addAttribute("msg", "공고 지원자가 없습니다.");
+			model.addAttribute("resultMsg", "no");
+			System.out.println("controller 공고 지원자 없음");
+		}
 		
 		System.out.println("resultMap : " + resultMap);
 		return "myrecruit/myrecruit";

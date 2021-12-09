@@ -6,8 +6,7 @@
 			<fieldset>
 				<legend style="color: white;" id="comments_insert_legend">한줄 후기</legend>
 				<div id="contract_box">
-					<input name="ccContent" id="commentsLine"
-						placeholder="100자 이내로 작성해주세요(공백포함)">
+					<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 					<div id="radio_box">
 						<h3>근로계약서 작성 여부</h3>
 						<label for="contract_y">작성</label>
