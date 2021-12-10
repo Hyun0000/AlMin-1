@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
@@ -18,11 +19,10 @@ public class MemberDao {
 //	@Qualifier("sqlSession")
 	private SqlSession sqlSession;//root-context에 정의한 bean 이름과 일치하게 쓰는것을 강력추천.(다르게 쓰면 동작안할 확률 있음)
 
-	public List<Member> getMembers() throws Exception {
-		List<Member> members = sqlSession.selectList("Member.listMember");
-		logger.info(members.toString());
-		System.out.println(members);
-		return members;
+	public Member getMemberInfo(Member m) throws Exception {
+		Member member = sqlSession.selectOne("Member.listMember", m);
+		logger.info("Dao-getMemberInfo 진입");
+		return member;
 	}
 
 	public void insertMember(Member member) throws Exception{
@@ -50,6 +50,13 @@ public class MemberDao {
 		return result;
 	}
 	
+	//개인회원정보 수정
+	public int updateMember(Member m) throws Exception{
+		logger.info("Dao-updateMember 진입");
+		int result = sqlSession.update("Member.updateMember",m);
+		return result;
+	}
+	
 	//개인회원 ID 중복체크
 	public int idChk(Member member) throws Exception{
 		logger.info("Dao-idChk 진입");
@@ -69,30 +76,36 @@ public class MemberDao {
 	// 개인회원 아이디 찾기(이메일)
 	public Member findMIdmail(Member member) throws Exception{
 		logger.info("Dao-findMIdmail 진입");
-		Member result = sqlSession.selectOne("Member.findMIdmail", member.getMemberId());
-		logger.info("id: "+member.getMemberId()+" result: "+result);
+		Member result = sqlSession.selectOne("Member.findMIdmail", member);
+		logger.info("id: "+result.getMemberId()+" result: "+result);
 		return result;
 	}
 	
 	// 기업회원 아이디 찾기(연락처)
 		public Company findCIdphone(Company company) throws Exception{
 			logger.info("Dao-findCIdphone 진입");
-			Company result = sqlSession.selectOne("Company.findCIdphone", company);
+			Company result = sqlSession.selectOne("Member.findCIdphone", company);
 			logger.info("id: "+result.getCompanyId()+" result: "+result);
 			return result;
 		}
 	// 기업회원 아이디 찾기(이메일)
 		public Company findCIdmail(Company company) throws Exception{
 			logger.info("Dao-findCIdmail 진입");
-			Company result = sqlSession.selectOne("Company.findCIdmail", company);
+			Company result = sqlSession.selectOne("Member.findCIdmail", company);
 			logger.info("id: "+result.getCompanyId()+" result: "+result);
 			return result;
 		}
 	// 기업회원 아이디 찾기(사업자번호)
 		public Company findCIdnum(Company company) throws Exception{
 			logger.info("Dao-findCIdnum 진입");
-			Company result = sqlSession.selectOne("Company.findCIdnum", company);
+			Company result = sqlSession.selectOne("Member.findCIdnum", company);
 			logger.info("id: "+result.getCompanyId()+" result: "+result);
+			return result;
+		}
+
+		public int findMPWdphone(Member member) {
+			logger.info("Dao-findMPWdphone 진입");
+			int result = sqlSession.selectOne("Member.findMPWdphone", member);
 			return result;
 		}
 

@@ -27,16 +27,17 @@
 		<result property="companyNum" column="COMPANY_NUM" />
 		<result property="mailCheckYn" column="MAILCHEK_YN" />
 	</resultMap>
-
-	<select id="listMember" resultMap="MemberResultMap">
+	
+	<!-- 회원정보 조회 -->
+	<select id="listMember" resultMap="MemberResultMap" parameterType="Member">
 		select MEMBER_ID, MEMBER_NAME, MEMBER_PHONE, MEMBER_BIRTH,
-		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE,MAILCHEK_YN from MEMBER
-		WHERE MEMBER_TYPE=1
+		MEMBER_EMAIL, MEMBER_GENDER, MEMBER_AGE, MEMBER_REGDATE from MEMBER
+		WHERE MEMBER_ID = #{memberId}
 	</select>
 
 	<select id="listCompany" resultMap="CompanyResultMap">
 		select COMPANY_ID, COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
-		COMPANY_ADDRESS, COMPANY_NUM,MAILCHEK_YN from COMPANY
+		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
 	</select>
 
 	<!-- 개인회원가입 -->
@@ -60,6 +61,11 @@
 	WHERE MEMBER_NAME = #{memberName} AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
+	<!-- 비밀번호찾기 -->
+	<select id="findMPWdphone" resultType="Integer" parameterType="Member">
+	SELECT count(*) FROM MEMBER 
+	WHERE MEMBER_NAME = #{memberName} AND MEMBER_ID = #{memberId} AND MEMBER_PHONE = #{memberPhone}
+	</select>
 	
 	<!-- 기업회원가입 -->
 	<insert id="insertCompany" parameterType="Company">
@@ -69,6 +75,8 @@
 			, #{companyName}, #{companyBoss}, #{companyEmail}, #{companyAddress},
 			#{companyNum},'N' )
 	</insert>
+	
+	
 	
 	<!-- 아이디 찾기(연락처) -->
 	<select id="findCIdphone" resultMap="CompanyResultMap" parameterType="Company">
@@ -85,6 +93,8 @@
 	SELECT COMPANY_ID FROM COMPANY 
 	WHERE COMPANY_BOSS = #{companyBoss} AND COMPANY_NUM = #{companyNum}
 	</select>
+	
+	
 	
 	<!-- 로그인(아이디 비번 동시 체크) -->
     <!-- password는 암호화로 인해 주석처리 -->
@@ -107,11 +117,19 @@
     
 	
 	<!-- 회원정보 수정 -->
-	<update id="memberUpdate">
+	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET 
-		<!-- MEMBER_PW = #{memberPw}, -->
-		MEMBER_NAME = #{memberName}
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_EMAIL = #{memberEmail}
 		WHERE MEMBER_ID = #{memberId}
+	</update>
+	<update id="updateCompany" parameterType="Company">
+		UPDATE COMPANY SET 
+		COMPANY_TEL = #{companyTel},
+		COMPANY_EMAIL = #{companyEmail},
+		COMPANY_NUM = #{companyNum},
+		COMPANY_ADDRESS = #{companyAddress}
+		WHERE COMPANY_ID = #{memberId}
 	</update>
 	
 </mapper>

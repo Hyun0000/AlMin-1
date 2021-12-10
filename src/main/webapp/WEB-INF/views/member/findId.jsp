@@ -120,7 +120,7 @@ $(document).ready(function(){
 					'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
 						};
 				
-		if(choose = "member"){//개인회원
+		if(choose == "member"){//개인회원
 			if(way=="tel"){//연락처로 찾기
 				if($("#userName").val()==""){
 					alert("성명을 입력해주세요.")
@@ -140,7 +140,7 @@ $(document).ready(function(){
 				}
 			}
 		}
-		if(choose = "member"){//개인회원
+		if(choose == "member"){//개인회원
 			if(way=="mail"){//이메일로 찾기
 				if($("#userName2").val()==""){
 					alert("성명을 입력해주세요.")
@@ -162,7 +162,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		if(choose = "company"){//기업회원
+		if(choose == "company"){//기업회원
 			if(way=="tel"){//연락처로 찾기
 				if($("#userName").val()==""){
 					alert("대표자명을 입력해주세요.")
@@ -183,7 +183,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		if(choose = "company"){//기업회원
+		if(choose == "company"){//기업회원
 			if(way=="mail"){//이메일로 찾기
 				if($("#userName2").val()==""){
 					alert("대표자명을 입력해주세요.")
@@ -203,7 +203,29 @@ $(document).ready(function(){
 				}
 			}
 		}
-		
+		if(choose == "company"){//기업회원
+			if(way=="num"){//사업자번호로 찾기
+				if($("#userName3").val()==""){
+					alert("대표자명을 입력해주세요.")
+					return false;
+				} else if($("#firstNum").val()==""){
+					alert("사업자번호를 입력해주세요.")
+					return false;
+				} else if($("#midNum").val()==""){
+					alert("사업자번호를 입력해주세요.")
+					return false;
+				}else if($("#endNum").val()==""){
+					alert("사업자번호를 입력해주세요.")
+					return false;
+				} else{
+					url="${pageContext.request.contextPath}/companies/id/num";
+					json = {
+							'companyBoss':$("#userName3").val(),
+							'companyNum':$("#firstNum").val()+"-"+$("#midNum").val()+"-"+$("#endNum").val()
+					}
+				}
+			}
+		}
 		console.log(json);
 		$.ajax({
 			url: url,

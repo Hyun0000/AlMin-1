@@ -25,9 +25,7 @@ apiURL += "&client_id=" + clientId;
 apiURL += "&redirect_uri=" + redirectURI;
 apiURL += "&state=" + state;
 session.setAttribute("state", state);
-
 %>
-
 
 <!-- Header Area Starts -->
 <header class="header-area main-header">
@@ -53,14 +51,12 @@ session.setAttribute("state", state);
 								<a href="${pageContext.request.contextPath}/members/register"
 								class="template-btn">회원가입</a></li>
 						</ul>
-				
 					</c:when>
 					<c:otherwise>
 						<!-- 로그인 후 노출 -->
-						<ul id="login-state" style="display: none;">
+						<ul id="login-state">
 							<li><a href="${pageContext.request.contextPath}/recruits/myrecruits">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-				<!-- <button type="button" onclick="logoutFB()">Facebook 로그아웃</button> -->
 						</ul>
 					</c:otherwise>
    				</c:choose>
@@ -165,7 +161,7 @@ session.setAttribute("state", state);
 			 
 			if($("#memberId").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩
 			                                       // 아이디 저장하기 체크되어있을 시,
-			    $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+			    $("#lb_idSave").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
 			}
 			 
 			$("#idSaveCheck").change(function(){ // 체크박스에 변화가 발생시

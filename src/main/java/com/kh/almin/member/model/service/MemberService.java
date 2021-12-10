@@ -19,10 +19,18 @@ public class MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public List<Member> getMembers() throws Exception{
+	public Member getMemberInfo(Member m) throws Exception{
 		logger.info("Service 진입");
-		List<Member> members = memberDao.getMembers();
-		return members;
+		Member member = memberDao.getMemberInfo(m);
+		return member;
+	}
+	public Member updateMember(Member m) throws Exception{
+		logger.info("Service 진입");
+		int result = memberDao.updateMember(m);
+		//수정된 정보를 화면에 뿌리기 위해 member를 한번 더 읽는다
+		//업데이트엔 성공했지만 또 다른 접속자가 수정했을 가능성이 있으므로.
+		Member member = memberDao.getMemberInfo(m);
+		return member;
 	}
 	
 	//개인회원가입
@@ -103,6 +111,12 @@ public class MemberService {
 	public Company findCIdnum(Company company) throws Exception{
 		logger.info("기업회원-아이디찾기(사업자번호) 진입");
 		Company result = memberDao.findCIdnum(company);
+		return result;
+	}
+
+	public int findMPWdphone(Member member) {
+		logger.info("개인 비번찾기(연락처) 진입");
+		int result = memberDao.findMPWdphone(member);
 		return result;
 	}
 }

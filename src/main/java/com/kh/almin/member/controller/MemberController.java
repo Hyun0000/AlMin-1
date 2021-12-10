@@ -123,6 +123,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 	}
 	@PostMapping("/id/mail") //개인 아이디찾기(이메일)
+	@ResponseBody // ajax랑 짝꿍 TODO ajax쓰는데 다 붙이기
 	private String findMIdmail(@RequestBody Member m) throws Exception {
 		String result="";
 		logger.info(m.toString());
@@ -134,40 +135,87 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 			result=ms.getMemberId();
 		}
 		return result;
+		//TODO: 화면창 만들기
 	}
 	@GetMapping("/pwd") //개인 비밀번호찾기
 	private String findPwdMember() throws Exception {
 		return "member/findPwd";
 	}
-	@GetMapping("/mypage") //회원정보 조회
-	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-		List<Member> volist = memberService.getMembers();
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberview",volist);
-		mv.setViewName("member/memberInfo");//jsp화면
-		
+	
+	@PostMapping("/pwd/phone") //개인 아이디찾기(연락처)
+	@ResponseBody
+	private int findMPWdphone(@RequestBody Member m) throws Exception {
+		int result=0;
+		logger.info(m.toString());
+		int ms= memberService.findMPWdphone(m);
+		if(ms == 0) {
+			return result;
+		}else {
+			logger.info("비밀번호찾기 성공");
+			result=ms;
+		}
+		return result;
+	}
+//	@GetMapping("/mypage/info") //회원정보 조회
+//	private ModelAndView getMemberInfo() throws Exception { //@ExceptionHandler가 받는다.
+//		Member vo = memberService.getMemberInfo();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("memberview",vo);
+//		mv.setViewName("member/memberInfoEdit");//jsp화면
+//		
+////		logger.info("volist: "+volist.toString());
+//		return mv;
+//	}
+	@GetMapping("/mypage") //회원정보 메인
+	private String selectMembers() { 
+		return "member/memberInfo";
+	}
+//	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
+//		List<Member> volist = memberService.getMembers();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("memberview",volist);
+//		mv.setViewName("member/memberInfo");//jsp화면
+//		
 		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
 //		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
 		
 //		logger.info("전체 회원리스트 조회");
 //		logger.info("volist: "+volist.toString());
-		return mv;
-	}
+		//return mv;
+	//}
 	@GetMapping("/mypage/memberinfo")
 	private String Memberinfo() { //회원정보 수정 전 비번 재입력
 		logger.info("회원정보 수정 전 단계 진입");
-		return "member/editCheck";
+		return "member/pwCheck";
+	}
+	@PostMapping("/mypage/pwd") //비밀번호 일치여부 확인
+	@ResponseBody
+	private boolean matchMemberPw(@RequestBody Member m) throws Exception {
+		Member ms= memberService.selectMember(m);
+		boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
+		logger.info(ms.toString());
+		return isPwdMatch;//일치 성공여부를 jsp로 던짐.
 	}
 	
 	@PutMapping
-	private String updateMember() { //회원정보 수정
+	@ResponseBody
+	private Member updateMember(@RequestBody Member member) throws Exception{ //회원정보 수정
 		logger.info("update 진입");
-		return "member/memberInfoEdit";
+		logger.info("member: "+member.toString());
+		Member ms = memberService.updateMember(member);
+		return ms;
 	}
 	@GetMapping("/mypage/edit")
-	private String editMemberinfo() { //회원정보 수정
-		logger.info("update 진입");
-		return "member/memberInfoEdit";
+	private ModelAndView editMemberinfo(@RequestParam String userId) throws Exception { //회원정보 수정
+		logger.info("userId: "+userId);
+		Member vo = new Member();
+		vo.setMemberId(userId);
+		ModelAndView mv = new ModelAndView();
+		Member ms = memberService.getMemberInfo(vo);
+		mv.addObject("vo", ms);
+		mv.setViewName("member/memberInfoEdit");
+		//userId로 select문 만들어서 
+		return mv;
 	}
 	
 	@ExceptionHandler

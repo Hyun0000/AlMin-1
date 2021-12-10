@@ -120,9 +120,13 @@ $(document).ready(function(){
 					'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
 						};
 				
-		if(choose = "member"){//개인회원
+		if(choose == "member"){//개인회원
 			if(way=="tel"){//연락처로 찾기
-				if($("#userName").val()==""){
+				if($("#userId").val()==""){
+					alert("아이디를 입력해주세요.")
+					return false;
+				}
+				else if($("#userName").val()==""){
 					alert("성명을 입력해주세요.")
 					return false;
 				} else if($("#phone2").val()==""){
@@ -132,15 +136,16 @@ $(document).ready(function(){
 					alert("휴대폰 뒷자리 번호를 입력해주세요.")
 					return false;
 				} else{
-					var url="${pageContext.request.contextPath}/members/id/phone";
+					var url="${pageContext.request.contextPath}/members/pwd/phone";
 					json = {
 							'memberName':$("#userName").val(),
+							'memberId':$("#userId").val(),
 							'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
 					}
 				}
 			}
 		}
-		if(choose = "member"){//개인회원
+		if(choose == "member"){//개인회원
 			if(way=="mail"){//이메일로 찾기
 				if($("#userName2").val()==""){
 					alert("성명을 입력해주세요.")
@@ -153,7 +158,7 @@ $(document).ready(function(){
 					return false;
 				} else{
 					//TODO: url, json 선언 
-					url="${pageContext.request.contextPath}/members/id/mail";
+					url="${pageContext.request.contextPath}/members/pwd/mail";
 					json = {
 							'memberName':$("#userName2").val(),
 							'memberEmail':$("#email_1").val()+"@"+$("#email_2").val()
@@ -162,7 +167,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		if(choose = "company"){//기업회원
+		if(choose == "company"){//기업회원
 			if(way=="tel"){//연락처로 찾기
 				if($("#userName").val()==""){
 					alert("대표자명을 입력해주세요.")
@@ -174,7 +179,7 @@ $(document).ready(function(){
 					alert("가운데 전화번호를 입력해주세요.")
 					return false;
 				} else{
-					url="${pageContext.request.contextPath}/companies/id/tel";
+					url="${pageContext.request.contextPath}/companies/pwd/tel";
 					json = {
 							'companyBoss':$("#userName").val(),
 							'companyTel':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
@@ -183,7 +188,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		if(choose = "company"){//기업회원
+		if(choose == "company"){//기업회원
 			if(way=="mail"){//이메일로 찾기
 				if($("#userName2").val()==""){
 					alert("대표자명을 입력해주세요.")
@@ -195,7 +200,7 @@ $(document).ready(function(){
 					alert("이메일 주소를 선택해주세요.")
 					return false;
 				} else{
-					url="${pageContext.request.contextPath}/companies/id/mail";
+					url="${pageContext.request.contextPath}/companies/pwd/mail";
 					json = {
 							'companyBoss':$("#userName2").val(),
 							'companyEmail':$("#email_1").val()+"@"+$("#email_2").val()
@@ -203,7 +208,29 @@ $(document).ready(function(){
 				}
 			}
 		}
-		
+		if(choose == "company"){//기업회원
+			if(way=="num"){//사업자번호로 찾기
+				if($("#userName3").val()==""){
+					alert("대표자명을 입력해주세요.")
+					return false;
+				} else if($("#firstNum").val()==""){
+					alert("사업자 앞번호를 입력해주세요.")
+					return false;
+				} else if($("#midNum").val()==""){
+					alert("사업자 가운데번호를 입력해주세요.")
+					return false;
+				}else if($("#endNum").val()==""){
+					alert("사업자 끝번호를 입력해주세요.")
+					return false;
+				} else{
+					url="${pageContext.request.contextPath}/companies/pwd/num";
+					json = {
+							'companyBoss':$("#userName3").val(),
+							'companyNum':$("#firstNum").val()+"-"+$("#midNum").val()+"-"+$("#endNum").val()
+					}
+				}
+			}
+		}
 		console.log(json);
 		$.ajax({
 			url: url,
@@ -214,14 +241,14 @@ $(document).ready(function(){
 			//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
 			contentType : "application/json; charset=utf-8",
 			success: function(result){
-				if(result == ""){
+				if(result == 0){
 					alert("일치하는 아이디가 없습니다.");
 				} else {
-					//TODO: 일치하는 n개의 비밀번호를 찾았습니다(화면 생성)
-					console.log("아이디찾기 성공")
+					console.log("비번찾기 성공")
 					alert(result);
+					//TODO: 일치하는 n개의 비밀번호를 찾았습니다(화면 생성) 새로운 jsp
+			location.href ="${pageContext.request.contextPath}/members/pwd/resetter"
 				}
-			//location.href ="${pageContext.request.contextPath}/main"
 		},
 		error:function(request,status,error){
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+
