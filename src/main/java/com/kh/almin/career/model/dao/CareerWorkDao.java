@@ -51,5 +51,9 @@ public class CareerWorkDao {
 		return result;
 	}
 // ===================================================================================================================
+	// 이벤트 수정 by 드래그
+	public int updateCalDrag(MemberWork dragMemberWork) {
+		return sqlSession.update("CareerWork.dragWorkUpdate", dragMemberWork);
+	}
 // ===================================================================================================================
 }

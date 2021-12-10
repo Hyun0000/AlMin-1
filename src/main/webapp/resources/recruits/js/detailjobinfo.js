@@ -3,6 +3,9 @@ let modalBack = document.getElementById('comments_insert_modal_back');
 // let recruitParam = "recruitNo=" + recruitNo;
 let recruitCommentParam = "reviews?recruitNo=" + recruitNo + "&id=" + userId;
 
+// 후기 입력 모달창 초기화를 위한 변수
+let firstInsert = "";
+
 window.onload = function() {
 // 1.
 // ========================================= page load 후 전체 후기 조회(select) ===============================================
@@ -18,7 +21,7 @@ window.onload = function() {
     document.getElementById('insert_modal_showBtn').onclick = function () {
     	modalBack.style.display = "block";
     	
-    	// =========== 모달창 초기화 ===========
+    	// ====================== 모달창 초기화 ======================
     	// 한 줄 후기 입력창 초기화
     	document.getElementById('commentsLine').value = "";
     	
@@ -27,40 +30,18 @@ window.onload = function() {
 		document.getElementById('contract_y').checked = false;
 		
 		// 키워드 입력창 초기화
-		while (document.getElementById('dropzone_1').hasChildNodes()) {
-//				console.log(document.getElementById('dropzone_1').firstChild);
-				let tempData = document.getElementById('dropzone_1').firstChild;
-				console.log(tempData);
-				console.log(tempData.lastChild);
-				// console.log(tempData.querySelector(".xMark"));
-				// tempData.lastChild.style.display = "none";
-				document.getElementById('dropzone_1').removeChild(tempData);
-				document.getElementById('dragzone_1').appendChild(tempData);
-				console.log(document.getElementById('dragzone_1').appendChild(tempData));
-				// tempData.lastChild.style.display = "none";
-//				let data = tempData.dataTransfer.getData("text");
-//				let dataInject = document.getElementById(data);
-//				document.getElementById('dragzone_1').appendChild(dataInject);
-//			document.getElementById('dropzone_1').removeChild(document.getElementById('dropzone_1').firstChild);
-		}
-		
-		while (document.getElementById('dropzone_2').hasChildNodes()) {
-			document.getElementById('dropzone_2').removeChild(document.getElementById('dropzone_2').firstChild);
-		}
-		
-		while (document.getElementById('dropzone_3').hasChildNodes()) {
-			document.getElementById('dropzone_3').removeChild(document.getElementById('dropzone_3').firstChild);
-		}
-		
-		while (document.getElementById('dropzone_4').hasChildNodes()) {
-			document.getElementById('dropzone_4').removeChild(document.getElementById('dropzone_4').firstChild);
-		}
-		
-		while (document.getElementById('dropzone_5').hasChildNodes()) {
-			document.getElementById('dropzone_5').removeChild(document.getElementById('dropzone_5').firstChild);
-		}
-		// =========== 모달창 초기화 ===========
-    	
+		for(let i = 1; i <= 5 ; i++){
+			while (document.getElementById('dropzone_' + i).hasChildNodes()) {
+				let tempData = document.getElementById('dropzone_' + i).firstChild;
+				// X mark 지우기
+				if(firstInsert === 'yes') {tempData.lastChild.style.display = "none";}
+
+				// dropzone --> dragzone으로 키워드 옮기기
+				document.getElementById('dropzone_' + i).removeChild(tempData);
+				document.getElementById('dragzone_' + i).appendChild(tempData);
+			}
+		};
+		// ====================== 모달창 초기화 ======================
     }
     
 	// 모달창 닫기
@@ -173,6 +154,7 @@ function postingComment(insertOrUpdate) {
 						initCommentsBox();
 						
 						if (data.result == "insertOk") {
+							firstInsert = "yes";
 							alert("후기 등록 ok");
 						} else if (data.result == "updateOk") {
 							alert("후기 수정 ok");

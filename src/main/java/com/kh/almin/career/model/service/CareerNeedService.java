@@ -22,6 +22,8 @@ public interface CareerNeedService {
 	// 차트에서 구직 & 면접 횟수 조회(년&월 기준)
 	public List<Map<String, String>> chartNeed(String userId, String year, String month) throws Exception;
 // ===================================================================================================================
+	// 이벤트 수정 by 드래그
+	public int updateCalDrag(MemberNeed dragMemberNeed) throws Exception;
 }
 // ===================================================================================================================
 // 회원의 현재 근무지 정보를 가져오는 method

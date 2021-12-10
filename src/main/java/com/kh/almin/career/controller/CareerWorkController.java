@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.almin.career.model.service.CareerNeedService;
 import com.kh.almin.career.model.service.CareerWorkService;
+import com.kh.almin.career.model.vo.MemberNeed;
 import com.kh.almin.career.model.vo.MemberWork;
 
 @Controller
@@ -134,6 +135,30 @@ public class CareerWorkController {
 		return jsonStr;
 	}
 // ===================================================================================================================
+	// 이벤트 수정 by 드래그
+	@PatchMapping(value = "/workupdatedrag")
+	@ResponseBody
+	public String updateCalDrag(@RequestBody String updateDragInfo) {
+		System.out.println("Drag @PatchMapping 진입");
+		System.out.println("updateDragInfo : " + updateDragInfo);
+		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		
+		MemberWork dragMemberWork = gson.fromJson(updateDragInfo, MemberWork.class);
+		System.out.println("dragMemberNeed : " + dragMemberWork);
+		
+		int result = 0;
+		try {
+			result = careerWorkService.updateCalDrag(dragMemberWork);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String resultStr = "";
+		if(result == 1) {resultStr = "ok";}
+		else if(result == 0) {resultStr = "false";}
+		return resultStr;
+	}
 // ===================================================================================================================
 	// 예외처리
 	@ExceptionHandler

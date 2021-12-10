@@ -74,6 +74,10 @@ function calenderLoad() {
 		}
 	}
 	
+	console.log("******************************************");
+	console.log(evnets);
+	console.log("******************************************");
+	
 	var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
@@ -169,35 +173,38 @@ function calenderLoad() {
         	// 모달창 pop up
             modalBack.style.display = 'block';
         },
-        drop: function(arg) {
-            // is the "remove after drop" checkbox checked?
-            if (document.getElementById('drop-remove').checked) {
-            // if so, remove the element from the "Draggable Events" list
-            arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-            }
-        // 드래그앤드랍 설정
-        },
+        
+        
         eventDragStart : (info, event, view, jsEvent) => { // 드래그 시작
             console.log("############eventDragStart###########");
-            // console.log(info.event.title);
-            console.log("############eventDragStart###########");
-        },
-        eventDragStop : (info) => { // 드래그 종료(드래그 당한 이벤트의 정보 - 원래 이벤트 정보)
-            console.log("@@@@@@@@@@eventDragStop@@@@@@@@@");
-            console.log(info);
             console.log(info.event.title);
+            console.log(info.event.id);
+            console.log(info.event.start);
+            console.log(info.event.end);
             console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
             console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
-            // Party
-            // 2021-11-04T11:00:00.000Z
-            // 2021-11-04T12:00:00.000Z
-            console.log("@@@@@@@@@@eventDragStop@@@@@@@@@");
+
+            let eventDragStartEventTitle = info.event.title;
+            let eventDragStartEventStartTime = info.event.start.toISOString().split('T')[0];
+            let eventDragStartEventEndTime = info.event.end.toISOString().split('T')[0];
+
+            console.log("eventDragStartEventTitle : " + eventDragStartEventTitle);
+            console.log("eventDragStartEventStartTime : " + eventDragStartEventStartTime);
+            console.log("eventDragStartEventEndTime : " + eventDragStartEventEndTime);
+
+            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
+            console.log("############eventDragStart###########");
         },
         eventDrop : (info) => { // 드래그 이벤트를 받은 객체에 대한 정보(그 날짜 그대로면 해당 이벤트는 실행 X)
+            console.log("############eventDrop###########");
             // TODO
             // 여기서 ajax 써야할듯
-            console.log("==========eventDrop=========");
             console.log(info.event.title);
+            console.log(info.event.id);
+            console.log(info.event.start);
+            console.log(typeof info.event.start);
+            console.log(info.event.end);
+            console.log(typeof info.event.end);
             console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
             console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
             // Party
@@ -211,10 +218,34 @@ function calenderLoad() {
             console.log("draggedEventTitle : " + draggedEventTitle);
             console.log("draggedEventStartTime : " + draggedEventStartTime);
             console.log("draggedEventEndTime : " + draggedEventEndTime);
+            
+            let dragUpdateStart = draggedEventStartTime + " " + info.event.start.toString().split(" ")[4];
+            let dragUpdateEnd = draggedEventEndTime + " " + info.event.end.toString().split(" ")[4];
+            console.log("dragUpdateStart : " + dragUpdateStart);
+            console.log("dragUpdateEnd : " + dragUpdateEnd);
+            
+            // 일정 드래그 수정
+            if(selectCal === "NG" || selectCal === "") {
+	            let dragUpdateNeedObj = {
+	        		needMemberNo : info.event.id,
+	        		needTimeStart : dragUpdateStart,
+	        		needTimeEnd : dragUpdateEnd
+	            }
+	            sendRequest("PATCH", "needupdatedrag", JSON.stringify(dragUpdateNeedObj), afterDragUpdate);
+            } else if(selectCal === "W") {
+	            let dragUpdateWorkObj = {
+	            		workMemberNo : info.event.id,
+	            		workTimeStart : dragUpdateStart,
+	            		workTimeEnd : dragUpdateEnd
+	            }
+	            sendRequest("PATCH", "workupdatedrag", JSON.stringify(dragUpdateWorkObj), afterDragUpdate);
+            }
 
-            movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
-            console.log("==========eventDrop=========");
+            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
+            console.log("############eventDrop###########");
         },
+        
+        
         events: evnets
     });
     calendar.render();
@@ -229,6 +260,19 @@ function calenderLoad() {
     for (let i = 0; i < eventList.length; i++) {
             eventList[i].onclick = detailEvent;
     }
+		}
+	}
+}
+
+// 근무일정 drag update callbackfunction
+function afterDragUpdate() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			if(selectCal === "NG" || selectCal === "") {
+				sendRequest("GET", getPath, null, calenderLoad); // 구직 일정 드래그 수정 후 다시 전체 일정 data 가져오기
+			} else {
+				sendRequest("GET", getWorkPath, null, calenderLoad); // 근무 일정 드래그 수정 후 다시 전체 일정 data 가져오기
+			}
 		}
 	}
 }

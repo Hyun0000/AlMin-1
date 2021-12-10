@@ -51,4 +51,9 @@ public class CareerNeedDao {
 		return result;
 	}
 // ===================================================================================================================
+	// 이벤트 수정 by 드래그
+	public int updateCalDrag(MemberNeed dragMemberNeed) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("CareerNeed.dragNeedUpdate", dragMemberNeed);
+	}
 }

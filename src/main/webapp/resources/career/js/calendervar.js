@@ -1,3 +1,13 @@
+// 드래그로 수정한 시작 날짜
+let dragUpdateStart;
+
+// 드래그로 수정한 종료 날짜
+let dragUpdateEnd;
+
+// 드래그 수정 조건에 사용될 id
+let dragId;
+
+// ==========================================================================================
 // 경력 insert 버튼
 let careerIsertBtn = document.getElementById('career_insert_btn');
 

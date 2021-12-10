@@ -32,6 +32,11 @@
 		FROM MEMBER_WORK
 		WHERE EXTRACT(YEAR FROM WORK_TIME_START) = #{year} AND EXTRACT(MONTH FROM WORK_TIME_START) = #{month} AND WORK_MEMBER_ID = #{userId}
 	</select>
+	
+	<update id="dragWorkUpdate" parameterType="MemberWork">
+		UPDATE MEMBER_WORK SET WORK_TIME_START = TO_DATE(#{workTimeStart},'yyyy-mm-dd hh24:mi:ss'), WORK_TIME_END = TO_DATE(#{workTimeEnd},'yyyy-mm-dd hh24:mi:ss')
+		WHERE WORK_MEMBER_NO = #{workMemberNo}
+	</update>
 </mapper>
 <!--
 	private int workMemberNo;

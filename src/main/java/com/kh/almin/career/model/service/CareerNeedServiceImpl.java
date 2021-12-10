@@ -44,6 +44,11 @@ public class CareerNeedServiceImpl implements CareerNeedService{
 		return careerNeedDao.chartNeed(userId, year, month);
 	}
 // ===================================================================================================================
+	// 이벤트 수정 by 드래그
+	@Override
+	public int updateCalDrag(MemberNeed dragMemberNeed) throws Exception {
+		return careerNeedDao.updateCalDrag(dragMemberNeed);
+	}
 }
 //===================================================================================================================
 	// 회원의 현재 근무지 정보를 가져오는 method
