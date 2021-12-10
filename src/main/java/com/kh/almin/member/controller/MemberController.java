@@ -156,33 +156,12 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		}
 		return result;
 	}
-//	@GetMapping("/mypage/info") //회원정보 조회
-//	private ModelAndView getMemberInfo() throws Exception { //@ExceptionHandler가 받는다.
-//		Member vo = memberService.getMemberInfo();
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("memberview",vo);
-//		mv.setViewName("member/memberInfoEdit");//jsp화면
-//		
-////		logger.info("volist: "+volist.toString());
-//		return mv;
-//	}
+
 	@GetMapping("/mypage") //회원정보 메인
 	private String selectMembers() { 
 		return "member/memberInfo";
 	}
-//	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
-//		List<Member> volist = memberService.getMembers();
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("memberview",volist);
-//		mv.setViewName("member/memberInfo");//jsp화면
-//		
-		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
-//		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
-		
-//		logger.info("전체 회원리스트 조회");
-//		logger.info("volist: "+volist.toString());
-		//return mv;
-	//}
+
 	@GetMapping("/mypage/memberinfo")
 	private String Memberinfo() { //회원정보 수정 전 비번 재입력
 		logger.info("회원정보 수정 전 단계 진입");
@@ -217,7 +196,29 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		//userId로 select문 만들어서 
 		return mv;
 	}
-	
+//	@GetMapping("/mypage/info") //회원정보 조회
+//	private ModelAndView getMemberInfo() throws Exception { //@ExceptionHandler가 받는다.
+//		Member vo = memberService.getMemberInfo();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("memberview",vo);
+//		mv.setViewName("member/memberInfoEdit");//jsp화면
+//		
+////		logger.info("volist: "+volist.toString());
+//		return mv;
+//	}
+//	private ModelAndView selectMembers() throws Exception { //@ExceptionHandler가 받는다.
+//		List<Member> volist = memberService.getMembers();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("memberview",volist);
+//		mv.setViewName("member/memberInfo");//jsp화면
+//		
+		//데이터를 싣고 갈 수 있는 방법(2번째 방식)
+//		mv.setViewName("redirect:/member/register");//redirect:가 붙으면 jsp가 아니라 RequestMapping 이름
+		
+//		logger.info("전체 회원리스트 조회");
+//		logger.info("volist: "+volist.toString());
+		//return mv;
+	//}
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {
 		logger.error(e.getMessage());

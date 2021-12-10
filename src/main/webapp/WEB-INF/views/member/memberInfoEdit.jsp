@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>알바의 민족 회원정보 수정 전 단계</title>
+<title>알바의 민족 회원정보 수정</title>
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">

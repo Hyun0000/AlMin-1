@@ -35,9 +35,10 @@
 		WHERE MEMBER_ID = #{memberId}
 	</select>
 
-	<select id="listCompany" resultMap="CompanyResultMap">
+	<select id="listCompany" resultMap="CompanyResultMap" parameterType="Company">
 		select COMPANY_ID, COMPANY_TEL, COMPANY_NAME, COMPANY_BOSS, COMPANY_EMAIL,
 		COMPANY_ADDRESS, COMPANY_NUM from COMPANY
+		WHERE COMPANY_ID = #{companyId}
 	</select>
 
 	<!-- 개인회원가입 -->

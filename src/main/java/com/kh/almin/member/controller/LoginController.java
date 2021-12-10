@@ -33,25 +33,6 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	BCryptPasswordEncoder pwdEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	//로그인이 전제되어야 하는 페이지가 필요할때 유용한 @SessionAttributes, @ModelAttribute
-//	@ModelAttribute("loginInfo")
-//	public Member setMemberSession() throws Exception {
-//		Member m = new Member();
-//		m.setMemberId("aaa");
-//		try {
-//			Member ms= memberService.selectMember(m);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return m;
-//	}
-	
-//	@GetMapping //로그인화면
-//	private String selectMembers() throws Exception {
-//		logger.info("로그인 화면 진입");
-//		return "member/loginPopup";//모달창으로 변경(삭제예정)
-//	}
-	
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/members/{memberId}")
 	@ResponseBody // ajax에 쓰이는 어노테이션. 얘가 없으면 result가 view페이지를 찾음.
@@ -79,7 +60,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 			return result;
 		}
 	}
-	
+
 	@PostMapping("/companies/{companyId}")
 	@ResponseBody 
 	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {
@@ -105,7 +86,24 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 			return result;
 		}
 	}
+	//로그인이 전제되어야 하는 페이지가 필요할때 유용한 @SessionAttributes, @ModelAttribute
+//	@ModelAttribute("loginInfo")
+//	public Member setMemberSession() throws Exception {
+//		Member m = new Member();
+//		m.setMemberId("aaa");
+//		try {
+//			Member ms= memberService.selectMember(m);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return m;
+//	}
 	
+	@GetMapping //로그인화면
+	private String selectMembers() throws Exception {
+		logger.info("로그인 화면 진입");
+		return "member/loginInterceptor";//인터셉터시 이동할 로그인창
+	}
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {
 		logger.error(e.getMessage());
