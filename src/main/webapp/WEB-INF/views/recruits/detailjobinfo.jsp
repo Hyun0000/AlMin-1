@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${recruitTitle}</title>
+<title>공고 상세</title>
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
