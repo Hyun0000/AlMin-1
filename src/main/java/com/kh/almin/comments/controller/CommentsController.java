@@ -160,9 +160,19 @@ public class CommentsController {
 	@ResponseBody
 	// public String selectAllComments(String recruitNo, String id) {
 	// public String selectAllComments(@RequestParam(value = "id",  defaultValue = "") String id, @RequestParam(value = "recruitNo") String recruitNo) {
-	public String selectAllComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String recruitNo) {
+	public String selectAllComments(@RequestParam(value = "id") String id, @RequestParam(value = "recruitNo") String recruitNo, @RequestParam(value = "page") String pageNo) {
 			System.out.println("@GetMapping(전체 후기 조회) 진입");
 			System.out.println("recruitNo : " + recruitNo);
+			
+			System.out.println("pageNo : " + pageNo);
+			
+			int pageNum = 0;
+			if(pageNo != null && !pageNo.equals("")) {
+				pageNum = Integer.parseInt(pageNo);
+			}
+			System.out.println("============================");
+			System.out.println("pageNum : " + pageNum);
+			System.out.println("============================");
 
 			// 1. 공고 번호
 			int rNo = 0;
@@ -187,7 +197,8 @@ public class CommentsController {
 			Map<String, Object> map = null;
 			
 			try {
-				 map = commentsService.selectAllComments(rNo, userId);
+				 // map = commentsService.selectAllComments(rNo, userId);
+				 map = commentsService.selectAllComments(rNo, userId, pageNum);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

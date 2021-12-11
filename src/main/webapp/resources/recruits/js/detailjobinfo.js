@@ -2,19 +2,28 @@ let modalBack = document.getElementById('comments_insert_modal_back');
 // let param = "recruitNo=" + recruitNo;
 // let recruitParam = "recruitNo=" + recruitNo;
 let recruitCommentParam = "reviews?recruitNo=" + recruitNo + "&id=" + userId;
+let recruitCommentPageParam = "reviews?recruitNo=" + recruitNo + "&id=" + userId + "&page=" + 1;
+console.log("recruitCommentPageParam : " + recruitCommentPageParam);
 
 // 후기 입력 모달창 초기화를 위한 변수
 let firstInsert = "";
 
+// 후기 전체를 담는 <ul>
+let ulEle = document.getElementById('comments_box');
+
+// 페이지 링크 전체를 담는 <div>
+let pageLinkDivEle = document.getElementById('comments_box_pageLink');
+
+// 유저가 현재 선택한 페이지
+let userSelectPage = 0;
+
 window.onload = function() {
 // 1.
 // ========================================= page load 후 전체 후기 조회(select) ===============================================
-	// TODO
-	// 리뷰번호 param으로 넣어줘야한다.
-	// let param = "recruitNo=1&id=";
-	// let param = "recruitNo=" + recruitNo;
-	sendRequest("GET", recruitCommentParam, null, selectAllComments);
-	// sendRequest("GET", "reviews", recruitParam, selectAllComments);
+	// 페이지 테스트
+	sendRequest("GET", recruitCommentPageParam, null, selectAllComments);
+	
+	// sendRequest("GET", recruitCommentParam, null, selectAllComments);
 // ========================================= 후기 insert ===============================================	
 // 2. 후기 insert
 	// 모달창 띄우기
@@ -161,10 +170,8 @@ function postingComment(insertOrUpdate) {
 						}
 						
 						// 후기 새로 가져오기
-						// 리뷰번호 param으로 넣어줘야한다.
-						// let param = "recruitNo=1";
-						sendRequest("GET", recruitCommentParam, null, selectAllComments);
-						// sendRequest("GET", "reviews", recruitParam, selectAllComments);
+						// sendRequest("GET", recruitCommentParam, null, selectAllComments);
+						sendRequest("GET", recruitCommentPageParam, null, selectAllComments);
 						
 					} else {
 						alert("후기 등록 or 수정 실패");
@@ -247,7 +254,46 @@ function selectAllComments() {
 			console.log("모듈을 이용한 js-ajax 성공");
 			console.log(httpRequest.responseText);
 			
+			// ================== 초기화 ==================
+			while (pageLinkDivEle.hasChildNodes()) {pageLinkDivEle.removeChild(pageLinkDivEle.firstChild);}
+			
+			while (ulEle.hasChildNodes()) {ulEle.removeChild(ulEle.firstChild);}
+			// ================== 초기화 ==================
+			
 			let commentsObj = JSON.parse(httpRequest.responseText);
+			
+			// ====================== 페이지 링크 출력 ======================
+			// 페이지 링크 전체를 담는 <div>
+			// let pageLinkDivEle = document.getElementById('comments_box_pageLink');
+			
+			// 페이지 링크
+			let allPageLink = commentsObj.pageLink;
+			
+			for (var i = 1; i <= allPageLink; i++) {
+				let pageSpanEle = document.createElement('span');
+				pageSpanEle.setAttribute('class', 'pageLink');
+				pageSpanEle.setAttribute('id', 'pageLink_' + i);
+				pageSpanEle.setAttribute('onclick', 'pageLickClick();');
+				pageSpanEle.innerText = i;
+				pageLinkDivEle.appendChild(pageSpanEle);
+			}
+			// ====================== 페이지 링크 출력 ======================
+			
+			// ====================== 현재 선택한 페이지 표시 ======================
+			let pageLinkClassEles = document.getElementsByClassName('pageLink');
+			for (var i = 0; i < pageLinkClassEles.length; i++) {
+				console.log(pageLinkClassEles[i]);
+				console.log(pageLinkClassEles[i].innerText);
+				
+				if(pageLinkClassEles[i].innerText === userSelectPage) {
+					pageLinkClassEles[i].style.borderBottom = "thick solid royalblue";
+					console.log("true");
+				} else {
+					pageLinkClassEles[i].style.borderBottom = "thick solid white";
+					console.log("false");
+				}
+			}
+			// ====================== 현재 선택한 페이지 표시 ======================
 			
 			// 후기 작성자의 정보를 담는 객체 배열
 			let comments = commentsObj.commentsVO;
@@ -259,7 +305,7 @@ function selectAllComments() {
 			let num = 0;
 			
 			// ul
-			let ulEle = document.getElementById('comments_box');
+			// let ulEle = document.getElementById('comments_box');
 			
 			comments.forEach(function (e) {
 				console.log(e.ccWriter);
@@ -380,6 +426,25 @@ function selectAllComments() {
 		let test = document.getElementsByClassName('deleteBtn');
 	}
 } // selectAllComments callback function 종료
+//========================================= 각 페이지링크 클릭 ====================================
+function pageLickClick() {
+	console.log(this);
+	console.log(event);
+	console.log(event.target);
+	console.log(event.target.innerText);
+	
+	userSelectPage = event.target.innerText;
+
+	// ================== 초기화 ==================
+//	while (pageLinkDivEle.hasChildNodes()) {pageLinkDivEle.removeChild(pageLinkDivEle.firstChild);}
+//	
+//	while (ulEle.hasChildNodes()) {ulEle.removeChild(ulEle.firstChild);}
+	// ================== 초기화 ==================
+	
+	let selectPageParam = "reviews?recruitNo=" + recruitNo + "&id=" + userId + "&page=" + userSelectPage;
+	sendRequest("GET", selectPageParam, null, selectAllComments);
+}
+
 //========================================= 후기 삭제 버튼(delete) inline function ====================================
 function deleteComment(event) {
 	let deleteBool = confirm("삭제 하시겠습니까?");
@@ -418,10 +483,8 @@ function deleteComment(event) {
 					initCommentsBox();
 					
 					// 후기 전체 다시 select
-					// 리뷰번호 param으로 넣어줘야한다.
-					// let param = "recruitNo=1";
-					// sendRequest("GET", "reviews", recruitParam, selectAllComments);
-					sendRequest("GET", recruitCommentParam, null, selectAllComments);
+					// sendRequest("GET", recruitCommentParam, null, selectAllComments);
+					sendRequest("GET", recruitCommentPageParam, null, selectAllComments);
 				}
 			}
 		}
@@ -442,8 +505,8 @@ function updateComment(event) {
 	// let param = "recruitNo=1&id=" + updateUserId;
 	
 	if (updateBool == true) {
-		sendRequest("GET", recruitCommentParam, null, popUpModal);
-		// sendRequest("GET", "reviews", param, popUpModal);
+		// sendRequest("GET", recruitCommentParam, null, popUpModal);
+		sendRequest("GET", recruitCommentPageParam, null, popUpModal);
 	}
 }
 
@@ -470,28 +533,28 @@ function popUpModal() {
 				console.log("=================== updata :  ===================");
 				let updateObj = JSON.parse(httpRequest.responseText);
 				
-				console.log("=================== httpRequest.responseText.commentsVO :  ===================");
-				console.log(httpRequest.responseText.commentsVO);
-				console.log("=================== updateObj.commentsVO :  ===================");
-				console.log(updateObj.commentsVO);
-				console.log("=================== updateObj.commentsVO.ccContent :  ===================");
-				console.log(updateObj.commentsVO.ccContent);
-				console.log("=================== updateObj.commentsVO[0] :  ===================");
-				console.log(updateObj.commentsVO[0]);
-				console.log("=================== updateObj.commentsVO[0].ccContent :  ===================");
-				console.log(updateObj.commentsVO[0].ccContent);
-				console.log("=================== updateObj.commentsVO[0].ccContract :  ===================");
-				console.log(updateObj.commentsVO[0].ccContract);
-				console.log("=================== userId :  ===================");
-				console.log(userId);
-				console.log("=================== updateObj[userId] :  ===================");
-				console.log(updateObj[userId]);
-				console.log("=================== updateObj[userId].length :  ===================");
-				console.log(updateObj[userId].length);
-				console.log("=================== updateObj.user01[0] :  ===================");
-				console.log(updateObj[userId][0]);
-				console.log("=================== updateObj.user01[0][0] :  ===================");
-				console.log(updateObj[userId][0][0]);
+//				console.log("=================== httpRequest.responseText.commentsVO :  ===================");
+//				console.log(httpRequest.responseText.commentsVO);
+//				console.log("=================== updateObj.commentsVO :  ===================");
+//				console.log(updateObj.commentsVO);
+//				console.log("=================== updateObj.commentsVO.ccContent :  ===================");
+//				console.log(updateObj.commentsVO.ccContent);
+//				console.log("=================== updateObj.commentsVO[0] :  ===================");
+//				console.log(updateObj.commentsVO[0]);
+//				console.log("=================== updateObj.commentsVO[0].ccContent :  ===================");
+//				console.log(updateObj.commentsVO[0].ccContent);
+//				console.log("=================== updateObj.commentsVO[0].ccContract :  ===================");
+//				console.log(updateObj.commentsVO[0].ccContract);
+//				console.log("=================== userId :  ===================");
+//				console.log(userId);
+//				console.log("=================== updateObj[userId] :  ===================");
+//				console.log(updateObj[userId]);
+//				console.log("=================== updateObj[userId].length :  ===================");
+//				console.log(updateObj[userId].length);
+//				console.log("=================== updateObj.user01[0] :  ===================");
+//				console.log(updateObj[userId][0]);
+//				console.log("=================== updateObj.user01[0][0] :  ===================");
+//				console.log(updateObj[userId][0][0]);
 				
 				// 한줄 후기 입력창에 기존 내용 입력
 				let updateoneLine = document.getElementById('commentsLine');

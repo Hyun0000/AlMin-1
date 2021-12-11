@@ -29,13 +29,10 @@ public class CommentsServiceImpl implements CommentsService {
 // ==============================================================================
 	// 특정 공고의 전체 후기 조회(select)
 	@Override
-	// public List<List<String>> selectAllComments(int recruitNo) {
-	public Map<String, Object> selectAllComments(int rNo, String userId) throws Exception {
-		return commentsDao.selectAllComments(rNo, userId);
+	// public Map<String, Object> selectAllComments(int rNo, String userId) throws Exception {
+	public Map<String, Object> selectAllComments(int rNo, String userId, int pageNum) throws Exception {
+		return commentsDao.selectAllComments(rNo, userId, pageNum);
 	}
-//	public Map<String, Object> selectAllComments(int recruitNo) throws Exception {
-//		return commentsDao.selectAllComments(recruitNo);
-//	}
 // ==============================================================================
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
 	@Override

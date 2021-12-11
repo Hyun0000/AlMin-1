@@ -206,6 +206,8 @@
 	</div>
 	<section id="comments_container">
 		<ul id="comments_box"></ul>
+		<!-- <div id="comments_box_pageLink">1  2  3  4  5</div> -->
+		<div id="comments_box_pageLink"></div>
 	</section>
 	<!-- 후기 조회(select) -->
 	<!-- 한줄 후기  & 근로계약서 -->
@@ -289,9 +291,21 @@
 	let commentsBoxEle = document.getElementById('comments_box');
 
 	// userID
-	// let userId = "test01";
+	// let userId = "jinpark";
+	// let userId = "giniuskang";
 	// let userId = "minzi91";
-	let userId = "jinpark";
+	// let userId = "sjh1216";
+	// let userId = "sy111k2";
+	// let userId = "test01";
+	let userId = "test02";
+	
+	// jinpark
+	// giniuskang
+	// minzi91
+	// sjh1216
+	// sy111k2
+	// test01
+	// test02
 
 	// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
 	let recruitNo = "${recruitNo}";

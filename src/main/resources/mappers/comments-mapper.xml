@@ -62,6 +62,11 @@
 		</if> -->
 		ORDER BY CC_NO DESC
 	</select>
+	
+<!-- ================================================= 특정 공고에 있는 전체 후기글 개수 (TO paging) ================================================= -->
+	<select id="countAllComment" parameterType="_int" resultType="_int">	
+		SELECT COUNT(*) FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo}
+	</select>
 <!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
 	<insert id="insertCommentsKeyword" parameterType="map" >
 		<choose>

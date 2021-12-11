@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -97,8 +98,8 @@ public class CommentsDao {
 	}
 // ==============================================================================================================
 	// 특정 공고의 전체 후기 조회(select) & 후기 수정을 위해 특정 유저의 후기 data 가져오기
-	public Map<String, Object> selectAllComments(int rNo , String userId) throws Exception {
-	// public List<List<String>> selectAllComments(int recruitNo) {
+	// public Map<String, Object> selectAllComments(int rNo , String userId) throws Exception {
+	public Map<String, Object> selectAllComments(int rNo , String userId, int pageNum) throws Exception {
 		// 반환용 map
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -107,6 +108,21 @@ public class CommentsDao {
 		
 		// mapping table에서 data를 가져올때 인자로 전달할 map
 		Map<String, Object> selectKeywordMap = new HashMap<String, Object>();
+		
+		// 현재 접속한 유저가 선택한 페이지 링크(임시 값)
+		int userSelectNum = pageNum;
+		System.out.println("doa userSelectNum : " + userSelectNum);
+		
+		// 가져올 후기 글 첫번째 순서
+		int offset = (userSelectNum - 1) * 5;
+		
+		// 가져올 후기  글 개수
+		final int LOAD_SIZE = 5;
+		
+		// 특정 공고에 있는 전체 후기글 개수 (TO paging)
+		System.out.println("countAllComment(rNo) : " + countAllComment(rNo));
+		int pageLink = (countAllComment(rNo)%LOAD_SIZE == 0) ? countAllComment(rNo) / LOAD_SIZE : (countAllComment(rNo) / LOAD_SIZE) + 1;
+		System.out.println("pageLink : " + pageLink);
 		
 		// userID = ""  -->  전체 후기를 조회할 때
 		if (userId == "") {
@@ -144,8 +160,12 @@ public class CommentsDao {
 			firstMap.put("recruitNo", rNo);
 			firstMap.put("userId", userId);
 			
+			// 후기 글 페이징용 rowBounds
+			RowBounds rowBounds = new RowBounds(offset, LOAD_SIZE);
+			
 			// 1. COMMENTS_COMPANY에서 후기 가져오기
-			List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", firstMap);
+			// List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", firstMap);
+			List<CommentsCompany> commentsVO = sqlSession.selectList("Comments.selectCommentVo", firstMap, rowBounds);
 			// 이건 다 분류하고 난 다음에 하기
 			resultMap.put("commentsVO", commentsVO);
 			
@@ -161,7 +181,9 @@ public class CommentsDao {
 					selectKeywordMap.put("writer", commentsCompany.getCcWriter());
 					
 					// List<Map<String, Object>> resultListMap = sqlSession.selectList("Comments.selectKeywords", selectMap);
+					
 					List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap);
+					// List<String> resultList = sqlSession.selectList("Comments.selectKeywords", selectKeywordMap, rowBounds);
 					System.out.println("test" + i + " : " + resultList);
 					
 //					Map<String, List<String>> commentsMap = new HashMap<String, List<String>>();
@@ -181,6 +203,9 @@ public class CommentsDao {
 				}
 			}
 		}
+		
+		// 페이지 링크 값 넣기
+		resultMap.put("pageLink", pageLink);
 		return resultMap;
 	}
 // ==============================================================================
@@ -234,6 +259,15 @@ public class CommentsDao {
 		System.out.println("result dao : " + result);
 		return result;
 	}
+//==============================================================================
+	// 특정 공고에 있는 전체 후기글 개수 (TO paging)
+	public int countAllComment(int recruitNo) {
+		return sqlSession.selectOne("Comments.countAllComment", recruitNo);
+	}
+//==============================================================================
+//==============================================================================
+//==============================================================================
+//==============================================================================
 }
 
 

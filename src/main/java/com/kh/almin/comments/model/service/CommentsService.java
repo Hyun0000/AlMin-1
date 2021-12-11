@@ -14,9 +14,8 @@ public interface CommentsService {
 	public int insertComments(List<List<String>> commentsList, CommentsCompany commentsCompany, String insertOrUpdate) throws Exception;
 // ==============================================================================================================
 	// 특정 공고의 전체 후기 조회(select)
-	// public Map<String, Object> selectAllComments(int recruitNo) throws Exception;
-	public Map<String, Object> selectAllComments(int recruitNo, String id) throws Exception;
-	// public List<List<String>> selectAllComments(int recruitNo);
+	// public Map<String, Object> selectAllComments(int recruitNo, String id) throws Exception;
+	public Map<String, Object> selectAllComments(int recruitNo, String id, int pageNum) throws Exception;
 // ==============================================================================
 	// 후기 삭제 --> 조건 : 공고번호(CC_RECRUIT_NO) & 작성자 ID
 	public int deleteComment(int rNo , String userId) throws Exception;

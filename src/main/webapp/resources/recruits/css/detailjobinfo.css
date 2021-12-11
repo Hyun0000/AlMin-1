@@ -39,7 +39,7 @@
     list-style-type: none;
     padding: 0;
     margin-top: 50px;
-    margin-bottom: 80px;
+    margin-bottom: 30px;
 }
 
 /* 후기 조회 <li> */
@@ -349,6 +349,25 @@
 /* 등록 버튼 클릭시 */
 #submitBtn:active {
     background-color: red;
+}
+
+/* 페이지 링크 전체를 담는 <div> */
+#comments_box_pageLink {
+	text-align: center;
+	font-size: 1.5rem;
+	color: black;
+	margin-bottom: 80px;
+}
+
+/* 각 페이지링크 */
+.pageLink {
+	padding: 0 15px;
+	/* padding-bottom: 5px; */
+}
+
+/* 각 페이지링크 hover시 */
+.pageLink:hover {
+	cursor: default;
 }
 
 .rectable {
