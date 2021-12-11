@@ -11,15 +11,9 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/assets/css/almin.css"/>">
 <title>상세 이력서 조회</title>
-<style type="text/css">
-button {
-	margin-left: 50%;
-	width: 100px;
-	color: gray;
-}
-  
-section {
-	margin-left: 300px;
+<style>
+.section-padding {
+	padding-bottom: 100px;
 }
 </style>
 </head>
@@ -28,47 +22,54 @@ section {
 		<c:import url="/WEB-INF/views/template/header.jsp" />
 	</header>
 
-	<section>
-		
-		<h2>개인기본정보</h2>
-		<div>
-			<strong>사진</strong><br>
-			<div>
+	<section class="job-single-content section-padding">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="main-content">
+						<div class="single-content2 py-4">
+							<h3>${resum.resumeTitle }</h3>
+							<img id="myimg" src="data:image/jpg;base64,+data.image+"
+								width="95px" height="128px" />
+						</div>
+						<div class="single-content4 py-4">
+							<h4>이력서</h4>
+							<table>
+								<tr>
+									<td>연락처 :&nbsp;</td>
+									<td>${resum.resumePhone }</td>
+								</tr>
+								<tr>
+									<td>지역 :&nbsp;</td>
+									<td>${resum.district.jobDistrictName }</td>
+								</tr>
+								<tr>
+									<td>경력 :&nbsp;</td>
+									<td>${resum.jobType.jobTypeName }${resum.period.periodType }
+										${resum.jobCareers }</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<button class="template-btn" onclick="history.back();">확인</button>
+					<button class="template-btn"
+						onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+					<button class="template-btn"
+						onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
 
-				<!-- 사진 -->
-				<img id="myimg" src="data:image/jpg;base64,+data.image+"
-					width="95px" height="128px" />
-			</div>
-			<strong>핸드폰 번호</strong> ${resum.resumePhone }
-		</div>
-		<hr>
-		<h2>이력서 제목</h2>
-		${resum.resumeTitle }
-		<hr>
-		<h2>지역</h2>
-		<div>
-			 ${resum.district.jobDistrictName }
-		</div>
-		<hr>
-		<h2>경력</h2>
-		<div>${resum.jobType.jobTypeName }${resum.period.periodType }
-			${resum.jobCareers }</div>
-		<br>
-		<button class="template-btn" onclick="history.back();">확인</button>
-		<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
-		<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
-		
-		<button class="template-btn like-btn" onclick="doLike(this);">
-			<c:choose>
-				<c:when test="${like == null}">
+					<button class="template-btn like-btn" onclick="doLike(this);">
+						<c:choose>
+							<c:when test="${like == null}">
 					찜하기
 				</c:when>
-				<c:otherwise>
+							<c:otherwise>
 					찜해제
 				</c:otherwise>
-			</c:choose>
-		</button>
-
+						</c:choose>
+					</button>
+				</div>
+			</div>
+		</div>
 	</section>
 
 	<footer>
@@ -98,5 +99,4 @@ section {
 			});
 		}
 	</script>
-
 </body>

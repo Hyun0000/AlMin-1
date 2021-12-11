@@ -65,7 +65,7 @@
 												</h5></li>
 										</ul>
 										<button class="genric-btn primary small"
-											onclick="${pageContext.request.contextPath }//resumes/allres">상세보기</button>
+											onclick="location.href='${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo}'">상세보기</button>
 									</div>
 								</div>
 							</div>
