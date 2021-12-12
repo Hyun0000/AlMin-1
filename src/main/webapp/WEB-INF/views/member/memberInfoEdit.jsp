@@ -40,7 +40,7 @@ $(document).ready(function(){
 				} else {
 					alert("회원정보 수정 성공");
 					//TODO: 회원정보 페이지로 이동
-			//location.href ="${pageContext.request.contextPath}/members/mypage"
+			location.href ="${pageContext.request.contextPath}/members/mypage"
 				}
 		},
 		error:function(request,status,error){

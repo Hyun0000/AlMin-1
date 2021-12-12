@@ -24,15 +24,19 @@ public class MemberService {
 		Member member = memberDao.getMemberInfo(m);
 		return member;
 	}
+	//회원정보 수정
 	public Member updateMember(Member m) throws Exception{
 		logger.info("Service 진입");
 		int result = memberDao.updateMember(m);
 		//수정된 정보를 화면에 뿌리기 위해 member를 한번 더 읽는다
-		//업데이트엔 성공했지만 또 다른 접속자가 수정했을 가능성이 있으므로.
+		//이유: 업데이트엔 성공했지만 또 다른 접속자가 수정했을 가능성 있음
 		Member member = memberDao.getMemberInfo(m);
 		return member;
 	}
-	
+	public int updatePwMember(Member m) throws Exception{
+		int result = memberDao.updatePwMember(m);
+		return result;
+	}
 	//개인회원가입
 	public void insertMember(Member member) throws Exception{
 		logger.info("MemberService-insertMember 진입");

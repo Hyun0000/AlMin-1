@@ -246,7 +246,7 @@ $(document).ready(function(){
 				} else {
 					console.log("비번찾기 성공")
 					alert(result);
-					//TODO: 일치하는 n개의 비밀번호를 찾았습니다(화면 생성) 새로운 jsp
+					//TODO: 새 비밀번호를 입력해 주세요.(화면 생성) 새로운 jsp
 			location.href ="${pageContext.request.contextPath}/members/pwd/resetter"
 				}
 		},

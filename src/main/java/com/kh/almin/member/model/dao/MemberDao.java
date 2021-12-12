@@ -56,7 +56,18 @@ public class MemberDao {
 		int result = sqlSession.update("Member.updateMember",m);
 		return result;
 	}
-	
+	//개인 비번찾기 - 재설정
+	public int updatePwMember(Member m) {
+		logger.info("Dao-updatePwMember 진입");
+		int result = sqlSession.update("Member.updatePwMember",m);
+		return result;
+	}
+	//기업 비번찾기 - 재설정
+	public int updatePwCompany(Member m) {
+		logger.info("Dao-updatePwCompany 진입");
+		int result = sqlSession.update("Member.updatePwCompany",m);
+		return result;
+	}
 	//개인회원 ID 중복체크
 	public int idChk(Member member) throws Exception{
 		logger.info("Dao-idChk 진입");
@@ -108,5 +119,4 @@ public class MemberDao {
 			int result = sqlSession.selectOne("Member.findMPWdphone", member);
 			return result;
 		}
-
 }

@@ -67,77 +67,89 @@ font-color: dodgerblue
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-	// 취소
-	$(".cancel").on("click", function(){
-		
-	});
-	});
-	
-$.ajax({
-	url : "/member/passChk",
-	type : "POST",
-	dateType : "json",
-	data : $("#updateForm").serializeArray(),
-	success: function(data){
-		if(data==true){
-			if(confirm("회원수정하시겠습니까?")){
-1							}
-		}else{
-			alert("패스워드가 틀렸습니다.");
-			return;
-		}
-	}
 })
 </script>
 </head>
 <body>
 	<!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp" />
-<section>
-<div id="container">
-		<p class="mName"><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b style="color:dodgerblue">통합 회원정보</b></p>
-		<!--  <p class="mTip">알바몬을 더 이상 이용하지 않는다면 <a href="#">회원탈퇴</a></p> -->
-		<div class="mInfoWrap">
+<!-- Start blog-posts Area -->
+	<section class="blog-posts-area section-padding">
+		<div class="container">
+			<div class="row">
 
-			<!--// 회원정보 -->
-			<div class="mInfo">
-				<h2>회원정보</h2>
-				<button class="template-btn">수정</button>
+				<div class="col-lg-8 post-list blog-post-list">
+					<div class="single-post">
+
+						<!-- Start comment-sec Area -->
+						<section class="comment-sec-area py-5">
+								<div class="container">
+		<p class="mName"><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b style="color:dodgerblue">통합 회원정보</b></p>
+									<div class="row flex-column">
+
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb"></div>
+													<div class="desc">
 				<p class="txt">안전한 정보보호를 위해 연락처 일부만 확인가능하며,<br> 수정화면에서 정확한 연락처 확인이 가능합니다.</p>
 				<dl>
 					<!--<dt>최근수정일</dt>
 					<dd>2020-05-22</dd>-->
 					<dt>연락처</dt>
+					<dd>[[${vo.memberPhone}]]</dd>
 					<dd>010-8***-***0</dd>
 					<dt>e-메일</dt>
 					<dd>ys****@n****.com</dd>
 					<dt>주소</dt>
 					<dd>서울 성동구  ******</dd>
 				</dl>
-			</div>
+					<div class="reply-btn">
+					<button type="button" class="genric-btn info-border" onclick="infoEdit()">수정</button>
+					</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</section>
+						<!-- End comment-sec Area -->
+						<!-- Start comment-sec Area -->
+						<section class="comment-sec-area py-5">
+								<div class="container">
+		<h2>비밀번호</h2>
+									<div class="row flex-column">
 
-			<!--// 비밀번호-->
-			<div class="mPw">
-				<h2>비밀번호</h2>
-
-				<div class="snsMem">
-				
-					<button class="template-btn">변경</button>
-					<p class="txt">비밀번호를 주기적으로 변경하여<br> 소중한 개인정보를 안전하게 보호하세요(6개월마다 알림)</p>
-					<dl>
-						<!--<dt>최근변경일</dt>
-						<dd>2009년 10월 25일
-						(<em>21일</em> 후 변경 알림 예정)</dd>-->
-					</dl>
-				</div>
-			</div>
-
-			<!--// 간편 로그인 관리 -->
-			<div class="mSns">
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb"></div>
+													<div class="desc">
+				<p class="txt">비밀번호를 주기적으로 변경하여<br> 소중한 개인정보를 안전하게 보호하세요(6개월마다 알림)</p>
+														<p class="rno" style="display: none">${item.recruitNo}</p>
+														<div class="reply-btn">
+															<button type="button" class="genric-btn info-border">변경</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</section>
+						<!-- Start comment-sec Area -->
+					<!-- 	<section class="comment-sec-area py-5">
+								<div class="container">
 				<h2>간편 로그인 관리</h2>
+									<div class="row flex-column">
+
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb"></div>
+													<div class="desc">
 				<p class="txt">소셜서비스 계정과 연결하면, 소셜 로그인으로 간편하게 로그인 할 수 있습니다.</p>
-				<div class="social-list">
-					
 					<div class="social-icon sns-naver">
 						<span><img src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></span>
 						<span class="social-name">네이버</span>
@@ -155,12 +167,41 @@ $.ajax({
 						<span class="social-name">페이스북</span>
 						<button id="btn_fb">연결</button>
 					</div>
-					
+														<div class="reply-btn">
+															<button type="button" class="template-btn">변경</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+						</section> -->
+						<!-- End comment-sec Area -->
+
+					</div>
+				</div>
+				<div class="col-lg-4 sidebar mt-5 mt-lg-0">
+					<div class="single-widget category-widget">
+						<h4 class="title">마이페이지</h4>
+						<ul>
+							<li><a href="${pageContext.request.contextPath}/members/mypage"
+								class="justify-content-between align-items-center d-flex"><h6>회원정보
+									</h6></a></li>
+							<li><a href="#"
+								class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6> </a></li>
+							<li><a href="${pageContext.request.contextPath}/recruits/myrecruits"
+								class="justify-content-between align-items-center d-flex "><h6
+										class="active">관심공고</h6> </a></li>
+							<li><a href="#"
+								class="justify-content-between align-items-center d-flex"><h6>이력서
+										관리</h6> </a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-		
-	</div>
+	</section>
 	<script>
 	function connection(){
 		$.ajax({
@@ -176,9 +217,6 @@ $.ajax({
 					alert("아이디와 비밀번호를 다시 확인해주세요.");
 				} else {
 					console.log("로그인 성공")
-	    		$(".modal").hide(); 
-				$("#login-state").show();//로그아웃, 마이페이지
-				$("#logout-state").hide();//로그인, 회원가입
 				}
 			//location.href ="${pageContext.request.contextPath}/main"
 		},
@@ -188,53 +226,10 @@ $.ajax({
 		}
 		});
 	}
+	function infoEdit(){
+		location.href ="${pageContext.request.contextPath}/members/mypage/pwCheck"
+	}
 	</script>
-</section>
-	<!-- Start blog-posts Area -->
-<section class="blog-posts-area section-padding">
-	<div class="container">
-		<div class="row">
-
-			<div class="col-lg-8 post-list blog-post-list">
-				<div class="single-post">
-
-						<!-- Start comment-sec Area -->
-<section class="comment-sec-area py-5">
-		<c:forEach var="item" items="${recruits}">
-				<div class="container">
-					<div class="row flex-column">
-
-						<div class="comment-list">
-							<div class="single-comment justify-content-between d-flex">
-								<div class="user justify-content-between d-flex">
-									<div class="thumb"></div>
-									<div class="desc">
-										<h5>
-											<a href="#">${item.recruitTitle}</a>
-										</h5>
-										<p class="rno" style="display: none">${item.recruitNo}</p>
-										<p class="date">${item.recruitDate}</p>
-										<div class="reply-btn">
-											<button type="button" class="template-btn">지원하기</button>
-											<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">	찜 해제</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</c:forEach>
-	</section>
-<!-- End comment-sec Area -->
-<!-- 공통 사이드바 jsp -->
-<c:import url="/WEB-INF/views/template/mypage_aside.jsp" />
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</section>
 	<!-- End blog-posts Area -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />
 </body>

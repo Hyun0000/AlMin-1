@@ -280,6 +280,7 @@
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
+<div class="col-lg-12">
 	<h2>기업회원가입</h2>
 	<div class="inner">
     <div class="user_join_agree">									<!-- 여기서 this는 이벤트가 발생한 element, 즉, '일괄동의' 체크박스 -->
@@ -752,13 +753,13 @@
 		<span id="adCmt" class="cmt"></span>
 		</td>
 		</tr>
-		
 	</table>
 <div class="btngroup">
 <button class="btn1" type="button" id="submit">회원가입</button>
 <button class="cancel btn2" type="button">취소</button>
 </div>
 </form>
+</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>

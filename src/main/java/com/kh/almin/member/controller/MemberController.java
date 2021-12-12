@@ -137,12 +137,16 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 		//TODO: 화면창 만들기
 	}
+	@GetMapping("/id/result") //개인 아이디찾기 결과
+	private String idResultMember() throws Exception {
+		return "member/idResult";
+	}
 	@GetMapping("/pwd") //개인 비밀번호찾기
 	private String findPwdMember() throws Exception {
 		return "member/findPwd";
 	}
 	
-	@PostMapping("/pwd/phone") //개인 아이디찾기(연락처)
+	@PostMapping("/pwd/phone") //개인 비번찾기(연락처)
 	@ResponseBody
 	private int findMPWdphone(@RequestBody Member m) throws Exception {
 		int result=0;
@@ -156,14 +160,13 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		}
 		return result;
 	}
-
-	@GetMapping("/mypage") //회원정보 메인
-	private String selectMembers() { 
-		return "member/memberInfo";
+	@GetMapping("/pwd/resetter") //개인 비밀번호재설정
+	private String resetPwMember() throws Exception {
+		return "member/resetPw";
 	}
 
-	@GetMapping("/mypage/memberinfo")
-	private String Memberinfo() { //회원정보 수정 전 비번 재입력
+	@GetMapping("/mypage/pwCheck")
+	private String MemberpwCheck() { //회원정보 수정 전 비번 재입력
 		logger.info("회원정보 수정 전 단계 진입");
 		return "member/pwCheck";
 	}
@@ -176,16 +179,40 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return isPwdMatch;//일치 성공여부를 jsp로 던짐.
 	}
 	
-	@PutMapping
+	@PutMapping //회원정보 수정
 	@ResponseBody
-	private Member updateMember(@RequestBody Member member) throws Exception{ //회원정보 수정
+	private Member updateMember(@RequestBody Member member) throws Exception{ 
 		logger.info("update 진입");
 		logger.info("member: "+member.toString());
 		Member ms = memberService.updateMember(member);
 		return ms;
 	}
-	@GetMapping("/mypage/edit")
-	private ModelAndView editMemberinfo(@RequestParam String userId) throws Exception { //회원정보 수정
+	@PutMapping("/pwd")//비번찾기 - 재설정
+	@ResponseBody 
+	private Member updatePwMember(@RequestBody Member member) throws Exception{ 
+//	private String updatePwMember(@RequestBody Member member) throws Exception{ 
+		logger.info("update 진입");
+		logger.info("member: "+member.toString());
+		String inputPass = member.getMemberPw();
+		String pwd = pwdEncoder.encode(inputPass);
+		member.setMemberPw(pwd);
+		Member ms = memberService.updateMember(member);
+//		return "redirect:/";
+		return ms;
+	}
+	@GetMapping("/mypage") //개인 회원정보 메인(조회)//@RequestParam String userId
+	private ModelAndView selectMembers() throws Exception { 
+		//logger.info("userId: "+userId);
+		Member vo = new Member();
+		//vo.setMemberId(userId);
+		ModelAndView mv = new ModelAndView();
+		Member ms= memberService.getMemberInfo(vo);
+		mv.addObject("vo", ms);
+		mv.setViewName("member/memberInfo");
+		return mv;
+	}
+	@GetMapping("/mypage/edit")//회원정보 수정 페이지(조회)
+	private ModelAndView editMemberinfo(@RequestParam String userId) throws Exception { 
 		logger.info("userId: "+userId);
 		Member vo = new Member();
 		vo.setMemberId(userId);

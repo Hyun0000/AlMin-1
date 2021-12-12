@@ -55,7 +55,7 @@ session.setAttribute("state", state);
 					<c:otherwise>
 						<!-- 로그인 후 노출 -->
 						<ul id="login-state">
-							<li><a href="${pageContext.request.contextPath}/recruits/myrecruits">마이페이지</a></li>
+							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
 						</ul>
 					</c:otherwise>
@@ -403,10 +403,32 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 			});
 			location.href="${pageContext.request.contextPath}/logout"
  	}
-		
-
 			//response.status === 'connected' 로그인상태
 			//response.status === 'unknown' 로그아웃상태
+			function mypage(){
+				$.ajax({
+					url: url,
+					type: "post",
+					 // data : 서버(컨트롤러)로 보내는 데이터.
+					 // json데이터를 JSON.stringify를 이용하여 String으로 형변환
+					data: JSON.stringify(json),
+					//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+					contentType : "application/json; charset=utf-8",
+					success: function(result){
+						if(result == false){
+							alert("비밀번호가 일치하지 않습니다.");
+						} else {
+							//TODO: 일치하는 n개의 아이디를 찾았습니다(화면 생성)
+							alert("비밀번호가 일치합니다.");
+					location.href ="${pageContext.request.contextPath}/members/mypage/edit?userId="+$("#uid").html() //회원정보수정
+						}
+				},
+				error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+
+							"\n"+"error:"+error);
+				}
+				});
+			}
 		
 	</script>
 </header>

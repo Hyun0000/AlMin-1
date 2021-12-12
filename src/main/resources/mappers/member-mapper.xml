@@ -19,6 +19,7 @@
 	<resultMap type="Company" id="CompanyResultMap">
 		<id property="companyId" column="COMPANY_ID" />
 		<id property="companyType" column="COMPANY_TYPE" />
+		<result property="companyPwd" column="COMPANY_PW" />
 		<result property="companyTel" column="COMPANY_TEL" />
 		<result property="companyName" column="COMPANY_NAME" />
 		<result property="companyBoss" column="COMPANY_BOSS" />
@@ -130,7 +131,18 @@
 		COMPANY_EMAIL = #{companyEmail},
 		COMPANY_NUM = #{companyNum},
 		COMPANY_ADDRESS = #{companyAddress}
-		WHERE COMPANY_ID = #{memberId}
+		WHERE COMPANY_ID = #{companyId}
+	</update>
+	<!-- 비번찾기 - 재설정 -->
+	<update id="updatePwMember" parameterType="Member">
+	UPDATE MEMBER SET
+	MEMBER_PW = #{memberPw}
+	WHERE MEMBER_ID = #{memberId}
+	</update>
+	<update id="updatePwCompany" parameterType="Company">
+	UPDATE COMPANY SET
+	COMPANY_PW = #{companyPwd}
+	WHERE COMPANY_ID = #{companyId}
 	</update>
 	
 </mapper>
