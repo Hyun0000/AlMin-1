@@ -33,16 +33,16 @@ section > h2 {
           text-align: center;
       }
 
-a {
+a#a {
 	color: #333333;
 	text-decoration: none;
 }
 
-a:link {
+a#a:link {
 	text-decoration: none;
 }
 
-a:hover {
+a#a:hover {
 	background-color: #BDBDBD;
 	text-decoration: none;
 }

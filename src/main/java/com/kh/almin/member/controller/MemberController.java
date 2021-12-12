@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,15 +36,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@Autowired
 	private MemberService memberService;
 	
-	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
+	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를` 추가
 	BCryptPasswordEncoder pwdEncoder;
 	
 	@Autowired
     private MailSendService mss;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	 @PostMapping("/emails")
-	 @ResponseBody
+	@PostMapping("/emails")
+	@ResponseBody
      public String signUp(@RequestBody Member member){
         // DB에 기본정보 insert
 		 logger.info(member.getMemberEmail());
@@ -137,7 +138,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 		//TODO: 화면창 만들기
 	}
-	@GetMapping("/id/result") //개인 아이디찾기 결과
+	@GetMapping("/id/result") //개인 아이디찾기 결과창
 	private String idResultMember() throws Exception {
 		return "member/idResult";
 	}
@@ -178,7 +179,6 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		logger.info(ms.toString());
 		return isPwdMatch;//일치 성공여부를 jsp로 던짐.
 	}
-	
 	@PutMapping //회원정보 수정
 	@ResponseBody
 	private Member updateMember(@RequestBody Member member) throws Exception{ 
@@ -189,22 +189,84 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	}
 	@PutMapping("/pwd")//비번찾기 - 재설정
 	@ResponseBody 
-	private Member updatePwMember(@RequestBody Member member) throws Exception{ 
+	private boolean updatePwMember(HttpSession session, @RequestBody Member member) throws Exception{ 
 //	private String updatePwMember(@RequestBody Member member) throws Exception{ 
 		logger.info("update 진입");
 		logger.info("member: "+member.toString());
 		String inputPass = member.getMemberPw();
 		String pwd = pwdEncoder.encode(inputPass);
 		member.setMemberPw(pwd);
-		Member ms = memberService.updateMember(member);
+		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		memberService.updatePwMember(member);
 //		return "redirect:/";
-		return ms;
+		return true;
 	}
+	@PutMapping("/mypage/pwd")//개인비번 변경
+	@ResponseBody 
+	private boolean changePwMember(HttpSession session, @RequestBody Member member) throws Exception{ 
+		boolean result= false;
+		
+		logger.info("update 진입");
+		logger.info("member: "+member.toString());
+		
+		String inputPass = member.getMemberPw();
+		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		Member ms= memberService.selectMember(member);
+		logger.info(ms.toString());
+		if(ms.getMemberId() == null) {
+			return result;
+		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+			boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
+			logger.info(String.valueOf(isPwdMatch));
+			if(isPwdMatch == true) {
+				logger.info("기존 비번과 동일하므로 false.");
+				return result;
+			} else {
+				logger.info("기존 비번과 동일하지 않으므로 통과! 비번변경이 가능함.");
+				result=true;
+			}
+		}
+		//비밀번호 암호화
+		String pwd = pwdEncoder.encode(inputPass);
+		member.setMemberPw(pwd);
+		memberService.updatePwMember(member);
+		return true;
+	}
+	
+	@PostMapping("/pwd/pwCheck") //비번만 체크
+	@ResponseBody
+	private boolean checkPwdMember(HttpSession session, @RequestBody Member member) throws Exception {
+logger.info("member: "+member.toString());
+		boolean result = false;
+		String inputPass = member.getMemberPw();
+		//String pwd = pwdEncoder.encode(inputPass);
+		//logger.info("pwd: "+pwd);
+		//member.setMemberPw(pwd);
+		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		Member ms= memberService.selectMember(member);
+		logger.info(ms.toString());
+		if(ms.getMemberId() == null) {
+			return result;
+		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+			boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
+			logger.info(String.valueOf(isPwdMatch));
+			if(isPwdMatch == false) {
+				logger.info("현재 비밀번호 틀리게 입력");
+				return result;
+			} else {
+				logger.info("현재 비밀번호 일치함.");
+				result=true;
+			}
+		}
+		return result;
+	}
+	
 	@GetMapping("/mypage") //개인 회원정보 메인(조회)//@RequestParam String userId
-	private ModelAndView selectMembers() throws Exception { 
-		//logger.info("userId: "+userId);
+	private ModelAndView selectMembers(HttpSession session) throws Exception {
+		String userId = ((Member)session.getAttribute("loginInfo")).getMemberId();
+		logger.info("userId: "+userId);
 		Member vo = new Member();
-		//vo.setMemberId(userId);
+		vo.setMemberId(userId);
 		ModelAndView mv = new ModelAndView();
 		Member ms= memberService.getMemberInfo(vo);
 		mv.addObject("vo", ms);

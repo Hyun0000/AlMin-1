@@ -33,9 +33,9 @@ public class MemberService {
 		Member member = memberDao.getMemberInfo(m);
 		return member;
 	}
-	public int updatePwMember(Member m) throws Exception{
-		int result = memberDao.updatePwMember(m);
-		return result;
+	public void updatePwMember(Member m) throws Exception{
+		logger.info("Service 진입");
+		memberDao.updatePwMember(m);
 	}
 	//개인회원가입
 	public void insertMember(Member member) throws Exception{

@@ -17,10 +17,10 @@
 $(document).ready(function(){
 		$("#editBtn").click(function(){ //수정완료 클릭 시
 		console.log("수정완료버튼 클릭");
-	var uid = $("#uid").val();
-		console.log("id: "+uid);
+	var uid2 = $("#uid2").html();
+		console.log("id: "+uid2);
 		var json = {
-				'memberId':$("#uid").val(),
+				'memberId':$("#uid2").html(),
 				'memberPhone':$("#memberPhone").val(),
 				'memberEmail':$("#memberEmail").val()
 			};
@@ -66,7 +66,7 @@ $(document).ready(function(){
      <tr>
             <!-- 회원정보에 등록된 아이디 -->
 		<th>아이디</th>
-		<td id="uid">${vo.memberId}</td>
+		<td id="uid2">${vo.memberId}</td>
 	</tr>
      <tr>
 		<th>이름</th>

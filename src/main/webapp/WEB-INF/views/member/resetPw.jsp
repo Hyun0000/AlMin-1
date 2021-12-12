@@ -50,11 +50,8 @@ $(document).ready(function(){
 				alert("새 비밀번호를 입력해주세요.");
 				$("#userPass").focus();
 				return false;
-			}else if(userPass != pwChk){
-				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-				return false;
-			} else{
-				var json = {//'memberId':  $("#userId").val(),
+			}else{
+				var json = {
 						'memberPw': $("#userPass").val()
 						};
 		console.log(json);
@@ -67,11 +64,11 @@ $(document).ready(function(){
 			//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
 			contentType : "application/json; charset=utf-8",
 			success: function(result){
-				if(result == ""){
+				if(result == false){
 					alert("비밀번호 수정 실패");
 				} else {
 					alert("비밀번호 수정 성공");
-			location.href ="${pageContext.request.contextPath}/main"
+			location.href ="${pageContext.request.contextPath}/members/mypage"
 				}
 		},
 		error:function(request,status,error){

@@ -28,6 +28,7 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){ 
+		var companychk = false;
 		$("#agreeChkAll").change(function selectAll(selectAll) {
 			console.log("전체선택 체크");
 		    if(this.checked){
@@ -174,6 +175,7 @@
 				
 				
 				$.ajax({
+					
 					url: "http://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=vUM20otkgSpGnI%2BSs%2BVr3%2FnILMSGkBIYZ2Nang%2FeMSgOAjaxLk5CJRXBRQSQm7atRnNOjJwT4yc2GMZRa16%2Bqg%3D%3D",
 					type: "post",
 					 // data : 서버(컨트롤러)로 보내는 데이터.
@@ -184,9 +186,14 @@
 					success: function(data){
 						console.log(data.data[0]);
 						if(data.data[0].valid=="02"){
-							alert(data.data[0].valid_msg);
+							if(data.data[0].valid_msg=="확인할 수 없습니다."){
+								alert("사업자번호가 일치하지 않습니다.")
+							} else{
+								companychk = true;
+								alert("사업자번호 확인이 완료되었습니다.")
+							}
 						}else{
-							alert(data.data[0].valid_msg);
+							alert("접근 실패했습니다.");
 							
 						}
 					//location.href ="${pageContext.request.contextPath}/main"
@@ -238,6 +245,11 @@
 			if($("#bossName").val()==""){
 				alert("대표자명을 입력해주세요.");
 				$("#bossName").focus();
+				return false;
+			}
+			if(companyChk == false){
+				alert("사업자 인증을 해주세요.");
+				$("#firstNum").focus();
 				return false;
 			}
 			var json = {'companyId':  $("#userId").val(),//TODO

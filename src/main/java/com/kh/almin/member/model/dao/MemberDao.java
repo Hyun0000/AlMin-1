@@ -57,10 +57,9 @@ public class MemberDao {
 		return result;
 	}
 	//개인 비번찾기 - 재설정
-	public int updatePwMember(Member m) {
+	public void updatePwMember(Member m) {
 		logger.info("Dao-updatePwMember 진입");
-		int result = sqlSession.update("Member.updatePwMember",m);
-		return result;
+		sqlSession.update("Member.updatePwMember",m);
 	}
 	//기업 비번찾기 - 재설정
 	public int updatePwCompany(Member m) {

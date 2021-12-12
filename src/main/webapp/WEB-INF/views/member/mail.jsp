@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <!-- 이메일 인증 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <meta charset="UTF-8">
 <title>이메일 인증단계</title>
 <!-- Favicon -->
@@ -39,7 +39,32 @@
 
 </section>
 <script>
-
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+ 
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+ 
+function getCookie(cookieName) {
+    cookieName = cookieName + '=';
+    var cookieData = document.cookie;
+    var start = cookieData.indexOf(cookieName);
+    var cookieValue = '';
+    if(start != -1){
+        start += cookieName.length;
+        var end = cookieData.indexOf(';', start);
+        if(end == -1)end = cookieData.length;
+        cookieValue = cookieData.substring(start, end);
+    }
+    return unescape(cookieValue);
+}
 function ajaxm1(){
 	var memberEmail = $("#mailaddress").html()
 	var json = {
@@ -59,7 +84,7 @@ function ajaxm1(){
 			var date = new Date();
 			 var minutes = 5;
 			 date.setTime(date.getTime() + (minutes * 60 * 1000));
-			 $.cookie("email",result, { expires: date }); //쿠키이름, 쿠키값, 언제끝날지
+			 setCookie("email",result, date); //쿠키이름, 쿠키값, 언제끝날지
 	},
 	error:function(request,status,error){
 		alert("code:"+request.status+"\n"+"message:"+request.responseText+
@@ -69,12 +94,13 @@ function ajaxm1(){
 }
 //member테이블에 이메일 인증 YN - N이면 서비스를 주면 안됨. -> 인터셉터 프리핸들에서 처리!(로그인 막기)
 function lastCheck(){
-	if($("#lastChk").val() == $.cookie("email")){
+	if($("#lastChk").val() == getCookie("email")){
 		alert("이메일 인증 성공하여 회원가입이 완료되었습니다.");
 		location.href="<%=request.getContextPath()%>/main";
 	}else {
 		alert("이메일 인증 실패");
 	}
+	
 	
 }
 

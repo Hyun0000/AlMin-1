@@ -54,4 +54,23 @@ public class MailSendService {
         }
           return authKey;
     }
+    //이메일 지원메일 보내기
+    public void sendApplyMail(String email) { //parameter로 받는사람 메일(email)
+    	try {
+    		MailUtils sendMail = new MailUtils(mailSender);
+    		sendMail.setSubject("[알바의 민족] 이메일 지원 수신알림");
+    		sendMail.setText(new StringBuffer().append("<h1>[이메일 지원] 1명의 지원자가 있습니다.</h1>")
+    				.toString());
+    		sendMail.setText(new StringBuffer().append("<a href='http://localhost:8090/almin/main'>알바의 민족 바로가기</a>")
+    				.toString());
+    				
+    		sendMail.setFrom("chsh9410@gmail.com", "관리자");//보내는사람 메일
+    		sendMail.setTo(email);
+    		sendMail.send();
+    	} catch (MessagingException e) {
+    		e.printStackTrace();
+    	} catch (UnsupportedEncodingException e) {
+    		e.printStackTrace();
+    	}
+    }
 }

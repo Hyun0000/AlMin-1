@@ -96,12 +96,14 @@ $(document).ready(function(){
 				<dl>
 					<!--<dt>최근수정일</dt>
 					<dd>2020-05-22</dd>-->
+					<dt>생년월일</dt>
+					<dd>${vo.memberBirth}</dd>
 					<dt>연락처</dt>
-					<dd>[[${vo.memberPhone}]]</dd>
+					<dd>${vo.memberPhone}</dd>
 					<dd>010-8***-***0</dd>
 					<dt>e-메일</dt>
+					<dd>${vo.memberEmail}</dd>
 					<dd>ys****@n****.com</dd>
-					<dt>주소</dt>
 					<dd>서울 성동구  ******</dd>
 				</dl>
 					<div class="reply-btn">
@@ -229,6 +231,67 @@ $(document).ready(function(){
 	function infoEdit(){
 		location.href ="${pageContext.request.contextPath}/members/mypage/pwCheck"
 	}
+	
+	let maskingFunc = { 
+			checkNull : function (str){ 
+				if(typeof str == "undefined" || str == null || str == ""){ 
+					return true;
+					} else{ return false;
+					} }, 
+					/* ※ 이메일 마스킹 ex1) 원본 데이터 : abcdefg12345@naver.com 
+					변경 데이터 : ab**********@naver.com ex2) 
+					원본 데이터 : abcdefg12345@naver.com 
+					변경 데이터 : ab**********@nav****** */ 
+					email : function(str){ 
+					let originStr = str; 
+					let emailStr = originStr.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+					let strLength; 
+					if(this.checkNull(originStr) == true || this.checkNull(emailStr) == true){
+						return originStr;
+					}else{ strLength = emailStr.toString().split('@')[0].length - 3; 
+					// ex1) abcdefg12345@naver.com => ab**********@naver.com 
+					// return originStr.toString().replace(new RegExp('.(?=.{0,' + strLength + '}@)', 'g'), '*'); 
+					// ex2) abcdefg12345@naver.com => ab**********@nav****** 
+					return originStr.toString().replace(new RegExp('.(?=.{0,' + strLength + '}@)', 'g'), '*').replace(/.{6}$/, "******");
+					}
+					}, 
+					/* ※ 휴대폰 번호 마스킹 
+					ex1) 원본 데이터 : 01012345678, 변경 데이터 : 010****5678 
+					ex2) 원본 데이터 : 010-1234-5678, 변경 데이터 : 010-****-5678 
+					ex3) 원본 데이터 : 0111234567, 변경 데이터 : 011***4567 
+					ex4) 원본 데이터 : 011-123-4567, 변경 데이터 : 011-***-4567 */ 
+					phone : function(str){
+						let originStr = str;
+					let phoneStr;
+					let maskingStr; 
+					if(this.checkNull(originStr) == true){
+						return originStr;
+					} if (originStr.toString().split('-').length != 3) { 
+						// 1) -가 없는 경우 phoneStr = originStr.length < 11 ? originStr.match(/\d{10}/gi) : originStr.match(/\d{11}/gi); 
+						if(this.checkNull(phoneStr) == true){
+							return originStr;
+					} if(originStr.length < 11) { 
+						// 1.1) 0110000000 
+					maskingStr = originStr.toString().replace(phoneStr, phoneStr.toString().replace(/(\d{3})(\d{3})(\d{4})/gi,'$1***$3'));
+					} else { // 1.2) 01000000000 
+					maskingStr = originStr.toString().replace(phoneStr, phoneStr.toString().replace(/(\d{3})(\d{4})(\d{4})/gi,'$1****$3'));
+					} }else { // 2) -가 있는 경우
+					phoneStr = originStr.match(/\d{2,3}-\d{3,4}-\d{4}/gi); 
+					if(this.checkNull(phoneStr) == true){
+						return originStr;
+					} if(/-[0-9]{3}-/.test(phoneStr)) { 
+						// 2.1) 00-000-0000 
+					maskingStr = originStr.toString().replace(phoneStr, phoneStr.toString().replace(/-[0-9]{3}-/g, "-***-"));
+					} else if(/-[0-9]{4}-/.test(phoneStr)) { 
+						// 2.2) 00-0000-0000 
+						maskingStr = originStr.toString().replace(phoneStr, phoneStr.toString().replace(/-[0-9]{4}-/g, "-****-"));
+						}
+					}
+					return maskingStr;
+					}, 
+
+	}
+
 	</script>
 	<!-- End blog-posts Area -->
 	<c:import url="/WEB-INF/views/template/footer.jsp" />

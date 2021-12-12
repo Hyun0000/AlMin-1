@@ -138,6 +138,60 @@ $(document).ready(function(){
 		});
 	})
 });
+
+function changePw(){
+	var nowPw= $("#nowPw").val();
+	var newPw= $("#newPw").val();
+	var json ={
+			"memberPw":nowPw
+	}
+	$.ajax({//현재 비밀번호 일치여부 확인(일치하면 다음ajax로)
+		url: "${pageContext.request.contextPath}/members/pwd/pwCheck",
+		type: "post",
+		data: JSON.stringify(json),
+		//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+		contentType : "application/json; charset=utf-8",
+		success: function(result){
+			console.log("result: "+result)
+			if(result == false){
+				alert("현재 비밀번호가 일치하지 않습니다.");
+			} else {
+				console.log("비밀번호가 일치합니다.");
+			var json = {
+					'memberPw': newPw
+			} 
+			//ajax 안에 ajax
+									$.ajax({//현재 비밀번호 일치여부 확인(일치하면 다음ajax로)
+							
+								url: "${pageContext.request.contextPath}/members/mypage/pwd",
+								type: "put",
+								data: JSON.stringify(json),
+								//이때 전달한 String데이터는 JSON형태의 데이터임을 알려줌.
+								contentType : "application/json; charset=utf-8",
+								success: function(result){
+									if(result == false){
+										alert("기존 비밀번호는 새 비밀번호로 설정 불가합니다. 다시 입력하세요.");
+									} else {
+										console.log("기존 비밀번호가 아닌 새 비밀번호로 변경 완료");
+							//	location.href ="${pageContext.request.contextPath}/members/mypage";
+									}
+							},
+							error:function(request,status,error){
+								alert("code:"+request.status+"\n"+"message:"+request.responseText+
+										"\n"+"error:"+error);
+							}
+							});
+			
+			
+			
+			}
+	},
+	error:function(request,status,error){
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+
+				"\n"+"error:"+error);
+	}
+	});
+}
 </script>
 </head>
 <body>
@@ -205,7 +259,7 @@ $(document).ready(function(){
 	</tr>
   </table>
   <div class="btnGroup">
-          <button type="button" class="btn1" id="changeBtn">수정완료</button>
+          <button type="button" class="btn1" id="changeBtn" onclick="changePw()">수정완료</button>
      </div>
 </div>
 
