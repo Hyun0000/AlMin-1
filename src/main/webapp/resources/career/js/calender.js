@@ -175,55 +175,91 @@ function calenderLoad() {
         },
         
         
-        eventDragStart : (info, event, view, jsEvent) => { // 드래그 시작
-            console.log("############eventDragStart###########");
-            console.log(info.event.title);
-            console.log(info.event.id);
-            console.log(info.event.start);
-            console.log(info.event.end);
-            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
-            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
-
-            let eventDragStartEventTitle = info.event.title;
-            let eventDragStartEventStartTime = info.event.start.toISOString().split('T')[0];
-            let eventDragStartEventEndTime = info.event.end.toISOString().split('T')[0];
-
-            console.log("eventDragStartEventTitle : " + eventDragStartEventTitle);
-            console.log("eventDragStartEventStartTime : " + eventDragStartEventStartTime);
-            console.log("eventDragStartEventEndTime : " + eventDragStartEventEndTime);
-
-            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
-            console.log("############eventDragStart###########");
-        },
+//        eventDragStart : (info, event, view, jsEvent) => { // 드래그 시작
+//            console.log("############eventDragStart###########");
+//            console.log(info.event.title);
+//            console.log(info.event.id);
+//            console.log(info.event.start);
+//            console.log(info.event.end);
+//            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
+//            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
+//
+//            let eventDragStartEventTitle = info.event.title;
+//            let eventDragStartEventStartTime = info.event.start.toISOString().split('T')[0];
+//            let eventDragStartEventEndTime = info.event.end.toISOString().split('T')[0];
+//
+//            console.log("eventDragStartEventTitle : " + eventDragStartEventTitle);
+//            console.log("eventDragStartEventStartTime : " + eventDragStartEventStartTime);
+//            console.log("eventDragStartEventEndTime : " + eventDragStartEventEndTime);
+//
+//            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
+//            console.log("############eventDragStart###########");
+//        },
         eventDrop : (info) => { // 드래그 이벤트를 받은 객체에 대한 정보(그 날짜 그대로면 해당 이벤트는 실행 X)
             console.log("############eventDrop###########");
             // TODO
             // 여기서 ajax 써야할듯
-            console.log(info.event.title);
-            console.log(info.event.id);
+            // console.log(info.event.title);
+            // console.log(info.event.id);
             console.log(info.event.start);
-            console.log(typeof info.event.start);
             console.log(info.event.end);
+            console.log(typeof info.event.start);
             console.log(typeof info.event.end);
-            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
-            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
-            // Party
+            console.log(typeof info.event.start.toString());
+            console.log(typeof info.event.end.toString());
+            
+            // 연도
+            let startYear = info.event.start.toString().split(" ")[3];
+            let endYear = info.event.end.toString().split(" ")[3];
+            console.log("startYear : " + startYear);
+            console.log("endYear : " + endYear);
+            
+            // 월            
+            let startMonth = info.event.start.toString().split(" ")[1];
+            let endMonth = info.event.end.toString().split(" ")[1];
+            console.log("startMonth : " + startMonth);
+            let startMonthNum = changeMonth(startMonth);
+            console.log("startMonthNum : " + startMonthNum);
+            
+            console.log("endMonth : " + endMonth);
+            let endMonthNum = changeMonth(endMonth);
+            console.log("endMonthNum : " + endMonthNum);
+            
+            // 일
+            let startDay = info.event.start.toString().split(" ")[2];
+            let endDay = info.event.end.toString().split(" ")[2];
+            console.log("startDay : " + startDay);
+            console.log("endDay : " + endDay);
+            
+            // 합치기
+            let startAll = startYear + "-" + startMonthNum + "-" + startDay;
+            let endAll = endYear + "-" + endMonthNum + "-" + endDay;
+            console.log("startAll : " + startAll);
+            console.log("endAll : " + endAll);
+            
             // 2021-11-03T11:00:00.000Z
             // 2021-11-03T12:00:00.000Z
 
             let draggedEventTitle = info.event.title;
             let draggedEventStartTime = info.event.start.toISOString().split('T')[0];
             let draggedEventEndTime = info.event.end.toISOString().split('T')[0];
+            
+            console.log(typeof info.event.start);
+            console.log(typeof info.event.start.toISOString());
+            console.log(info.event.start.toString());
+            console.log("info.event.start.toISOString() : " + info.event.start.toISOString());
+            console.log("info.event.end.toISOString() : " + info.event.end.toISOString());
 
             console.log("draggedEventTitle : " + draggedEventTitle);
             console.log("draggedEventStartTime : " + draggedEventStartTime);
             console.log("draggedEventEndTime : " + draggedEventEndTime);
             
-            let dragUpdateStart = draggedEventStartTime + " " + info.event.start.toString().split(" ")[4];
-            let dragUpdateEnd = draggedEventEndTime + " " + info.event.end.toString().split(" ")[4];
+            let dragUpdateStart = startAll + " " + info.event.start.toString().split(" ")[4];
+            let dragUpdateEnd = endAll + " " + info.event.end.toString().split(" ")[4];
             console.log("dragUpdateStart : " + dragUpdateStart);
             console.log("dragUpdateEnd : " + dragUpdateEnd);
             
+// =============================================
             // 일정 드래그 수정
             if(selectCal === "NG" || selectCal === "") {
 	            let dragUpdateNeedObj = {
@@ -240,6 +276,7 @@ function calenderLoad() {
 	            }
 	            sendRequest("PATCH", "workupdatedrag", JSON.stringify(dragUpdateWorkObj), afterDragUpdate);
             }
+// =============================================
 
             // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
             console.log("############eventDrop###########");
@@ -275,6 +312,28 @@ function afterDragUpdate() {
 			}
 		}
 	}
+}
+
+// month switch function
+function changeMonth(monthStr) {
+    let monthNum = 0;
+
+    switch (monthStr) {
+        case "Jan": monthNum = 01; break;
+        case "Feb": monthNum = 02; break;
+        case "Mar": monthNum = 03; break;
+        case "Apr": monthNum = 04; break;
+        case "May": monthNum = 05; break;
+        case "Jun": monthNum = 06; break;
+        case "Jul": monthNum = 07; break;
+        case "Aug": monthNum = 08; break;
+        case "Sep": monthNum = 09; break;
+        case "Oct": monthNum = 10; break;
+        case "Nov": monthNum = 11; break;
+        case "Dec": monthNum = 12; break;
+    }
+    
+    return monthNum;
 }
 // ============================================================================================================
 //모달창 팝업 callback function

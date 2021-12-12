@@ -307,9 +307,9 @@
 		// let userId = "giniuskang";
 		// let userId = "minzi91";
 		// let userId = "sjh1216";
-		// let userId = "sy111k2";
+		let userId = "sy111k2";
 		// let userId = "test01";
-		let userId = "test02";
+		// let userId = "test02";
 
 		// jinpark
 		// giniuskang
