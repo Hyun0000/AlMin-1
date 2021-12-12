@@ -122,7 +122,7 @@
 						<p class="py-3">
 							일거리를 찾는 알바의 민족이라면?<br>이력서 등록하고 간편 지원하자!
 						</p>
-						<a href="#" class="secondary-btn">등록하기<span
+						<a href="${pageContext.request.contextPath}/resumes/resumeAdd" class="secondary-btn">등록하기<span
 							class="flaticon-next"></span></a>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 						<p class="py-3">
 							가족을 찾는 구인의 민족이라면?<br>공고 등록하고 쉽게 구인하자!
 						</p>
-						<a href="#" class="secondary-btn">등록하기<span
+						<a href="${pageContext.request.contextPath}/recruits/recruitAdd" class="secondary-btn">등록하기<span
 							class="flaticon-next"></span></a>
 					</div>
 				</div>

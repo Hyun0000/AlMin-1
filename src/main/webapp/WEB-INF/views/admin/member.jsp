@@ -11,7 +11,8 @@
 
 <!-- Page Title -->
 <title>회원 조회</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Favicon -->
 <link rel="shortcut icon"
 	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
@@ -60,6 +61,10 @@ button {
 .search-bg form input {
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+.jobs-area {
+	padding-bottom: 200px;
 }
 </style>
 
@@ -140,8 +145,7 @@ button {
 											</div>
 										</div>
 									</div>
-									<div id="memberList">
-									</div>
+									<div id="memberList"></div>
 								</div>
 							</div>
 						</div>
@@ -168,8 +172,7 @@ button {
 											</div>
 										</div>
 									</div>
-									<div id="companyList">
-									</div>
+									<div id="companyList"></div>
 								</div>
 							</div>
 						</div>
@@ -364,7 +367,8 @@ button {
 			var cid = $(this).parent().prev(".cid").text();
 			var $itemEle = $(this).parents(".companyItem");
 			if (confirm('정말 탈퇴처리하시겠습니까?')) {
-				$.ajax({
+				$
+						.ajax({
 							type : "post",
 							url : "${pageContext.request.contextPath}/admins/decompany",
 							data : {

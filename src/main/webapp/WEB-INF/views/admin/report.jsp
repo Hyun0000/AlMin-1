@@ -30,7 +30,7 @@
 
 .jobs-area {
 	min-height: 60%;
-	padding-bottom : 200px;
+	padding-bottom: 200px;
 }
 
 .job-text>p {
@@ -46,6 +46,10 @@ button {
 	border: 0;
 	outline: 0;
 	background-color: transparent
+}
+
+.jobs-area {
+	padding-bottom: 350px;
 }
 </style>
 
@@ -170,7 +174,7 @@ button {
 			//$(targetEle).next().children("id").split("_");
 			for (var i = 1; i < reasonlist.length + 1; i++) {
 				$(targetEle).next().find("#here_" + i).html("");
-				$(targetEle).next().find("#here_" + i).html(reasonlist[i-1]);
+				$(targetEle).next().find("#here_" + i).html(reasonlist[i - 1]);
 			}
 		}
 	</script>
