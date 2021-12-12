@@ -5,6 +5,10 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 import com.kh.almin.district.model.vo.District;
+import com.kh.almin.jobwho.model.vo.JobWho;
+import com.kh.almin.model.education.vo.Education;
+import com.kh.almin.model.jobtype.vo.JobType;
+import com.kh.almin.model.period.vo.Period;
 
 import lombok.Data;
 import lombok.Getter;
@@ -43,6 +47,10 @@ public class Recruit {
    private int recruitReport;
    
    private District district; //쿼리로 join할 Vo
+   private JobType jobType;
+	private Education education;
+	private Period period;
+	private JobWho jobwho;
 
 @Override
 public String toString() {

@@ -112,4 +112,15 @@ public class RecruitServiceImpl implements RecruitService {
 		return recruitDao.appForYou(memberId);
 	}
 
+	public int insertRecruit(Recruit r) throws Exception{
+		return recruitDao.insertRecruit(r);
+	}
+	
+	public int updateRecruit(Recruit r) throws Exception{
+		return recruitDao.updateRecruit(r);
+	}
+	
+	public int deleteRecruit(int recruitNo) throws Exception{
+		return recruitDao.deleteRecruit(recruitNo);
+	}
 }

@@ -71,4 +71,16 @@ public class RecruitDao {
 	public List<Recruit> appForYou(String memberId) throws Exception {
 		return sqlSession.selectList("Recruit.appForYou", memberId);
 	}
+	
+	public int insertRecruit(Recruit r) throws Exception{
+		return sqlSession.insert("Recruit.insertRecruit",r);
+	}
+	
+	public int updateRecruit(Recruit r) throws Exception{
+		return sqlSession.update("Recruit.updateRecruit",r);
+	}
+	
+	public int deleteRecruit(int recruitNo) throws Exception{
+		return sqlSession.delete("Recruit.deleteRecruit",recruitNo);
+	}
 }

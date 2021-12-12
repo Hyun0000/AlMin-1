@@ -47,4 +47,5 @@ public class MemberResume { //회원 이력서 테이블
 	private JobType jobType;
 	private Education education;
 	private Period period;
+	
 }

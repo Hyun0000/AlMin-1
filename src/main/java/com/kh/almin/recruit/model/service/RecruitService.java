@@ -36,4 +36,9 @@ public interface RecruitService {
 
 	public List<Recruit> appForYou(String memberId) throws Exception;
 
+	public int insertRecruit(Recruit r) throws Exception;
+	
+	public int updateRecruit(Recruit r) throws Exception;
+	
+	public int deleteRecruit(int recruitNo) throws Exception;
 }

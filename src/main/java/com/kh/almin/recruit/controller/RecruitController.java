@@ -3,10 +3,13 @@ package com.kh.almin.recruit.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Recruit;
 import com.kh.almin.recruit.model.vo.ReportRecruit;
 import com.kh.almin.recruit.model.vo.SearchRecruit;
+import com.kh.almin.resume.model.vo.MemberResume;
 import com.kh.almin.recruit.model.service.RecruitService;
 
 @Controller
@@ -141,6 +145,71 @@ public class RecruitController {
 		}
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
+	}
+	@GetMapping("recruitAdd")
+	public String goRecruitAddPage(Model model) {
+		
+		return "recruits/recruitAdd";
+	}
+	@GetMapping("addrecruit")
+	public ModelAndView insertRecruit(@RequestParam(value="msg", required=false)String msg,Recruit r,ModelAndView mv,HttpServletRequest request) throws Exception {
+		int result=recruitService.insertRecruit(r);
+		System.out.println("r: "+r);
+		if(result>0) {
+			mv.addObject("msg", "공고 등록이 되었습니다.");
+			mv.setViewName("recruits/jobinfoList");
+		}else {
+			mv.addObject("msg", "공고 등록이 실패했습니다.다시 시도해주세요.");
+			String referer = request.getHeader("Referer"); //이전페이지로 이동
+		    mv.setViewName("redirect:"+ referer); 
+		}
+		
+		return mv;
+		
+	}
+	@GetMapping("updateRe")
+	public ModelAndView goUpdateRecruit(@RequestParam("recruitNo") int recruitNo,ModelAndView mv) {
+		try {
+			mv.addObject("recruit", recruitService.detailjobinfo(recruitNo));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("recruits/updateRecruit");
+		return mv;
+	}
+	@GetMapping("updateRecruit")
+	public String updateRecruit(@RequestParam(value="msg", required=false)String msg,Recruit r,Model m ) {
+		int result=-1;
+		try {
+			result = recruitService.updateRecruit(r);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		if(result>0) {
+			m.addAttribute("msg","수정되었습니다.");
+		}else {
+			m.addAttribute("msg","다시 시도해주세요.");
+		}
+		return "redirect:recruits";
+	}
+	
+	@GetMapping("deleteResume")
+	public String deleteRecruit(@RequestParam(value="msg", required=false)String msg,int recruitNo,Model m) {
+		int result=-1;
+		try {
+			result=recruitService.deleteRecruit(recruitNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result>0) {
+			m.addAttribute("msg","삭제되었습니다");
+		}else {
+			m.addAttribute("msg","다시 시도해주세요.");
+		}
+		
+		
+		return "redirect:recruits";
 	}
 
 	@ExceptionHandler

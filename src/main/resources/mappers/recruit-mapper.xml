@@ -31,12 +31,31 @@
 		<result property="recruitReport" column="RECRUIT_REPORT" />
 
 		<association property="district" resultMap="districtMap">
+		<association property="jobType" resultMap="jobTypeMap"></association>
+		<association property="education" resultMap="educationMap"></association>
+		<association property="period" resultMap="periodMap"></association>
 		</association>
 	</resultMap>
 
 	<resultMap id="districtMap" type="District">
 		<id property="jobDistrictNo" column="JOB_DISTRICT_NO" />
 		<result property="jobDistrictName" column="JOB_DISTRICT_NAME" />
+	</resultMap>
+	<resultMap id="jobTypeMap" type="com.kh.almin.model.jobtype.vo.JobType">
+		<id property="jobTypeNo" column="JOB_TYPE_NO"/>
+		<result property="jobTypeName" column="JOB_TYPE_NAME"/>
+	</resultMap>
+	<resultMap type="com.kh.almin.model.education.vo.Education" id="educationMap">
+		<id property="educationNo" column="EDUCATION_NO"/>
+		<result property="educationType" column="EDUCATION_TYPE"/>
+	</resultMap>
+	<resultMap type="com.kh.almin.model.period.vo.Period" id="periodMap">
+		<id property="periodNo" column="PERIOD_NO"/>
+		<result property="periodType" column="PERIOD_TYPE"/>
+	</resultMap>
+	<resultMap type="com.kh.almin.jobwho.model.vo.JobWho" id="jobWhoMap">
+		<id property="jobWhoNo" column="JOB_WHO_NO"/>
+		<result property="jobWhoName" column="JOB_WHO_NAME"/>
 	</resultMap>
 
 	<!-- 카테고리별 공고 수 조회 -->
@@ -152,4 +171,27 @@
 		company_recruit where
 		RECRUIT_NO=#{recruitNo}
 	</select>
+	
+	<!-- 공고 등록 -->
+	<insert id="insertRecruit" parameterType="Recruit">
+		insert into COMPANY_RECRUIT(RECRUIT_NO,RECRUIT_COMPANY_ID,RECRUIT_TITLE,RECRUIT_CAREER,RECRUIT_GENDER,
+		RECRUIT_START_AGE,RECRUIT_END_AGE,RECRUIT_EDUCATION,RECRUIT_PERSON,RECRUIT_MONEY,RECRUIT_PERIOD,RECRUIT_DAY,
+		RECRUIT_TIME,RECRUIT_ADDRESS,RECRUIT_CONTENT,RECRUIT_PUB,RECRUIT_JOB_TYPE,RECRUIT_JOB_DISTRICT,RECRUIT_JOB_WHO,RECRUIT_JOB_BRANCH)
+		values(COMPANY_RECRUIT_SEQUENCE.NEXTVAL,#{recruitCompanyId},#{recruitTitle},#{recruitCareer},#{recruitGender},#{recruitStartAge},
+		#{recruitEndAge},#{recruitEducation},#{recruitPerson},#{recruitMoney},#{recruitPeriod},#{recruitDay},#{recruitTime},#{recruitAddress},
+		#{recruitContent},#{recruitPub},#{recruitJobType},#{recruitJobDistrict},#{recruitJobWho},#{recruitJobBranch})
+	</insert>
+	<!-- 공고 삭제 -->
+	<delete id="deleteRecruit" parameterType="Recruit">
+		delete from COMPANY_RECRUIT where RECRUIT_NO=#{recruitNo}
+	</delete>
+	<!-- 공고 수정 -->
+	<update id="updateRecruit" parameterType="Recruit">
+		update COMPANY_RECRUIT
+		set RECRUIT_TITLE=#{recruitTitle},,RECRUIT_CAREER=#{recruitCareer},RECRUIT_GENDER=#{recruitGender},
+		RECRUIT_START_AGE=#{recruitStartAge},RECRUIT_END_AGE=#{recruitEndAge},RECRUIT_EDUCATION=#{recruitEducation},
+		RECRUIT_PERSON=#{recruitPerson},RECRUIT_MONEY=#{recruitMoney},RECRUIT_PERIOD=#{recruitPeriod},RECRUIT_DAY=#{recruitDay},
+		RECRUIT_TIME=#{recruitTime},RECRUIT_ADDRESS=#{recruitAddress},RECRUIT_CONTENT=#{recruitContent},RECRUIT_PUB=#{recruitPub},
+		RECRUIT_JOB_TYPE=#{recruitJobType},RECRUIT_JOB_DISTRICT=#{recruitJobDistrict},RECRUIT_JOB_WHO=#{recruitJobWho},RECRUIT_JOB_BRANCH=#{recruitJobBranch}
+	</update>
 </mapper>
