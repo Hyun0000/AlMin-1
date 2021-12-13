@@ -253,7 +253,7 @@
 				<div class="col-lg-12">
 					<div class="employee-slider owl-carousel">
 						<div class="single-slide d-sm-flex">
-							<div class="slide-img">
+							<div class="slide-img" onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=82'">
 								<img
 									src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Ediya.png"
 									class="logo" alt="BR">
@@ -271,7 +271,7 @@
 							</div>
 						</div>
 						<div class="single-slide d-sm-flex">
-							<div class="slide-img">
+							<div class="slide-img" onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=81'">
 								<img
 									src="${pageContext.request.contextPath}/resources/assets/images/brand/brand_Burgerking.png"
 									class="logo" alt="Burgerking">
