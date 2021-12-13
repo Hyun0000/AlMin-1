@@ -26,6 +26,9 @@
 .ck-editor__editable {
 	min-height: 500px;
 }
+th {
+width: 150px;
+}
 </style>
 </head>
 <body>
