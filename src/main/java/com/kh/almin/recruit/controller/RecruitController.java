@@ -74,7 +74,7 @@ public class RecruitController {
 		logger.info("마이페이지-관심공고");
 		return mv;
 	}
-	
+
 	@GetMapping(value = "/appforyou")
 	private ModelAndView appForYou(ModelAndView mv) throws Exception {
 		List<Recruit> volist = null;
@@ -115,10 +115,15 @@ public class RecruitController {
 		String result = "";
 		int report = 0;
 		reportRecruit.setMemberId("sy111k2");
-		report = recruitService.doReport(reportRecruit);
-		recruitService.reportRecruit(reportRecruit.getRecruitNo());
-		if (report == 1) {
-			System.out.println("공고 신고");
+		int chkrpt = recruitService.checkReport(reportRecruit);
+		System.out.println("chkrpt!!!!!! : " + chkrpt);
+
+		if (chkrpt == 0) {
+			report = recruitService.doReport(reportRecruit);
+			recruitService.reportRecruit(reportRecruit.getRecruitNo());
+			if (report == 1) {
+				System.out.println("공고 신고");
+			}
 		}
 		result = String.valueOf(report); // 1. 신고완료
 		return result;
@@ -139,7 +144,7 @@ public class RecruitController {
 		}
 		mv.addObject("commentsMap", commentsMap);
 		mv.addObject("detailjobinfo", recruitService.detailjobinfo(recruitNo));
-		
+
 		// 후기 입력에 필요한 recruitNo도 추가로 넘기겠습니다. - Hyun
 		mv.addObject("recruitNo", recruitNo);
 		if (like > 0) {
@@ -150,89 +155,93 @@ public class RecruitController {
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
 	}
+
 	@GetMapping("recruitAdd")
 	public String goRecruitAddPage(Model model) {
-		
+
 		return "recruits/recruitAdd";
 	}
+
 	@GetMapping("addrecruit")
-	public ModelAndView insertRecruit(@RequestParam(value="msg", required=false)String msg,Recruit r,ModelAndView mv,HttpServletRequest request) throws Exception {
-		int result=recruitService.insertRecruit(r);
-		System.out.println("r: "+r);
-		if(result>0) {
+	public ModelAndView insertRecruit(@RequestParam(value = "msg", required = false) String msg, Recruit r,
+			ModelAndView mv, HttpServletRequest request) throws Exception {
+		int result = recruitService.insertRecruit(r);
+		System.out.println("r: " + r);
+		if (result > 0) {
 			mv.addObject("msg", "공고 등록이 되었습니다.");
 			mv.setViewName("recruits/jobinfoList");
-		}else {
+		} else {
 			mv.addObject("msg", "공고 등록이 실패했습니다.다시 시도해주세요.");
-			String referer = request.getHeader("Referer"); //이전페이지로 이동
-		    mv.setViewName("redirect:"+ referer); 
+			String referer = request.getHeader("Referer"); // 이전페이지로 이동
+			mv.setViewName("redirect:" + referer);
 		}
-		
+
 		return mv;
-		
+
 	}
+
 	@GetMapping("updateRe")
-	public ModelAndView goUpdateRecruit(@RequestParam("recruitNo") int recruitNo,ModelAndView mv) {
+	public ModelAndView goUpdateRecruit(@RequestParam("recruitNo") int recruitNo, ModelAndView mv) {
 		try {
 			mv.addObject("recruit", recruitService.detailjobinfo(recruitNo));
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		mv.setViewName("recruits/updateRecruit");
 		return mv;
 	}
+
 	@GetMapping("updateRecruit")
-	public String updateRecruit(@RequestParam(value="msg", required=false)String msg,Recruit r,Model m ) {
-		int result=-1;
+	public String updateRecruit(@RequestParam(value = "msg", required = false) String msg, Recruit r, Model m) {
+		int result = -1;
 		try {
 			result = recruitService.updateRecruit(r);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		if(result>0) {
-			m.addAttribute("msg","수정되었습니다.");
-		}else {
-			m.addAttribute("msg","다시 시도해주세요.");
+		if (result > 0) {
+			m.addAttribute("msg", "수정되었습니다.");
+		} else {
+			m.addAttribute("msg", "다시 시도해주세요.");
 		}
 		return "redirect:recruits";
 	}
-	
+
 	@GetMapping("deleteResume")
-	public String deleteRecruit(@RequestParam(value="msg", required=false)String msg,int recruitNo,Model m) {
-		int result=-1;
+	public String deleteRecruit(@RequestParam(value = "msg", required = false) String msg, int recruitNo, Model m) {
+		int result = -1;
 		try {
-			result=recruitService.deleteRecruit(recruitNo);
+			result = recruitService.deleteRecruit(recruitNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result>0) {
-			m.addAttribute("msg","삭제되었습니다");
-		}else {
-			m.addAttribute("msg","다시 시도해주세요.");
+		if (result > 0) {
+			m.addAttribute("msg", "삭제되었습니다");
+		} else {
+			m.addAttribute("msg", "다시 시도해주세요.");
 		}
-		
-		
+
 		return "redirect:recruits";
 	}
-	
+
 	@Autowired
 	private MyRecruitService myRecruitService;
-	
+
 	// 공고 지원하기 버튼 클릭했을때 --> 개인 회원으로 로그인(받는 값 : 아이디 & 공고번호)
 	@PostMapping("/recruitgo")
 	public String recruitGo(MyRecruit myRecruit, Model model) {
 		System.out.println("myRecruit : " + myRecruit);
-		
+
 		int result = 0;
 		try {
 			result = myRecruitService.recruitGo(myRecruit);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result == 1) {
+		if (result == 1) {
 			model.addAttribute("recruitgomsg", "지원 완료!!!");
-		} else if(result == 0) {
+		} else if (result == 0) {
 			model.addAttribute("recruitgomsg", "지원 안됨");
 		}
 		return "redirect:/recruits/detailjobinfo?recruitNo=" + myRecruit.getRwmRecruitNo();

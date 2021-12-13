@@ -283,7 +283,11 @@
 				},
 				success : function(data) {
 					console.log(data);
+					if(data == "1"){
 					alert('신고가 완료되었습니다.');
+					} else {
+					alert('신고는 공고당 한 번만 가능합니다.');
+					}
 				},
 				error : function() {
 					alert('오류 발생. 오류 코드: ' + error.code);

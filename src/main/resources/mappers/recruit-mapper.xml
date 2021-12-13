@@ -95,6 +95,14 @@
 		where RECRUIT_NO = #{recruitNo}
 	</update>
 
+	<!-- 신고유무 체크 -->
+	<select id="checkReport" resultType="integer"
+		parameterType="reportRecruit">
+		select count(*) from report_recruit where
+		member_id =
+		#{memberId} and recruit_no = #{recruitNo}
+	</select>
+
 	<!-- 공고신고 -->
 	<insert id="doReport" parameterType="ReportRecruit">
 		insert into REPORT_RECRUIT

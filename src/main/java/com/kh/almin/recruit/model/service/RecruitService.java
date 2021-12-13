@@ -41,4 +41,6 @@ public interface RecruitService {
 	public int updateRecruit(Recruit r) throws Exception;
 	
 	public int deleteRecruit(int recruitNo) throws Exception;
+	
+	public int checkReport(ReportRecruit reportRecruit) throws Exception;
 }

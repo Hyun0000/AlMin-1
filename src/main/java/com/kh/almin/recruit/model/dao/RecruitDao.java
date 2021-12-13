@@ -83,4 +83,8 @@ public class RecruitDao {
 	public int deleteRecruit(int recruitNo) throws Exception{
 		return sqlSession.delete("Recruit.deleteRecruit",recruitNo);
 	}
+	
+	public int checkReport(ReportRecruit reportRecruit) throws Exception {
+		return sqlSession.selectOne("Recruit.checkReport", reportRecruit);
+	}
 }
