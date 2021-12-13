@@ -44,14 +44,24 @@
 		</script>
 
 	</c:if>
-	
-		<h1>공고등록</h1>
-		<form action="addrecruit" method="get">
+	<div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="main-content">
+                        <div class="single-content1">
+                        </div>
+                        <div class="single-content2 py-4">
+                        <h1>공고등록</h1>
+          <form action="addrecruit" method="get">
+                            <p>양식에 맞게 채용공고를 등록해주세요.</p>
+                        </div>
+                        <div class="single-content3 py-4">
 			<h2>제목</h2>
-				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요.">
-			<hr>
-			<h2>모집조건</h2>
-			<table>
+				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." required>
+                        </div>
+                        <div class="single-content4 py-4">
+                            <h2>모집조건</h2>
+                            <table>
 				<tr>
 					<th>성별</th>
 					<td><select name="recruitGender">
@@ -62,8 +72,8 @@
 				<tr>
 					<th>연령</th>
 					<td><input type="number" name="recruitStartAge"
-						placeholder="최소연령">~<input type="number"
-						name="recruitEndAge" placeholder="최대연령"></td>
+						placeholder="최소연령" required>~<input type="number"
+						name="recruitEndAge" placeholder="최대연령" required></td>
 				</tr>
 				<tr>
 					<th>학력</th>
@@ -78,7 +88,7 @@
 				</tr>
 				<tr>
 					<th>모집인원</th>
-					<td><input type="number" name="recruitPerson" placeholder="00">명</td>
+					<td><input type="number" name="recruitPerson" placeholder="00" required>명</td>
 				</tr>
 				<tr>
 					<th>대상</th>
@@ -94,12 +104,17 @@
 					</select></td>
 				</tr>
 			</table>
-			<hr>
+                            <ul>
+                                <li class="mb-2">2022년 최저임금은 9,160원입니다.</li>
+                                <li class="mb-2">근로기준법상 취업을 시킬 수 있는 최저 나이는 만15세 이상 입니다.</li>
+                            </ul>
+                        </div>
+                        <div class="single-content5 py-4">
 			<h2>근무조건</h2>
 			<table>
 				<tr>
 					<th>급여</th>
-					<td><input type="number" name="recruitMoney" placeholder="급여 입력"></td>
+					<td><input type="number" name="recruitMoney" placeholder="급여 입력" required></td>
 				</tr>
 				<tr>
 					<th>근무기간</th>
@@ -114,12 +129,12 @@
 				</tr>
 				<tr>
 					<th>근무요일</th>
-					<td><input type="text" name="recruitDay" placeholder="주중"></td>
+					<td><input type="text" name="recruitDay" placeholder="주중" required></td>
 					<td>**주중, 주 #일, 월~금, 주말(토,일) 등 형식으로 작성해주세요.</td>
 				</tr>
 				<tr>
 					<th>근무시간</th>
-					<td><input type="text" name="recruitTime" placeholder="시간협의"></td>
+					<td><input type="text" name="recruitTime" placeholder="시간협의" required></td>
 					<td>**시간협의, ##:##~##:##(휴게시간 #분) 등 형식으로 작성해주세요.</td>
 				</tr>
 				<tr>
@@ -140,10 +155,11 @@
 					</select></td>
 				</tr>
 			</table>
-			<hr>
-			<h2>근무지역</h2>
+                        </div>
+                        <div class="single-content6 py-4">
+                            <h2>근무지역</h2>
 			<h4>주소 입력</h4>
-			<select name="recruitJobDistrict">
+			<select name="recruitJobDistrict" required>
         <option value="1">경기도</option>
         <option value="2">인천</option>
         <option value="3">대전</option>
@@ -164,8 +180,9 @@
         <option value="18">서울</option>
     </select><br>
 			<input type="text" name="recruitAddress" placeholder="상세 주소 입력해주세요.">
-			<hr>
-			<h2>상세모집요강</h2>
+                        </div>
+                        <div class="single-content7 py-4">
+                            <h2>상세모집요강</h2>
 			<div>
 				<textarea id="ckeditor" name="recruitContent"></textarea>
 			</div>
@@ -175,20 +192,115 @@
 				name="recruitJobBranch" value="N">N <br> <strong>공개여부</strong>
 			<br> <input type="checkbox" name="recruitPub" value="Y">공개
 			<input type="checkbox" name="recruitPub" value="N">비공개 <br>
-			<button>등록</button>
+			<button type="submit" id="submit" class="template-btn">등록</button>
 		</form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="single-item mb-4">
+                            <h4 class="mb-4">jobs type</h4>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>Full Time</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>Part Time</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between">
+                                <span>Internship</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                        </div>
+                        <div class="single-item mb-4">
+                            <h4 class="mb-4">job by location</h4>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>New York</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>California</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>Swizerland</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between mb-3">
+                                <span>Canada</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                            <a href="#" class="sidebar-btn d-flex justify-content-between">
+                                <span>Sweden</span>
+                                <span class="text-right">25 job</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</section>
 
 	<footer>
 		<c:import url="/WEB-INF/views/template/footer.jsp" />
 	</footer>
 
-	<script>
+<script>
     ClassicEditor
             .create( document.querySelector( '#ckeditor' ))
             .catch( error => {
                 console.error( error );
             } );
+    //등록 버튼 클릭 시
+    $("#submit").on("click", function(){
+    	if($('input[name=recruitTitle]').val()==""){
+    	    alert("공고 제목을 입력해주세요.");
+    	    $('input[name=recruitTitle]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitStartAge]').val()==""){
+    	    alert("최소연령을 입력해주세요.");
+    	    $('input[name=recruitStartAge]').focus();
+    	    return false;
+    	}else if($('input[name=recruitEndAge]').val()==""){
+    	    alert("최대연령을 입력해주세요.");
+    	    $('input[name=recruitEndAge]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitPerson]').val()==""){
+    	    alert("모집인원을 입력해주세요.");
+    	    $('input[name=recruitPerson]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitMoney]').val()==""){
+    	    alert("급여를 입력해주세요.");
+    	    $('input[name=recruitMoney]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitPeriod]').val()==""){
+    	    alert("근무기간을 입력해주세요.");
+    	    $('input[name=recruitPeriod]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitDay]').val()==""){
+    	    alert("근무요일을 입력해주세요.");
+    	    $('input[name=recruitDay]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitTime]').val()==""){
+    	    alert("근무시간을 입력해주세요.");
+    	    $('input[name=recruitTime]').focus();
+    	    return false;
+    	}
+    	if($('input[name=recruitAddress]').val()==""){
+    	    alert("상세주소를 입력해주세요.");
+    	    $('input[name=recruitAddress]').focus();
+    	    return false;
+    	}
+    	//TODO: 상세모집요강이 공백이면 등록 못하도록 or 기본값 만들어서 자동채우기
+    	})
 </script>
 </body>
 </html>
