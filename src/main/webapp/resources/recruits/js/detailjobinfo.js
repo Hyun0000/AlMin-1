@@ -398,9 +398,9 @@ function selectAllComments() {
 	        	btmRightDivEle.appendChild(btmUl);
 		        	
 		        	for (var j = 0; j < commentsObj[e.ccWriter][i].length; j++) {
-		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		        		console.log(commentsObj[e.ccWriter][i]);
-		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//		        		console.log(commentsObj[e.ccWriter][i]);
+//		        		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		        		// bottom 우측 <ul>에 속하는 <li>  -->  각 후기별 키워드 넣기
 		        		let btmLiEle = document.createElement('li'); btmLiEle.innerText = commentsObj[e.ccWriter][i][j];
 		        		btmUl.appendChild(btmLiEle);
@@ -558,7 +558,18 @@ function popUpModal() {
 				
 				// 한줄 후기 입력창에 기존 내용 입력
 				let updateoneLine = document.getElementById('commentsLine');
-				updateoneLine.value = updateObj.commentsVO[0].ccContent;
+				// updateoneLine.value = updateObj.commentsVO[0].ccContent;
+				console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+				console.log(updateObj.commentsVO[0].ccContent);
+				console.log(updateObj.commentsVO.length);
+				console.log("userId : " + userId);
+				for (var i = 0; i < updateObj.commentsVO.length; i++) {
+					if(updateObj.commentsVO[i].ccWriter === userId) {
+						updateoneLine.value = updateObj.commentsVO[i].ccContent;
+						console.log(updateObj.commentsVO[i].ccWriter);
+					}
+				}
+				console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 				
 				console.log(document.getElementById('contract_y'));
 				console.log(document.getElementById('contract_n'));
@@ -580,16 +591,12 @@ function popUpModal() {
 				let updateDropZone = document.getElementsByClassName('dropzoneClass');
 				
 				for (var i = 0; i < updateObj[userId].length; i++) {
-					console.log("진입1");
 					let keywordSort = document.querySelectorAll("#dragzone_" + (i + 1) + " .keyword");
 					
 					for (var j = 0; j < updateObj[userId][i].length; j++) {
-						console.log("진입2");
 						
 						for (var k = 0; k < keywordSort.length; k++) {
-							console.log("진입3");
 							if (keywordSort[k].innerText == updateObj[userId][i][j]) {
-								console.log("이렇게 하긴 싫다.");
 								keywordSort[k].parentNode.style.display = "none";
 							}
 						}

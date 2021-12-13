@@ -3,11 +3,15 @@ package com.kh.almin.myrecruit.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.almin.myrecruit.model.vo.MyRecruit;
+
 public interface MyRecruitService {
 // ==============================================================================
 	// 특정 공고 지원자 전체 조회(조건  : 공고 번호)
 	List<Map<String, Object>> selectRecruitMember(int recruitNo) throws Exception;
 // ==============================================================================
+	// 공고 지원하기 버튼 클릭했을때 --> 개인 회원으로 로그인(받는 값 : 아이디 & 공고번호)
+	int recruitGo(MyRecruit myRecruit) throws Exception;
 // ==============================================================================
 // ==============================================================================
 // ==============================================================================

@@ -10,10 +10,16 @@
 		<result column="MEMBER_EMAIL" property="memberEmail"/>
 	</resultMap>
 	
+	<!-- 공고 지원자 전체 조회 by 기업으로 로그인 -->
 	<select id="selectRecruitMember" parameterType="_int" resultType="hashmap">
 		SELECT RWM.RWM_MEMBER_ID, MEMBER.MEMBER_NAME, MEMBER.MEMBER_BIRTH, MEMBER.MEMBER_GENDER, MEMBER.MEMBER_PHONE, MEMBER.MEMBER_EMAIL
 		FROM RECRUIT_WANT_MEMBER RWM JOIN MEMBER ON RWM.RWM_MEMBER_ID = MEMBER.MEMBER_ID WHERE RWM_RECRUIT_NO = #{recruitNo}
 	</select>
+	
+	<!-- 공고 지원 by 회원으로 로그인  -->
+	<insert id="recruitGo" parameterType="MyRecruit">
+		INSERT INTO RECRUIT_WANT_MEMBER VALUES (#{rwmRecruitNo}, #{rwmMemberId}, '1')
+	</insert>
 </mapper>
 
 

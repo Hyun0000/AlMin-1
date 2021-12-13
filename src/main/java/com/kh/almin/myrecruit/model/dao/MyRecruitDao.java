@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.almin.myrecruit.model.vo.MyRecruit;
+
 @Repository("myRecruitDao")
 public class MyRecruitDao {
 	@Autowired
@@ -17,6 +19,10 @@ public class MyRecruitDao {
 		return sqlSession.selectList("MyRecruit.selectRecruitMember", recruitNo);
 	}
 // ==============================================================================
+	// 공고 지원하기 버튼 클릭했을때 --> 개인 회원으로 로그인(받는 값 : 아이디 & 공고번호)
+	public int recruitGo(MyRecruit myRecruit) throws Exception {
+		return sqlSession.insert("MyRecruit.recruitGo", myRecruit);
+	}
 // ==============================================================================
 // ==============================================================================
 // ==============================================================================

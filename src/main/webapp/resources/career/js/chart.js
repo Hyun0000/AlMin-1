@@ -381,6 +381,7 @@ function loadChart() {
 	            grid:{ display:false} // 격자 지우기
 	        }
 	    },
+	    borderRadius: 5,
 	    plugins: {
 	        legend: {
 	            position: 'bottom'

@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.comments.model.service.CommentsService;
+import com.kh.almin.myrecruit.model.service.MyRecruitService;
+import com.kh.almin.myrecruit.model.vo.MyRecruit;
 import com.kh.almin.recruit.controller.RecruitController;
 import com.kh.almin.recruit.model.vo.LikeRecruit;
 import com.kh.almin.recruit.model.vo.Recruit;
@@ -30,6 +33,7 @@ import com.kh.almin.recruit.model.service.RecruitService;
 
 @Controller
 @RequestMapping("/recruits")
+@SessionAttributes("recruitgomsg")
 public class RecruitController {
 	@Autowired
 	private RecruitService recruitService;
@@ -210,6 +214,30 @@ public class RecruitController {
 		
 		
 		return "redirect:recruits";
+	}
+	
+	@Autowired
+	private MyRecruitService myRecruitService;
+	
+	// 공고 지원하기 버튼 클릭했을때 --> 개인 회원으로 로그인(받는 값 : 아이디 & 공고번호)
+	@PostMapping("/recruitgo")
+	public String recruitGo(MyRecruit myRecruit, Model model) {
+		System.out.println("myRecruit : " + myRecruit);
+		
+		int result = 0;
+		try {
+			result = myRecruitService.recruitGo(myRecruit);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result == 1) {
+			model.addAttribute("recruitgomsg", "지원 완료!!!");
+		} else if(result == 0) {
+			model.addAttribute("recruitgomsg", "지원 안됨");
+		}
+		return "redirect:/recruits/detailjobinfo?recruitNo=" + myRecruit.getRwmRecruitNo();
+//		http://localhost:8090/almin/recruits/detailjobinfo?recruitNo=10
+//		http://localhost:8090/almin/detailjobinfo?=10
 	}
 
 	@ExceptionHandler

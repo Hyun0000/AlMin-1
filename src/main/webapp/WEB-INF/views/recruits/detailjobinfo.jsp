@@ -164,22 +164,26 @@
 					<div class="sidebar">
 						<div class="single-item mb-4">
 							<h4 class="mb-4">매장 후기</h4>
-							<a href="#" id="insert_modal_showBtn"
-								class="sidebar-btn d-flex justify-content-between mb-3">후기
-								등록</a>
-							<section id="comments_container">
-								<ul id="comments_box"></ul>
-								<!-- <div id="comments_box_pageLink">1  2  3  4  5</div> -->
-								<div id="comments_box_pageLink"></div>
-							</section>
+							<a href="#" id="insert_modal_showBtn">후기등록</a>
+							<!-- <a href="#" id="insert_modal_showBtn" class="sidebar-btn d-flex justify-content-between mb-3">후기등록</a> -->
 						</div>
 					</div>
 				</div>
 			</div>
-			<button type="button" class="template-btn"
-				onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
-				지원자 보기</button>
-			<button type="button" class="template-btn">지원하기</button>
+			<button type="button" class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
+			<form action="recruitgo" method="post">
+				<input type="hidden" id="recruitGoId" value="test02" name="rwmMemberId">
+				<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
+				<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
+			</form>
+			
+				<c:if test="${recruitgomsg ne null}">
+					<script>
+						alert("${recruitgomsg}");
+						<c:remove var="recruitgomsg"/>
+					</script>
+				</c:if>
+			
 			<button class="template-btn like-btn" onclick="doLike(this);">
 				<c:choose>
 					<c:when test="${like == null}">
@@ -222,6 +226,10 @@
 				</div>
 			</div>
 		</div>
+	</section>
+	<section id="comments_container">
+		<ul id="comments_box"></ul>
+		<div id="comments_box_pageLink"></div>
 	</section>
 
 	<!-- Footer Area Starts -->
@@ -307,9 +315,9 @@
 		// let userId = "giniuskang";
 		// let userId = "minzi91";
 		// let userId = "sjh1216";
-		let userId = "sy111k2";
+		// let userId = "sy111k2";
 		// let userId = "test01";
-		// let userId = "test02";
+		let userId = "test02";
 
 		// jinpark
 		// giniuskang
