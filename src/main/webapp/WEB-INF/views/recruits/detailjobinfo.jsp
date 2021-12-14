@@ -165,7 +165,7 @@
 						<div class="single-item mb-4">
 							<h4 class="mb-4">매장 후기</h4>
 							<button type="button" class="commentsBtns" id="insert_modal_showBtn">후기등록</button>
-							<button type="button" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기 키워드</button>
+							<button type="button" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기</button>
 <!-- 							<a href="#" class="commentsBtns" id="insert_modal_showBtn">후기등록</a>
 							<a href="#" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기 키워드</a> -->
 							<!-- <a href="#" id="insert_modal_showBtn" class="sidebar-btn d-flex justify-content-between mb-3">후기등록</a> -->
@@ -174,11 +174,11 @@
 								<span style="color: black; font-size: 1.25rem;">등록된 후기가 없습니다.</span>
 							</div>
 							<ul id="mostCommentsUl" style="display: none;">
-								<li class="mostCommentsList">123</li>
-								<li class="mostCommentsList">123</li>
-								<li class="mostCommentsList">123</li>
-								<li class="mostCommentsList">123</li>
-								<li class="mostCommentsList">123</li>
+								<li class="mostCommentsList"></li>
+								<li class="mostCommentsList"></li>
+								<li class="mostCommentsList"></li>
+								<li class="mostCommentsList"></li>
+								<li class="mostCommentsList"></li>
 							</ul>
 						</div>
 					</div>
@@ -243,6 +243,8 @@
 		</div>
 	</section>
 	<section id="comments_container">
+		<hr style="border-bottom: 1px solid #707070">
+		<h1 style="padding-left: 40px;">Review</h1>
 		<ul id="comments_box"></ul>
 		<div id="comments_box_pageLink"></div>
 	</section>
@@ -315,7 +317,7 @@
 		// item을 놓는 장소인 dropzone : <div id="dropzone">
 		// let dropzoneEle = document.getElementById('dropzone');
 		let dropzoneEle = document.getElementsByClassName('dropzoneClass');
-
+		
 		// 기존 item을 저장하는 장소인 dragzone : <div id="dragzone">
 		// let dragzoneEle = document.getElementById('dragzone');dragzoneClass
 		let dragzoneEle = document.getElementsByClassName('dragzoneClass');
@@ -336,7 +338,7 @@
 		// let userId = "sjh1216";
 		// let userId = "sy111k2";
 		// let userId = "test01";
-		let userId = "test02";
+		let userId = "jinpark";
 
 		// jinpark
 		// giniuskang

@@ -370,16 +370,21 @@ function selectAllComments() {
 		        let topLeftDivEle = document.createElement('div'); topLeftDivEle.setAttribute('class', 'comments_top_bar_left');
 		        topDivEle.appendChild(topLeftDivEle);
 
+		        console.log("=====================================");
+		        console.log(e.ccWriter);
+		        console.log("=====================================");
 		        // top 좌측 <div>에 속하는 <h2> --> 작성자 아이디   commentsObj[e.ccWriter]?????
-		        let topHtwo = document.createElement('h2'); topHtwo.innerText = e.ccWriter;
+		        let topHtwo = document.createElement('h3'); topHtwo.innerText = e.ccWriter;
+		        topHtwo.setAttribute('style', 'margin : 0;');
 		        topLeftDivEle.appendChild(topHtwo);
 		        
 		        // 작성자 담기
 		        // commentsWriterArr[num] = e.ccWriter;
 
 		        // top 좌측 <div>에 속하는 <h3> --> 작성일
-		        let topHthree = document.createElement('h4'); topHthree.innerText = e.ccDate;
-		        topHthree.setAttribute('style', 'margin : 0;');
+		        let topHthree = document.createElement('h6'); topHthree.innerText = e.ccDate;
+//		        topHthree.setAttribute('style', 'margin : 0;');
+		        topHthree.setAttribute('style', 'color : black; margin-bottom : 0; margin-left : 30px;');
 		        topLeftDivEle.appendChild(topHthree);
 
 		        // top 우측 <div> 만들기
@@ -399,14 +404,6 @@ function selectAllComments() {
 			        deleteBtn.setAttribute('class', 'deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
 			        deleteBtn.setAttribute('onClick', 'deleteComment(event);'); topRightDivEle.appendChild(deleteBtn);
 		        }
-		        
-//		        if(userId === e.ccWriter) {
-//		        	// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
-//		        	document.getElementById('insert_modal_showBtn').style.display = "none";
-//		        } else {
-//		        	// 특정 공고에 후기 입력을 이미 했으면 추가로 후기 입력을 불가능하게 하는 기능 구현 (없으면 후기 작성 가능)
-//		        	document.getElementById('insert_modal_showBtn').style.display = "block";
-//		        }
 		        
 		        // id & class에 붙이는 숫자 변수 (+)
 		        num++;
@@ -509,31 +506,37 @@ function deleteComment(event) {
 	// console.log(event); console.log(this); --> 이상
 	
 	// userID를 담을 변수
-	let userId = event.target.parentNode.previousSibling.firstChild.innerText
+	let deleteId = event.target.parentNode.previousSibling.firstChild.innerText
+	console.log("deleteId : " + deleteId);
+	
 	
 	let deleteData = {
 			recruitNo : recruitNo,
-			id : event.target.parentNode.previousSibling.firstChild.innerText
+			id : userId
 	}
+	
+	console.log(userId);
+	console.log(deleteData);
+	console.log(JSON.stringify(deleteData));
 	
 	if (deleteBool == true) {
 		sendRequest("DELETE", "reviews", JSON.stringify(deleteData), afterDelete);
 	}
-	
-	function afterDelete() {
-		if (httpRequest.readyState === 4) {
-			if (httpRequest.status === 200) {
-				console.log(httpRequest.responseText);
-				if (httpRequest.responseText == 'ok') {
-					alert("삭제 성공");
-					
-					// 후기 구역 초기화
-					initCommentsBox();
-					
-					// 후기 전체 다시 select
-					// sendRequest("GET", recruitCommentParam, null, selectAllComments);
-					sendRequest("GET", recruitCommentPageParam, null, selectAllComments);
-				}
+}
+
+function afterDelete() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			console.log(httpRequest.responseText);
+			if (httpRequest.responseText == 'ok') {
+				alert("삭제 성공");
+				
+				// 후기 구역 초기화
+				initCommentsBox();
+				
+				// 후기 전체 다시 select
+				// sendRequest("GET", recruitCommentParam, null, selectAllComments);
+				sendRequest("GET", recruitCommentPageParam, null, selectAllComments);
 			}
 		}
 	}

@@ -88,33 +88,41 @@
 	/* border: 1px solid black; */
     list-style-type: none;
     padding: 0;
-    margin-top: 50px;
+    margin-top: 40px;
     margin-bottom: 30px;
+    /* background-color: #F5F7FA */
 }
 
 /* 후기 조회 <li> */
 .comments_list {
-	border: 5px solid royalblue;
-	border-radius: 20px;
+	/* border-top: 5px solid #cfcfcf; */
+	/* border-bottom: 5px solid royalblue; */
+	/* border-radius: 20px; */
     width: 1000px;
     margin: 0 auto;
     box-sizing: border-box;
     margin-top: 30px;
+    /* border-top: 3px solid #707070; */
+    border-bottom: 3px solid #707070;
 }
 
 /* 작성자, 날짜, 버튼 등이 들어가는 상단 <div> 전체 */
 .comments_top_bar {
-    border-bottom: 5px solid royalblue;
+	border-top: 3px solid #707070;
+    /* border-bottom: 5px solid royalblue; */
+    border-bottom: 3px solid #707070;
+    background-color: #cfcfcf;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
     align-items: center;
-    padding: 10px 30px;
+    padding: 5px 30px;
 }
 
 /* 작성자, 날짜가 들어가는 상단 죄측 <div> */
 .comments_top_bar_left{
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -151,13 +159,14 @@
     /* border: 1px solid royalblue; */
     width: 700px;
     /* box-sizing: border-box; */
-    padding: 20px 10px;
+    padding: 10px 10px;
     padding-left: 40px;
 }
 
 /* 하단 전체 <div> */
 .comments_btm_bar {
-	border-top: 5px solid royalblue;
+	/* border-top: 5px solid royalblue; */
+	border-top: 3px solid #707070;
     /* border: 1px solid brown; */
     display: flex;
     /* padding: 20px; */
@@ -169,7 +178,8 @@
     width: 20%;
     box-sizing: border-box;
     text-align: center;
-    padding: 10px;
+    /* padding: 10px; */
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -180,10 +190,11 @@
 /* 하단 <div> 중 키워드가 들어가는 우측 <div> */
 .right_comments_box{
     /* border: 1px solid violet; */
-    border-left: 5px solid royalblue;
+    /* border-left: 5px solid royalblue; */
     width: 80%;
     box-sizing: border-box;
-    padding: 10px;
+    /* padding: 10px; */
+    padding: 5px;
     display: flex;
 	flex-direction: column;
 }
@@ -199,7 +210,7 @@
 /* 각 키워드 <li> */
 .right_comments_box_ul li {
     border: 3px solid black;
-    margin: 5px 5px;
+    margin: 3px 3px;
     padding: 5px;
     font-size: .83em;
     font-weight: bolder;

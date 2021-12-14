@@ -228,6 +228,9 @@ public class CommentsController {
 		JsonElement jsonElement = jsonParser.parse(test);
 		System.out.println("jsonElement : " + jsonElement);
 		
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		// CommentsCompany commentsCompany = gson.toJson(jsonElement)
+		
 		// 작성자 ID
 		String id = jsonElement.getAsJsonObject().get("id").getAsString();
 		// 공고 번호
