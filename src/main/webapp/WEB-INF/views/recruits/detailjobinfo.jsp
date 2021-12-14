@@ -32,6 +32,8 @@
 .d-toggle {
 	display: none;
 }
+form{display:inline 
+}
 </style>
 </head>
 <body>
@@ -184,7 +186,10 @@
 					</div>
 				</div>
 			</div>
-			<button type="button" class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
+			<hr>
+			<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
+			<div class="btninline">
+			<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
 			<form action="recruitgo" method="post">
 				<!-- session 이용 필요 -->
 				<input type="hidden" id="recruitGoId" value="test02" name="rwmMemberId">
@@ -239,6 +244,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</section>
