@@ -1,5 +1,6 @@
 package com.kh.almin.comments.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +24,7 @@ public interface CommentsService {
 	// 현재 접속자의 해당 공고 후기 작성 유무 확인
 	public int findComments(String userId, int recruitNo) throws Exception;
 // ==============================================================================
+	// 후기 카테고리별 가장 많은 키워드보기
+	public ArrayList<Map<String, String>> showManyKeyWord(String recruitNo) throws Exception;
 // ==============================================================================
 }

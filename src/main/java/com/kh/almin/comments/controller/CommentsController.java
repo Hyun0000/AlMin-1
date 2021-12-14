@@ -276,6 +276,27 @@ public class CommentsController {
 		return resultStr;
 	}
 // ==============================================================================
+	// ajax
+	// 후기 카테고리별 가장 많은 키워드보기
+	@GetMapping("showmanykeyword")
+	@ResponseBody
+	public String showManyKeyWord(@RequestParam(value = "recruitNo") String recruitNo) {
+		System.out.println("@GetMapping(가장 많은 키워드 보기) 진입");
+		System.out.println("recruitNo : " + recruitNo);
+		
+		List<Map<String, String>> keywordMap = null;
+		try {
+			keywordMap = commentsService.showManyKeyWord(recruitNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String jsonStr = "";
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		jsonStr = gson.toJson(keywordMap);
+		System.out.println("jsonStr : " + jsonStr);
+		return jsonStr;
+	}
 // ==============================================================================
 }
 

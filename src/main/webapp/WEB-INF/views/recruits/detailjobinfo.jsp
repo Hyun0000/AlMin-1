@@ -165,6 +165,7 @@
 						<div class="single-item mb-4">
 							<h4 class="mb-4">매장 후기</h4>
 							<a href="#" id="insert_modal_showBtn">후기등록</a>
+							<a href="#" id="show_most_keyword">해당 공고에서 가장 많은 후기 키워드</a>
 							<!-- <a href="#" id="insert_modal_showBtn" class="sidebar-btn d-flex justify-content-between mb-3">후기등록</a> -->
 						</div>
 					</div>
@@ -172,6 +173,7 @@
 			</div>
 			<button type="button" class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
 			<form action="recruitgo" method="post">
+				<!-- session 이용 필요 -->
 				<input type="hidden" id="recruitGoId" value="test02" name="rwmMemberId">
 				<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
 				<button type="submit" class="template-btn" id="recruitGo">지원하기</button>

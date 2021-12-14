@@ -193,6 +193,31 @@
 	<select id="findComments" parameterType="map" resultType="_int">
 		SELECT COUNT(CC_NO) FROM COMMENTS_COMPANY WHERE CC_RECRUIT_NO = #{recruitNo} AND CC_WRITER = #{id}
 	</select>
+<!-- ================================================= 후기 카테고리별 가장 많은 키워드보기 ================================================= -->
+	<select id="showManyKeyWord" resultType="hashmap" parameterType="map">
+ 		<choose>
+ 			<when test="category == 'COMMENTS_GOOD_MAP'">
+ 				SELECT COMMENTS_GOOD.GOOD_NAME FROM COMMENTS_GOOD WHERE
+				GOOD_NO = (SELECT NVL(MAX(CGM_GOOD_NO), 0) FROM COMMENTS_GOOD_MAP WHERE CGM_CC_NO = #{recruitNo})
+ 			</when>
+ 			<when test="category == 'COMMENTS_BAD_MAP'">
+ 				SELECT COMMENTS_BAD.BAD_NAME FROM COMMENTS_BAD WHERE
+				BAD_NO = (SELECT NVL(MAX(CBM_BAD_NO), 0) FROM COMMENTS_BAD_MAP WHERE CBM_CC_NO = #{recruitNo})
+ 			</when>
+ 			<when test="category == 'COMMENTS_CONDITION_MAP'">
+ 				SELECT COMMENTS_AIR.AIR_NAME FROM COMMENTS_AIR WHERE
+				AIR_NO = (SELECT NVL(MAX(CAM_AIR_NO), 0) FROM COMMENTS_AIR_MAP WHERE CAM_CC_NO = #{recruitNo})
+ 			</when>
+ 			<when test="category == 'COMMENTS_AIR_MAP'">
+ 				SELECT COMMENTS_CONDITION.CONDITION_NAME FROM COMMENTS_CONDITION WHERE
+				CONDITION_NO = (SELECT NVL(MAX(CCM_CONDITION_NO), 0) FROM COMMENTS_CONDITION_MAP WHERE CCM_CC_NO = #{recruitNo})
+ 			</when>
+ 			<when test="category == 'COMMENTS_PAY_MAP'">
+ 				SELECT COMMENTS_PAY.PAY_NAME FROM COMMENTS_PAY WHERE
+				PAY_NO = (SELECT NVL(MAX(CPM_PAY_NO), 0) FROM COMMENTS_PAY_MAP WHERE CPM_CC_NO = #{recruitNo})
+ 			</when>
+ 		</choose>
+	</select>
 </mapper>
 
 

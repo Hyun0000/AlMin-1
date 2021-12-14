@@ -1,5 +1,6 @@
 package com.kh.almin.comments.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,4 +47,9 @@ public class CommentsServiceImpl implements CommentsService {
 		return commentsDao.findComments(userId, recruitNo);
 	}
 // ==============================================================================
+	// 후기 카테고리별 가장 많은 키워드보기
+	@Override
+	public ArrayList<Map<String, String>> showManyKeyWord(String recruitNo) throws Exception {
+		return commentsDao.showManyKeyWord(recruitNo);
+	}
 }

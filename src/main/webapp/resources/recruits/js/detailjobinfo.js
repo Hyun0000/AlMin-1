@@ -1,3 +1,19 @@
+// 후기 카테고리별 가장 많은 키워드보기
+let showManyKeyWord = document.getElementById('show_most_keyword');
+let keyWordParh = "showmanykeyword?recruitNo=" + recruitNo;
+showManyKeyWord.onclick = () => {
+	sendRequest("GET", keyWordParh, null, showManyKeyWordFunc);
+};
+
+
+function showManyKeyWordFunc() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			alert(123);
+		}
+	}
+}
+
 let modalBack = document.getElementById('comments_insert_modal_back');
 // let param = "recruitNo=" + recruitNo;
 // let recruitParam = "recruitNo=" + recruitNo;
