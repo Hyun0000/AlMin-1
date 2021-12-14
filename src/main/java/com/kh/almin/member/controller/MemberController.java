@@ -43,32 +43,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
     private MailSendService mss;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	@PostMapping("/emails")
-	@ResponseBody
-     public String signUp(@RequestBody Member member){
-        // DB에 기본정보 insert
-		 logger.info(member.getMemberEmail());
-        //임의의 authKey 생성 & 이메일 발송
-        String authKey = mss.sendAuthMail(member.getMemberEmail());
-        member.setAuthKey(authKey);
-
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("email", member.getMemberEmail());
-        map.put("authKey", member.getAuthKey());
-        System.out.println(map);
-        return authKey;
-      //DB에 authKey 업데이트
-    //  memberService.updateAuthKey(map);
-  	}
-	 @GetMapping("/emails")
-	 public ModelAndView mailCheck(@RequestParam String Memberemail, Model model) {
-		 logger.info("Memberemail: "+Memberemail);
-		 ModelAndView mv = new ModelAndView();
-		 mv.addObject("email",Memberemail);
-		 mv.setViewName("member/mail");
-		 return mv;
-		 
-	 }
+	@GetMapping("/register") //개인, 기업 회원가입 선택 페이지
+	private String registMember() throws Exception {
+		return "member/register";
+	}
+	@GetMapping //개인회원가입창
+	private String joinMember() throws Exception {
+		return "member/memberJoin";
+	}
+	
 	 
 	@PostMapping //회원가입
 	private String insertMember(@RequestBody Member member) throws Exception { 
@@ -98,19 +81,13 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 	}
 	
-	@GetMapping("/register") //개인, 기업 회원가입 선택 페이지
-	private String registMember() throws Exception {
-		return "member/register";
-	}
-	@GetMapping //개인회원가입창
-	private String joinMember() throws Exception {
-		return "member/memberJoin";
-	}
+	
 	@GetMapping("/id") //개인 아이디찾기창
 	private String findIdMember() throws Exception {
 		return "member/findId";
 	}
 	@PostMapping("/id/phone") //개인 아이디찾기(연락처)
+	@ResponseBody
 	private String findMIdphone(@RequestBody Member m) throws Exception {
 		String result="";
 		logger.info(m.toString());
@@ -124,7 +101,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 	}
 	@PostMapping("/id/mail") //개인 아이디찾기(이메일)
-	@ResponseBody // ajax랑 짝꿍 TODO ajax쓰는데 다 붙이기
+	@ResponseBody // ajax랑 짝꿍
 	private String findMIdmail(@RequestBody Member m) throws Exception {
 		String result="";
 		logger.info(m.toString());
@@ -285,6 +262,32 @@ logger.info("member: "+member.toString());
 		//userId로 select문 만들어서 
 		return mv;
 	}
+	@PostMapping("/emails")
+	@ResponseBody
+     public String signUp(@RequestBody Member member){
+        // DB에 기본정보 insert
+		 logger.info(member.getMemberEmail());
+        //임의의 authKey 생성 & 이메일 발송
+        String authKey = mss.sendAuthMail(member.getMemberEmail());
+        member.setAuthKey(authKey);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("email", member.getMemberEmail());
+        map.put("authKey", member.getAuthKey());
+        System.out.println(map);
+        return authKey;
+      //DB에 authKey 업데이트
+    //  memberService.updateAuthKey(map);
+  	}
+	 @GetMapping("/emails")
+	 public ModelAndView mailCheck(@RequestParam String Memberemail, Model model) {
+		 logger.info("Memberemail: "+Memberemail);
+		 ModelAndView mv = new ModelAndView();
+		 mv.addObject("email",Memberemail);
+		 mv.setViewName("member/mail");
+		 return mv;
+		 
+	 }
 //	@GetMapping("/mypage/info") //회원정보 조회
 //	private ModelAndView getMemberInfo() throws Exception { //@ExceptionHandler가 받는다.
 //		Member vo = memberService.getMemberInfo();

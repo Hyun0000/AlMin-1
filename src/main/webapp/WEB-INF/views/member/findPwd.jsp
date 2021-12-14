@@ -263,6 +263,7 @@ $(document).ready(function(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
+<div class="container">
 <table>
     <tr>
 	    <td>
@@ -395,7 +396,6 @@ $(document).ready(function(){
 			<input type="text" id="firstNum" maxlength="3" size="3" required> -
 			<input type="text" id="midNum" maxlength="2" size = "2" required> -
 			<input type="text" id="endNum" maxlength="5" size = "5" required>
-			<button type="button" class="btn2" id="companyNum">확인</button>
 		</td>
 	</tr>
 </table>
@@ -403,6 +403,7 @@ $(document).ready(function(){
    <div class="search-buttons">
           <button type="button" class="btn1" id="nextBtn">다음</button>
      </div>
+</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>

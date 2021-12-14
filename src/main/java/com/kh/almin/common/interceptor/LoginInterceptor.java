@@ -21,10 +21,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {//Interceptor�
         HttpSession session = request.getSession();
         Member loginInfo = (Member) session.getAttribute("loginInfo");
         if(loginInfo == null){//세션정보가 없을 경우 로그인 페이지로 이동시킨다.
-            response.sendRedirect("/almin/logins");
+            response.sendRedirect(request.getContextPath() + "/logins");
             //return 값을 false로 해주어, 다음 요청으로 넘어가지 않게 해준다.
             return false;
         }
+        //request
         return true;
     } 
 	/* prehandle -> 로그인 여부 체크할 때 많이 씀.

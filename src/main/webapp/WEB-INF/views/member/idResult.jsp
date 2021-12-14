@@ -44,8 +44,7 @@
                 </div>
 
             <div class="search-buttons section-padding2">
-                <button type="button" class="genric-btn success radius">비밀번호 찾기</button>
-                <button type="button" class="genric-btn primary radius">로그인</button>
+                <button type="button" class="genric-btn primary radius" onclick="openLogin()">로그인</button>
             </div>
                     </div>
                 </div>
@@ -54,5 +53,10 @@
     </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
+<script>
+function openLogin(){
+	location.href = "${pageContext.request.contextPath}/logins"
+}
+</script>
 </body>
 </html>

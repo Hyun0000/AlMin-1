@@ -100,11 +100,8 @@ $(document).ready(function(){
 					<dd>${vo.memberBirth}</dd>
 					<dt>연락처</dt>
 					<dd>${vo.memberPhone}</dd>
-					<dd>010-8***-***0</dd>
 					<dt>e-메일</dt>
 					<dd>${vo.memberEmail}</dd>
-					<dd>ys****@n****.com</dd>
-					<dd>서울 성동구  ******</dd>
 				</dl>
 					<div class="reply-btn">
 					<button type="button" class="genric-btn info-border" onclick="infoEdit()">수정</button>

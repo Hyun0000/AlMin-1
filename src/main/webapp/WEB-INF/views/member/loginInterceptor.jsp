@@ -129,6 +129,11 @@ input:hover,
         color: white;
         }
 </style>
+<script>
+$(document).ready(function(){
+	$(".login").click();
+});
+</script>
 </head>
 <body>
 <!-- 공통헤더 템플릿 -->

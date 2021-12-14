@@ -239,11 +239,10 @@ $(document).ready(function(){
 				if(result == ""){
 					alert("일치하는 아이디가 없습니다.");
 				} else {
-					//TODO: 일치하는 n개의 아이디를 찾았습니다(화면 생성)
 					console.log("아이디찾기 성공")
-					alert(result);
+					alert("아이디는 "+result+" 입니다.");
+			location.href ="${pageContext.request.contextPath}/members/id/result"//id찾기 결과화면
 				}
-			//location.href ="${pageContext.request.contextPath}/main"
 		},
 		error:function(request,status,error){
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+
@@ -258,14 +257,15 @@ $(document).ready(function(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
-<table>
-    <tr>
-	    <td>
-	        <a href="${pageContext.request.contextPath}/members/id" class="box-sizing">아이디 찾기</a>
-	        <a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing">비밀번호 찾기</a>
-	    </td>
-    </tr>
-</table>
+<div class="container">
+	 <table>
+	    <tr>
+		    <td>
+		        <a href="${pageContext.request.contextPath}/members/id" class="box-sizing">아이디 찾기</a>
+		        <a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing">비밀번호 찾기</a>
+		    </td>
+	    </tr>
+	</table>
             
 <div class="tab btngroup">
         <button type="button" class="tab-item tab1" id="mBtn"
@@ -273,13 +273,8 @@ $(document).ready(function(){
        <button type="button" class="tab-item tab1 active"
 					id="cBtn">기업회원</button>
 </div>
-      <div class="ui-message gray">
-          <div class="list-type message-content">
-               <p class="list-item">아이디 찾기 방법을 선택해 주세요.</p>
-          </div>
-      </div>
-
-      <div class="change-option box-sizing">
+ <p class="list-item">아이디 찾기 방법을 선택해 주세요.</p>
+   <div class="change-option box-sizing">
           <div class="item-group">
               <div class="search-item">
                  <input type="radio" name="certType" id="dev_search_tel" data-val="1" value="PHONE" checked="checked">
@@ -375,7 +370,6 @@ $(document).ready(function(){
 			<input type="text" id="firstNum" maxlength="3" size="3" required> -
 			<input type="text" id="midNum" maxlength="2" size = "2" required> -
 			<input type="text" id="endNum" maxlength="5" size = "5" required>
-			<button type="button" class="btn2" id="companyNum">확인</button>
 		</td>
 	</tr>
 </table>
@@ -383,6 +377,7 @@ $(document).ready(function(){
    <div class="search-buttons">
           <button type="button" class="btn1" id="nextBtn">다음</button>
      </div>
+</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
