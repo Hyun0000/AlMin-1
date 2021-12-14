@@ -278,7 +278,7 @@ public class CommentsController {
 // ==============================================================================
 	// ajax
 	// 후기 카테고리별 가장 많은 키워드보기
-	@GetMapping("showmanykeyword")
+	@GetMapping(value = "showmanykeyword", produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String showManyKeyWord(@RequestParam(value = "recruitNo") String recruitNo) {
 		System.out.println("@GetMapping(가장 많은 키워드 보기) 진입");

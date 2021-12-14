@@ -164,9 +164,22 @@
 					<div class="sidebar">
 						<div class="single-item mb-4">
 							<h4 class="mb-4">매장 후기</h4>
-							<a href="#" id="insert_modal_showBtn">후기등록</a>
-							<a href="#" id="show_most_keyword">해당 공고에서 가장 많은 후기 키워드</a>
+							<button type="button" class="commentsBtns" id="insert_modal_showBtn">후기등록</button>
+							<button type="button" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기 키워드</button>
+<!-- 							<a href="#" class="commentsBtns" id="insert_modal_showBtn">후기등록</a>
+							<a href="#" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기 키워드</a> -->
 							<!-- <a href="#" id="insert_modal_showBtn" class="sidebar-btn d-flex justify-content-between mb-3">후기등록</a> -->
+							<div style="text-align: center; margin-top: 30px; display: none" id="alterImage_div">
+								<img src="${pageContext.request.contextPath}/resources/assets/images/no_most_comments.png" id="most_comments_alterImage">
+								<span style="color: black; font-size: 1.25rem;">등록된 후기가 없습니다.</span>
+							</div>
+							<ul id="mostCommentsUl" style="display: none;">
+								<li class="mostCommentsList">123</li>
+								<li class="mostCommentsList">123</li>
+								<li class="mostCommentsList">123</li>
+								<li class="mostCommentsList">123</li>
+								<li class="mostCommentsList">123</li>
+							</ul>
 						</div>
 					</div>
 				</div>

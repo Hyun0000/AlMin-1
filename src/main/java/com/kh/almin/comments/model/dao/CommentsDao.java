@@ -265,7 +265,6 @@ public class CommentsDao {
 		return sqlSession.selectOne("Comments.countAllComment", recruitNo);
 	}
 //==============================================================================
-	// TODO
 	// 후기 카테고리별 가장 많은 키워드보기
 	public ArrayList<Map<String, String>> showManyKeyWord(String recruitNo) {
 		ArrayList<Map<String, String>> resultMap = new ArrayList<Map<String,String>>();
@@ -277,7 +276,6 @@ public class CommentsDao {
 		
 		for (int i = 0; i < tableName.length; i++) {
 			paramMap.put("category", tableName[i]);
-			String temp = "";
 			resultMapTwo = sqlSession.selectOne("Comments.showManyKeyWord", paramMap);
 			resultMap.add(resultMapTwo);
 		}

@@ -9,7 +9,39 @@ showManyKeyWord.onclick = () => {
 function showManyKeyWordFunc() {
 	if (httpRequest.readyState === 4) {
 		if (httpRequest.status === 200) {
-			alert(123);
+			console.log(httpRequest.responseText);
+			let mostCommentsBox = JSON.parse(httpRequest.responseText);
+			console.log("mostCommentsBox : " + mostCommentsBox);
+			console.log("mostCommentsBox.length : " + mostCommentsBox.length);
+//			console.log(typeof mostCommentsBox[0]);
+//			console.log(mostCommentsBox[0].GOOD_NAME);
+//			console.log("mostCommentsBox.GOOD_NAME : " + mostCommentsBox[0].GOOD_NAME);
+
+			
+			let tableNameArr = ['GOOD_NAME', 'BAD_NAME', 'AIR_NAME', 'CONDITION_NAME', 'PAY_NAME'];
+			let conditionNameArr = ['장점 - ', '단점 - ', '분위기 - ', '조건 - ', '급여 - '];
+			console.log("tableNameArr[4] : " + tableNameArr[4]);
+			
+			let mostCommentsListEle = document.getElementsByClassName('mostCommentsList');
+			
+			for (var i = 0; i < mostCommentsListEle.length; i++) {
+				if(mostCommentsBox[0] == null) {
+					document.getElementById('alterImage_div').style.display = 'block';
+					break;
+				} else {
+					console.log(mostCommentsBox[i][tableNameArr[i]]);
+					mostCommentsListEle[i].innerText = conditionNameArr[i] + mostCommentsBox[i][tableNameArr[i]];
+				}
+			}
+			
+			// 토글 적용
+			if(document.getElementById('mostCommentsUl').style.display === 'block' && document.getElementById('alterImage_div').style.display === 'none') {
+				document.getElementById('mostCommentsUl').style.display = 'none';
+			} else if(document.getElementById('mostCommentsUl').style.display === 'none' && document.getElementById('alterImage_div').style.display === 'none') {
+				document.getElementById('mostCommentsUl').style.display = 'block';
+			}
+			
+			
 		}
 	}
 }
