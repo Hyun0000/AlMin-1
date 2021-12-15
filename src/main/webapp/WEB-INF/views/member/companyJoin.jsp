@@ -161,7 +161,20 @@
 					});
 			});
 			$("#companyNum").on("click",function(){
-				console.log("확인 클릭")
+				console.log("사업자인증 클릭")
+				if($("#firstNum").val()==""){
+					alert("사업자번호 앞자리를 입력해주세요.")
+					return false;
+				} else if($("#midNum").val()==""){
+					alert("사업자번호 가운데를 입력해주세요.")
+					return false;
+				}else if($("#endNum").val()==""){
+					alert("사업자번호 끝자리를 입력해주세요.")
+					return false;
+				}else if($("#companyName").val()==""){
+					alert("회사/점포명을 입력해주세요.")
+					return false;
+				}
 				var json = {
 						  "businesses": [
 							    {
@@ -724,12 +737,21 @@
 		</td>
 		</tr>
 		<tr>
+		<th><label for="companyName">회사/점포명</label></th>
+		<td>
+		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
+		<input type="text" id="companyName" name="companyName" maxlength="50" size = "10" required>
+		<span id="nmCmt" class="cmt"></span>
+		</td>
+		</tr>
+		<tr>
 		<th>사업자등록번호</th>
 		<td>
 		<input type="text" id="firstNum" maxlength="3" size="3" required> -
 		<input type="text" id="midNum" maxlength="2" size = "2" required> -
 		<input type="text" id="endNum" maxlength="5" size = "5" required>
-		<button type="button" class="btn2" id="companyNum">확인</button>
+		<button type="button" class="btn2" id="companyNum">인증</button>
+		<span id="cnCmt" class="cmt"></span>
 		</td>
 		</tr>
 		<tr>
@@ -738,14 +760,7 @@
 ※ 지점·지사의 경우, 해당 지점·지사의 사업자등록번호를 입력해 주세요.
 ※ 인증이 되지 않을 경우 고객센터(T.1588-9351)로 문의해 주세요.</pre></td>
 		</tr>
-		<tr>
-		<th><label for="companyName">회사/점포명</label></th>
-		<td>
-		<!-- maxlengh: 최대 입력 글자수, size: 화면에 보이는 최대글자수 -->
-		<input type="text" id="companyName" name="companyName" maxlength="50" size = "10" required>
-		<span id="nmCmt" class="cmt"></span>
-		</td>
-		</tr>
+		
 		<tr>
 		<th><label for="bossName">대표자명</label></th>
 		<td>

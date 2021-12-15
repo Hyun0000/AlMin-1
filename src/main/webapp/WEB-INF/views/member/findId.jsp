@@ -12,17 +12,45 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<style>
+th {
+width:150px;
+}
+/* 입력란 */
+input[type=text], input[type=password]{
+background-color: #f9f9ff;
+border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
+.tab-item{
+width: 300px;
+}
+a {
+text-decoration:none;
+}
+.box-sizing{
+width: 200px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	var choose = "member"; //개인회원 / 기업회원 선택여부
 	var way = "tel"; //연락처 / 이메일 / 사업자번호 선택여부
 	
  	$(".hide").hide(); 
+ 	$("#dev_certForm1").show(); 
+    
 	$("#mBtn").css({
 		"background-color":"#f8b600",
 		"color":"white",
-		"border":"3px solid #f8b600"
+		"border":"3px solid transparent"
 	});
 	
 	$("#mBtn").click(function(){
@@ -32,12 +60,12 @@ $(document).ready(function(){
 		$("#mBtn").css({
 			"background-color":"#f8b600",
 			"color":"white",
-			"border":"3px solid #f8b600"
+			"border":"3px solid transparent"
 		});
 		$("#cBtn").css({
-			"background-color":"white",
+			"background-color":"#f9f9ff",
 			"color":"black",
-			"border":"3px solid #FAE100"
+			"border":"3px solid transparent"
 		});
 		})
 		
@@ -48,12 +76,12 @@ $(document).ready(function(){
 		$("#cBtn").css({
 			"background-color":"#f8b600",
 			"color":"white",
-			"border":"3px solid #f8b600"
+			"border":"3px solid transparent"
 		});
 		$("#mBtn").css({
-			"background-color":"white",
+			"background-color":"#f9f9ff",
 			"color":"black",
-			"border":"3px solid #FAE100"
+			"border":"3px solid transparent"
 		});
 		})
 		var namePattern = /^[a-zA-Z가-힣]*$/;
@@ -256,43 +284,38 @@ $(document).ready(function(){
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<section>
-<div class="container">
-	 <table>
-	    <tr>
-		    <td>
-		        <a href="${pageContext.request.contextPath}/members/id" class="box-sizing">아이디 찾기</a>
-		        <a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing">비밀번호 찾기</a>
-		    </td>
-	    </tr>
-	</table>
-            
-<div class="tab btngroup">
-        <button type="button" class="tab-item tab1" id="mBtn"
-					autofocus>개인회원</button>
-       <button type="button" class="tab-item tab1 active"
-					id="cBtn">기업회원</button>
-</div>
- <p class="list-item">아이디 찾기 방법을 선택해 주세요.</p>
-   <div class="change-option box-sizing">
-          <div class="item-group">
-              <div class="search-item">
+<section class="job-single-content section-padding">
+	<div class="container">
+     <button type="button" class="tab-item genric-btn primary-border e-large" id="mBtn" autofocus>개인회원</button>
+     <button type="button" class="tab-item genric-btn primary-border e-large"	id="cBtn">기업회원</button>
+			<div class="row">
+				<div class="col-lg-8">
+						<div class="main-content">
+							<div class="single-content1">
+								<div class="mb-4 d-lg-flex justify-content-between">
+									<div class="job-text">
+									<br><br>
+    <h3 class="list-item">아이디 찾기 방법을 선택해 주세요.</h3>
+           <br>
+  <div class="content-wrap">
+ <div class="item-group">
+                    <div class="search-item">
                  <input type="radio" name="certType" id="dev_search_tel" data-val="1" value="PHONE" checked="checked">
                  <label for="dev_search_tel">연락처로 찾기</label>
-              </div>
-              <div class="search-item search_num">
+      </div>
+      <div class="search-item search_num">
                   <input type="radio" name="certType" id="dev_search_num" data-val="5" value="IDENT">
                   <label for="dev_search_num">사업자등록번호로 찾기</label>
-              </div>
-              <div class="search-item">
+      </div>
+      <div class="search-item">
                   <input type="radio" name="certType" id="dev_search_mail" data-val="2" value="EMAIL">
                   <label for="dev_search_mail">이메일로 찾기</label>
-              </div>
-          </div>
-      </div>
-
-            <!-- 회원정보에 등록된 연락처 -->
-            <div id="dev_certForm1" class="hide">
+   </div><br><br>
+</div>																		
+</div>
+<div class="desc">
+   <!-- 회원정보에 등록된 연락처 -->
+  <div id="dev_certForm1" class="hide">
                 <div class="ui-message white wide">
                     <p class="message-content strong">회원정보에 등록된 연락처로 아이디를 찾을 수 있습니다.</p>
                 </div>
@@ -300,24 +323,46 @@ $(document).ready(function(){
                         <tr class="form-item">
                             <th class="form-table form-title">이름</th>
                             <td class="form-table form-data">
-                                <input type="text" name="certPhoneName" id="userName" title="가입자명" placeholder="가입자명" maxlength="12">
+                                <input type="text" name="certPhoneName" id="userName" class="single-input" title="가입자명" placeholder="가입자명" maxlength="12">
               <span id="nm2Cmt"></span>
                             </td>
 		</tr>
-                        <tr class="form-item">
-                            <th class="form-table form-title">연락처</th>
-                                <td class="phone">
+         <tr class="form-item">
+               <th class="form-table form-title">연락처</th>
+               <td class="phone">
                 <input type="text" name="phone1" id="phone1" maxlength="3" size = "3" required>
          - <input type="text" name="phone2" id="phone2" maxlength="4" size = "4" required> -
-		<input type="text" name="phone3" id="phone3"  maxlength="4" size = "4" required>
+		<input type="text" name="phone3" id="phone3" maxlength="4" size = "4" required>
 		<span id="pn2Cmt" class="cmt"></span>
 		<span id="pn3Cmt" class="cmt"></span>
-                                 </td>
-                        </tr>
-                    </table>
-            </div>
+           </td>
+          </tr>
+</table>
+</div>
 
-  <!-- 이메일 -->
+ <!-- 사업자등록번호 인증 -->
+<div id="dev_certForm5" class="hide">
+  <p class="message-content strong">회원정보에 등록된 사업자번호로 아이디를 찾을 수 있습니다.</p>
+ <table class="find-form">
+   	<tr class="form-item">
+        <th class="form-table form-title">이름</th>
+          <td class="form-table form-data">
+              <input type="text" class="single-input" name="userName" id="userName3" title="가입자명" placeholder="가입자명" maxlength="12">
+              <span id="nm3Cmt"></span>
+          </td>
+    </tr>
+    <tr>
+		<th>사업자등록번호</th>
+		<td>
+			<input type="text" id="firstNum" maxlength="3" size="3" required> -
+			<input type="text" id="midNum" maxlength="2" size = "2" required> -
+			<input type="text" id="endNum" maxlength="5" size = "5" required>
+		</td>
+	</tr>
+</table>							
+ </div>
+
+<!-- 이메일 -->
  <div id="dev_certForm2" class="hide">
           <p class="message-content strong">회원정보에 등록된 이메일로 아이디를 찾을 수 있습니다.</p>
                 <div class="find-to-result">
@@ -325,18 +370,18 @@ $(document).ready(function(){
    	<tr class="form-item">
               <th class="form-table form-title">이름</th>
               <td class="form-table form-data">
-                   <input type="text" name="userName" id="userName2" title="가입자명" placeholder="가입자명" maxlength="12">
+                   <input type="text" name="userName" id="userName2" class="single-input" title="가입자명" placeholder="가입자명" maxlength="12">
               <span id="nm2Cmt"></span>
               </td>
        </tr>
     <tr>
 		<th>이메일</th>
-		<td>
-		<input type="text" id = "email_1" name="email_1" maxlength="30" required>@
-		<input type="text" id = "email_2" name="email_2" maxlength="30" required disabled>
+		<td style="width:300px">
+		<input type="text" id = "email_1" name="email_1" maxlength="30" size = "5" required>@
+		<input type="text" id = "email_2" name="email_2" maxlength="30" size = "5" required disabled>
 		</td>
 		<td>
-		<select id = "email_3" name="email_3">
+		<select id = "email_3" name="email_3" class="single-input" >
 			<option value="1">직접입력</option> 
 			<option value="naver.com" selected>naver.com</option> 
 			<option value="hanmail.net">hanmail.net</option> 
@@ -352,32 +397,28 @@ $(document).ready(function(){
   </table>
 </div>
 </div>
-
-  <!-- 사업자등록번호 인증 -->
-<div id="dev_certForm5" class="hide">
-  <p class="message-content strong">회원정보에 등록된 사업자번호로 아이디를 찾을 수 있습니다.</p>
- <table class="find-form">
-   	<tr class="form-item">
-        <th class="form-table form-title">이름</th>
-          <td class="form-table form-data">
-              <input type="text" name="userName" id="userName3" title="가입자명" placeholder="가입자명" maxlength="12">
-              <span id="nm3Cmt"></span>
-          </td>
-    </tr>
-    <tr>
-		<th>사업자등록번호</th>
-		<td>
-			<input type="text" id="firstNum" maxlength="3" size="3" required> -
-			<input type="text" id="midNum" maxlength="2" size = "2" required> -
-			<input type="text" id="endNum" maxlength="5" size = "5" required>
-		</td>
-	</tr>
-</table>
-</div>
-   <div class="search-buttons">
-          <button type="button" class="btn1" id="nextBtn">다음</button>
-     </div>
-</div>
+<div class="search-buttons">
+	          <button type="button" class="genric-btn info radius" id="nextBtn">다음</button>
+	</div>
+ </div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="col-lg-4">
+						<div class="sidebar mt-5 mt-lg-0">
+							<div class="mb-4">
+							<ul>
+      <li><a href="${pageContext.request.contextPath}/members/id" class="box-sizing genric-btn success medium">아이디 찾기</a></li>
+      <li><a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing genric-btn success-border medium">비밀번호 찾기</a></li>
+                           </ul>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>

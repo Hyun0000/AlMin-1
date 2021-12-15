@@ -58,9 +58,6 @@ input[type=text], input[type=password]{
   line-height: 20px;
   text-decoration: none;
 }
-input:hover{
-	opacity:1;
-}
    /* submit 버튼 */
 .btn1{
         padding: 5px 25px;
