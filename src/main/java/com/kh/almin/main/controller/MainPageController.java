@@ -29,7 +29,7 @@ public class MainPageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RecruitController.class);
 
-	@GetMapping("main")
+	@GetMapping({"main", "/"})
 	public ModelAndView main(ModelAndView mv) throws Exception {
 		List<Recruit> volist = recruitService.recruitList();
 		List<Applicant> avolist = applicantService.getApplicants();

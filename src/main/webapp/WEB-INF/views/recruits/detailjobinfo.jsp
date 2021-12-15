@@ -37,6 +37,7 @@ form{display:inline
 </style>
 </head>
 <body>
+[[${loginInfo.memberId}]]
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 	<!-- Header Area End -->
 	<section class="job-single-content section-padding">
