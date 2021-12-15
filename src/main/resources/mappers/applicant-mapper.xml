@@ -25,7 +25,7 @@
 		RESUME_NO,MEMBER_ID,RESUME_TITLE,JOB_DISTRICT_NO,EDUCATION_NO,CAREERS_NO
 		from searchApplicant
 		<where>
-			<if test='jobDistrictNo != 17 '>
+			<if test='jobDistrictNo != 100 '>
 				and JOB_DISTRICT_NO = #{jobDistrictNo}
 			</if>
 			<if test='educationNo != 0 '>

@@ -30,9 +30,11 @@ public class ApplicantController {
 	private ModelAndView viewApplicants(SearchApplicant searchApplicant, ModelAndView mv) throws Exception {
 		List<Applicant> volist = null;
 		List<Applicant> svolist = null;
+		SearchApplicant alist = searchApplicant;
 		String msg = "";
 		if (searchApplicant.getMemberGender() != null) {
 			svolist = applicantService.searchApplicant(searchApplicant);
+			mv.addObject("alist", alist);
 			if (svolist == null || svolist.size() == 0) {
 				msg = "검색 결과가 없습니다.";
 				volist = applicantService.getApplicants();

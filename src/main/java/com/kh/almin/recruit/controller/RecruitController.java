@@ -46,9 +46,11 @@ public class RecruitController {
 	private ModelAndView viewRecruits(SearchRecruit searchRecruit, ModelAndView mv) throws Exception {
 		List<Recruit> volist = null;
 		List<Recruit> svolist = null;
+		SearchRecruit slist = searchRecruit;
 		String msg = "";
 		if (!ObjectUtils.isEmpty(searchRecruit) && searchRecruit.getRecruitJobDistrict() != 0) {
 			svolist = recruitService.searchRecruit(searchRecruit);
+			mv.addObject("slist", slist);
 			if (svolist == null || svolist.size() == 0) {
 				msg = "검색 결과가 없습니다.";
 				volist = recruitService.recruitList();
