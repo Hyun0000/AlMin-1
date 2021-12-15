@@ -37,7 +37,6 @@ form{display:inline
 </style>
 </head>
 <body>
-[[${loginInfo.memberId}]]
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 	<!-- Header Area End -->
 	<section class="job-single-content section-padding">
@@ -252,6 +251,7 @@ form{display:inline
 	<section id="comments_container">
 		<hr style="border-bottom: 1px solid #707070">
 		<h1 style="padding-left: 40px;">Review</h1>
+		[[${loginInfo.memberId}]]
 		<ul id="comments_box"></ul>
 		<div id="comments_box_pageLink"></div>
 	</section>

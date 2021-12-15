@@ -26,16 +26,21 @@ input[type=number] {
     padding-left: 10px;
     /* text-align: center; */
     font-size: 1rem;
+    border: 5px solid royalblue;
     border-radius: 10px;
+}
+
+input[type=number]:hover {
+	background: #f9f9f9;;
 }
 
 /* 년 & 월을 입력하는 <button> */
 #date_input_btn{
-    background-color: white;
+/*     background-color: white;
     color: royalblue;
     border: 5px solid royalblue;
     width: 100px;
-    height: 35px;
+    height: 35px; */
 }
 
 /* 년 & 월을 입력하는 <button> 눌렀을 때 */
@@ -59,6 +64,8 @@ input[type=number] {
 /* 년 & 월 <input> 옆의 텍스트 */
 #top_box_right_innerBox .dateTypeSpan{
     margin-right: 20px;
+   	/* border: 1px solid black;
+   	border-radius: 20px; */
 }
 
 /* 날짜 입력 <div> 박스 전체 */
@@ -136,10 +143,12 @@ input[type=number] {
 
 #secondChartBox #moneyTabel .firstTd {
     width: 30%;
+    text-align: center;
 }
 
 #secondChartBox #moneyTabel .secondTd {
     width: 70%;
+    text-align: center;
 }
 
 #secondChartBox table td {
@@ -155,6 +164,7 @@ input[type=number] {
     background-color: royalblue;
     color : white;
     font-weight: bolder;
+    text-align: center;
 }
 
 /* 이미지 설정 */

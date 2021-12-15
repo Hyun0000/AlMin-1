@@ -104,6 +104,7 @@
     margin-top: 30px;
     /* border-top: 3px solid #707070; */
     border-bottom: 3px solid #707070;
+    /* background: #f9f9f9; */
 }
 
 /* 작성자, 날짜, 버튼 등이 들어가는 상단 <div> 전체 */
@@ -111,7 +112,8 @@
 	border-top: 3px solid #707070;
     /* border-bottom: 5px solid royalblue; */
     border-bottom: 3px solid #707070;
-    background-color: #cfcfcf;
+    /* background-color: #cfcfcf; */
+    /* background: #f9f9f9; */
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -161,6 +163,7 @@
     /* box-sizing: border-box; */
     padding: 10px 10px;
     padding-left: 40px;
+    /* background: #f9f9f9; */
 }
 
 /* 하단 전체 <div> */
@@ -185,6 +188,7 @@
     justify-content: space-around;
     font-weight: bolder;
     color: black;
+    /* background: #f9f9f9; */
 }
 
 /* 하단 <div> 중 키워드가 들어가는 우측 <div> */
@@ -197,6 +201,7 @@
     padding: 5px;
     display: flex;
 	flex-direction: column;
+	/* background: #f9f9f9; */
 }
 
 /* 키워드를 감싸는 <ul> */
@@ -209,7 +214,7 @@
 
 /* 각 키워드 <li> */
 .right_comments_box_ul li {
-    border: 3px solid black;
+    border: 1px solid #757575;
     margin: 3px 3px;
     padding: 5px;
     font-size: .83em;

@@ -1,7 +1,8 @@
-body {
-    margin: 50px 0px;
-    font-size: 14px;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+.d-toggle {display: none;} form{display:inline}
+
+/* 캘린더 전체 section */
+#calendar_section {
+	margin-bottom: 80px;
 }
 
 /* 최상단(제목, 일정 추가) */
@@ -9,8 +10,8 @@ body {
     border-bottom: 5px solid royalblue;
     padding-bottom: 15px;
     margin: 0 50px;
-    margin-top: 20px;
-    margin-bottom: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,7 +124,7 @@ body {
 } */
 
 /* 경력추가 테이블 전체 */
-#careerInputTable {
+#calendar_section #careerInputTable {
     /* border: 5px solid royalblue; */
 	width: 300px;
     /* height: 250px; */
@@ -135,15 +136,16 @@ body {
 }
 
 /* 경력추가 테이블 전체 <td> */
-#careerInputTable td {
+#calendar_section #careerInputTable td {
     text-align: center;
     box-sizing: border-box;
-    border: 2px solid royalblue;
+    /* border: 2px solid royalblue; */
 }
 
 /* 경력추가 테이블 중 왼쪽 열 */
-.careerInputFirstTd {
-    border-right: 2px solid royalblue;
+#calendar_section .careerInputFirstTd {
+    /* border-right: 2px solid royalblue; */
+    /* border-bottom: 2px solid #757575; */
     text-align: center;
     padding: 20px 10px;
     width: 30%;
@@ -151,7 +153,8 @@ body {
 }
 
 /* 경력추가 테이블 중 오른쪽 열 */
-.careerInputSecondTd {
+#calendar_section .careerInputSecondTd {
+	/* border-bottom: 2px solid #757575; */
     padding: 10px;
     width: 80%;
     text-align: center;
@@ -159,25 +162,25 @@ body {
 }
 
 /* 근무 직종 선택 <select> */
-#job_type {
+#calendar_section #job_type {
     width: 100%;
     height: 25px;
     text-align: center;
     box-sizing: border-box;
-    border: 2px solid royalblue;
+    /* border: 2px solid royalblue; */
 }
 
 /* 근무 기간 선택 <select> */
-#job_period{
+#calendar_section #job_period{
     width: 100%;
     height: 25px;
     text-align: center;
     box-sizing: border-box;
-    border: 2px solid royalblue;
+    /* border: 2px solid royalblue; */
 }
 
 /* 근무 내용 <input> */
-#careerTitle {
+#calendar_section #careerTitle {
     width: 100%;
     height: 25px;
     box-sizing: border-box;
@@ -185,20 +188,41 @@ body {
 }
 
 /* 근무 내용 <input> */
-#careerTitle:focus {
+#calendar_section #careerTitle:focus {
     outline: none;
 }
 
 /* 경력 버튼 담는 <td> */
-#insertBtnTd {
-	border-top: 5px solid royalblue;
+#calendar_section #insertBtnTd {
+	/* border-top: 5px solid royalblue; */
 	padding: 10px 10px;
 }
 
 /* 경력 추가 버튼 */
-#career_insert_btn{
-	background-color: white;
+#calendar_section #career_insert_btn{
+/* 	background-color: white;
 	border: 5px solid royalblue;
 	padding: 5px 10px;
-	border-radius: 20px;
+	border-radius: 20px; */
+}
+
+.list li, li.option {
+	text-align: center;
+}
+
+li.option {
+	text-align: center;
+}
+
+.list .option {
+	text-align: center;
+}
+
+#job_type option {
+	text-align: center;
+}
+
+.nice-select {
+	text-align: center;
+	margin: 0 auto;
 }

@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>MyCalender</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/main.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/calender.css"/>">
@@ -12,24 +7,41 @@
 <link rel="stylesheet" href="<c:url value="/resources/career/css/smallcalendar.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/mdtimepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/career/css/chart.css"/>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="shortcut icon" href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyCalender</title>
+<style type="text/css">
+</style>
 </head>
 <body>
+<c:import url="/WEB-INF/views/template/header.jsp" />
     <section id="calender_top">
         <!-- <div> -->
-            <div id="top_title"></div>
+            <div id="top_title" style="color:black;"></div>
             <div id="top_btn">
-                <!-- <button type="button" class="insert_btn_class" id="insert_evnet_btn">일정추가</button> -->
             </div>
         <!-- </div> -->
     </section>
 <!-- ================================================== 모달창 ================================================== -->
 <div id="ModalBg">
+    <!-- <div id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
     <div id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <!-- <div class="modal-dialog" style="margin-top: 0; padding: 10px;"> -->
+        <div style="margin-top: 0; padding: 10px;">
         	<!-- <form> -->
-	            <div class="modal-content">
+	            <!-- <div class="modal-content" style="border: none;"> -->
+	            <div style="border: none;">
 	            	<!-- 색깔 및 버튼-->
-	                <div class="modal-header">
+	                <div class="modal-header" style="padding: 10px;">
 	                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 1.5rem; font-weight: bolder;"></h5>
 	                    <div id="insertBtnBox">
 	                        <div>
@@ -48,18 +60,19 @@
 	                        </div>
 	                    </div>
 	                </div>
-	                <div class="modal-body" style="padding: 20px;">
+	                <!-- <div class="modal-body" style="padding: 20px;"> -->
+	                <div style="padding: 10px; color: black;" class="modalPopBody">
 	                        <!-- 제목 -->
 	                        <div class="mb-3" id="insertTitleBox">
 	                            <div id="insertTitleDiv">
 	                            	<div><label for="message-text" class="col-form-label" style="text-align: left;">제목</label></div>
 	                            	<div id="work_time_money_box">
 	                            		<label class="work_time_money_label" for="money_input" id="money_label_id">시급
-	                            			<input id="money_input" class="work_time_money_input" type="text" placeholder="숫자만입력">
+	                            			<input id="money_input" class="work_time_money_input" type="text" placeholder="숫자만">
 	                            		</label>
 	                            		
 	                            		<label class="work_time_money_label" for="time_input" id="time_label_id">일 근무시간
-	                            			<input id="time_input" class="work_time_money_input" type="text" placeholder="숫자만입력">
+	                            			<input id="time_input" class="work_time_money_input" type="text" placeholder="숫자만">
 	                            		</label>
 	                            	</div>
 	                            </div>
@@ -102,7 +115,7 @@
 	                            </table>
 	                        </div>
 	             		</div>
-	                <div class="modal-footer">
+	                <div class="modal-footer" style="padding: 10px;">
 	                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
 	                    <button type="button" class="btn btn-primary" id="calUpdateBtn">수정</button>
 	                    <button type="button" class="btn btn-primary" id="calSubmitBtn">등록</button>
@@ -146,7 +159,7 @@
     </div>
 </div>
 <!-- ================================================== 모달창 ================================================== -->
-<section>
+<section id="calendar_section">
 	<div id='calendar-wrap'>
 	    <div id="side_calendar">
 	        <div id="btn_box">
@@ -161,13 +174,16 @@
 				<!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 -->
 	 			<div id="careerInputTable_box">
 				    <table id="careerInputTable" style="display: none;">
-				        <tr>
-				            <td class="careerInputFirstTd">
+				    
+<!-- 				        <tr>
+				            <td class="careerInputFirstTd" style="padding: 5px 5px; background-color: #f9f9f9;">
 				                <label for="job_type">업무직종</label>
 				            </td>
-				
-				            <td class="careerInputSecondTd">
-				                <select name="job_type" id="job_type">
+			            </tr> -->
+			            
+						<tr>
+				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9; text-align: center;">
+				                <select name="job_type" id="job_type" style="text-align: center;">
 				                    <option value="job_type_no">-------업무 직종-------</option>
 				                    <option value="1">외식 / 음료</option>
 				                    <option value="2">유통 / 판매</option>
@@ -185,12 +201,14 @@
 				            </td>
 				        </tr>
 				
-				        <tr>
-				            <td class="careerInputFirstTd">
+<!-- 				        <tr>
+				            <td class="careerInputFirstTd" style="padding: 5px 5px; background-color: #f9f9f9;">
 				                <label for="job_period">기간</label>
 				            </td>
-				
-				            <td class="careerInputSecondTd">
+						</tr> -->
+						
+						<tr>
+				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;">
 				                <select name="job_period" id="job_period">
 				                    <option value="job_period_no">-------기간-------</option>
 				                    <option value="1">1주일</option>
@@ -204,18 +222,20 @@
 				        </tr>
 				
 				        <tr>
-				            <td class="careerInputFirstTd">
+				            <td class="careerInputFirstTd" style="padding: 5px 5px; background-color: #f9f9f9;">
 				                <label for="careerTitle">담당업무</label>
 				            </td>
-				
-				            <td class="careerInputSecondTd">
+						</tr>
+						
+						<tr>
+				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;">
 				                <input type="text" id="careerTitle" placeholder="15자 이내 입력">
 				            </td>
 				        </tr>
 				        
 			        	<tr>
-			        		<td colspan="2" id="insertBtnTd">
-			        			<button id="career_insert_btn">경력추가</button>
+			        		<td colspan="2" id="insertBtnTd" style="padding: 5px 5px; background-color: #f9f9f9;">
+			        			<button id="career_insert_btn" class="template-btn btn0">경력추가</button>
 			        		</td>
 			        	</tr>
 				    </table>
@@ -233,7 +253,7 @@
 		        <div id="top_box_right_innerBox">
 		            <input id="yearInput" type="number" min="0000" max="9999"><span class="dateTypeSpan">년</span>
 		            <input id="monthInput" type="number" min="1" max="12"><span class="dateTypeSpan">월</span>
-		            <button type="button" id="date_input_btn">조회</button>
+		            <button type="button" id="date_input_btn" class="template-btn btn0">조회</button>
 		        </div>
 		    </div>
 		    <div id="allChartBox">
@@ -263,6 +283,7 @@
 		</div>
 	</div>
 </section> 
+<c:import url="/WEB-INF/views/template/footer.jsp" />
 <!-- ================================================== chart.js ================================================== -->
 <script>
 	let userId = "sy111k2";

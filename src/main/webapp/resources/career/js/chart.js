@@ -146,7 +146,7 @@ function afterWorkChart() {
 				
 				let firstHTdEle = document.createElement('td');
 				firstHTdEle.setAttribute('class', 'firstTd tableColName');
-				firstHTdEle.innerText = "매장 시급";
+				firstHTdEle.innerText = "매장";
 				trHEle.appendChild(firstHTdEle);
 				
 				let secondHTdEle = document.createElement('td');
