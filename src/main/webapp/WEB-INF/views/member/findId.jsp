@@ -29,7 +29,7 @@ border: none;
   line-height: 20px;
   text-decoration: none;
 }
-.tab-item{
+.primary-border{
 width: 300px;
 }
 a {

@@ -13,7 +13,7 @@
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/assets/css/member.css'/>">
 
 <!-- 네이버 로그인 -->
 <%@ page import="java.net.URLEncoder" %>
@@ -65,13 +65,43 @@
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<section class="container">
+<section class="pricing-table section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-top text-center">
 <h2>알바의 민족<br>회원가입을 환영합니다.</h2>
-<div class=" section-padding2">
-<div class="personal-member section-padding">
-<h3 class="item">이력서를 등록하고<br>알바를 찾아보세요</h3>
-<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png" class="item" alt="개인회원 캐릭터">
-<button class="btn1 item" type="button" id="memberJoin">개인회원가입</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+    <div class="pricing-box section-padding3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="single-box1 text-center mb-4 mb-md-0">
+                    <h3 class="item btngroup">이력서를 등록하고<br>알바를 찾아보세요</h3>
+<img src="${pageContext.request.contextPath}/resources/assets/images/regist_member.png" class="item btngroup" alt="개인회원 캐릭터">
+<div class="btngroup"> 
+<button class="template-btn" type="button" id="memberJoin">개인회원가입</button>
+</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="single-box2 text-center" style="background: #4cd3e3">
+                       <h3 class="item btngroup">공고를 등록하고<br>인재를 찾아보세요</h3>
+<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" class="item btngroup" alt="기업회원 캐릭터">
+<div class="btngroup">
+<button class="template-btn" type="button" id="companyJoin">기업회원가입</button>
+</div>
+<p class="notice item">※ 알바를 채용하시려는 개인사업자, 사업체직원 포함</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
 <!-- SNS 로그인
 <div class="snsBx item">
 			<ul>
@@ -81,17 +111,6 @@
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
 			</ul>
 </div>  -->
-</div>
-<div class="company-member section-padding">
-<h3 class="item">공고를 등록하고<br>인재를 찾아보세요</h3>
-<img src="${pageContext.request.contextPath}/resources/assets/images/regist_company.png" class="item" alt="기업회원 캐릭터">
-<button class="btn1 item" type="button" id="companyJoin">기업회원가입</button>
-<p class="notice item">※ 알바를 채용하시려는 개인사업자, 사업체직원 포함</p>
-</div>
-
-</div>
-<div></div>
-</section>
 <!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
 </body>
