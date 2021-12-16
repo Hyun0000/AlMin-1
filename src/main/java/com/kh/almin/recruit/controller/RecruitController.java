@@ -210,7 +210,7 @@ public class RecruitController {
 		return "redirect:recruits";
 	}
 
-	@GetMapping("deleteResume")
+	@GetMapping("deleteRecruit")
 	public String deleteRecruit(@RequestParam(value = "msg", required = false) String msg, int recruitNo, Model m) {
 		int result = -1;
 		try {

@@ -67,6 +67,7 @@
 				</c:otherwise>
 						</c:choose>
 					</button>
+					<button id="print" class="template-btn" onclick="window.print()">인쇄하기</button>
 				</div>
 			</div>
 		</div>
