@@ -142,6 +142,15 @@ button {
 
 	<!-- Javascript -->
 	<script>
+		let id = "${loginInfo.memberId}";
+		console.log(id);
+		console.log(typeof id);
+		if(id != "") {
+			alert("개인회원은 접근할 수 없습니다.");
+			history.back();
+		}
+	</script>
+	<script>
 		function myFunction(targetEle) {
 			console.log(targetEle);
 			var $togggleEle = $(targetEle).next();
