@@ -29,6 +29,7 @@
 th {
 width: 150px;
 }
+
 </style>
 </head>
 <body>
@@ -55,12 +56,13 @@ width: 150px;
                         </div>
                         <div class="single-content2 py-4">
                         <h1>공고등록</h1>
-          <form action="addrecruit" method="get">
                             <p>양식에 맞게 채용공고를 등록해주세요.</p>
                         </div>
+                          <form action="addrecruit" method="get">
                         <div class="single-content3 py-4">
+                       
 			<h2>제목</h2>
-				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." required>
+				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." class="single-input" required>
                         </div>
                         <div class="single-content4 py-4">
                             <h2>모집조건</h2>
@@ -74,9 +76,9 @@ width: 150px;
 				</tr>
 				<tr>
 					<th>연령</th>
-					<td><input type="number" name="recruitStartAge"
+					<td><input type="number" name="recruitStartAge" class="single-input"
 						placeholder="최소연령" required>~<input type="number"
-						name="recruitEndAge" placeholder="최대연령" required></td>
+						name="recruitEndAge" class="single-input" placeholder="최대연령" required></td>
 				</tr>
 				<tr>
 					<th>학력</th>
@@ -91,7 +93,7 @@ width: 150px;
 				</tr>
 				<tr>
 					<th>모집인원</th>
-					<td><input type="number" name="recruitPerson" placeholder="00" required>명</td>
+					<td><input type="number" name="recruitPerson" class="single-input" placeholder="00" required>명</td>
 				</tr>
 				<tr>
 					<th>대상</th>
@@ -117,7 +119,7 @@ width: 150px;
 			<table>
 				<tr>
 					<th>급여</th>
-					<td><input type="number" name="recruitMoney" placeholder="급여 입력" required></td>
+					<td><input type="number" name="recruitMoney" class="single-input" placeholder="급여 입력" required></td>
 				</tr>
 				<tr>
 					<th>근무기간</th>
@@ -132,12 +134,12 @@ width: 150px;
 				</tr>
 				<tr>
 					<th>근무요일</th>
-					<td><input type="text" name="recruitDay" placeholder="주중" required></td>
+					<td><input type="text" name="recruitDay" placeholder="주중" class="single-input" required></td>
 					<td>**주중, 주 #일, 월~금, 주말(토,일) 등 형식으로 작성해주세요.</td>
 				</tr>
 				<tr>
 					<th>근무시간</th>
-					<td><input type="text" name="recruitTime" placeholder="시간협의" required></td>
+					<td><input type="text" name="recruitTime" class="single-input" placeholder="시간협의" required></td>
 					<td>**시간협의, ##:##~##:##(휴게시간 #분) 등 형식으로 작성해주세요.</td>
 				</tr>
 				<tr>
@@ -182,7 +184,7 @@ width: 150px;
         <option value="17">전국</option>
         <option value="18">서울</option>
     </select><br>
-			<input type="text" name="recruitAddress" placeholder="상세 주소 입력해주세요.">
+			<input type="text" name="recruitAddress" class="single-input" placeholder="상세 주소 입력해주세요.">
                         </div>
                         <div class="single-content7 py-4">
                             <h2>상세모집요강</h2>
@@ -190,16 +192,18 @@ width: 150px;
 				<textarea id="ckeditor" name="recruitContent"></textarea>
 			</div>
 			<hr>
-			<strong>브랜드</strong> <br> <input type="checkbox"
-				name="recruitJobBranch" value="Y">Y <input type="checkbox"
+			<strong>브랜드</strong> <br> <input type="radio"
+				name="recruitJobBranch" value="Y">Y <input type="radio"
 				name="recruitJobBranch" value="N">N <br> <strong>공개여부</strong>
-			<br> <input type="checkbox" name="recruitPub" value="Y">공개
-			<input type="checkbox" name="recruitPub" value="N">비공개 <br>
+			<br> <input type="radio" name="recruitPub" value="Y">공개
+			<input type="radio" name="recruitPub" value="N">비공개 <br>
 			<button type="submit" id="submit" class="template-btn">등록</button>
-		</form>
+		
                         </div>
+                         </form>
                     </div>
                 </div>
+               
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <div class="single-item mb-4">

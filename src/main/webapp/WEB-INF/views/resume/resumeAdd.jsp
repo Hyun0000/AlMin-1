@@ -24,6 +24,9 @@
 	
 	color:gray;
 	}
+	.single-input{
+		width:500px;
+	}
 </Style>
 </head>
 <body>
@@ -70,11 +73,11 @@
    	 <br>
         <div id="resumeTitle">
             <strong>이력서 제목</strong><br>
-            <input type="text" name="resumeTitle" placeholder="제목을 입력해주세요."><br>
+            <input type="text" name="resumeTitle" class="single-input" placeholder="제목을 입력해주세요." maxlength="12"><br>
         </div>
         <div id="resumePhone">
             <strong>전화번호</strong><br>
-            <input type="text" name="resumePhone" placeholder="연락받으실 연락처 입력해주세요.">
+            <input type="text" name="resumePhone" class="single-input" placeholder="연락받으실 연락처 입력해주세요.">
         </div>
         <strong>지역</strong><br>
         <div id="jobDistrictNo" class="default-select">
@@ -141,11 +144,11 @@
         </div>
         <br>
         	<br>
-            <input type="text" name=jobCareers placeholder="담당했던 업무 입력해주세요.">
+            <input type="text" name="jobCareers" class="single-input" placeholder="담당했던 업무 입력해주세요.">
             <br>
         <div id="resumePublicYn">
-            <input type="checkbox" name="resumePublicYn" value="Y">공개
-            <input type="checkbox" name="resumePublicYn" value="N">비공개
+            <input type="radio" name="resumePublicYn" value="Y">공개
+            <input type="radio" name="resumePublicYn" value="N">비공개
         </div>
         <br>
         <button>등록</button>
