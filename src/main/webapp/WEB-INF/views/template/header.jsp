@@ -43,41 +43,35 @@ session.setAttribute("state", state);
 					<span></span> <span></span> <span></span>
 				</div>
 				<div class="main-menu">
+					<ul id="mainbar">
+						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
+						<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
+					<li><a href="<%=request.getContextPath()%>/members/id" id="findId">아이디/비밀번호 찾기</a></li>
 				<c:choose>
 					<c:when test="${empty sessionScope.loginInfo.memberId and empty sessionScope.loginInfo.companyId }">
 						<!-- 로그인 전 노출 -->
-						<ul id="logout-state">
 							<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
 								<a href="${pageContext.request.contextPath}/members/register"
 								class="template-btn">회원가입</a></li>
-						</ul>
 					</c:when>
 					<c:otherwise>
 				<c:choose>
 					<c:when test="${not empty sessionScope.loginInfo.memberId}">
 						<!-- 로그인 후 노출 -->
 						<!-- 개인회원 노출 -->
-						<ul id="login-state">
 							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-						</ul>
 					</c:when>
 					<c:otherwise>
 						<!-- 기업회원 노출 TODO: 기업서비스-->
-						<ul id="company-state">
 							<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-						</ul>
-					
+
 					</c:otherwise>
    				</c:choose>
 					
 					</c:otherwise>
    				</c:choose>
-					<ul>
-						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
-						<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
-					<li><a href="<%=request.getContextPath()%>/members/id" id="findId">아이디/비밀번호 찾기</a></li>
 					</ul>
 				</div>
 			</div>

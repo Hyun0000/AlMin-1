@@ -33,3 +33,7 @@ body {
 카카오 로그인 -->#logout-state {
 	z-index: 200;
 }
+
+#mainbar {
+	margin-top:-15px;
+}
