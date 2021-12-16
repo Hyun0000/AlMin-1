@@ -82,6 +82,11 @@ public class MemberService {
 		Integer result = memberDao.idChk(member);
 		return result;
 	}
+	public int idChkCompany(Company company) throws Exception{
+		logger.info("기업회원 아이디 중복체크 진입");
+		Integer result = memberDao.idChkCompany(company);
+		return result;
+	}
 	public Member selectMember(Member member) throws Exception{
 		logger.info("개인회원 로그인-아디비번 동시체크 진입");
 		Member result = memberDao.selectMember(member);

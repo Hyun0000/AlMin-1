@@ -86,9 +86,9 @@
 					}
 						$.ajax({
 							type : 'post',
-							url : '${pageContext.request.contextPath}/members/idCheck',
+							url : '${pageContext.request.contextPath}/companies/idCheck',
 							data : {
-								userId : userId
+								companyId : userId
 							},
 							dataType : 'text',
 							success : function(result) {
@@ -186,9 +186,8 @@
 							  ]
 							}
 				
-				
+				var html = "";
 				$.ajax({
-					
 					url: "http://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=vUM20otkgSpGnI%2BSs%2BVr3%2FnILMSGkBIYZ2Nang%2FeMSgOAjaxLk5CJRXBRQSQm7atRnNOjJwT4yc2GMZRa16%2Bqg%3D%3D",
 					type: "post",
 					 // data : 서버(컨트롤러)로 보내는 데이터.
@@ -204,7 +203,21 @@
 							} else{
 								companychk = true;
 								alert("사업자번호 확인이 완료되었습니다.")
+									html+="사업자번호 인증 완료";
+								$("#firstNum").attr("readonly",true);
+								$("#midNum").attr("readonly",true);
+								$("#endNum").attr("readonly",true);
+								$("#firstNum").css({
+									"background-color":"#ddd"
+								});
+								$("#midNum").css({
+									"background-color":"#ddd"
+								});
+								$("#endNum").css({
+									"background-color":"#ddd"
+								});
 							}
+								$("#cnCmt").html(html);
 						}else{
 							alert("접근 실패했습니다.");
 							
@@ -260,7 +273,8 @@
 				$("#bossName").focus();
 				return false;
 			}
-			if(companyChk == false){
+			
+			if(cnCmt == ""){
 				alert("사업자 인증을 해주세요.");
 				$("#firstNum").focus();
 				return false;

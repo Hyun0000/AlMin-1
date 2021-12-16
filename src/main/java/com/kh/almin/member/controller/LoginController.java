@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
+import com.kh.almin.member.model.vo.SsInfo;
 
 @Controller
 @RequestMapping("/logins")
@@ -32,7 +33,7 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 	@Inject //암호화 기능을 사용할수 있게 BCryptPasswordEncoder를 추가
 	BCryptPasswordEncoder pwdEncoder;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	//로그인: id, pw 조회 -> 같으면 login 성공 (where절에 id, pw 넣어서)
 	@PostMapping("/members/{memberId}")
 	@ResponseBody // ajax에 쓰이는 어노테이션. 얘가 없으면 result가 view페이지를 찾음.
@@ -51,8 +52,13 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 			if(isPwdMatch == true) {
 				logger.info("로그인 성공");
 				result= "1";
-				 session.setAttribute("loginInfo", ms);
-				 logger.info((String) session.getAttribute("loginInfo"));
+				// session.setAttribute("loginInfo", ms);
+				 //System.out.println((SsInfo) session.getAttribute("loginInfo"));
+				 SsInfo ssinfo = new SsInfo();
+				 ssinfo.setMemberId(ms.getMemberId());
+				 ssinfo.setSessionType(ms.getMemberType());
+				 session.setAttribute("loginInfo", ssinfo);
+				 System.out.println("[[[ loginInfo ]]] " +(SsInfo) session.getAttribute("loginInfo"));
 				// model.addAttribute("loginInfo",ms); 이런 방식도 있다.
 			} else {
 				logger.info("로그인 실패");
@@ -67,7 +73,9 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 		String result = "0";
 		logger.info("companyId: "+companyId);
 		logger.info(c.toString());
+		
 		Company ms= memberService.loginCompany(c);
+		
 		logger.info(ms.toString());
 		if(ms.getCompanyId() == null) {
 			return result;
@@ -77,8 +85,12 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 			if(isPwdMatch == true) {
 				logger.info("로그인 성공");
 				result= "1";
-				 session.setAttribute("loginInfo", ms);
-				 logger.info((String) session.getAttribute("loginInfo"));
+				//session.setAttribute("loginInfo", ms);
+				 SsInfo ssinfo = new SsInfo();
+				 ssinfo.setCompanyId(ms.getCompanyId());
+				 ssinfo.setSessionType(ms.getCompanyType());
+				 session.setAttribute("loginInfo", ssinfo);
+				 System.out.println("[[[ loginInfo ]]] " +(SsInfo) session.getAttribute("loginInfo"));
 				// model.addAttribute("loginInfo",ms); 이런 방식도 있다.
 			} else {
 				logger.info("로그인 실패");

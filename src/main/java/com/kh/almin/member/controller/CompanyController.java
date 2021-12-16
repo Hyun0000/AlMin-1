@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.almin.member.model.service.MemberService;
@@ -43,6 +44,14 @@ public class CompanyController {
 		company.setCompanyPwd(pwd);
 		memberService.insertCompany(company);
 		return "redirect:";
+	}
+	
+	@PostMapping("/idCheck")//회원가입 - id 중복체크
+	@ResponseBody
+	private int idCheck(Company c) throws Exception {
+		int result = memberService.idChkCompany(c);
+		/* 만약, DB에 ID가 존재하면 1을, 존재하지 않으면 0을 return 할 것임 */
+		return result;
 	}
 	
 	@PostMapping("/id/tel") //기업 아이디찾기(연락처)

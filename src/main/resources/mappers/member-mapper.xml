@@ -101,12 +101,12 @@
 	<!-- 로그인(아이디 비번 동시 체크) -->
     <!-- password는 암호화로 인해 주석처리 -->
 	<select id="loginMember" resultMap="MemberResultMap" parameterType="String">
-		SELECT MEMBER_ID , MEMBER_PW FROM MEMBER
+		SELECT MEMBER_ID , MEMBER_PW, MEMBER_TYPE FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 		 <!--  AND MEMBER_PW = #{memberPw} -->
 	</select>
 	<select id="loginCompany" resultMap="CompanyResultMap" parameterType="String">
-		SELECT COMPANY_ID , COMPANY_PW FROM COMPANY
+		SELECT COMPANY_ID , COMPANY_PW, COMPANY_TYPE FROM COMPANY
 		WHERE COMPANY_ID = #{companyId}
 		 <!--  AND MEMBER_PW = #{memberPw} -->
 	</select>
@@ -115,6 +115,10 @@
 	<select id="idChk" resultType="Integer" parameterType="String">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE TRIM(MEMBER_ID) = #{memberId}
+	</select>
+	<select id="idChkCompany" resultType="Integer" parameterType="String">
+		SELECT COUNT(*) FROM COMPANY
+		WHERE TRIM(COMPANY_ID) = #{companyId}
 	</select>
     
 	

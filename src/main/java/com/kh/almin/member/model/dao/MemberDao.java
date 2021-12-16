@@ -45,7 +45,7 @@ public class MemberDao {
 	// 기업회원 로그인 - id, pw 동시체크
 	public Company loginCompany(Company company) throws Exception{
 		logger.info("Dao-selectCompany 진입");
-		Company result = sqlSession.selectOne("Company.loginCompany", company.getCompanyId());
+		Company result = sqlSession.selectOne("Member.loginCompany", company.getCompanyId());
 		logger.info("id: "+company.getCompanyId()+" result: "+result);
 		return result;
 	}
@@ -72,6 +72,14 @@ public class MemberDao {
 		logger.info("Dao-idChk 진입");
 		Integer result = sqlSession.selectOne("Member.idChk", member.getMemberId());
 		logger.info("id: "+member.getMemberId()+" result: "+result);
+		// 입력된 아이디가 DB에 존재시 1 없으면 0
+		return result;
+	}
+	//개인회원 ID 중복체크
+	public int idChkCompany(Company company) throws Exception{
+		logger.info("Dao-idChk 진입");
+		Integer result = sqlSession.selectOne("Member.idChkCompany", company.getCompanyId());
+		logger.info("id: "+company.getCompanyId()+" result: "+result);
 		// 입력된 아이디가 DB에 존재시 1 없으면 0
 		return result;
 	}

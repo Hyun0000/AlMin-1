@@ -44,7 +44,7 @@ session.setAttribute("state", state);
 				</div>
 				<div class="main-menu">
 				<c:choose>
-					<c:when test="${empty sessionScope.loginInfo.memberId}">
+					<c:when test="${empty sessionScope.loginInfo.memberId and empty sessionScope.loginInfo.companyId }">
 						<!-- 로그인 전 노출 -->
 						<ul id="logout-state">
 							<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
@@ -53,11 +53,25 @@ session.setAttribute("state", state);
 						</ul>
 					</c:when>
 					<c:otherwise>
+				<c:choose>
+					<c:when test="${not empty sessionScope.loginInfo.memberId}">
 						<!-- 로그인 후 노출 -->
+						<!-- 개인회원 노출 -->
 						<ul id="login-state">
 							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
 						</ul>
+					</c:when>
+					<c:otherwise>
+						<!-- 기업회원 노출 TODO: 기업서비스-->
+						<ul id="company-state">
+							<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
+							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
+						</ul>
+					
+					</c:otherwise>
+   				</c:choose>
+					
 					</c:otherwise>
    				</c:choose>
 					<ul>
@@ -226,15 +240,18 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberPw = $("#memberPw").val();
 	
 	var saveIdCheck = $("#lb_idSave:checked").val();//TODO
-	var json = {'memberId':  $("#memberId").val(),
-			'memberPw': $("#memberPw").val()};
 	var url="<%=request.getContextPath()%>/logins";
 	console.log("memberId: "+memberId+", memberPw: "+memberPw+" chk: "+chk);
 	
+	var json = "";
 	if(chk=="company"){
 		url+="/companies/"+memberId;
+		json = {'companyId':  $("#memberId").val(),
+				'companyPwd': $("#memberPw").val()};
 	}else if(chk=="member"){
 		url+="/members/"+memberId;
+		json = {'memberId':  $("#memberId").val(),
+				'memberPw': $("#memberPw").val()};
 	}
 	
 	$.ajax({

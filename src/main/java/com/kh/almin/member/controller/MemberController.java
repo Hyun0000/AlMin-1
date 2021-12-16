@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.almin.member.model.service.MailSendService;
 import com.kh.almin.member.model.service.MemberService;
 import com.kh.almin.member.model.vo.Member;
+import com.kh.almin.member.model.vo.SsInfo;
 
 @Controller
 @RequestMapping("/members") // 개인회원가입, 아이디찾기, 비밀번호찾기
@@ -173,7 +174,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		String inputPass = member.getMemberPw();
 		String pwd = pwdEncoder.encode(inputPass);
 		member.setMemberPw(pwd);
-		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
 		memberService.updatePwMember(member);
 //		return "redirect:/";
 		return true;
@@ -187,7 +188,7 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		logger.info("member: "+member.toString());
 		
 		String inputPass = member.getMemberPw();
-		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
 		Member ms= memberService.selectMember(member);
 		logger.info(ms.toString());
 		if(ms.getMemberId() == null) {
@@ -219,7 +220,7 @@ logger.info("member: "+member.toString());
 		//String pwd = pwdEncoder.encode(inputPass);
 		//logger.info("pwd: "+pwd);
 		//member.setMemberPw(pwd);
-		member.setMemberId(((Member)session.getAttribute("loginInfo")).getMemberId());
+		member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
 		Member ms= memberService.selectMember(member);
 		logger.info(ms.toString());
 		if(ms.getMemberId() == null) {
@@ -240,7 +241,8 @@ logger.info("member: "+member.toString());
 	
 	@GetMapping("/mypage") //개인 회원정보 메인(조회)//@RequestParam String userId
 	private ModelAndView selectMembers(HttpSession session) throws Exception {
-		String userId = ((Member)session.getAttribute("loginInfo")).getMemberId();
+		System.out.println("마이페이지");
+		String userId = ((SsInfo)session.getAttribute("loginInfo")).getMemberId();
 		logger.info("userId: "+userId);
 		Member vo = new Member();
 		vo.setMemberId(userId);
