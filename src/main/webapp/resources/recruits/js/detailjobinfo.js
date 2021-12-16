@@ -65,6 +65,11 @@ let pageLinkDivEle = document.getElementById('comments_box_pageLink');
 // 유저가 현재 선택한 페이지
 let userSelectPage = 0;
 
+// 공고 지원자 보기 버튼 display
+if(loginCompId === recruitCompId) {
+	document.getElementById('showRecruiter').style.display = 'inline-block';
+}
+
 window.onload = function() {
 // 1.
 // ========================================= page load 후 전체 후기 조회(select) ===============================================

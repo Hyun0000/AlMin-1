@@ -189,7 +189,7 @@ form{display:inline
 			<hr>
 			<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div class="btninline">
-			<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
+			<button id="showRecruiter" class="template-btn" style="display: none;" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
 			<form action="recruitgo" method="post">
 				<!-- session 이용 필요 -->
 				<input type="hidden" id="recruitGoId" value="test02" name="rwmMemberId">
@@ -338,14 +338,15 @@ form{display:inline
 		// <ul id="comments_box"></ul> : comments 전체를 담는 <ul>
 		let commentsBoxEle = document.getElementById('comments_box');
 
-		// userID
-		// let userId = "jinpark";
-		// let userId = "giniuskang";
-		// let userId = "minzi91";
-		// let userId = "sjh1216";
-		// let userId = "sy111k2";
-		// let userId = "test01";
+		// 현재 로그인한 개인 회원
 		let userId = "${loginInfo.memberId}";
+		
+		// 현재 로그인한 기업 회원
+		let loginCompId = "";
+		
+		// 현재 페이지의 공고를 작성한 기업 ID
+		let recruitCompId = "${detailjobinfo.recruitCompanyId}";
+		console.log("recruitCompId : " + recruitCompId);
 
 		// jinpark
 		// giniuskang
