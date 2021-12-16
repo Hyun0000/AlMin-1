@@ -26,9 +26,9 @@
 		WHERE WORK_MEMBER_NO = #{workMemberNo} AND WORK_MEMBER_ID = #{workMemberId}
 	</update>
 	
-	<!-- 차트에서 구직 & 면접 횟수 조회(년&월 기준) -->
+	<!-- 차트에서 근무 경력 조회(년&월 기준) -->
 	<select id="chartWork" resultType="hashmap" parameterType="map">
-		SELECT WORK_TITLE, WORK_TIME, WORK_MONEY, WORK_MEMBER_ID, (EXTRACT(DAY FROM WORK_TIME_END) - EXTRACT(DAY FROM WORK_TIME_START)) WORKDAY
+		SELECT WORK_TITLE, WORK_TIME, WORK_MONEY, WORK_MEMBER_ID, (EXTRACT(DAY FROM WORK_TIME_END) - EXTRACT(DAY FROM WORK_TIME_START) + 1) WORKDAY
 		FROM MEMBER_WORK
 		WHERE EXTRACT(YEAR FROM WORK_TIME_START) = #{year} AND EXTRACT(MONTH FROM WORK_TIME_START) = #{month} AND WORK_MEMBER_ID = #{userId}
 	</select>

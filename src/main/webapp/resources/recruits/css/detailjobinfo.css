@@ -140,20 +140,24 @@
 
 /* 수정&삭제 버튼 */
 .comments_top_bar_right button{
-    border: none;
+/*     border: none;
     background-color: royalblue;
     color: white;
     width: 80px; height: 30px;
     font-weight: bolder;
-    margin: 0 10px;
+    margin: 0 10px; */
+}
+
+.deleteBtn {
+	margin-left: 20px;
 }
 
 /* 수정&삭제 버튼 클릭시 */
 .comments_top_bar_right button:active {
-    background-color: white;
+    /* background-color: white;
     border: 2px solid royalblue; 
     color: royalblue;
-    outline: none;
+    outline: none; */
 }
 
 /* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 *//* 한줄 후기 */

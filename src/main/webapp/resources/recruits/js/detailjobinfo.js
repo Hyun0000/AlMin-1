@@ -76,6 +76,12 @@ window.onload = function() {
 // 2. 후기 insert
 	// 모달창 띄우기
     document.getElementById('insert_modal_showBtn').onclick = function () {
+    	
+    	if(userId === "") {
+    		alert("로그인을 먼저 진행해주세요");
+    		return;
+    	}
+    	
     	modalBack.style.display = "block";
     	
     	// ====================== 모달창 초기화 ======================
@@ -374,7 +380,7 @@ function selectAllComments() {
 		        console.log(e.ccWriter);
 		        console.log("=====================================");
 		        // top 좌측 <div>에 속하는 <h2> --> 작성자 아이디   commentsObj[e.ccWriter]?????
-		        let topHtwo = document.createElement('h3'); topHtwo.innerText = e.ccWriter;
+		        let topHtwo = document.createElement('h4'); topHtwo.innerText = e.ccWriter;
 		        topHtwo.setAttribute('style', 'margin : 0;');
 		        topLeftDivEle.appendChild(topHtwo);
 		        
@@ -396,12 +402,12 @@ function selectAllComments() {
 		        if(userId === e.ccWriter) {
 			        // 수정 버튼 만들기
 			        let updateBtn = document.createElement('button'); updateBtn.innerText = "수정";
-			        updateBtn.setAttribute('class', 'updateBtn'); updateBtn.setAttribute('id', 'updateBtn_id_' + num);
+			        updateBtn.setAttribute('class', 'genric-btn primary small updateBtn'); updateBtn.setAttribute('id', 'updateBtn_id_' + num);
 			        updateBtn.setAttribute('onClick', 'updateComment(event);');  topRightDivEle.appendChild(updateBtn);
 	
 			        // 삭제 버튼 만들기
 			        let deleteBtn = document.createElement('button'); deleteBtn.innerText = "삭제";
-			        deleteBtn.setAttribute('class', 'deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
+			        deleteBtn.setAttribute('class', 'genric-btn primary small deleteBtn');  deleteBtn.setAttribute('id', 'deleteBtn_id_' + num);
 			        deleteBtn.setAttribute('onClick', 'deleteComment(event);'); topRightDivEle.appendChild(deleteBtn);
 		        }
 		        

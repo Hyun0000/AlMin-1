@@ -345,7 +345,7 @@ form{display:inline
 		// let userId = "sjh1216";
 		// let userId = "sy111k2";
 		// let userId = "test01";
-		let userId = "jinpark";
+		let userId = "${loginInfo.memberId}";
 
 		// jinpark
 		// giniuskang
