@@ -53,6 +53,16 @@ function calenderLoad() {
 	let needCalData = JSON.parse(httpRequest.responseText);
 	console.log(needCalData);
 	
+	let googleEvents = {
+	    googleCalendarId: 'raddernepa@gmail.com'
+	};
+	
+	console.log("needCalData.length : " + needCalData.length);
+	console.log("googleEvents");
+	console.log(googleEvents);
+	console.log("googleEvents");
+	console.log("googleEvents.googleCalendarId : " + googleEvents.googleCalendarId);
+	console.log("googleEvents.length : " + googleEvents.length);
 	
 	if(selectCal === "NG" || selectCal === "") {
 		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
@@ -67,7 +77,27 @@ function calenderLoad() {
 			evnetObj.type = needCalData[i].NEED_GO_MEET;
 			evnets[i] = evnetObj;
 		}
+		// evnets[needCalData.length] = googleEvents;
 	}
+// ========================================================================================	
+//	if(selectCal === "NG" || selectCal === "") {
+//		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
+//		evnets = []; // 배열 초기화
+//		for (var i = 0; i < needCalData.length; i++) {
+//			let evnetObj = new Object();
+//			evnetObj.title = needCalData[i].NEED_TITLE;
+//			evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
+//			evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
+//			evnetObj.color = needCalData[i].NEED_COLOR;
+//			evnetObj.id = needCalData[i].NEED_MEMBER_NO;
+//			evnetObj.type = needCalData[i].NEED_GO_MEET;
+//			evnets[i] = evnetObj;
+//		}
+//		// evnets[needCalData.length] = googleEvents;
+//	}
+// ========================================================================================	
+	console.log("evnets : " + evnets);
+	console.log("evnets.length : " + evnets.length);
 	
 	if(selectCal === "W") {
 		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 근무관리 calendar";
@@ -90,12 +120,12 @@ function calenderLoad() {
 	
 	var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-    	googleCalendarApiKey : "AIzaSyDickLfpIFVxuK1OPwxsNPEGUEQSnQPcZE",
+    	// plugins: [ 'googleCalendar' ],
+    	googleCalendarApiKey : "AIzaSyAbwR6yZe1SWMSCRpoRaYJCTKpIslPr0xw",
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
             right: 'dayGridMonth,dayGridWeek,listMonth'
-            // dayGridDay,
         },
         initialView: 'dayGridMonth',
         locale: 'ko',
@@ -184,28 +214,6 @@ function calenderLoad() {
         	// 모달창 pop up
             modalBack.style.display = 'block';
         },
-        
-        
-//        eventDragStart : (info, event, view, jsEvent) => { // 드래그 시작
-//            console.log("############eventDragStart###########");
-//            console.log(info.event.title);
-//            console.log(info.event.id);
-//            console.log(info.event.start);
-//            console.log(info.event.end);
-//            console.log(info.event.start.toISOString()); // 이벤트 드랍받은 날짜&시간(날짜만 이용해라)
-//            console.log(info.event.end.toISOString()); // 이벤트 드랍받은 날짜(날짜만 이용해라)
-//
-//            let eventDragStartEventTitle = info.event.title;
-//            let eventDragStartEventStartTime = info.event.start.toISOString().split('T')[0];
-//            let eventDragStartEventEndTime = info.event.end.toISOString().split('T')[0];
-//
-//            console.log("eventDragStartEventTitle : " + eventDragStartEventTitle);
-//            console.log("eventDragStartEventStartTime : " + eventDragStartEventStartTime);
-//            console.log("eventDragStartEventEndTime : " + eventDragStartEventEndTime);
-//
-//            // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
-//            console.log("############eventDragStart###########");
-//        },
         eventDrop : (info) => { // 드래그 이벤트를 받은 객체에 대한 정보(그 날짜 그대로면 해당 이벤트는 실행 X)
             console.log("############eventDrop###########");
             // TODO
@@ -292,7 +300,18 @@ function calenderLoad() {
             // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
             console.log("############eventDrop###########");
         },
-         events: evnets
+        eventSources : [
+          {
+    	    googleCalendarId: 'raddernepa@gmail.com',
+    	    color: '#be5683'
+		  },
+		  {events : evnets}
+        ]
+//         events: {
+//        	    googleCalendarId: 'raddernepa@gmail.com',
+//        	    color: '#be5683'
+//    	  },
+    	  // events : evnets
     });
     calendar.render();
 
