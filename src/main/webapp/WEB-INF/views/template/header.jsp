@@ -64,7 +64,7 @@ session.setAttribute("state", state);
 					</c:when>
 					<c:otherwise>
 						<!-- 기업회원 노출 TODO: 기업서비스-->
-							<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
+							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
 
 					</c:otherwise>

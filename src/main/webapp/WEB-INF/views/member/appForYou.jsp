@@ -77,15 +77,19 @@
 					<div class="single-widget category-widget">
 						<h4 class="title">마이페이지</h4>
 						<ul>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex"><h6>회원정보
-									</h6></a></li>
-							<li><a href="#"
+							<li><a
+								href="${pageContext.request.contextPath}/members/mypage"
+								class="justify-content-between align-items-center d-flex"><h6>회원정보</h6></a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/recruits/appforyou"
 								class="justify-content-between align-items-center d-flex "><h6
-										class="active">맞춤공고</h6> </a></li>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex "><h6>관심공고</h6> </a></li>
-							<li><a href="#"
+										class="active">맟춤공고</h6> </a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/recruits/myrecruits"
+								class="justify-content-between align-items-center d-flex "><h6>관심공고</h6>
+							</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/resumes/allres"
 								class="justify-content-between align-items-center d-flex"><h6>이력서
 										관리</h6> </a></li>
 						</ul>

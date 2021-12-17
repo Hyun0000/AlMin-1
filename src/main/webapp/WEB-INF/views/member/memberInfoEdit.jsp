@@ -12,7 +12,6 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
 <script>
 $(document).ready(function(){
 		$("#editBtn").click(function(){ //수정완료 클릭 시

@@ -81,7 +81,7 @@
 <body>
 	<!-- 공통헤더 템플릿 -->
 	<c:import url="/WEB-INF/views/template/header.jsp" />
-	
+
 	<!-- Start blog-posts Area -->
 	<section class="blog-posts-area section-padding">
 		<div class="container">
@@ -198,26 +198,64 @@
 
 					</div>
 				</div>
-				<div class="col-lg-4 sidebar mt-5 mt-lg-0">
-					<div class="single-widget category-widget">
-						<h4 class="title">마이페이지</h4>
-						<ul>
-							<li><a
-								href="${pageContext.request.contextPath}/members/mypage"
-								class="justify-content-between align-items-center d-flex"><h6 class="active">회원정보
-									</h6></a></li>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6>
-							</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/recruits/myrecruits"
-								class="justify-content-between align-items-center d-flex "><h6>관심공고</h6> </a></li>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex"><h6>이력서
-										관리</h6> </a></li>
-						</ul>
-					</div>
-				</div>
+
+				<c:choose>
+					<c:when
+						test="${!empty sessionScope.loginInfo.memberId or !empty sessionScope.loginInfo.companyId }">
+						<c:choose>
+							<c:when test="${not empty sessionScope.loginInfo.memberId}">
+								<!-- 개인회원 노출 -->
+								<div class="col-lg-4 sidebar mt-5 mt-lg-0">
+									<div class="single-widget category-widget">
+										<h4 class="title">마이페이지</h4>
+										<ul>
+											<li><a
+												href="${pageContext.request.contextPath}/members/mypage"
+												class="justify-content-between align-items-center d-flex"><h6
+														class="active">회원정보</h6></a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/recruits/appforyou"
+												class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6>
+											</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/recruits/myrecruits"
+												class="justify-content-between align-items-center d-flex "><h6>관심공고</h6>
+											</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/resumes/allres"
+												class="justify-content-between align-items-center d-flex"><h6>이력서
+														관리</h6> </a></li>
+										</ul>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<!-- 기업회원 노출 TODO: 기업서비스-->
+								<div class="col-lg-4 sidebar mt-5 mt-lg-0">
+									<div class="single-widget category-widget">
+										<h4 class="title">마이페이지</h4>
+										<ul>
+											<li><a
+												href="${pageContext.request.contextPath}/members/mypage"
+												class="justify-content-between align-items-center d-flex"><h6
+														class="active">회원정보</h6></a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/applicants/myapplicants"
+												class="justify-content-between align-items-center d-flex "><h6>관심인재</h6>
+											</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/myallrecruit"
+												class="justify-content-between align-items-center d-flex "><h6>공고관리</h6>
+											</a></li>
+										</ul>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
+
+
 			</div>
 		</div>
 	</section>
