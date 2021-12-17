@@ -418,9 +418,9 @@ $(document).ready(function(){
   </table>
 </div>
 </div>
-<div class="search-buttons">
+<div class="search-buttons jobs-title">
 	          <button type="button" class="genric-btn info radius" id="nextBtn">다음</button>
-	</div>
+</div>
  </div>
 									</div>
 								</div>

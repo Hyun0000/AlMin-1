@@ -242,7 +242,7 @@ function changePw(){
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" name="userPw" id="userPw" class="single-input" 
+		<td><input type="password" name="userPw" id="userPw"  
 				maxlength="20" placeholder="비밀번호"></td>
 	</tr>
   </table>
@@ -264,20 +264,20 @@ function changePw(){
  <table class="find-form jobs-title jobs-title">
     <tr>
 		<th>현재 비밀번호</th>
-			<td><input type="password" name="nowPw" id="nowPw" class="single-input" 
+			<td><input type="password" name="nowPw" id="nowPw"  
 							maxlength="20" placeholder="현재 비밀번호">
               <span id="nwpwCmt"></span>
            </td>
 	<tr>
 		<th>새 비밀번호</th>
-			<td><input type="password" name="newPw" id="newPw" class="single-input" 
+			<td><input type="password" name="newPw" id="newPw"  
 							maxlength="20" placeholder="새 비밀번호">
               <span id="pwCmt"></span>
            </td>
 	</tr>
 	<tr>
 		<th>새 비밀번호 확인</th>
-			<td><input type="password" name="newPwChk" id="newPwChk" class="single-input" 
+			<td><input type="password" name="newPwChk" id="newPwChk"  
 							maxlength="20" placeholder="새 비밀번호 확인">
               <span id="pwChkCmt"></span>
            </td>

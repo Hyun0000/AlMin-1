@@ -14,29 +14,62 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<style>
+th {
+width:150px;
+}
+/* 입력란 */
+input[type=text], input[type=password]{
+background-color: #f9f9ff;
+border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
+button#mailcheck, button#lastChkBtn{
+ margin-left: 10px;
+ }
+ table{
+    margin: 0 auto;
+ }
+</style>
 </head>
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<section>
-<h2>이메일 인증</h2>
-
+<section class="feature-area section-padding2">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12" style="padding-top: 50px;">
+					<div class="section-top text-center">
+						<h2>이메일 인증</h2>
 <h4>이메일 인증만 마치면 회원가입이 완료됩니다.</h4>
-<!-- ajax로 쿠키 떨궈줌(인증 클릭 시) -> 이메일 보냄
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-bottom: 120px;">
+				<div class="col-lg-12">
+	<!-- ajax로 쿠키 떨궈줌(인증 클릭 시) -> 이메일 보냄
  -> 컨트롤러에서 어스키 보내줌 -> 쿠키에 저장(3분) -> 
   mail.jsp에서 입력 -->
 <table>
 	<tr>
 		<td><p id="mailaddress">${email}</p></td>
-		<td><button type="button" class="btn2" id="mailcheck" onclick="ajaxm1()">인증</button></td>
+		<td><button type="button" class="genric-btn info-border radius" id="mailcheck" onclick="ajaxm1()">인증</button></td>
 	</tr>
 	<tr>
 		<td><input type="text" id="lastChk"></td>
-		<td><button type="button" class="btn2" id="lastChkBtn" onclick="lastCheck()">확인</button></td>
+		<td><button type="button" class="genric-btn info radius" id="lastChkBtn" onclick="lastCheck()">확인</button></td>
 	</tr>
 </table>
-
+				</div>
+			</div>
+		</div>
 </section>
 <script>
 function setCookie(cookieName, value, exdays){

@@ -12,10 +12,25 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
 <!-- 다음 주소찾기 -->
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
+th{
+	width:150px;
+}
+ /* 입력란 */
+input[type=text], input[type=password]{
+	background-color: #f9f9ff;
+	border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
 .agree_terms{/* 가입약관 */
   height: 300px;/* scroll하기 위해 추가 */
   padding: 0 18px;
@@ -23,6 +38,12 @@
   max-height: 0;
   overflow: scroll;
   transition: max-height 0.3s ease-out;
+ }
+ #cnmsg{
+ font-family: auto;
+ }
+ button#idCheck, button#companyNum{
+ margin-left: 10px;
  }
 </style>
 </head>
@@ -203,7 +224,7 @@
 							} else{
 								companychk = true;
 								alert("사업자번호 확인이 완료되었습니다.")
-									html+="사업자번호 인증 완료";
+									html+="인증 완료";
 								$("#firstNum").attr("readonly",true);
 								$("#midNum").attr("readonly",true);
 								$("#endNum").attr("readonly",true);
@@ -232,13 +253,14 @@
 				});
 			
 			$("#findAddress").on("click",function(){
+				var html="";
 			    new daum.Postcode({
 			        oncomplete: function(data) {
 			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
 			            console.log(data);
 			           
-			            
+			            html+= "상세주소를 입력해주세요.";
 			           $("#zonecode").val(data.zonecode);
 			           $("#basicAddress").val(data.address);
 			            
@@ -248,6 +270,20 @@
 			});
 			
 			$("#submit").on("click", function(){
+				var checked1 = $('#agreeChk_5').is(':checked');
+				var checked2 = $('#agreeChk_0').is(':checked');
+				var checked3 = $('#agreeChk_1').is(':checked');
+				
+				if(!checked1){
+				alert("필수약관에 동의해주세요.");
+				return false;
+				} else if(!checked2){
+				alert("필수약관에 동의해주세요.");
+				return false;
+				}else if(!checked3){
+				alert("필수약관에 동의해주세요.");
+				return false;
+				}
 			
 			if($("#userId").val()==""){
 				alert("아이디를 입력해주세요.");
@@ -321,7 +357,7 @@
 <section>
 <div class="col-lg-12">
 	<h2>기업회원가입</h2>
-	<div class="inner">
+	<div class="inner jobs-title">
     <div class="user_join_agree">									<!-- 여기서 this는 이벤트가 발생한 element, 즉, '일괄동의' 체크박스 -->
         <input type="checkbox" name="selectall" id="agreeChkAll" value="selectall"><label for="agreeChkAll"><b style="color:dodgerblue">필수동의 항목 및 [선택] 개인정보 수집 및 이용동의, [선택] 광고성 정보 이메일/SMS 수신 동의에 일괄 동의합니다.</b></label>
     </div>
@@ -679,7 +715,6 @@
     </div>
     <div class="user_join_agree agrSelect">
         <input type="checkbox" name="agree" id="agreeChk_2" value="on"><label for="agreeChk_2"><span class="select">[선택]</span> 광고성 정보 이메일/SMS 수신 동의 <br><span class="promotion_type">(알바 뉴스레터, 소식 및 광고메일, 휴대폰 알림)</span></label>
-    <hr>
         <div class="toggle_terms">
             <a href="#">내용보기<span class=""></span></a>
         </div>
@@ -702,16 +737,17 @@
             </dl>
         </div>
     </div>
+     <hr>
 </div>
 	
 	
 	
 <form id="updateForm" action="/member/memberUpdate" method="post">
-	<table>
+	<table class="jobs-title">
 		<tr>
 		<th><label for="userId">아이디</label></th>
 		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" required>
-		<button type="button" class="btn3" id="idCheck">중복확인</button>
+		<button type="button" class="genric-btn primary radius" id="idCheck">중복확인</button>
 		<span id="idCmt" class="cmt"></span></td>
 		</tr>
 		<tr>
@@ -728,16 +764,16 @@
 		<input type="text" name="tel1" id="tel1" placeholder="010" maxlength="3" size = "3" required> -
 		<input type="text" name="tel2" id="tel2"  placeholder="0000" maxlength="4" size = "4" required> -
 		<input type="text" name="tel3" id="tel3"  placeholder="0000" maxlength="4" size = "4" required>
+		</td>
 		</tr>
-		
 		<tr>
 		<th>이메일</th>
-		<td>
+		<td style="width: 534px;">
 		<input type="text" id = "email_1" name="email_1" maxlength="30" required>@
 		<input type="text" id = "email_2" name="email_2" maxlength="30" required disabled>
 		</td>
 		<td>
-		<select id = "email_3" name="email_3">
+		<select id = "email_3" name="email_3" class="single-input">
 			<option value="1">직접입력</option> 
 			<option value="naver.com" selected>naver.com</option> 
 			<option value="hanmail.net">hanmail.net</option> 
@@ -764,13 +800,13 @@
 		<input type="text" id="firstNum" maxlength="3" size="3" required> -
 		<input type="text" id="midNum" maxlength="2" size = "2" required> -
 		<input type="text" id="endNum" maxlength="5" size = "5" required>
-		<button type="button" class="btn2" id="companyNum">인증</button>
+		<button type="button" class="genric-btn info-border radius" id="companyNum">인증</button>
 		<span id="cnCmt" class="cmt"></span>
 		</td>
 		</tr>
 		<tr>
 		<td></td>
-		<td><pre>※ 사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.
+		<td><pre id="cnmsg">※ 사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.
 ※ 지점·지사의 경우, 해당 지점·지사의 사업자등록번호를 입력해 주세요.
 ※ 인증이 되지 않을 경우 고객센터(T.1588-9351)로 문의해 주세요.</pre></td>
 		</tr>
@@ -790,14 +826,16 @@
 		<input type="text" id="zonecode" name="zonecode" maxlength="50" size = "10" required readonly>
 		<input type="text" id="basicAddress" name="basicAddress" maxlength="50" size = "10" required readonly>
 		<input type="text" id="detailAddress" name="detailAddress" maxlength="50" size = "10" required>
-		<button type="button" class="btn2" id="findAddress">주소 검색</button>
+		</td>
+		<td>
+		<button type="button" class="genric-btn success radius" id="findAddress">주소 검색</button>
 		<span id="adCmt" class="cmt"></span>
 		</td>
 		</tr>
 	</table>
-<div class="btngroup">
-<button class="btn1" type="button" id="submit">회원가입</button>
-<button class="cancel btn2" type="button">취소</button>
+<div class="btngroup jobs-title">
+<button class="genric-btn info radius" type="button" id="submit">회원가입</button>
+<button class="cancel genric-btn default radius" type="button">취소</button>
 </div>
 </form>
 </div>

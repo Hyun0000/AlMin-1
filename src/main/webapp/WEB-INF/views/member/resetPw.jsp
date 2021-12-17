@@ -19,6 +19,19 @@ width:150px;
 .box-sizing{
 width: 200px;
 }
+/* 입력란 */
+input[type=text], input[type=password]{
+background-color: #f9f9ff;
+border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -105,12 +118,12 @@ $(document).ready(function(){
    <table class="section-top">
     <tr>
     <td> <h4>비밀번호</h4></td>
-    <td><input type="password" id="userPass" placeholder="8~16자 영문, 숫자, 특수문자" class="single-input" required></td>
+    <td><input type="password" id="userPass" placeholder="8~16자 영문, 숫자, 특수문자"  required></td>
     <td><span id="pwCmt" class="cmt"></span></td>
 	</tr>
 	<tr>
                   <td><br><h4>비밀번호 확인</h4></td>
-                  <td><input type="password" id="pwChk" class="single-input"></td>
+                  <td><input type="password" id="pwChk" ></td>
                   <td><span id="pwChkCmt" class="cmt"></span></td>
 	</tr>
    </table>
