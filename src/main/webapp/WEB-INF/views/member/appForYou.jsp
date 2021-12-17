@@ -43,31 +43,43 @@
 
 						<!-- Start comment-sec Area -->
 						<section class="comment-sec-area py-5">
-							<c:forEach var="item" items="${recruits}">
-								<div class="container">
-									<div class="row flex-column">
+							<c:choose>
+								<c:when test="${empty recruits}">
+									<div class="container">
+										<div class="row flex-column">
+											<h5>아직 회원님을 위한 맞춤 공고가 없습니다.<br>
+											다양한 이력서를 등록해주시면 더 많은 공고를 추천해드릴게요!</h5>
+										</div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="item" items="${recruits}">
+										<div class="container">
+											<div class="row flex-column">
 
-										<div class="comment-list">
-											<div class="single-comment justify-content-between d-flex">
-												<div class="user justify-content-between d-flex">
-													<div class="thumb"></div>
-													<div class="desc">
-														<h5>
-															<a
-																href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle}</a>
-														</h5>
-														<p class="rno" style="display: none">${item.recruitNo}</p>
-														<p class="date">${item.recruitDate}</p>
-														<div class="reply-btn">
-															<button type="button" class="template-btn">지원하기</button>
+												<div class="comment-list">
+													<div class="single-comment justify-content-between d-flex">
+														<div class="user justify-content-between d-flex">
+															<div class="thumb"></div>
+															<div class="desc">
+																<h5>
+																	<a
+																		href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle}</a>
+																</h5>
+																<p class="rno" style="display: none">${item.recruitNo}</p>
+																<p class="date">${item.recruitDate}</p>
+																<div class="reply-btn">
+																	<button type="button" class="template-btn">지원하기</button>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</c:forEach>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</section>
 						<!-- End comment-sec Area -->
 

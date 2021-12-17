@@ -39,8 +39,12 @@
 		<interceptor>
 		<!-- <mapping path="" /> 로 설정을 해주면 interceptor가 컨트롤러를 제어 할 수 있게 된다.  -->
 			<mapping path="/members/mypage" />
-			<mapping path="/members/pwd/pwCheck" />
 			<mapping path="/admins" />
+			<mapping path="/report" />
+			<mapping path="/recruits/appforyou" />
+			<mapping path="/recruits/myrecruits" />
+			<mapping path="/applicants/myapplicants" />
+			<mapping path="/members/pwd/pwCheck" />
 			<!-- 모든 기능에 Interceptor 적용하려면 /*만 쓰면 됨. -->
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>

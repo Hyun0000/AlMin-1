@@ -32,7 +32,9 @@
 .d-toggle {
 	display: none;
 }
-form{display:inline 
+
+form {
+	display: inline
 }
 </style>
 </head>
@@ -150,10 +152,11 @@ form{display:inline
 						</div>
 						<div class="single-content7 py-4">
 							<h4>상세모집요강</h4>
-							<div>되는 청춘에서만 할지니, 피는 그들은 노래하며 스며들어 봄바람이다. 같으며, 무엇이 사랑의 하는
-								이것이다. 가치를 예가 얼마나 인생에 있음으로써 것이다. 원대하고, 곧 영원히 보배를 되려니와, 고행을 사랑의
-								두손을 청춘이 위하여서. 풀이 듣기만 피부가 되려니와, 설레는 스며들어 노년에게서 별과 있다.<br>
-								것은 보내는 새 원대하고, 착목한는 인류의 것이다. 열매를 그들의 귀는 있을 원질이 것이다. 그들은 시들어 속에서 힘차게 커다란
+							<div>
+								되는 청춘에서만 할지니, 피는 그들은 노래하며 스며들어 봄바람이다. 같으며, 무엇이 사랑의 하는 이것이다. 가치를
+								예가 얼마나 인생에 있음으로써 것이다. 원대하고, 곧 영원히 보배를 되려니와, 고행을 사랑의 두손을 청춘이
+								위하여서. 풀이 듣기만 피부가 되려니와, 설레는 스며들어 노년에게서 별과 있다.<br> 것은 보내는 새
+								원대하고, 착목한는 인류의 것이다. 열매를 그들의 귀는 있을 원질이 것이다. 그들은 시들어 속에서 힘차게 커다란
 								끓는다. 산야에 꽃이 위하여, 인간의 사랑의 생생하며, 그와 것은 피어나기 것이다. 할지라도 이상의 대고, 같은
 								품에 피가 만천하의 것이다. 그들에게 그들의 주는 가지에 얼음이 끓는 풀밭에 그들에게 든 이것이다. 불러 할지라도
 								피고 우리의 무엇을 수 때문이다. 봄바람을 앞이 그것을 듣는다. 앞이 같이 실현에 따뜻한 이것을 교향악이다. 것은
@@ -166,14 +169,19 @@ form{display:inline
 					<div class="sidebar">
 						<div class="single-item mb-4">
 							<h4 class="mb-4">매장 후기</h4>
-							<button type="button" class="commentsBtns" id="insert_modal_showBtn">후기등록</button>
-							<button type="button" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기</button>
-<!-- 							<a href="#" class="commentsBtns" id="insert_modal_showBtn">후기등록</a>
+							<button type="button" class="commentsBtns"
+								id="insert_modal_showBtn">후기등록</button>
+							<button type="button" class="commentsBtns" id="show_most_keyword">가장
+								많이 선택된 후기</button>
+							<!-- 							<a href="#" class="commentsBtns" id="insert_modal_showBtn">후기등록</a>
 							<a href="#" class="commentsBtns" id="show_most_keyword">가장 많이 선택된 후기 키워드</a> -->
 							<!-- <a href="#" id="insert_modal_showBtn" class="sidebar-btn d-flex justify-content-between mb-3">후기등록</a> -->
-							<div style="text-align: center; margin-top: 30px; display: none" id="alterImage_div">
-								<img src="${pageContext.request.contextPath}/resources/assets/images/no_most_comments.png" id="most_comments_alterImage">
-								<span style="color: black; font-size: 1.25rem;">등록된 후기가 없습니다.</span>
+							<div style="text-align: center; margin-top: 30px; display: none"
+								id="alterImage_div">
+								<img
+									src="${pageContext.request.contextPath}/resources/assets/images/no_most_comments.png"
+									id="most_comments_alterImage"> <span
+									style="color: black; font-size: 1.25rem;">등록된 후기가 없습니다.</span>
 							</div>
 							<ul id="mostCommentsUl" style="display: none;">
 								<li class="mostCommentsList"></li>
@@ -189,62 +197,58 @@ form{display:inline
 			<hr>
 			<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div class="btninline">
-			<button id="showRecruiter" class="template-btn" style="display: none;" onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고 지원자 보기</button>
-			<form action="recruitgo" method="post">
-				<!-- session 이용 필요 -->
-				<input type="hidden" id="recruitGoId" value="test02" name="rwmMemberId">
-				<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
-				<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
-			</form>
-			
+				<button id="showRecruiter" class="template-btn"
+					style="display: none;"
+					onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
+					지원자 보기</button>
+				<form action="recruitgo" method="post">
+					<!-- session 이용 필요 -->
+					<input type="hidden" id="recruitGoId" value="test02"
+						name="rwmMemberId"> <input type="hidden" id="recruitGoNo"
+						value="${recruitNo}" name="rwmRecruitNo">
+					<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
+				</form>
+
 				<c:if test="${recruitgomsg ne null}">
 					<script>
 						alert("${recruitgomsg}");
 						<c:remove var="recruitgomsg"/>
 					</script>
 				</c:if>
-			
-			<button class="template-btn like-btn" onclick="doLike(this);">
-				<c:choose>
-					<c:when test="${like == null}">
-					찜하기
-				</c:when>
-					<c:otherwise>
-					찜해제
-				</c:otherwise>
-				</c:choose>
-			</button>
-			<button class="template-btn" onclick="myFunction(this)">신고하기</button>
-			<div class="d-toggle">
-				<div class="col-lg-4">
-					<div class="sidebar mt-5 mt-lg-0">
-						<div class="single-item mb-4">
-							<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
-							<p style="display: none">${detailjobinfo.recruitNo}</p>
-							<button class="sidebar-btn justify-content-between mb-3"
-								onclick="report(this);" id="rno_1">
-								<span>통장,신분증,비밀번호를 요구하는 경우</span>
-							</button>
-							<button class="sidebar-btn justify-content-between mb-3"
-								onclick="report(this);" id="rno_2">
-								<span>유흥업소 및 불건전 업소</span>
-							</button>
-							<button class="sidebar-btn justify-content-between mb-3"
-								onclick="report(this);" id="rno_3">
-								<span>허위 사기성 내용</span>
-							</button>
-							<button class="sidebar-btn justify-content-between mb-3"
-								onclick="report(this);" id="rno_4">
-								<span>다단계 및 피라미드성 통신상품 판매 업체</span>
-							</button>
-							<button class="sidebar-btn justify-content-between"
-								onclick="report(this);" id="rno_5">
-								<span>최저임금 미만의 급여</span>
-							</button>
+
+				<button class="template-btn like-btn" onclick="doLike(this);">
+				</button>
+				<button class="template-btn" onclick="myFunction(this)">신고하기</button>
+				<div class="d-toggle">
+					<div class="col-lg-4">
+						<div class="sidebar mt-5 mt-lg-0">
+							<div class="single-item mb-4">
+								<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
+								<p style="display: none">${detailjobinfo.recruitNo}</p>
+								<button class="sidebar-btn justify-content-between mb-3"
+									onclick="report(this);" id="rno_1">
+									<span>통장,신분증,비밀번호를 요구하는 경우</span>
+								</button>
+								<button class="sidebar-btn justify-content-between mb-3"
+									onclick="report(this);" id="rno_2">
+									<span>유흥업소 및 불건전 업소</span>
+								</button>
+								<button class="sidebar-btn justify-content-between mb-3"
+									onclick="report(this);" id="rno_3">
+									<span>허위 사기성 내용</span>
+								</button>
+								<button class="sidebar-btn justify-content-between mb-3"
+									onclick="report(this);" id="rno_4">
+									<span>다단계 및 피라미드성 통신상품 판매 업체</span>
+								</button>
+								<button class="sidebar-btn justify-content-between"
+									onclick="report(this);" id="rno_5">
+									<span>최저임금 미만의 급여</span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 	</section>
@@ -252,10 +256,6 @@ form{display:inline
 		<hr style="border-bottom: 1px solid #707070">
 		<h1 style="padding-left: 40px;">Review</h1>
 		[[${loginInfo.memberId}]]
-		[[${loginInfo.companyId}]]
-		[[=========================]]
-		[[${loginInfo.memberId}]]
-		[[${loginInfo.sessionType}]]
 		<ul id="comments_box"></ul>
 		<div id="comments_box_pageLink"></div>
 	</section>
@@ -276,6 +276,26 @@ form{display:inline
 		}
 	</script>
 	<script>
+		$(document).ready(function isLiked() {
+			$.ajax({
+				url : '${pageContext.request.contextPath}/recruits/isliked',
+				type : 'post',
+				data : {
+					recruitNo : '${detailjobinfo.recruitNo}'
+				},
+				success : function(data) {
+					console.log(data);
+					if (data == "1") {
+						$(".template-btn.like-btn").text("찜해제");
+					} else {
+						$(".template-btn.like-btn").text("찜하기");
+					}
+				},
+				error : function() {
+					alert('오류 발생. 오류 코드: ' + error.code);
+				}
+			});
+		});
 		function doLike(e) {
 			//location.href='${pageContext.request.contextPath}/recruits/like?recruitNo=${detailjobinfo.recruitNo}';
 			$.ajax({
@@ -311,10 +331,10 @@ form{display:inline
 				},
 				success : function(data) {
 					console.log(data);
-					if(data == "1"){
-					alert('신고가 완료되었습니다.');
+					if (data == "1") {
+						alert('신고가 완료되었습니다.');
 					} else {
-					alert('신고는 공고당 한 번만 가능합니다.');
+						alert('신고는 공고당 한 번만 가능합니다.');
 					}
 				},
 				error : function() {
@@ -328,7 +348,7 @@ form{display:inline
 		// item을 놓는 장소인 dropzone : <div id="dropzone">
 		// let dropzoneEle = document.getElementById('dropzone');
 		let dropzoneEle = document.getElementsByClassName('dropzoneClass');
-		
+
 		// 기존 item을 저장하는 장소인 dragzone : <div id="dragzone">
 		// let dragzoneEle = document.getElementById('dragzone');dragzoneClass
 		let dragzoneEle = document.getElementsByClassName('dragzoneClass');
@@ -344,12 +364,10 @@ form{display:inline
 
 		// 현재 로그인한 개인 회원
 		let userId = "${loginInfo.memberId}";
-		console.log("userId : " + "${loginInfo.memberId}");
-		
+
 		// 현재 로그인한 기업 회원
-		let loginCompId = "${loginInfo.companyId}";
-		console.log("loginCompId : " + "${loginInfo.companyId}");
-		
+		let loginCompId = "";
+
 		// 현재 페이지의 공고를 작성한 기업 ID
 		let recruitCompId = "${detailjobinfo.recruitCompanyId}";
 		console.log("recruitCompId : " + recruitCompId);

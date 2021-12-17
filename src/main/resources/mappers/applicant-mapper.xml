@@ -69,7 +69,7 @@
 	<select id="checkLike" resultType="integer"
 		parameterType="likeApplicant">
 		select count(*) from FOCUS_MEMBER where
-		membCOMPANY_IDer_id =
+		COMPANY_ID =
 		#{companyId} and RESUME_NO = #{resumeNo}
 	</select>
 

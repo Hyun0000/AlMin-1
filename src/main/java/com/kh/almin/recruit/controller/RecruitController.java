@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.comments.model.service.CommentsService;
+import com.kh.almin.member.model.vo.SsInfo;
 import com.kh.almin.myrecruit.model.service.MyRecruitService;
 import com.kh.almin.myrecruit.model.vo.MyRecruit;
 import com.kh.almin.recruit.controller.RecruitController;
@@ -68,9 +71,11 @@ public class RecruitController {
 	}
 
 	@GetMapping(value = "/myrecruits")
-	private ModelAndView listLikes(ModelAndView mv) throws Exception {
+	private ModelAndView listLikes(ModelAndView mv, HttpSession session) throws Exception {
 		List<Recruit> volist = null;
-		volist = recruitService.listLike("sy111k2");
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		volist = recruitService.listLike(id);
 		mv.addObject("recruits", volist);
 		mv.setViewName("member/memberPage");
 		logger.info("마이페이지-관심공고");
@@ -78,9 +83,11 @@ public class RecruitController {
 	}
 
 	@GetMapping(value = "/appforyou")
-	private ModelAndView appForYou(ModelAndView mv) throws Exception {
+	private ModelAndView appForYou(ModelAndView mv, HttpSession session) throws Exception {
 		List<Recruit> volist = null;
-		volist = recruitService.appForYou("minzi91");
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		volist = recruitService.appForYou(id);
 		mv.addObject("recruits", volist);
 		mv.setViewName("member/appForYou");
 		logger.info("마이페이지-맞춤공고");
@@ -88,18 +95,22 @@ public class RecruitController {
 	}
 
 	@GetMapping(value = "/dislike")
-	private String dislikeRecruit(LikeRecruit likeRecruit) throws Exception {
-		likeRecruit.setMemberId("sy111k2");
+	private String dislikeRecruit(LikeRecruit likeRecruit, HttpSession session) throws Exception {
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		likeRecruit.setMemberId(id);
 		recruitService.dislikeRecruit(likeRecruit);
 		return "redirect:/recruits/myrecruits";
 	}
 
 	@PostMapping(value = "/like")
 	@ResponseBody
-	private String likeRecruit(LikeRecruit likeRecruit) throws Exception {
+	private String likeRecruit(LikeRecruit likeRecruit, HttpSession session) throws Exception {
 		String result = "";
 		int like = 0;
-		likeRecruit.setMemberId("sy111k2");
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		likeRecruit.setMemberId(id);
 		like = recruitService.dislikeRecruit(likeRecruit);
 		if (like == 1) {
 			System.out.println("찜 해제");
@@ -111,12 +122,32 @@ public class RecruitController {
 		return result;
 	}
 
+	@PostMapping(value = "/isliked")
+	@ResponseBody
+	private String isLiked(LikeRecruit likeRecruit, HttpSession session) throws Exception {
+		String result = "";
+		int like = 0;
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		likeRecruit.setMemberId(id);
+		like = recruitService.checkLike(likeRecruit);
+		if (like == 1) {
+			System.out.println("찜 있음");
+		} else if (like == 0) {
+			System.out.println("찜 없음");
+		}
+		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		return result;
+	}
+
 	@PostMapping(value = "/report")
 	@ResponseBody
-	private String reportRecruit(ReportRecruit reportRecruit) throws Exception {
+	private String reportRecruit(ReportRecruit reportRecruit, HttpSession session) throws Exception {
 		String result = "";
 		int report = 0;
-		reportRecruit.setMemberId("sy111k2");
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getMemberId();
+		reportRecruit.setMemberId(id);
 		int chkrpt = recruitService.checkReport(reportRecruit);
 		System.out.println("chkrpt!!!!!! : " + chkrpt);
 
@@ -134,11 +165,7 @@ public class RecruitController {
 	@GetMapping(value = "/detailjobinfo")
 	public ModelAndView detailjobinfo(@RequestParam("recruitNo") int recruitNo, ModelAndView mv,
 			@RequestParam(name = "msg", required = false) String msg) throws Exception {
-		LikeRecruit likeRecruit = new LikeRecruit();
 		Map<String, List<String>> commentsMap = null;
-		likeRecruit.setMemberId("sy111k2");
-		likeRecruit.setRecruitNo(recruitNo);
-		int like = recruitService.checkLike(likeRecruit);
 		try {
 			commentsMap = commentsService.selectAllKeyWords();
 		} catch (Exception e) {
@@ -149,11 +176,6 @@ public class RecruitController {
 
 		// 후기 입력에 필요한 recruitNo도 추가로 넘기겠습니다. - Hyun
 		mv.addObject("recruitNo", recruitNo);
-		if (like > 0) {
-			mv.addObject("like", like);
-		} else {
-			mv.addObject("like", null);
-		}
 		mv.setViewName("recruits/detailjobinfo");
 		return mv;
 	}
@@ -229,21 +251,21 @@ public class RecruitController {
 
 	@Autowired
 	private MyRecruitService myRecruitService;
-	 
+
 	// 공고 지원하기 버튼 클릭했을때 --> 개인 회원으로 로그인(받는 값 : 아이디 & 공고번호)
 	@PostMapping("/recruitgo")
 	public String recruitGo(MyRecruit myRecruit, Model model) {
 		System.out.println("myRecruit : " + myRecruit);
-		
+
 		int result = -1;
 		try {
 			result = myRecruitService.recruitGo(myRecruit);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result == 1) {
+		if (result == 1) {
 			model.addAttribute("recruitgomsg", "지원 완료!!!");
-		} else if(result == 0) {
+		} else if (result == 0) {
 			model.addAttribute("recruitgomsg", "이미 지원을 한 공고입니다.");
 		}
 		return "redirect:/recruits/detailjobinfo?recruitNo=" + myRecruit.getRwmRecruitNo();

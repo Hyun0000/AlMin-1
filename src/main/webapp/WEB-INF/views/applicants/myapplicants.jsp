@@ -52,7 +52,8 @@
 													<div class="thumb"></div>
 													<div class="desc">
 														<h5>
-															<a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo}">${item.resumeTitle}</a>
+															<a
+																href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo}">${item.resumeTitle}</a>
 														</h5>
 														<p class="rno" style="display: none">${item.resumeNo}</p>
 														<p class="date">${item.resumeDate}</p>
@@ -78,15 +79,18 @@
 					<div class="single-widget category-widget">
 						<h4 class="title">마이페이지</h4>
 						<ul>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex"><h6>회원정보
-									</h6></a></li>
-							<li><a href="#"
+							<li><a
+								href="${pageContext.request.contextPath}/members/mypage"
+								class="justify-content-between align-items-center d-flex"><h6>회원정보</h6></a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/applicants/myapplicants"
 								class="justify-content-between align-items-center d-flex "><h6
-										class="active">관심인재</h6> </a></li>
-							<li><a href="#"
-								class="justify-content-between align-items-center d-flex"><h6>공고
-										관리</h6> </a></li>
+										class="active">관심인재</h6>
+							</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/myallrecruit"
+								class="justify-content-between align-items-center d-flex "><h6>공고관리</h6>
+							</a></li>
 						</ul>
 					</div>
 				</div>

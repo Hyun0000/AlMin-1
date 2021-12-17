@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.kh.almin.member.model.vo.Member;
 import com.kh.almin.member.model.vo.SsInfo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor를 통한 로그인 처리
@@ -43,6 +42,46 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 				return true;
 			}
 		}
+		if (requestURL.startsWith("/report")) {
+			if (!loginInfo.getSessionType().equals("0")) {// 관리자가 아니면
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				System.out.println("관리자 페이지 접근 실패");
+				response.sendRedirect(request.getContextPath() + "/main");
+				return false;
+			} else {
+				return true;
+			}
+		}
+		if (requestURL.startsWith("/recruits/appforyou")) {
+			if (!loginInfo.getSessionType().equals("1")) {
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				System.out.println("관리자 페이지 접근 실패");
+				response.sendRedirect(request.getContextPath() + "/main");
+				return false;
+			} else {
+				return true;
+			}
+		}
+		if (requestURL.startsWith("/recruits/myrecruits")) {
+			if (!loginInfo.getSessionType().equals("1")) {
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				System.out.println("관리자 페이지 접근 실패");
+				response.sendRedirect(request.getContextPath() + "/main");
+				return false;
+			} else {
+				return true;
+			}
+		}
+		if (requestURL.startsWith("/applicants/myapplicants")) {
+			if (!loginInfo.getSessionType().equals("2")) {
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				System.out.println("관리자 페이지 접근 실패");
+				response.sendRedirect(request.getContextPath() + "/main");
+				return false;
+			} else {
+				return true;
+			}
+		}
 		if (requestURL.startsWith("/members/mypage")) {
 			if (loginInfo.equals(null)) {
 				System.out.println("세션타입: " + loginInfo.getSessionType());
@@ -57,6 +96,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 				return true;
 			}
 		}
+
 		return true;
 	}
 

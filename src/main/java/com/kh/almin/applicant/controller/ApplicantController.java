@@ -2,6 +2,8 @@ package com.kh.almin.applicant.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.kh.almin.applicant.model.service.ApplicantService;
 import com.kh.almin.applicant.model.vo.Applicant;
 import com.kh.almin.applicant.model.vo.LikeApplicant;
 import com.kh.almin.applicant.model.vo.SearchApplicant;
+import com.kh.almin.member.model.vo.SsInfo;
 
 @Controller
 @RequestMapping("/applicants")
@@ -55,9 +58,11 @@ public class ApplicantController {
 	}
 
 	@GetMapping(value = "/myapplicants")
-	private ModelAndView listLikes(ModelAndView mv) throws Exception {
+	private ModelAndView listLikes(ModelAndView mv, HttpSession session) throws Exception {
 		List<Applicant> volist = null;
-		volist = applicantService.listLike("testcompany01");
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getCompanyId();
+		volist = applicantService.listLike(id);
 		mv.addObject("applicants", volist);
 		mv.setViewName("applicants/myapplicants");
 		logger.info("마이페이지-관심공고");
@@ -65,19 +70,42 @@ public class ApplicantController {
 	}
 
 	@GetMapping(value = "/dislike")
-	private String dislikeRecruit(LikeApplicant likeApplicant) throws Exception {
-		likeApplicant.setCompanyId("testcompany01");
+	private String dislikeRecruit(LikeApplicant likeApplicant, HttpSession session) throws Exception {
+		SsInfo loginInfo = (SsInfo) session.getAttribute("loginInfo");
+		String id = loginInfo.getCompanyId();
+		likeApplicant.setCompanyId(id);
 		applicantService.dislikeApplicant(likeApplicant);
 		return "redirect:/applicants/myapplicants";
 	}
 
-	@PostMapping(value = "/like")
+	@PostMapping(value = "/isliked")
 	@ResponseBody
-	private String likeRecruit(LikeApplicant likeApplicant) throws Exception {
+	private String isLiked(LikeApplicant likeApplicant, HttpSession session) throws Exception {
 		String result = "";
 		int like = 0;
-		likeApplicant.setCompanyId("testcompany01");
+		SsInfo loginInfo = (SsInfo)session.getAttribute("loginInfo");
+		String id = loginInfo.getCompanyId();
+		likeApplicant.setCompanyId(id);
+		like = applicantService.checkLike(likeApplicant);
+		if (like == 1) {
+			System.out.println("찜 있음");
+		} else if (like == 0) {
+			System.out.println("찜 없음");
+		}
+		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		return result;
+	}
+	
+	@PostMapping(value = "/like")
+	@ResponseBody
+	private String likeRecruit(LikeApplicant likeApplicant, HttpSession session) throws Exception {
+		String result = "";
+		int like = 0;
+		SsInfo loginInfo = (SsInfo)session.getAttribute("loginInfo");
+		String id = loginInfo.getCompanyId();
+		likeApplicant.setCompanyId(id);
 		like = applicantService.dislikeApplicant(likeApplicant);
+		System.out.println("like전!!!!!!!!!! : " + like);
 		if (like == 1) {
 			System.out.println("찜 해제");
 		} else if (like == 0) {
@@ -85,6 +113,7 @@ public class ApplicantController {
 			System.out.println("찜 등록");
 		}
 		result = String.valueOf(like); // 0: 찜 등록완료, 1. 찜 해제완료
+		System.out.println("like후!!!!!!!!!! : " + like);
 		return result;
 	}
 
