@@ -12,7 +12,27 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<style>
+th {
+width:150px;
+}
+.primary-border{
+width: 300px;
+}
+/* 입력란 */
+input[type=text], input[type=password]{
+background-color: #f9f9ff;
+border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none;
+}
+</style>
 <script>
 $(document).ready(function(){
 	var choose = "edit"; //회원정보수정 / 비밀번호 변경 선택여부
@@ -21,7 +41,7 @@ $(document).ready(function(){
 	$("#edit").css({
 		"background-color":"#f8b600",
 		"color":"white",
-		"border":"3px solid #f8b600"
+		"border":"3px solid transparent"
 	});
 	$("#changeForm").hide();
 	$("#editForm").show();
@@ -32,12 +52,12 @@ $(document).ready(function(){
 		$("#edit").css({
 			"background-color":"#f8b600",
 			"color":"white",
-			"border":"3px solid #f8b600"
+			"border":"3px solid transparent"
 		});
 		$("#change").css({
-			"background-color":"white",
+			"background-color":"#f9f9ff",
 			"color":"black",
-			"border":"3px solid #FAE100"
+			"border":"3px solid transparent"
 		});
 		$("#changeForm").hide();
 		$("#editForm").show();
@@ -49,12 +69,12 @@ $(document).ready(function(){
 		$("#change").css({
 			"background-color":"#f8b600",
 			"color":"white",
-			"border":"3px solid #f8b600"
+			"border":"3px solid transparent"
 		});
 		$("#edit").css({
-			"background-color":"white",
+			"background-color":"#f9f9ff",
 			"color":"black",
-			"border":"3px solid #FAE100"
+			"border":"3px solid transparent"
 		});
 		$("#editForm").hide();
 		$("#changeForm").show();
@@ -197,37 +217,42 @@ function changePw(){
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<section>
-<div class="tab btngroup">
-        <button type="button" class="tab-item tab1" id="edit"
+<section class="job-single-content section-padding">
+	<div class="container">
+        <button type="button" class="tab-item genric-btn primary-border e-large" id="edit"
 					autofocus>회원정보수정</button>
-       <button type="button" class="tab-item tab1 active"
+       <button type="button" class="tab-item genric-btn primary-border e-large"
 					id="change">비밀번호 변경</button>
-</div>
-<div id="editForm" class="hide">
-	<ul>
+					<div class="row">
+				<div class="col-lg-8">
+						<div class="main-content">
+							<div class="single-content1">
+								<div class="mb-4 d-lg-flex justify-content-between">
+									<div class="job-text">
+<div id="editForm" class="hide jobs-title">
+	<ul class="jobs-title">
 		<li>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해 주세요.</li>
 		<li>비밀번호는 타인에게 노출되지 않도록 주의해 주세요.</li>
 	</ul>
-    <table class="find-form">
+	<div class="desc jobs-title">
+    <table class="find-form jobs-title">
      <tr>
-            <!-- 회원정보에 등록된 아이디 -->
 		<th>아이디</th>
 		<td id="uid">${sessionScope.loginInfo.memberId}</td>
 	</tr>
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" name="userPw" id="userPw"
+		<td><input type="password" name="userPw" id="userPw" class="single-input" 
 				maxlength="20" placeholder="비밀번호"></td>
 	</tr>
   </table>
-   <div class="search-buttons">
-          <button type="button" class="btn1" id="editBtn">확인</button>
+   <div class="search-buttons btngroup">
+          <button type="button" class="genric-btn success radius" id="editBtn">확인</button>
+     </div>
      </div>
 </div>
-
- <div id="changeForm" class="hide">
- <ul>
+ <div id="changeForm" class="hide jobs-title">
+ <ul class="jobs-title">
 	<li>개인정보를 안전하게 보호하기 위해  비밀번호를 주기적(6개월)으로 변경해 주세요.</li>
 	<li>비밀번호는 6~16자의 영문 대소문자, 숫자, 특수문자를 조합하여 사용하실 수 있습니다.<br></li>
 	<li class="tooltip">안전한 비밀번호 설정
@@ -236,33 +261,59 @@ function changePw(){
 	쉽게 비밀번호를 알아 낼 수 없도록 숫자, 영문자, 특수문자 조합을 권장 합니다.</span>
 	</li>
 </ul>
- <table class="find-form">
+ <table class="find-form jobs-title jobs-title">
     <tr>
 		<th>현재 비밀번호</th>
-			<td><input type="password" name="nowPw" id="nowPw"
+			<td><input type="password" name="nowPw" id="nowPw" class="single-input" 
 							maxlength="20" placeholder="현재 비밀번호">
               <span id="nwpwCmt"></span>
            </td>
 	<tr>
 		<th>새 비밀번호</th>
-			<td><input type="password" name="newPw" id="newPw"
+			<td><input type="password" name="newPw" id="newPw" class="single-input" 
 							maxlength="20" placeholder="새 비밀번호">
               <span id="pwCmt"></span>
            </td>
 	</tr>
 	<tr>
 		<th>새 비밀번호 확인</th>
-			<td><input type="password" name="newPwChk" id="newPwChk"
+			<td><input type="password" name="newPwChk" id="newPwChk" class="single-input" 
 							maxlength="20" placeholder="새 비밀번호 확인">
               <span id="pwChkCmt"></span>
            </td>
 	</tr>
   </table>
-  <div class="btnGroup">
-          <button type="button" class="btn1" id="changeBtn" onclick="changePw()">수정완료</button>
+  <div class="btnGroup jobs-title">
+          <button type="button" class="genric-btn success radius" id="changeBtn" onclick="changePw()">수정완료</button>
      </div>
 </div>
-
+</div>
+								</div>
+							</div>
+						</div>
+				</div>
+   <div class="col-lg-4 sidebar mt-5 mt-lg-0">
+               <div class="single-widget category-widget">
+                  <h4 class="title">마이페이지</h4>
+                  <ul>
+                     <li><a
+                        href="${pageContext.request.contextPath}/members/mypage"
+                        class="justify-content-between align-items-center d-flex"><h6 class="active">회원정보
+                           </h6></a></li>
+                     <li><a href="${pageContext.request.contextPath}/recruits/appforyou"
+                        class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6>
+                     </a></li>
+                     <li><a
+                        href="${pageContext.request.contextPath}/recruits/myrecruits"
+                        class="justify-content-between align-items-center d-flex "><h6>관심공고</h6> </a></li>
+                     <li><a href="${pageContext.request.contextPath}/resumes/allres"
+                        class="justify-content-between align-items-center d-flex"><h6>이력서
+                              관리</h6> </a></li>
+                  </ul>
+               </div>
+            </div>
+ </div>
+</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>

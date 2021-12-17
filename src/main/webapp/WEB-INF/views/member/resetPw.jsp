@@ -12,7 +12,14 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
-<link rel="stylesheet" href="<c:url value='/resources/member/css/member.css'/>">
+<style>
+th {
+width:150px;
+}
+.box-sizing{
+width: 200px;
+}
+</style>
 <script>
 $(document).ready(function(){
 	var pwPattern =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$^!%*#?&])[A-Za-z\d$@$!^%*#?&]{6,}$/;
@@ -85,55 +92,50 @@ $(document).ready(function(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 
-<table>
+<section class="job-single-content section-padding">
+	<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+						<div class="main-content">
+							<div class="single-content1">
+								<div class="mb-4 d-lg-flex justify-content-between">
+									<div class="job-text">
+                         <h3>새 비밀번호를 입력해 주세요.</h3><br>
+           <br>
+   <table class="section-top">
     <tr>
-	    <td>
-	        <a href="${pageContext.request.contextPath}/members/id" class="box-sizing">아이디 찾기</a>
-	        <a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing">비밀번호 찾기</a>
-	    </td>
-    </tr>
-</table>
-<section class="contact-form section-padding3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 mb-5 mb-lg-0">
-                    <div class="d-flex">
-                        <div class="into-icon">
-                            <i class="fa fa-home"></i>
-                        </div>
-                        <div class="info-text">
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="into-icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="info-text">
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="into-icon">
-                            <i class="fa fa-envelope-o"></i>
-                        </div>
-                        <div class="info-text">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <form action="#">
-                        <div>
-                           <h3>새 비밀번호를 입력해 주세요.</h3><br>
-                            <h4>비밀번호</h4>
-                           <input type="password" id="userPass" placeholder="8~16자 영문, 숫자, 특수문자" required><span id="pwCmt" class="cmt"></span>
-                            <br><h4>비밀번호 확인</h4>
-                            <input type="password" id="pwChk"><span id="pwChkCmt" class="cmt"></span>
-                        <button type="submit" class="template-btn" id="nextBtn">다음</button>
-                        </div>
-                    </form>
-                </div>
+    <td> <h4>비밀번호</h4></td>
+    <td><input type="password" id="userPass" placeholder="8~16자 영문, 숫자, 특수문자" class="single-input" required></td>
+    <td><span id="pwCmt" class="cmt"></span></td>
+	</tr>
+	<tr>
+                  <td><br><h4>비밀번호 확인</h4></td>
+                  <td><input type="password" id="pwChk" class="single-input"></td>
+                  <td><span id="pwChkCmt" class="cmt"></span></td>
+	</tr>
+   </table>
+<div class="search-buttons">
+                        <button type="submit" class="genric-btn primary radius" id="nextBtn">다음</button>
             </div>
-        </div>
-    </section>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<div class="col-lg-4">
+						<div class="sidebar mt-5 mt-lg-0">
+							<div class="mb-4">
+							<ul>
+      <li><a href="${pageContext.request.contextPath}/members/id" class="box-sizing genric-btn success medium">아이디 찾기</a></li>
+      <li><a href="${pageContext.request.contextPath}/members/pwd" class="box-sizing genric-btn success-border medium">비밀번호 찾기</a></li>
+                           </ul>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+</section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
 </body>
