@@ -116,9 +116,15 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		return result;
 		//TODO: 화면창 만들기
 	}
-	@GetMapping("/id/result") //개인 아이디찾기 결과창
-	private String idResultMember() throws Exception {
-		return "member/idResult";
+	@GetMapping("/id/result") //개인 아이디찾기 결과화면
+	private ModelAndView idResultMember(@RequestParam String userId) throws Exception {
+		Member vo = new Member();
+		vo.setMemberId(userId);
+		ModelAndView mv = new ModelAndView();
+		Member ms= memberService.getMemberInfo(vo);
+		mv.addObject("vo", ms);
+		mv.setViewName("member/idResult");
+		return mv;
 	}
 	@GetMapping("/pwd") //개인 비밀번호찾기
 	private String findPwdMember() throws Exception {

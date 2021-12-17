@@ -16,8 +16,7 @@
 	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet"
-	href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 <style>
 .active {
 	color: #1fa5fd;
@@ -261,8 +260,7 @@
 	</section>
 	<script>
 		function connection() {
-			$
-					.ajax({
+			$.ajax({
 						url : "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=LV_HERZOVT4XTBBoYuEl&client_secret=ONiMpnqaLD&access_token=ACCESS_TOKEN",
 						type : "post",
 						// data : 서버(컨트롤러)로 보내는 데이터.
