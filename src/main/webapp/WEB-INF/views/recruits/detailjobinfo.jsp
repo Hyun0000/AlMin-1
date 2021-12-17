@@ -252,6 +252,10 @@ form{display:inline
 		<hr style="border-bottom: 1px solid #707070">
 		<h1 style="padding-left: 40px;">Review</h1>
 		[[${loginInfo.memberId}]]
+		[[${loginInfo.companyId}]]
+		[[=========================]]
+		[[${loginInfo.memberId}]]
+		[[${loginInfo.sessionType}]]
 		<ul id="comments_box"></ul>
 		<div id="comments_box_pageLink"></div>
 	</section>
@@ -340,9 +344,11 @@ form{display:inline
 
 		// 현재 로그인한 개인 회원
 		let userId = "${loginInfo.memberId}";
+		console.log("userId : " + "${loginInfo.memberId}");
 		
 		// 현재 로그인한 기업 회원
-		let loginCompId = "";
+		let loginCompId = "${loginInfo.companyId}";
+		console.log("loginCompId : " + "${loginInfo.companyId}");
 		
 		// 현재 페이지의 공고를 작성한 기업 ID
 		let recruitCompId = "${detailjobinfo.recruitCompanyId}";

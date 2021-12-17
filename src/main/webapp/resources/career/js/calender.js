@@ -1,8 +1,11 @@
 // 로그인을 하지 않은 상태에서는 뒤로가기
-if(userId === "") {
+// 1. 비로그인 상태
+if(userId === "" && loginCompId === "") {
 	alert("로그인을 먼저 진행해주세요");
+	history.back();	
+} else if(loginCompId != "") {
+	alert("개인 회원만 이용가능합니다.");
 	history.back();
-	
 }
 
 // 캘린더 등록 이벤트 배열
@@ -87,6 +90,7 @@ function calenderLoad() {
 	
 	var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+    	googleCalendarApiKey : "AIzaSyDickLfpIFVxuK1OPwxsNPEGUEQSnQPcZE",
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',
@@ -288,9 +292,7 @@ function calenderLoad() {
             // movedEvent(draggedEventTitle, draggedEventStartTime, draggedEventEndTime);
             console.log("############eventDrop###########");
         },
-        
-        
-        events: evnets
+         events: evnets
     });
     calendar.render();
 

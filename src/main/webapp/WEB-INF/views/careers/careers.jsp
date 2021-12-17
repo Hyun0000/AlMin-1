@@ -23,6 +23,12 @@
 </style>
 </head>
 <body>
+	<!-- Preloader Starts -->
+	<div class="preloader">
+		<div class="spinner"></div>
+	</div>
+	<!-- Preloader End -->
+	
 <c:import url="/WEB-INF/views/template/header.jsp" />
     <section id="calender_top">
         <!-- <div> -->
@@ -286,11 +292,22 @@
 <c:import url="/WEB-INF/views/template/footer.jsp" />
 <!-- ================================================== chart.js ================================================== -->
 <script>
+	// 현재 로그인한 개인 회원
 	let userId = "${loginInfo.memberId}";
-	// let userId = "sy111k2";
+	
+	// 현재 로그인한 기업 회원
+	let loginCompId = "${loginInfo.companyId}";
+	
+	// 현재 로그인한 계정의 type
+	let loginType = "${loginInfo.sessionType}";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="<c:url value="/resources/assets/js/vendor/wow.min.js"/>"></script>
+<script src="<c:url value="/resources/assets/js/main.js"/>"></script>
+
+
 <script src="<c:url value="/resources/template/js/almin.js"/>"></script>
 <script src="<c:url value="/resources/career/js/main.js"/>"></script>
 <script src="<c:url value="/resources/career/js/ko.js"/>"></script>
