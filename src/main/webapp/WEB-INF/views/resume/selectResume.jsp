@@ -53,14 +53,34 @@
 							</table>
 						</div>
 					</div>
-					<button class="template-btn" onclick="history.back();">확인</button>
-					<button class="template-btn"
-						onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
-					<button class="template-btn"
-						onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
-					<button class="template-btn like-btn" onclick="doLike(this);">
-					</button>
-					<button id="print" class="template-btn" onclick="window.print()">인쇄하기</button>
+
+					<c:choose>
+						<c:when
+							test="${!empty sessionScope.loginInfo.memberId or !empty sessionScope.loginInfo.companyId }">
+							<c:choose>
+								<c:when test="${not empty sessionScope.loginInfo.memberId}">
+									<!-- 개인회원 노출 -->
+									<button id="print" class="template-btn"
+										onclick="window.print()">인쇄하기</button>
+									<button class="template-btn like-btn" onclick="doLike(this);">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<!-- 기업회원 노출 TODO: 기업서비스-->
+									<c:choose>
+										<c:when
+											test="${sessionScope.loginInfo.memberId eq resum.memberId}">
+											<button class="template-btn"
+												onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+											<button class="template-btn"
+												onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
+										</c:when>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+					</c:choose>
+					<button class="template-btn" onclick="history.back();">목록으로</button>
 				</div>
 			</div>
 		</div>
@@ -71,7 +91,7 @@
 	</footer>
 
 	<script>
-	$(document).ready(function isLiked() {
+		$(document).ready(function isLiked() {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/applicants/isliked',
 				type : 'post',
@@ -90,7 +110,7 @@
 					alert('오류 발생. 오류 코드: ' + error.code);
 				}
 			});
-	});
+		});
 		function doLike(e) {
 			$.ajax({
 				url : '${pageContext.request.contextPath}/applicants/like',

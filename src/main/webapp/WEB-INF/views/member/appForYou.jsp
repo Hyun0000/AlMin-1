@@ -69,7 +69,6 @@
 																<p class="rno" style="display: none">${item.recruitNo}</p>
 																<p class="date">${item.recruitDate}</p>
 																<div class="reply-btn">
-																	<button type="button" class="template-btn">지원하기</button>
 																</div>
 															</div>
 														</div>

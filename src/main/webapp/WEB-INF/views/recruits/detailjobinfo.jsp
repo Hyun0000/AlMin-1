@@ -197,58 +197,71 @@ form {
 			<hr>
 			<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div class="btninline">
+				<c:choose>
+					<c:when
+						test="${!empty sessionScope.loginInfo.memberId or !empty sessionScope.loginInfo.companyId }">
+						<c:choose>
+							<c:when test="${not empty sessionScope.loginInfo.memberId}">
+								<!-- 개인회원 노출 -->
+								<form action="recruitgo" method="post">
+									<input type="hidden" id="recruitGoId" value="test02"
+										name="rwmMemberId"> <input type="hidden"
+										id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
+									<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
+								</form>
+
+								<c:if test="${recruitgomsg ne null}">
+									<script>
+										alert("${recruitgomsg}");
+										<c:remove var="recruitgomsg"/>
+									</script>
+								</c:if>
+
+								<button class="template-btn like-btn" onclick="doLike(this);">
+								</button>
+								<button class="template-btn" onclick="myFunction(this)">신고하기</button>
+								<div class="d-toggle">
+									<div class="col-lg-4">
+										<div class="sidebar mt-5 mt-lg-0">
+											<div class="single-item mb-4">
+												<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
+												<p style="display: none">${detailjobinfo.recruitNo}</p>
+												<button class="sidebar-btn justify-content-between mb-3"
+													onclick="report(this);" id="rno_1">
+													<span>통장,신분증,비밀번호를 요구하는 경우</span>
+												</button>
+												<button class="sidebar-btn justify-content-between mb-3"
+													onclick="report(this);" id="rno_2">
+													<span>유흥업소 및 불건전 업소</span>
+												</button>
+												<button class="sidebar-btn justify-content-between mb-3"
+													onclick="report(this);" id="rno_3">
+													<span>허위 사기성 내용</span>
+												</button>
+												<button class="sidebar-btn justify-content-between mb-3"
+													onclick="report(this);" id="rno_4">
+													<span>다단계 및 피라미드성 통신상품 판매 업체</span>
+												</button>
+												<button class="sidebar-btn justify-content-between"
+													onclick="report(this);" id="rno_5">
+													<span>최저임금 미만의 급여</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<!-- 기업회원 노출 TODO: 기업서비스-->
+								<button id="showRecruiter" class="template-btn"
+									onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
+									지원자 보기</button>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
 				<button id="showRecruiter" class="template-btn"
-					style="display: none;"
-					onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
-					지원자 보기</button>
-				<form action="recruitgo" method="post">
-					<!-- session 이용 필요 -->
-					<input type="hidden" id="recruitGoId" value="test02"
-						name="rwmMemberId"> <input type="hidden" id="recruitGoNo"
-						value="${recruitNo}" name="rwmRecruitNo">
-					<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
-				</form>
-
-				<c:if test="${recruitgomsg ne null}">
-					<script>
-						alert("${recruitgomsg}");
-						<c:remove var="recruitgomsg"/>
-					</script>
-				</c:if>
-
-				<button class="template-btn like-btn" onclick="doLike(this);">
-				</button>
-				<button class="template-btn" onclick="myFunction(this)">신고하기</button>
-				<div class="d-toggle">
-					<div class="col-lg-4">
-						<div class="sidebar mt-5 mt-lg-0">
-							<div class="single-item mb-4">
-								<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
-								<p style="display: none">${detailjobinfo.recruitNo}</p>
-								<button class="sidebar-btn justify-content-between mb-3"
-									onclick="report(this);" id="rno_1">
-									<span>통장,신분증,비밀번호를 요구하는 경우</span>
-								</button>
-								<button class="sidebar-btn justify-content-between mb-3"
-									onclick="report(this);" id="rno_2">
-									<span>유흥업소 및 불건전 업소</span>
-								</button>
-								<button class="sidebar-btn justify-content-between mb-3"
-									onclick="report(this);" id="rno_3">
-									<span>허위 사기성 내용</span>
-								</button>
-								<button class="sidebar-btn justify-content-between mb-3"
-									onclick="report(this);" id="rno_4">
-									<span>다단계 및 피라미드성 통신상품 판매 업체</span>
-								</button>
-								<button class="sidebar-btn justify-content-between"
-									onclick="report(this);" id="rno_5">
-									<span>최저임금 미만의 급여</span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
+					onclick="history.back();">목록으로</button>
 			</div>
 		</div>
 	</section>

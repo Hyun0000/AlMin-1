@@ -59,8 +59,7 @@
 														<p class="rno" style="display: none">${item.recruitNo}</p>
 														<p class="date">${item.recruitDate}</p>
 														<div class="reply-btn">
-															<button type="button" class="template-btn">지원하기</button>
-															<button class="template-btn"
+														<button type="button" class="genric-btn success-border"
 																onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">
 																찜 해제</button>
 														</div>
