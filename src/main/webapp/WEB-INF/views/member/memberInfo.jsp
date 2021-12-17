@@ -18,6 +18,11 @@
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 <style>
+.social-name{
+	color: black;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
 .active {
 	color: #1fa5fd;
 }
@@ -71,6 +76,12 @@
 .id {
 	font-color: dodgerblue
 }
+tr > td{
+	width: 70px;
+}
+tr > td:last-child{
+	width: 90px;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -81,8 +92,7 @@
 	<!-- 공통헤더 템플릿 -->
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 
-	<!-- Start blog-posts Area -->
-	<section class="blog-posts-area section-padding">
+	<section class="job-single-content section-padding">
 		<div class="container">
 			<div class="row">
 
@@ -93,8 +103,8 @@
 						<section class="comment-sec-area py-5">
 							<div class="container">
 								<p class="mName">
-									<b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b
-										style="color: dodgerblue">통합 회원정보</b>
+									<h2><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b
+										style="color: dodgerblue">통합 회원정보</b></h2>
 								</p>
 								<div class="row flex-column">
 
@@ -104,23 +114,21 @@
 												<div class="thumb"></div>
 												<div class="desc">
 													<p class="txt">
-														안전한 정보보호를 위해 연락처 일부만 확인가능하며,<br> 수정화면에서 정확한 연락처 확인이
-														가능합니다.
+														안전한 정보보호를 위해 회원정보 일부만 확인가능하며,
+														<br> 수정화면에서 전체 회원정보 열람이 가능합니다.
 													</p>
-													<dl>
-														<!--<dt>최근수정일</dt>
-														<dd>2020-05-22</dd>-->
-														<dt>생년월일</dt>
-														<dd>${vo.memberBirth}</dd>
-														<dt>연락처</dt>
-														<dd>${vo.memberPhone}</dd>
-														<dt>e-메일</dt>
-														<dd>${vo.memberEmail}</dd>
-													</dl>
-													<div class="reply-btn">
-														<button type="button" class="genric-btn info-border"
-															onclick="infoEdit()">수정</button>
-													</div>
+									<div class="jobs-title">
+									<ul class="unordered-list">
+										<li>생년월일</li>
+										<li>${vo.memberBirth}</li>
+										<li>연락처</li>
+										<li>${vo.memberPhone}</li>
+										<li>e-메일</li>
+										<li>${vo.memberEmail}</li>
+									</ul>
+									</div>
+													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck">
+														<button type="button" class="genric-btn info-border">수정</button></a>
 												</div>
 											</div>
 										</div>
@@ -134,18 +142,18 @@
 							<div class="container">
 								<h2>비밀번호</h2>
 								<div class="row flex-column">
-
 									<div class="comment-list">
 										<div class="single-comment justify-content-between d-flex">
 											<div class="user justify-content-between d-flex">
 												<div class="thumb"></div>
 												<div class="desc">
-													<p class="txt">
+													<p class="txt jobs-title">
 														비밀번호를 주기적으로 변경하여<br> 소중한 개인정보를 안전하게 보호하세요(6개월마다 알림)
 													</p>
 													<p class="rno" style="display: none">${item.recruitNo}</p>
 													<div class="reply-btn">
-														<button type="button" class="genric-btn info-border">변경</button>
+													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck">
+													<button type="button" class="genric-btn info-border">변경</button></a>
 													</div>
 												</div>
 											</div>
@@ -155,23 +163,24 @@
 							</div>
 						</section>
 						<!-- Start comment-sec Area -->
-						<!-- 	<section class="comment-sec-area py-5">
+							<section class="comment-sec-area py-5">
 								<div class="container">
 				<h2>간편 로그인 관리</h2>
 									<div class="row flex-column">
-
 										<div class="comment-list">
 											<div class="single-comment justify-content-between d-flex">
 												<div class="user justify-content-between d-flex">
-													<div class="thumb"></div>
-													<div class="desc">
+												<div class="thumb"></div>
+													<div class="desc jobs-title">
 				<p class="txt">소셜서비스 계정과 연결하면, 소셜 로그인으로 간편하게 로그인 할 수 있습니다.</p>
-					<div class="social-icon sns-naver">
-						<span><img src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></span>
-						<span class="social-name">네이버</span>
-						<button id="btn_nv" onclick="connection()">연결</button>
-					</div>
-					
+					<table class="social-icon sns-naver">
+					<tr>
+						<td><img src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></td>
+						<td class="social-name">네이버</td>
+						<td><button id="btn_nv" class="genric-btn default" onclick="connection()">연결</button></td>
+					</tr>
+					</table>
+					<!--
 					<div class="social-icon sns-kakao">
 						<span><img src="${pageContext.request.contextPath}/resources/assets/images/kakao.png""></span>
 						<span class="social-name">카카오</span>
@@ -182,17 +191,14 @@
 						<span><img src=""></span>
 						<span class="social-name">페이스북</span>
 						<button id="btn_fb">연결</button>
-					</div>
-														<div class="reply-btn">
-															<button type="button" class="template-btn">변경</button>
-														</div>
+					</div>-->
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-						</section> -->
+						</section> 
 						<!-- End comment-sec Area -->
 
 					</div>
@@ -282,9 +288,6 @@
 									+ error);
 						}
 					});
-		}
-		function infoEdit() {
-			location.href = "${pageContext.request.contextPath}/members/mypage/pwCheck"
 		}
 
 		let maskingFunc = {
