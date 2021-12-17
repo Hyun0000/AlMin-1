@@ -36,7 +36,7 @@ border: none;
 <script>
 $(document).ready(function(){
 	var choose = "edit"; //회원정보수정 / 비밀번호 변경 선택여부
-	
+	console.log($("#type").html());
  	$(".hide").hide(); 
 	$("#edit").css({
 		"background-color":"#f8b600",
@@ -79,6 +79,10 @@ $(document).ready(function(){
 		$("#editForm").hide();
 		$("#changeForm").show();
 		})
+		
+		if($("#type").html()=="2"){
+			$("#change").click();
+		}
 		var pwPattern =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$^!%*#?&])[A-Za-z\d$@$!^%*#?&]{6,}$/;
 			
 		$("#newPw").on("keyup", function(){
@@ -201,9 +205,6 @@ function changePw(){
 										"\n"+"error:"+error);
 							}
 							});
-			
-			
-			
 			}
 	},
 	error:function(request,status,error){
@@ -218,6 +219,7 @@ function changePw(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section class="job-single-content section-padding">
+<p id="type">${type}</p>
 	<div class="container">
         <button type="button" class="tab-item genric-btn primary-border e-large" id="edit"
 					autofocus>회원정보수정</button>

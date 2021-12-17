@@ -127,7 +127,7 @@ tr > td:last-child{
 										<li>${vo.memberEmail}</li>
 									</ul>
 									</div>
-													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck">
+													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=1">
 														<button type="button" class="genric-btn info-border">수정</button></a>
 												</div>
 											</div>
@@ -152,7 +152,7 @@ tr > td:last-child{
 													</p>
 													<p class="rno" style="display: none">${item.recruitNo}</p>
 													<div class="reply-btn">
-													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck">
+													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=2">
 													<button type="button" class="genric-btn info-border">변경</button></a>
 													</div>
 												</div>

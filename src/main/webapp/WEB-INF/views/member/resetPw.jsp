@@ -88,6 +88,7 @@ $(document).ready(function(){
 					alert("비밀번호 수정 실패");
 				} else {
 					alert("비밀번호 수정 성공");
+					console.log($("#uid").html);
 			location.href ="${pageContext.request.contextPath}/members/mypage"
 				}
 		},
@@ -104,7 +105,7 @@ $(document).ready(function(){
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-
+<p id="uid" style="display:hidden">${vo.memberId}</p>
 <section class="job-single-content section-padding">
 	<div class="container">
 			<div class="row">

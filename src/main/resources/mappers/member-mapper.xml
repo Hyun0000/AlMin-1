@@ -63,10 +63,15 @@
 	WHERE MEMBER_NAME = #{memberName} AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
-	<!-- 비밀번호찾기 -->
+	<!-- 비밀번호찾기(연락처) -->
 	<select id="findMPWdphone" resultType="Integer" parameterType="Member">
 	SELECT count(*) FROM MEMBER 
 	WHERE MEMBER_NAME = #{memberName} AND MEMBER_ID = #{memberId} AND MEMBER_PHONE = #{memberPhone}
+	</select>
+	<!-- 비밀번호찾기(이메일) -->
+	<select id="findMPWdmail" resultType="Integer" parameterType="Member">
+	SELECT count(*) FROM MEMBER 
+	WHERE MEMBER_NAME = #{memberName} AND MEMBER_ID = #{memberId} AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
 	<!-- 기업회원가입 -->
@@ -77,8 +82,6 @@
 			, #{companyName}, #{companyBoss}, #{companyEmail}, #{companyAddress},
 			#{companyNum},'N' )
 	</insert>
-	
-	
 	
 	<!-- 아이디 찾기(연락처) -->
 	<select id="findCIdphone" resultMap="CompanyResultMap" parameterType="Company">
@@ -96,7 +99,21 @@
 	WHERE COMPANY_BOSS = #{companyBoss} AND COMPANY_NUM = #{companyNum}
 	</select>
 	
-	
+	<!-- 비밀번호찾기(연락처) -->
+	<select id="findCPWdtel" resultType="Integer" parameterType="Company">
+	SELECT count(*) FROM COMPANY 
+	WHERE COMPANY_BOSS = #{companyBoss} AND COMPANY_ID = #{companyId} AND COMPANY_TEL = #{companyTel}
+	</select>
+	<!-- 비밀번호찾기(이메일) -->
+	<select id="findCPWdmail" resultType="Integer" parameterType="Company">
+	SELECT count(*) FROM COMPANY 
+	WHERE COMPANY_BOSS = #{companyBoss} AND COMPANY_ID = #{companyId} AND COMPANY_EMAIL = #{companyEmail}
+	</select>
+	<!-- 비밀번호찾기(사업자번호) -->
+	<select id="findCPWdnum" resultType="Integer" parameterType="Company">
+	SELECT count(*) FROM COMPANY 
+	WHERE COMPANY_BOSS = #{companyBoss} AND COMPANY_ID = #{companyId} AND COMPANY_NUM = #{companyNum}
+	</select>
 	
 	<!-- 로그인(아이디 비번 동시 체크) -->
     <!-- password는 암호화로 인해 주석처리 -->
@@ -121,7 +138,6 @@
 		WHERE TRIM(COMPANY_ID) = #{companyId}
 	</select>
     
-	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER SET 

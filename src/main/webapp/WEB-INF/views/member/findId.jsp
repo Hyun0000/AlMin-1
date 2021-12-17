@@ -38,6 +38,9 @@ text-decoration:none;
 .box-sizing{
 width: 200px;
 }
+.job-text{
+margin: 0 auto;
+}
 </style>
 <script>
 $(document).ready(function(){

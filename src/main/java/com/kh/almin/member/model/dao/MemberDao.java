@@ -120,10 +120,34 @@ public class MemberDao {
 			logger.info("id: "+result.getCompanyId()+" result: "+result);
 			return result;
 		}
-
+		// 개인회원 비밀번호 찾기(연락처)
 		public int findMPWdphone(Member member) {
 			logger.info("Dao-findMPWdphone 진입");
 			int result = sqlSession.selectOne("Member.findMPWdphone", member);
+			return result;
+		}
+		// 개인회원 비밀번호 찾기(이메일)
+		public int findMPWdmail(Member member) {
+			logger.info("Dao-findMPWdmail 진입");
+			int result = sqlSession.selectOne("Member.findMPWdmail", member);
+			return result;
+		}
+		// 기업회원 비밀번호 찾기(연락처)
+		public int findCPWdtel(Company company) {
+			logger.info("Dao-findCPWdphone 진입");
+			int result = sqlSession.selectOne("Member.findCPWdtel", company);
+			return result;
+		}
+		// 기업회원 비밀번호 찾기(이메일)
+		public int findCPWdmail(Company company) {
+			logger.info("Dao-findCPWdmail 진입");
+			int result = sqlSession.selectOne("Member.findCPWdmail", company);
+			return result;
+		}
+		// 기업회원 비밀번호 찾기(사업자번호)
+		public int findCPWdnum(Company company) {
+			logger.info("Dao-findCPWdnum 진입");
+			int result = sqlSession.selectOne("Member.findCPWdnum", company);
 			return result;
 		}
 }

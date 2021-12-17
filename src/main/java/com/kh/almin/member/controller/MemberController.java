@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -145,15 +146,42 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 		}
 		return result;
 	}
+	@PostMapping("/pwd/mail") //개인 비번찾기(이메일)
+	@ResponseBody
+	private int findMPWdmail(@RequestBody Member m) throws Exception {
+		int result=0;
+		logger.info(m.toString());
+		int ms= memberService.findMPWdmail(m);
+		if(ms == 0) {
+			return result;
+		}else {
+			logger.info("비밀번호찾기 성공");
+			result=ms;
+		}
+		return result;
+	}
 	@GetMapping("/pwd/resetter") //개인 비밀번호재설정
-	private String resetPwMember() throws Exception {
-		return "member/resetPw";
+	private ModelAndView resetPwMember(@RequestParam String userId) throws Exception {
+		Member m = new Member();
+		m.setMemberId(userId);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("vo", m);
+		mv.setViewName("member/resetPw");
+		return mv;
 	}
 
-	@GetMapping("/mypage/pwCheck")
-	private String MemberpwCheck() { //회원정보 수정 전 비번 재입력
+	@GetMapping("/mypage/pwCheck")						//@Nullable = type이 널이어도 됨.
+	private ModelAndView MemberpwCheck(@RequestParam @Nullable String type) { //회원정보 수정 전 비번 재입력
 		logger.info("회원정보 수정 전 단계 진입");
-		return "member/pwCheck";
+		String typeName = "1"; //회원정보 수정 - 비번 체크
+		
+		if(type.equals("2")) {//비밀번호 변경 - 현재 비번, 새 비번 입력
+			typeName = "2";
+		} 
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("type", typeName);
+		mv.setViewName("member/pwCheck");
+		return mv;
 	}
 	@PostMapping("/mypage/pwd") //비밀번호 일치여부 확인
 	@ResponseBody

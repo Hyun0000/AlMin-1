@@ -143,6 +143,7 @@ $(document).ready(function(){
 		console.log("다음버튼 클릭");
 			//choose="member"- Member테이블 / "company" - Company테이블
 			var url="${pageContext.request.contextPath}/members/id/phone";//개인 아이디찾기(연락처)
+			var uid = "";
 			var json = {
 					'memberName':$("#userName").val(),
 					'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
@@ -165,9 +166,10 @@ $(document).ready(function(){
 					return false;
 				} else{
 					var url="${pageContext.request.contextPath}/members/pwd/phone";
+					uid = $("#userId").val();
 					json = {
 							'memberName':$("#userName").val(),
-							'memberId':$("#userId").val(),
+							'memberId': uid,
 							'memberPhone':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
 					}
 				}
@@ -187,8 +189,10 @@ $(document).ready(function(){
 				} else{
 					//TODO: url, json 선언 
 					url="${pageContext.request.contextPath}/members/pwd/mail";
+					uid =$("#userId2").val();
 					json = {
 							'memberName':$("#userName2").val(),
+							'memberId':uid ,
 							'memberEmail':$("#email_1").val()+"@"+$("#email_2").val()
 					}
 				}
@@ -208,8 +212,10 @@ $(document).ready(function(){
 					return false;
 				} else{
 					url="${pageContext.request.contextPath}/companies/pwd/tel";
+					uid =$("#userId").val();
 					json = {
 							'companyBoss':$("#userName").val(),
+							'companyId':uid,
 							'companyTel':$("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val()
 					}
 				}
@@ -229,8 +235,10 @@ $(document).ready(function(){
 					return false;
 				} else{
 					url="${pageContext.request.contextPath}/companies/pwd/mail";
+					uid =$("#userId2").val();
 					json = {
 							'companyBoss':$("#userName2").val(),
+							'companyId':uid,
 							'companyEmail':$("#email_1").val()+"@"+$("#email_2").val()
 					}
 				}
@@ -252,8 +260,10 @@ $(document).ready(function(){
 					return false;
 				} else{
 					url="${pageContext.request.contextPath}/companies/pwd/num";
+					uid = $("#userId3").val();
 					json = {
 							'companyBoss':$("#userName3").val(),
+							'companyId':uid,
 							'companyNum':$("#firstNum").val()+"-"+$("#midNum").val()+"-"+$("#endNum").val()
 					}
 				}
@@ -273,9 +283,11 @@ $(document).ready(function(){
 					alert("일치하는 아이디가 없습니다.");
 				} else {
 					console.log("비번찾기 성공")
+					console.log("uid: "+uid)
+					
 					alert(result);
 					//TODO: 새 비밀번호를 입력해 주세요.(화면 생성) 새로운 jsp
-			location.href ="${pageContext.request.contextPath}/members/pwd/resetter"
+			location.href ="${pageContext.request.contextPath}/members/pwd/resetter?userId="+uid
 				}
 		},
 		error:function(request,status,error){
@@ -328,7 +340,7 @@ $(document).ready(function(){
                     <table class="find-form">
                     <tr>
 		<th><label for="userId">아이디</label></th>
-		<td><input type="text" id="userId" name="userId"  placeholder="6~50자 영문, 숫자" maxlength="50" required>
+		<td><input type="text" id="userId" name="userId" placeholder="6~50자 영문, 숫자" maxlength="50" required>
 		<span id="idCmt" class="cmt"></span></td>
 		</tr>
                         <tr class="form-item">
@@ -363,7 +375,7 @@ $(document).ready(function(){
    	<tr class="form-item">
         <th class="form-table form-title">이름</th>
           <td class="form-table form-data">
-              <input type="text" name="userName" id="userName3" title="가입자명" placeholder="가입자명" maxlength="12">
+              <input type="text" name="userName3" id="userName3" title="가입자명" placeholder="가입자명" maxlength="12">
               <span id="nm3Cmt"></span>
           </td>
     </tr>
@@ -385,7 +397,7 @@ $(document).ready(function(){
  <table class="find-form">
  <tr>
 		<th><label for="userId2">아이디</label></th>
-		<td><input type="text" id="userId" name="userId2"  placeholder="6~50자 영문, 숫자" maxlength="50" required>
+		<td><input type="text" id="userId2" name="userId2"  placeholder="6~50자 영문, 숫자" maxlength="50" required>
 		<span id="id2Cmt" class="cmt"></span></td>
 		</tr>
    	<tr class="form-item">

@@ -94,6 +94,53 @@ public class CompanyController {
 		}
 		return result;
 	}
+	@GetMapping("/pwd") //기업 비밀번호찾기
+	private String findPwdCompany() throws Exception {
+		return "member/findPwd";
+	}
+	
+	@PostMapping("/pwd/tel") //기업 비번찾기(연락처)
+	@ResponseBody
+	private int findCPWdtel(@RequestBody Company c) throws Exception {
+		int result=0;
+		logger.info(c.toString());
+		int ms= memberService.findCPWdtel(c);
+		if(ms == 0) {
+			return result;
+		}else {
+			logger.info("비밀번호찾기 성공");
+			result=ms;
+		}
+		return result;
+	}
+	@PostMapping("/pwd/mail") //기업 비번찾기(이메일)
+	@ResponseBody
+	private int findCPWdmail(@RequestBody Company c) throws Exception {
+		int result=0;
+		logger.info(c.toString());
+		int ms= memberService.findCPWdmail(c);
+		if(ms == 0) {
+			return result;
+		}else {
+			logger.info("비밀번호찾기 성공");
+			result=ms;
+		}
+		return result;
+	}
+	@PostMapping("/pwd/num") //기업 비번찾기(사업자번호)
+	@ResponseBody
+	private int findCPWdnum(@RequestBody Company c) throws Exception {
+		int result=0;
+		logger.info(c.toString());
+		int ms= memberService.findCPWdnum(c);
+		if(ms == 0) {
+			return result;
+		}else {
+			logger.info("비밀번호찾기 성공");
+			result=ms;
+		}
+		return result;
+	}
 	
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {
