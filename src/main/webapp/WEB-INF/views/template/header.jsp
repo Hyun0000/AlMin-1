@@ -55,18 +55,22 @@ session.setAttribute("state", state);
 								class="template-btn">회원가입</a></li>
 					</c:when>
 					<c:otherwise>
-				<c:choose>
-					<c:when test="${not empty sessionScope.loginInfo.memberId}">
 						<!-- 로그인 후 노출 -->
+				<c:choose>
+				<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
 						<!-- 개인회원 노출 -->
 							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-					</c:when>
-					<c:otherwise>
-						<!-- 기업회원 노출 TODO: 기업서비스-->
+				</c:when>
+				<c:when test="${sessionScope.loginInfo.sessionType eq '2'}">
+					<!-- 기업회원 노출 TODO: 기업서비스-->
 							<li><a href="${pageContext.request.contextPath}/members/mypage">마이페이지</a></li>
 							<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
-
+				</c:when>
+					<c:otherwise>
+					<!-- 관리자 노출 -->
+					<li><a href="${pageContext.request.contextPath}/admins">회원/신고</a></li>
+					<li><a href="${pageContext.request.contextPath}/logout" class="logoutBtn"><button class="template-btn" onclick="logout()">로그아웃</button></a></li>
 					</c:otherwise>
    				</c:choose>
 					
