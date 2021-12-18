@@ -349,10 +349,13 @@
 		if(!isNull(recruitJobBranch)){
 			isSearchResult = true;
 			switch(recruitJobBranch){
+			case "X":
+				searchHtml += "";
+				break;
 			case "Y":
 				searchHtml += " #브랜드알바";
 				break;
-			case "X":
+			case "N":
 				searchHtml += " #브랜드제외";
 				break;
 			default:

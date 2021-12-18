@@ -217,7 +217,7 @@ form {
 									</script>
 								</c:if>
 
-								<button class="template-btn like-btn" onclick="doLike(this);">
+								<button class="template-btn like-btn" onclick="doLike(this);">찜하기
 								</button>
 								<button class="template-btn" onclick="myFunction(this)">신고하기</button>
 								<div class="d-toggle">
