@@ -102,10 +102,18 @@ tr > td:last-child{
 						<!-- Start comment-sec Area -->
 						<section class="comment-sec-area py-5">
 							<div class="container">
+								<c:choose>
+								<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
 								<p class="mName">
-									<h2><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b
-										style="color: dodgerblue">통합 회원정보</b></h2>
+									<h2><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b style="color: dodgerblue">통합 회원정보</b></h2>
 								</p>
+								</c:when>
+								<c:when test="${sessionScope.loginInfo.sessionType eq '2'}">
+								<p class="mName">
+									<h2><b>${sessionScope.loginInfo.companyId}</b>님의 알바의 민족 <b style="color: dodgerblue">통합 회원정보</b></h2>
+								</p>
+								</c:when>
+								</c:choose>
 								<div class="row flex-column">
 
 									<div class="comment-list">
@@ -162,6 +170,8 @@ tr > td:last-child{
 								</div>
 							</div>
 						</section>
+						<c:choose>
+								<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
 						<!-- Start comment-sec Area -->
 							<section class="comment-sec-area py-5">
 								<div class="container">
@@ -199,6 +209,8 @@ tr > td:last-child{
 									</div>
 								</div>
 						</section> 
+						</c:when>
+					</c:choose>
 						<!-- End comment-sec Area -->
 
 					</div>

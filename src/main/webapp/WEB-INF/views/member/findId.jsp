@@ -270,8 +270,7 @@ $(document).ready(function(){
 				if(result == ""){
 					alert("일치하는 아이디가 없습니다.");
 				} else {
-					console.log("아이디찾기 성공")
-					alert("아이디는 "+result+" 입니다.");
+					console.log("아이디찾기 성공! id: "+result)
 			location.href ="${pageContext.request.contextPath}/members/id/result?userId="+result//id찾기 결과화면
 				}
 		},

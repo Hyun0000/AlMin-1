@@ -128,7 +128,7 @@ function ajaxm1(){
 //member테이블에 이메일 인증 YN - N이면 서비스를 주면 안됨. -> 인터셉터 프리핸들에서 처리!(로그인 막기)
 function lastCheck(){
 	if($("#lastChk").val() == getCookie("email")){
-		alert("이메일 인증 성공하여 회원가입이 완료되었습니다.");
+		alert("회원가입이 완료되었습니다.");
 		location.href="<%=request.getContextPath()%>/main";
 	}else {
 		alert("이메일 인증 실패");
