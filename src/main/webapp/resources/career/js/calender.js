@@ -218,12 +218,12 @@ function calenderLoad() {
             // 여기서 ajax 써야할듯
             // console.log(info.event.title);
             // console.log(info.event.id);
-            console.log(info.event.start);
-            console.log(info.event.end);
-            console.log(typeof info.event.start);
-            console.log(typeof info.event.end);
-            console.log(typeof info.event.start.toString());
-            console.log(typeof info.event.end.toString());
+//            console.log(info.event.start);
+//            console.log(info.event.end);
+//            console.log(typeof info.event.start);
+//            console.log(typeof info.event.end);
+//            console.log(typeof info.event.start.toString());
+//            console.log(typeof info.event.end.toString());
             
             // 연도
             let startYear = info.event.start.toString().split(" ")[3];
@@ -302,36 +302,39 @@ function calenderLoad() {
           {
 			  googleCalendarId: ggCalId,
 			  className: 'ggCalEvent',
-			  color: '#ff5722'
+			  color: changeRGB()
 		  },
 		  {
 			  googleCalendarId: ggCaKoId,
 			  className: 'ggCalKo',
-			  color: '#67daff'
+			  color: changeRGB()
 		  },
 		  {
 			  events : evnets
 		  }
-        ]
+        ],
+        loading : function(bool) {
+            if (bool) {
+            	console.log("before");
+             } else {
+            	 console.log("after");
+             }
+          }
     });
     calendar.render();
-    // testColor();
-
+    
     // 등록된 이벤트 관련 내용
     let eventList = document.getElementsByClassName('fc-daygrid-event-harness');
     for (let i = 0; i < eventList.length; i++) {
             eventList[i].onclick = detailEvent;
     }
-    
-//    let testAll = document.getElementsByClassName(".fc-event-title-container");
-//    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-//    console.log(testAll);
-//    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-    
 		}
 	}
 }
 
+function kiwi() {
+	alert(123);
+}
 
 // 근무일정 drag update callbackfunction
 function afterDragUpdate() {
@@ -475,35 +478,3 @@ function changeRGB() {
 	 
 	return random_color;
 }
-
-// =============== 구글 캘린더 일정 색상 ===============
-let testAlls = document.getElementsByClassName("ggCalEvent");
-console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-console.log(testAlls);
-console.log(testAlls.length);
-console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-
-let testtest = document.getElementsByClassName("ggCalKo");
-console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-console.log(testtest);
-console.log(testtest.length);
-console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
-
-//function testColor() {
-//	let ggCals = document.getElementsByClassName('ggCal-event');
-//		console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
-//		console.log(ggCals);
-//		console.log(ggCals[0]);
-//		console.log(ggCals.length);
-//	for (var i = 0; i < ggCals.length; i++) {
-//		console.log("yyyyyyyyyyyyyyyyyyyyyyy");
-//		console.log(ggCals[i]);
-//	}
-//}
-
-
-
-
-
-
-
