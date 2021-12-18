@@ -206,23 +206,6 @@
 	border-radius: 20px; */
 }
 
-.list li, li.option {
-	text-align: center;
-}
-
-li.option {
-	text-align: center;
-}
-
-.list .option {
-	text-align: center;
-}
-
-#job_type option {
-	text-align: center;
-}
-
-.nice-select {
-	text-align: center;
-	margin: 0 auto;
-}
+/* .ggCalEvent {
+	border: 5px solid red;
+} */

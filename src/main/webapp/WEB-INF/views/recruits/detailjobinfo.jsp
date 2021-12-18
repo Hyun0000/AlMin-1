@@ -268,7 +268,7 @@ form {
 	<section id="comments_container">
 		<hr style="border-bottom: 1px solid #707070">
 		<h1 style="padding-left: 40px;">Review</h1>
-		[[${loginInfo.memberId}]]
+		<%-- [[${loginInfo.memberId}]] --%>
 		<ul id="comments_box"></ul>
 		<div id="comments_box_pageLink"></div>
 	</section>
@@ -384,14 +384,6 @@ form {
 		// 현재 페이지의 공고를 작성한 기업 ID
 		let recruitCompId = "${detailjobinfo.recruitCompanyId}";
 		console.log("recruitCompId : " + recruitCompId);
-
-		// jinpark
-		// giniuskang
-		// minzi91
-		// sjh1216
-		// sy111k2
-		// test01
-		// test02
 
 		// recruitNo(후기, 수정 삭제는 이 변수를 쓰면 안 된다. 로그인한 사용자가 매번 달라지기 때문)
 		let recruitNo = "${recruitNo}";

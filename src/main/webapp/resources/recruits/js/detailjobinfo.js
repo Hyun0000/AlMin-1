@@ -223,9 +223,9 @@ function postingComment(insertOrUpdate) {
 						
 						if (data.result == "insertOk") {
 							firstInsert = "yes";
-							alert("후기 등록 ok");
+							alert("후기가 등록 됐습니다.");
 						} else if (data.result == "updateOk") {
-							alert("후기 수정 ok");
+							alert("후기 수정이 완료됐습니다.");
 						}
 						
 						// 후기 새로 가져오기

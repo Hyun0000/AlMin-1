@@ -264,6 +264,25 @@ function calUpdate() {
 
     // 종료 날짜 + 시간
     allEnd = endDayEle.innerText + " " + endTimeEle.value;
+
+    // 근무/면접 버튼 element 유효성 검사
+    if(selectCal === "NG" || selectCal === "") {
+	    fourbtnEleVal = ""
+	    for (let k = 0; k < inputRadioEle.length; k++) {
+	        if (inputRadioEle[k].checked) {fourbtnEleVal = inputRadioEle[k].value;}
+	    }
+	    console.log("fourbtnEleVal : " + fourbtnEleVal);
+		if(fourbtnEleVal === "") {
+	        alert("일정의 종류를 선택해주세요");
+	        return false;
+		}
+    }
+    
+    // 일정 제목 유효성 검사
+    if (titleEle.value.length == 0 || titleEle.value.length > 10) {
+        alert("제목의 글자수를 맞게 입력해주세요");
+        return false;
+    }
     
     if(updateConfirm) {
     	if(selectCal === "NG" || selectCal === "") {

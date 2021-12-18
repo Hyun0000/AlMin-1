@@ -51,18 +51,14 @@ function calenderLoad() {
 	console.log(httpRequest.responseText);
 	
 	let needCalData = JSON.parse(httpRequest.responseText);
-	console.log(needCalData);
 	
-	let googleEvents = {
-	    googleCalendarId: 'raddernepa@gmail.com'
-	};
-	
-	console.log("needCalData.length : " + needCalData.length);
-	console.log("googleEvents");
-	console.log(googleEvents);
-	console.log("googleEvents");
-	console.log("googleEvents.googleCalendarId : " + googleEvents.googleCalendarId);
-	console.log("googleEvents.length : " + googleEvents.length);
+//	let testGG =  {
+//    	    googleCalendarId: ggCalId,
+//    	    color: '#be5683'
+//	}
+//	console.log("=================================");
+//	console.log(testGG.googleCalendarId);
+//	console.log("=================================");
 	
 	if(selectCal === "NG" || selectCal === "") {
 		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
@@ -77,7 +73,6 @@ function calenderLoad() {
 			evnetObj.type = needCalData[i].NEED_GO_MEET;
 			evnets[i] = evnetObj;
 		}
-		// evnets[needCalData.length] = googleEvents;
 	}
 // ========================================================================================	
 //	if(selectCal === "NG" || selectCal === "") {
@@ -118,9 +113,12 @@ function calenderLoad() {
 	console.log(evnets);
 	console.log("******************************************");
 	
+//	let ggCals = document.getElementsByClassName('ggCalEvent');
+//	console.log(ggCals);
+//	console.log(ggCals.length);
+	
 	var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-    	// plugins: [ 'googleCalendar' ],
     	googleCalendarApiKey : "AIzaSyAbwR6yZe1SWMSCRpoRaYJCTKpIslPr0xw",
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
@@ -263,15 +261,15 @@ function calenderLoad() {
             let draggedEventStartTime = info.event.start.toISOString().split('T')[0];
             let draggedEventEndTime = info.event.end.toISOString().split('T')[0];
             
-            console.log(typeof info.event.start);
-            console.log(typeof info.event.start.toISOString());
-            console.log(info.event.start.toString());
-            console.log("info.event.start.toISOString() : " + info.event.start.toISOString());
-            console.log("info.event.end.toISOString() : " + info.event.end.toISOString());
-
-            console.log("draggedEventTitle : " + draggedEventTitle);
-            console.log("draggedEventStartTime : " + draggedEventStartTime);
-            console.log("draggedEventEndTime : " + draggedEventEndTime);
+//            console.log(typeof info.event.start);
+//            console.log(typeof info.event.start.toISOString());
+//            console.log(info.event.start.toString());
+//            console.log("info.event.start.toISOString() : " + info.event.start.toISOString());
+//            console.log("info.event.end.toISOString() : " + info.event.end.toISOString());
+//
+//            console.log("draggedEventTitle : " + draggedEventTitle);
+//            console.log("draggedEventStartTime : " + draggedEventStartTime);
+//            console.log("draggedEventEndTime : " + draggedEventEndTime);
             
             let dragUpdateStart = startAll + " " + info.event.start.toString().split(" ")[4];
             let dragUpdateEnd = endAll + " " + info.event.end.toString().split(" ")[4];
@@ -302,32 +300,38 @@ function calenderLoad() {
         },
         eventSources : [
           {
-    	    googleCalendarId: 'raddernepa@gmail.com',
-    	    color: '#be5683'
+			  googleCalendarId: ggCalId,
+			  className: 'ggCalEvent',
+			  color: '#ff5722'
 		  },
-		  {events : evnets}
+		  {
+			  googleCalendarId: ggCaKoId,
+			  className: 'ggCalKo',
+			  color: '#67daff'
+		  },
+		  {
+			  events : evnets
+		  }
         ]
-//         events: {
-//        	    googleCalendarId: 'raddernepa@gmail.com',
-//        	    color: '#be5683'
-//    	  },
-    	  // events : evnets
     });
     calendar.render();
-
-    // 각 날짜를 클릭했을 때 모달창 팝업 callback function 등록
-    // let dayDay = document.getElementsByClassName('fc-day');
-//    let dayDay = document.getElementById('insert_evnet_btn');
-//    dayDay.onclick = modalUp;
+    // testColor();
 
     // 등록된 이벤트 관련 내용
     let eventList = document.getElementsByClassName('fc-daygrid-event-harness');
     for (let i = 0; i < eventList.length; i++) {
             eventList[i].onclick = detailEvent;
     }
+    
+//    let testAll = document.getElementsByClassName(".fc-event-title-container");
+//    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+//    console.log(testAll);
+//    console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+    
 		}
 	}
 }
+
 
 // 근무일정 drag update callbackfunction
 function afterDragUpdate() {
@@ -460,3 +464,46 @@ function movedEvent(title, newStartDay, newEndDay) {
         }
     }
 }
+
+function changeRGB() {
+	// 0~255값을 랜덤으로 뽑아내서 각각의 변수 r,g,b 에 들어간다.
+	let r = Math.round(Math.random() * 255); 
+	let g = Math.round(Math.random() * 255);
+	let b = Math.round(Math.random() * 255);
+	 
+	let random_color = "rgba(" + r + "," + g + "," + b + ")";
+	 
+	return random_color;
+}
+
+// =============== 구글 캘린더 일정 색상 ===============
+let testAlls = document.getElementsByClassName("ggCalEvent");
+console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+console.log(testAlls);
+console.log(testAlls.length);
+console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+
+let testtest = document.getElementsByClassName("ggCalKo");
+console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+console.log(testtest);
+console.log(testtest.length);
+console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+
+//function testColor() {
+//	let ggCals = document.getElementsByClassName('ggCal-event');
+//		console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+//		console.log(ggCals);
+//		console.log(ggCals[0]);
+//		console.log(ggCals.length);
+//	for (var i = 0; i < ggCals.length; i++) {
+//		console.log("yyyyyyyyyyyyyyyyyyyyyyy");
+//		console.log(ggCals[i]);
+//	}
+//}
+
+
+
+
+
+
+

@@ -1,3 +1,9 @@
+// 구글 캘린더 ID
+let ggCalId = 'raddernepa@gmail.com';
+
+// 구글 캘린더 한국 달력 ID
+let ggCaKoId = 'ko.south_korea#holiday@group.v.calendar.google.com';
+
 // 드래그로 수정한 시작 날짜
 let dragUpdateStart;
 

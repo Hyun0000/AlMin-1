@@ -319,5 +319,20 @@
 <script src="<c:url value="/resources/career/js/chart.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>$(document).ready(function () {$('.timepicker').mdtimepicker();});</script>
+<script type="text/javascript">
+	let apples = document.getElementsByClassName("ggCalEvent");
+	console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+	console.log(apples);
+	console.log(apples[0]);
+	console.log(apples.length);
+	console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+	
+	let kiwis = document.querySelectorAll(".ggCalEvent");
+	console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+	console.log(kiwis);
+	console.log(kiwis[0]);
+	console.log(kiwis.length);
+	console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
+</script>
 </body>
 </html>
