@@ -55,7 +55,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 		if (requestURL.startsWith("/recruits/appforyou")) {
 			if (!loginInfo.getSessionType().equals("1")) {
 				System.out.println("세션타입: " + loginInfo.getSessionType());
-				System.out.println("관리자 페이지 접근 실패");
+				System.out.println("접근 실패");
 				response.sendRedirect(request.getContextPath() + "/main");
 				return false;
 			} else {
@@ -65,7 +65,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 		if (requestURL.startsWith("/recruits/myrecruits")) {
 			if (!loginInfo.getSessionType().equals("1")) {
 				System.out.println("세션타입: " + loginInfo.getSessionType());
-				System.out.println("관리자 페이지 접근 실패");
+				System.out.println("접근 실패");
 				response.sendRedirect(request.getContextPath() + "/main");
 				return false;
 			} else {
@@ -75,7 +75,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 		if (requestURL.startsWith("/applicants/myapplicants")) {
 			if (!loginInfo.getSessionType().equals("2")) {
 				System.out.println("세션타입: " + loginInfo.getSessionType());
-				System.out.println("관리자 페이지 접근 실패");
+				System.out.println("접근 실패");
 				response.sendRedirect(request.getContextPath() + "/main");
 				return false;
 			} else {

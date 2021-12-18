@@ -46,10 +46,10 @@ session.setAttribute("state", state);
 					<ul id="mainbar">
 						<li class="active"><a href="${pageContext.request.contextPath}/recruits">구인공고</a></li>
 						<li><a href="${pageContext.request.contextPath}/applicants">인재정보</a></li>
-					<li><a href="<%=request.getContextPath()%>/members/id" id="findId">아이디/비밀번호 찾기</a></li>
 				<c:choose>
 					<c:when test="${empty sessionScope.loginInfo.memberId and empty sessionScope.loginInfo.companyId }">
 						<!-- 로그인 전 노출 -->
+					<li><a href="<%=request.getContextPath()%>/members/id" id="findId">아이디/비밀번호 찾기</a></li>
 							<li class="menu-btn"><button class="login template-btn btn0">로그인</button>
 								<a href="${pageContext.request.contextPath}/members/register"
 								class="template-btn">회원가입</a></li>
