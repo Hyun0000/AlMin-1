@@ -272,6 +272,23 @@ public class RecruitController {
 //		http://localhost:8090/almin/recruits/detailjobinfo?recruitNo=10
 //		http://localhost:8090/almin/detailjobinfo?=10
 	}
+	
+	@GetMapping("myallrecruit")
+	public ModelAndView goAllRecruit(HttpSession session,Recruit r,ModelAndView mv) {
+		List<Recruit> volist=null;
+		String companyId = ((SsInfo)session.getAttribute("loginInfo")).getCompanyId();
+		System.out.println("userid : "+companyId);
+		r.setRecruitCompanyId(companyId);
+		try {
+			volist=recruitService.selectAllRecruit(r);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mv.addObject("allRecruit", volist);
+		System.out.println("allRecruit : "+volist);
+		mv.setViewName("recruits/selectAllRecruit");
+		return mv;
+	}
 
 	@ExceptionHandler
 	private ModelAndView handleMemberException(Exception e) {

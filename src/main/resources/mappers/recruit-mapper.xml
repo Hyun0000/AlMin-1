@@ -202,4 +202,9 @@
 		RECRUIT_TIME=#{recruitTime},RECRUIT_ADDRESS=#{recruitAddress},RECRUIT_CONTENT=#{recruitContent},RECRUIT_PUB=#{recruitPub},
 		RECRUIT_JOB_TYPE=#{recruitJobType},RECRUIT_JOB_DISTRICT=#{recruitJobDistrict},RECRUIT_JOB_WHO=#{recruitJobWho},RECRUIT_JOB_BRANCH=#{recruitJobBranch}
 	</update>
+	
+	<!-- 기업회원 공고 전체 조회 -->
+	<select id="selectAllRecruit" resultMap="RecruitResultMap" resultType="Recruit">
+		select RECRUIT_NO,RECRUIT_TITLE,RECRUIT_DATE from COMPANY_RECRUIT where RECRUIT_COMPANY_ID=#{recruitCompanyId}
+	</select>
 </mapper>

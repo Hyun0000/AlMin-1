@@ -42,7 +42,7 @@
 	</resultMap>
 	
 	
-	<!-- 이력서 전체 조회 -->
+	<!-- 개인 이력서 전체 조회 -->
 	<select id="selectAllResume" resultMap="ResumeResultMap" resultType="Resume">
 		select RESUME_NO,RESUME_TITLE,RESUME_DATE from MEMBER_RESUME where MEMBER_ID=#{memberId}
 	</select> 

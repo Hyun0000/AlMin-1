@@ -127,4 +127,8 @@ public class RecruitServiceImpl implements RecruitService {
 	public int checkReport(ReportRecruit reportRecruit) throws Exception {
 		return recruitDao.checkReport(reportRecruit);
 	}
-}
+	
+	public List<Recruit> selectAllRecruit(Recruit r) throws Exception{
+		return recruitDao.selectAllRecruit(r);
+	}
+	}

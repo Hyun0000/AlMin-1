@@ -87,4 +87,9 @@ public class RecruitDao {
 	public int checkReport(ReportRecruit reportRecruit) throws Exception {
 		return sqlSession.selectOne("Recruit.checkReport", reportRecruit);
 	}
+	
+	public List<Recruit> selectAllRecruit(Recruit r) throws Exception{
+		List<Recruit> recruit=sqlSession.selectList("Recruit.selectAllRecruit",r);
+		return recruit;
+	}
 }
