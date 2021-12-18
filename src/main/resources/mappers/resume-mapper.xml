@@ -16,6 +16,7 @@
 		<result property="periodNo" column="PERIOD_NO" />
 		<result property="jobTypeNo" column="JOB_TYPE_NO" />
 		<result property="resumePhoto" column="RESUME_PHOTO" />
+		<result property="resumeDate" column="RESUME_DATE"/>
 		
 		<association property="district" resultMap="districtMap"></association>
 		<association property="jobType" resultMap="jobTypeMap"></association>

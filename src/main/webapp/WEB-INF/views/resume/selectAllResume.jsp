@@ -53,8 +53,14 @@
                             	</c:if>
                                 <div class="reportItem">
                                     <div class="d-toggle">
-                                        <div class="rt"><a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a>
-                                        	
+                                        <div class="rt">
+                                        <table>
+                                        <tr>
+                                        <th><a href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a></th>
+                                        <td>${item.resumeDate }</td>
+                                        </tr>
+                                        
+                                        </table>
                                         </div>
                                     </div>
                                 </div>

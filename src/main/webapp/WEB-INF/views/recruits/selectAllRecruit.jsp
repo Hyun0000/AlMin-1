@@ -34,8 +34,15 @@
 									<div class="reportItem">
 										<div class="d-toggle">
 											<div class="rt">
-												<a
-													href="${pageContext.request.contextPath}/recruits/recruit?recruitNo=${item.recruitNo }">${item.recruitTitle }</a>
+											<table>
+											<tr>
+											<th><a href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle }</a></th>
+											<td>${item.recruitDate }</td>
+											</tr>
+											
+											
+											</table>
+												
 
 											</div>
 										</div>

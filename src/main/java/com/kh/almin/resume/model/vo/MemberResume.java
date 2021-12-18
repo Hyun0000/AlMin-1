@@ -1,5 +1,7 @@
 package com.kh.almin.resume.model.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.kh.almin.district.model.vo.District;
@@ -41,6 +43,7 @@ public class MemberResume { //회원 이력서 테이블
 	private int periodNo;
 	private int jobTypeNo;
 	private byte[] resumePhoto;
+	private Date resumeDate;
 	
 	//join
 	private District district;
