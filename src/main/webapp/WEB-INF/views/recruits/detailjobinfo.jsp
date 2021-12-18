@@ -42,6 +42,14 @@ form {
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 	<!-- Header Area End -->
 	<section class="job-single-content section-padding">
+	
+	<c:if test="${!empty msg}">
+		<script>
+			alert("${msg}");
+			<c:remove var="msg"/>
+		</script>
+		</c:if>
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -256,6 +264,8 @@ form {
 								<button id="showRecruiter" class="template-btn"
 									onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
 									지원자 보기</button>
+								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/updateRecruit?recruitNo=${detailjobinfo.recruitNo }'">수정하기</button>
+								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/deleteRecruit?recruitNo=${detailjobinfo.recruitNo }'">삭제하기</button>
 							</c:otherwise>
 						</c:choose>
 					</c:when>

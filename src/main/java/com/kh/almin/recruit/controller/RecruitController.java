@@ -246,7 +246,7 @@ public class RecruitController {
 			m.addAttribute("msg", "다시 시도해주세요.");
 		}
 
-		return "redirect:recruits";
+		return "redirect:/recruits";
 	}
 
 	@Autowired
