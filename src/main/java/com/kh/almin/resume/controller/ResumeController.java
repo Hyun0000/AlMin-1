@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.util.Base64Utils;
 
+import com.kh.almin.member.model.service.MemberService;
+import com.kh.almin.member.model.vo.Member;
+import com.kh.almin.member.model.vo.SsInfo;
 import com.kh.almin.resume.model.service.ResumeService;
 import com.kh.almin.resume.model.vo.MemberResume;
 
@@ -48,13 +52,20 @@ public class ResumeController {
 	}
 	
 	@GetMapping("allres") //로그인된 회원 전체 이력서 조회
-	public ModelAndView goAllResumePage(MemberResume mr,ModelAndView mv) {
+	public ModelAndView goAllResumePage(HttpSession session,MemberResume mr,ModelAndView mv) {
+//TODO 로그인세션 정보 넘기기
 		List<MemberResume> volist=null;
+		String userId = ((SsInfo)session.getAttribute("loginInfo")).getMemberId();
+		System.out.println("userid : "+userId);
+		
+		mr.setMemberId(userId);
 		try {
 			volist = resumeService.selectAllResume(mr);
+			System.out.println("이력서 아이디 : "+volist);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		mv.addObject("allResume", volist);
 		System.out.println("allResume : "+volist);
 		mv.setViewName("resume/selectAllResume");
@@ -86,7 +97,7 @@ public class ResumeController {
 		return mv;
 	}
 	@PostMapping("updateResume")//이력서 수정
-	public String updateResume(@RequestParam(value="msg", required=false)String msg,MemberResume mr,Model m ) throws Exception {
+	public String updateResume(HttpSession session,@RequestParam(value="msg", required=false)String msg,MemberResume mr,Model m ) throws Exception {
 		int result=resumeService.updateResume(mr);
 		if(result>0) {
 			m.addAttribute("msg","수정되었습니다.");
@@ -97,13 +108,16 @@ public class ResumeController {
 	}
 	
 	@PostMapping("addres")//이력서등록
-	public ModelAndView insertResume(@RequestParam(value = "resumePhoto",required = false) byte[] resumePhoto,MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
+	public ModelAndView insertResume(HttpSession session,@RequestParam(value = "resumePhoto",required = false) byte[] resumePhoto,MemberResume mr,RedirectAttributes redirectAttributes,HttpServletRequest request,ModelAndView mv) throws Exception{
 		System.out.println("mr : "+mr);
+		String userId = ((SsInfo)session.getAttribute("loginInfo")).getMemberId();
+		Member vo=new Member();
+		vo.setMemberId(userId);
 		int result=-1;
 		byte imageArray[] = null;
 		final String BASE_64_PREFIX = "data:image/jpg;base64,";
 		try {
-			 String base64Url = String.valueOf(mr);
+			 String base64Url = String.valueOf(resumePhoto);
 			
 //			 String base64Url = String.valueOf(param.get("image"));
 	            if (base64Url.startsWith(BASE_64_PREFIX)){
@@ -113,6 +127,7 @@ public class ResumeController {
 	                
 	            }
 			result=resumeService.insertResume(mr);
+			System.out.println("이력서정보 : "+mr);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

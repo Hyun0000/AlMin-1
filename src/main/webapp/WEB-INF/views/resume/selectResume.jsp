@@ -60,12 +60,18 @@
 							<c:choose>
 								<c:when test="${not empty sessionScope.loginInfo.memberId}">
 									<!-- 개인회원 노출 -->
+									<button id="print" class="template-btn"
+												onclick="window.print()">인쇄하기</button>
+											<button class="template-btn"
+												onclick="location.href='${pageContext.request.contextPath}/resumes/deleteResume?resumeNo=${resum.resumeNo}'">삭제</button>
+											<button class="template-btn"
+												onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
 								</c:when>
 								<c:otherwise>
 									<!-- 기업회원 노출 TODO: 기업서비스-->
 									<button class="template-btn like-btn" onclick="doLike(this);">
 									</button>
-									<c:choose>
+									<%-- <c:choose>
 										<c:when
 											test="${sessionScope.loginInfo.memberId eq resum.memberId}">
 											<button id="print" class="template-btn"
@@ -76,7 +82,7 @@
 												onclick="location.href='${pageContext.request.contextPath}/resumes/update?resumeNo=${resum.resumeNo}'">수정</button>
 
 										</c:when>
-									</c:choose>
+									</c:choose> --%>
 								</c:otherwise>
 							</c:choose>
 						</c:when>

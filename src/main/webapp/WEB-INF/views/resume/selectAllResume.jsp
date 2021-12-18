@@ -37,7 +37,9 @@
 			<c:remove var="msg"/>
 		</script>
 		</c:if>
+		
 	<h1>My이력서</h1>
+		
     <div class="row">
         <div class="col-lg-12">
             <div class="tab-content">

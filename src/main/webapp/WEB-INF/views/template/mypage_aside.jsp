@@ -10,7 +10,7 @@
 					class="justify-content-between align-items-center d-flex"><h6>회원정보</h6></a></li>
 				<li><a href="#"
 					class="justify-content-between align-items-center d-flex "><h6 class="active">관심공고</h6></a></li>
-				<li><a href="#"
+				<li><a href="${pageContext.request.contextPath}/resumes/selectAllResume"
 					class="justify-content-between align-items-center d-flex"><h6>이력서 관리</h6></a></li>
 			</ul>
 		</div>

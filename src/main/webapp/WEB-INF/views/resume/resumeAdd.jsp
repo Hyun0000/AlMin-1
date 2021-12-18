@@ -33,7 +33,7 @@
 <div class="resumeform">
 <header>
 		<c:import url="/WEB-INF/views/template/header.jsp" />
-	</header>
+</header>
 	<section>
 	<c:if test="${!empty msg}">
 
@@ -44,18 +44,20 @@
 		</script>
 
 	</c:if>
+	 <form action="addres" method="post">
 	<h1>이력서 등록</h1>
     <br>
     <div id="logininfo">
         <strong>개인기본정보</strong>
         <span>가입 시 등록한 개인정보를 한번 더 확인해주세요.</span><br>
         <!-- TODO //이름 핸드폰 성별 (로그인 정보 가져오기) -->
+       <input type="text" name="memberId" value="${sessionScope.loginInfo.memberId}" readonly><br><strong>님의 알바의 민족</strong>
         
     </div>
     <br>
     <hr>
-    <div>
-    <form action="addres" method="post">
+    
+    
    <!-- 	<div id="resumePhoto">
    	<strong>이력서 사진</strong><br>
    	 <input type="file" name="resumePhoto"><br>
@@ -63,7 +65,7 @@
    	 <!-- <div id="dropbox" >
    	 <strong>사진</strong><br>
    	  <span id="droplabel" >이곳에 파일을 드랍주세요.</span>
-   	 </div>
+   	
    		<img id="preview" name="resumePhoto" alt="[미리보기 표시]"/> -->
    		<div id="dropbox">
    			<input type="file" name="resumePhoto" onchange="setThumbnail(event);"/>
@@ -151,11 +153,12 @@
             <input type="radio" name="resumePublicYn" value="N">비공개
         </div>
         <br>
-        <button>등록</button>
+        <button class="template-btn">등록</button>
         </form>
     </div>
+    
     </section>
-    </div>
+   
     <footer>
 		<c:import url="/WEB-INF/views/template/footer.jsp" />
 	</footer>
