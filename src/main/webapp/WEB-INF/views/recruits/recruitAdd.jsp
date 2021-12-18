@@ -60,6 +60,8 @@ width: 150px;
                         </div>
                           <form action="addrecruit" method="get">
                         <div class="single-content3 py-4">
+                        
+          	     <input type="hidden" name="recruitCompanyId" value="${sessionScope.loginInfo.companyId }" >
                        
 			<h2>제목</h2>
 				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." class="single-input" required>

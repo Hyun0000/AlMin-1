@@ -50,7 +50,7 @@
     <div id="logininfo">
         <strong>개인기본정보</strong>
         <span>가입 시 등록한 개인정보를 한번 더 확인해주세요.</span><br>
-        <!-- TODO //이름 핸드폰 성별 (로그인 정보 가져오기) -->
+        
        <input type="text" name="memberId" value="${sessionScope.loginInfo.memberId}" readonly><br><strong>님의 알바의 민족</strong>
         
     </div>

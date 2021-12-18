@@ -193,7 +193,7 @@ public class RecruitController {
 		System.out.println("r: " + r);
 		if (result > 0) {
 			mv.addObject("msg", "공고 등록이 되었습니다.");
-			mv.setViewName("recruits/jobinfoList");
+			mv.setViewName("redirect:/recruits");
 		} else {
 			mv.addObject("msg", "공고 등록이 실패했습니다.다시 시도해주세요.");
 			String referer = request.getHeader("Referer"); // 이전페이지로 이동
