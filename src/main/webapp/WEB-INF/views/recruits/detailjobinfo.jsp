@@ -210,22 +210,21 @@ form {
 						<c:choose>
 							<c:when test="${not empty sessionScope.loginInfo.memberId}">
 								<!-- 개인회원 노출 -->
-								<%-- 								<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
-								<button type="button" class="template-btn" id="recruitGo">지원하기</button> --%>
-								<!-- 							
+								<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
+								<button type="button" class="template-btn" id="recruitGo">지원하기</button>
 								<div id="resume_modal_back">
 									<div id="resume_insert_box">
 										
 									</div>
 								</div>
--->
-								<form action="recruitgo" method="post">
+								
+<%-- 								<form action="recruitgo" method="post">
 									<input type="hidden" id="recruitGoId"
 										value="${loginInfo.memberId}" name="rwmMemberId"> <input
 										type="hidden" id="recruitGoNo" value="${recruitNo}"
 										name="rwmRecruitNo">
 									<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
-								</form>
+								</form> --%>
 
 								<c:if test="${recruitgomsg ne null}">
 									<script>

@@ -725,7 +725,7 @@ function findComments() {
 
 // ============================== 공조 지원 이력서 선택(개인회원) ==============================
 let resumeBack = document.getElementById('resume_modal_back');
-let resume_insert_box = document.getElementById('resume_modal_back');
+let resume_insert_box = document.getElementById('resume_insert_box');
 
 document.getElementById('recruitGo').onclick = () => {
 	let getResumePath = "/almin/resumes/allresAjax/" + userId;
@@ -748,10 +748,18 @@ function afterBtn() {
 			let resumeUlEle = document.createElement('ul');
 			resumeUlEle.setAttribute("id", "resumeList");
 			resume_insert_box.appendChild(resumeUlEle);
+			for (var i = 0; i < resumeData.length; i++) {
+				let resumeLiEle = document.createElement('li');
+				resumeLiEle.setAttribute("class", "resumeItem");
+				resumeUlEle.appendChild(resumeLiEle);
+				
+				let aEle = document.createElement('a');
+				aEle.setAttribute("href", resumeData[i].resumeNo);
+				aEle.innerText = resumeData[i].resumeTitle;
+				resumeLiEle.appendChild(aEle);
+			}
 			
-			let resumeLiEle = document.createElement('li');
-			resumeLiEle.setAttribute("class", "resumeItem");
-			resumeUlEle.appendChild(resumeLiEle);
+			
 			
 			//모달창 팝업 닫기(배경 눌렀을때)
 			window.onclick = () => {

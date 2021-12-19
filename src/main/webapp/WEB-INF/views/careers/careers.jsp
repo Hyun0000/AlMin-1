@@ -32,7 +32,7 @@
 <c:import url="/WEB-INF/views/template/header.jsp" />
     <section id="calender_top">
         <!-- <div> -->
-            <div id="top_title" style="color:black; display: none"></div>
+            <div id="top_title" style="color:black; display: none;"></div>
             <div id="top_btn">
             </div>
         <!-- </div> -->
