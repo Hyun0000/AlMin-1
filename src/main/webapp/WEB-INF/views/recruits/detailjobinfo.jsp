@@ -65,6 +65,10 @@ form {
 									<td>${detailjobinfo.recruitCareer }</td>
 								</tr>
 								<tr>
+									<td>대상 :&nbsp;</td>
+									<td>${detailjobinfo.jobWho.recruitJobWhoName }</td>
+								</tr>
+								<tr>
 									<td>성별 :&nbsp;</td>
 									<td>${detailjobinfo.recruitGender }</td>
 								</tr>
@@ -264,7 +268,7 @@ form {
 								<button id="showRecruiter" class="template-btn"
 									onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
 									지원자 보기</button>
-								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/updateRecruit?recruitNo=${detailjobinfo.recruitNo }'">수정하기</button>
+								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/updateRe?recruitNo=${detailjobinfo.recruitNo }'">수정하기</button>
 								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/deleteRecruit?recruitNo=${detailjobinfo.recruitNo }'">삭제하기</button>
 							</c:otherwise>
 						</c:choose>

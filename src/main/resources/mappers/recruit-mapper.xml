@@ -30,11 +30,12 @@
 		<result property="recruitDate" column="RECRUIT_DATE" />
 		<result property="recruitReport" column="RECRUIT_REPORT" />
 
-		<association property="district" resultMap="districtMap">
+		<association property="district" resultMap="districtMap"></association>
 		<association property="jobType" resultMap="jobTypeMap"></association>
 		<association property="education" resultMap="educationMap"></association>
 		<association property="period" resultMap="periodMap"></association>
-		</association>
+		<association property="jobWho" resultMap="jobwhoMap"></association>
+		
 	</resultMap>
 
 	<resultMap id="districtMap" type="District">
@@ -53,7 +54,7 @@
 		<id property="periodNo" column="PERIOD_NO"/>
 		<result property="periodType" column="PERIOD_TYPE"/>
 	</resultMap>
-	<resultMap type="com.kh.almin.jobwho.model.vo.JobWho" id="jobWhoMap">
+	<resultMap type="com.kh.almin.jobwho.model.vo.JobWho" id="jobwhoMap">
 		<id property="jobWhoNo" column="JOB_WHO_NO"/>
 		<result property="jobWhoName" column="JOB_WHO_NAME"/>
 	</resultMap>
@@ -196,11 +197,11 @@
 	<!-- 공고 수정 -->
 	<update id="updateRecruit" parameterType="Recruit">
 		update COMPANY_RECRUIT
-		set RECRUIT_TITLE=#{recruitTitle},,RECRUIT_CAREER=#{recruitCareer},RECRUIT_GENDER=#{recruitGender},
-		RECRUIT_START_AGE=#{recruitStartAge},RECRUIT_END_AGE=#{recruitEndAge},RECRUIT_EDUCATION=#{recruitEducation},
-		RECRUIT_PERSON=#{recruitPerson},RECRUIT_MONEY=#{recruitMoney},RECRUIT_PERIOD=#{recruitPeriod},RECRUIT_DAY=#{recruitDay},
-		RECRUIT_TIME=#{recruitTime},RECRUIT_ADDRESS=#{recruitAddress},RECRUIT_CONTENT=#{recruitContent},RECRUIT_PUB=#{recruitPub},
-		RECRUIT_JOB_TYPE=#{recruitJobType},RECRUIT_JOB_DISTRICT=#{recruitJobDistrict},RECRUIT_JOB_WHO=#{recruitJobWho},RECRUIT_JOB_BRANCH=#{recruitJobBranch}
+		set RECRUIT_TITLE=#{recruitTitle},RECRUIT_GENDER=#{recruitGender},RECRUIT_START_AGE=#{recruitStartAge},RECRUIT_END_AGE=#{recruitEndAge},
+		RECRUIT_EDUCATION=#{recruitEducation},RECRUIT_PERSON=#{recruitPerson},RECRUIT_JOB_WHO=#{recruitJobWho},RECRUIT_MONEY=#{recruitMoney},
+		RECRUIT_PERIOD=#{recruitPeriod},RECRUIT_DAY=#{recruitDay},RECRUIT_TIME=#{recruitTime},RECRUIT_JOB_TYPE=#{recruitJobType},
+		RECRUIT_JOB_DISTRICT=#{recruitJobDistrict},RECRUIT_ADDRESS=#{recruitAddress},RECRUIT_CONTENT=#{recruitContent} where RECRUIT_NO=#{recruitNo}
+		
 	</update>
 	
 	<!-- 기업회원 공고 전체 조회 -->

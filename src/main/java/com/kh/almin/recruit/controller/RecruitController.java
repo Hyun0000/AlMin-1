@@ -217,19 +217,19 @@ public class RecruitController {
 
 	@GetMapping("updateRecruit")
 	public String updateRecruit(@RequestParam(value = "msg", required = false) String msg, Recruit r, Model m) {
-		int result = -1;
+
+		int result=0;
 		try {
 			result = recruitService.updateRecruit(r);
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
-		if (result > 0) {
-			m.addAttribute("msg", "수정되었습니다.");
-		} else {
+		if(result>0) {
+			m.addAttribute("msg", "수정되었습니다");
+		}else {
 			m.addAttribute("msg", "다시 시도해주세요.");
 		}
-		return "redirect:recruits";
+		return "redirect:/recruits";
 	}
 
 	@GetMapping("deleteRecruit")

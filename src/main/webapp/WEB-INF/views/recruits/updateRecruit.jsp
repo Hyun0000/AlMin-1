@@ -46,7 +46,7 @@
 	</c:if>
 	
 		<h1>공고등록</h1>
-		<form action="updateRecruit" method="get">
+		<form action="updateRecruit?recruitNo=${recruit.recruitNo }" method="get">
 			<h2>제목</h2>
 				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." value="${recruit.recruitTitle }">
 			<hr>
@@ -55,7 +55,7 @@
 				<tr>
 					<th>성별</th>
 					<td><select name="recruitGender">
-					<option value="${recruit.recruitGender }">
+					<option value="${recruit.recruitGender }">${recruit.recruitGender }</option>
 							<option value="남자">남자</option>
 							<option value="여자">여자</option>
 					</select></td>

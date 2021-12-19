@@ -50,7 +50,7 @@ public class Recruit {
    private JobType jobType;
 	private Education education;
 	private Period period;
-	private JobWho jobwho;
+	private JobWho jobWho;
 
 @Override
 public String toString() {
