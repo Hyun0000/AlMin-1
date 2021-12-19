@@ -75,18 +75,8 @@ button {
 	padding-left: 10px;
 }
 
-.memberItem {
-	padding-top: 3px;
-	padding-bottom: 3px;
-}
-
 #clist {
 	padding-left: 10px;
-}
-
-.companyItem {
-	padding-top: 3px;
-	padding-bottom: 3px;
 }
 </style>
 
@@ -295,9 +285,11 @@ button {
 			}
 			for (var i = 0; i < data.length; i++) {
 				uHtml += '<div class="memberItem">';
+				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '<button onclick="myFunction(this)" class="mid">'
 						+ data[i].memberId + '</button>';
 				uHtml += '<div class="d-toggle"  id="mlist">';
+				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += data[i].memberName + '<br>' + data[i].memberPhone
 						+ '<br>';
 				uHtml += data[i].memberBirth + '<br>' + data[i].memberEmail
@@ -305,7 +297,6 @@ button {
 				uHtml += data[i].memberAge + '<br>' + data[i].memberRegdate
 						+ '<br>';
 				uHtml += '<button class="genric-btn primary small deletemm" id="removebtn">탈퇴</button>';
-				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '</div>';
 				uHtml += '</div>';
 			}
@@ -334,6 +325,7 @@ button {
 				</div> 
 				 */
 				uHtml += '<div class="companyItem">';
+				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '<button onclick="myFunction(this)" class="cid">'
 						+ data[i].companyId + '</button>';
 				uHtml += '<div class="d-toggle" id="clist">';
@@ -343,7 +335,6 @@ button {
 						+ ' ';
 				uHtml += data[i].companyNum + ' ';
 				uHtml += '<button class="genric-btn primary small deletecm" id="removebtn">탈퇴</button>';
-				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '</div>';
 				uHtml += '</div>';
 			}

@@ -101,6 +101,7 @@ button {
 								<div class="job-text">
 									<c:forEach var="item" items="${reportview}">
 										<div class="reportItem">
+											<hr style="border: 1px color= silver;" width="90%">
 											<button onclick="myFunction(this)">${item.recruitTitle}</button>
 											<div class="d-toggle" id="rlist">
 												<div class="title" id="reportItem">${item.recruitCompanyId}<br>${item.recruitDate}</div>
@@ -127,7 +128,6 @@ button {
 														최저임금 미만의 급여<span id="here_5"></span>
 													</div>
 												</div>
-												<hr style="border: 1px color= silver;" width="90%">
 											</div>
 										</div>
 									</c:forEach>
