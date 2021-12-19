@@ -329,11 +329,11 @@ button {
 				uHtml += '<button onclick="myFunction(this)" class="cid">'
 						+ data[i].companyId + '</button>';
 				uHtml += '<div class="d-toggle" id="clist">';
-				uHtml += data[i].companyName + data[i].companyTel + ' '
-						+ data[i].companyBoss + ' ';
-				uHtml += data[i].companyEmail + ' ' + data[i].companyAddress
-						+ ' ';
-				uHtml += data[i].companyNum + ' ';
+				uHtml += data[i].companyName + data[i].companyTel + '<br>'
+						+ data[i].companyBoss + '<br>';
+				uHtml += data[i].companyEmail + '<br>' + data[i].companyAddress
+						+ '<br>';
+				uHtml += data[i].companyNum + '<br>';
 				uHtml += '<button class="genric-btn primary small deletecm" id="removebtn">탈퇴</button>';
 				uHtml += '</div>';
 				uHtml += '</div>';
