@@ -128,6 +128,9 @@ input:hover,
         background-color: #555555;
         color: white;
         }
+section {
+   padding-bottom: 100px;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -139,6 +142,7 @@ $(document).ready(function(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section>
+<!--
 <div class="box">
                 <div class="container">
                             <form id= "log-box" method="post" action="login">
@@ -152,7 +156,6 @@ $(document).ready(function(){
                                 </div>
                                 <div class="form-group">
                                 <input type="submit" value="로그인" id="login">
-                                <!-- 10/18 추가: 소셜로그인 -->
                                 <div class="col">
                                     <a href="#" class="fb btn">
                                       <i class="fa fa-facebook fa-fw"></i> Login with Facebook
@@ -175,7 +178,8 @@ $(document).ready(function(){
                                 </div>
                            </div>
                 </div>
-</section>
+-->
+</section>  
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>
 <script>

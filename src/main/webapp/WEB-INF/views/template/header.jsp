@@ -84,13 +84,13 @@ session.setAttribute("state", state);
 
 	<!-- 로그인 Modal Box -->
 	<div class="modal" style="display: none;">
-		<div class="modal-content loginArea">
+		<div class="modal-content">
 			<span class="close">&times;</span>
 			<!-- 닫기 -->
 			<div class="tab item btngroup" style="margin-bottom: 10px;">
-				<button type="button" class="t ab-item tab1" id="memberBtn"
+				<button type="button" class="tab-item genric-btn warning" id="memberBtn"
 					autofocus>개인회원</button>
-				<button type="button" class="tab-item tab1 active"
+				<button type="button" class="tab-item genric-btn primary-border"
 					id="companyBtn">기업회원</button>
 			</div>
 			<form name="form" method="post" action="#" class="item">
@@ -109,7 +109,9 @@ session.setAttribute("state", state);
 							id="lb_idSave" value="on" checked><label for="lb_idSave">아이디 저장</label></td>
 					</tr>
 					<tr>
-						<td class="btngroup"><button type="button" class="template-btn btn0" id="loginBtn" onclick='ajaxL1()'>로그인</button></td>
+						<td class="btngroup jobs-title">
+						<button type="button" class="template-btn pointer" id="loginBtn" onclick='ajaxL1()'>로그인</button>
+						</td>
 					</tr>
 				</table>
 			</form>
@@ -123,7 +125,7 @@ session.setAttribute("state", state);
 							<td><fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button></td>
 				</tr>
 			</table>
-			<table class="login-menu item">
+			<table class="login-menu item jobs-title">
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/members/id" id="findId">아이디 찾기</a></td>
 					<td><a href="<%=request.getContextPath()%>/members/pwd" id="findPwd">비밀번호 찾기</a></td>
@@ -139,19 +141,19 @@ session.setAttribute("state", state);
 		$("#memberBtn").css({
 			"background-color":"#f8b600",
 			"color":"white",
-			"border":"3px solid #f8b600"
+			"border":"3px solid transparent"
 		});
 		$("#memberBtn").click(function(){
 			chk="member";
 			$("#memberBtn").css({
 				"background-color":"#f8b600",
 				"color":"white",
-				"border":"3px solid #f8b600"
+				"border":"3px solid transparent"
 			});
 			$("#companyBtn").css({
 				"background-color":"white",
 				"color":"black",
-				"border":"3px solid #FAE100"
+				"border":"3px solid transparent"
 			});
 			})
 		$("#companyBtn").click(function(){
@@ -159,12 +161,12 @@ session.setAttribute("state", state);
 			$("#companyBtn").css({
 				"background-color":"#f8b600",
 				"color":"white",
-				"border":"3px solid #f8b600"
+				"border":"3px solid transparent"
 			});
 			$("#memberBtn").css({
 				"background-color":"white",
 				"color":"black",
-				"border":"3px solid #FAE100"
+				"border":"3px solid transparent"
 			});
 			})
 			 //아이디 저장 체크박스
@@ -237,10 +239,18 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 	var memberId = $("#memberId").val();
 	var memberPw = $("#memberPw").val();
 	
-	var saveIdCheck = $("#lb_idSave:checked").val();//TODO
+	var saveIdCheck = $("#lb_idSave:checked").val();
 	var url="<%=request.getContextPath()%>/logins";
 	console.log("memberId: "+memberId+", memberPw: "+memberPw+" chk: "+chk);
 	
+	if(memberId==""){
+		alert("아이디를 입력해주세요.")
+		return false;
+	}
+	if(memberPw==""){
+		alert("비밀번호를 입력해주세요.")
+		return false;
+	}
 	var json = "";
 	if(chk=="company"){
 		url+="/companies/"+memberId;
