@@ -255,7 +255,7 @@ tr>td:last-child {
 												href="${pageContext.request.contextPath}/recruits/myrecruits"
 												class="justify-content-between align-items-center d-flex ">관심공고</a></li>
 											<li><a
-												href="${pageContext.request.contextPath}/resumes/allres"
+												href="${pageContext.request.contextPath}/resumes/selectAllResume"
 												class="justify-content-between align-items-center d-flex">이력서
 													관리</a></li>
 										</ul>
@@ -277,7 +277,7 @@ tr>td:last-child {
 												class="justify-content-between align-items-center d-flex ">관심인재
 											</a></li>
 											<li><a
-												href="${pageContext.request.contextPath}/myallrecruit"
+												href="${pageContext.request.contextPath}/recruits/myallrecruit"
 												class="justify-content-between align-items-center d-flex ">공고관리
 											</a></li>
 										</ul>
