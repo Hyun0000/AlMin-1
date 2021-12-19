@@ -21,4 +21,5 @@ public class MyRecruit {
     private int rwmRecruitNo;
     private String rwmMemberId;
     private String rwmMemberType;
+    private int rwmMemberResumeNo;
 }

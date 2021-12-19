@@ -745,18 +745,40 @@ function afterBtn() {
 			console.log(resumeData);
 			console.log(resumeData.length);
 			
-			let resumeUlEle = document.createElement('ul');
-			resumeUlEle.setAttribute("id", "resumeList");
-			resume_insert_box.appendChild(resumeUlEle);
+			if(resumeData.length === 0) {
+				alert("이력서를 한 개 이상 작성해주세요");
+				resumeBack.style.display = 'none';
+				return;
+			}
+			
+//			let resumeUlEle = document.createElement('ul');
+//			resumeUlEle.setAttribute("id", "resumeList");
+//			resume_insert_box.appendChild(resumeUlEle);
+			
+			let resumeUlEle = document.getElementById('resumeList');
+			
 			for (var i = 0; i < resumeData.length; i++) {
+				let radioEle = document.createElement('input');
+				radioEle.setAttribute("type", "radio");
+				radioEle.setAttribute("name", "rwmMemberResumeNo");
+				radioEle.setAttribute("value", resumeData[i].resumeNo);
+				resumeUlEle.appendChild(radioEle);
+				
+				
 				let resumeLiEle = document.createElement('li');
 				resumeLiEle.setAttribute("class", "resumeItem");
+				resumeLiEle.setAttribute("style", "display : inline-block;");
+				resumeLiEle.innerText = resumeData[i].resumeTitle;
 				resumeUlEle.appendChild(resumeLiEle);
 				
-				let aEle = document.createElement('a');
-				aEle.setAttribute("href", resumeData[i].resumeNo);
-				aEle.innerText = resumeData[i].resumeTitle;
-				resumeLiEle.appendChild(aEle);
+				let brLiEle = document.createElement('br');
+				resumeUlEle.appendChild(brLiEle);
+
+				
+//				let aEle = document.createElement('a');
+//				aEle.setAttribute("href", resumeData[i].resumeNo);
+//				aEle.innerText = resumeData[i].resumeTitle;
+//				resumeLiEle.appendChild(aEle);
 			}
 			
 			

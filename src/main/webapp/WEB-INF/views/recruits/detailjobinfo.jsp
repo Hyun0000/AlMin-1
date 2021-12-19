@@ -214,7 +214,13 @@ form {
 								<button type="button" class="template-btn" id="recruitGo">지원하기</button>
 								<div id="resume_modal_back">
 									<div id="resume_insert_box">
-										
+										<h3>지원할 이력서를 선택해 주세요</h3>
+										<form action="recruitgoTwo" method="post">
+										<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
+										<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
+										<ul id="resumeList"></ul>
+										<button type="submit" class="genric-btn primary small">지원</button>
+										</form>
 									</div>
 								</div>
 								

@@ -273,6 +273,26 @@ public class RecruitController {
 //		http://localhost:8090/almin/detailjobinfo?=10
 	}
 	
+	@PostMapping("/recruitgoTwo")
+	public String recruitGoTwo(MyRecruit myRecruit, Model model) {
+		System.out.println("myRecruit : " + myRecruit);
+
+		int result = -1;
+		try {
+			result = myRecruitService.recruitGo(myRecruit);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 1) {
+			model.addAttribute("recruitgomsg", "지원 완료!!!");
+		} else if (result == 0) {
+			model.addAttribute("recruitgomsg", "이미 지원을 한 공고입니다.");
+		}
+		return "redirect:/recruits/detailjobinfo?recruitNo=" + myRecruit.getRwmRecruitNo();
+//		http://localhost:8090/almin/recruits/detailjobinfo?recruitNo=10
+//		http://localhost:8090/almin/detailjobinfo?=10
+	}
+	
 	@GetMapping("myallrecruit")
 	public ModelAndView goAllRecruit(HttpSession session,Recruit r,ModelAndView mv) {
 		List<Recruit> volist=null;

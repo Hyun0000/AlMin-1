@@ -22,7 +22,7 @@
 	
 	<!-- 공고 지원 by 회원으로 로그인  -->
 	<insert id="recruitGo" parameterType="MyRecruit">
-		INSERT INTO RECRUIT_WANT_MEMBER VALUES (#{rwmRecruitNo}, #{rwmMemberId}, '1')
+		INSERT INTO RECRUIT_WANT_MEMBER VALUES (#{rwmRecruitNo}, #{rwmMemberId}, '1', #{rwmMemberResumeNo})
 	</insert>
 </mapper>
 
