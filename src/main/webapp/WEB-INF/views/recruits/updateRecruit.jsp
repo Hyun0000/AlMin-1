@@ -12,13 +12,16 @@
 <meta charset="UTF-8">
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/resources/assets/images/logo/favicon.png"
-	type="image/x-icon">
-<link rel="stylesheet"
-	href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
 <title>공고 등록</title>
 <style>
+.col-lg-8 {
+margin: 0 auto;
+}
+th {
+width: 150px;
+}
 .ck.ck-editor {
 	max-width: 1000px;
 }
@@ -29,24 +32,25 @@
 </style>
 </head>
 <body>
-	<header>
 	<c:import url="/WEB-INF/views/template/header.jsp" />
-	</header>
-
-	<section>
-	
+<section>
 	<c:if test="${!empty msg}">
-
 		<script>
 			alert("${msg}");
-
 			<c:remove var="msg"/>
 		</script>
-
 	</c:if>
-	
-		<h1>공고등록</h1>
-		<form action="updateRecruit?recruitNo=${recruit.recruitNo }" method="get">
+	<div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="main-content">
+                        <div class="single-content1">
+                        </div>
+                        <div class="single-content2 py-4">
+                        <h1>공고등록</h1>
+                            <p>양식에 맞게 채용공고를 수정해주세요.</p>
+                        </div>
+                          		<form action="updateRecruit?recruitNo=${recruit.recruitNo }" method="get">
 			<h2>제목</h2>
 				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." value="${recruit.recruitTitle }">
 			<hr>
@@ -174,7 +178,7 @@
 			<hr>
 			<h2>상세모집요강</h2>
 			<div>
-				<textarea id="ckeditor" name="recruitContent" value="${recruit.recruitContent }"></textarea>
+				<textarea id="ckeditor" name="recruitContent" value="${recruit.recruitContent}"></textarea>
 			</div>
 			<hr>
 			<strong>브랜드</strong> <br> <input type="checkbox"
@@ -182,13 +186,15 @@
 				name="recruitJobBranch" value="N">N <br> <strong>공개여부</strong>
 			<br> <input type="checkbox" name="recruitPub" value="Y">공개
 			<input type="checkbox" name="recruitPub" value="N">비공개 <br>
-			<button>수정</button>
+			<button class="genric-btn info radius">수정</button>
 		</form>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
 	</section>
-
-	<footer>
 		<c:import url="/WEB-INF/views/template/footer.jsp" />
-	</footer>
 
 	<script>
     ClassicEditor

@@ -134,23 +134,60 @@ $(document).ready(function(){
 							</div>
 						</div>
 				</div>
-   <div class="col-lg-4 sidebar mt-5 mt-lg-0">
-               <div class="single-widget category-widget">
-                  <h4 class="title">마이페이지</h4>
-                  <ul>
-                     <li><a
-                        href="${pageContext.request.contextPath}/members/mypage"
-                        class="justify-content-between align-items-center d-flex active">회원정보</a></li>
-                     <li><a href="${pageContext.request.contextPath}/recruits/appforyou"
-                        class="justify-content-between align-items-center d-flex ">맞춤공고</a></li>
-                     <li><a
-                        href="${pageContext.request.contextPath}/recruits/myrecruits"
-                        class="justify-content-between align-items-center d-flex ">관심공고</a></li>
-                     <li><a href="${pageContext.request.contextPath}/resumes/allres"
-                        class="justify-content-between align-items-center d-flex">이력서 관리</a></li>
-                  </ul>
-               </div>
-            </div>
+			<c:choose>
+					<c:when
+						test="${!empty sessionScope.loginInfo.memberId or !empty sessionScope.loginInfo.companyId }">
+						<c:choose>
+							<c:when test="${not empty sessionScope.loginInfo.memberId}">
+								<!-- 개인회원 노출 -->
+								<div class="col-lg-4 sidebar mt-5 mt-lg-0">
+									<div class="single-widget category-widget">
+										<h4 class="title">마이페이지</h4>
+										<ul>
+											<li><a
+												href="${pageContext.request.contextPath}/members/mypage"
+												class="justify-content-between align-items-center d-flex"><span
+														class="active">회원정보</span></a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/recruits/appforyou"
+												class="justify-content-between align-items-center d-flex ">맞춤공고
+											</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/recruits/myrecruits"
+												class="justify-content-between align-items-center d-flex ">관심공고</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/resumes/allres"
+												class="justify-content-between align-items-center d-flex">이력서
+													관리</a></li>
+										</ul>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<!-- 기업회원 노출 TODO: 기업서비스-->
+								<div class="col-lg-4 sidebar mt-5 mt-lg-0">
+									<div class="single-widget category-widget">
+										<h4 class="title">마이페이지</h4>
+										<ul>
+											<li><a
+												href="${pageContext.request.contextPath}/members/mypage"
+												class="justify-content-between align-items-center d-flex"><span
+														class="active">회원정보</span></a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/applicants/myapplicants"
+												class="justify-content-between align-items-center d-flex ">관심인재
+											</a></li>
+											<li><a
+												href="${pageContext.request.contextPath}/myallrecruit"
+												class="justify-content-between align-items-center d-flex ">공고관리
+											</a></li>
+										</ul>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+			</c:choose>
  </div>
 </div>
 </section>
