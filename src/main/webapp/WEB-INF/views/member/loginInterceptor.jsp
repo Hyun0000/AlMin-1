@@ -180,8 +180,6 @@ $(document).ready(function(){
                 </div>
 -->
 </section>  
-	<!-- 공통푸터 템플릿 -->
-<c:import url="/WEB-INF/views/template/footer.jsp"/>
 <script>
 		var chk = "member";
 	$(document).ready(function(){
