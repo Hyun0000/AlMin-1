@@ -55,6 +55,9 @@ dateInputBtn.onclick = () => {
 careerCalButn.onclick = () => {
 	selectCal = "C";
 	
+	// 경력 추가 버튼 보이기
+	careerInsertBtn.style.display = "block";
+	
 	// 좌측 사이드 이미지
 	document.getElementById('slide_first_img').style.display = "none";
 	document.getElementById('slide_second_img').style.display = "none";
@@ -468,6 +471,7 @@ function afterCareerInput() {
 				jobTypeSelect.value = "";
 				jobPeriodSelect.value = "";
 				careerInputEle.value = "";
+				document.getElementById('careerInputTable_box').style.display = "none";
 				
 				// 경력 입력 후 chart 전체 새로 load
 				sendRequest("GET", getNeedChartPath, null, afterNeedChart);
@@ -476,4 +480,23 @@ function afterCareerInput() {
 			}
 		}
 	}
+}
+
+
+careerInsertBtn.onclick = () => {
+	document.getElementById('careerInputTable_box').style.display = "block";
+}
+
+//모달창 팝업 닫기(Esc 눌렀을때)
+document.onkeydown = (event) => {
+    if (event.keyCode == 27 && document.getElementById('careerInputTable_box').style.display == 'block') {
+    	document.getElementById('careerInputTable_box').style.display = 'none';
+    }
+}
+
+//모달창 팝업 닫기(배경 눌렀을때)
+window.onclick = () => {
+    if (event.target == document.getElementById('careerInputTable_box')) {
+    	document.getElementById('careerInputTable_box').style.display = 'none';
+    }
 }

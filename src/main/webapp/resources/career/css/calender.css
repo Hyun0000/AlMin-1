@@ -2,7 +2,8 @@
 
 /* 캘린더 전체 section */
 #calendar_section {
-	margin-bottom: 80px;
+	margin-bottom: 0px;
+	margin-top: 20px;
 }
 
 /* 최상단(제목, 일정 추가) */
@@ -41,6 +42,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
+    margin-top: 20px;
 }
 
 /* 왼쪽 사이드 전체 <div> */
@@ -121,8 +123,34 @@
 
 /* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 */
 #careerInputTable_box {
-	margin-top: 50px;
-	margin-bottom: 50px
+/* 	margin-top: 50px;
+	margin-bottom: 50px */
+	
+    height: 100%; width: 100%;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: rgba(12,12,12,0.3);
+    z-index: 1;
+    /* 스크롤 만들기 */
+    overflow: auto;
+    /* 임시 주석 */
+    display: none;
+}
+
+#careerInputTable_box_item {
+    width: 500px;
+    /* height: 100%; */
+    padding: 20px 0;
+    margin: 50px auto;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    /* background-color: white; */
+    
+    
+    color : black;
+    /* background-color: rgba(12,12,12,0.8); */
+    background-color: #f9f9f9;
 }
 
 #calendar_section, #calender_top {
@@ -160,6 +188,7 @@
     padding: 20px 10px;
     width: 30%;
     box-sizing: border-box;
+    border-left: 60px;
 }
 
 /* 경력추가 테이블 중 오른쪽 열 */
@@ -169,6 +198,7 @@
     width: 80%;
     text-align: center;
     box-sizing: border-box;
+    border-left: 60px;
 }
 
 /* 근무 직종 선택 <select> */

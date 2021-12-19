@@ -53,6 +53,9 @@ let workCalButn = document.getElementById('workCalBtn');
 // (경력 관리) 선택 버튼
 let careerCalButn = document.getElementById('careerCalBtn');
 
+// 사이드 (경력 추가) 버튼
+let careerInsertBtn = document.getElementById('careerInsertBtn');
+
 // 모달 배경(검은 배경)
 let modalBack = document.getElementById('ModalBg');
 

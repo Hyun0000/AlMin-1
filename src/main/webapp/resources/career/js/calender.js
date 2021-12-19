@@ -17,6 +17,9 @@ needCalButn.onclick = () => {
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
 	
+	// 경력 추가 버튼 숨기기
+	careerInsertBtn.style.display = "none";
+	
 	// 좌측 사이드 이미지
 	document.getElementById('slide_first_img').style.display = "block";
 	document.getElementById('slide_second_img').style.display = "none";
@@ -31,6 +34,9 @@ workCalButn.onclick = () => {
 	selectCal = "W";
 	calDiv.style.display = 'block';
 	chartDiv.style.display = 'none';
+	
+	// 경력 추가 버튼 숨기기
+	careerInsertBtn.style.display = "none";
 	
 	// 좌측 사이드 이미지
 	document.getElementById('slide_first_img').style.display = "none";
