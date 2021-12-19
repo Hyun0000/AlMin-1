@@ -45,7 +45,7 @@
 
 /* 왼쪽 사이드 전체 <div> */
 #side_calendar {
-    width: 23%;
+    width: 25%;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -58,9 +58,9 @@
 #side_calendar_img_box {
 	width: 23%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
     margin-bottom: 30px;
 }
 
@@ -77,11 +77,12 @@
 
 /* 왼쪽 버튼 4개 */
 .calendarBtn {
-    box-sizing: border-box;
+    /* box-sizing: border-box;
     border: #0d6efd 5px solid;
     background-color: #0d6efd;
-    color: white;
     font-weight: bolder;
+    color: white; */
+    
     border-radius: 50px;
     padding: 10px;
     margin: 10px 0;
@@ -119,9 +120,18 @@
 }
 
 /* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 *//* 경력 추가 */
-/* #careerInputTable_box {
-	margin-top: 100px;
-} */
+#careerInputTable_box {
+	margin-top: 50px;
+	margin-bottom: 50px
+}
+
+#calendar_section, #calender_top {
+/* 	margin-left: 150px;
+	margin-right: 150px; */
+	max-width: 1140px;
+	margin : 0 auto;
+	/* margin-bottom: 30px; */
+}
 
 /* 경력추가 테이블 전체 */
 #calendar_section #careerInputTable {

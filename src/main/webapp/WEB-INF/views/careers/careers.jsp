@@ -123,10 +123,14 @@
 	             		</div>
 	                <div class="modal-footer" style="padding: 10px;">
 	                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button> -->
-	                    <button type="button" class="btn btn-primary" id="calUpdateBtn">수정</button>
+	                    <button type="button" class="template-btn btn0" id="calUpdateBtn">수정</button>
+	                    <button type="button" class="template-btn btn0" id="calSubmitBtn">등록</button>
+	                    <button type="button" class="genric-btn primary small" id="calDeleteBtn" style="height: 51px;">삭제</button>
+	                    <button type="button" class="genric-btn primary small" id="insertBoxClose" style="height: 51px;" onclick="modalClose();">취소</button>
+<!-- 	                    <button type="button" class="btn btn-primary" id="calUpdateBtn">수정</button>
 	                    <button type="button" class="btn btn-primary" id="calSubmitBtn">등록</button>
 	                    <button type="button" class="btn btn-secondary" id="calDeleteBtn">삭제</button>
-	                    <button type="button" class="btn btn-secondary" id="insertBoxClose" onclick="modalClose();">취소</button>
+	                    <button type="button" class="btn btn-secondary" id="insertBoxClose" onclick="modalClose();">취소</button> -->
 	                </div>
 	            </div>
             <!-- </form> -->
@@ -169,14 +173,16 @@
 	<div id='calendar-wrap'>
 	    <div id="side_calendar">
 	        <div id="btn_box">
-	            <button id="needCalBtn" class="calendarBtn" style="width: 100%;">지원 / 면접일자</button>
-	            <button id="workCalBtn" class="calendarBtn" style="width: 100%;">근무관리</button>
-	            <button id="careerCalBtn" class="calendarBtn" style="width: 100%;">경력관리</button>
+	            <button id="needCalBtn" class="calendarBtn template-btn btn0" style="width: 100%;">지원 / 면접일자</button>
+	            <button id="workCalBtn" class="calendarBtn template-btn btn0" style="width: 100%;">근무관리</button>
+	            <button id="careerCalBtn" class="calendarBtn template-btn btn0" style="width: 100%;">경력관리</button>
 	        </div>
-	        <div id="side_calendar_img_box">
-				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side1.png" id="slide_first_img">
-				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side2.png" id="slide_second_img" style="display: none;">
-				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side3.png" id="slide_third_img" style="display: none;">
+	        <div id="side_calendar_img_box" style="margin-bottom: 0px">
+	        	<div></div>
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side1.png" id="slide_first_img" style="width: 250px;">
+				<img src="${pageContext.request.contextPath}/resources/assets/images/calender_side2.png" id="slide_second_img" style="display: none; width: 250px;">
+				<img id="slide_third_img" style="display: none;">
+				<%-- <img src="${pageContext.request.contextPath}/resources/assets/images/calender_side3.png" id="slide_third_img" style="display: none;"> --%>
 				<!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 --><!-- 경력 추가 -->
 	 			<div id="careerInputTable_box">
 				    <table id="careerInputTable" style="display: none;">
@@ -188,7 +194,8 @@
 			            </tr> -->
 			            
 						<tr>
-				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9; text-align: center;">
+				            <td class="careerInputSecondTd" style=" text-align: center;">
+				            <!-- <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9; text-align: center;"> -->
 				                <select name="job_type" id="job_type" style="text-align: center;">
 				                    <option value="job_type_no">-------업무 직종-------</option>
 				                    <option value="1">외식 / 음료</option>
@@ -214,7 +221,8 @@
 						</tr> -->
 						
 						<tr>
-				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;">
+				            <!-- <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;"> -->
+				            <td class="careerInputSecondTd" style="margin: 0 auto;">
 				                <select name="job_period" id="job_period">
 				                    <option value="job_period_no">-------기간-------</option>
 				                    <option value="1">1주일</option>
@@ -228,19 +236,22 @@
 				        </tr>
 				
 				        <tr>
-				            <td class="careerInputFirstTd" style="padding: 5px 5px; background-color: #f9f9f9;">
+				            <!-- <td class="careerInputFirstTd" style="padding: 5px 5px; background-color: #f9f9f9;"> -->
+				            <td class="careerInputFirstTd">
 				                <label for="careerTitle">담당업무</label>
 				            </td>
 						</tr>
 						
 						<tr>
-				            <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;">
+				            <!-- <td class="careerInputSecondTd" style="padding: 5px 5px; background-color: #f9f9f9;"> -->
+				            <td class="careerInputSecondTd">
 				                <input type="text" id="careerTitle" placeholder="15자 이내 입력">
 				            </td>
 				        </tr>
 				        
 			        	<tr>
-			        		<td colspan="2" id="insertBtnTd" style="padding: 5px 5px; background-color: #f9f9f9;">
+			        		<!-- <td colspan="2" id="insertBtnTd" style="padding: 5px 5px; background-color: #f9f9f9;"> -->
+			        		<td colspan="2" id="insertBtnTd">
 			        			<button id="career_insert_btn" class="template-btn btn0">경력추가</button>
 			        		</td>
 			        	</tr>

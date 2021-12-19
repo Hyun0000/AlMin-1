@@ -57,8 +57,8 @@ input[type=number]:hover {
     padding-bottom: 10px;
     padding-right: 30px;
     padding-left: 50px;
-    margin-top: 20px;
-    margin-right: 20px;
+    /* margin-top: 20px;
+    margin-right: 20px; */
 }
 
 /* 년 & 월 <input> 옆의 텍스트 */
@@ -78,7 +78,7 @@ input[type=number]:hover {
     display: flex;
     justify-content: space-evenly;
     align-items: baseline;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 /* 왼쪽 라인 박스 */
@@ -138,7 +138,9 @@ input[type=number]:hover {
 
 /* 월 급여 <table> */
 #moneyTabelReal {
-	width: 100%;
+	/* width: 100%; */
+	width: 350px;
+	margin: 0 auto;
 }
 
 #secondChartBox #moneyTabel .firstTd {
@@ -191,7 +193,17 @@ input[type=number]:hover {
 	height: 400px;
 }
 
+.nice-select {
+	width: 200px !important;
+	margin: 0 auto !important;
+	text-align: center !important;
+}
 
+.careerInputSecondTd{
+	width: 200px !important;
+	margin: 0 auto !important;
+	text-align: center !important;
+}
 
 
 

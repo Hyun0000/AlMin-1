@@ -722,3 +722,67 @@ function findComments() {
 		}
 	}
 }
+
+// ============================== 공조 지원 이력서 선택(개인회원) ==============================
+let resumeBack = document.getElementById('resume_modal_back');
+let resume_insert_box = document.getElementById('resume_modal_back');
+
+document.getElementById('recruitGo').onclick = () => {
+	let getResumePath = "/almin/resumes/allresAjax/" + userId;
+	
+	sendRequest("GET", getResumePath, null, afterBtn);
+}
+
+function afterBtn() {
+	if (httpRequest.readyState === 4) {
+		if (httpRequest.status === 200) {
+			resumeBack.style.display = 'block';
+			
+			console.log(httpRequest.responseText);
+			console.log(httpRequest.responseText.length);
+			
+			let resumeData = JSON.parse(httpRequest.responseText);
+			console.log(resumeData);
+			console.log(resumeData.length);
+			
+			let resumeUlEle = document.createElement('ul');
+			resumeUlEle.setAttribute("id", "resumeList");
+			resume_insert_box.appendChild(resumeUlEle);
+			
+			let resumeLiEle = document.createElement('li');
+			resumeLiEle.setAttribute("class", "resumeItem");
+			resumeUlEle.appendChild(resumeLiEle);
+			
+			//모달창 팝업 닫기(배경 눌렀을때)
+			window.onclick = () => {
+			    if (event.target == resumeBack) {
+			    	resumeBack.style.display = 'none';
+			    }
+			}
+		}	
+	}
+}
+
+
+
+// 모달창 팝업 닫기(Esc 눌렀을때)
+document.onkeydown = (event) => {
+    if (event.keyCode == 27 && resumeBack.style.display == 'block') {
+    	resumeBack.style.display = 'none';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
