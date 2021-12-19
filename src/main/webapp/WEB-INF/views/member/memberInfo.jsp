@@ -16,13 +16,15 @@
 	type="image/x-icon">
 
 <!-- CSS Files -->
-<link rel="stylesheet" href="<c:url value="/resources/assets/css/almin.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/assets/css/almin.css"/>">
 <style>
-.social-name{
+.social-name {
 	color: black;
 	font-size: 1.2rem;
 	font-weight: bold;
 }
+
 .active {
 	color: #1fa5fd;
 }
@@ -76,10 +78,12 @@
 .id {
 	font-color: dodgerblue
 }
-tr > td{
+
+tr>td {
 	width: 70px;
 }
-tr > td:last-child{
+
+tr>td:last-child {
 	width: 90px;
 }
 </style>
@@ -103,16 +107,22 @@ tr > td:last-child{
 						<section class="comment-sec-area py-5">
 							<div class="container">
 								<c:choose>
-								<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
-								<p class="mName">
-									<h2><b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b style="color: dodgerblue">통합 회원정보</b></h2>
-								</p>
-								</c:when>
-								<c:when test="${sessionScope.loginInfo.sessionType eq '2'}">
-								<p class="mName">
-									<h2><b>${sessionScope.loginInfo.companyId}</b>님의 알바의 민족 <b style="color: dodgerblue">통합 회원정보</b></h2>
-								</p>
-								</c:when>
+									<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
+										<p class="mName">
+										<h2>
+											<b>${sessionScope.loginInfo.memberId}</b>님의 알바의 민족 <b
+												style="color: dodgerblue">통합 회원정보</b>
+										</h2>
+										</p>
+									</c:when>
+									<c:when test="${sessionScope.loginInfo.sessionType eq '2'}">
+										<p class="mName">
+										<h2>
+											<b>${sessionScope.loginInfo.companyId}</b>님의 알바의 민족 <b
+												style="color: dodgerblue">통합 회원정보</b>
+										</h2>
+										</p>
+									</c:when>
 								</c:choose>
 								<div class="row flex-column">
 
@@ -122,21 +132,23 @@ tr > td:last-child{
 												<div class="thumb"></div>
 												<div class="desc">
 													<p class="txt">
-														안전한 정보보호를 위해 회원정보 일부만 확인가능하며,
-														<br> 수정화면에서 전체 회원정보 열람이 가능합니다.
+														안전한 정보보호를 위해 회원정보 일부만 확인가능하며, <br> 수정화면에서 전체 회원정보 열람이
+														가능합니다.
 													</p>
-									<div class="jobs-title">
-									<ul class="unordered-list">
-										<li>생년월일</li>
-										<li>${vo.memberBirth}</li>
-										<li>연락처</li>
-										<li>${vo.memberPhone}</li>
-										<li>e-메일</li>
-										<li>${vo.memberEmail}</li>
-									</ul>
-									</div>
-													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=1">
-														<button type="button" class="genric-btn info-border">수정</button></a>
+													<div class="jobs-title">
+														<ul class="unordered-list">
+															<li>생년월일</li>
+															<li>${vo.memberBirth}</li>
+															<li>연락처</li>
+															<li>${vo.memberPhone}</li>
+															<li>e-메일</li>
+															<li>${vo.memberEmail}</li>
+														</ul>
+													</div>
+													<a
+														href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=1">
+														<button type="button" class="genric-btn info-border">수정</button>
+													</a>
 												</div>
 											</div>
 										</div>
@@ -160,8 +172,10 @@ tr > td:last-child{
 													</p>
 													<p class="rno" style="display: none">${item.recruitNo}</p>
 													<div class="reply-btn">
-													<a href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=2">
-													<button type="button" class="genric-btn info-border">변경</button></a>
+														<a
+															href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=2">
+															<button type="button" class="genric-btn info-border">변경</button>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -171,26 +185,29 @@ tr > td:last-child{
 							</div>
 						</section>
 						<c:choose>
-								<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
-						<!-- Start comment-sec Area -->
-							<section class="comment-sec-area py-5">
-								<div class="container">
-				<h2>간편 로그인 관리</h2>
-									<div class="row flex-column">
-										<div class="comment-list">
-											<div class="single-comment justify-content-between d-flex">
-												<div class="user justify-content-between d-flex">
-												<div class="thumb"></div>
-													<div class="desc jobs-title">
-				<p class="txt">소셜서비스 계정과 연결하면, 소셜 로그인으로 간편하게 로그인 할 수 있습니다.</p>
-					<table class="social-icon sns-naver">
-					<tr>
-						<td><img src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></td>
-						<td class="social-name">네이버</td>
-						<td><button id="btn_nv" class="genric-btn default" onclick="connection()">연결</button></td>
-					</tr>
-					</table>
-					<!--
+							<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
+								<!-- Start comment-sec Area -->
+								<section class="comment-sec-area py-5">
+									<div class="container">
+										<h2>간편 로그인 관리</h2>
+										<div class="row flex-column">
+											<div class="comment-list">
+												<div class="single-comment justify-content-between d-flex">
+													<div class="user justify-content-between d-flex">
+														<div class="thumb"></div>
+														<div class="desc jobs-title">
+															<p class="txt">소셜서비스 계정과 연결하면, 소셜 로그인으로 간편하게 로그인 할 수
+																있습니다.</p>
+															<table class="social-icon sns-naver">
+																<tr>
+																	<td><img
+																		src="${pageContext.request.contextPath}/resources/assets/images/naver.png""></td>
+																	<td class="social-name">네이버</td>
+																	<td><button id="btn_nv" class="genric-btn default"
+																			onclick="connection()">연결</button></td>
+																</tr>
+															</table>
+															<!--
 					<div class="social-icon sns-kakao">
 						<span><img src="${pageContext.request.contextPath}/resources/assets/images/kakao.png""></span>
 						<span class="social-name">카카오</span>
@@ -202,15 +219,15 @@ tr > td:last-child{
 						<span class="social-name">페이스북</span>
 						<button id="btn_fb">연결</button>
 					</div>-->
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-						</section> 
-						</c:when>
-					</c:choose>
+								</section>
+							</c:when>
+						</c:choose>
 						<!-- End comment-sec Area -->
 
 					</div>
@@ -228,20 +245,19 @@ tr > td:last-child{
 										<ul>
 											<li><a
 												href="${pageContext.request.contextPath}/members/mypage"
-												class="justify-content-between align-items-center d-flex"><h6
-														class="active">회원정보</h6></a></li>
+												class="justify-content-between align-items-center d-flex"><span
+														class="active">회원정보</span></a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/recruits/appforyou"
-												class="justify-content-between align-items-center d-flex "><h6>맟춤공고</h6>
+												class="justify-content-between align-items-center d-flex ">맞춤공고
 											</a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/recruits/myrecruits"
-												class="justify-content-between align-items-center d-flex "><h6>관심공고</h6>
-											</a></li>
+												class="justify-content-between align-items-center d-flex ">관심공고</a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/resumes/allres"
-												class="justify-content-between align-items-center d-flex"><h6>이력서
-														관리</h6> </a></li>
+												class="justify-content-between align-items-center d-flex">이력서
+													관리</a></li>
 										</ul>
 									</div>
 								</div>
@@ -254,15 +270,15 @@ tr > td:last-child{
 										<ul>
 											<li><a
 												href="${pageContext.request.contextPath}/members/mypage"
-												class="justify-content-between align-items-center d-flex"><h6
-														class="active">회원정보</h6></a></li>
+												class="justify-content-between align-items-center d-flex"><span
+														class="active">회원정보</span></a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/applicants/myapplicants"
-												class="justify-content-between align-items-center d-flex "><h6>관심인재</h6>
+												class="justify-content-between align-items-center d-flex ">관심인재
 											</a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/myallrecruit"
-												class="justify-content-between align-items-center d-flex "><h6>공고관리</h6>
+												class="justify-content-between align-items-center d-flex ">공고관리
 											</a></li>
 										</ul>
 									</div>
@@ -278,7 +294,8 @@ tr > td:last-child{
 	</section>
 	<script>
 		function connection() {
-			$.ajax({
+			$
+					.ajax({
 						url : "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=LV_HERZOVT4XTBBoYuEl&client_secret=ONiMpnqaLD&access_token=ACCESS_TOKEN",
 						type : "post",
 						// data : 서버(컨트롤러)로 보내는 데이터.

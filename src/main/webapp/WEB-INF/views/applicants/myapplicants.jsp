@@ -81,15 +81,15 @@
 						<ul>
 							<li><a
 								href="${pageContext.request.contextPath}/members/mypage"
-								class="justify-content-between align-items-center d-flex"><h6>회원정보</h6></a></li>
+								class="justify-content-between align-items-center d-flex">회원정보</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/applicants/myapplicants"
-								class="justify-content-between align-items-center d-flex "><h6
-										class="active">관심인재</h6>
+								class="justify-content-between align-items-center d-flex "><span
+										class="active">관심인재</span>
 							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/myallrecruit"
-								class="justify-content-between align-items-center d-flex "><h6>공고관리</h6>
+								class="justify-content-between align-items-center d-flex ">공고관리
 							</a></li>
 						</ul>
 					</div>

@@ -90,19 +90,20 @@
 						<ul>
 							<li><a
 								href="${pageContext.request.contextPath}/members/mypage"
-								class="justify-content-between align-items-center d-flex"><h6>회원정보</h6></a></li>
+								class="justify-content-between align-items-center d-flex">회원정보</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/recruits/appforyou"
-								class="justify-content-between align-items-center d-flex "><h6
-										class="active">맟춤공고</h6> </a></li>
+								class="justify-content-between align-items-center d-flex "><span
+										class="active">맞춤공고</span>
+							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/recruits/myrecruits"
-								class="justify-content-between align-items-center d-flex "><h6>관심공고</h6>
+								class="justify-content-between align-items-center d-flex ">관심공고
 							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/resumes/allres"
-								class="justify-content-between align-items-center d-flex"><h6>이력서
-										관리</h6> </a></li>
+								class="justify-content-between align-items-center d-flex">이력서
+										관리</a></li>
 						</ul>
 					</div>
 				</div>
