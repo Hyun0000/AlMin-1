@@ -215,7 +215,7 @@ public class RecruitController {
 		return mv;
 	}
 
-	@GetMapping("updateRecruit")
+	@PostMapping("updateRecruit")
 	public String updateRecruit(@RequestParam(value = "msg", required = false) String msg, Recruit r, Model m) {
 
 		int result=0;

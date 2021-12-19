@@ -50,7 +50,7 @@ width: 150px;
                         <h1>공고등록</h1>
                             <p>양식에 맞게 채용공고를 수정해주세요.</p>
                         </div>
-                          		<form action="updateRecruit?recruitNo=${recruit.recruitNo }" method="get">
+                          		<form action="updateRecruit?recruitNo=${recruit.recruitNo }" method="post">
 			<h2>제목</h2>
 				 <input type="text" name="recruitTitle" placeholder="공고 제목 입력해주세요." value="${recruit.recruitTitle }">
 			<hr>
