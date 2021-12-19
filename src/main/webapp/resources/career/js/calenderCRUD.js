@@ -75,11 +75,7 @@ function calSubmit() {
 					needTimeEnd : allEnd,
 					needGoMeet : fourbtnEleVal
 			}
-		    console.log(insertParam);
-		    console.log(JSON.stringify(insertParam));
-		    console.log("fourbtnEleVal : " + fourbtnEleVal);
 			sendRequest("POST", "calender", JSON.stringify(insertParam), afterCalInsert);
-			// sendRequest("POST", "insertCalneed", JSON.stringify(insertParam), afterCalInsert);
 		} else {
 			let insertWorkParam = {
 					workMemberId : userId,
@@ -90,11 +86,7 @@ function calSubmit() {
 					workTimeEnd : allEnd,
 					workMoney : workMoneyInputEle.value,
 					workType : "W"
-					/*workType : fourbtnEleVal*/
 			}
-		    console.log(userId);
-		    console.log(JSON.stringify(insertWorkParam));
-		    console.log("fourbtnEleVal : " + fourbtnEleVal);
 		    sendRequest("POST", "works", JSON.stringify(insertWorkParam), afterCalInsert);
 		}
 	}

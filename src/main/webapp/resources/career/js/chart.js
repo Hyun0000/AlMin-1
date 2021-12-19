@@ -305,7 +305,6 @@ function loadChart() {
 	workChart = new Chart(workCt, {
 	type: 'doughnut',
 	data: {
-	    // labels: ['Red', 'Blue', 'Yellow', 'Green'],
 	    labels: workChartTitle,
 	    datasets: [{
 	        data: workChartDay, // 알바별 월 근무 일수
