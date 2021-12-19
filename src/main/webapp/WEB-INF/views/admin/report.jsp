@@ -60,6 +60,11 @@ button {
 #rlist {
 	padding-left: 10px;
 }
+
+#reasonbtn{
+	margin-top: 6px; 
+	margin-bottom: 6px; 
+}
 </style>
 
 </head>
@@ -109,7 +114,7 @@ button {
 												<button class="genric-btn primary small"
 													onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}'">공고보기</button>
 												<button class="genric-btn primary small deletert">삭제</button>
-												<button class="genric-btn primary small reason"
+												<button class="genric-btn primary small reason" id="reasonbtn"
 													onclick="reason(this)">신고사유</button>
 												<div class="d-toggle rlist">
 													<div>
