@@ -108,6 +108,7 @@
         <div id="educationNo" class="default-select">
             
             <select name="educationNo">
+            	<option value="0">무관</option>
                 <option value="1">초등학교</option>
                 <option value="2">중학교</option>
                 <option value="3">고등학교</option>
@@ -121,6 +122,7 @@
         <div id="careers" class="default-select">
             
             <select name="jobTypeNo">
+            	<option value="0">무관</option>
                 <option value="1">외식/음료</option>
                 <option value="2">유통/판매</option>
                 <option value="3">문화/여가</option>
@@ -135,6 +137,7 @@
                 <option value="12">병원/간호</option>
             </select>
             <select name="periodNo" class="default-select">
+            	<option value="0">무관</option>
                 <option value="1">1주일</option>
                 <option value="2">1주일~1개월</option>
                 <option value="3">1개월~3개월</option>

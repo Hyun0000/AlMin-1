@@ -72,6 +72,7 @@ width: 150px;
 				<tr>
 					<th>성별</th>
 					<td><select name="recruitGender">
+							<option value="무관">무관</option>
 							<option value="남자">남자</option>
 							<option value="여자">여자</option>
 					</select></td>
@@ -85,6 +86,7 @@ width: 150px;
 				<tr>
 					<th>학력</th>
 					<td><select name="recruitEducation">
+							<option value="0">무관</option>
 							<option value="1">초등학교</option>
 							<option value="2">중학교</option>
 							<option value="3">고등학교</option>
@@ -100,6 +102,7 @@ width: 150px;
 				<tr>
 					<th>대상</th>
 					<td><select name="recruitJobWho">
+							<option value="0">무관</option>
 							<option value="1">청소년</option>
 							<option value="2">대학생</option>
 							<option value="3">중장년</option>
@@ -126,6 +129,7 @@ width: 150px;
 				<tr>
 					<th>근무기간</th>
 					<td><select name="recruitPeriod" class="default-select">
+							<option value="0">무관</option>
 							<option value="1">1주일</option>
 							<option value="2">1주일~1개월</option>
 							<option value="3">1개월~3개월</option>
@@ -147,6 +151,7 @@ width: 150px;
 				<tr>
 					<th>업직종</th>
 					<td><select name="recruitJobType">
+							<option value="0">무관</option>
 							<option value="1">외식/음료</option>
 							<option value="2">유통/판매</option>
 							<option value="3">문화/여가</option>
