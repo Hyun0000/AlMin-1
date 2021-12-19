@@ -105,7 +105,7 @@ $(document).ready(function(){
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<p id="uid" style="display:hidden">${vo.memberId}</p>
+<p id="uid" style="visibility:hidden">${vo.memberId}</p>
 <section class="job-single-content section-padding">
 	<div class="container">
 			<div class="row">
@@ -148,7 +148,6 @@ $(document).ready(function(){
 						</div>
 				</div>
 			</div>
-		</div>
 </section>
 	<!-- 공통푸터 템플릿 -->
 <c:import url="/WEB-INF/views/template/footer.jsp"/>

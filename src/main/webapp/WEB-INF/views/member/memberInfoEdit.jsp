@@ -12,6 +12,29 @@
 	href="${pageContext.request.contextPath}/resources/assets/images/logo/favicon.png" type="image/x-icon">
 <!-- CSS Files -->
 <link rel="stylesheet" href="<c:url value='/resources/assets/css/almin.css'/>">
+<style>
+th {
+width:150px;
+padding: 12px;
+line-height: 20px;
+font-size: 1.1em;
+}
+td{
+font-size: 1.1em;
+}
+/* 입력란 */
+input[type=text], input[type=password]{
+background-color: #f9f9ff;
+border: none;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  opacity: 0.85;
+  display: inline-block;
+  line-height: 20px;
+  text-decoration: none;
+}
+</style>
 <script>
 $(document).ready(function(){
 		$("#editBtn").click(function(){ //수정완료 클릭 시
@@ -54,14 +77,23 @@ $(document).ready(function(){
 <body>
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
-<section>
+<section class="job-single-content section-padding">
+<p id="type" style="visibility:hidden">${type}</p>
+	<div class="container">
+					<div class="row">
+				<div class="col-lg-8">
+						<div class="main-content">
+							<div class="single-content1">
+								<div class="mb-4 d-lg-flex justify-content-between">
+									<div class="job-text">
+<div id="editForm" class="hide jobs-title">
 <h2>회원정보수정</h2>
-<div id="editForm" class="hide">
-	<ul>
-	<li>회원정보는 <a href="#">개인정보처리방침</a>에 따라 안전하게 보호되며, 회원님의 동의 없이 공개 또는 제 3자에게 제공되지 않습니다.</li>
+	<ul class="jobs-title">
+		<li>회원정보는 <a href="#">개인정보처리방침</a>에 따라 안전하게 보호되며,<br>회원님의 동의 없이 공개 또는 제 3자에게 제공되지 않습니다.</li>
 		<li>이름, 생년월일, 성별 정보는 고객센터를 통해 수정하실 수 있습니다.  </li>
 	</ul>
-    <table class="find-form">
+	<div class="desc jobs-title">
+    <table class="find-form jobs-title">
      <tr>
             <!-- 회원정보에 등록된 아이디 -->
 		<th>아이디</th>
@@ -92,9 +124,34 @@ $(document).ready(function(){
 		<td>${vo.memberRegdate}</td>
 	</tr>
   </table>
-   <div class="search-buttons">
-          <button type="button" class="btn1" id="editBtn">수정완료</button>
+   <div class="search-buttons btngroup">
+          <button type="button" class="genric-btn info radius" id="editBtn">수정완료</button>
      </div>
+     </div>
+</div>
+</div>
+								</div>
+							</div>
+						</div>
+				</div>
+   <div class="col-lg-4 sidebar mt-5 mt-lg-0">
+               <div class="single-widget category-widget">
+                  <h4 class="title">마이페이지</h4>
+                  <ul>
+                     <li><a
+                        href="${pageContext.request.contextPath}/members/mypage"
+                        class="justify-content-between align-items-center d-flex active">회원정보</a></li>
+                     <li><a href="${pageContext.request.contextPath}/recruits/appforyou"
+                        class="justify-content-between align-items-center d-flex ">맞춤공고</a></li>
+                     <li><a
+                        href="${pageContext.request.contextPath}/recruits/myrecruits"
+                        class="justify-content-between align-items-center d-flex ">관심공고</a></li>
+                     <li><a href="${pageContext.request.contextPath}/resumes/allres"
+                        class="justify-content-between align-items-center d-flex">이력서 관리</a></li>
+                  </ul>
+               </div>
+            </div>
+ </div>
 </div>
 </section>
 	<!-- 공통푸터 템플릿 -->

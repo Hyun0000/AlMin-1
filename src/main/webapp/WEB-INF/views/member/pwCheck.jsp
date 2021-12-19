@@ -149,9 +149,7 @@ $(document).ready(function(){
 				if(result == false){
 					alert("비밀번호가 일치하지 않습니다.");
 				} else {
-					//TODO: 일치하는 n개의 아이디를 찾았습니다(화면 생성)
-					alert("비밀번호가 일치합니다.");
-				console.log($("#uid").html());
+				console.log("비밀번호가 일치합니다."+$("#uid").html());
 			location.href ="${pageContext.request.contextPath}/members/mypage/edit?userId="+$("#uid").html() //회원정보수정
 				}
 		},
@@ -219,7 +217,7 @@ function changePw(){
 <!-- 공통헤더 템플릿 -->
 <c:import url="/WEB-INF/views/template/header.jsp"/>
 <section class="job-single-content section-padding">
-<p id="type">${type}</p>
+<p id="type" style="visibility:hidden">${type}</p>
 	<div class="container">
         <button type="button" class="tab-item genric-btn primary-border e-large" id="edit"
 					autofocus>회원정보수정</button>
