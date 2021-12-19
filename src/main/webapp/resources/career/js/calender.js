@@ -74,25 +74,6 @@ function calenderLoad() {
 			evnets[i] = evnetObj;
 		}
 	}
-// ========================================================================================	
-//	if(selectCal === "NG" || selectCal === "") {
-//		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 구직관리 calendar";
-//		evnets = []; // 배열 초기화
-//		for (var i = 0; i < needCalData.length; i++) {
-//			let evnetObj = new Object();
-//			evnetObj.title = needCalData[i].NEED_TITLE;
-//			evnetObj.start = needCalData[i].STARTTIME.replace(" ", "T");
-//			evnetObj.end = needCalData[i].ENDTIME.replace(" ", "T");
-//			evnetObj.color = needCalData[i].NEED_COLOR;
-//			evnetObj.id = needCalData[i].NEED_MEMBER_NO;
-//			evnetObj.type = needCalData[i].NEED_GO_MEET;
-//			evnets[i] = evnetObj;
-//		}
-//		// evnets[needCalData.length] = googleEvents;
-//	}
-// ========================================================================================	
-	console.log("evnets : " + evnets);
-	console.log("evnets.length : " + evnets.length);
 	
 	if(selectCal === "W") {
 		topCalTitle.innerText = "우리의 민족!!! " + userId + "님의 근무관리 calendar";
@@ -105,6 +86,8 @@ function calenderLoad() {
 			evnetObj.color = needCalData[i].WORK_COLOR;
 			evnetObj.id = needCalData[i].WORK_MEMBER_NO;
 			evnetObj.type = needCalData[i].WORK_TYPE;
+			evnetObj.dayWorkTime = needCalData[i].WORK_TIME;
+			evnetObj.money =  needCalData[i].WORK_MONEY;
 			evnets[i] = evnetObj;
 		}
 	}
@@ -141,6 +124,7 @@ function calenderLoad() {
         // 'auto'(기본값) : daygrid에 있을 때 이벤트가 하루 종일 또는 여러 날인 경우 이벤트를 단색 직사각형으로 렌더링, 시간 제한 이벤트인 경우 점으로 렌더링
         // eventOverlap : true,
         eventClick : (info) => { // 이벤트 클릭시 eventClickInfo
+        	console.log(info.event);
             console.log(info.event.start);
             console.log(info.event.end);
 
@@ -332,10 +316,6 @@ function calenderLoad() {
 	}
 }
 
-function kiwi() {
-	alert(123);
-}
-
 // 근무일정 drag update callbackfunction
 function afterDragUpdate() {
 	if (httpRequest.readyState === 4) {
@@ -402,6 +382,9 @@ function detailEvent(title, startTime, endTime) {
     console.log(evnets);
     for (let i = 0; i < evnets.length; i++) {
         if (title == evnets[i].title && startTime == evnets[i].start.split('T')[1] && endTime == evnets[i].end.split('T')[1]) {
+        	console.log("=========================");
+        	console.log(evnets[i]);
+        	console.log("=========================");
 
             // 시작 시간
             let startVal = evnets[i].start.split('T')[1].split(":")[0] + ":" + evnets[i].start.split('T')[1].split(":")[1];
@@ -419,6 +402,15 @@ function detailEvent(title, startTime, endTime) {
             colorEle.value = evnets[i].color;
             eventGroupId = evnets[i].id;
             
+            console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            console.log(evnets[i].money);
+            console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+            
+            if(selectCal === "W") {
+            	workMoneyInputEle.value = evnets[i].money;
+            	workTimeInputEle.value = evnets[i].dayWorkTime;
+            }
+            
             // 입력 모달창 타입 <label> 관련 코드
             if(evnets[i].type === "G" || evnets[i].type === "M") {
             	goLabelEle.style.display = 'block';
@@ -434,8 +426,8 @@ function detailEvent(title, startTime, endTime) {
             	/*workLabelEle.style.display = 'block';*/            
             	
             	// 근무 & 시급 <input> & <label>
-            	workMoneyInputEle.value = "";
-            	workTimeInputEle.value = "";
+//            	workMoneyInputEle.value = "";
+//            	workTimeInputEle.value = "";
             	moneyLabel.style.display = 'block';
             	workLabel.style.display = 'block';
             }

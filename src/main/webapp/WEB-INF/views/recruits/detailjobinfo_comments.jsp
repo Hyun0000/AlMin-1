@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="comments_insert_modal_back">
+	<!-- <div id="comments_insert_box"> -->
 	<div id="comments_insert_box">
 		<div class="comments_insert_top">
 			<fieldset>
-				<legend style="color: white;" id="comments_insert_legend">한줄 후기</legend>
+				<legend style="color: black;" id="comments_insert_legend">한줄 후기</legend>
 				<div id="contract_box">
 					<input name="ccContent" id="commentsLine" placeholder="100자 이내로 작성해주세요(공백포함)">
 					<div id="radio_box">
@@ -43,7 +44,7 @@
 			</c:forEach>
 		</div>
 		<div id="btnBox">
-			<button type="button" id="submitBtn">등록</button>
+			<button type="button" class="template-btn btn0" id="submitBtn">등록</button>
 		</div>
 	</div>
 </div>

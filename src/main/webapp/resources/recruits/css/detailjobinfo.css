@@ -237,13 +237,13 @@
     overflow: auto;
     
     /* 임시 주석 */
-    display: none;
+    /* display: none; */
 }
 
 /* 후기 입력창 전체를 감싸는 <div> & 모달창 콘텐츠 */
 #comments_insert_box{
-	border: 3px solid royalblue;
-	border-radius: 30px;
+	/* border: 3px solid royalblue; */
+	/* border-radius: 30px; */
     width: 1100px;
     /* height: 100%; */
     padding: 20px 0;
@@ -254,8 +254,9 @@
     /* background-color: white; */
     
     
-    color : white;
-    background-color: rgba(12,12,12,0.8);
+    color : black;
+    /* background-color: rgba(12,12,12,0.8); */
+    background-color: #f9f9f9;
 }
 
 /* 한줄 후기 <input>, 근로계약서를 담는 <div> 스타일 지정 */
@@ -264,27 +265,32 @@
     /* margin: 0 auto; */
     /* border: 3px solid blue; */
     padding: 20px;
+    padding-bottom: 0px;
     box-sizing: border-box;
 }
 
 /* 한줄 후기 <input>을 감싸는  <fieldset> */
 .comments_insert_top fieldset{
-	padding: 30px;
+	padding: 10px;
 	width: 1000px;
 	margin: 0 auto;
-	border: 3px solid royalblue;
-	border-radius: 30px;
+	/* border: 3px solid royalblue; */
+	border: 2px solid #dbdbdb;
+	/* border-radius: 30px; */
 	
-	color : white;
+	color : black;
 }
 
 /* 한줄 후기 <input>을 감싸는  <legend> */
 #comments_insert_legend {
-	border: 3px solid royalblue;
+	/* border: 3px solid royalblue; */
+	border: 2px solid #dbdbdb;
 	padding : 10px;
 	padding-left: 30px;
-	
-	color : white;
+	font-family: "Noto Sans KR", sans-serif;
+	    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 600;
+    color: #001D38;
 }
 
 /* 한줄 후기 <input> 스타일 지정 */
@@ -301,21 +307,21 @@
 
 /* 근로계약서 radio 버튼을 담는 <div> */
 #contract_box {
-	border: 5px solid pink;
-	padding: 20px;
+	/* border: 5px solid pink; */
+	padding: 10px;
 	box-sizing: border-box;
-	
-	color : white;
+	font-family: "Noto Sans KR", sans-serif;
+	color : black;
 }
 
 /* 근로계약서 작성 여부 제목 */
 #contract_box h3 {
 	display: inline-block;
-	margin-right: 30px;
+	margin-right: 15px;
 	border-right: 1px solid yellow;
-	padding-right: 30px;
-	
-	color : white;
+	/* padding-right: 30px; */
+	font-family: "Noto Sans KR", sans-serif;
+	color : black;
 }
 
 #radio_box {
@@ -328,17 +334,25 @@
 #contract_box label {
 	color: black;
 	margin: 0 10px;
-	color : white;
+	font-family: "Noto Sans KR", sans-serif;
+	color : black;
 }
 
 .keyName {
-	border: 3px solid yellow;
-	border-radius: 30px;
+	/* border: 3px solid yellow; */
+	/* border-radius: 30px; */
     width: 100px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 10px;
+    
+    /* color: #222; */
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 600;
+    color: #001D38;
+    font-size: 26px;
+    /* position: relative; */
 }
 
 /* item을 drop하는 div 스타일 지정 */
@@ -349,12 +363,14 @@
     /* height: 150px; */
     /* border: 1px solid red; */
     
-   	border: 3px solid royalblue;
-	border-radius: 30px;
+   	/* border: 3px solid royalblue; */
+	/* border-radius: 30px; */
+   	border: 2px solid #dbdbdb;
+	
     
     box-sizing: border-box;
     
-    margin-top: 30px;
+    /* margin-top: 10px; */
 
     display: flex;
     justify-content: start;
@@ -369,8 +385,10 @@
     /* height: 150px; */
     /* border: 1px solid black; */
     
-  	border: 3px solid skyblue;
-	border-radius: 30px;
+  	/* border: 3px solid skyblue; */
+	/* border-radius: 30px; */
+	
+	border: 2px solid #dbdbdb;
 	
     box-sizing: border-box;
 
@@ -383,7 +401,9 @@
 
 /* 각 item 스타일 지정 */
 .dragEle {
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    border: 1px solid #CEE8FF;
+    color: #0A8CFF;
     padding: 5px;
     margin: 10px 10px;
 }
@@ -401,19 +421,20 @@
 #btnBox {
 	width: 1000px;
     /* margin: 50px auto; */
-    margin: 30px auto;
+    margin: 20px auto;
+    margin-bottom: 0;
     /* margin-top: 50px; */
     text-align: center;
 }
 
 /* 등록 버튼 */
 #submitBtn {
-	width: 300px;
+	/* width: 300px;
 	height: 50px;
 	background-color: royalblue;
 	color: white;
 	font-weight: bolder;
-	border: nonel
+	border: nonel */
 }
 
 /* 등록 버튼 클릭시 */
