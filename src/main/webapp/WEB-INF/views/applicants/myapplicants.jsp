@@ -27,13 +27,14 @@
 .active {
 	color: #1fa5fd;
 }
+
 </style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 
 	<!-- Start blog-posts Area -->
-	<section class="blog-posts-area section-padding">
+	<section class="blog-posts-area section-padding" id="asection">
 		<div class="container">
 			<div class="row">
 
@@ -85,10 +86,10 @@
 							<li><a
 								href="${pageContext.request.contextPath}/applicants/myapplicants"
 								class="justify-content-between align-items-center d-flex "><span
-										class="active">관심인재</span>
+									class="active">관심인재</span>
 							</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/myallrecruit"
+								href="${pageContext.request.contextPath}/recruits/myallrecruit"
 								class="justify-content-between align-items-center d-flex ">공고관리
 							</a></li>
 						</ul>

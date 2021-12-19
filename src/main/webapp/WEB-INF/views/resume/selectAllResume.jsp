@@ -29,23 +29,25 @@
 .active {
 	color: #1fa5fd;
 }
+
+#rtitle {
+	font-size: 18px;
+}
 </style>
 </head>
 <body>
-<header>
-<c:import url="/WEB-INF/views/template/header.jsp" />
-</header>
-<section>
+	<header>
+		<c:import url="/WEB-INF/views/template/header.jsp" />
+	</header>
 	<c:if test="${!empty msg}">
 		<script>
 			alert("${msg}");
 			<c:remove var="msg"/>
 		</script>
-		</c:if>
-		
-	<h1>My이력서</h1>
-		<hr>
-    <div class="container">
+	</c:if>
+
+	<section class="blog-posts-area section-padding">
+		<div class="container">
 			<div class="row">
 
 				<div class="col-lg-8 post-list blog-post-list">
@@ -53,37 +55,40 @@
 
 						<!-- Start comment-sec Area -->
 						<section class="comment-sec-area py-5">
-							
-									<c:forEach var="item" items="${allResume}">
-									<c:if test="${item.resumeTitle==null}">
-										<div class="container">
-										<div class="row flex-colum"><h5>회원님의 이력서가 없습니다.<br>다양한 회원님만의 이력서를 등록해주세요.</h5></div>
-										</div>
-										</c:if>
-										<div class="container">
-											<div class="row flex-column">
 
-												<div class="comment-list">
-													<div class="single-comment justify-content-between d-flex">
-														<div class="user justify-content-between d-flex">
-															<div class="thumb"></div>
-															<div class="desc">
-																<h5>
-																	<a
-																		href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a>
-																</h5>
-																<p class="rno" style="display: none">${item.resumeNo}</p>
-																<p class="date">${item.resumeDate}</p>
-																<div class="reply-btn">
-																</div>
-															</div>
-														</div>
+							<c:forEach var="item" items="${allResume}">
+								<c:if test="${item.resumeTitle==null}">
+									<div class="container">
+										<div class="row flex-colum">
+											<h5>
+												회원님의 이력서가 없습니다.<br>다양한 회원님만의 이력서를 등록해주세요.
+											</h5>
+										</div>
+									</div>
+								</c:if>
+								<div class="container">
+									<div class="row flex-column">
+
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb"></div>
+													<div class="desc">
+														<h5>
+															<a id="rtitle"
+																href="${pageContext.request.contextPath}/resumes/resume?resumeNo=${item.resumeNo }">${item.resumeTitle }</a>
+														</h5>
+														<p class="rno" style="display: none">${item.resumeNo}</p>
+														<p class="date">${item.resumeDate}</p>
+														<div class="reply-btn"></div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</c:forEach>
-								
+									</div>
+								</div>
+							</c:forEach>
+
 						</section>
 						<!-- End comment-sec Area -->
 
@@ -98,8 +103,7 @@
 								class="justify-content-between align-items-center d-flex">회원정보</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/recruits/appforyou"
-								class="justify-content-between align-items-center d-flex "><span
-										class="active">맞춤공고</span>
+								class="justify-content-between align-items-center d-flex ">맞춤공고
 							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/recruits/myrecruits"
@@ -107,15 +111,15 @@
 							</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/resumes/allres"
-								class="justify-content-between align-items-center d-flex">이력서
-										관리</a></li>
+								class="justify-content-between align-items-center d-flex"><span
+									class="active">이력서 관리</span></a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-    </section>
-    <footer class="footer-area section-padding">
+	</section>
+	<footer class="footer-area section-padding">
 		<div class="footer-widget">
 			<div class="container"></div>
 		</div>
@@ -135,9 +139,9 @@
 			</div>
 		</div>
 	</footer>
-	
+
 	<script>
-	
+		
 	</script>
 </body>
 </html>

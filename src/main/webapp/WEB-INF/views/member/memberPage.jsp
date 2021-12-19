@@ -28,13 +28,14 @@
 .active {
 	color: #1fa5fd;
 }
+
 </style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 
 	<!-- Start blog-posts Area -->
-	<section class="blog-posts-area section-padding">
+	<section class="blog-posts-area section-padding" id="asection">
 		<div class="container">
 			<div class="row">
 
@@ -59,7 +60,7 @@
 														<p class="rno" style="display: none">${item.recruitNo}</p>
 														<p class="date">${item.recruitDate}</p>
 														<div class="reply-btn">
-														<button type="button" class="genric-btn success-border"
+															<button type="button" class="genric-btn success-border"
 																onclick="location.href='${pageContext.request.contextPath}/recruits/dislike?recruitNo=${item.recruitNo}'">
 																찜 해제</button>
 														</div>
@@ -89,12 +90,11 @@
 							<li><a
 								href="${pageContext.request.contextPath}/recruits/myrecruits"
 								class="justify-content-between align-items-center d-flex "><span
-										class="active">관심공고</span>
-							</a></li>
+									class="active">관심공고</span> </a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/resumes/allres"
 								class="justify-content-between align-items-center d-flex">이력서
-										관리</a></li>
+									관리</a></li>
 						</ul>
 					</div>
 				</div>

@@ -26,6 +26,10 @@
 .active {
 	color: #1fa5fd;
 }
+
+#rtitle {
+	font-size: 18px;
+}
 </style>
 </head>
 <body>
@@ -33,10 +37,7 @@
 		<c:import url="/WEB-INF/views/template/header.jsp" />
 	</header>
 
-	<section>
-		<h1>My공고</h1>
-		<hr>
-		<!-- Start blog-posts Area -->
+	<!-- Start blog-posts Area -->
 	<section class="blog-posts-area section-padding">
 		<div class="container">
 			<div class="row">
@@ -46,63 +47,65 @@
 
 						<!-- Start comment-sec Area -->
 						<section class="comment-sec-area py-5">
-							
-								
-									<c:forEach var="item" items="${allRecruit}">
-										<c:if test="${item.recruitTitle==null}">
-										<div class="container">
-										<div class="row flex-colum"><h5>회원님의 공고가 없습니다.<br>회원님만의 공고를 등록해주세요.</h5></div>
+
+
+							<c:forEach var="item" items="${allRecruit}">
+								<c:if test="${item.recruitTitle==null}">
+									<div class="container">
+										<div class="row flex-colum">
+											<h5>
+												회원님의 공고가 없습니다.<br>회원님만의 공고를 등록해주세요.
+											</h5>
 										</div>
-										</c:if>
-										
-										<div class="container">
-											<div class="row flex-column">
-													
-												<div class="comment-list">
-													<div class="single-comment justify-content-between d-flex">
-														<div class="user justify-content-between d-flex">
-															<div class="thumb"></div>
-															<div class="desc">
-																<h5>
-																	<a
-																		href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle }</a>
-																</h5>
-																<p class="rno" style="display: none">${item.recruitNo}</p>
-																<p class="date">${item.recruitDate}</p>
-																<div class="reply-btn">
-																</div>
-															</div>
-														</div>
+									</div>
+								</c:if>
+
+								<div class="container">
+									<div class="row flex-column">
+
+										<div class="comment-list">
+											<div class="single-comment justify-content-between d-flex">
+												<div class="user justify-content-between d-flex">
+													<div class="thumb"></div>
+													<div class="desc">
+														<h5>
+															<a id="rtitle"
+																href="${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}">${item.recruitTitle }</a>
+														</h5>
+														<p class="rno" style="display: none">${item.recruitNo}</p>
+														<p class="date">${item.recruitDate}</p>
+														<div class="reply-btn"></div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</c:forEach>
-								
+									</div>
+								</div>
+							</c:forEach>
+
 						</section>
 						<!-- End comment-sec Area -->
 
 					</div>
 				</div>
 				<div class="col-lg-4 sidebar mt-5 mt-lg-0">
-									<div class="single-widget category-widget">
-										<h4 class="title">마이페이지</h4>
-										<ul>
-											<li><a
-												href="${pageContext.request.contextPath}/members/mypage"
-												class="justify-content-between align-items-center d-flex"><span
-														class="active">회원정보</span></a></li>
-											<li><a
-												href="${pageContext.request.contextPath}/applicants/myapplicants"
-												class="justify-content-between align-items-center d-flex ">관심인재
-											</a></li>
-											<li><a
-												href="${pageContext.request.contextPath}/recruits/myallrecruit"
-												class="justify-content-between align-items-center d-flex ">공고관리
-											</a></li>
-										</ul>
-									</div>
-								</div>
+					<div class="single-widget category-widget">
+						<h4 class="title">마이페이지</h4>
+						<ul>
+							<li><a
+								href="${pageContext.request.contextPath}/members/mypage"
+								class="justify-content-between align-items-center d-flex">회원정보</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/applicants/myapplicants"
+								class="justify-content-between align-items-center d-flex ">관심인재
+							</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/recruits/myallrecruit"
+								class="justify-content-between align-items-center d-flex "><span
+									class="active">공고관리</span> </a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
