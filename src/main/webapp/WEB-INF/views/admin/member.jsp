@@ -66,16 +66,27 @@ button {
 .jobs-area {
 	padding-bottom: 200px;
 }
-#removebtn{
-	margin-top: 5px;
-	margin-bottom: 10px;
+
+#removebtn {
+	margin-top: 6px;
 }
-#mlist{
+
+#mlist {
 	padding-left: 10px;
 }
-.memberItem{
+
+.memberItem {
 	padding-top: 3px;
-	padding-bottom:3px;
+	padding-bottom: 3px;
+}
+
+#clist {
+	padding-left: 10px;
+}
+
+.companyItem {
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 </style>
 
@@ -287,10 +298,12 @@ button {
 				uHtml += '<button onclick="myFunction(this)" class="mid">'
 						+ data[i].memberId + '</button>';
 				uHtml += '<div class="d-toggle"  id="mlist">';
-				uHtml += data[i].memberName + '<br>' + data[i].memberPhone + '<br>';
-				uHtml += data[i].memberBirth + '<br>' + data[i].memberEmail + '<br>'
-						+ data[i].memberGender + '<br>';
-				uHtml += data[i].memberAge + '<br>' + data[i].memberRegdate + '<br>';
+				uHtml += data[i].memberName + '<br>' + data[i].memberPhone
+						+ '<br>';
+				uHtml += data[i].memberBirth + '<br>' + data[i].memberEmail
+						+ '<br>' + data[i].memberGender + '<br>';
+				uHtml += data[i].memberAge + '<br>' + data[i].memberRegdate
+						+ '<br>';
 				uHtml += '<button class="genric-btn primary small deletemm" id="removebtn">탈퇴</button>';
 				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '</div>';
@@ -323,13 +336,14 @@ button {
 				uHtml += '<div class="companyItem">';
 				uHtml += '<button onclick="myFunction(this)" class="cid">'
 						+ data[i].companyId + '</button>';
-				uHtml += '<div class="d-toggle">';
+				uHtml += '<div class="d-toggle" id="clist">';
 				uHtml += data[i].companyName + data[i].companyTel + ' '
 						+ data[i].companyBoss + ' ';
 				uHtml += data[i].companyEmail + ' ' + data[i].companyAddress
 						+ ' ';
 				uHtml += data[i].companyNum + ' ';
-				uHtml += '<button class="genric-btn primary small deletecm">탈퇴</button>';
+				uHtml += '<button class="genric-btn primary small deletecm" id="removebtn">탈퇴</button>';
+				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '</div>';
 				uHtml += '</div>';
 			}
