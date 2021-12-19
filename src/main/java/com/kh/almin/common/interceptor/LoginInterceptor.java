@@ -96,6 +96,32 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {// Interceptor�
 				return true;
 			}
 		}
+		if (requestURL.startsWith("/resumes/resumeAdd")) {
+			if (!loginInfo.getSessionType().equals("1")) {
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('권한이 없습니다!'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/main'</script>");
+				return false;
+			} else {
+				return true;
+			}
+		}
+		if (requestURL.startsWith("/recruits/recruitAdd")) {
+			if (!loginInfo.getSessionType().equals("2")) {
+				System.out.println("세션타입: " + loginInfo.getSessionType());
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('권한이 없습니다!'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/main'</script>");
+				return false;
+			} else {
+				return true;
+			}
+		}
 
 		return true;
 	}

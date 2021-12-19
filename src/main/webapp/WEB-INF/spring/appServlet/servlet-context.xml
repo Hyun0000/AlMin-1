@@ -45,6 +45,8 @@
 			<mapping path="/recruits/myrecruits" />
 			<mapping path="/applicants/myapplicants" />
 			<mapping path="/members/pwd/pwCheck" />
+			<mapping path="/resumes/resumeAdd" />
+			<mapping path="/recruits/recruitAdd" />
 			<!-- 모든 기능에 Interceptor 적용하려면 /*만 쓰면 됨. -->
 			<beans:ref bean="LoginInterceptor" />
 		</interceptor>
