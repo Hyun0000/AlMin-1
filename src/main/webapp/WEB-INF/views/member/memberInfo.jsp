@@ -255,7 +255,7 @@ tr>td:last-child {
 												href="${pageContext.request.contextPath}/recruits/myrecruits"
 												class="justify-content-between align-items-center d-flex ">관심공고</a></li>
 											<li><a
-												href="${pageContext.request.contextPath}/resumes/selectAllResume"
+												href="${pageContext.request.contextPath}/resumes/allres"
 												class="justify-content-between align-items-center d-flex">이력서
 													관리</a></li>
 										</ul>
