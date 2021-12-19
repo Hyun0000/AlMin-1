@@ -343,8 +343,7 @@ input[type=text], input[type=password] {
 										<ul>
 											<li><a
 												href="${pageContext.request.contextPath}/members/mypage"
-												class="justify-content-between align-items-center d-flex"><span
-													class="active">회원정보</span></a></li>
+												class="justify-content-between align-items-center d-flex">회원정보</a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/recruits/appforyou"
 												class="justify-content-between align-items-center d-flex ">맞춤공고
@@ -368,8 +367,7 @@ input[type=text], input[type=password] {
 										<ul>
 											<li><a
 												href="${pageContext.request.contextPath}/members/mypage"
-												class="justify-content-between align-items-center d-flex"><span
-													class="active">회원정보</span></a></li>
+												class="justify-content-between align-items-center d-flex">회원정보</a></li>
 											<li><a
 												href="${pageContext.request.contextPath}/applicants/myapplicants"
 												class="justify-content-between align-items-center d-flex ">관심인재
