@@ -42,14 +42,14 @@ form {
 	<c:import url="/WEB-INF/views/template/header.jsp" />
 	<!-- Header Area End -->
 	<section class="job-single-content section-padding">
-	
-	<c:if test="${!empty msg}">
-		<script>
-			alert("${msg}");
-			<c:remove var="msg"/>
-		</script>
+
+		<c:if test="${!empty msg}">
+			<script>
+				alert("${msg}");
+				<c:remove var="msg"/>
+			</script>
 		</c:if>
-		
+
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -209,6 +209,8 @@ form {
 			<hr>
 			<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------- -->
 			<div class="btninline">
+				<button id="showRecruiter" class="template-btn"
+					onclick="history.back();">목록으로</button>
 				<c:choose>
 					<c:when
 						test="${!empty sessionScope.loginInfo.memberId or !empty sessionScope.loginInfo.companyId }">
@@ -235,8 +237,8 @@ form {
 								<div class="d-toggle">
 									<div class="col-lg-4">
 										<div class="sidebar mt-5 mt-lg-0">
-											<div class="single-item mb-4">
-												<h4 class="mb-4">이 공고를 신고하는 이유를 알려주세요.</h4>
+											<div class="single-item mb-4" style="margin-top: 30px;">
+												<h4 class="mb-4">공고를 신고하는 이유를 알려주세요.</h4>
 												<p style="display: none">${detailjobinfo.recruitNo}</p>
 												<button class="sidebar-btn justify-content-between mb-3"
 													onclick="report(this);" id="rno_1">
@@ -268,14 +270,15 @@ form {
 								<button id="showRecruiter" class="template-btn"
 									onclick="location.href='${pageContext.request.contextPath}/myrecruit/${recruitNo}'">공고
 									지원자 보기</button>
-								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/updateRe?recruitNo=${detailjobinfo.recruitNo }'">수정하기</button>
-								<button class="template-btn" onclick="location.href='${pageContext.request.contextPath}/recruits/deleteRecruit?recruitNo=${detailjobinfo.recruitNo }'">삭제하기</button>
+								<button class="template-btn"
+									onclick="location.href='${pageContext.request.contextPath}/recruits/updateRe?recruitNo=${detailjobinfo.recruitNo }'">수정하기</button>
+								<button class="template-btn"
+									onclick="location.href='${pageContext.request.contextPath}/recruits/deleteRecruit?recruitNo=${detailjobinfo.recruitNo }'">삭제하기</button>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 				</c:choose>
-				<button id="showRecruiter" class="template-btn"
-					onclick="history.back();">목록으로</button>
+
 			</div>
 		</div>
 	</section>
@@ -349,25 +352,30 @@ form {
 	<script>
 		function report(e) {
 			var selectedVal = $(e).attr("id").split("_");
-			$.ajax({
-				url : '${pageContext.request.contextPath}/recruits/report',
-				type : 'post',
-				data : {
-					recruitNo : '${detailjobinfo.recruitNo}',
-					reasonNo : selectedVal[1]
-				},
-				success : function(data) {
-					console.log(data);
-					if (data == "1") {
-						alert('신고가 완료되었습니다.');
-					} else {
-						alert('신고는 공고당 한 번만 가능합니다.');
+
+			if (confirm('정말 신고하시겠습니까?신고 후에는 취소할 수 없습니다.')) {
+
+				$.ajax({
+					url : '${pageContext.request.contextPath}/recruits/report',
+					type : 'post',
+					data : {
+						recruitNo : '${detailjobinfo.recruitNo}',
+						reasonNo : selectedVal[1]
+					},
+					success : function(data) {
+						console.log(data);
+						if (data == "1") {
+							alert('신고가 완료되었습니다.');
+						} else {
+							alert('신고는 공고당 한 번만 가능합니다.');
+						}
+					},
+					error : function() {
+						alert('오류 발생. 오류 코드: ' + error.code);
 					}
-				},
-				error : function() {
-					alert('오류 발생. 오류 코드: ' + error.code);
-				}
-			});
+				})
+			}
+			;
 		}
 	</script>
 	<script>

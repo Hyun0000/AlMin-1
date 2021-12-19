@@ -51,6 +51,15 @@ button {
 .jobs-area {
 	padding-bottom: 350px;
 }
+
+.reportItem {
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#rlist {
+	padding-left: 10px;
+}
 </style>
 
 </head>
@@ -93,8 +102,8 @@ button {
 									<c:forEach var="item" items="${reportview}">
 										<div class="reportItem">
 											<button onclick="myFunction(this)">${item.recruitTitle}</button>
-											<div class="d-toggle">
-												<div class="title">${item.recruitCompanyId}${item.recruitDate}</div>
+											<div class="d-toggle" id="rlist">
+												<div class="title" id="reportItem">${item.recruitCompanyId}<br>${item.recruitDate}</div>
 												<div style="display: none" class="rt">${item.recruitNo}</div>
 												<button class="genric-btn primary small"
 													onclick="location.href='${pageContext.request.contextPath}/recruits/detailjobinfo?recruitNo=${item.recruitNo}'">공고보기</button>
@@ -118,6 +127,7 @@ button {
 														최저임금 미만의 급여<span id="here_5"></span>
 													</div>
 												</div>
+												<hr style="border: 1px color= silver;" width="90%">
 											</div>
 										</div>
 									</c:forEach>

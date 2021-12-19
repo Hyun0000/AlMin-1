@@ -66,6 +66,17 @@ button {
 .jobs-area {
 	padding-bottom: 200px;
 }
+#removebtn{
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+#mlist{
+	padding-left: 10px;
+}
+.memberItem{
+	padding-top: 3px;
+	padding-bottom:3px;
+}
 </style>
 
 </head>
@@ -275,13 +286,13 @@ button {
 				uHtml += '<div class="memberItem">';
 				uHtml += '<button onclick="myFunction(this)" class="mid">'
 						+ data[i].memberId + '</button>';
-				uHtml += '<div class="d-toggle">';
-				uHtml += data[i].memberName + data[i].memberPhone + ' '
-						+ data[i].memberAddress + ' ';
-				uHtml += data[i].memberBirth + ' ' + data[i].memberEmail + ' '
-						+ data[i].memberGender + ' ';
-				uHtml += data[i].memberAge + ' ' + data[i].memberRegdate + ' ';
-				uHtml += '<button class="genric-btn primary small deletemm">탈퇴</button>';
+				uHtml += '<div class="d-toggle"  id="mlist">';
+				uHtml += data[i].memberName + '<br>' + data[i].memberPhone + '<br>';
+				uHtml += data[i].memberBirth + '<br>' + data[i].memberEmail + '<br>'
+						+ data[i].memberGender + '<br>';
+				uHtml += data[i].memberAge + '<br>' + data[i].memberRegdate + '<br>';
+				uHtml += '<button class="genric-btn primary small deletemm" id="removebtn">탈퇴</button>';
+				uHtml += '<hr style="border:1px color= silver;" width="90%">';
 				uHtml += '</div>';
 				uHtml += '</div>';
 			}
