@@ -165,14 +165,7 @@ form {
 						<div class="single-content7 py-4">
 							<h4>상세모집요강</h4>
 							<div>
-								되는 청춘에서만 할지니, 피는 그들은 노래하며 스며들어 봄바람이다. 같으며, 무엇이 사랑의 하는 이것이다. 가치를
-								예가 얼마나 인생에 있음으로써 것이다. 원대하고, 곧 영원히 보배를 되려니와, 고행을 사랑의 두손을 청춘이
-								위하여서. 풀이 듣기만 피부가 되려니와, 설레는 스며들어 노년에게서 별과 있다.<br> 것은 보내는 새
-								원대하고, 착목한는 인류의 것이다. 열매를 그들의 귀는 있을 원질이 것이다. 그들은 시들어 속에서 힘차게 커다란
-								끓는다. 산야에 꽃이 위하여, 인간의 사랑의 생생하며, 그와 것은 피어나기 것이다. 할지라도 이상의 대고, 같은
-								품에 피가 만천하의 것이다. 그들에게 그들의 주는 가지에 얼음이 끓는 풀밭에 그들에게 든 이것이다. 불러 할지라도
-								피고 우리의 무엇을 수 때문이다. 봄바람을 앞이 그것을 듣는다. 앞이 같이 실현에 따뜻한 이것을 교향악이다. 것은
-								얼음이 지혜는 고동을 앞이 그림자는 쓸쓸하랴? 오아이스도 있는 원대하고, 바로 갑 물방아 거선의 원질이 넣는 있다.
+								${detailjobinfo.recruitContent }
 							</div>
 						</div>
 					</div>
@@ -217,9 +210,9 @@ form {
 						<c:choose>
 							<c:when test="${not empty sessionScope.loginInfo.memberId}">
 								<!-- 개인회원 노출 -->
-<%-- 								<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
+								<%-- 								<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
 								<button type="button" class="template-btn" id="recruitGo">지원하기</button> --%>
-<!-- 							
+								<!-- 							
 								<div id="resume_modal_back">
 									<div id="resume_insert_box">
 										
@@ -227,8 +220,10 @@ form {
 								</div>
 -->
 								<form action="recruitgo" method="post">
-									<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
-									<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
+									<input type="hidden" id="recruitGoId"
+										value="${loginInfo.memberId}" name="rwmMemberId"> <input
+										type="hidden" id="recruitGoNo" value="${recruitNo}"
+										name="rwmRecruitNo">
 									<button type="submit" class="template-btn" id="recruitGo">지원하기</button>
 								</form>
 
