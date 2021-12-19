@@ -765,7 +765,7 @@ input[type=text], input[type=password]{
 		</tr>
 		<tr>
 		<th>이메일</th>
-		<td style="width: 534px;">
+		<td style="width: 540px;">
 		<input type="text" id = "email_1" name="email_1" maxlength="30" required>@
 		<input type="text" id = "email_2" name="email_2" maxlength="30" required disabled>
 		</td>

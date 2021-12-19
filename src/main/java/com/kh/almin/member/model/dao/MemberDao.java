@@ -62,12 +62,12 @@ public class MemberDao {
 		return result;
 	}
 	//개인 비번찾기 - 재설정
-	public void updatePwMember(Member m) {
+	public void updatePwMember(Member m) throws Exception {
 		logger.info("Dao-updatePwMember 진입");
 		sqlSession.update("Member.updatePwMember",m);
 	}
 	//기업 비번찾기 - 재설정
-	public int updatePwCompany(Company c) {
+	public int updatePwCompany(Company c) throws Exception {
 		logger.info("Dao-updatePwCompany 진입");
 		int result = sqlSession.update("Member.updatePwCompany",c);
 		return result;
@@ -126,31 +126,31 @@ public class MemberDao {
 			return result;
 		}
 		// 개인회원 비밀번호 찾기(연락처)
-		public int findMPWdphone(Member member) {
+		public int findMPWdphone(Member member) throws Exception {
 			logger.info("Dao-findMPWdphone 진입");
 			int result = sqlSession.selectOne("Member.findMPWdphone", member);
 			return result;
 		}
 		// 개인회원 비밀번호 찾기(이메일)
-		public int findMPWdmail(Member member) {
+		public int findMPWdmail(Member member) throws Exception {
 			logger.info("Dao-findMPWdmail 진입");
 			int result = sqlSession.selectOne("Member.findMPWdmail", member);
 			return result;
 		}
 		// 기업회원 비밀번호 찾기(연락처)
-		public int findCPWdtel(Company company) {
+		public int findCPWdtel(Company company) throws Exception {
 			logger.info("Dao-findCPWdphone 진입");
 			int result = sqlSession.selectOne("Member.findCPWdtel", company);
 			return result;
 		}
 		// 기업회원 비밀번호 찾기(이메일)
-		public int findCPWdmail(Company company) {
+		public int findCPWdmail(Company company) throws Exception {
 			logger.info("Dao-findCPWdmail 진입");
 			int result = sqlSession.selectOne("Member.findCPWdmail", company);
 			return result;
 		}
 		// 기업회원 비밀번호 찾기(사업자번호)
-		public int findCPWdnum(Company company) {
+		public int findCPWdnum(Company company) throws Exception {
 			logger.info("Dao-findCPWdnum 진입");
 			int result = sqlSession.selectOne("Member.findCPWdnum", company);
 			return result;
