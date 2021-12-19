@@ -59,7 +59,6 @@
 														<p class="rno" style="display: none">${item.resumeNo}</p>
 														<p class="date">${item.resumeDate}</p>
 														<div class="reply-btn">
-															<button type="button" class="template-btn">연락하기</button>
 															<button class="template-btn"
 																onclick="location.href='${pageContext.request.contextPath}/applicants/dislike?resumeNo=${item.resumeNo}'">
 																찜 해제</button>
