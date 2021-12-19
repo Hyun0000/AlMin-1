@@ -135,7 +135,9 @@ tr>td:last-child {
 														안전한 정보보호를 위해 회원정보 일부만 확인가능하며, <br> 수정화면에서 전체 회원정보 열람이
 														가능합니다.
 													</p>
-													<div class="jobs-title">
+													<c:choose>
+									<c:when test="${sessionScope.loginInfo.sessionType eq '1'}">
+										<div class="jobs-title">
 														<ul class="unordered-list">
 															<li>생년월일</li>
 															<li>${vo.memberBirth}</li>
@@ -145,6 +147,21 @@ tr>td:last-child {
 															<li>${vo.memberEmail}</li>
 														</ul>
 													</div>
+										
+									</c:when>
+									<c:when test="${sessionScope.loginInfo.sessionType eq '2'}">
+										<div class="jobs-title">
+														<ul class="unordered-list">
+															<li>회사/점포명</li>
+															<li>${vo.companyName}</li>
+															<li>연락처</li>
+															<li>${vo.companyTel}</li>
+															<li>e-메일</li>
+															<li>${vo.companyEmail}</li>
+														</ul>
+													</div>
+									</c:when>
+								</c:choose>
 													<a
 														href="${pageContext.request.contextPath}/members/mypage/pwCheck?type=1">
 														<button type="button" class="genric-btn info-border">수정</button>

@@ -36,6 +36,7 @@ public class CompanyController {
 	}
 	
 	@PostMapping //회원가입
+	@ResponseBody
 	private String insertCompany(@RequestBody Company company) throws Exception {
 		logger.info("insert 진입");
 		logger.info(company.toString());
@@ -43,7 +44,7 @@ public class CompanyController {
 		String pwd = pwdEncoder.encode(inputPass);
 		company.setCompanyPwd(pwd);
 		memberService.insertCompany(company);
-		return "redirect:";
+		return "1";
 	}
 	
 	@PostMapping("/idCheck")//회원가입 - id 중복체크

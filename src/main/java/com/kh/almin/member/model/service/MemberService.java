@@ -24,6 +24,11 @@ public class MemberService {
 		Member member = memberDao.getMemberInfo(m);
 		return member;
 	}
+	public Company getCompanyInfo(Company c) throws Exception{
+		logger.info("Service 진입");
+		Company company = memberDao.getCompanyInfo(c);
+		return company;
+	}
 	//회원정보 수정
 	public Member updateMember(Member m) throws Exception{
 		logger.info("Service 진입");
@@ -36,6 +41,10 @@ public class MemberService {
 	public void updatePwMember(Member m) throws Exception{
 		logger.info("Service 진입");
 		memberDao.updatePwMember(m);
+	}
+	public void updatePwCompany(Company c) throws Exception{
+		logger.info("Service 진입");
+		memberDao.updatePwCompany(c);
 	}
 	//개인회원가입
 	public void insertMember(Member member) throws Exception{

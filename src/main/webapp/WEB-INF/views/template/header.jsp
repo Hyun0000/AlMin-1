@@ -310,6 +310,7 @@ function ajaxL1(){ //ID, PWD 입력 후 로그인 버튼 onclick
 						url : '/v2/user/me',
 						success : function(response) {
 							location.href = "main";
+							//ajax 태우기 -> controller에 session.seta
 							console.log(response)
 						},
 						fail : function(error) {

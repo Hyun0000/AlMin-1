@@ -334,14 +334,11 @@ input[type=text], input[type=password]{
 				contentType : "application/json; charset=utf-8",
 				success: function(result){
 					if(result == 0){
-						alert("아이디와 비밀번호를 다시 확인해주세요.");
+						alert("회원가입 실패");
 					} else {
-						console.log("로그인 성공")
-		    		$(".modal").hide(); 
-					$("#login-state").show();//로그아웃, 마이페이지
-					$("#logout-state").hide();//로그인, 회원가입
+						console.log("회원가입 성공")
+				location.href ="${pageContext.request.contextPath}/main"
 					}
-				//location.href ="${pageContext.request.contextPath}/main"
 			},
 			error:function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+

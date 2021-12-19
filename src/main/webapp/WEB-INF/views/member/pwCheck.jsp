@@ -169,9 +169,7 @@ input[type=text], input[type=password] {
 															} else {
 																console
 																		.log("비밀번호가 일치합니다."
-																				+ $(
-																						"#uid")
-																						.html());
+																				+ $("#uid").html());
 																location.href = "${pageContext.request.contextPath}/members/mypage/edit?userId="
 																		+ $(
 																				"#uid")
@@ -217,9 +215,7 @@ input[type=text], input[type=password] {
 								'memberPw' : newPw
 							}
 							//ajax 안에 ajax
-							$
-									.ajax({//현재 비밀번호 일치여부 확인(일치하면 다음ajax로)
-
+							$.ajax({//현재 비밀번호 일치여부 확인(일치하면 다음ajax로)
 										url : "${pageContext.request.contextPath}/members/mypage/pwd",
 										type : "put",
 										data : JSON.stringify(json),
@@ -229,9 +225,8 @@ input[type=text], input[type=password] {
 											if (result == false) {
 												alert("기존 비밀번호는 새 비밀번호로 설정 불가합니다. 다시 입력하세요.");
 											} else {
-												console
-														.log("기존 비밀번호가 아닌 새 비밀번호로 변경 완료");
-												//	location.href ="${pageContext.request.contextPath}/members/mypage";
+												console.log("기존 비밀번호가 아닌 새 비밀번호로 변경 완료");
+													location.href ="${pageContext.request.contextPath}/members/mypage";
 											}
 										},
 										error : function(request, status, error) {

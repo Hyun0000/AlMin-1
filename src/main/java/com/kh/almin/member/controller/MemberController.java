@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.almin.member.model.service.MailSendService;
 import com.kh.almin.member.model.service.MemberService;
+import com.kh.almin.member.model.vo.Company;
 import com.kh.almin.member.model.vo.Member;
 import com.kh.almin.member.model.vo.SsInfo;
 
@@ -185,10 +186,22 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	}
 	@PostMapping("/mypage/pwd") //비밀번호 일치여부 확인
 	@ResponseBody
-	private boolean matchMemberPw(@RequestBody Member m) throws Exception {
-		Member ms= memberService.selectMember(m);
-		boolean isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
-		logger.info(ms.toString());
+	private boolean matchMemberPw(HttpSession session,@RequestBody Member m) throws Exception {
+		boolean isPwdMatch = false;
+		logger.info("세션 기업아이디: "+((SsInfo)session.getAttribute("loginInfo")).getCompanyId());
+		if(((SsInfo)session.getAttribute("loginInfo")).getCompanyId()==null){
+			Member ms= memberService.selectMember(m);
+			logger.info(ms.toString());
+			 isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getMemberPw());
+			
+		}else {
+			Company company = new Company();
+			company.setCompanyPwd(m.getMemberPw());
+			company.setCompanyId(((SsInfo)session.getAttribute("loginInfo")).getCompanyId());
+			Company ms= memberService.loginCompany(company);
+			logger.info(ms.toString());
+			 isPwdMatch = pwdEncoder.matches(m.getMemberPw(), ms.getCompanyPwd());
+		}
 		return isPwdMatch;//일치 성공여부를 jsp로 던짐.
 	}
 	@PutMapping //회원정보 수정
@@ -217,57 +230,107 @@ public class MemberController {//Service, Dao에서 throws Exception 붙이기
 	@ResponseBody 
 	private boolean changePwMember(HttpSession session, @RequestBody Member member) throws Exception{ 
 		boolean result= false;
-		
+		boolean isPwdMatch = false;
 		logger.info("update 진입");
 		logger.info("member: "+member.toString());
-		
-		String inputPass = member.getMemberPw();
-		member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
-		Member ms= memberService.selectMember(member);
-		logger.info(ms.toString());
-		if(ms.getMemberId() == null) {
-			return result;
-		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
-			boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
-			logger.info(String.valueOf(isPwdMatch));
-			if(isPwdMatch == true) {
-				logger.info("기존 비번과 동일하므로 false.");
+		if(((SsInfo)session.getAttribute("loginInfo")).getCompanyId()==null){
+			String inputPass = member.getMemberPw();
+			member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
+			Member ms= memberService.selectMember(member);
+			logger.info(ms.toString());
+			if(ms.getMemberId() == null) {
 				return result;
-			} else {
-				logger.info("기존 비번과 동일하지 않으므로 통과! 비번변경이 가능함.");
-				result=true;
+			}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+				isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
+				logger.info(String.valueOf(isPwdMatch));
+				if(isPwdMatch == true) {
+					logger.info("기존 비번과 동일하므로 false.");
+					return result;
+				} else {
+					logger.info("기존 비번과 동일하지 않으므로 통과! 비번변경이 가능함.");
+					result=true;
+				}
 			}
+			//비밀번호 암호화
+			String pwd = pwdEncoder.encode(inputPass);
+			member.setMemberPw(pwd);
+			memberService.updatePwMember(member);
+			return true;
+		}else {
+			Company company = new Company();
+			 String inputPass = member.getMemberPw();
+			 company.setCompanyId(((SsInfo)session.getAttribute("loginInfo")).getCompanyId());
+				Company ms= memberService.loginCompany(company);
+				logger.info(ms.toString());
+				if(ms.getCompanyId() == null) {
+					return result;
+				}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+					isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getCompanyPwd());
+					logger.info(String.valueOf(isPwdMatch));
+					if(isPwdMatch == true) {
+						logger.info("기존 비번과 동일하므로 false.");
+						return result;
+					} else {
+						logger.info("기존 비번과 동일하지 않으므로 통과! 비번변경이 가능함.");
+						result=true;
+					}
+				} //비밀번호 암호화
+				String pwd = pwdEncoder.encode(inputPass);
+				company.setCompanyPwd(pwd);
+				memberService.updatePwCompany(company);
+				return true;
 		}
-		//비밀번호 암호화
-		String pwd = pwdEncoder.encode(inputPass);
-		member.setMemberPw(pwd);
-		memberService.updatePwMember(member);
-		return true;
+		
 	}
 	
 	@PostMapping("/pwd/pwCheck") //비번만 체크
 	@ResponseBody
 	private boolean checkPwdMember(HttpSession session, @RequestBody Member member) throws Exception {
-logger.info("member: "+member.toString());
 		boolean result = false;
-		String inputPass = member.getMemberPw();
-		//String pwd = pwdEncoder.encode(inputPass);
-		//logger.info("pwd: "+pwd);
-		//member.setMemberPw(pwd);
-		member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
-		Member ms= memberService.selectMember(member);
-		logger.info(ms.toString());
-		if(ms.getMemberId() == null) {
-			return result;
-		}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
-			boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
-			logger.info(String.valueOf(isPwdMatch));
-			if(isPwdMatch == false) {
-				logger.info("현재 비밀번호 틀리게 입력");
+		ModelAndView mv = new ModelAndView();
+		System.out.println("마이페이지");
+		if(((SsInfo)session.getAttribute("loginInfo")).getCompanyId()==null){//개인회원일 경우
+			logger.info("member: "+member.toString());
+			String inputPass = member.getMemberPw();
+			//String pwd = pwdEncoder.encode(inputPass);
+			//logger.info("pwd: "+pwd);
+			//member.setMemberPw(pwd);
+			member.setMemberId(((SsInfo)session.getAttribute("loginInfo")).getMemberId());
+			Member ms= memberService.selectMember(member);
+			logger.info(ms.toString());
+			if(ms.getMemberId() == null) {
 				return result;
-			} else {
-				logger.info("현재 비밀번호 일치함.");
-				result=true;
+			}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+				boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getMemberPw());
+				logger.info(String.valueOf(isPwdMatch));
+				if(isPwdMatch == false) {
+					logger.info("현재 비밀번호 틀리게 입력");
+					return result;
+				} else {
+					logger.info("현재 비밀번호 일치함.");
+					result=true;
+				}
+			}
+		} else {
+			String userId = ((SsInfo)session.getAttribute("loginInfo")).getCompanyId();
+			logger.info("userId: "+userId);
+			Company company = new Company();
+			company.setCompanyPwd(member.getMemberPw());//jsp화면에서 입력한 pw담아가기
+			company.setCompanyId(((SsInfo)session.getAttribute("loginInfo")).getCompanyId());
+			Company ms= memberService.loginCompany(company);
+			logger.info(ms.toString());
+			if(ms.getCompanyId() == null) {
+				return result;
+			}else { // 입력된 비번과 DB에 암호화 저장된 비밀번호 비교 (matches)
+				boolean isPwdMatch = pwdEncoder.matches(member.getMemberPw(), ms.getCompanyPwd());
+				logger.info(String.valueOf(isPwdMatch));
+				if(isPwdMatch == false) {
+					logger.info("현재 비밀번호 틀리게 입력");
+					return result;
+				} else {
+					logger.info("현재 비밀번호 일치함.");
+					result=true;
+				}
 			}
 		}
 		return result;
@@ -275,14 +338,23 @@ logger.info("member: "+member.toString());
 	
 	@GetMapping("/mypage") //개인 회원정보 메인(조회)//@RequestParam String userId
 	private ModelAndView selectMembers(HttpSession session) throws Exception {
-		System.out.println("마이페이지");
-		String userId = ((SsInfo)session.getAttribute("loginInfo")).getMemberId();
-		logger.info("userId: "+userId);
-		Member vo = new Member();
-		vo.setMemberId(userId);
 		ModelAndView mv = new ModelAndView();
-		Member ms= memberService.getMemberInfo(vo);
-		mv.addObject("vo", ms);
+		System.out.println("마이페이지");
+		if(((SsInfo)session.getAttribute("loginInfo")).getCompanyId()==null){//개인회원일 경우
+			String userId = ((SsInfo)session.getAttribute("loginInfo")).getMemberId();
+			logger.info("userId: "+userId);
+			Member vo = new Member();
+			vo.setMemberId(userId);
+			Member ms= memberService.getMemberInfo(vo);
+			mv.addObject("vo", ms);
+		} else {
+			String userId = ((SsInfo)session.getAttribute("loginInfo")).getCompanyId();
+			logger.info("userId: "+userId);
+			Company vo = new Company();
+			vo.setCompanyId(userId);
+			Company ms= memberService.getCompanyInfo(vo);
+			mv.addObject("vo", ms);
+		}
 		mv.setViewName("member/memberInfo");
 		return mv;
 	}

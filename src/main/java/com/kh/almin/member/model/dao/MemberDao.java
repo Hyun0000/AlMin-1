@@ -24,6 +24,11 @@ public class MemberDao {
 		logger.info("Dao-getMemberInfo 진입");
 		return member;
 	}
+	public Company getCompanyInfo(Company c) throws Exception {
+		Company company = sqlSession.selectOne("Member.listCompany", c);
+		logger.info("Dao-getCompanyInfo 진입");
+		return company;
+	}
 
 	public void insertMember(Member member) throws Exception{
 		logger.info("Dao-insertMember 진입");
@@ -62,9 +67,9 @@ public class MemberDao {
 		sqlSession.update("Member.updatePwMember",m);
 	}
 	//기업 비번찾기 - 재설정
-	public int updatePwCompany(Member m) {
+	public int updatePwCompany(Company c) {
 		logger.info("Dao-updatePwCompany 진입");
-		int result = sqlSession.update("Member.updatePwCompany",m);
+		int result = sqlSession.update("Member.updatePwCompany",c);
 		return result;
 	}
 	//개인회원 ID 중복체크
