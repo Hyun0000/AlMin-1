@@ -219,7 +219,7 @@ form {
 										<input type="hidden" id="recruitGoNo" value="${recruitNo}" name="rwmRecruitNo">
 										<input type="hidden" id="recruitGoId" value="${loginInfo.memberId}" name="rwmMemberId">
 										<ul id="resumeList"></ul>
-										<button type="submit" class="genric-btn primary small">지원</button>
+										<button type="submit" class="genric-btn primary small" onclick="return resumeSub();">지원</button>
 										</form>
 									</div>
 								</div>

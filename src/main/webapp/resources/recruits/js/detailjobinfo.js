@@ -761,6 +761,7 @@ function afterBtn() {
 				let radioEle = document.createElement('input');
 				radioEle.setAttribute("type", "radio");
 				radioEle.setAttribute("name", "rwmMemberResumeNo");
+				radioEle.setAttribute("onclick", "resumeChoiceCount();");
 				radioEle.setAttribute("value", resumeData[i].resumeNo);
 				resumeUlEle.appendChild(radioEle);
 				
@@ -804,9 +805,18 @@ document.onkeydown = (event) => {
 
 
 
+let resumeChoiceNum = 0;
+function resumeChoiceCount() {
+	resumeChoiceNum++;
+	console.log(resumeChoiceNum);
+}
 
-
-
+function resumeSub() {
+	if(resumeChoiceNum === 0) {
+		alert("이력서를 최소 1개 이상 선택해 주세요");
+		return false;
+	}
+}
 
 
 

@@ -1,4 +1,5 @@
 // 구글 캘린더 ID
+//let ggCalId = 'chsh9410@gmail.com';
 let ggCalId = 'raddernepa@gmail.com';
 
 // 구글 캘린더 한국 달력 ID
