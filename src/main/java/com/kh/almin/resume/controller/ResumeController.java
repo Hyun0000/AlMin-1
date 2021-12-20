@@ -46,7 +46,12 @@ public class ResumeController {
 		MemberResume resum=new MemberResume();
 		resum.setResumeNo(resumeNo);
 		try {
-			mv.addObject("resum", resumeService.selectResume(resumeNo));
+			mv.addObject("resum", resumeService.selectResume(resumeNo));//가져온 이력서
+			MemberResume rs = new MemberResume();
+			rs = resumeService.selectResume(resumeNo);
+			byte[] encodeBase64= rs.getResumePhoto();
+			String base64Encoded = new String(encodeBase64, "UTF-8");
+			mv.addObject("image", base64Encoded);
 			System.out.println("resum: "+resum);
 		} catch (Exception e) {
 			e.printStackTrace();

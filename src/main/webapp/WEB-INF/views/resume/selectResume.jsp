@@ -31,7 +31,7 @@
 					<div class="main-content">
 						<div class="single-content2 py-4">
 							<h3>${resum.resumeTitle }</h3>
-							<img id="myimg" src="data:image/jpg;base64,+data.image+"
+							<img id="myimg" src="data:image/jpg;base64,${image}"
 								width="95px" height="128px" />
 						</div>
 						<div class="single-content4 py-4">

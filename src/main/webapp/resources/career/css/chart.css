@@ -181,16 +181,19 @@ input[type=number]:hover {
 #careerChart_alterImage {
 	width: 400px;
 	height: 400px;
+	padding: 50px;
 }
 
 #needChart_alterImage {
 	width: 400px;
 	height: 400px;
+	padding: 50px;
 }
 
 #workChart_alterImage {
 	width: 400px;
 	height: 400px;
+	padding: 50px;
 }
 
 /* .nice-select {

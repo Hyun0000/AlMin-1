@@ -66,7 +66,15 @@ public class LoginController { //개인/관리자/기업 로그인, SNS로그인
 			return result;
 		}
 	}
-
+	@PostMapping("/sns/{memberId}")
+	@ResponseBody 
+	private void loginSNS(HttpSession session,@RequestBody Member m) throws Exception{
+		Member ms= memberService.selectMember(m);
+		SsInfo ssinfo = new SsInfo();
+		 ssinfo.setMemberId(ms.getMemberId());
+		 ssinfo.setSessionType(ms.getMemberType());
+		 session.setAttribute("loginInfo", ssinfo);
+	}
 	@PostMapping("/companies/{companyId}")
 	@ResponseBody 
 	private String loginCompany(HttpSession session,@PathVariable("companyId")String companyId, @RequestBody Company c) throws Exception {

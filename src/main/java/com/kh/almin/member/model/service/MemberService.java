@@ -132,27 +132,27 @@ public class MemberService {
 		return result;
 	}
 
-	public int findMPWdphone(Member member) {
+	public int findMPWdphone(Member member) throws Exception {
 		logger.info("개인 비번찾기(연락처) 진입");
 		int result = memberDao.findMPWdphone(member);
 		return result;
 	}
-	public int findMPWdmail(Member member) {
+	public int findMPWdmail(Member member) throws Exception {
 		logger.info("개인 비번찾기(이메일) 진입");
 		int result = memberDao.findMPWdmail(member);
 		return result;
 	}
-	public int findCPWdtel(Company company) {
+	public int findCPWdtel(Company company) throws Exception {
 		logger.info("기업 비번찾기(연락처) 진입");
 		int result = memberDao.findCPWdtel(company);
 		return result;
 	}
-	public int findCPWdmail(Company company) {
+	public int findCPWdmail(Company company) throws Exception {
 		logger.info("기업 비번찾기(이메일) 진입");
 		int result = memberDao.findCPWdmail(company);
 		return result;
 	}
-	public int findCPWdnum(Company company) {
+	public int findCPWdnum(Company company) throws Exception {
 		logger.info("기업 비번찾기(사업자번호) 진입");
 		int result = memberDao.findCPWdnum(company);
 		return result;

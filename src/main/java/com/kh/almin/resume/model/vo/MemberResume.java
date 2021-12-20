@@ -13,6 +13,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import oracle.sql.BLOB;
 //RESUME_NO        NOT NULL NUMBER         
 //MEMBER_ID                 VARCHAR2(50)   
 //MEMBER_TYPE               CHAR(1)        
