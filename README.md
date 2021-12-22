@@ -3,8 +3,6 @@
 
 [배포 링크](http://112.221.156.36:8090/almin) Click
 
-[UI 설계서 링크](https://xd.adobe.com/view/8d8224c7-c804-40be-b52a-05732f7bd05e-d8d1/) Click 
-
 ## Contents 
 1. 개요
 2. 설계의 주안점
@@ -41,3 +39,6 @@ Version Control System|Git / github
 * 마이페이지
 * 내 정보 수정
 * 비밀번호 변경
+
+## 주요 기능
+[UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) Click 
