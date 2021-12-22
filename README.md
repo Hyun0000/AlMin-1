@@ -18,9 +18,10 @@
 ## 설계의 주안점
 ***
 ## 사용기술 및 개발환경
-Browser | Chrome, Whale 
------------- | ------------- 
+
 Language | Java 8, Servlet/JSP, HTML5, CSS3, JavaScript, XML 
+------------ | ------------- 
+Browser | Chrome, Whale 
 Web Application Server | Apache Tomcat 8.5
 Database|Oracle 11g Express Edition
 Framework & Open Api|Spring, MyBatis, Ajax, jQuery, Bootstrap, FullCalendar, Chart.js, Naver 로그인, Kakao 로그인, Facebook 로그인, Kakao 지도, Daum 주소찾기, Selenium,국세청 사업자번호조회, CKEditor
@@ -41,4 +42,21 @@ Version Control System|Git / github
 * 비밀번호 변경
 
 ## 주요 기능
-[UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) Click 
+* [UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) Click
+***
+## Document
+1. 유스케이스
+<img src="https://user-images.githubusercontent.com/89828294/147045092-4e5bef5f-b9e0-4e48-86c2-a42d8f2e41eb.png">
+
+2. ERD
+<img src="https://user-images.githubusercontent.com/89828294/147045496-4f8b6c82-3aa0-440f-96e2-7b5ae9a02559.png">
+
+3. SQL문  
+[Dclass_almin_almin2021.txt](https://github.com/Seonhea/AlMin/files/7760493/Dclass_almin_almin2021.txt)
+
+[[알바의 민족] 기획보고서.pdf](https://github.com/Seonhea/AlMin/files/7760484/default.pdf)  
+[[알바의 민족] DB설계보고서.pdf](https://github.com/Seonhea/AlMin/files/7760485/DB.pdf)  
+[[알바의 민족] 클래스 설계보고서.pdf](https://github.com/Seonhea/AlMin/files/7760486/default.pdf)  
+[[알바의 민족] 파이널 발표자료.pdf](https://github.com/Seonhea/AlMin/files/7760479/default.pdf)
+
+
