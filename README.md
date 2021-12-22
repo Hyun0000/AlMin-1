@@ -24,7 +24,7 @@ Language | Java 8, Servlet/JSP, HTML5, CSS3, JavaScript, XML
 Browser | Chrome, Whale 
 Web Application Server | Apache Tomcat 8.5
 Database|Oracle 11g Express Edition
-Framework & Open Api|Spring, MyBatis, Ajax, jQuery, Bootstrap, FullCalendar, Chart.js, Naver 로그인, Kakao 로그인, Facebook 로그인, Kakao 지도, Daum 주소찾기, Selenium, 국세청 사업자번호조회, CKEditor
+Framework & Open Api|Spring, MyBatis, Ajax, jQuery, Bootstrap, FullCalendar, Google Calendar, Chart.js, Naver 로그인, Kakao 로그인, Facebook 로그인, Kakao 지도, Daum 주소찾기, Selenium, 국세청 사업자번호조회, CKEditor
 설계분석도구|erdCloud, oven, draw.io
 IDE|STS 3.9.12 / sqldeveloper
 Version Control System|Git / github
@@ -34,6 +34,12 @@ Version Control System|Git / github
 * #### 채선혜
   *  크롤링
       * Selenium 사용하여 알바몬 채용공고 크롤링 
+  * 암호화(properties 활용)
+     * DBCP 암호화
+     * g메일 계정 암호화
+  * 인터셉터
+    * 로그인 세션체크
+    * 권한체크(관리자/개인회원/기업회원) 
   * 로그인 페이지
     * 네이버, 카카오, 페이스북 로그인 API 사용
   * 회원가입 페이지
@@ -43,7 +49,7 @@ Version Control System|Git / github
   * 아이디 찾기
   * 비밀번호 찾기
   * 마이페이지
-    * 내 정보 수정
+    * 회원정보 조회/수정
     * 비밀번호 변경
 * #### 김현영
   * 지원자 조회(이력서 선택 후)
@@ -68,7 +74,7 @@ Version Control System|Git / github
   * 기업서비스
     * 관심 인재 찜
   * 관리자 기능
-    * 회원 검색
+    * 회원 조회/검색
     * 회원 강제탈퇴
     * 의심공고 조회/삭제
 *  #### 고성화
@@ -76,8 +82,11 @@ Version Control System|Git / github
         * Kakao 지도 API 사용  
     *  인재정보 상세조회
     *  채용공고 등록/수정/삭제
-        * CKeditor API 사용  
+        * 공고 공개/비공개  
+        * CKEditor API 사용  
     *  이력서 등록/수정/삭제
+       * 이력서 공개/비공개  
+       * 이력서 출력
     *  공고 지원하기
 ## 주요 기능
 * [UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) ✔Click
