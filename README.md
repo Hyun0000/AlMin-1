@@ -1,7 +1,7 @@
 # 우리가 어떤 민족입니까? [알바의 민족]
 팀원: 채선혜(조장), 김현영, 김진주, 고성화
 
-[배포 링크](http://112.221.156.36:8090/almin) Click
+[WAR 배포 링크](http://112.221.156.36:8090/almin) ✔Click
 
 ## Contents 
 1. 개요
@@ -24,25 +24,63 @@ Language | Java 8, Servlet/JSP, HTML5, CSS3, JavaScript, XML
 Browser | Chrome, Whale 
 Web Application Server | Apache Tomcat 8.5
 Database|Oracle 11g Express Edition
-Framework & Open Api|Spring, MyBatis, Ajax, jQuery, Bootstrap, FullCalendar, Chart.js, Naver 로그인, Kakao 로그인, Facebook 로그인, Kakao 지도, Daum 주소찾기, Selenium,국세청 사업자번호조회, CKEditor
+Framework & Open Api|Spring, MyBatis, Ajax, jQuery, Bootstrap, FullCalendar, Chart.js, Naver 로그인, Kakao 로그인, Facebook 로그인, Kakao 지도, Daum 주소찾기, Selenium, 국세청 사업자번호조회, CKEditor
 설계분석도구|erdCloud, oven, draw.io
 IDE|STS 3.9.12 / sqldeveloper
 Version Control System|Git / github
 ***
 ## 프로젝트 기능 구현
 
-* 채선혜
-* 로그인 페이지
-* 네이버, 카카오, 페이스북 로그인 API 사용
-* 회원가입 페이지
-* 아이디 찾기
-* 비밀번호 찾기
-* 마이페이지
-* 내 정보 수정
-* 비밀번호 변경
-
+* #### 채선혜
+  *  크롤링
+      * Selenium 사용하여 알바몬 채용공고 크롤링 
+  * 로그인 페이지
+    * 네이버, 카카오, 페이스북 로그인 API 사용
+  * 회원가입 페이지
+    * 국세청 사업자번호 조회, 다음 주소찾기 API 사용
+    * Spring-security 비밀번호 암호화
+    * 이메일 인증(gmail)
+  * 아이디 찾기
+  * 비밀번호 찾기
+  * 마이페이지
+    * 내 정보 수정
+    * 비밀번호 변경
+* #### 김현영
+  * 지원자 조회(이력서 선택 후)
+  * 기업후기 등록(Drag&Drop 방식)
+  * 각 공고별 가장 많이 선택된 키워드 조회
+  * 지원&면접일자 조회/등록/수정/삭제
+  * 근무일자 조회/등록/수정/삭제
+     * Fullcalendar API 사용
+     * Google Calendar API 사용
+     * Drag&Drop 방식을 통한 일정 수정 가능
+  * 월별 구직&근무 데이터 조회
+  * 개인 경력조회
+     * Chart.js API 사용
+  * 급여 계산
+* #### 김진주
+  * 채용공고 목록 & 검색
+  * 인재정보 목록 & 검색
+  * 의심공고 신고
+  * 개인서비스
+    * 관심 채용정보 찜
+    * 맞춤공고 추천
+  * 기업서비스
+    * 관심 인재 찜
+  * 관리자 기능
+    * 회원 검색
+    * 회원 강제탈퇴
+    * 의심공고 조회/삭제
+*  #### 고성화
+    *  채용공고 상세조회
+        * Kakao 지도 API 사용  
+    *  인재정보 상세조회
+    *  채용공고 등록/수정/삭제
+        * CKeditor API 사용  
+    *  이력서 등록/수정/삭제
+    *  공고 지원하기
 ## 주요 기능
-* [UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) Click
+* [UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) ✔Click
 ***
 ## Document
 1. 유스케이스
@@ -52,8 +90,10 @@ Version Control System|Git / github
 <img src="https://user-images.githubusercontent.com/89828294/147045496-4f8b6c82-3aa0-440f-96e2-7b5ae9a02559.png">
 
 3. SQL문  
+[[알바의 민족] Oracle DB 계정생성.txt](https://github.com/Seonhea/AlMin/files/7760540/Oracle.DB.txt)  
 [Dclass_almin_almin2021.txt](https://github.com/Seonhea/AlMin/files/7760493/Dclass_almin_almin2021.txt)
 
+4. 보고서 및 발표PPT  
 [[알바의 민족] 기획보고서.pdf](https://github.com/Seonhea/AlMin/files/7760484/default.pdf)  
 [[알바의 민족] DB설계보고서.pdf](https://github.com/Seonhea/AlMin/files/7760485/DB.pdf)  
 [[알바의 민족] 클래스 설계보고서.pdf](https://github.com/Seonhea/AlMin/files/7760486/default.pdf)  
