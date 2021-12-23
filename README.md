@@ -54,10 +54,7 @@ Version Control System|Git / github
     * 회원정보 조회/수정
     * 비밀번호 변경
 * #### 김현영
-  * 지원자 조회(지원시 이력서 선택)
-  * 공고 지원자 조회 및 지원자 상세 경력 조회
-    * Chart.js API 사용
-  * 기업 후기 등록/수정/삭제/조회(Ajax)
+    * 기업 후기 등록/수정/삭제/조회(Ajax)
   * Drag&Drop 방식을 이용한 기업 후기 등록/수정
   * 각 공고별 가장 많이 선택된 키워드 조회
   * 지원&면접 일자 조회/등록/수정/삭제(Ajax)
@@ -66,10 +63,13 @@ Version Control System|Git / github
      * Google Calendar API 사용
      * MDTimePicker, js-calendar Library 사용
      * Drag&Drop 방식을 통한 일정 수정 가능  
+  * 근무 매장별 월별 총 급여 계산
   * 월별 구직&근무 Chart 데이터 조회
   * 개인 경력 Chart 데이터 조회
      * Chart.js API 사용
-  * 근무 매장별 월별 총 급여 계산
+  * 지원자 조회(지원시 이력서 선택)
+  * 공고 지원자 조회 및 지원자 상세 경력 조회
+     * Chart.js API 사용
 * #### 김진주
   * 채용공고 목록 & 검색
   * 인재정보 목록 & 검색
