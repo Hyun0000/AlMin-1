@@ -91,7 +91,16 @@ Version Control System|Git / github
        * 이력서 출력
     *  공고 지원하기
 ## 주요 기능
-* [UI 설계서 링크](https://xd.adobe.com/view/186c059a-7392-4abf-a66d-e19bbca9ee3b-4d3f/) ✔Click
+* [UI 설계서 링크](https://xd.adobe.com/view/d7cc2dbc-4a1b-4f36-947f-331cb5543744-829f/) ✔Click
+<img src="https://user-images.githubusercontent.com/89828294/147194493-3efb5df4-dff3-4b09-a3e1-a945fee03112.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194438-79dd0bb5-d655-4e59-b477-1e1635052d69.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194462-6a445b96-7449-4c11-b3a7-97b8e9537605.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194468-38375c67-db12-490d-86c3-fc48393deb54.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194529-5fdef865-9c3f-42d5-ace0-581c3eaf77d6.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194479-4a8742a0-30a2-414e-bca6-1e7a68baeed9.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194573-3b25f5c2-b180-4eb7-9503-7825958bc7c8.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194578-7d9cf684-096a-472c-a3d1-47fab962d593.png">
+<img src="https://user-images.githubusercontent.com/89828294/147194579-bfae85dc-bb77-4209-80de-32665817b8d8.png">
 ***
 ## Document
 1. 유스케이스
