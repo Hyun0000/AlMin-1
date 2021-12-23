@@ -70,7 +70,6 @@
 <!-- ================================================= 후기 작성(insert)(mapping) ================================================= -->
 	<insert id="insertCommentsKeyword" parameterType="map" >
 		<choose>
-			<!-- 공고글번호 나중에 동적으로 가져와야함 : CPM_CC_NO 같은거 -->
 			<!-- COMMENTS_GOOD_MAP -->
 			<when test="category == 'COMMENTS_GOOD_MAP'">
 					<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">

@@ -61,6 +61,7 @@
 <!-- =========================================== 모달창 =========================================== -->
 <c:choose>
 	<c:when test="${resultMsg eq 'yes'}">
+		<h2 id="candidate_title">공고에 지원한 용사들</h2>
 		<section id="candidate_container">
 			<c:forEach var="selectRecruitMember" items="${resultMap}">
 			<c:set var="k" value="${1+k}"></c:set>

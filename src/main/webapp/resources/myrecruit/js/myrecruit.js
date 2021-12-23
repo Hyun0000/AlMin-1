@@ -41,7 +41,7 @@ function modalUp() {
     modalBirth.innerText = "생년원일 : " + this.querySelector('.candidate_birth_class').innerText;
     modalGender.innerText = "성별 : " + this.querySelector('.candidate_gneder_class').innerText;
     modalPhone.innerText = "번호 : " + this.querySelector('.candidate_phone_class').innerText;
-    modalEmail.innerText = "이메일 : " + this.querySelector('.candidate_email_class').innerText;
+    modalEmail.innerHTML = "이메일  <br>" + this.querySelector('.candidate_email_class').innerText;
     
     // 모달창 띄우기
     candidateModalBack.style.display = 'flex';

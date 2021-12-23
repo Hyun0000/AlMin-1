@@ -1,7 +1,16 @@
+/* 지원자  <section> 제목 */
+#candidate_title {
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 2rem;
+}
+
 /* 지원자 전체를 담는 <section> */
 #candidate_container {
     width: 900px;
-    margin: 50px auto;
+    margin: 30px auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

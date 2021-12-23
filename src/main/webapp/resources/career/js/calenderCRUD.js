@@ -240,8 +240,6 @@ function calUpdate() {
     				needTimeEnd : allEnd,
     				needGoMeet : fourbtnEleVal
     		}
-    	    console.log(updateParam);
-    	    console.log(JSON.stringify(updateParam));
     	    sendRequest("PATCH", "calender", JSON.stringify(updateParam), afterCalUpdate);
     	} else {
     	    // 시급 정규식 검사
@@ -269,8 +267,6 @@ function calUpdate() {
     				workTime : workTimeInputEle.value,
     				workMoney : workMoneyInputEle.value
     		}
-    	    console.log(updateWorkParam);
-    	    console.log(JSON.stringify(updateWorkParam));
     	    sendRequest("PATCH", "works", JSON.stringify(updateWorkParam), afterCalUpdate);
     	}
     }
