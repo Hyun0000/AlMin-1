@@ -16,6 +16,8 @@
 * 위드코로나와 함께 구직자와 업장 모두 아르바이트를 구할 수 있는 중개 플랫폼
 ***
 ## 설계의 주안점
+* Spring Legacy Project(MVC 구조)
+* Restful한 설계방식
 ***
 ## 사용기술 및 개발환경
 
@@ -90,6 +92,7 @@ Version Control System|Git / github
        * 개인 이력서 조회
        * 이력서 출력
     *  공고 지원하기
+***
 ## 주요 기능
 * [UI 설계서 링크](https://xd.adobe.com/view/d7cc2dbc-4a1b-4f36-947f-331cb5543744-829f/) ✔Click
 <img src="https://user-images.githubusercontent.com/89828294/147194493-3efb5df4-dff3-4b09-a3e1-a945fee03112.png">
@@ -101,6 +104,7 @@ Version Control System|Git / github
 <img src="https://user-images.githubusercontent.com/89828294/147194573-3b25f5c2-b180-4eb7-9503-7825958bc7c8.png">
 <img src="https://user-images.githubusercontent.com/89828294/147194578-7d9cf684-096a-472c-a3d1-47fab962d593.png">
 <img src="https://user-images.githubusercontent.com/89828294/147194579-bfae85dc-bb77-4209-80de-32665817b8d8.png">
+
 ***
 ## Document
 1. 유스케이스
